@@ -1,0 +1,20 @@
+Package: apscp
+Title: Decision Support Tool for the Antarctic Peninsula
+Version: 0.0.0.9000
+Authors@R:
+    person(given = c("Jeffrey", "O."),
+           family = "Hanson",
+           role = c("aut", "cre"),
+           email = "jeffrey.hanson@uqconnect.edu.au")
+Description:
+  Interactive decision support tool to navigate management options for the Antarctic Peninsula. The tool identifies priority areas for implementing policies for conservation, tourism, and scientific research. To achieve this, it leverages previously published data (Lee et al. 2024; <doi:10.1007/s13280-024-02009-4>) and multi-objective optimization techniques through the 'prioritizr' package (Hanson et al. 2025; <doi:10.1111/cobi.14376>). Although default parameters are specified based on stakeholder surveys, users can calibrate weights and representation targets to fine tune optimization procedures according to their own preferences. Optimization procedures can be performed with the 'Gurobi' (<https://www.gurobi.com/>) or 'CBC' (via the 'rcbc' package, <https://github.com/dirkschumacher/rcbc>) exact algorithm solvers.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Language: en-US
+URL: https://jeffreyhanson.github.io/apscp/
+BugReports: https://jeffreyhanson.github.io/apscp/issues
+Imports:
+    config,
+    golem,
+    shiny

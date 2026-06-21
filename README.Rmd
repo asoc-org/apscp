@@ -1,0 +1,56 @@
+---
+output:
+  rmarkdown::github_document:
+    html_preview: no
+---
+
+<!--- README.md is generated from README.Rmd. Please edit that file -->
+
+# apscp: Decision Support Tool for the Antarctic Peninsula
+
+[![lifecycle](https://img.shields.io/badge/Lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R-CMD-check-Ubuntu](https://img.shields.io/github/actions/workflow/status/jeffreyhanson/apscp/R-CMD-check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/jeffreyhanson/apscp/actions)
+[![R-CMD-check-Windows](https://img.shields.io/github/actions/workflow/status/jeffreyhanson/apscp/R-CMD-check-windows.yaml?branch=master&label=Windows)](https://github.com/jeffreyhanson/apscp/actions)
+[![Docker Status](https://img.shields.io/docker/cloud/build/naturecons/wheretowork?label=Docker%20build)](https://hub.docker.com/r/naturecons/wheretowork)
+[![Coverage Status](https://codecov.io/github/jeffreyhanson/apscp/coverage.svg?branch=master)](https://codecov.io/github/jeffreyhanson/apscp?branch=master)
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(fig.path = "man/figures/README-", fig.align = "center")
+```
+
+```{r, include = FALSE}
+devtools::load_all()
+h = 2.75
+w = 3.0
+ow = "400"
+```
+
+Interactive decision support tool to navigate management options for the Antarctic Peninsula. The tool identifies priority areas for implementing policies for conservation, tourism, and scientific research. To achieve this, it leverages previously published data ([Lee et al. 2024](https://doi.org/10.1007/s13280-024-02009-4)) and multi-objective optimization techniques through the [_prioritizr_ package](https://prioritizr.net) ([Hanson et al. 2025](https://doi.org/10.1111/cobi.14376)). Although default parameters are specified based on stakeholder surveys, users can calibrate weights and representation targets to fine tune optimization procedures according to their own preferences. Optimization procedures can be performed with the 'Gurobi' (<https://www.gurobi.com/>) or 'CBC' (via the 'rcbc' package, <https://github.com/dirkschumacher/rcbc>) exact algorithm solvers.
+
+## Usage
+
+TODO.
+
+## Installation
+
+TODO.
+
+## Contributing
+
+The application is a [Shiny web application](https://mastering-shiny.org/) developed using the [R statistical computing environment](https://www.r-project.org/). Specifically, it uses the [_golem_ framework](https://thinkr-open.github.io/golem/). This means that the application is effectively an [R package](https://r-pkgs.org/) that contains code for defining and launching the application ([see here for more details](https://engineering-shiny.org/)). The R code files (located in the `./R` directory) are organized using the following naming conventions:
+
+* `app_*`: Defines the web application:
+    * `app_config.R`: Imports configuration settings.
+    * `app_global.R`: Initializes the application. It performs a similar to the `global.R` file in typical Shiny applications.
+    * `app_server.R`: Defines the (back-end) server-side logic for the application. It performs a similar role to the `server.R` file in typical Shiny applications.
+    * `app_ui.R`: Defines the (font-end) user interface for the application. It performs a similar role to the `ui.R` file in typical Shiny applications.
+* `server_*`: Defines components used to assemble the server-side logic for the application.
+* `ui_`*: Defines functions used to create user interface elements.
+* `class_*`: Defines [_R6_ object classes](https://r6.r-lib.org/) for managing data. used in the back-end of the application.
+* `fct_*`:  Defines functions for analysis and data manipulation.
+* `widget_*`:  Defines custom [_htmlwidgets_ widgets](https://www.htmlwidgets.org/) for user interface used by the application.
+* `utils_*`: Defines utility functions.
+
+## Getting help
+
+Thank you for checking out this application. If you encounter any software defects (e.g. application crashes, unexpected behavior, or spelling mistakes), please feel free to post them on the [issue tracker](https://github.com/jeffreyhanson/apscp/issues).

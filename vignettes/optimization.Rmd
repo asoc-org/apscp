@@ -1,0 +1,15 @@
+---
+title: "Optimization"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    fig_caption: true
+bibliography: references.bib
+csl: reference-style.csl
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{Optimization}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+TODO.

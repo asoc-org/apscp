@@ -1,0 +1,12 @@
+url: https://jeffreyhanson.github.io/apscp
+
+template:
+  bootstrap: 5
+
+navbar:
+  components:
+    articles:
+      text: Advanced topics
+      menu:
+      - text: Optimization
+        href: articles/optimization.html
