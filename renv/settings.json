@@ -1,7 +1,7 @@
 {
   "bioconductor.version": null,
   "external.libraries": [],
-  "ignored.packages": [],
+  "ignored.packages": ["gurobi"],
   "lockfile.sanitize": true,
   "package.dependency.fields": [
     "Imports",

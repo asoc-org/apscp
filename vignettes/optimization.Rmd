@@ -12,4 +12,67 @@ vignette: >
   %\usepackage[UTF-8]{inputenc}
 ---
 
+The tool leverages multi-objective optimization techniques to identify priority areas for conservation, tourism, and scientific management. Here we provide a description of mathematical optimization problem formulation that underpins the tool. To begin with, we will define the following terminology. Let $Z$ (indexed by $z$) denote the set of management zones. In particular, the management zones represent the range of potential management options that are available. For convenience, here we let $z=c$ denote the conservation zone, $z=s$ the scientific zone, and $z=t$ the tourism zone. Also let $I$ (indexed by $i$) denote the set of features considered for management. Although features often pertain to biodiversity elements (e.g., species, ecosystems), here we consider additional features that may also be relevant to scientific and tourism areas (e.g., geological sites, points of interest for tourism, existing scientific infrastructure). Additionally, let $J$ (indexed by $j$) denote the set of planning units (e.g., areas available for management). Broadly speaking, the tool aims to help inform which planning units $j \in J$ should be allocated to zones $z \in Z$.
+
+We define terminology to describe the spatial distribution of the features and stakeholder preferences for their representation. In particular, let $A_{ij}$ indicate the amount of each feature $i \in I$ (e.g., abundance of penguins, hectares of lichen, presence/absence of geological sites) that is present within each planning unit $j \in J$. Representation targets are used to specify the minimum amount of each feature that should ideally be held (covered) by planning units allocated to a particular zone (e.g., total abundance of penguins required in conservation areas, total abundance of penguins required in tourism areas, total hectares of lichen present in conservation areas, total number of geological sites for scientific areas). To quantify such targets, let $R_{iz} denote the representation target for feature $i in I$ by management zone $z \in Z$. Additionally, to quantify the relative importance for meeting a particular representation target, let $W_{iz} denote a positive weight value for each feature $i \in I$ and management zone $z \in Z$.
+
+We define terminology to describe the location of existing management zones that cannot be altered. For example, it would be impractical to decommission infrastructure in existing scientific areas, or de-gazette existing protected areas (i.e., Antarctic Specially Protected Areas). To describe this, let $L_{jz}$ indicate if planning unit $j \in J$ is currently allocated to zone $z  in Z$ and must remain allocated to this zone during optimization. In other words, these $L_{jz}$ variables will subsequently be used to "lock" planning units to a particular zone.
+
+We define terminology to describe the negative impacts associated with implementing management zones. To describe the foregone economic opportunity associated with establishing conservation and scientific areas, let $n_j$ denote the opportunity cost for planning $j$. Since detailed site-level revenue data are not readily available across the entire Antarctic Peninsula, we parameterized $n_j$ based on the average number of tourists that have visited planning unit $j$ over a predefined period of time as a proxy. Additionally, let $q_j$ denote the impact of tourism operations on local biodiversity present in planning unit $j$. Because the population viability analyses required to parameterize species-specific responses to tourism operations are not readily available for all species in the Antarctic Peninsula, we parameterized $q_j$ based on the irreplaceability of the conservation features present in planning unit $j$ (i.e,. measured according to rarity-weighted richness). Thus we assume that planning units containing a greater number of species with localized distributions would be more negatively impacted by tourism impacts.
+
+$$
+\begin{align*}
+q_j = \sum_{j \in J} \begin{cases}
+\frac{\frac{A_{ij}}{max_{i \in I} A_{ij}}}{\sum_{i \in I} A_{ij}}, \text{if $R_{j,z=c} > 0$},
+0, \text{otherwise} \end{cases}
+\end{align*}
+$$
+
+We define the binary $X_{iz}$ decision variables. Briefly, these variables represent the primary uncertainty in the decision making process. For a given solution, the $X_{iz}$ variables indicate which planning units are allocated to each zone.
+
+$$
+\begin{align*}
+X_{iz} &= \begin{cases}
+1, \text{if planning unit $i$ selected for zone $z$,}
+0, \text{otherwise} \end{cases}
+$$
+
+We define the continuous $S_{iz} auxiliary variables. Briefly, these variables represent calculations based on the decision variables. For a given solution, the $S_{iz} variables describes the percentage of the target for feature $i \in I$ and zone $z \in Z$ that remains unfulfilled by the solution (in other words, relative target shortfall). In other words, these variables describe how poorly the solution meets a given target.
+
+$$
+\begin{align*}
+S_{iz} &= \text{relative target shortfall for feature $i$ by zone $z$}
+\end{align}
+$$
+
+We define the continuous $\alpha_c$, $\alpha_s$, $\alpha_t$, $\beta$, $\gamma$ objective variables. Briefly, these variables represent the performance metrics that are maximized or minimized during optimization. For a given solution, the $\alpha_c$, $\alpha_s$, and $\alpha_t$ variables measure the weighted sum of the relative target shortfalls for the conservation, scientific, and tourism zones (respectively). Additionally, the $\beta$ variable measures the total opportunity costs associated with the planning units allocated to the conservation and scientific zones. Furthermore, the $\gamma$ variable measures the total impacts of tourism areas on biodiversity.
+
+$$
+\begin{align*}
+\alpha_{c} &= \text{weighted sum of relative target shortfalls for conservation areas ($z=c$)} \\
+\alpha_{s} &= \text{weighted sum of relative target shortfalls for scientific areas ($z=s$)} \\
+\alpha_{t} &= \text{weighted sum of relative target shortfalls for tourism areas ($z=t$)} \\
+\beta &= \text{total opportunity cost of conservation and scientific areas} \\
+\gamma &= \text{total impacts of tourism areas on biodiversity}
+\end{align}
+$$
+
+Based on the previous defined terminology, the optimization problem is formulated as the following multi-objective mixed integer programming problem.
+
+$$
+\begin{align*}
+\text{Minimize} & \alpha_c, \alpha_s, \alpha_t, \beta, \gamma &
+\text{Subject to} & \alpha_c = \sum_{i in I} W_{i,z=c} \times \frac{S_{i,z=c}}{R_{i,z=c}} & \\
+& \alpha_s = \sum_{i in I} W_{i,z=s} \times \frac{S_{i,z=s}}{R_{i,z=s}} & \\
+& \alpha_t = \sum_{i in I} W_{i,z=t} \times \frac{S_{i,z=t}}{R_{i,z=t}} & \\
+& \big( \sum{j \in J} A_{ij} \big) + \big( R_{iz} \times S_{iz} \big) \geq R_{iz} & \forall i \in i, z \in Z \\
+& \beta = \big( \sum{j \in J} n_j \times X_{j,z=t} \big) + \big( \sum{j \in J} n_j \times X_{j,z=t} \big) & \\
+& \gamma = \sum{j \in J} q_j \times X_{j,z=t} & \\
+& X_{jz} \geq L_{jz} & \forall j \in J, z \in Z \\
+& \sum{z \in Z} X_{jz} \leq 1 & \forall j \in J \\
+& X_{jz} \in \{0, 1\} & \forall j \in J, z \in Z \\
+& S_{iz} \in [0, 1] & \forall i \in i, z \in Z \\
+\end{align*}
+$$
+
 TODO.

@@ -5,6 +5,7 @@ doc
 *.so
 *.dll
 .DS_Store
+data-raw/*.pdf
 
 # log files
 gurobi.log
