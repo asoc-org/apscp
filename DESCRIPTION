@@ -28,10 +28,16 @@ Imports:
     terra (>= 1.9-34),
     vroom (>= 1.7.1)
 Suggests:
-    testthat (>= 3.2.1.1),
+    gurobi (>= 13.0-2),
+    testthat (>= 3.3.2),
     knitr (>= 1.48),
     rmarkdown (>= 2.28),
-    whereami (>= 0.2.0),
-    gurobi (>= 13.0-2),
+    devtools (>= 2.5.2),
+    roxygen2 (>= 8.0.0),
+    pkgdown (>= 2.2.0),
+    remotes (>= 2.5.0),
+    markdown (>= 2.0),
+    rbibutils (>= 2.4.1),
+    whereami (>= 0.2.0)
 Remotes:
     dirkschumacher/rcbc
