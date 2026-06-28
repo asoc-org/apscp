@@ -18,15 +18,27 @@ BugReports: https://jeffreyhanson.github.io/apscp/issues
 Depends:
     R (>= 4.6.0),
     promises (>= 1.3.0),
-    R6 (>= 2.6.1),
 Imports:
+    tools,
+    R6 (>= 2.6.1),
     config (>= 0.3.2),
     golem (>= 0.5.1),
     shiny (>= 1.13.0),
     mapgl (>= 0.4.6),
     sf (>= 1.1-1),
     terra (>= 1.9-34),
-    vroom (>= 1.7.1)
+    vroom (>= 1.7.1),
+    uuid (>= 1.2-2),
+    scales (>= 1.4.0),
+    RColorBrewer (>= 1.1-3),
+    viridisLite (>= 0.4.3),
+    assertthat (>= 0.2.0),
+    cli (>= 3.6.0),
+    rlang (>= 1.1.0),
+    yaml (>= 2.3.12),
+    prioritizr (>= 9.0.0.0),
+    rcbc (>= 0.1.0.9003),
+    Matrix (>= 1.3-0)
 Suggests:
     gurobi (>= 13.0-2),
     testthat (>= 3.3.2),
@@ -38,6 +50,37 @@ Suggests:
     remotes (>= 2.5.0),
     markdown (>= 2.0),
     rbibutils (>= 2.4.1),
-    whereami (>= 0.2.0)
+    whereami (>= 0.2.0),
+    usethis (>= 3.2.1)
 Remotes:
-    dirkschumacher/rcbc
+    dirkschumacher/rcbc,
+    prioritizr/prioritizr
+Config/roxygen2/version: 8.0.0
+Collate: 
+    'app_config.R'
+    'app_server.R'
+    'app_ui.R'
+    'internal.R'
+    'class_Dataset.R'
+    'class_Layer.R'
+    'class_Cost.R'
+    'class_Feature.R'
+    'class_Legend.R'
+    'class_Lock.R'
+    'class_Project.R'
+    'class_Provenance.R'
+    'class_Theme.R'
+    'fct_mapgl.R'
+    'import-standalone-as_Matrix.R'
+    'import-standalone-assertions_class.R'
+    'import-standalone-assertions_handlers.R'
+    'import-standalone-assertions_vector.R'
+    'method_Dataset.R'
+    'method_Layer.R'
+    'method_Legend.R'
+    'method_Project.R'
+    'method_deserialize_object.R'
+    'method_print.R'
+    'method_serialize_object.R'
+    'run_app.R'
+    'utils_color_palette.R'

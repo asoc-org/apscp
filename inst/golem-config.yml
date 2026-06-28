@@ -1,11 +1,36 @@
 default:
+  # golem variables
   golem_name: apscp
   golem_version: 0.0.0.9000
   app_prod: no
 
-production:
-  app_prod: yes
+  ## data name
+  data: "inst/data/antarctic-peninsula"
 
+  ## future plan strategy
+  ### if "auto", then:
+  ###   if on Shiny apps (per R_CONFIG_ACTIVE variable): "multicore"
+  ###   else if on Unix systems: "multicore"
+  ###   else "multisession"
+  strategy: "auto"
+
+  ## verbosity
+  verbose: false
+
+  ## monitor memory usage
+  monitor: false
+
+  ## optimality gap
+  solver_gap: 0.01 # 1% from optimality for initial optimization
+
+  ## time limit (seconds) for generating solutions
+  solver_time_limit: 300 # 5 minutes for spatial clustering optimization
+
+  ## time out (seconds) for worker processes
+  ## i.e. maximum time that worker process should remain active after
+  ## contacting controller process
+  worker_time_out: 7200 # two hours
+
+# development configuration
 dev:
-  golem_wd: !expr golem::pkg_path()
-
+  golem_wd: !expr here::here()

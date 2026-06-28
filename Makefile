@@ -107,4 +107,11 @@ reset:
 snapshot:
 	R -e "renv::snapshot(dev = TRUE)"
 
+# usethis commands
+## update standalone files
+update-standalone:
+	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_class.R')"
+	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_vector.R')"
+	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-as_Matrix.R')"
+
 .PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy demo demo-kill image debug snapshot vigns R init init_dev

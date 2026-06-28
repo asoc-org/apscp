@@ -1,0 +1,74 @@
+#' @include internal.R class_Dataset.R
+NULL
+
+#' New Layer
+#'
+#' Create a new layer object.
+#'
+#' @param dataset [new_dataset()] object with spatial data.
+#'
+#' @param index `character` or `integer` value indicating the layer in
+#' `dataset` that has the data for this layer.
+#'
+#' @param legend [new_categorical_legend()] or [new_continuous_legend()]
+#' object.
+#'
+#' @param units `character` value containing the units for the values in the
+#' underlying data.
+#'
+#' @param provenance [new_provenance()] object.
+#'
+#' @param id `character` value with unique identifier.
+#' Defaults to a random identifier ([uuid::UUIDgenerate()]).
+#'
+#' @return A `Layer` object.
+#'
+#' @examples
+#' # TODO
+#'
+#' @export
+new_layer <- function(
+  dataset,
+  index,
+  total,
+  units,
+  legend,
+  provenance,
+  id = uuid::UUIDgenerate()
+) {
+  # assert that arguments are valid
+  assertthat::assert_that(
+    ## dataset
+    inherits(dataset, "Dataset"),
+    ## index
+    assertthat::is.string(index) || assertthat::is.count(index),
+    assertthat::noNA(index),
+    ## total
+    assertthat::is.number(total),
+    assertthat::noNA(total),
+    isTRUE(total >= 0),
+    ## units
+    assertthat::is.string(units),
+    assertthat::noNA(units),
+    ## legend
+    inherits(legend, c("ContinuousLegend", "CategoricalLegend")),
+    #### provenance
+    inherits(provenance, "Provenance"),
+    ## id
+    assertthat::is.string(id),
+    assertthat::noNA(id)
+  )
+  # return object
+  structure(
+    list(
+      dataset = dataset,
+      index = index,
+      total = total,
+      units = units,
+      legend = legend,
+      provenance = provenance,
+      id = id
+    ),
+    class = "Layer"
+  )
+}

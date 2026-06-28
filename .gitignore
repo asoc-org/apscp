@@ -5,7 +5,12 @@ doc
 *.so
 *.dll
 .DS_Store
+
+# data files
 data-raw/*.pdf
+data-raw/29092346/*
+data-raw/29092346/*/*
+data-raw/29092346/*/*/*
 
 # log files
 gurobi.log
@@ -20,18 +25,21 @@ inst/log/*
 
 # system files
 .directory
+
 # do not ignore the following files
 !.gitkeep
 !*/
 !inst/doc/*.html
 !inst/doc/*.Rmd
 !inst/doc/.gitkeep
+!data-raw/*.zip
 
 # devtools files
 doc/*
 Meta/*
 /doc/
 /Meta/
+
 
 # shinyapps.io
 rsconnect

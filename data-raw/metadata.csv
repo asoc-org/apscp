@@ -1,0 +1,59 @@
+file,layer,name,details,units,class,theme,palette,provenance_source,provenance_url,provenance_icon
+ant_circ_1km.tif ,1,Sites past the Antarctic circle,Site is located south of the Antarctic Circle,presence,feature,Geographic,#cc4c02,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+cont_land_1km.tif ,1,Continental landing site,,presence,feature,Geographic,#fe9929,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+field_camp_1km.tif ,1,Scientific field camps,,presence,feature,Science,#08519c,COMNAP 2023,https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities,server
+fresh_wat_1km.tif ,1,Fresh water,,presence,feature,Habitats,#a6cee3,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+geotherm_1km.tif ,1,Geotermal/volcanic sites,,presence,feature,Habitats,#fb9a99,Fraster et al. 2014,https://doi.org/10.1073/pnas.1321437111,book
+HSM_1km.tif ,1,Historic monuments,,presence,feature,Historic,#fee391,Antarctic Protected Areas Database,https://www.ats.aq/devph/en/apa-database/,
+inv_spec_1km.tif ,1,Invasive species,Important for monitoring and management and inversely important to biodiversity (i.e. sites free of invasives important),presence,feature,Habitats,#984ea3,Hughes et al. 2015,https://doi.org/10.1007/s10531-015-0896-6,book
+invert_1km.tif ,1,General invertebrates,,presence,feature,Invertebrates,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+inviolate_1km.tif ,1,Inviolate sites,"Important for ASPA designation, also as future scientific monitoring/control sites. Including undisturbed coastal areas (which are rare in the Peninsula)",presence,lock,NA,#74c476,Leihy et al. 2020,https://doi.org/10.1038/s41586-020-2506-3,book
+monitor_1km.tif ,1,Monitoring sites,,presence,feature,Science,#6baed6,Penguin Watch (T. Hart pers comm),https://www.polarsentinels.org/projects/penguin-watch,server
+res_stat_1km.tif ,1,Research stations,,presence,feature,Science,#3182bd,COMNAP 2023,https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities,
+SCPID_1_1km.tif ,1,Freshwater copepods ,,abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_10_1km.tif ,1,Poduromorpha springtails ,"E.g., Gomphiocephalus hodgsoni",abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_12_1km.tif ,1,Intertidal mites ,,abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_13_1km.tif ,1,Intertidal oligochaetes ,"Including enchytraeids, such as Christensenia spp.",abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_14_1km.tif ,1,Intertidal springtails ,,abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_20_1km.tif ,1,Mesic mosses ,,abundance,feature,Vegetation,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_22_1km.tif ,1,Truly aquatic mosses ,"I.e., lake-dwelling moss",abundance,feature,Vegetation,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_23_1km.tif ,1,Leafy liverworts ,"E.g., Cephaloziella varians",abundance,feature,Vegetation,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_24_1km.tif ,1,Thalloid liverworts ,,abundance,feature,Vegetation,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_30_1km.tif ,1,Snow algae ,,abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_31_1km.tif ,1,Biological soil crust microbes,Biological soil crust microbial communities ,abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_32_1km.tif ,1,Dry soil microbes,Microbes that predominantly survive in the dry soil,abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_33_1km.tif ,1,Lithic microbes,"Microbes that predominantly survive on/in rocks (endolithic, hypolithic and chasmolithic)",abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_34_1km.tif ,1,Wet soil microbes,Wet soil microbial communities ,abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_35_1km.tif ,1,Microbial mats,"Microbial mats, both lake and flush systems ",abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_36_1km.tif ,1,Plankton,Non-marine aquatic system plankton ,abundance,feature,Microbes,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_37_1km.tif ,1,Adélie penguins ,Including associated ectoparasites,abundance,feature,Penguins,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_38_1km.tif ,1,Chinstrap penguins ,Including associated ectoparasites,abundance,feature,Penguins,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_39_1km.tif ,1,Gentoo penguins ,Including associated ectoparasites,abundance,feature,Penguins,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_40_1km.tif ,1,Macaroni penguins ,Including associated ectoparasites,abundance,feature,Penguins,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_41_1km.tif ,1,King penguins ,Including associated ectoparasites,abundance,feature,Penguins,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_42_1km.tif ,1,Emperor penguins ,Including associated ectoparasites,presence,feature,Penguins,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_44_1km.tif ,1,Antarctic shag ,Including associated ectoparasites,presence,feature,Seabirds,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_45_1km.tif ,1,Antarctic terns ,Including associated ectoparasites,presence,feature,Seabirds,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_46_1km.tif ,1,Procellariids ,"Snow petrel, Southern Fulmar, Wilson's storm petrel, Antarctic petrel, Antarctic prion, Cape petrel, and associated ectoparasties",presence,feature,Seabirds,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_5_1km.tif ,1,Moss-associated microfauna,"Terrestrial, moss associated nematodes, rotifers, tardigrades ",abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_51_1km.tif ,1,Antarctic fur seals ,Including associated ectoparasites,abundance,feature,Seals,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_52_1km.tif ,1,Elephant seals ,Including associated ectoparasites,abundance,feature,Seals,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_53_1km.tif ,1,Weddell seals ,Including associated ectoparasites,abundance,feature,Seals,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_6_1km.tif ,1,Penguin rookery-associated nematodes,"Terrestrial, penguin rookery associated nematodes ",abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_74_1km.tif ,1,Potential expansion zones ,Zones that species might be likely to expand into with climate change,abundance,feature,Geographic,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_76_1km.tif ,1,Crevasses ,,abundance,feature,Ice,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_77_1km.tif ,1,Fast ice / shelf ice ,,abundance,feature,Ice,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_78_1km.tif ,1,Glaciers ,Including tidewater glaciers,abundance,feature,Ice,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_79_1km.tif ,1,Fossil bearing rocks ,,abundance,feature,Outstanding geological,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_80_1km.tif ,1,Meteorites ,,abundance,feature,Outstanding geological,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_81_1km.tif ,1,Minerals and crystals ,,abundance,feature,Outstanding geological,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_82_1km.tif ,1,Geological processes ,"Sites containing examples of interesting geological processes (e.g., ventifacts)",abundance,feature,Outstanding geological,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+SCPID_9_1km.tif ,1,Entomobryomorpha springtails,"E.g., Isotoma klovstadi",abundance,feature,Invertebrates,viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+seabird_1km.tif ,1,Other seabird colonies,"E.g., southern giant petrels, sheathbills, Antarctic shag, terns, petrels",presence,feature,Seabirds,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+shelf_ice_1km.tif ,1,Ice shelf,,presence,feature,Ice,#cab2d6,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+snow_alg_1km.tif ,1,Snow algae 2,,presence,feature,Microbes,#984ea3,Gray et al. 2020,https://doi.org/10.1038/s41467-020-16018-w,book
+veg_1km.tif,1,Vegetation,Sites with the two Antarctic plants or moss or lichens,presence,feature,Vegetation,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
+PUID_1km.tif,1,Planning units,,index,pu,NA,NA,Lee et al. 2025,https://doi.org/10.26180/29092346,book
+ASPA_1km.tif,1,ASPA,,presence,lock,NA,#006d2c,Australian Antarctic Data Centre,https://data.aad.gov.au/metadata/records/AAS_4296_Updated_ASPAs_2024,server
+max_tvis_1km.tif,1,Tourism visitor landings,,number of visitors,cost,NA,magma,International Association of Antarctica Tour Operators,https://iaato.org/news-room/data-statistics,server
+max_tves_1km.tif,1,Tourism vessel landings,,number of vessels,cost,NA,inferno,International Association of Antarctica Tour Operators,https://iaato.org/news-room/data-statistics,server
