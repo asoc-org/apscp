@@ -21,6 +21,7 @@ gp.log
 examples.log
 restart.txt
 inst/log/*
+*.Rout
 *.log
 
 # system files
@@ -39,7 +40,6 @@ doc/*
 Meta/*
 /doc/
 /Meta/
-
 
 # shinyapps.io
 rsconnect

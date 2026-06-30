@@ -2,9 +2,39 @@
 % Please edit documentation in R/method_serialize_object.R
 \name{serialize_object}
 \alias{serialize_object}
+\alias{serialize_object.Provenance}
+\alias{serialize_object.ContinuousLegend}
+\alias{serialize_object.CategoricalLegend}
+\alias{serialize_object.Layer}
+\alias{serialize_object.Feature}
+\alias{serialize_object.Lock}
+\alias{serialize_object.Cost}
+\alias{serialize_object.Solution}
+\alias{serialize_object.Theme}
+\alias{serialize_object.Project}
 \title{Serialize object}
 \usage{
 serialize_object(x)
+
+\method{serialize_object}{Provenance}(x)
+
+\method{serialize_object}{ContinuousLegend}(x)
+
+\method{serialize_object}{CategoricalLegend}(x)
+
+\method{serialize_object}{Layer}(x)
+
+\method{serialize_object}{Feature}(x)
+
+\method{serialize_object}{Lock}(x)
+
+\method{serialize_object}{Cost}(x)
+
+\method{serialize_object}{Solution}(x)
+
+\method{serialize_object}{Theme}(x)
+
+\method{serialize_object}{Project}(x)
 }
 \arguments{
 \item{x}{An object.}
@@ -19,6 +49,27 @@ Serialize an object.
 This function is designed to be used for (i) passing objects from the R
 session to the JavaScript session in the client browser, and (ii)
 reading and writing objects to disk.
+}
+\examples{
+# create an object
+x <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))
+
+# preview object
+print(x)
+
+# serialize object
+s <- serialize_object(x)
+
+# preview serialized object
+print(s)
+
+# deserialize the serialized object
+d <- deserialize_object(s)
+
+# preview the deserialized object,
+# we can see that it is identical to x (i.e., the original object)
+print(d)
+
 }
 \seealso{
 See [deserialize_object()] for the opposite of this function.

@@ -1,2019 +1,2201 @@
 name: Antarctic Peninsula
 author_name: Jasmine Lee
 author_email: jasmine.lee@monash.edu
-dataset:
-  spatial_path: inst/data/antarctic-peninsula_rast.tif
-  attribute_path: inst/data/antarctic-peninsula_attr.csv.gz
-  boundary_path: inst/data/antarctic-peninsula_bd.csv.gz
-themes:
-  Geographic:
-    name: Geographic
-    feature:
-      Continental landing site:
-        name: Continental landing site
-        layer:
-          index: Continental landing site
-          total: 31895.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#fe9929'
-            class: CategoricalLegend
-          provenance:
-            name: Antarctic Digital Database
-            icon: server
-            color: '#000000'
-            description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-              Digital Database</a>
-          id: 608e1ab3-d9da-4007-bb37-87ca5130c30c
-        targets:
-        - 0.0
-        - 0.0
-        - 6.27e-05
-      Potential expansion zones:
-        name: Potential expansion zones
-        layer:
-          index: Potential expansion zones
-          total: 21.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: b1da0a89-d675-40a7-ab39-c60758e9199c
-        targets:
-        - 0.3
-        - 0.05
-        - 0.0
-      Sites past the Antarctic circle:
-        name: Sites past the Antarctic circle
-        layer:
-          index: Sites past the Antarctic circle
-          total: 28554.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#cc4c02'
-            class: CategoricalLegend
-          provenance:
-            name: Antarctic Digital Database
-            icon: server
-            color: '#000000'
-            description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-              Digital Database</a>
-          id: e801e1ea-66b4-4f8a-bd0d-95f77f510270
-        targets:
-        - 0.0
-        - 0.0
-        - 0.0001051
-  Habitats:
-    name: Habitats
-    feature:
-      Fresh water:
-        name: Fresh water
-        layer:
-          index: Fresh water
-          total: 882.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#a6cee3'
-            class: CategoricalLegend
-          provenance:
-            name: Antarctic Digital Database
-            icon: server
-            color: '#000000'
-            description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-              Digital Database</a>
-          id: 54f15ef5-c942-4ad3-a2ba-e6f9b9d139b9
-        targets:
-        - 0.05
-        - 0.05
-        - 0.0
-      Geotermal/volcanic sites:
-        name: Geotermal/volcanic sites
-        layer:
-          index: Geotermal/volcanic sites
-          total: 3.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#fb9a99'
-            class: CategoricalLegend
-          provenance:
-            name: Fraster et al. 2014
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1073/pnas.1321437111">Fraster
-              et al. 2014</a>
-          id: 2835c889-ed2b-48d2-8a50-5b13cc4f6b9f
-        targets:
-        - 0.6
-        - 0.3
-        - 0.0
-      Invasive species:
-        name: Invasive species
-        layer:
-          index: Invasive species
-          total: 26.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Hughes et al. 2015
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1007/s10531-015-0896-6">Hughes
-              et al. 2015</a>
-          id: 589b0e81-1ff3-4699-8fc1-3ace07b47f6f
-        targets:
-        - 0.0
-        - 0.5769231
-        - 0.0
-  Historic:
-    name: Historic
-    feature:
-      Historic monuments:
-        name: Historic monuments
-        layer:
-          index: Historic monuments
-          total: 29.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#fee391'
-            class: CategoricalLegend
-          provenance:
-            name: Antarctic Protected Areas Database
-            icon: question
-            color: '#000000'
-            description: Obtained from <a href="https://www.ats.aq/devph/en/apa-database/">Antarctic
-              Protected Areas Database</a>
-          id: 4d2847cc-7990-4e2a-af69-aaa0b19cfb08
-        targets:
-        - 0.0
-        - 0.5
-        - 0.1034483
-  Ice:
-    name: Ice
-    feature:
-      Crevasses:
-        name: Crevasses
-        layer:
-          index: Crevasses
-          total: 897.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 15.0
-            - 30.0
-            - 45.0
-            - 60.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 20.0
-            - 40.0
-            - 60.0
-            labels:
-            - '0'
-            - '20'
-            - '40'
-            - '60'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 50374956-475a-4e82-be2b-e6a152252ab4
-        targets:
-        - 0.0111483
-        - 0.0089186
-        - 0.0
-      Fast ice / shelf ice:
-        name: Fast ice / shelf ice
-        layer:
-          index: Fast ice / shelf ice
-          total: 10.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.75
-            - 1.5
-            - 2.25
-            - 3.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 3d7a1cde-db94-4df1-9e8e-d6c2c1f1a1a0
-        targets:
-        - 0.2
-        - 0.4
-        - 0.0
-      Glaciers:
-        name: Glaciers
-        layer:
-          index: Glaciers
-          total: 451.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.875
-            - 3.75
-            - 5.625
-            - 7.5
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            labels:
-            - '0'
-            - '2.5'
-            - '5'
-            - '7.5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 2da0d854-f7ac-46d4-8178-9846f6591420
-        targets:
-        - 0.15
-        - 0.05
-        - 0.0
-      Ice shelf:
-        name: Ice shelf
-        layer:
-          index: Ice shelf
-          total: 1306.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#cab2d6'
-            class: CategoricalLegend
-          provenance:
-            name: Antarctic Digital Database
-            icon: server
-            color: '#000000'
-            description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-              Digital Database</a>
-          id: a6266a3a-d430-4805-9bac-24fc5adbc09f
-        targets:
-        - 0.0
-        - 0.05
-        - 0.0011485
-  Invertebrates:
-    name: Invertebrates
-    feature:
-      Entomobryomorpha springtails:
-        name: Entomobryomorpha springtails
-        layer:
-          index: Entomobryomorpha springtails
-          total: 955.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 6.25
-            - 12.5
-            - 18.75
-            - 25.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 5.0
-            - 10.0
-            - 15.0
-            - 20.0
-            - 25.0
-            labels:
-            - '0'
-            - '5'
-            - '10'
-            - '15'
-            - '20'
-            - '25'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 49f2ef84-0ff7-4ac6-92fc-2ac05652b635
-        targets:
-        - 0.1052356
-        - 0.0073298
-        - 0.0
-      Freshwater copepods:
-        name: Freshwater copepods
-        layer:
-          index: Freshwater copepods
-          total: 44.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.75
-            - 1.5
-            - 2.25
-            - 3.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: b62ffbca-0d12-41de-87d3-529424ce1f64
-        targets:
-        - 0.2272727
-        - 0.1136364
-        - 0.0
-      General invertebrates:
-        name: General invertebrates
-        layer:
-          index: General invertebrates
-          total: 288.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 1ff83a2e-b1ed-494a-80df-69b235656a80
-        targets:
-        - 0.0
-        - 0.0
-        - 0.0
-      Intertidal mites:
-        name: Intertidal mites
-        layer:
-          index: Intertidal mites
-          total: 12.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 619fa205-a9f1-4202-83ef-68d1e3e5297e
-        targets:
-        - 0.3
-        - 0.05
-        - 0.0
-      Intertidal oligochaetes:
-        name: Intertidal oligochaetes
-        layer:
-          index: Intertidal oligochaetes
-          total: 90.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.875
-            - 3.75
-            - 5.625
-            - 7.5
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            labels:
-            - '0'
-            - '2.5'
-            - '5'
-            - '7.5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 39c211ee-0933-44ea-bb6b-fe423d6e9691
-        targets:
-        - 0.1111111
-        - 0.05
-        - 0.0
-      Intertidal springtails:
-        name: Intertidal springtails
-        layer:
-          index: Intertidal springtails
-          total: 143.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.875
-            - 3.75
-            - 5.625
-            - 7.5
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            labels:
-            - '0'
-            - '2.5'
-            - '5'
-            - '7.5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 3ec053cf-9627-4a5e-9823-60667a4af141
-        targets:
-        - 0.1398601
-        - 0.2097902
-        - 0.0
-      Moss-associated microfauna:
-        name: Moss-associated microfauna
-        layer:
-          index: Moss-associated microfauna
-          total: 295.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 3.0
-            - 6.0
-            - 9.0
-            - 12.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 4.0
-            - 8.0
-            - 12.0
-            labels:
-            - '0'
-            - '4'
-            - '8'
-            - '12'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 0c828a37-f9fe-43fe-9dad-e0ac139d39b5
-        targets:
-        - 0.1338983
-        - 0.05
-        - 0.0
-      Penguin rookery-associated nematodes:
-        name: Penguin rookery-associated nematodes
-        layer:
-          index: Penguin rookery-associated nematodes
-          total: 185.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            - 10.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 5.0
-            - 10.0
-            labels:
-            - '0'
-            - '5'
-            - '10'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 33cc7ef1-e525-437d-bf4d-b0b2ad24cc5f
-        targets:
-        - 0.2
-        - 0.05
-        - 0.0
-      Poduromorpha springtails:
-        name: Poduromorpha springtails
-        layer:
-          index: Poduromorpha springtails
-          total: 9.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: c567b32c-2050-4d42-b94c-b3fcf42ef549
-        targets:
-        - 0.2222222
-        - 0.4444444
-        - 0.0
-  Microbes:
-    name: Microbes
-    feature:
-      Biological soil crust microbes:
-        name: Biological soil crust microbes
-        layer:
-          index: Biological soil crust microbes
-          total: 482.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.25
-            - 2.5
-            - 3.75
-            - 5.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            - 4.0
-            - 5.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            - '4'
-            - '5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 4872185c-a28c-4d2c-9dd5-4247a58261a9
-        targets:
-        - 0.7
-        - 0.05
-        - 0.0041494
-      Dry soil microbes:
-        name: Dry soil microbes
-        layer:
-          index: Dry soil microbes
-          total: 10.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 989a7d39-3766-48e3-a2d1-f5ab1e4b89d4
-        targets:
-        - 0.775
-        - 0.05
-        - 0.0
-      Lithic microbes:
-        name: Lithic microbes
-        layer:
-          index: Lithic microbes
-          total: 251.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            - 4.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            - 4.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            - '4'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: c040d137-4ec1-4534-bdd3-cd0521ee60c4
-        targets:
-        - 0.55
-        - 0.05
-        - 0.0199203
-      Microbial mats:
-        name: Microbial mats
-        layer:
-          index: Microbial mats
-          total: 95.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 9abfd9e7-caae-4248-9898-de33a8efa1c6
-        targets:
-        - 0.3157895
-        - 0.0315789
-        - 0.0
-      Plankton:
-        name: Plankton
-        layer:
-          index: Plankton
-          total: 311.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 22.5
-            - 45.0
-            - 67.5
-            - 90.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 30.0
-            - 60.0
-            - 90.0
-            labels:
-            - '0'
-            - '30'
-            - '60'
-            - '90'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: a6163302-4da2-4693-a633-28a24e31562b
-        targets:
-        - 0.75
-        - 0.05
-        - 0.0
-      Snow algae:
-        name: Snow algae
-        layer:
-          index: Snow algae
-          total: 280.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.875
-            - 3.75
-            - 5.625
-            - 7.5
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            labels:
-            - '0'
-            - '2.5'
-            - '5'
-            - '7.5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 187998ea-be9f-44a5-8721-588bd3c7341c
-        targets:
-        - 0.6
-        - 0.05
-        - 0.0071429
-      Snow algae 2:
-        name: Snow algae 2
-        layer:
-          index: Snow algae 2
-          total: 529.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Gray et al. 2020
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1038/s41467-020-16018-w">Gray
-              et al. 2020</a>
-          id: 18fdeeaa-fa14-429a-bd5e-a2a21b8996af
-        targets:
-        - 0.3
-        - 0.05
-        - 0.0
-      Wet soil microbes:
-        name: Wet soil microbes
-        layer:
-          index: Wet soil microbes
-          total: 180.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.75
-            - 1.5
-            - 2.25
-            - 3.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: b236c136-172d-43ca-a8c0-40014414417e
-        targets:
-        - 0.5
-        - 0.05
-        - 0.0
-  Outstanding geological:
-    name: Outstanding geological
-    feature:
-      Fossil bearing rocks:
-        name: Fossil bearing rocks
-        layer:
-          index: Fossil bearing rocks
-          total: 3540.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 16.0
-            - 32.0
-            - 48.0
-            - 64.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 20.0
-            - 40.0
-            - 60.0
-            labels:
-            - '0'
-            - '20'
-            - '40'
-            - '60'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 62facb22-6985-43e2-9f6b-6208189eeb98
-        targets:
-        - 0.0254237
-        - 0.0423729
-        - 0.0
-      Geological processes:
-        name: Geological processes
-        layer:
-          index: Geological processes
-          total: 24.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            - 10.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 5.0
-            - 10.0
-            labels:
-            - '0'
-            - '5'
-            - '10'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 35f61152-7b35-4ea6-b175-41b827f45e6f
-        targets:
-        - 0.3
-        - 0.05
-        - 0.0
-      Meteorites:
-        name: Meteorites
-        layer:
-          index: Meteorites
-          total: 65.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 3.75
-            - 7.5
-            - 11.25
-            - 15.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 5.0
-            - 10.0
-            - 15.0
-            labels:
-            - '0'
-            - '5'
-            - '10'
-            - '15'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 1626f6b5-6422-4b0b-b32e-1b0f3642a9a5
-        targets:
-        - 0.4
-        - 0.05
-        - 0.0
-      Minerals and crystals:
-        name: Minerals and crystals
-        layer:
-          index: Minerals and crystals
-          total: 20.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: b3e071f3-7192-458b-b9b3-467904d8c10b
-        targets:
-        - 0.55
-        - 0.05
-        - 0.0
-  Penguins:
-    name: Penguins
-    feature:
-      Adélie penguins:
-        name: Adélie penguins
-        layer:
-          index: Adélie penguins
-          total: 296.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.5
-            - 3.0
-            - 4.5
-            - 6.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 2.0
-            - 4.0
-            - 6.0
-            labels:
-            - '0'
-            - '2'
-            - '4'
-            - '6'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: e4d44307-91d8-48d1-b686-645c4fcab977
-        targets:
-        - 0.55
-        - 0.05
-        - 0.0
-      Chinstrap penguins:
-        name: Chinstrap penguins
-        layer:
-          index: Chinstrap penguins
-          total: 255.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 1.25
-            - 2.5
-            - 3.75
-            - 5.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            - 4.0
-            - 5.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            - '4'
-            - '5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 833ab121-9520-41ac-a6aa-e791ee724bbe
-        targets:
-        - 0.6
-        - 0.05
-        - 0.0
-      Emperor penguins:
-        name: Emperor penguins
-        layer:
-          index: Emperor penguins
-          total: 3.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: e2554a5d-753e-4193-80f7-c5190acfc262
-        targets:
-        - 0.6
-        - 0.05
-        - 0.0
-      Gentoo penguins:
-        name: Gentoo penguins
-        layer:
-          index: Gentoo penguins
-          total: 235.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 6.25
-            - 12.5
-            - 18.75
-            - 25.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 5.0
-            - 10.0
-            - 15.0
-            - 20.0
-            - 25.0
-            labels:
-            - '0'
-            - '5'
-            - '10'
-            - '15'
-            - '20'
-            - '25'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: c221c3ca-2abc-4559-8d06-b5c6133e9252
-        targets:
-        - 0.4
-        - 0.0851064
-        - 0.0
-      King penguins:
-        name: King penguins
-        layer:
-          index: King penguins
-          total: 21.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 49da70ee-91be-4be9-8349-860d194c69ad
-        targets:
-        - 0.875
-        - 0.05
-        - 0.0
-      Macaroni penguins:
-        name: Macaroni penguins
-        layer:
-          index: Macaroni penguins
-          total: 124.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.75
-            - 1.5
-            - 2.25
-            - 3.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 65ff6ce1-83da-4a23-ac00-4fef449ae299
-        targets:
-        - 0.7
-        - 0.05
-        - 0.0
-  Science:
-    name: Science
-    feature:
-      Monitoring sites:
-        name: Monitoring sites
-        layer:
-          index: Monitoring sites
-          total: 165.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#6baed6'
-            class: CategoricalLegend
-          provenance:
-            name: Penguin Watch (T. Hart pers comm)
-            icon: server
-            color: '#000000'
-            description: Obtained from <a href="https://www.polarsentinels.org/projects/penguin-watch">Penguin
-              Watch (T. Hart pers comm)</a>
-          id: a9f126c2-f10a-460f-aba0-59f1e5d678f1
-        targets:
-        - 0.0
-        - 0.1818182
-        - 0.0
-      Research stations:
-        name: Research stations
-        layer:
-          index: Research stations
-          total: 38.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#3182bd'
-            class: CategoricalLegend
-          provenance:
-            name: COMNAP 2023
-            icon: question
-            color: '#000000'
-            description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
-              2023</a>
-          id: 7a9781ad-6064-4fc9-adac-f16d450161ed
-        targets:
-        - 0.0
-        - 0.6578947
-        - 0.0526316
-      Scientific field camps:
-        name: Scientific field camps
-        layer:
-          index: Scientific field camps
-          total: 5.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#08519c'
-            class: CategoricalLegend
-          provenance:
-            name: COMNAP 2023
-            icon: server
-            color: '#000000'
-            description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
-              2023</a>
-          id: 7e320e7e-5310-4274-a47b-c3313fc770ad
-        targets:
-        - 0.0
-        - 1.0
-        - 0.0
-  Seabirds:
-    name: Seabirds
-    feature:
-      Antarctic shag:
-        name: Antarctic shag
-        layer:
-          index: Antarctic shag
-          total: 9.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: baf77898-6a03-4db8-9600-f99ee345f9ae
-        targets:
-        - 0.6
-        - 0.05
-        - 0.05
-      Antarctic terns:
-        name: Antarctic terns
-        layer:
-          index: Antarctic terns
-          total: 9.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 80661bea-f46a-4ace-8496-d6cbef06a160
-        targets:
-        - 0.6
-        - 0.05
-        - 0.05
-      Other seabird colonies:
-        name: Other seabird colonies
-        layer:
-          index: Other seabird colonies
-          total: 242.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 13a24a12-05a3-44cc-b20b-6feadb51eb33
-        targets:
-        - 0.0
-        - 0.0
-        - 0.0123967
-      Procellariids:
-        name: Procellariids
-        layer:
-          index: Procellariids
-          total: 4.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 568cd2fc-adb8-4288-bd9d-5fd4b9e316d5
-        targets:
-        - 0.6
-        - 0.05
-        - 0.0
-  Seals:
-    name: Seals
-    feature:
-      Antarctic fur seals:
-        name: Antarctic fur seals
-        layer:
-          index: Antarctic fur seals
-          total: 9.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 42ede012-8546-4cc3-9d10-20af15cf394b
-        targets:
-        - 0.3
-        - 0.05
-        - 0.0
-      Elephant seals:
-        name: Elephant seals
-        layer:
-          index: Elephant seals
-          total: 9.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 0.5
-            - 1.0
-            - 1.5
-            - 2.0
-            labels:
-            - '0'
-            - '0.5'
-            - '1'
-            - '1.5'
-            - '2'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: e997c239-7fe1-4149-b5e5-54901f74c2d0
-        targets:
-        - 0.5555556
-        - 0.05
-        - 0.0
-      Weddell seals:
-        name: Weddell seals
-        layer:
-          index: Weddell seals
-          total: 30.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 0.75
-            - 1.5
-            - 2.25
-            - 3.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 1.0
-            - 2.0
-            - 3.0
-            labels:
-            - '0'
-            - '1'
-            - '2'
-            - '3'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 55fa7b35-8c25-44ae-a3e8-eb4cd07e6f4b
-        targets:
-        - 0.1
-        - 0.05
-        - 0.0
-  Vegetation:
-    name: Vegetation
-    feature:
-      Leafy liverworts:
-        name: Leafy liverworts
-        layer:
-          index: Leafy liverworts
-          total: 2423.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 19.75
-            - 39.5
-            - 59.25
-            - 79.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 25.0
-            - 50.0
-            - 75.0
-            labels:
-            - '0'
-            - '25'
-            - '50'
-            - '75'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 6ab9df69-4a02-4efb-9c8a-998f83f9212e
-        targets:
-        - 0.168572
-        - 0.0660338
-        - 0.0
-      Mesic mosses:
-        name: Mesic mosses
-        layer:
-          index: Mesic mosses
-          total: 336.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 3.0
-            - 6.0
-            - 9.0
-            - 12.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 4.0
-            - 8.0
-            - 12.0
-            labels:
-            - '0'
-            - '4'
-            - '8'
-            - '12'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: d0fece89-43d8-4117-93b8-8c62f4d27d56
-        targets:
-        - 0.1
-        - 0.0595238
-        - 0.0
-      Thalloid liverworts:
-        name: Thalloid liverworts
-        layer:
-          index: Thalloid liverworts
-          total: 86.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 2.0
-            - 4.0
-            - 6.0
-            - 8.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 2.5
-            - 5.0
-            - 7.5
-            labels:
-            - '0'
-            - '2.5'
-            - '5'
-            - '7.5'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: f736cf73-67a1-4b52-bef8-ad9a3ad6896d
-        targets:
-        - 0.5
-        - 0.05
-        - 0.0
-      Truly aquatic mosses:
-        name: Truly aquatic mosses
-        layer:
-          index: Truly aquatic mosses
-          total: 2748.0
-          units: abundance
-          legend:
-            values:
-            - 0.0
-            - 19.0
-            - 38.0
-            - 57.0
-            - 76.0
-            colors:
-            - '#440154FF'
-            - '#3B528BFF'
-            - '#21908CFF'
-            - '#5DC863FF'
-            - '#FDE725FF'
-            breaks:
-            - 0.0
-            - 25.0
-            - 50.0
-            - 75.0
-            labels:
-            - '0'
-            - '25'
-            - '50'
-            - '75'
-            class: ContinuousLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: db953a71-59b2-4680-a923-5e2bb22ead88
-        targets:
-        - 0.1663755
-        - 0.0582242
-        - 0.0
-      Vegetation:
-        name: Vegetation
-        layer:
-          index: Vegetation
-          total: 749.0
-          units: presence
-          legend:
-            values: 1.0
-            labels: presence
-            colors: '#984ea3'
-            class: CategoricalLegend
-          provenance:
-            name: Terauds et al. 2025
-            icon: book
-            color: '#000000'
-            description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-              et al. 2025</a>
-          id: 21363a8e-294c-4f63-9bf5-0f64b4bddf8c
-        targets:
-        - 0.0
-        - 0.0
-        - 0.0026702
+zones:
+- Conservation area
+- Scientific area
+- Tourism area
 costs:
-  Tourism vessel landings:
-    name: Tourism vessel landings
+- name: Tourism vessel landings
+  layer:
+    index: Tourism vessel landings
+    total: 7171.0
+    units: number of vessels
+    details: ~
+    legend:
+      values:
+      - 0.0
+      - 78.0
+      - 156.0
+      - 234.0
+      - 312.0
+      colors:
+      - '#000004FF'
+      - '#56106EFF'
+      - '#BB3754FF'
+      - '#F98C0AFF'
+      - '#FCFFA4FF'
+      breaks:
+      - 0.0
+      - 100.0
+      - 200.0
+      - 300.0
+      labels:
+      - '0'
+      - '100'
+      - '200'
+      - '300'
+      class: ContinuousLegend
+    provenance:
+      name: International Association of Antarctica Tour Operators
+      icon: server
+      color: '#000000'
+      description: Obtained from <a href="https://iaato.org/news-room/data-statistics">International
+        Association of Antarctica Tour Operators</a>
+      class: Provenance
+    id: a362bd6e-29e5-4953-9803-6dc0f4ebcbe4
+    class: Layer
+  class: Cost
+- name: Tourism visitor landings
+  layer:
+    index: Tourism visitor landings
+    total: 378254.0
+    units: number of visitors
+    details: ~
+    legend:
+      values:
+      - 0.0
+      - 7500.0
+      - 15000.0
+      - 22500.0
+      - 30000.0
+      colors:
+      - '#000004FF'
+      - '#51127CFF'
+      - '#B63679FF'
+      - '#FB8861FF'
+      - '#FCFDBFFF'
+      breaks:
+      - 0.0
+      - 10000.0
+      - 20000.0
+      - 30000.0
+      labels:
+      - '0'
+      - '10000'
+      - '20000'
+      - '30000'
+      class: ContinuousLegend
+    provenance:
+      name: International Association of Antarctica Tour Operators
+      icon: server
+      color: '#000000'
+      description: Obtained from <a href="https://iaato.org/news-room/data-statistics">International
+        Association of Antarctica Tour Operators</a>
+      class: Provenance
+    id: f51912b3-b111-4fd2-be1a-343a4265e93e
+    class: Layer
+  class: Cost
+themes:
+- name: Geographic
+  features:
+  - name: Continental landing site
     layer:
-      index: Tourism vessel landings
-      total: 7171.0
-      units: number of vessels
-      legend:
-        values:
-        - 0.0
-        - 78.0
-        - 156.0
-        - 234.0
-        - 312.0
-        colors:
-        - '#000004FF'
-        - '#56106EFF'
-        - '#BB3754FF'
-        - '#F98C0AFF'
-        - '#FCFFA4FF'
-        breaks:
-        - 0.0
-        - 100.0
-        - 200.0
-        - 300.0
-        labels:
-        - '0'
-        - '100'
-        - '200'
-        - '300'
-        class: ContinuousLegend
-      provenance:
-        name: International Association of Antarctica Tour Operators
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://iaato.org/news-room/data-statistics">International
-          Association of Antarctica Tour Operators</a>
-      id: 712dd1d7-a469-4c7f-baf8-fa172cd334d6
-  Tourism visitor landings:
-    name: Tourism visitor landings
-    layer:
-      index: Tourism visitor landings
-      total: 378254.0
-      units: number of visitors
-      legend:
-        values:
-        - 0.0
-        - 7500.0
-        - 15000.0
-        - 22500.0
-        - 30000.0
-        colors:
-        - '#000004FF'
-        - '#51127CFF'
-        - '#B63679FF'
-        - '#FB8861FF'
-        - '#FCFDBFFF'
-        breaks:
-        - 0.0
-        - 10000.0
-        - 20000.0
-        - 30000.0
-        labels:
-        - '0'
-        - '10000'
-        - '20000'
-        - '30000'
-        class: ContinuousLegend
-      provenance:
-        name: International Association of Antarctica Tour Operators
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://iaato.org/news-room/data-statistics">International
-          Association of Antarctica Tour Operators</a>
-      id: c6fbd86c-b867-4774-9b59-b6950d590cad
-locks:
-  ASPA:
-    name: ASPA
-    layer:
-      index: ASPA
-      total: 719.0
+      index: Continental landing site
+      total: 31895.0
       units: presence
+      details: ~
       legend:
         values: 1.0
         labels: presence
-        colors: '#006d2c'
+        colors: '#fe9929'
         class: CategoricalLegend
       provenance:
-        name: Australian Antarctic Data Centre
+        name: Antarctic Digital Database
         icon: server
         color: '#000000'
-        description: Obtained from <a href="https://data.aad.gov.au/metadata/records/AAS_4296_Updated_ASPAs_2024">Australian
-          Antarctic Data Centre</a>
-      id: 7979f13f-7532-42d1-9435-db1d425d6f2c
-  Inviolate sites:
-    name: Inviolate sites
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      id: 05f67f55-ab88-4bcd-83d7-8bf1de57b03f
+      class: Layer
+    targets:
+    - 0.0
+    - 0.0
+    - 6.27e-05
+    class: Feature
+  - name: Potential expansion zones
     layer:
-      index: Inviolate sites
-      total: 25753.0
-      units: presence
+      index: Potential expansion zones
+      total: 21.0
+      units: abundance
+      details: Zones that species might be likely to expand into with climate change
       legend:
-        values: 1.0
-        labels: presence
-        colors: '#74c476'
-        class: CategoricalLegend
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
       provenance:
-        name: Leihy et al. 2020
+        name: Terauds et al. 2025
         icon: book
         color: '#000000'
-        description: Obtained from <a href="https://doi.org/10.1038/s41586-020-2506-3">Leihy
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 5f5fdaf2-0c1c-4a5c-9cdd-c9f47353d5fb
+      class: Layer
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Sites past the Antarctic circle
+    layer:
+      index: Sites past the Antarctic circle
+      total: 28554.0
+      units: presence
+      details: Site is located south of the Antarctic Circle
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#cc4c02'
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      id: ebf9df86-9827-47b8-bc0e-0c045e84ee2b
+      class: Layer
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0001051
+    class: Feature
+  class: Theme
+- name: Habitats
+  features:
+  - name: Fresh water
+    layer:
+      index: Fresh water
+      total: 882.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#a6cee3'
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      id: d46158c6-43dd-4c9d-bd74-42ff0bcf7a3f
+      class: Layer
+    targets:
+    - 0.05
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Geotermal/volcanic sites
+    layer:
+      index: Geotermal/volcanic sites
+      total: 3.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#fb9a99'
+        class: CategoricalLegend
+      provenance:
+        name: Fraster et al. 2014
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1073/pnas.1321437111">Fraster
+          et al. 2014</a>
+        class: Provenance
+      id: 0ef81ec6-a662-4d48-b9c2-97103fccf9a1
+      class: Layer
+    targets:
+    - 0.6
+    - 0.3
+    - 0.0
+    class: Feature
+  - name: Invasive species
+    layer:
+      index: Invasive species
+      total: 26.0
+      units: presence
+      details: Important for monitoring and management and inversely important to
+        biodiversity (i.e. sites free of invasives important)
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Hughes et al. 2015
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1007/s10531-015-0896-6">Hughes
+          et al. 2015</a>
+        class: Provenance
+      id: 65edf24c-0137-454a-b4da-b1c04aa3c836
+      class: Layer
+    targets:
+    - 0.0
+    - 0.5769231
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Historic
+  features:
+  - name: Historic monuments
+    layer:
+      index: Historic monuments
+      total: 29.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#fee391'
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Protected Areas Database
+        icon: question
+        color: '#000000'
+        description: Obtained from <a href="https://www.ats.aq/devph/en/apa-database/">Antarctic
+          Protected Areas Database</a>
+        class: Provenance
+      id: 7d6119a3-e6fb-4e2d-b2e4-f779feb9384a
+      class: Layer
+    targets:
+    - 0.0
+    - 0.5
+    - 0.1034483
+    class: Feature
+  class: Theme
+- name: Ice
+  features:
+  - name: Crevasses
+    layer:
+      index: Crevasses
+      total: 897.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 15.0
+        - 30.0
+        - 45.0
+        - 60.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 20.0
+        - 40.0
+        - 60.0
+        labels:
+        - '0'
+        - '20'
+        - '40'
+        - '60'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 6e18df2b-4f89-416d-8bc7-a31cbf80df6e
+      class: Layer
+    targets:
+    - 0.0111483
+    - 0.0089186
+    - 0.0
+    class: Feature
+  - name: Fast ice / shelf ice
+    layer:
+      index: Fast ice / shelf ice
+      total: 10.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: ac296a6c-2017-4007-8eef-45126fadb35b
+      class: Layer
+    targets:
+    - 0.2
+    - 0.4
+    - 0.0
+    class: Feature
+  - name: Glaciers
+    layer:
+      index: Glaciers
+      total: 451.0
+      units: abundance
+      details: Including tidewater glaciers
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 17396bc3-0067-4c24-bd7b-2b93ab5244c6
+      class: Layer
+    targets:
+    - 0.15
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Ice shelf
+    layer:
+      index: Ice shelf
+      total: 1306.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#cab2d6'
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      id: 971a1351-f37f-41d1-9bb0-3a4f12868633
+      class: Layer
+    targets:
+    - 0.0
+    - 0.05
+    - 0.0011485
+    class: Feature
+  class: Theme
+- name: Invertebrates
+  features:
+  - name: Entomobryomorpha springtails
+    layer:
+      index: Entomobryomorpha springtails
+      total: 955.0
+      units: abundance
+      details: E.g., Isotoma klovstadi
+      legend:
+        values:
+        - 0.0
+        - 6.25
+        - 12.5
+        - 18.75
+        - 25.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        - 15.0
+        - 20.0
+        - 25.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        - '15'
+        - '20'
+        - '25'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 8db7c3a4-4849-4204-a366-3888778d4576
+      class: Layer
+    targets:
+    - 0.1052356
+    - 0.0073298
+    - 0.0
+    class: Feature
+  - name: Freshwater copepods
+    layer:
+      index: Freshwater copepods
+      total: 44.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: a3d2b5fa-73b5-4e7f-a6f3-4bd7f481badb
+      class: Layer
+    targets:
+    - 0.2272727
+    - 0.1136364
+    - 0.0
+    class: Feature
+  - name: General invertebrates
+    layer:
+      index: General invertebrates
+      total: 288.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: af6eeb5f-6780-4f0e-9a41-efb01462f68a
+      class: Layer
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0
+    class: Feature
+  - name: Intertidal mites
+    layer:
+      index: Intertidal mites
+      total: 12.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 48b9e058-bb14-4fdb-a259-2357ddd759fc
+      class: Layer
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Intertidal oligochaetes
+    layer:
+      index: Intertidal oligochaetes
+      total: 90.0
+      units: abundance
+      details: Including enchytraeids, such as Christensenia spp.
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: a824210f-abb8-42fa-a5f6-dbcecf53c249
+      class: Layer
+    targets:
+    - 0.1111111
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Intertidal springtails
+    layer:
+      index: Intertidal springtails
+      total: 143.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 5d43adc5-0b23-4d39-be0e-2a5d9473a5f3
+      class: Layer
+    targets:
+    - 0.1398601
+    - 0.2097902
+    - 0.0
+    class: Feature
+  - name: Moss-associated microfauna
+    layer:
+      index: Moss-associated microfauna
+      total: 295.0
+      units: abundance
+      details: Terrestrial, moss associated nematodes, rotifers, tardigrades
+      legend:
+        values:
+        - 0.0
+        - 3.0
+        - 6.0
+        - 9.0
+        - 12.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 4.0
+        - 8.0
+        - 12.0
+        labels:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 32fb71fe-8e92-4445-aceb-c16e71d11827
+      class: Layer
+    targets:
+    - 0.1338983
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Penguin rookery-associated nematodes
+    layer:
+      index: Penguin rookery-associated nematodes
+      total: 185.0
+      units: abundance
+      details: Terrestrial, penguin rookery associated nematodes
+      legend:
+        values:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        - 10.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 7a6e8936-8c28-4a42-922b-c95ca03b4045
+      class: Layer
+    targets:
+    - 0.2
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Poduromorpha springtails
+    layer:
+      index: Poduromorpha springtails
+      total: 9.0
+      units: abundance
+      details: E.g., Gomphiocephalus hodgsoni
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 8bc8e4ca-78f0-4d53-8e85-35e2a43dea79
+      class: Layer
+    targets:
+    - 0.2222222
+    - 0.4444444
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Microbes
+  features:
+  - name: Biological soil crust microbes
+    layer:
+      index: Biological soil crust microbes
+      total: 482.0
+      units: abundance
+      details: Biological soil crust microbial communities
+      legend:
+        values:
+        - 0.0
+        - 1.25
+        - 2.5
+        - 3.75
+        - 5.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        - 5.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: e0b97ced-3171-4efb-8796-84266b273034
+      class: Layer
+    targets:
+    - 0.7
+    - 0.05
+    - 0.0041494
+    class: Feature
+  - name: Dry soil microbes
+    layer:
+      index: Dry soil microbes
+      total: 10.0
+      units: abundance
+      details: Microbes that predominantly survive in the dry soil
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: f754321b-c10e-4f65-a408-bcd6537d2a48
+      class: Layer
+    targets:
+    - 0.775
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Lithic microbes
+    layer:
+      index: Lithic microbes
+      total: 251.0
+      units: abundance
+      details: Microbes that predominantly survive on/in rocks (endolithic, hypolithic
+        and chasmolithic)
+      legend:
+        values:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 1459b8cd-dd8b-4e1e-9a43-b7da8e4c271b
+      class: Layer
+    targets:
+    - 0.55
+    - 0.05
+    - 0.0199203
+    class: Feature
+  - name: Microbial mats
+    layer:
+      index: Microbial mats
+      total: 95.0
+      units: abundance
+      details: Microbial mats, both lake and flush systems
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: b4fc742a-f6a3-42b5-b124-063153099b80
+      class: Layer
+    targets:
+    - 0.3157895
+    - 0.0315789
+    - 0.0
+    class: Feature
+  - name: Plankton
+    layer:
+      index: Plankton
+      total: 311.0
+      units: abundance
+      details: Non-marine aquatic system plankton
+      legend:
+        values:
+        - 0.0
+        - 22.5
+        - 45.0
+        - 67.5
+        - 90.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 30.0
+        - 60.0
+        - 90.0
+        labels:
+        - '0'
+        - '30'
+        - '60'
+        - '90'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: cbccb68e-5197-4c67-a5b2-15789eea7732
+      class: Layer
+    targets:
+    - 0.75
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Snow algae
+    layer:
+      index: Snow algae
+      total: 280.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: fa077784-fed7-4d71-8381-c2de78866a3c
+      class: Layer
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0071429
+    class: Feature
+  - name: Snow algae 2
+    layer:
+      index: Snow algae 2
+      total: 529.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Gray et al. 2020
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1038/s41467-020-16018-w">Gray
           et al. 2020</a>
-      id: 5c79631b-86c7-4029-9eef-575f83810266
+        class: Provenance
+      id: cd9c4252-4941-453e-9335-a5931ac1ac13
+      class: Layer
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Wet soil microbes
+    layer:
+      index: Wet soil microbes
+      total: 180.0
+      units: abundance
+      details: Wet soil microbial communities
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 41fbc60c-62fc-4425-9565-f704e2ccbc0a
+      class: Layer
+    targets:
+    - 0.5
+    - 0.05
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Outstanding geological
+  features:
+  - name: Fossil bearing rocks
+    layer:
+      index: Fossil bearing rocks
+      total: 3540.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 16.0
+        - 32.0
+        - 48.0
+        - 64.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 20.0
+        - 40.0
+        - 60.0
+        labels:
+        - '0'
+        - '20'
+        - '40'
+        - '60'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: fef169fc-1e1e-4b79-899c-432b82a788fa
+      class: Layer
+    targets:
+    - 0.0254237
+    - 0.0423729
+    - 0.0
+    class: Feature
+  - name: Geological processes
+    layer:
+      index: Geological processes
+      total: 24.0
+      units: abundance
+      details: Sites containing examples of interesting geological processes (e.g.,
+        ventifacts)
+      legend:
+        values:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        - 10.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: c574b624-5b03-44ac-a9c0-7bd03b6e8327
+      class: Layer
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Meteorites
+    layer:
+      index: Meteorites
+      total: 65.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 3.75
+        - 7.5
+        - 11.25
+        - 15.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        - 15.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        - '15'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 0146d273-409a-4c7d-b2bd-6d4147addd88
+      class: Layer
+    targets:
+    - 0.4
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Minerals and crystals
+    layer:
+      index: Minerals and crystals
+      total: 20.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: d99cf7e6-d31a-4370-af59-1bc72d127bc7
+      class: Layer
+    targets:
+    - 0.55
+    - 0.05
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Penguins
+  features:
+  - name: Adélie penguins
+    layer:
+      index: Adélie penguins
+      total: 296.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 1.5
+        - 3.0
+        - 4.5
+        - 6.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.0
+        - 4.0
+        - 6.0
+        labels:
+        - '0'
+        - '2'
+        - '4'
+        - '6'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: a13c1799-b143-4456-83c9-c0c59a55da2f
+      class: Layer
+    targets:
+    - 0.55
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Chinstrap penguins
+    layer:
+      index: Chinstrap penguins
+      total: 255.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 1.25
+        - 2.5
+        - 3.75
+        - 5.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        - 5.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 961651dd-a3cc-414a-87fa-a003bc2c8be7
+      class: Layer
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Emperor penguins
+    layer:
+      index: Emperor penguins
+      total: 3.0
+      units: presence
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: fba3532b-63f0-42a0-a23f-51427564d1bb
+      class: Layer
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Gentoo penguins
+    layer:
+      index: Gentoo penguins
+      total: 235.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 6.25
+        - 12.5
+        - 18.75
+        - 25.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        - 15.0
+        - 20.0
+        - 25.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        - '15'
+        - '20'
+        - '25'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 145f1124-e4a7-4fb8-8133-7de675df2324
+      class: Layer
+    targets:
+    - 0.4
+    - 0.0851064
+    - 0.0
+    class: Feature
+  - name: King penguins
+    layer:
+      index: King penguins
+      total: 21.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 945f84c3-3144-4b4a-aa0f-b93634c66e47
+      class: Layer
+    targets:
+    - 0.875
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Macaroni penguins
+    layer:
+      index: Macaroni penguins
+      total: 124.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 72803aa6-eeea-47e9-b70c-5b65be5431bb
+      class: Layer
+    targets:
+    - 0.7
+    - 0.05
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Science
+  features:
+  - name: Monitoring sites
+    layer:
+      index: Monitoring sites
+      total: 165.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#6baed6'
+        class: CategoricalLegend
+      provenance:
+        name: Penguin Watch (T. Hart pers comm)
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.polarsentinels.org/projects/penguin-watch">Penguin
+          Watch (T. Hart pers comm)</a>
+        class: Provenance
+      id: 1267be43-5219-4981-9f6d-c69fc60a3746
+      class: Layer
+    targets:
+    - 0.0
+    - 0.1818182
+    - 0.0
+    class: Feature
+  - name: Research stations
+    layer:
+      index: Research stations
+      total: 38.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#3182bd'
+        class: CategoricalLegend
+      provenance:
+        name: COMNAP 2023
+        icon: question
+        color: '#000000'
+        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
+          2023</a>
+        class: Provenance
+      id: 00b55c92-eaa5-46dc-bb07-42c2d02711ab
+      class: Layer
+    targets:
+    - 0.0
+    - 0.6578947
+    - 0.0526316
+    class: Feature
+  - name: Scientific field camps
+    layer:
+      index: Scientific field camps
+      total: 5.0
+      units: presence
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#08519c'
+        class: CategoricalLegend
+      provenance:
+        name: COMNAP 2023
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
+          2023</a>
+        class: Provenance
+      id: 7323e4d4-7eca-40ea-9072-3e7561f71a84
+      class: Layer
+    targets:
+    - 0.0
+    - 1.0
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Seabirds
+  features:
+  - name: Antarctic shag
+    layer:
+      index: Antarctic shag
+      total: 9.0
+      units: presence
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: ced93ce8-6f0c-4bc7-99be-bdd888b29741
+      class: Layer
+    targets:
+    - 0.6
+    - 0.05
+    - 0.05
+    class: Feature
+  - name: Antarctic terns
+    layer:
+      index: Antarctic terns
+      total: 9.0
+      units: presence
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 51f02283-19be-43f8-a278-a8b68fab452a
+      class: Layer
+    targets:
+    - 0.6
+    - 0.05
+    - 0.05
+    class: Feature
+  - name: Other seabird colonies
+    layer:
+      index: Other seabird colonies
+      total: 242.0
+      units: presence
+      details: E.g., southern giant petrels, sheathbills, Antarctic shag, terns, petrels
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 00fefaa1-27c3-4b5e-aeee-56d0c370f3a5
+      class: Layer
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0123967
+    class: Feature
+  - name: Procellariids
+    layer:
+      index: Procellariids
+      total: 4.0
+      units: presence
+      details: Snow petrel, Southern Fulmar, Wilson's storm petrel, Antarctic petrel,
+        Antarctic prion, Cape petrel, and associated ectoparasties
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: b56339a1-100e-463f-9714-9c30f3b72732
+      class: Layer
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Seals
+  features:
+  - name: Antarctic fur seals
+    layer:
+      index: Antarctic fur seals
+      total: 9.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: cf750c83-18c6-45eb-bf06-5497f7d23950
+      class: Layer
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Elephant seals
+    layer:
+      index: Elephant seals
+      total: 9.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 6e420779-2e60-4865-9a89-e3f35938edf0
+      class: Layer
+    targets:
+    - 0.5555556
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Weddell seals
+    layer:
+      index: Weddell seals
+      total: 30.0
+      units: abundance
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: daab98cf-c1c1-4733-ae7d-c36b5094d6f7
+      class: Layer
+    targets:
+    - 0.1
+    - 0.05
+    - 0.0
+    class: Feature
+  class: Theme
+- name: Vegetation
+  features:
+  - name: Leafy liverworts
+    layer:
+      index: Leafy liverworts
+      total: 2423.0
+      units: abundance
+      details: E.g., Cephaloziella varians
+      legend:
+        values:
+        - 0.0
+        - 19.75
+        - 39.5
+        - 59.25
+        - 79.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 25.0
+        - 50.0
+        - 75.0
+        labels:
+        - '0'
+        - '25'
+        - '50'
+        - '75'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 902f5993-4784-484a-b690-12ac568ea8e0
+      class: Layer
+    targets:
+    - 0.168572
+    - 0.0660338
+    - 0.0
+    class: Feature
+  - name: Mesic mosses
+    layer:
+      index: Mesic mosses
+      total: 336.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 3.0
+        - 6.0
+        - 9.0
+        - 12.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 4.0
+        - 8.0
+        - 12.0
+        labels:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 9870b915-f217-4b88-b257-5636dd1e97a4
+      class: Layer
+    targets:
+    - 0.1
+    - 0.0595238
+    - 0.0
+    class: Feature
+  - name: Thalloid liverworts
+    layer:
+      index: Thalloid liverworts
+      total: 86.0
+      units: abundance
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 2.0
+        - 4.0
+        - 6.0
+        - 8.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 459aacdd-99cf-49b3-9fb7-f6be2a9d3624
+      class: Layer
+    targets:
+    - 0.5
+    - 0.05
+    - 0.0
+    class: Feature
+  - name: Truly aquatic mosses
+    layer:
+      index: Truly aquatic mosses
+      total: 2748.0
+      units: abundance
+      details: I.e., lake-dwelling moss
+      legend:
+        values:
+        - 0.0
+        - 19.0
+        - 38.0
+        - 57.0
+        - 76.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 25.0
+        - 50.0
+        - 75.0
+        labels:
+        - '0'
+        - '25'
+        - '50'
+        - '75'
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: 8fa58799-8487-4467-89d8-fccdf96d7de3
+      class: Layer
+    targets:
+    - 0.1663755
+    - 0.0582242
+    - 0.0
+    class: Feature
+  - name: Vegetation
+    layer:
+      index: Vegetation
+      total: 749.0
+      units: presence
+      details: Sites with the two Antarctic plants or moss or lichens
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      id: bffab6d0-be78-4587-aa22-d0a94264ab40
+      class: Layer
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0026702
+    class: Feature
+  class: Theme
+locks:
+- name: ASPA
+  layer:
+    index: ASPA
+    total: 719.0
+    units: presence
+    details: ~
+    legend:
+      values: 1.0
+      labels: presence
+      colors: '#006d2c'
+      class: CategoricalLegend
+    provenance:
+      name: Australian Antarctic Data Centre
+      icon: server
+      color: '#000000'
+      description: Obtained from <a href="https://data.aad.gov.au/metadata/records/AAS_4296_Updated_ASPAs_2024">Australian
+        Antarctic Data Centre</a>
+      class: Provenance
+    id: e6e3bf4f-f67d-4058-8dac-67e8b841c3af
+    class: Layer
+  class: Lock
+- name: Inviolate sites
+  layer:
+    index: Inviolate sites
+    total: 25753.0
+    units: presence
+    details: Important for ASPA designation, also as future scientific monitoring/control
+      sites. Including undisturbed coastal areas (which are rare in the Peninsula)
+    legend:
+      values: 1.0
+      labels: presence
+      colors: '#74c476'
+      class: CategoricalLegend
+    provenance:
+      name: Leihy et al. 2020
+      icon: book
+      color: '#000000'
+      description: Obtained from <a href="https://doi.org/10.1038/s41586-020-2506-3">Leihy
+        et al. 2020</a>
+      class: Provenance
+    id: 61423419-0a85-42ca-9ac3-48c897fa967d
+    class: Layer
+  class: Lock
+solutions: []
+class: Project
+dataset_paths:
+  spatial_path: antarctic-peninsula_rast.tif
+  attribute_path: antarctic-peninsula_attr.csv.gz
+  boundary_path: antarctic-peninsula_bd.csv.gz

@@ -22,7 +22,7 @@ get_raster_layer_parameters.default <- function(x) {
 
 #' @export
 get_raster_layer_parameters.CategoricalLegend <- function(x) {
-  list(raster_color = NULL)
+  list(raster_color = NULL, raster_resampling = "nearest")
 }
 
 #' @export
@@ -34,7 +34,7 @@ get_raster_layer_parameters.ContinuousLegend <- function(x) {
       stops = x$colors,
       na_color = "transparent"
     ),
-    raster_range = range(x$values)
+    raster_resampling = "linear"
   )
 }
 
@@ -51,7 +51,7 @@ get_raster_layer_parameters.ContinuousLegend <- function(x) {
 #' @return A `data.frame` object.
 #'
 #' @export
-get_color_table <- function(x, y, warn = TRUE) {
+get_color_table <- function(x) {
   UseMethod("get_color_table")
 }
 

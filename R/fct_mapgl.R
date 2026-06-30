@@ -12,7 +12,9 @@ NULL
 #'
 #' @export
 mapgl_layer_id <- function(x) {
-  assertthat::assert_that(inherits(x, c("Feature", "Cost", "Lock")))
+  assertthat::assert_that(
+    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
+  )
   paste0("lyr-", x$layer$id)
 }
 
@@ -27,7 +29,9 @@ mapgl_layer_id <- function(x) {
 #'
 #' @export
 mapgl_source_id <- function(x) {
-  assertthat::assert_that(inherits(x, c("Feature", "Cost", "Lock")))
+  assertthat::assert_that(
+    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
+  )
   paste0("src-", x$layer$id)
 }
 
@@ -51,7 +55,7 @@ mapgl_add_source <- function(map, x) {
       map,
       c("mapboxgl", "maplibre", "mapboxgl_proxy", "maplibre_proxy")
     ),
-    assertthat::assert_that(inherits(x, c("Feature", "Cost", "Lock")))
+    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
   )
   # return updated map
   mapgl::add_image_source(
@@ -76,7 +80,7 @@ mapgl_add_source <- function(map, x) {
 mapgl_add_layer <- function(
   map,
   x,
-  visible = TRUE,
+  visibility = "visible",
   before_id = NULL
 ) {
   # assert arguments are valid
@@ -85,18 +89,19 @@ mapgl_add_layer <- function(
       map,
       c("mapboxgl", "maplibre", "mapboxgl_proxy", "maplibre_proxy")
     ),
-    assertthat::assert_that(inherits(x, c("Feature", "Cost", "Lock"))),
-    assertthat::is.flag(visible),
-    assertthat::noNA(visible)
+    inherits(x, c("Feature", "Cost", "Lock", "Solution")),
+    assertthat::is.string(visibility),
+    assertthat::noNA(visibility)
   )
   # return updated map
-  mapgl::add_raster_layer(
+  do.call(
+    mapgl::add_raster_layer,
     append(
       list(
-        map,
+        map = map,
         id = mapgl_layer_id(x),
         source = mapgl_source_id(x),
-        visible = visible,
+        visibility = visibility,
         before_id = before_id
       ),
       get_raster_layer_parameters(x$layer$legend)
@@ -121,7 +126,7 @@ mapgl_clear_feature_layer <- function(map, x) {
       map,
       c("mapboxgl", "maplibre", "mapboxgl_proxy", "maplibre_proxy")
     ),
-    assertthat::assert_that(inherits(x, c("Feature", "Cost", "Lock")))
+    inherits(x, c("Feature", "Cost", "Lock", "Solution")),
   )
   # return updated map
   mapgl::clear_layer(map, mapgl_layer_id(x))

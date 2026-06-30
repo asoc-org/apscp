@@ -7,7 +7,7 @@
 new_lock(name, layer, id = uuid::UUIDgenerate())
 }
 \arguments{
-\item{name}{`character` value with the name of the feature.}
+\item{name}{`character` value with the name.}
 
 \item{layer}{[new_layer()] object used to store information for
 visualization.}
@@ -16,12 +16,32 @@ visualization.}
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
 }
 \value{
-A `Cost` object.
+A `Lock` object.
 }
 \description{
 Create a new lock object.
 }
 \examples{
-# TODO
+# create object
+x <- new_lock(
+  name = "lock",
+  layer = new_layer(
+    dataset = simulate_dataset(),
+    index = "locked_in",
+    legend = new_categorical_legend(
+      c(0, 1), c("#000000", "#DDDDDD"),
+      c("Other", "Protected area")
+    ),
+    units = "presence/absence",
+    provenance = new_provenance(
+      name = "Global", icon = "globe", color = "#123456",
+      description = "Data is global."
+    ),
+    total = 500,
+    details = "extra info"
+)
+
+# preview object
+print(x)
 
 }

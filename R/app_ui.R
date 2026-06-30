@@ -5,13 +5,27 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  tagList(
-    # Leave this function for adding external resources
+  htmltools::tagList(
+    # add external resources
     golem_add_external_resources(),
-    # Your application UI logic
-    fluidPage(
-      golem::golem_welcome_page() # Remove this line to start building your UI
+
+    # app content
+    shiny::fillPage(
+
+      ## start up screen
+      shinybusy::busy_start_up(
+        loader = shinybusy::spin_epic("scaling-squares", color = "#FFF"),
+        text = "Loading...",
+        mode = "auto",
+        color = "#FFF",
+        background = "#001329"
+      ),
+
+      ## mapgl map
+      mapgl::mapboxglOutput("map", width = "100%", height = "100%")
+
     )
+
   )
 }
 

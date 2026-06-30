@@ -12,6 +12,12 @@ project_name = "Antarctic Peninsula"
 project_author_name = "Jasmine Lee"
 project_author_email = "jasmine.lee@monash.edu"
 
+## define helper functions
+convert_na_to_null <- function(x) {
+  if (is.na(x)[[1]]) return(NULL)
+  x
+}
+
 # Preliminary processing
 ## archive to temporary directory
 td <- tempfile()
@@ -120,6 +126,7 @@ locks <-
         index = x$name,
         units = x$units,
         total = terra::global(raster_data[[x$name]], "sum", na.rm = TRUE)[[1]],
+        details = convert_na_to_null(x$details),
         provenance = new_provenance(
           name = x$provenance_source,
           icon = x$provenance_icon,
@@ -133,7 +140,8 @@ locks <-
         )
       )
     )
-  })
+  }) %>%
+  unname()
 
 ## create costs
 costs <-
@@ -147,6 +155,7 @@ costs <-
         index = x$name,
         units = x$units,
         total = terra::global(raster_data[[x$name]], "sum", na.rm = TRUE)[[1]],
+        details = convert_na_to_null(x$details),
         provenance = new_provenance(
           name = x$provenance_source,
           icon = x$provenance_icon,
@@ -160,7 +169,8 @@ costs <-
         )
       )
     )
-  })
+  }) %>%
+  unname()
 
 ## create features
 features <-
@@ -175,6 +185,7 @@ features <-
         index = x$name,
         units = x$units,
         total = terra::global(raster_data[[x$name]], "sum", na.rm = TRUE)[[1]],
+        details = convert_na_to_null(x$details),
         provenance = new_provenance(
           name = x$provenance_source,
           icon = x$provenance_icon,
@@ -188,7 +199,8 @@ features <-
         )
       )
     )
-  })
+  }) %>%
+  unname()
 
 ## create themes
 themes <-
@@ -201,7 +213,8 @@ themes <-
         vapply(features, function(x) x$name, character(1)) %in% x$name
       ]
     )
-  })
+  }) %>%
+  unname()
 
 ## create project
 project <- new_project(

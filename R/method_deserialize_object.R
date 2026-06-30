@@ -5,13 +5,12 @@ NULL
 #'
 #' Deserialize an object.
 #'
-#' @param x `list` object.
+#' @param x `list` object generated with [serialize_object()].
 #'
-#' @param dataset [Dataset] object.
+#' @param dataset [Dataset] or `NULL` object. Note that some classes
+#' need a [Dataset] object to be deserialized.
 #'
-#' @inheritParams rlang::args_dots_empty
-#'
-#' @inherit serialize_object details
+#' @inherit serialize_object details examples
 #'
 #' @seealso
 #' See [serialize_object()] for the opposite of this function.
@@ -19,84 +18,70 @@ NULL
 #' @return An object.
 #'
 #' @export
-deserialize_object <- function(x, ...) {
-  UseMethod("deserialize_object", x)
-}
-
-#' @export
-deserialize_object.default <- function(x, ...) {
-  rlang::abort("`x` is not recognized.")
-}
-
-#' @export
-deserialize_object.Provenance <- function(x, ...) {
-  rlang::check_dots_empty()
-  do.call(new_provenance, x)
-}
-
-#' @export
-deserialize_object.Legend <- function(x, ...) {
-  rlang::check_dots_empty()
+deserialize_object <- function(x, dataset = NULL) {
+  # assert valid arguments
   assertthat::assert_that(
-    asserthat::has_name(x, "class"),
-    isTRUE(x$class %in% c("ContinuousLegend", "CategoricalLegend")),
-    msg = "`x` is not a valid legend."
+    is.list(x),
+    assertthat::has_name(x, "class"),
+    assertthat::is.string(x$class)
   )
-  # set class
-  cl <- x$class
+
+  # check if dataset required
+  need_dataset_classes <- c(
+    "Layer", "Cost", "Theme", "Feature", "Lock", "Solution", "Project"
+  )
+  if (x$class %in% need_dataset_classes) {
+    assertthat::assert_that(
+      inherits(dataset, "Dataset"),
+      msg = "`x` requires `dataset` argument to be deserialized."
+    )
+  }
+
+  # extract class
+  x_class <- x$class
   x$class <- NULL
+
+  # if needed, deserialize components of x
+  if (assertthat::has_name(x, "legend")) {
+    x$legend <- deserialize_object(x$legend)
+  }
+  if (assertthat::has_name(x, "provenance")) {
+    x$provenance <- deserialize_object(x$provenance)
+  }
+  if (assertthat::has_name(x, "layer")) {
+    x$layer <- deserialize_object(x$layer, dataset = dataset)
+  }
+  if (assertthat::has_name(x, "costs")) {
+    x$costs <- lapply(x$costs, deserialize_object, dataset = dataset)
+  }
+  if (assertthat::has_name(x, "features")) {
+    x$features <- lapply(x$features, deserialize_object, dataset = dataset)
+  }
+  if (assertthat::has_name(x, "themes")) {
+    x$themes <- lapply(x$themes, deserialize_object, dataset = dataset)
+  }
+  if (assertthat::has_name(x, "locks")) {
+    x$locks <- lapply(x$locks, deserialize_object, dataset = dataset)
+  }
+  if (assertthat::has_name(x, "solutions")) {
+    x$solutions <- lapply(x$solutions, deserialize_object, dataset = dataset)
+  }
+  if (x_class %in% c("Layer", "Project")) {
+    x$dataset <- dataset
+  }
+
   # return object
-  if (identical(cl, "ContinuousLegend")) {
-    return(deserialize_object.ContinuousLegend(x))
-  }
-  return(deserialize_object.CategoricalLegend(x))
-}
-
-#' @export
-deserialize_object.CategoricalLegend <- function(x, ...) {
-  rlang::check_dots_empty()
-  do.call(new_categorical_legend, x)
-}
-
-#' @export
-deserialize_object.ContinuousLegend <- function(x, ...) {
-  rlang::check_dots_empty()
-  do.call(new_continuous_legend, x)
-}
-
-#' @export
-deserialize_object.Layer <- function(x, dataset, ...) {
-  rlang::check_dots_empty()
-  x$legend <- deserialize_object.Legend(x$legend)
-  do.call(new_layer, x)
-}
-
-#' @export
-deserialize_object.Feature <- function(x, dataset, ...) {
-  rlang::check_dots_empty()
-  x$layer <- deserialize_object(x$layer, dataset)
-  do.call(new_feature, x)
-}
-
-#' @export
-deserialize_object.Lock <- function(x, dataset, ...) {
-  rlang::check_dots_empty()
-  x$layer <- deserialize_object(x$layer, dataset)
-  do.call(new_lock, x)
-}
-
-#' @export
-deserialize_object.Cost <- function(x, dataset, ...) {
-  rlang::check_dots_empty()
-  x$layer <- deserialize_object(x$layer, dataset)
-  do.call(new_cost, x)
-}
-
-#' @export
-deserialize_object.Theme <- function(x, dataset, ...) {
-  rlang::check_dots_empty()
-  for (i in seq_along(x)) {
-    x[[i]]$feature <- deserialize_object.Feature(x[[i]]$feature, dataset)
-  }
-  do.call(new_theme, x)
+  switch(
+    x_class,
+    Provenance = do.call(new_provenance, x),
+    CategoricalLegend = do.call(new_categorical_legend, x),
+    ContinuousLegend = do.call(new_continuous_legend, x),
+    Layer = do.call(new_layer, x),
+    Feature = do.call(new_feature, x),
+    Lock = do.call(new_lock, x),
+    Cost = do.call(new_cost, x),
+    Solution = do.call(new_solution, x),
+    Theme = do.call(new_theme, x),
+    Project = do.call(new_project, x)
+  )
 }

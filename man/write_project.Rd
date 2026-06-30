@@ -17,3 +17,21 @@ An invisible `TRUE` indicating success.
 \description{
 Export project data.
 }
+\examples{
+# find file path for built-in project
+path <- dir(
+  system.file("data", package = "apscp"),
+  pattern = "^.*\\\\.yml$",
+  full.names = TRUE
+)
+
+# import project
+x <- read_project(path)
+
+# preview project
+print(x)
+
+# save project to temporary file
+write_project(x, tempfile(fileext = ".yml")
+
+}

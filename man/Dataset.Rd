@@ -2,13 +2,9 @@
 % Please edit documentation in R/class_Dataset.R
 \name{Dataset}
 \alias{Dataset}
-\title{Dataset class}
+\title{R6 class representing a dataset}
 \description{
-Definition for the `Dataset` class.
-}
-\seealso{
-See [new_dataset()] and [read_dataset()]
-to create a `Dataset` object.
+A dataset is used to store and access information about a set spatial layers.
 }
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
@@ -26,9 +22,11 @@ to create a `Dataset` object.
   \itemize{
     \item \href{#method-Dataset-initialize}{\code{Dataset$new()}}
     \item \href{#method-Dataset-get_crs}{\code{Dataset$get_crs()}}
+    \item \href{#method-Dataset-get_center}{\code{Dataset$get_center()}}
     \item \href{#method-Dataset-get_bbox}{\code{Dataset$get_bbox()}}
     \item \href{#method-Dataset-get_names}{\code{Dataset$get_names()}}
     \item \href{#method-Dataset-get_index}{\code{Dataset$get_index()}}
+    \item \href{#method-Dataset-get_total}{\code{Dataset$get_total()}}
     \item \href{#method-Dataset-has_index}{\code{Dataset$has_index()}}
     \item \href{#method-Dataset-add_index}{\code{Dataset$add_index()}}
     \item \href{#method-Dataset-clone}{\code{Dataset$clone()}}
@@ -74,13 +72,28 @@ to create a `Dataset` object.
 }
 
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_center"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_center}{}}}
+\subsection{\code{Dataset$get_center()}}{
+  Get center point.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_center()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A `numeric` vector with two values.
+  }
+}
+
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Dataset-get_bbox"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-get_bbox}{}}}
 \subsection{\code{Dataset$get_bbox()}}{
   Get the bounding box.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_bbox(native = TRUE, expand = FALSE)}
+    \preformatted{Dataset$get_bbox(native = TRUE, expand = 0)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -89,8 +102,9 @@ to create a `Dataset` object.
       \item{\code{native}}{`logical` value indicating if the bounding box should
 be in (`TRUE`) the native coordinate reference system or (`FALSE`)
 re-projected to longitude/latitude?}
-      \item{\code{expand}}{`logical` value indicating if the bounding box be expanded
-by 10%? Defaults to `FALSE`.}
+      \item{\code{expand}}{`numeric` value denoting the proportion to expand the
+bounding box. For example, `expand = 0.1` would expand the bounding
+box by 10 percent. Defaults to 0.}
     }
     \if{html}{\out{</div>}}
   }
@@ -111,7 +125,7 @@ elements.
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    `character` vector of field/layer names.
+    A `character` vector of layer names.
   }
 }
 
@@ -128,12 +142,34 @@ elements.
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{index}}{`character` or `integer` indicating the desired layer.}
+      \item{\code{index}}{`character` or `integer` value indicating the desired layer.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
     A [terra::rast()] object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_total"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_total}{}}}
+\subsection{\code{Dataset$get_total()}}{
+  Get total (sum) of values for an index.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_total(index)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{index}}{`character` or `integer` value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A `character` vector of layer names.
   }
 }
 
@@ -150,13 +186,12 @@ elements.
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{index}}{`character` or `integer` indicating the field/layer with
-the data.}
+      \item{\code{index}}{`character` or `integer` value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    `logical` indicating if data is present or not.
+    A `logical` value.
   }
 }
 
@@ -173,11 +208,13 @@ the data.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{index}}{`character` or `integer` indicating the field/layer with
-the data.}
+      \item{\code{index}}{`character` or `integer` value.}
       \item{\code{values}}{`numeric` vector.}
     }
     \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible `TRUE` indicating success.
   }
 }
 

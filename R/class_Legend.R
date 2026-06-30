@@ -110,12 +110,25 @@ new_continuous_legend <- function(values, colors, breaks, labels) {
 #'
 #' @param x [rast::SpatRaster()]
 #'
+#' @param palette `character` value with the color palette. In particular,
+#' `palette` can be the name of a color palette that is recognized by
+#' [color_palette()]. Alternatively, it can be a set of
+#' hex color code delimited by semicolons
+#' (e.g., `palette = "#000000;#DDDDDD;#123456"`).
+#'
 #' @param type `character` value indicating if legend should be `"continuous"`
 #' `"categorical"`, `"presence/absence"`, or `"presence".
 #' Defaults to `NULL`, such that
 #' the legend type will be determined automatically.
 #'
 #' @return A new [new_continuous_legend()] or [new_categorical_legend()] object.
+#'
+#' @examples
+#' # create object
+#' x <- create_legend(prioritizr::get_sim_pu_raster(), palette = "PuBu")
+#'
+#' # preview object
+#' print(x)
 #'
 #' @export
 create_legend <- function(x, palette = "viridis", type = NULL) {
@@ -162,8 +175,8 @@ create_legend <- function(x, palette = "viridis", type = NULL) {
     # create legend
     out <- new_categorical_legend(
       values = c(0, 1),
-      labels = c("absent", "presence"),
-      colors = color_palette(palette, n = 2L)
+      labels = c("absent", "present"),
+      colors = palette
     )
   } else if (identical(type, "presence")) {
     # generate colors

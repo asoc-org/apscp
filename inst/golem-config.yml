@@ -4,8 +4,8 @@ default:
   golem_version: 0.0.0.9000
   app_prod: no
 
-  ## data name
-  data: "inst/data/antarctic-peninsula"
+  ## file name for project data
+  project_filename: "antarctic-peninsula.yml"
 
   ## future plan strategy
   ### if "auto", then:
@@ -34,3 +34,4 @@ default:
 # development configuration
 dev:
   golem_wd: !expr here::here()
+  monitor: true

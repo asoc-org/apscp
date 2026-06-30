@@ -4,13 +4,15 @@
 \alias{mapgl_add_layer}
 \title{Add layer}
 \usage{
-mapgl_add_layer(map, x, visible = TRUE, before_id = NULL)
+mapgl_add_layer(map, x, visibility = "visible", before_id = NULL)
 }
 \arguments{
 \item{map}{A [mapgl::mapboxgl()], [mapgl::maplibre()],
 [mapgl::mapboxgl_proxy()], or [mapgl::maplibre_proxy()].}
 
 \item{x}{[Feature], [Cost], or [Lock] object.}
+
+\item{visibility}{Whether this layer is displayed.}
 
 \item{before_id}{The name of the layer that this layer appears "before", allowing you to insert layers below other layers in your basemap (e.g. labels).}
 }

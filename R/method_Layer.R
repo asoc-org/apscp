@@ -24,17 +24,17 @@ get_spatraster <- function(x, apply_coltab = TRUE) {
 }
 
 #' @export
-get_spatraster.default <- function(x) {
+get_spatraster.default <- function(x, apply_coltab = TRUE) {
   rlang::abort("`x` is not recognized.")
 }
 
 #' @export
 get_spatraster.Layer <- function(x, apply_coltab = TRUE) {
   # extract raster layer
-  d <- x$dataset$get_index(x$index)
+  d <- x$dataset$get_raster_data(x$index)
   # assign colors
   if (
-    isTRUE(apply_color_table) &&
+    isTRUE(apply_coltab) &&
     inherits(x$legend, "CategoricalLegend")
   ) {
     terra::coltab(d, layer = 1) <- get_color_table(x$legend)

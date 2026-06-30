@@ -33,12 +33,21 @@ read_dataset <- function(spatial_path, attribute_path, boundary_path) {
 
   # import data
   spatial_data <- terra::rast(spatial_path)
-  attribute_data <- vroom::vroom(attribute_path)
-  boundary_data <- vroom::vroom(
-    boundary_path,
-    col_names = c("i", "j", "x"),
-    col_types = "iid"
+  attribute_data <- vroom::vroom(
+    attribute_path,
+    col_type = vroom::cols(
+      "_index" = vroom::col_integer(),
+      .default = vroom::col_double()
+    )
   )
+  boundary_data <- vroom::vroom(boundary_path, col_types = "iid")
+
+  # remove vroom attributes
+  attr(attribute_data, "spec") <- NULL
+  attr(attribute_data, "problems") <- NULL
+
+  # coerce _index column to integer
+  attribute_data[["_index"]] <- as.integer(attribute_data[["_index"]])
 
   # convert boundary data to sparse matrix format
   boundary_data <- Matrix::sparseMatrix(
@@ -99,7 +108,7 @@ write_dataset <- function(x, spatial_path, attribute_path, boundary_path) {
   vroom::vroom_write(x$attribute_data, file = attribute_path, progress = FALSE)
 
   # save boundary data
-  m <- as_Matrix(x$boundary_data, "dgTMatrix")
+  m <- as_Matrix(x$boundary_data, "dsTMatrix")
   vroom::vroom_write(
     data.frame(i = m@i, j = m@j, x = m@x),
     file = boundary_path,
@@ -108,4 +117,49 @@ write_dataset <- function(x, spatial_path, attribute_path, boundary_path) {
 
   # return success
   invisible(TRUE)
+}
+
+#' Simulate dataset
+#'
+#' Simulate a [Dataset] object.
+#'
+#' @inherit new_dataset return
+#'
+#' @examples
+#' # simulate dataset
+#' d <- simulate_dataset()
+#'
+#' # preview object
+#' print(d)
+#' @export
+simulate_dataset <- function() {
+  # create simulated solution with 3 zones
+  solution <- prioritizr::get_sim_pu_raster()
+  idx <- terra::cells(is.na(solution), 0)[[1]]
+  solution[idx] <- withr::with_seed(
+    seed = 500,
+    sample(seq(0, 3), size = length(idx), replace = TRUE)
+  )
+
+  # prepare spatial layers for dataset
+  d <- c(
+    prioritizr::get_sim_pu_raster(),
+    prioritizr::get_sim_features(),
+    prioritizr::get_sim_locked_in_raster(),
+    prioritizr::get_sim_locked_out_raster(),
+    solution
+  )
+  names(d) <- c(
+    "pu",
+    paste0("feat_", seq_len(terra::nlyr(d) - 4L)),
+    "locked_in",
+    "locked_out",
+    "solution"
+  )
+
+  # set coordinate reference system
+  terra::crs(d) <- "epsg:3857"
+
+  # return dataset
+  create_dataset(d, pu_name = "pu")
 }

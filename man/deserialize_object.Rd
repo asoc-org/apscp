@@ -4,14 +4,13 @@
 \alias{deserialize_object}
 \title{Deserialize}
 \usage{
-deserialize_object(x, ...)
+deserialize_object(x, dataset = NULL)
 }
 \arguments{
-\item{x}{`list` object.}
+\item{x}{`list` object generated with [serialize_object()].}
 
-\item{...}{These dots are for future extensions and must be empty.}
-
-\item{dataset}{[Dataset] object.}
+\item{dataset}{[Dataset] or `NULL` object. Note that some classes
+need a [Dataset] object to be deserialized.}
 }
 \value{
 An object.
@@ -23,6 +22,27 @@ Deserialize an object.
 This function is designed to be used for (i) passing objects from the R
 session to the JavaScript session in the client browser, and (ii)
 reading and writing objects to disk.
+}
+\examples{
+# create an object
+x <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))
+
+# preview object
+print(x)
+
+# serialize object
+s <- serialize_object(x)
+
+# preview serialized object
+print(s)
+
+# deserialize the serialized object
+d <- deserialize_object(s)
+
+# preview the deserialized object,
+# we can see that it is identical to x (i.e., the original object)
+print(d)
+
 }
 \seealso{
 See [serialize_object()] for the opposite of this function.

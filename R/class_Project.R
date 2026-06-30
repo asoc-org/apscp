@@ -36,7 +36,6 @@ Project <- R6::R6Class(
     #' @field author_email `character` email of the project author.
     author_email = "Unknown",
 
-
     #' @description
     #' Create a `Project` object.
     #' @param dataset [Dataset] object.
@@ -88,7 +87,7 @@ Project <- R6::R6Class(
       )
       if (length(solutions) > 0) {
         assertthat::assert_that(
-          all_elements_inherit(solution, "Solution")
+          all_elements_inherit(solutions, "Solution")
         )
       }
 
@@ -139,6 +138,8 @@ Project <- R6::R6Class(
 #'
 #' @param dataset [new_dataset()] object.
 #'
+#' @param zones `character` vector of zone names.
+#'
 #' @param costs `list` of [new_cost()] objects.
 #'
 #' @param themes `list` of [new_themes()] objects.
@@ -159,6 +160,107 @@ Project <- R6::R6Class(
 #'
 #' @return A new `Project` object.
 #'
+#'
+#' @examples
+#' # create dataset
+#' dataset <- simulate_dataset()
+#'
+#' # create cost
+#' cost <- new_cost(
+#'   name = "cost",
+#'   layer = new_layer(
+#'     dataset = dataset,
+#'     index = "feat_1",
+#'     legend = new_continuous_legend(
+#'       c(0, 1), c("#000000", "#DDDDDD"),
+#'       c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
+#'     ),
+#'     units = "USD",
+#'     provenance = new_provenance(
+#'      name = "Global", icon = "globe", color = "#123456",
+#'      description = "Data is global."
+#'     ),
+#'     total = 500,
+#'     details = "extra info"
+#'   )
+#' )
+#'
+#' # create lock
+#' lock <- new_lock(
+#'   name = "lock",
+#'   layer = new_layer(
+#'     dataset = dataset,
+#'     index = "locked_in",
+#'     legend = new_categorical_legend(
+#'       c(0, 1), c("#000000", "#DDDDDD"),
+#'       c("Other", "Protected area")
+#'     ),
+#'     units = "presence/absence",
+#'     provenance = new_provenance(
+#'       name = "Global", icon = "globe", color = "#123456",
+#'       description = "Data is global."
+#'     ),
+#'     total = 500,
+#'     details = "extra info"
+#' )
+#'
+#' # create theme
+#' theme <- new_theme(
+#'   "species",
+#'   list(
+#'     new_feature(
+#'       name = "f1",
+#'       targets = c(0.1, 0.5),
+#'       layer = new_layer(
+#'         dataset = dataset,
+#'         index = "feat_1",
+#'         legend = new_continuous_legend(
+#'           c(0, 1), c("#000000", "#DDDDDD"),
+#'           c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
+#'         ),
+#'         units = "suitability",
+#'         provenance = new_provenance(
+#'          name = "Global", icon = "globe", color = "#123456",
+#'          description = "Data is global."
+#'         ),
+#'         total = 500,
+#'         details = "extra info"
+#'       )
+#'     ),
+#'     new_feature(
+#'       name = "f2",
+#'       targets = c(0.2, 0.9),
+#'       layer = new_layer(
+#'         dataset = dataset,
+#'         index = "feat_2",
+#'         legend = new_continuous_legend(
+#'           c(0, 1), c("#000000", "#AAAAAA"),
+#'           c(0.2, 0.5, 0.8), c("20%", "50%", "80%")
+#'         ),
+#'         units = "abundance",
+#'         provenance = new_provenance(
+#'          name = "Global", icon = "globe", color = "#123456",
+#'          description = "Data is global."
+#'         ),
+#'         total = 600,
+#'         details = "extra info 2"
+#'       )
+#'     )
+#'   )
+#' )
+#'
+#' # create project
+#' x <- new_project(
+#'   dataset = dataset,
+#'   zones = c("Conservation", "Tourism", "Science"),
+#'   costs = list(cost),
+#'   locks = list(locks),
+#'   themes = list(theme)
+#' )
+#'
+#' # preview object
+#' print(x)
+#'
 #' @export
 new_project <- function(
   dataset,
@@ -178,6 +280,7 @@ new_project <- function(
     costs = costs,
     themes = themes,
     locks = locks,
+    solutions = solutions,
     name = name,
     author_name = author_name,
     author_email = author_email

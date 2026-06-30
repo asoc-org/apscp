@@ -4,16 +4,29 @@
 \alias{read_project}
 \title{Read project}
 \usage{
-read_project(path, dataset)
+read_project(path)
 }
 \arguments{
 \item{path}{`character` file path for YAML metadata file.}
-
-\item{dataset}{[new_dataset()] object.}
 }
 \value{
 A [Project] object.
 }
 \description{
 Import project data.
+}
+\examples{
+# find file path for built-in project
+path <- dir(
+  system.file("data", package = "apscp"),
+  pattern = "^.*\\\\.yml$",
+  full.names = TRUE
+)
+
+# import project
+x <- read_project(path)
+
+# preview project
+print(x)
+
 }

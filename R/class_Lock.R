@@ -5,17 +5,37 @@ NULL
 #'
 #' Create a new lock object.
 #'
-#' @param name `character` value with the name of the feature.
+#' @param name `character` value with the name.
 #'
 #' @param layer [new_layer()] object used to store information for
 #' visualization.
 #'
 #' @inheritParams new_layer
 #'
-#' @return A `Cost` object.
+#' @return A `Lock` object.
 #'
 #' @examples
-#' # TODO
+#' # create object
+#' x <- new_lock(
+#'   name = "lock",
+#'   layer = new_layer(
+#'     dataset = simulate_dataset(),
+#'     index = "locked_in",
+#'     legend = new_categorical_legend(
+#'       c(0, 1), c("#000000", "#DDDDDD"),
+#'       c("Other", "Protected area")
+#'     ),
+#'     units = "presence/absence",
+#'     provenance = new_provenance(
+#'       name = "Global", icon = "globe", color = "#123456",
+#'       description = "Data is global."
+#'     ),
+#'     total = 500,
+#'     details = "extra info"
+#' )
+#'
+#' # preview object
+#' print(x)
 #'
 #' @export
 new_lock <- function(name, layer, id = uuid::UUIDgenerate()) {

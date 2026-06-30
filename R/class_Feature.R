@@ -5,7 +5,7 @@ NULL
 #'
 #' Create a new feature object.
 #'
-#' @param name `character` value with the name of the feature.
+#' @param name `character` value with the name.
 #'
 #' @param layer [new_layer()] object used to store information for
 #' visualization.
@@ -21,7 +21,29 @@ NULL
 #' @return A `Feature` object.
 #'
 #' @examples
-#' # TODO
+#' # create object
+#' x <- new_feature(
+#'   name = "species 1",
+#'   targets = c(0.1, 0.5),
+#'   layer = new_layer(
+#'     dataset = simulate_dataset(),
+#'     index = "feat_1",
+#'     legend = new_continuous_legend(
+#'       c(0, 1), c("#000000", "#DDDDDD"),
+#'       c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
+#'     ),
+#'     units = "suitability",
+#'     provenance =  new_provenance(
+#'      name = "Global", icon = "globe", color = "#123456",
+#'      description = "Data is global."
+#'     ),
+#'     total = 500,
+#'     details = "extra info"
+#'   )
+#' )
+#'
+#' # preview object
+#' print(x)
 #'
 #' @export
 new_feature <- function(name, layer, targets, id = uuid::UUIDgenerate()) {

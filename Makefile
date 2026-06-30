@@ -25,25 +25,30 @@ init:
 	$(R) CMD BATCH --no-restore --no-save inst/scripts/init.R
 	rm -rf init.Rout
 
+## build data
+data:
+	$(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-data.R
+	rm -rf prepare-data.Rout
+
 ## build docs
 man:
-	R --slave -e "devtools::document()"
+	$(R) --slave -e "devtools::document()"
 
 vigns:
-	R --slave -e "devtools::build_vignettes()"
+	$(R) --slave -e "devtools::build_vignettes()"
 
 ## reubild readme
 readme:
-	R --slave -e "rmarkdown::render('README.Rmd')"
+	$(R) --slave -e "rmarkdown::render('README.Rmd')"
 
 ## run tests
 test:
-	R --slave -e "devtools::test()" > test.log 2>&1
+	$(R) --slave -e "devtools::test()" > test.log 2>&1
 	rm -f tests/testthat/Rplots.pdf
 
 ## test examples
 examples:
-	R --slave -e "devtools::run_examples(test = TRUE, run = TRUE);warnings()"  >> examples.log
+	$(R) --slave -e "devtools::run_examples(test = TRUE, run = TRUE);warnings()"  >> examples.log
 	rm -f Rplots.pdf
 
 ## run checks
@@ -62,20 +67,20 @@ install:
 
 ## build entire site
 site:
-	R --slave -e "pkgdown::clean_site()"
-	R --slave -e "pkgdown::build_site(run_dont_run = TRUE, lazy = FALSE)"
+	$(R) --slave -e "pkgdown::clean_site()"
+	$(R) --slave -e "pkgdown::build_site(run_dont_run = TRUE, lazy = FALSE)"
 
 ## rebuild update files for site
 quicksite:
-	R --slave -e "pkgdown::build_site(run_dont_run = TRUE, lazy = TRUE)"
+	$(R) --slave -e "pkgdown::build_site(run_dont_run = TRUE, lazy = TRUE)"
 
 # commands to launch app
 ## launch local version using system libraries
-debug:
-	R -e "options(golem.app.prod = FALSE); golem::run_dev()"
+debug_renv:
+	$(R) -e "options(golem.app.prod = FALSE); golem::run_dev()"
 
-quick-debug:
-	R -e "options(golem.app.prod = FALSE, quick = TRUE); golem::run_dev()"
+debug:
+	$(R) -e "options(golem.app.prod = FALSE, quick = TRUE); golem::run_dev()"
 
 ## launch local version inside Docker container
 demo:
@@ -86,7 +91,7 @@ demo-kill:
 
 ## launch released version inside Docker container
 launch:
-	docker run -dp 3838:3838 --name apscp -it jeffreyhanson/apscp
+	docker run -dp 3838:3838 --name apscp -it asoc-org/apscp
 
 launch-kill:
 	docker rm --force apscp
@@ -94,8 +99,8 @@ launch-kill:
 # Docker commands
 ## create local image and push to docker
 image:
-	docker build -t jeffreyhanson/apscp:latest .
-	docker push jeffreyhanson/apscp:latest
+	docker build -t asoc-org/apscp:latest .
+	docker push asoc-org/apscp:latest
 
 ## delete all local containers and images
 reset:

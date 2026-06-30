@@ -9,6 +9,12 @@ create_legend(x, palette = "viridis", type = NULL)
 \arguments{
 \item{x}{[rast::SpatRaster()]}
 
+\item{palette}{`character` value with the color palette. In particular,
+`palette` can be the name of a color palette that is recognized by
+[color_palette()]. Alternatively, it can be a set of
+hex color code delimited by semicolons
+(e.g., `palette = "#000000;#DDDDDD;#123456"`).}
+
 \item{type}{`character` value indicating if legend should be `"continuous"`
 `"categorical"`, `"presence/absence"`, or `"presence".
 Defaults to `NULL`, such that
@@ -19,4 +25,12 @@ A new [new_continuous_legend()] or [new_categorical_legend()] object.
 }
 \description{
 Create a new legend automatically from raster data.
+}
+\examples{
+# create object
+x <- create_legend(prioritizr::get_sim_pu_raster(), palette = "PuBu")
+
+# preview object
+print(x)
+
 }

@@ -11,6 +11,7 @@ new_layer(
   units,
   legend,
   provenance,
+  details = NULL,
   id = uuid::UUIDgenerate()
 )
 }
@@ -20,6 +21,9 @@ new_layer(
 \item{index}{`character` or `integer` value indicating the layer in
 `dataset` that has the data for this layer.}
 
+\item{total}{`numeric` value indicating the total sum of values in
+the layer.}
+
 \item{units}{`character` value containing the units for the values in the
 underlying data.}
 
@@ -27,6 +31,9 @@ underlying data.}
 object.}
 
 \item{provenance}{[new_provenance()] object.}
+
+\item{details}{`character` value with additional details for the layer.
+Defaults to `NULL`.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
@@ -38,6 +45,24 @@ A `Layer` object.
 Create a new layer object.
 }
 \examples{
-# TODO
+# create object
+x <- new_layer(
+  dataset = simulate_dataset(),
+  index = "feat_1",
+  legend = new_continuous_legend(
+    c(0, 1), c("#000000", "#DDDDDD"),
+    c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
+  ),
+  units = "suitability",
+  provenance = new_provenance(
+   name = "Global", icon = "globe", color = "#123456",
+   description = "Data is global."
+  ),
+  total = 500,
+  details = "extra info"
+)
+
+# preview object
+print(x)
 
 }

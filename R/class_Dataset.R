@@ -1,12 +1,11 @@
 #' @include internal.R
 NULL
 
-#' Dataset class
+#' R6 class representing a dataset
 #'
-#' Definition for the `Dataset` class.
+#' A dataset is used to store and access information about a set spatial layers.
 #'
-#' @seealso See [new_dataset()] and [read_dataset()]
-#' to create a `Dataset` object.
+#' @export
 Dataset <- R6::R6Class(
   "Dataset",
   public = list(
@@ -44,7 +43,7 @@ Dataset <- R6::R6Class(
       )
       ## set fields
       self$spatial_data <- spatial_data
-      self$attribute_data <- attribute_data
+      self$attribute_data <- tibble::as_tibble(attribute_data)
       self$boundary_data <- boundary_data
     },
 
@@ -56,20 +55,30 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Get center point.
+    #' @return A `numeric` vector with two values.
+    get_center = function() {
+      c(
+        (terra::xmin(self$spatial_data) + terra::xmax(self$spatial_data)) / 2,
+        (terra::ymin(self$spatial_data) + terra::ymax(self$spatial_data)) / 2
+      )
+    },
+
+    #' @description
     #' Get the bounding box.
     #' @param native `logical` value indicating if the bounding box should
     #' be in (`TRUE`) the native coordinate reference system or (`FALSE`)
     #' re-projected to longitude/latitude?
-    #' @param expand `logical` value indicating if the bounding box be expanded
-    #' by 10%? Defaults to `FALSE`.
-    #' @return A `list` object with `"xmin"`, `"xmax"`, `"ymin"`, and `"ymax"`
-    #' elements.
-    get_bbox = function(native = TRUE, expand = FALSE) {
+    #' @param expand `numeric` value denoting the proportion to expand the
+    #' bounding box. For example, `expand = 0.1` would expand the bounding
+    #' box by 10 percent. Defaults to 0.
+    #' @return A [sf::st_bbox()] object.
+    get_bbox = function(native = TRUE, expand = 0) {
       # assert arguments are valid
       assertthat::assert_that(
         assertthat::is.flag(native),
         assertthat::noNA(native),
-        assertthat::is.flag(expand),
+        assertthat::is.number(expand),
         assertthat::noNA(expand)
       )
       # generate extent object
@@ -83,43 +92,50 @@ Dataset <- R6::R6Class(
         )
       }
       # expand bounding box if needed
-      if (isTRUE(expand)) {
-        out <- list()
-        out$xmin <- unname(ext[1] - (0.1 * (ext[2] - ext[1])))
-        out$xmax <- unname(ext[2] + (0.1 * (ext[2] - ext[1])))
-        out$ymin <- unname(ext[3] - (0.1 * (ext[4] - ext[3])))
-        out$ymax <- unname(ext[4] + (0.1 * (ext[4] - ext[3])))
-      } else {
-        out <- list(
-          xmin = unname(ext[1]),
-          xmax = unname(ext[2]),
-          ymin = unname(ext[3]),
-          ymax = unname(ext[4])
-        )
-      }
+      out <- c(
+        xmin = unname(ext[1] - (expand * (ext[2] - ext[1]))),
+        ymin = unname(ext[3] - (expand * (ext[4] - ext[3]))),
+        xmax = unname(ext[2] + (expand * (ext[2] - ext[1]))),
+        ymax = unname(ext[4] + (expand * (ext[4] - ext[3])))
+      )
       # if using lon/lat CRS, then ensure valid extent
       if (!native) {
-        out$xmin <- max(out$xmin, -180)
-        out$xmax <- min(out$xmax, 180)
-        out$ymin <- max(out$ymin, -90)
-        out$ymax <- min(out$ymax, 90)
+        out[[1]] <- max(out[[1]], -180)
+        out[[2]] <- max(out[[2]], -90)
+        out[[3]] <- min(out[[3]], 180)
+        out[[4]] <- min(out[[4]], 90)
       }
       # return result
-      out
+      sf::st_bbox(out)
     },
 
     #' @description
-    #' Get attribute names.
-    #' @return `character` vector of field/layer names.
-    get_names = function() {
+    #' Get index values.
+    #' @return A `character` vector of layer names.
+    get_indices = function() {
       setdiff(names(self$attribute_data), "_index")
     },
 
     #' @description
-    #' Get a data from the dataset at an index.
-    #' @param index `character` or `integer` indicating the desired layer.
+    #' Get data from the dataset at an index.
+    #' @param index `character` or `integer` value..
+    #' @return A `numeric` vector.
+    get_data = function(index) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.string(index) || assertthat::is.count(index),
+        assertthat::noNA(index),
+        self$has_index(index)
+      )
+      # return values
+      self$attribute_data[[index]]
+    },
+
+    #' @description
+    #' Get data from the dataset at an index.
+    #' @param index `character` or `integer` vector.
     #' @return A [terra::rast()] object.
-    get_index = function(index) {
+    get_raster_data = function(index) {
       # assert arguments are valid
       assertthat::assert_that(
         is.character(index) || is.numeric(index),
@@ -153,10 +169,23 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Get total (sum) of values for an index.
+    #' @param index `character` or `integer` value.
+    #' @return A `character` vector of layer names.
+    get_total = function(index) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.string(index) || assertthat::is.count(index),
+        assertthat::noNA(index)
+      )
+      # return sum of values
+      sum(self$attribute_data[[index]], na.rm = TRUE)
+    },
+
+    #' @description
     #' Check if the dataset has an index.
-    #' @param index `character` or `integer` indicating the field/layer with
-    #'   the data.
-    #' @return `logical` indicating if data is present or not.
+    #' @param index `character` or `integer` vector.
+    #' @return A `logical` value.
     has_index = function(index) {
       # assert arguments are valid
       assertthat::assert_that(
@@ -174,11 +203,11 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Add data at an index.
-    #' @param index `character` or `integer` indicating the field/layer with
-    #' the data.
+    #' Set data at an index.
+    #' @param index `character` or `integer` value.
     #' @param values `numeric` vector.
-    add_index = function(index, values) {
+    #' @return An invisible `TRUE` indicating success.
+    set_data = function(index, values) {
       # assert arguments are valid
       assertthat::assert_that(
         assertthat::is.string(index) || assertthat::is.count(index),
@@ -204,7 +233,7 @@ Dataset <- R6::R6Class(
 #'
 #' @param spatial_data [terra::rast()] object.
 #'
-#' @param attribute_data  [tibble::tibble()] object.
+#' @param attribute_data [tibble::tibble()] object.
 #'
 #' @param boundary_data [Matrix::sparseMatrix()] object.
 #'

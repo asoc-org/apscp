@@ -4,7 +4,7 @@
 \alias{get_color_table}
 \title{Get color table}
 \usage{
-get_color_table(x, y, warn = TRUE)
+get_color_table(x)
 }
 \arguments{
 \item{x}{[new_continuous_legend()] or [new_categorical_legend()] object.}
