@@ -4,14 +4,13 @@
 \alias{new_dataset}
 \title{New dataset}
 \usage{
-new_dataset(spatial_data, attribute_data, boundary_data)
+new_dataset(pu_data, boundary_data)
 }
 \arguments{
-\item{spatial_data}{[terra::rast()] object.}
+\item{pu_data}{[tibble::tibble()] object with planning unit data.}
 
-\item{attribute_data}{[tibble::tibble()] object.}
-
-\item{boundary_data}{[Matrix::sparseMatrix()] object.}
+\item{boundary_data}{[Matrix::sparseMatrix()] object with boundary
+matrix data.}
 }
 \value{
 A [Dataset] object.
@@ -20,6 +19,24 @@ A [Dataset] object.
 Create a new [Dataset] object.
 }
 \examples{
-# TODO
+# simulate spatial data
+sim_data <- simulate_spatial_data()
 
+# manually prepare planning unit data
+pu_data <- sf::st_drop_geometry(sim_data)
+pu_data[["_index"]] <- seq_len(nrow(pu_data))
+
+# manually prepare boundary data
+bd_data <- prioritizr::boundary_matrix(sim_data)
+
+# create object
+x <- new_dataset(pu_data, bd_data)
+
+# preview object
+print(x)
+
+}
+\seealso{
+See [create_dataset()] to automatically convert a [sf::st_sf()] object
+to a [new_dataset()] object.
 }

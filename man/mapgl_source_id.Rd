@@ -7,12 +7,26 @@
 mapgl_source_id(x)
 }
 \arguments{
-\item{x}{[Feature], [Cost], or [Lock] object.}
+\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+[new_solution()] object.}
 }
 \value{
 A `character` value.
 }
 \description{
-Get an identifier for a feature object that corresponds to the
-\pkg{mapgl} source for the feature.
+Get the source identifier.
+}
+\details{
+This corresponds to the `source` parameter of [mapgl::add_fill_layer()].
+}
+\examples{
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
+# create object
+x <- create_tile(sim_data)
+
+# get source identifier
+mapgl_source_id(x)
+
 }

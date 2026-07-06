@@ -11,11 +11,7 @@ NULL
 #'
 #' @examples
 #' # find file path for built-in project
-#' path <- dir(
-#'   system.file("data", package = "apscp"),
-#'   pattern = "^.*\\.yml$",
-#'   full.names = TRUE
-#' )
+#' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 #'
 #' # import project
 #' x <- read_project(path)
@@ -41,38 +37,35 @@ read_project <- function(path) {
     assertthat::has_name(l, "author_name"),
     assertthat::has_name(l, "author_email"),
     assertthat::has_name(l, "dataset_paths"),
-    assertthat::has_name(l$dataset_paths, "spatial_path"),
-    assertthat::has_name(l$dataset_paths, "attribute_path"),
+    assertthat::has_name(l$dataset_paths, "pu_path"),
     assertthat::has_name(l$dataset_paths, "boundary_path"),
+    assertthat::has_name(l, "tileset"),
+    assertthat::has_name(l$tileset, "tiles"),
+    assertthat::has_name(l$tileset, "max_zoom"),
     assertthat::has_name(l, "themes"),
     assertthat::has_name(l, "costs"),
     assertthat::has_name(l, "locks"),
+    assertthat::has_name(l, "bbox"),
+    assertthat::has_name(l$bbox, "xmin"),
+    assertthat::has_name(l$bbox, "ymin"),
+    assertthat::has_name(l$bbox, "xmax"),
+    assertthat::has_name(l$bbox, "ymax"),
+    assertthat::has_name(l$bbox, "crs"),
     msg = "`path` is not a valid project metadata file."
   )
 
   # normalize paths to save directory as metadata path
-  spatial_path <- file.path(
-    dirname(path),
-    l$dataset_paths$spatial_path
-  )
-  attribute_path <- file.path(
-    dirname(path),
-    l$dataset_paths$attribute_path
-  )
-  boundary_path <- file.path(
-    dirname(path),
-    l$dataset_paths$boundary_path
-  )
+  pu_path <- file.path(dirname(path), l$dataset_paths$pu_path)
+  boundary_path <- file.path(dirname(path), l$dataset_paths$boundary_path)
 
   # import dataset
-  d <- read_dataset(
-    spatial_path = spatial_path,
-    attribute_path = attribute_path,
-    boundary_path = boundary_path
-  )
+  d <- read_dataset(pu_path = pu_path, boundary_path = boundary_path)
 
   # set dataset paths to NULL because they are not a parameter of new_project
   l$dataset_paths <- NULL
+
+  # overwrite tileset directory
+  l$tileset$dir <- dirname(path)
 
   # return object
   deserialize_object(l, d)
@@ -90,11 +83,7 @@ read_project <- function(path) {
 #'
 #' @examples
 #' # find file path for built-in project
-#' path <- dir(
-#'   system.file("data", package = "apscp"),
-#'   pattern = "^.*\\.yml$",
-#'   full.names = TRUE
-#' )
+#' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 #'
 #' # import project
 #' x <- read_project(path)
@@ -103,7 +92,7 @@ read_project <- function(path) {
 #' print(x)
 #'
 #' # save project to temporary file
-#' write_project(x, tempfile(fileext = ".yml")
+#' write_project(x, tempfile(fileext = ".yml"))
 #'
 #' @export
 write_project <- function(x, path) {
@@ -120,22 +109,33 @@ write_project <- function(x, path) {
 
   # define file paths for datasets
   path_no_ext <- tools::file_path_sans_ext(path)
-  spatial_path <- paste0(path_no_ext, "_rast.tif")
-  attribute_path <- paste0(path_no_ext, "_attr.csv.gz")
+  pu_path <- paste0(path_no_ext, "_pu.csv.gz")
   boundary_path <- paste0(path_no_ext, "_bd.csv.gz")
 
   # save dataset
-  write_dataset(x$dataset, spatial_path, attribute_path, boundary_path)
+  write_dataset(x$dataset, pu_path, boundary_path)
 
   # serialize project
   l <- serialize_object(x)
 
   # assign dataset paths
   l$dataset_paths <- list(
-    spatial_path = basename(spatial_path),
-    attribute_path = basename(attribute_path),
+    pu_path = basename(pu_path),
     boundary_path = basename(boundary_path)
   )
+
+  # copy tile files to new directory
+  lapply(x$tileset$tiles, function(x) {
+    file.copy(
+      file.path(l$tileset$dir, x$file),
+      to = file.path(dirname(path), x$file),
+      overwrite = TRUE
+    )
+  })
+
+  # overwrite tileset directory with NULL,
+  # note that this will be overwritten in read_project()
+  l$tileset$dir <- NULL
 
   # save metadata
   yaml::write_yaml(l, file = path)
@@ -152,13 +152,9 @@ write_project <- function(x, path) {
 #'
 #' @return A [mapgl::mapboxgl()] object.
 #'
-#' @examplesIf interactive()
+#' @examplesIf has_mapbox_token()
 #' # find file path for built-in project
-#' path <- dir(
-#'   system.file("data", package = "apscp"),
-#'   pattern = "^.*\\.yml$",
-#'   full.names = TRUE
-#' )
+#' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 #'
 #' # import project
 #' x <- read_project(path)
@@ -167,16 +163,20 @@ write_project <- function(x, path) {
 #' print(x)
 #'
 #' # create interactive map for project data
-#' map_project(x)
+#' map <- map_project(x)
 #'
+#' # display map
+#' \dontrun{
+#' print(map)
+#' }
 #' @export
 map_project <- function(x, ...) {
   # assert valid arguments
   assertthat::assert_that(inherits(x, "Project"))
 
   # define map parameters
-  bounds = as.vector(x$dataset$get_bbox(native = FALSE, expand = 0.1))
-  maxBounds = as.vector(x$dataset$get_bbox(native = FALSE, expand = 0.25))
+  bounds = x$get_bbox(native = FALSE, expand = 0.1)
+  maxBounds = as.vector(x$get_bbox(native = FALSE, expand = 0.25))
 
   # initialize map
   m <- mapgl::mapboxgl(
@@ -185,149 +185,33 @@ map_project <- function(x, ...) {
     ...
   )
 
-  # add sources and layers
+  # add sources
+  for (i in seq_along(x$tiles)) {
+    m <- mapgl_add_source(m, x$tiles[[i]])
+  }
+
+  # add layers
   ## features
   for (i in seq_along(x$themes)) {
     for (j in seq_along(x$themes[[i]]$features)) {
-      m <- mapgl_add_source(m, x$themes[[i]]$features[[j]])
       m <- mapgl_add_layer(m, x$themes[[i]]$features[[j]])
     }
   }
   ## locks
   for (i in seq_along(x$locks)) {
-    m <- mapgl_add_source(m, x$locks[[i]])
     m <- mapgl_add_layer(m, x$locks[[i]])
   }
   ## costs
   for (i in seq_along(x$costs)) {
-    m <- mapgl_add_source(m, x$costs[[i]])
     m <- mapgl_add_layer(m, x$costs[[i]])
   }
   ## solutions
   if (length(x$solutions) > 0) {
     for (i in seq_along(x$costs)) {
-      m <- mapgl_add_source(m, x$costs[[i]])
-      m <- mapgl_add_layer(m, x$costs[[i]])
+      m <- mapgl_add_layer(m, x$solutions[[i]])
     }
   }
 
   # return object
   m
-}
-
-
-#' Simulate project
-#'
-#' Simulate a new project.
-#'
-#' @return A [Project] object.
-#'
-#' @examples
-#' # create simulated project
-#' x <- simulate_project()
-#'
-#' # preview object
-#' print(x)
-#'
-#' @export
-simulate_project <- function() {
-  # create dataset
-  dataset <- simulate_dataset()
-
-  # create provenance
-  provenance <- new_provenance(
-   name = "Simulated", icon = "server", color = "#123456",
-   description = "Data is simulated."
-  )
-
-  # create cost
-  cost <- new_cost(
-    name = "Tourism revenue",
-    layer = new_layer(
-      dataset = dataset,
-      index = "pu",
-      legend = create_legend(dataset$get_raster_data("pu")),
-      units = "USD",
-      provenance = provenance,
-      total = dataset$get_total("locked_in")
-    )
-  )
-
-  # create solution
-  solution <- new_solution(
-    name = "Solution 1",
-    layer = new_layer(
-      dataset = dataset,
-      index = "solution",
-      legend = new_categorical_legend(
-        c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
-        c("Conservation", "Tourism", "Science")
-      ),
-      units = "categorical",
-      provenance = provenance,
-      total = dataset$get_total("solution")
-    )
-  )
-
-  # create object
-  locked_in <- new_lock(
-    name = "Protected areas",
-    layer = new_layer(
-      dataset = dataset,
-      index = "locked_in",
-      legend = create_legend(
-        dataset$get_raster_data("locked_in"),
-        palette = "Greens"
-      ),
-      units = "presence/absence",
-      provenance = provenance,
-      total = dataset$get_total("locked_in")
-    )
-  )
-  locked_out <- new_lock(
-    name = "Historical sites",
-    layer = new_layer(
-      dataset = dataset,
-      index = "locked_out",
-      legend = create_legend(
-        dataset$get_raster_data("locked_out"),
-        palette = "Reds"
-      ),
-      units = "presence/absence",
-      provenance = provenance,
-      total = dataset$get_total("locked_out")
-    )
-  )
-
-  # create theme object
-  theme <- new_theme(
-    "Species",
-    lapply(seq_len(5), function(i) {
-      new_feature(
-        name = paste0("Species ", i),
-        targets = runif(3, min = 0, max = 1),
-        layer = new_layer(
-          dataset = dataset,
-          index = paste0("feat_", i),
-          legend = create_legend(
-            dataset$get_raster_data("locked_out"),
-            "viridis"
-          ),
-          units = "suitability",
-          provenance = provenance,
-          total = dataset$get_total(paste0("feat_", i))
-        )
-      )
-    })
-  )
-
-  # return project
-  new_project(
-    dataset = dataset,
-    zones = c("Conservation", "Tourism", "Science"),
-    costs = list(cost),
-    locks = list(locked_in, locked_out),
-    themes = list(theme),
-    solutions = list(solution)
-  )
 }

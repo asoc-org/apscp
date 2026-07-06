@@ -11,6 +11,8 @@ data_path <- "data-raw/29092346.zip"
 project_name = "Antarctic Peninsula"
 project_author_name = "Jasmine Lee"
 project_author_email = "jasmine.lee@monash.edu"
+### parameters for tiling
+max_zoom <- 8
 
 ## define helper functions
 convert_na_to_null <- function(x) {
@@ -110,9 +112,38 @@ for (l in metadata$name[metadata$units == "presence"]) {
   raster_data[[l]] <- terra::ifel(raster_data[[l]] == 1, 1, NA_real_)
 }
 
+### convert raster data to planning units
+idx <- terra::cells(is.na(pu_data), 0)[[1]]
+vector_data <- sf::st_as_sf(
+  terra::as.polygons(
+    pu_data, values = TRUE, na.rm = TRUE, na.all = TRUE, dissolve = FALSE
+  )
+)
+vector_data[["_index"]] <- seq_len(nrow(vector_data))
+vector_data <- vector_data[,
+  c("_index", setdiff(names(vector_data), "_index")),
+  drop = FALSE
+]
+for (i in names(raster_data)) {
+  vector_data[[i]] <- raster_data[[i]][idx][[1]]
+}
+
+## create boundary_data
+boundary_data <- prioritizr::boundary_matrix(pu_data)
+boundary_data <- boundary_data[idx, idx]
+
 # Main processing
 ## create dataset
-dataset <- create_dataset(raster_data, pu_name = names(pu_data))
+dataset <- new_dataset(sf::st_drop_geometry(vector_data), boundary_data)
+
+## create tiles
+td <- tempdir()
+tile <- create_tile(
+  vector_data[, setdiff(names(vector_data), "_index"), drop = FALSE],
+  path = file.path(td, "antarctic-peninsula.pmtiles"),
+  max_zoom = max_zoom
+)
+tileset <- new_tileset(list(tile), dir = td, max_zoom = max_zoom)
 
 ## create locks
 locks <-
@@ -123,10 +154,10 @@ locks <-
       name = x$name,
       layer = new_layer(
         dataset = dataset,
-        index = x$name,
-        units = x$units,
-        total = terra::global(raster_data[[x$name]], "sum", na.rm = TRUE)[[1]],
+        column = x$name,
+        total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
           icon = x$provenance_icon,
@@ -134,9 +165,11 @@ locks <-
           description = x$provenance_description
         ),
         legend = create_legend(
-          x = raster_data[[x$name]],
+          x = vector_data,
+          column = x$name,
           palette = x$palette,
-          type = x$type
+          type = x$type,
+          units = x$units
         )
       )
     )
@@ -152,10 +185,10 @@ costs <-
       name = x$name,
       layer = new_layer(
         dataset = dataset,
-        index = x$name,
-        units = x$units,
-        total = terra::global(raster_data[[x$name]], "sum", na.rm = TRUE)[[1]],
+        column = x$name,
+        total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
           icon = x$provenance_icon,
@@ -163,9 +196,11 @@ costs <-
           description = x$provenance_description
         ),
         legend = create_legend(
-          x = raster_data[[x$name]],
+          x = vector_data,
+          column = x$name,
           palette = x$palette,
-          type = x$type
+          type = x$type,
+          units = x$units
         )
       )
     )
@@ -182,10 +217,10 @@ features <-
       targets = c(x$conservation_target, x$scientific_target, x$tourism_target),
       layer = new_layer(
         dataset = dataset,
-        index = x$name,
-        units = x$units,
-        total = terra::global(raster_data[[x$name]], "sum", na.rm = TRUE)[[1]],
+        column = x$name,
+        total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
           icon = x$provenance_icon,
@@ -193,9 +228,11 @@ features <-
           description = x$provenance_description
         ),
         legend = create_legend(
-          x = raster_data[[x$name]],
+          x = vector_data,
+          column = x$name,
           palette = x$palette,
-          type = x$type
+          type = x$type,
+          units = x$units
         )
       )
     )
@@ -218,16 +255,18 @@ themes <-
 
 ## create project
 project <- new_project(
+  zones = c("Conservation area", "Scientific area", "Tourism area"),
+  bbox = sf::st_transform(sf::st_bbox(vector_data), 3875),
   dataset = dataset,
-  name = project_name,
-  author_name = project_author_name,
-  author_email = project_author_email,
+  tileset = tileset,
   themes = themes,
   costs = costs,
   locks = locks,
-  zones = c("Conservation area", "Scientific area", "Tourism area")
+  name = project_name,
+  author_name = project_author_name,
+  author_email = project_author_email
 )
 
 # Exports
 ## write project
-write_project(project, "inst/data/antarctic-peninsula.yml")
+write_project(project, "inst/extdata/antarctic-peninsula.yml")

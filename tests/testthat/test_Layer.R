@@ -1,50 +1,41 @@
 test_that("new_layer", {
   # create object
-  s <- simulate_dataset()
-  l <- new_continuous_legend(
-    c(0, 1), c("#000000", "#DDDDDD"),
-    c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
-  )
-  p <- new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-  )
+  s <- simulate_spatial_data()
+  w <- create_dataset(s)
+  r <- create_tile(s, verbose = FALSE)
+  l <- simulate_continuous_legend()
+  p <- simulate_provenance()
   x <- new_layer(
-    dataset = s,
-    index = "feat_1",
+    dataset = w,
+    tile = r,
+    column = "feat_1",
     legend = l,
-    units = "suitability",
     provenance = p,
     total = 500,
     details = "extra info"
   )
   # run tests
   expect_s3_class(x, "Layer")
-  expect_equal(x$dataset, s)
-  expect_equal(x$index, "feat_1")
+  expect_equal(x$dataset, w)
+  expect_equal(x$tile, r)
+  expect_equal(x$column, "feat_1")
   expect_equal(x$legend, l)
-  expect_equal(x$units, "suitability")
   expect_equal(x$provenance, p)
   expect_equal(x$details, "extra info")
 })
 
 test_that("serialize_object", {
   # create object
-  s <- simulate_dataset()
-  l <- new_continuous_legend(
-    c(0, 1), c("#000000", "#DDDDDD"),
-    c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
-  )
-  p <- new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-
-  )
+  s <- simulate_spatial_data()
+  w <- create_dataset(s)
+  r <- create_tile(s, verbose = FALSE)
+  l <- simulate_continuous_legend()
+  p <- simulate_provenance()
   d <- new_layer(
-    dataset = s,
-    index = "feat_1",
+    dataset = w,
+    tile = r,
+    column = "feat_1",
     legend = l,
-    units = "suitability",
     provenance = p,
     total = 500,
     details = "extra info"
@@ -52,35 +43,31 @@ test_that("serialize_object", {
   x <- serialize_object(d)
   # run tests
   expect_type(x, "list")
-  expect_equal(x$index, "feat_1")
+  expect_equal(x$column, "feat_1")
   expect_equal(x$legend, serialize_object(l))
-  expect_equal(x$units, "suitability")
   expect_equal(x$provenance, serialize_object(p))
+  expect_equal(x$tile, serialize_object(r))
   expect_equal(x$details, "extra info")
   expect_equal(x$class, "Layer")
 })
 
 test_that("deserialize_object", {
   # create object
-  s <- simulate_dataset()
-  l <- new_continuous_legend(
-    c(0, 1), c("#000000", "#DDDDDD"),
-    c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
-  )
-  p <- new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-  )
+  s <- simulate_spatial_data()
+  w <- create_dataset(s)
+  r <- create_tile(s, verbose = FALSE)
+  l <- simulate_continuous_legend()
+  p <- simulate_provenance()
   x <- new_layer(
-    dataset = s,
-    index = "feat_1",
+    dataset = w,
+    tile = r,
+    column = "feat_1",
     legend = l,
-    total = 500,
-    units = "suitability",
     provenance = p,
+    total = 500,
     details = "extra info"
   )
-  y <- deserialize_object(serialize_object(x), dataset = s)
+  y <- deserialize_object(serialize_object(x), dataset = w)
   # run tests
   expect_equal(x, y)
 })

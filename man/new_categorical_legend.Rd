@@ -4,7 +4,7 @@
 \alias{new_categorical_legend}
 \title{New categorical legend}
 \usage{
-new_categorical_legend(values, colors, labels)
+new_categorical_legend(values, colors, labels, units = NULL)
 }
 \arguments{
 \item{values}{`numeric` vector of values that are linked to the labels.}
@@ -16,6 +16,9 @@ Note that `colors` must have a value for each value in `values`.}
 
 \item{labels}{`character` Labels to show in the legend.
 Note that `labels` must have a value for each value in `values`.}
+
+\item{units}{`character` value containing the units for the values in the
+underlying data. Defaults to a `NULL` value.}
 }
 \value{
 A `CategoricalLegend` object.
@@ -25,7 +28,12 @@ Create a new categorical legend object.
 }
 \examples{
 # create new object
-l <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))
+l <- new_categorical_legend(
+  values = c(0, 1),
+  colors = c("#000000", "#AAAAAA"),
+  labels = c("a", "b"),
+  units = "land-use types"
+)
 
 # print object
 print(l)

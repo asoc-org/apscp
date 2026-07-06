@@ -15,7 +15,7 @@ server_initialize_app <- quote({
   # find project
   project_path <- system.file(
     "data",
-    apscp:::get_golem_config("project_filename"),
+    get_golem_config("project_filename"),
     package = "apscp"
   )
   assertthat::assert_that(

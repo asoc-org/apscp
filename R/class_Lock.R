@@ -15,23 +15,21 @@ NULL
 #' @return A `Lock` object.
 #'
 #' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
 #' # create object
 #' x <- new_lock(
 #'   name = "lock",
 #'   layer = new_layer(
-#'     dataset = simulate_dataset(),
-#'     index = "locked_in",
-#'     legend = new_categorical_legend(
-#'       c(0, 1), c("#000000", "#DDDDDD"),
-#'       c("Other", "Protected area")
-#'     ),
-#'     units = "presence/absence",
-#'     provenance = new_provenance(
-#'       name = "Global", icon = "globe", color = "#123456",
-#'       description = "Data is global."
-#'     ),
+#'     column = "locked_in",
 #'     total = 500,
+#'     dataset = create_dataset(sim_data),
+#'     tile = create_tile(sim_data),
+#'     legend = simulate_binary_legend(),
+#'     provenance = simulate_provenance(),
 #'     details = "extra info"
+#'   )
 #' )
 #'
 #' # preview object

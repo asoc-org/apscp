@@ -17,11 +17,7 @@ Import project data.
 }
 \examples{
 # find file path for built-in project
-path <- dir(
-  system.file("data", package = "apscp"),
-  pattern = "^.*\\\\.yml$",
-  full.names = TRUE
-)
+path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 
 # import project
 x <- read_project(path)

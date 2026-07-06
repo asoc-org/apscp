@@ -7,12 +7,37 @@
 mapgl_layer_id(x)
 }
 \arguments{
-\item{x}{[Feature], [Cost], or [Lock] object.}
+\item{x}{[new_feature()], [new_cost()], [new_lock()], or [new_solution()]
+object.}
 }
 \value{
 A `character` value.
 }
 \description{
-Get an identifier for a feature object that corresponds to the
-\pkg{mapgl} layer for the feature.
+Get the layer identifier for an object.
+}
+\details{
+This corresponds to the `id` parameter of [mapgl::add_fill_layer()].
+}
+\examples{
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
+# create object
+x <- new_cost(
+  name = "cost",
+  layer = new_layer(
+    column = "feat_1",
+    total = 500,
+    dataset = create_dataset(sim_data),
+    tile = create_tile(sim_data),
+    legend = simulate_continuous_legend(),
+    provenance = simulate_provenance(),
+    details = "extra info"
+  )
+)
+
+# get layer identifier
+mapgl_layer_id(x)
+
 }

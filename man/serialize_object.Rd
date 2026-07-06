@@ -2,7 +2,10 @@
 % Please edit documentation in R/method_serialize_object.R
 \name{serialize_object}
 \alias{serialize_object}
+\alias{serialize_object.bbox}
 \alias{serialize_object.Provenance}
+\alias{serialize_object.Tile}
+\alias{serialize_object.Tileset}
 \alias{serialize_object.ContinuousLegend}
 \alias{serialize_object.CategoricalLegend}
 \alias{serialize_object.Layer}
@@ -16,7 +19,13 @@
 \usage{
 serialize_object(x)
 
+\method{serialize_object}{bbox}(x)
+
 \method{serialize_object}{Provenance}(x)
+
+\method{serialize_object}{Tile}(x)
+
+\method{serialize_object}{Tileset}(x)
 
 \method{serialize_object}{ContinuousLegend}(x)
 

@@ -5,10 +5,10 @@
 \title{New Layer}
 \usage{
 new_layer(
-  dataset,
-  index,
+  column,
   total,
-  units,
+  dataset,
+  tile,
   legend,
   provenance,
   details = NULL,
@@ -16,18 +16,17 @@ new_layer(
 )
 }
 \arguments{
-\item{dataset}{[new_dataset()] object with spatial data.}
-
-\item{index}{`character` or `integer` value indicating the layer in
-`dataset` that has the data for this layer.}
+\item{column}{`character` value indicating the column in
+`dataset` and `tile` that has the data for this layer.}
 
 \item{total}{`numeric` value indicating the total sum of values in
 the layer.}
 
-\item{units}{`character` value containing the units for the values in the
-underlying data.}
+\item{dataset}{[new_dataset()] object with spatial data.}
 
-\item{legend}{[new_categorical_legend()] or [new_continuous_legend()]
+\item{tile}{[new_tile()] object.}
+
+\item{legend}{[new_categorical_legend()] or [new_continuous _legend()]
 object.}
 
 \item{provenance}{[new_provenance()] object.}
@@ -45,20 +44,17 @@ A `Layer` object.
 Create a new layer object.
 }
 \examples{
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
 # create object
 x <- new_layer(
-  dataset = simulate_dataset(),
-  index = "feat_1",
-  legend = new_continuous_legend(
-    c(0, 1), c("#000000", "#DDDDDD"),
-    c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
-  ),
-  units = "suitability",
-  provenance = new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-  ),
+  column = "feat_1",
   total = 500,
+  dataset = create_dataset(sim_data),
+  tile = create_tile(sim_data),
+  legend = simulate_continuous_legend(),
+  provenance = simulate_provenance(),
   details = "extra info"
 )
 

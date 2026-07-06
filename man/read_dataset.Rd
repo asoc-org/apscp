@@ -4,12 +4,10 @@
 \alias{read_dataset}
 \title{Read dataset}
 \usage{
-read_dataset(spatial_path, attribute_path, boundary_path)
+read_dataset(pu_path, boundary_path)
 }
 \arguments{
-\item{spatial_path}{`character` file path for spatial data.}
-
-\item{attribute_path}{`character` file path for attribute data.}
+\item{pu_path}{`character` file path for planning unit data.}
 
 \item{boundary_path}{`character` file path for boundary data.}
 }
@@ -20,6 +18,20 @@ A [Dataset] object.
 Import a [Dataset] object.
 }
 \examples{
-# TODO
+# specify file paths
+pu_path <- system.file(
+ "extdata", "antarctic-peninsula_pu.csv.gz",
+ package = "apscp"
+)
+bd_path <- system.file(
+  "extdata", "antarctic-peninsula_bd.csv.gz",
+ package = "apscp"
+)
+
+# import data
+x <- read_dataset(pu_path, bd_path)
+
+# preview object
+print(x)
 
 }

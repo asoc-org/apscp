@@ -48,6 +48,20 @@ serialize_object.default <- function(x) {
 }
 
 #' @rdname serialize_object
+#' @method serialize_object bbox
+#' @export
+serialize_object.bbox <- function(x) {
+  list(
+    xmin = x$xmin[[1]],
+    ymin = x$ymin[[1]],
+    xmax = x$xmax[[1]],
+    ymax = x$ymax[[1]],
+    crs = sf::st_crs(x)$epsg,
+    class = "bbox"
+  )
+}
+
+#' @rdname serialize_object
 #' @method serialize_object Provenance
 #' @export
 serialize_object.Provenance <- function(x) {
@@ -61,6 +75,30 @@ serialize_object.Provenance <- function(x) {
 }
 
 #' @rdname serialize_object
+#' @method serialize_object Tile
+#' @export
+serialize_object.Tile <- function(x) {
+  list(
+    file = x$file,
+    source_layer = x$source_layer,
+    max_zoom = x$max_zoom,
+    class = "Tile"
+  )
+}
+
+#' @rdname serialize_object
+#' @method serialize_object Tileset
+#' @export
+serialize_object.Tileset <- function(x) {
+  list(
+    tiles = lapply(x$tiles, serialize_object.Tile),
+    dir = x$dir,
+    max_zoom = x$max_zoom,
+    class = "Tileset"
+  )
+}
+
+#' @rdname serialize_object
 #' @method serialize_object ContinuousLegend
 #' @export
 serialize_object.ContinuousLegend <- function(x) {
@@ -69,6 +107,7 @@ serialize_object.ContinuousLegend <- function(x) {
     colors = x$colors,
     breaks = x$breaks,
     labels = x$labels,
+    units = x$units,
     class = "ContinuousLegend"
   )
 }
@@ -81,6 +120,7 @@ serialize_object.CategoricalLegend <- function(x) {
     values = x$values,
     labels = x$labels,
     colors = x$colors,
+    units = x$units,
     class = "CategoricalLegend"
   )
 }
@@ -90,12 +130,12 @@ serialize_object.CategoricalLegend <- function(x) {
 #' @export
 serialize_object.Layer <- function(x) {
   list(
-    index = x$index,
+    column = x$column,
     total = x$total,
-    units = x$units,
     details = x$details,
     legend = serialize_object(x$legend),
     provenance = serialize_object.Provenance(x$provenance),
+    tile = serialize_object.Tile(x$tile),
     id = x$id,
     class = "Layer"
   )
@@ -166,6 +206,8 @@ serialize_object.Project <- function(x) {
     author_name = x$author_name,
     author_email = x$author_email,
     zones = x$zones,
+    bbox = serialize_object.bbox(x$bbox),
+    tileset = serialize_object.Tileset(x$tileset),
     costs = lapply(x$costs, function(y) serialize_object.Cost(y)),
     themes = lapply(x$themes, function(y) serialize_object.Theme(y)),
     locks = lapply(x$locks, function(y) serialize_object.Lock(y)),

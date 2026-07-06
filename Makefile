@@ -28,7 +28,7 @@ init:
 ## build data
 data:
 	$(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-data.R
-	rm -rf prepare-data.Rout
+	rm -f prepare-data.Rout
 
 ## build docs
 man:
@@ -48,13 +48,13 @@ test:
 
 ## test examples
 examples:
-	$(R) --slave -e "devtools::run_examples(test = TRUE, run = TRUE);warnings()"  >> examples.log
+	$(R) --slave -e "devtools::run_examples();warnings()"  >> examples.log
 	rm -f Rplots.pdf
 
 ## run checks
 check:
 	echo "\n===== R CMD CHECK =====\n" > check.log 2>&1
-	R --slave -e "devtools::check(build_args = '--no-build-vignettes', args = '--no-build-vignettes', run_dont_test = TRUE, vignettes = FALSE)" >> check.log 2>&1
+	R --slave -e "devtools::check(build_args = '--no-build-vignettes', args = '--no-build-vignettes', vignettes = FALSE)" >> check.log 2>&1
 
 ## check docs for spelling mistakes
 spellcheck:

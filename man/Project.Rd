@@ -12,7 +12,9 @@ See [new_project()] to create a `Project` object.
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
-    \item{\code{dataset}}{[new_datset] object.}
+    \item{\code{dataset}}{[new_dataset()] object.}
+
+    \item{\code{tileset}}{`[new_tile_set()] objects.}
 
     \item{\code{zones}}{`character` vector of zone names.}
 
@@ -23,6 +25,8 @@ See [new_project()] to create a `Project` object.
     \item{\code{costs}}{`list` of [new_cost()] objects.}
 
     \item{\code{solutions}}{`list` of [new_solution()] objects.}
+
+    \item{\code{bbox}}{[sf::st_bbox()] object.}
 
     \item{\code{name}}{`character` name of the project.}
 
@@ -36,6 +40,8 @@ See [new_project()] to create a `Project` object.
 \subsection{Public methods}{
   \itemize{
     \item \href{#method-Project-initialize}{\code{Project$new()}}
+    \item \href{#method-Project-get_centroid}{\code{Project$get_centroid()}}
+    \item \href{#method-Project-get_bbox}{\code{Project$get_bbox()}}
     \item \href{#method-Project-add_solution}{\code{Project$add_solution()}}
     \item \href{#method-Project-add_lock}{\code{Project$add_lock()}}
     \item \href{#method-Project-clone}{\code{Project$clone()}}
@@ -49,8 +55,10 @@ See [new_project()] to create a `Project` object.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Project$new(
-  dataset,
   zones,
+  bbox,
+  dataset,
+  tileset,
   themes,
   locks,
   costs,
@@ -64,8 +72,10 @@ See [new_project()] to create a `Project` object.
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{dataset}}{[Dataset] object.}
       \item{\code{zones}}{`character` vector of zone names.}
+      \item{\code{bbox}}{[sf::st_bbox()] object.}
+      \item{\code{dataset}}{[new_dataset()] object.}
+      \item{\code{tileset}}{`[new_tile_set()] object.}
       \item{\code{themes}}{`list` of [new_theme()] objects.}
       \item{\code{locks}}{`list` of [new_lock()] objects.}
       \item{\code{costs}}{`list` of [new_cost()] objects.}
@@ -82,6 +92,48 @@ Defaults to `"Unknown"`.}
   }
   \subsection{Returns}{
     A new `Project` object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-get_centroid"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-get_centroid}{}}}
+\subsection{\code{Project$get_centroid()}}{
+  Get centroid.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$get_centroid()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A `numeric` vector with two values.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-get_bbox"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-get_bbox}{}}}
+\subsection{\code{Project$get_bbox()}}{
+  Get the bounding box.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$get_bbox(native = TRUE, expand = 0)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{native}}{`logical` value indicating if the bounding box should
+be in (`TRUE`) the native coordinate reference system or (`FALSE`)
+re-projected to longitude/latitude?}
+      \item{\code{expand}}{`numeric` value denoting the proportion to expand the
+bounding box. For example, `expand = 0.1` would expand the bounding
+box by 10 percent. Defaults to 0.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A [sf::st_bbox()] object.
   }
 }
 

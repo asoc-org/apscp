@@ -1,80 +1,232 @@
 #' @include internal.R
 NULL
 
+#' Has Mapbox token?
+#'
+#' Determine if a Mapbox token is defined?
+#'
+#' @return A `logical` value.
+#'
+#' @examples
+#' # see if a Mapbox token is defined?
+#' has_mapbox_token()
+#'
+#' @export
+has_mapbox_token <- function() {
+  nzchar(Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
+}
+
 #' Get \pkg{mapgl} layer identifier
 #'
-#' Get an identifier for a feature object that corresponds to the
-#' \pkg{mapgl} layer for the feature.
+#' Get the layer identifier for an object.
 #'
-#' @param x [Feature], [Cost], or [Lock] object.
+#' @param x [new_feature()], [new_cost()], [new_lock()], or [new_solution()]
+#' object.
+#'
+#' @details
+#' This corresponds to the `id` parameter of [mapgl::add_fill_layer()].
 #'
 #' @return A `character` value.
+#'
+#' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- new_cost(
+#'   name = "cost",
+#'   layer = new_layer(
+#'     column = "feat_1",
+#'     total = 500,
+#'     dataset = create_dataset(sim_data),
+#'     tile = create_tile(sim_data),
+#'     legend = simulate_continuous_legend(),
+#'     provenance = simulate_provenance(),
+#'     details = "extra info"
+#'   )
+#' )
+#'
+#' # get layer identifier
+#' mapgl_layer_id(x)
 #'
 #' @export
 mapgl_layer_id <- function(x) {
   assertthat::assert_that(
     inherits(x, c("Feature", "Cost", "Lock", "Solution"))
   )
-  paste0("lyr-", x$layer$id)
+  paste0(x$layer$id)
+}
+
+#' Get \pkg{mapgl} source URL.
+#'
+#' @param x [new_tile()] object.
+#'
+#' @details
+#' This corresponds to the `url` parameter of [mapgl::add_pmtiles_source()].
+#'
+#' @return A `character` value.
+#'
+#' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- create_tile(sim_data)
+#'
+#' # get layer identifier
+#' mapgl_source_url(x)
+#'
+#' @export
+mapgl_source_url <- function(x) {
+  assertthat::assert_that(inherits(x, "Tile"))
+  paste0(get_golem_config("tile_server_url"), x$file)
 }
 
 #' Get \pkg{mapgl} source identifier
 #'
-#' Get an identifier for a feature object that corresponds to the
-#' \pkg{mapgl} source for the feature.
+#' Get the source identifier.
 #'
-#' @inheritParams mapgl_layer_id
+#' @param x [new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+#' [new_solution()] object.
 #'
-#' @inherit mapgl_layer_id return
+#' @details
+#' This corresponds to the `source` parameter of [mapgl::add_fill_layer()].
+#'
+#' @inherit mapgl_layer_id  return
+#'
+#' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- create_tile(sim_data)
+#'
+#' # get source identifier
+#' mapgl_source_id(x)
 #'
 #' @export
 mapgl_source_id <- function(x) {
   assertthat::assert_that(
-    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
+    inherits(x, c("Feature", "Cost", "Lock", "Solution", "Tile"))
   )
-  paste0("src-", x$layer$id)
+  if (!inherits(x, "Tile")) {
+    x <- x$layer$tile
+  }
+  paste0("src-", sanitize_text(x$file))
 }
 
-#' Add source
+#' Get \pkg{mapgl} source layer identifier
 #'
-#' Add feature, cost, or lock object as a data source to a \pkg{mapgl} object.
-#'
-#' @param map A [mapgl::mapboxgl()], [mapgl::maplibre()],
-#' [mapgl::mapboxgl_proxy()], or [mapgl::maplibre_proxy()].
+#' Get the source layer identifier.
 #'
 #' @inheritParams mapgl_layer_id
 #'
 #' @details
-#' Data sources are added with [mapgl::add_image_source()].
+#' This corresponds to the `source_layer` parameter of
+#' [mapgl::add_fill_layer()].
 #'
+#' @inherit mapgl_layer_id  return
+#'
+#' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- new_cost(
+#'   name = "cost",
+#'   layer = new_layer(
+#'     column = "feat_1",
+#'     total = 500,
+#'     dataset = create_dataset(sim_data),
+#'     tile = create_tile(sim_data),
+#'     legend = simulate_continuous_legend(),
+#'     provenance = simulate_provenance(),
+#'     details = "extra info"
+#'   )
+#' )
+#'
+#' # get layer identifier
+#' mapgl_source_layer_id(x)
+#'
+#' @export
+mapgl_source_layer_id <- function(x) {
+  assertthat::assert_that(
+    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
+  )
+  paste0(x$layer$tile$source_layer)
+}
+
+#' Add source
+#'
+#' Add a [new_tile()] object as a layer to a \pkg{mapgl} object.
+#'
+#' @param x [new_tile()] object.
+#'
+#' @inheritParams mapgl::add_pmtiles_source
+#'
+#' @details
+#' Sources are added with [mapgl::add_pmtiles_source()].
+#'
+#' @examplesIf has_mapbox_token()
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create objects
+#' dataset <- create_dataset(sim_data)
+#' tile <- create_tile(sim_data)
+#' cost <- new_cost(
+#'   name = "cost",
+#'   layer = new_layer(
+#'     column = "feat_1",
+#'     total = 500,
+#'     dataset = dataset,
+#'     tile = tile,
+#'     legend = simulate_continuous_legend(),
+#'     provenance = simulate_provenance(),
+#'     details = "extra info"
+#'   )
+#' )
+#'
+#' # create mapbox map
+#' map <- mapgl::mapboxgl()
+#'
+#' # add source for tile object
+#' map <- mapgl_add_source(map, tile)
+#'
+#' # add layer for cost object
+#' map <- mapgl_add_layer(map, cost)
+#'
+#' # display map
+#' \dontrun{
+#' print(map)
+#' }
 #' @export
 mapgl_add_source <- function(map, x) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(
-      map,
-      c("mapboxgl", "maplibre", "mapboxgl_proxy", "maplibre_proxy")
-    ),
-    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
+    inherits(map, c("mapboxgl", "mapboxgl_proxy")),
+    inherits(x, "Tile")
   )
   # return updated map
-  mapgl::add_image_source(
+  mapgl::add_pmtiles_source(
     map,
     id = mapgl_source_id(x),
-    data = get_spatraster.Layer(x$layer, apply_coltab = TRUE)
+    url = mapgl_source_url(x)
   )
 }
 
 #' Add layer
 #'
-#' Add feature, cost, or lock object as a layer to a \pkg{mapgl} object.
+#' Add object as a layer to a \pkg{mapgl} object.
 #'
 #' @inheritParams mapgl_add_source
 #'
-#' @inheritParams mapgl::add_raster_layer
+#' @inheritParams mapgl::add_fill_layer
 #'
 #' @details
-#' Layers are added with [mapgl::add_raster_layer()].
+#' Layers are added with [mapgl::add_fill_layer()].
+#'
+#' @inherit mapgl_add_source examples
 #'
 #' @export
 mapgl_add_layer <- function(
@@ -85,49 +237,72 @@ mapgl_add_layer <- function(
 ) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(
-      map,
-      c("mapboxgl", "maplibre", "mapboxgl_proxy", "maplibre_proxy")
-    ),
+    inherits(map, c("mapboxgl", "mapboxgl_proxy")),
     inherits(x, c("Feature", "Cost", "Lock", "Solution")),
     assertthat::is.string(visibility),
-    assertthat::noNA(visibility)
+    assertthat::noNA(visibility),
+    inherits(x$layer$legend, c("ContinuousLegend", "CategoricalLegend"))
   )
-  # return updated map
+
+  # prepare legend
+  if (inherits(x$layer$legend, "ContinuousLegend")) {
+    paint_params <- list(
+      fill_color = mapgl::interpolate(
+        column = x$layer$column,
+        type = "linear",
+        values = x$layer$legend$values,
+        stops = x$layer$legend$colors,
+        na_color = "transparent"
+      ),
+      fill_opacity = 0.5
+    )
+  } else {
+    paint_params <- list(
+      fill_color = mapgl::step_expr(
+        column = x$layer$column,
+        base = "#B2BEB5",
+        values = x$layer$legend$values,
+        stops = x$layer$legend$colors,
+        na_color = "transparent"
+      ),
+      fill_opacity = 0.5
+    )
+  }
+
+  # return updated map with layer
   do.call(
-    mapgl::add_raster_layer,
+    mapgl::add_fill_layer,
     append(
       list(
         map = map,
         id = mapgl_layer_id(x),
         source = mapgl_source_id(x),
+        source_layer = mapgl_source_layer_id(x),
         visibility = visibility,
         before_id = before_id
       ),
-      get_raster_layer_parameters(x$layer$legend)
+      paint_params
     )
   )
 }
 
 #' Clear layer
 #'
-#' Clear a feature, cost, or lock object layer from a \pkg{mapgl} object.
+#' Clear an object as a layer from a \pkg{mapgl} object.
 #'
 #' @inheritParams mapgl_add_source
 #'
 #' @details
-#' Layers are added with [mapgl::add_raster_layer()].
+#' Layers are cleared with [mapgl::clear_layer()].
 #'
 #' @export
-mapgl_clear_feature_layer <- function(map, x) {
+mapgl_clear_layer <- function(map, x) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(
-      map,
-      c("mapboxgl", "maplibre", "mapboxgl_proxy", "maplibre_proxy")
-    ),
-    inherits(x, c("Feature", "Cost", "Lock", "Solution")),
+    inherits(map, c("mapboxgl", "mapboxgl_proxy")),
+    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
   )
+
   # return updated map
   mapgl::clear_layer(map, mapgl_layer_id(x))
 }

@@ -1,66 +1,63 @@
 #' @include internal.R
 NULL
 
-#' Get raster layer parameters
+#' Get paint parameters
 #'
-#' Get parameters for the [mapgl::add_raster_layer()] function
-#' so that a [terra::rast()] object can be colored according to a legend.
+#' Get parameters for painting a [new_layer] object.
 #'
 #' @param x [new_continuous_legend()] or [new_categorical_legend()] object.
 #'
+#' @param column `character` value with source layer for painting.
+#'
+#' @details
+#' This function is designed for use with [mapgl::add_fill_layer()].
+#'
 #' @return A named `list` object.
 #'
+#' @examples
+#' # create object
+#' legend <- simulate_continuous_legend()
+#'
+#' # obtain parameters for painting data stored in a column
+#' # called "values" based on the legend
+#' x <- get_paint_parameters(legend, "values")
+#'
+#' # preview object
+#' print(x)
+#'
 #' @export
-get_raster_layer_parameters <- function(x) {
-  UseMethod("get_raster_layer_parameters")
+get_paint_parameters <- function(x, column) {
+  UseMethod("get_paint_parameters")
 }
 
 #' @export
-get_raster_layer_parameters.default <- function(x) {
+get_paint_parameters.default <- function(x, column) {
   rlang::abort("`x` is not recognized.")
 }
 
 #' @export
-get_raster_layer_parameters.CategoricalLegend <- function(x) {
-  list(raster_color = NULL, raster_resampling = "nearest")
-}
-
-#' @export
-get_raster_layer_parameters.ContinuousLegend <- function(x) {
+get_paint_parameters.ContinuousLegend <- function(x, column) {
+  # return object
   list(
-    raster_color = mapgl::interpolate(
-      column = "raster-value",
+    fill_color = mapgl::interpolate(
+      column = column,
       values = x$values,
       stops = x$colors,
       na_color = "transparent"
-    ),
-    raster_resampling = "linear"
+    )
   )
 }
 
-#' Get color table
-#'
-#' Get a color table to colorize a [terra::rast()] object according to colors
-#' defined by a legend.
-#'
-#' @inheritParams get_raster_layer_parameters
-#'
-#' @details
-#' This function provides the `value` parameter for [terra::coltab()].
-#'
-#' @return A `data.frame` object.
-#'
 #' @export
-get_color_table <- function(x) {
-  UseMethod("get_color_table")
-}
-
-#' @export
-get_color_table.default <- function(x) {
-  rlang::abort("`x` is not recognized.")
-}
-
-#' @export
-get_color_table.CategoricalLegend <- function(x) {
-  data.frame(value = x$values, col = x$colors)
+get_paint_parameters.CategoricalLegend <- function(x, column) {
+  # return object
+  list(
+    fill_color = mapgl::step_expr(
+      column = column,
+      base = "#B2BEB5",
+      values = x$values,
+      stops = x$colors,
+      na_color = "transparent"
+    )
+  )
 }

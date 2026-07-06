@@ -1,20 +1,12 @@
 test_that("new_solution", {
   # create object
-  s <- simulate_dataset()
-  g <- new_categorical_legend(
-    c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
-    c("Conservation", "Tourism", "Science")
-  )
-  p <- new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-  )
+  s <- simulate_spatial_data()
   l <- new_layer(
-    dataset = s,
-    index = "solution",
-    legend = g,
-    units = "categorical",
-    provenance = p,
+    dataset = create_dataset(s),
+    tile = create_tile(s, verbose = FALSE),
+    column = "solution",
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance(),
     total = 500,
     details = "extra info"
   )
@@ -27,21 +19,13 @@ test_that("new_solution", {
 
 test_that("serialize_object", {
   # create object
-  s <- simulate_dataset()
-  g <- new_categorical_legend(
-    c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
-    c("Conservation", "Tourism", "Science")
-  )
-  p <- new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-  )
+  s <- simulate_spatial_data()
   l <- new_layer(
-    dataset = s,
-    index = "solutioned_in",
-    legend = g,
-    units = "categorical",
-    provenance = p,
+    dataset = create_dataset(s),
+    tile = create_tile(s, verbose = FALSE),
+    column = "solution",
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance(),
     total = 500,
     details = "extra info"
   )
@@ -56,26 +40,19 @@ test_that("serialize_object", {
 
 test_that("deserialize_object", {
   # create object
-  s <- simulate_dataset()
-  g <- new_categorical_legend(
-    c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
-    c("Conservation", "Tourism", "Science")
-  )
-  p <- new_provenance(
-   name = "Global", icon = "globe", color = "#123456",
-   description = "Data is global."
-  )
+  s <- simulate_spatial_data()
+  w <- create_dataset(s)
   l <- new_layer(
-    dataset = s,
-    index = "solution",
-    legend = g,
-    units = "categorical",
-    provenance = p,
+    dataset = w,
+    tile = create_tile(s, verbose = FALSE),
+    column = "solution",
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance(),
     total = 500,
     details = "extra info"
   )
   x <- new_solution(name = "solution", layer = l)
-  y <- deserialize_object(serialize_object(x), s)
+  y <- deserialize_object(serialize_object(x), dataset = w)
   # run tests
   expect_equal(x, y)
 })

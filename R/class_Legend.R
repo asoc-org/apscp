@@ -15,16 +15,29 @@ NULL
 #' @param labels `character` Labels to show in the legend.
 #' Note that `labels` must have a value for each value in `values`.
 #'
+#' @param units `character` value containing the units for the values in the
+#' underlying data. Defaults to a `NULL` value.
+#'
 #' @return A `CategoricalLegend` object.
 #'
 #' @examples
 #' # create new object
-#' l <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))
+#' l <- new_categorical_legend(
+#'   values = c(0, 1),
+#'   colors = c("#000000", "#AAAAAA"),
+#'   labels = c("a", "b"),
+#'   units = "land-use types"
+#' )
 #'
 #' # print object
 #' print(l)
 #' @export
-new_categorical_legend <- function(values, colors, labels) {
+new_categorical_legend <- function(
+  values,
+  colors,
+  labels,
+  units = NULL
+) {
   # assert valid parameters
   assertthat::assert_that(
     ## values
@@ -42,9 +55,17 @@ new_categorical_legend <- function(values, colors, labels) {
     length(values) == length(labels),
     length(colors) == length(labels)
   )
+  if (!is.null(units)) {
+    assertthat::assert_that(
+      ## units
+      assertthat::is.string(units),
+      assertthat::noNA(units)
+    )
+  }
+
   # return object
   structure(
-    list(values = values, colors = colors, labels = labels),
+    list(values = values, colors = colors, labels = labels, units = units),
     class = c("CategoricalLegend", "Legend")
   )
 }
@@ -66,19 +87,30 @@ new_categorical_legend <- function(values, colors, labels) {
 #' @param labels `character` vector with label text.
 #' Note that `labels` and `breaks` must have the same number of values.
 #'
+#' @inheritParams new_categorical_legend
+#'
 #' @return A `ContinuousLegend` object.
 #'
 #' @examples
 #' # create new object
 #' l <- new_continuous_legend(
-#'   c(0, 1), c("#000000", "#DDDDDD"),
-#'   c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
+#'   values = c(0, 1),
+#'   colors = c("#000000", "#DDDDDD"),
+#'   breaks = c(0.2, 0.5, 0.8),
+#'   labels = c("Low", "Medium", "High"),
+#'   units = "hectares"
 #' )
 #'
 #' # print object
 #' print(l)
 #' @export
-new_continuous_legend <- function(values, colors, breaks, labels) {
+new_continuous_legend <- function(
+  values,
+  colors,
+  breaks,
+  labels,
+  units = NULL
+) {
   # assert arguments are valid
   assertthat::assert_that(
     ## values
@@ -95,20 +127,35 @@ new_continuous_legend <- function(values, colors, breaks, labels) {
     ## labels
     is.character(labels),
     assertthat::noNA(labels),
-    identical(length(labels), length(breaks))
+    identical(length(labels), length(breaks)),
+    ## units
+    assertthat::is.string(units)
   )
+  if (!is.null(units)) {
+    assertthat::assert_that(
+      ## units
+      assertthat::is.string(units),
+      assertthat::noNA(units)
+    )
+  }
+
   # return object
   structure(
-    list(values = values, colors = colors, breaks = breaks, labels = labels),
+    list(
+      values = values, colors = colors, breaks = breaks, labels = labels,
+      units = units
+    ),
     class = c("ContinuousLegend", "Legend")
   )
 }
 
 #' Create a new legend
 #'
-#' Create a new legend automatically from raster data.
+#' Create a new legend automatically for a column in a [sf::st_sf()] object.
 #'
-#' @param x [rast::SpatRaster()]
+#' @param x [sf::st_sf()] object.
+#'
+#' @param column `character` value with name of column.
 #'
 #' @param palette `character` value with the color palette. In particular,
 #' `palette` can be the name of a color palette that is recognized by
@@ -121,26 +168,45 @@ new_continuous_legend <- function(values, colors, breaks, labels) {
 #' Defaults to `NULL`, such that
 #' the legend type will be determined automatically.
 #'
+#' @inheritParams new_categorical_legend
+#'
 #' @return A new [new_continuous_legend()] or [new_categorical_legend()] object.
 #'
 #' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
 #' # create object
-#' x <- create_legend(prioritizr::get_sim_pu_raster(), palette = "PuBu")
+#' x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-create_legend <- function(x, palette = "viridis", type = NULL) {
+create_legend <- function(
+  x,
+  column,
+  units = NULL,
+  palette = "viridis",
+  type = NULL
+) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(x, "SpatRaster"),
-    terra::nlyr(x) == 1
+    inherits(x, "sf"),
+    assertthat::is.string(column),
+    assertthat::noNA(column),
+    assertthat::has_name(x, column)
   )
+  if (!is.null(units)) {
+    assertthat::assert_that(
+      ## units
+      assertthat::is.string(units),
+      assertthat::noNA(units)
+    )
+  }
 
   # compute layer values
-  v <- c(terra::values(x))
-  v <- sort(unique(v[!is.na(v)]))
+  v <- sort(unique(x[[column]]))
 
   # if needed, determine type
   if (is.null(type)) {
@@ -176,7 +242,8 @@ create_legend <- function(x, palette = "viridis", type = NULL) {
     out <- new_categorical_legend(
       values = c(0, 1),
       labels = c("absent", "present"),
-      colors = palette
+      colors = palette,
+      units = units
     )
   } else if (identical(type, "presence")) {
     # generate colors
@@ -189,7 +256,8 @@ create_legend <- function(x, palette = "viridis", type = NULL) {
     out <- new_categorical_legend(
       values = 1,
       labels = "presence",
-      colors = palette
+      colors = palette,
+      units = units
     )
   } else if (identical(type, "categorical")) {
     # generate colors
@@ -202,7 +270,8 @@ create_legend <- function(x, palette = "viridis", type = NULL) {
     out <- new_categorical_legend(
       values = v,
       labels = as.character(v),
-      colors = palette
+      colors = palette,
+      units = units
     )
   } else {
     # generate colors
@@ -219,7 +288,8 @@ create_legend <- function(x, palette = "viridis", type = NULL) {
       values = seq(min(c(v, br)), max(c(v, br)), length.out = n_colors),
       colors = palette,
       breaks = br,
-      labels = as.character(br)
+      labels = as.character(br),
+      units = units
     )
   }
 

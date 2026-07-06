@@ -9,7 +9,7 @@ app_startup <- function() {
   set.seed(200)
 
   # print initial memory usage
-  if (isTRUE(apscp:::get_golem_config("monitor"))) {
+  if (isTRUE(get_golem_config("monitor"))) {
     cli::cli_rule()
     golem::print_dev("Initial memory used: ")
     golem::print_dev(lobstr::mem_used())
@@ -30,7 +30,7 @@ app_startup <- function() {
 
   # initialize asynchronous processing
   ## identify strategy
-  strategy <- apscp:::get_golem_config("strategy")
+  strategy <- get_golem_config("strategy")
   if (identical(strategy, "auto")) {
     if (identical(Sys.getenv("R_CONFIG_ACTIVE"), "shinyapps")) {
       strategy <- "multicore"
@@ -42,7 +42,7 @@ app_startup <- function() {
   }
   ## set future settings
   options(
-    future.wait.timeout = apscp:::get_golem_config("worker_time_out")
+    future.wait.timeout = get_golem_config("worker_time_out")
   )
   ## implement strategy
   golem::print_dev(paste("plan strategy:", strategy))

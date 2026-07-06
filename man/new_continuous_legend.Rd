@@ -4,7 +4,7 @@
 \alias{new_continuous_legend}
 \title{New continuous legend}
 \usage{
-new_continuous_legend(values, colors, breaks, labels)
+new_continuous_legend(values, colors, breaks, labels, units = NULL)
 }
 \arguments{
 \item{values}{`numeric` vector of values for creating the color bar.}
@@ -19,6 +19,9 @@ be shown on the color ramp.}
 
 \item{labels}{`character` vector with label text.
 Note that `labels` and `breaks` must have the same number of values.}
+
+\item{units}{`character` value containing the units for the values in the
+underlying data. Defaults to a `NULL` value.}
 }
 \value{
 A `ContinuousLegend` object.
@@ -29,8 +32,11 @@ Create a new continuous legend object.
 \examples{
 # create new object
 l <- new_continuous_legend(
-  c(0, 1), c("#000000", "#DDDDDD"),
-  c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
+  values = c(0, 1),
+  colors = c("#000000", "#DDDDDD"),
+  breaks = c(0.2, 0.5, 0.8),
+  labels = c("Low", "Medium", "High"),
+  units = "hectares"
 )
 
 # print object

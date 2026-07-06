@@ -5,11 +5,13 @@
 \title{New project}
 \usage{
 new_project(
-  dataset,
   zones,
+  dataset,
+  tileset,
   costs,
   themes,
   locks,
+  bbox,
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
@@ -17,9 +19,11 @@ new_project(
 )
 }
 \arguments{
+\item{zones}{`character` vector of zone names.}
+
 \item{dataset}{[new_dataset()] object.}
 
-\item{zones}{`character` vector of zone names.}
+\item{tileset}{[new_tileset()] objects.}
 
 \item{costs}{`list` of [new_cost()] objects.}
 
@@ -27,8 +31,10 @@ new_project(
 
 \item{locks}{`list` of [new_locks()] objects.}
 
+\item{bbox}{[sf::st_bbox()] object.}
+
 \item{solutions}{`list` of [new_solution()] objects.
-Defaults to an empty list.}
+Defaults to an empty list().}
 
 \item{name}{`character` name of the project.
 Defaults to `"Project"`.}
@@ -46,26 +52,24 @@ A new `Project` object.
 Create a new project object.
 }
 \examples{
-# create dataset
-dataset <- simulate_dataset()
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
+# prepare data
+dataset <- create_dataset(sim_data)
+tileset <- create_tileset(sim_data)
+tile <- tileset$tiles[[1]]
 
 # create cost
 cost <- new_cost(
   name = "cost",
   layer = new_layer(
-    dataset = dataset,
-    index = "feat_1",
-    legend = new_continuous_legend(
-      c(0, 1), c("#000000", "#DDDDDD"),
-      c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
-    ),
-    units = "USD",
-    provenance = new_provenance(
-     name = "Global", icon = "globe", color = "#123456",
-     description = "Data is global."
-    ),
+    column = "feat_1",
     total = 500,
-    details = "extra info"
+    dataset = dataset,
+    tile = tile,
+    legend = simulate_continuous_legend(),
+    provenance = simulate_provenance()
   )
 )
 
@@ -73,19 +77,13 @@ cost <- new_cost(
 lock <- new_lock(
   name = "lock",
   layer = new_layer(
+    column = "locked_in",
+    total = 30,
     dataset = dataset,
-    index = "locked_in",
-    legend = new_categorical_legend(
-      c(0, 1), c("#000000", "#DDDDDD"),
-      c("Other", "Protected area")
-    ),
-    units = "presence/absence",
-    provenance = new_provenance(
-      name = "Global", icon = "globe", color = "#123456",
-      description = "Data is global."
-    ),
-    total = 500,
-    details = "extra info"
+    tile = tile,
+    legend = simulate_continuous_legend(),
+    provenance = simulate_provenance()
+  )
 )
 
 # create theme
@@ -96,38 +94,24 @@ theme <- new_theme(
       name = "f1",
       targets = c(0.1, 0.5),
       layer = new_layer(
-        dataset = dataset,
-        index = "feat_1",
-        legend = new_continuous_legend(
-          c(0, 1), c("#000000", "#DDDDDD"),
-          c(0.2, 0.5, 0.8), c("Low", "Medium", "High")
-        ),
-        units = "suitability",
-        provenance = new_provenance(
-         name = "Global", icon = "globe", color = "#123456",
-         description = "Data is global."
-        ),
+        column = "feat_1",
         total = 500,
-        details = "extra info"
+        dataset = dataset,
+        tile = tile,
+        legend = simulate_continuous_legend(),
+        provenance = simulate_provenance()
       )
     ),
     new_feature(
       name = "f2",
       targets = c(0.2, 0.9),
       layer = new_layer(
+        column = "feat_2",
+        total = 200,
         dataset = dataset,
-        index = "feat_2",
-        legend = new_continuous_legend(
-          c(0, 1), c("#000000", "#AAAAAA"),
-          c(0.2, 0.5, 0.8), c("20\%", "50\%", "80\%")
-        ),
-        units = "abundance",
-        provenance = new_provenance(
-         name = "Global", icon = "globe", color = "#123456",
-         description = "Data is global."
-        ),
-        total = 600,
-        details = "extra info 2"
+        tile = tile,
+        legend = simulate_continuous_legend(),
+        provenance = simulate_provenance()
       )
     )
   )
@@ -135,11 +119,13 @@ theme <- new_theme(
 
 # create project
 x <- new_project(
-  dataset = dataset,
   zones = c("Conservation", "Tourism", "Science"),
+  dataset = dataset,
+  tileset = tileset,
   costs = list(cost),
-  locks = list(locks),
-  themes = list(theme)
+  locks = list(lock),
+  themes = list(theme),
+  bbox = sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
 )
 
 # preview object

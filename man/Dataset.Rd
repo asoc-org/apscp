@@ -9,9 +9,7 @@ A dataset is used to store and access information about a set spatial layers.
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
-    \item{\code{spatial_data}}{[terra::rast()] object.}
-
-    \item{\code{attribute_data}}{`data.frame` object.}
+    \item{\code{pu_data}}{[tibble::tibble()] object.}
 
     \item{\code{boundary_data}}{[Matrix::sparseMatrix()] object.}
   }
@@ -21,14 +19,12 @@ A dataset is used to store and access information about a set spatial layers.
 \subsection{Public methods}{
   \itemize{
     \item \href{#method-Dataset-initialize}{\code{Dataset$new()}}
-    \item \href{#method-Dataset-get_crs}{\code{Dataset$get_crs()}}
-    \item \href{#method-Dataset-get_center}{\code{Dataset$get_center()}}
-    \item \href{#method-Dataset-get_bbox}{\code{Dataset$get_bbox()}}
-    \item \href{#method-Dataset-get_names}{\code{Dataset$get_names()}}
-    \item \href{#method-Dataset-get_index}{\code{Dataset$get_index()}}
-    \item \href{#method-Dataset-get_total}{\code{Dataset$get_total()}}
-    \item \href{#method-Dataset-has_index}{\code{Dataset$has_index()}}
-    \item \href{#method-Dataset-add_index}{\code{Dataset$add_index()}}
+    \item \href{#method-Dataset-get_n_pu}{\code{Dataset$get_n_pu()}}
+    \item \href{#method-Dataset-get_column_names}{\code{Dataset$get_column_names()}}
+    \item \href{#method-Dataset-get_column_data}{\code{Dataset$get_column_data()}}
+    \item \href{#method-Dataset-get_column_total}{\code{Dataset$get_column_total()}}
+    \item \href{#method-Dataset-has_column}{\code{Dataset$has_column()}}
+    \item \href{#method-Dataset-set_column_data}{\code{Dataset$set_column_data()}}
     \item \href{#method-Dataset-clone}{\code{Dataset$clone()}}
   }
 }
@@ -39,14 +35,13 @@ A dataset is used to store and access information about a set spatial layers.
   Create a `Dataset` object.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$new(spatial_data, attribute_data, boundary_data)}
+    \preformatted{Dataset$new(pu_data, boundary_data)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{spatial_data}}{[terra::rast()] object.}
-      \item{\code{attribute_data}}{`data.frame` object.}
+      \item{\code{pu_data}}{[tibble::tibble()] object.}
       \item{\code{boundary_data}}{[Matrix::sparseMatrix()] object.}
     }
     \if{html}{\out{</div>}}
@@ -57,114 +52,71 @@ A dataset is used to store and access information about a set spatial layers.
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_crs"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_crs}{}}}
-\subsection{\code{Dataset$get_crs()}}{
-  Get the coordinate reference system.
+\if{html}{\out{<a id="method-Dataset-get_n_pu"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_n_pu}{}}}
+\subsection{\code{Dataset$get_n_pu()}}{
+  Get number of planning units.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_crs()}
+    \preformatted{Dataset$get_n_pu()}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    [sf::st_crs()] object.
+    An `integer` value.
   }
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_center"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_center}{}}}
-\subsection{\code{Dataset$get_center()}}{
-  Get center point.
+\if{html}{\out{<a id="method-Dataset-get_column_names"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_column_names}{}}}
+\subsection{\code{Dataset$get_column_names()}}{
+  Get column names.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_center()}
+    \preformatted{Dataset$get_column_names()}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `numeric` vector with two values.
+    A `character` vector.
   }
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_bbox"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_bbox}{}}}
-\subsection{\code{Dataset$get_bbox()}}{
-  Get the bounding box.
+\if{html}{\out{<a id="method-Dataset-get_column_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_column_data}{}}}
+\subsection{\code{Dataset$get_column_data()}}{
+  Get column data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_bbox(native = TRUE, expand = 0)}
+    \preformatted{Dataset$get_column_data(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{native}}{`logical` value indicating if the bounding box should
-be in (`TRUE`) the native coordinate reference system or (`FALSE`)
-re-projected to longitude/latitude?}
-      \item{\code{expand}}{`numeric` value denoting the proportion to expand the
-bounding box. For example, `expand = 0.1` would expand the bounding
-box by 10 percent. Defaults to 0.}
+      \item{\code{column}}{`character` or `integer` value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `list` object with `"xmin"`, `"xmax"`, `"ymin"`, and `"ymax"`
-elements.
+    A `numeric` vector.
   }
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_names"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_names}{}}}
-\subsection{\code{Dataset$get_names()}}{
-  Get attribute names.
+\if{html}{\out{<a id="method-Dataset-get_column_total"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_column_total}{}}}
+\subsection{\code{Dataset$get_column_total()}}{
+  Get total (sum) of values in a column.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_names()}
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Returns}{
-    A `character` vector of layer names.
-  }
-}
-
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_index"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_index}{}}}
-\subsection{\code{Dataset$get_index()}}{
-  Get a data from the dataset at an index.
-  \subsection{Usage}{
-    \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_index(index)}
+    \preformatted{Dataset$get_column_total(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{index}}{`character` or `integer` value indicating the desired layer.}
-    }
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Returns}{
-    A [terra::rast()] object.
-  }
-}
-
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_total"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_total}{}}}
-\subsection{\code{Dataset$get_total()}}{
-  Get total (sum) of values for an index.
-  \subsection{Usage}{
-    \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_total(index)}
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Arguments}{
-    \if{html}{\out{<div class="arguments">}}
-    \describe{
-      \item{\code{index}}{`character` or `integer` value.}
+      \item{\code{column}}{`character` or `integer` value.}
     }
     \if{html}{\out{</div>}}
   }
@@ -174,19 +126,19 @@ elements.
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-has_index"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-has_index}{}}}
-\subsection{\code{Dataset$has_index()}}{
-  Check if the dataset has an index.
+\if{html}{\out{<a id="method-Dataset-has_column"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-has_column}{}}}
+\subsection{\code{Dataset$has_column()}}{
+  Check if the dataset has a column or columns.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$has_index(index)}
+    \preformatted{Dataset$has_column(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{index}}{`character` or `integer` value.}
+      \item{\code{column}}{`character vector.}
     }
     \if{html}{\out{</div>}}
   }
@@ -196,19 +148,19 @@ elements.
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-add_index"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-add_index}{}}}
-\subsection{\code{Dataset$add_index()}}{
-  Add data at an index.
+\if{html}{\out{<a id="method-Dataset-set_column_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-set_column_data}{}}}
+\subsection{\code{Dataset$set_column_data()}}{
+  Set column data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$add_index(index, values)}
+    \preformatted{Dataset$set_column_data(column, values)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{index}}{`character` or `integer` value.}
+      \item{\code{column}}{`character` value.}
       \item{\code{values}}{`numeric` vector.}
     }
     \if{html}{\out{</div>}}

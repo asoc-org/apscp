@@ -4,23 +4,26 @@
 \alias{create_dataset}
 \title{Create dataset}
 \usage{
-create_dataset(x, pu_name)
+create_dataset(x)
 }
 \arguments{
-\item{x}{[terra::rast()] object.}
-
-\item{pu_name}{`character` name of layer in `x` that is used to define
-which pixels are planning units are not. In particular, pixels
-that do not have missing (`NA`) values in this layer are treated
-as planning units.}
+\item{x}{[sf::st_sf()] object.}
 }
 \value{
 A [Dataset] object.
 }
 \description{
-Create a [Dataset] object from a [terra::rast()] object.
+Create a [Dataset] object from a [st::sf()] object.
 }
 \examples{
-# TODO
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# simulate spatial data
+sim_data <- simulate_spatial_data()
 
+# create object
+x <- create_dataset(sim_data)
+
+# preview object
+print(x)
+\dontshow{\}) # examplesIf}
 }

@@ -4,14 +4,12 @@
 \alias{write_dataset}
 \title{Write dataset}
 \usage{
-write_dataset(x, spatial_path, attribute_path, boundary_path)
+write_dataset(x, pu_path, boundary_path)
 }
 \arguments{
 \item{x}{[Dataset] object.}
 
-\item{spatial_path}{`character` file path for spatial data.}
-
-\item{attribute_path}{`character` file path for attribute data.}
+\item{pu_path}{`character` file path for planning unit data.}
 
 \item{boundary_path}{`character` file path for boundary data.}
 }
@@ -22,6 +20,17 @@ An invisible `TRUE` indicating success.
 Write a [Dataset] object.
 }
 \examples{
-# TODO
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
+# create object
+dataset <- create_dataset(sim_data)
+
+# define file paths for saving data
+pu_path <- tempfile(fileext = ".csv.gz")
+bd_path <- tempfile(fileext = ".csv.gz")
+
+# save files
+write_dataset(dataset, pu_path, bd_path)
 
 }

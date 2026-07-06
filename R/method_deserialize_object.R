@@ -48,11 +48,23 @@ deserialize_object <- function(x, dataset = NULL) {
   if (assertthat::has_name(x, "provenance")) {
     x$provenance <- deserialize_object(x$provenance)
   }
+  if (assertthat::has_name(x, "tile")) {
+    x$tile <- deserialize_object(x$tile)
+  }
+  if (assertthat::has_name(x, "bbox")) {
+    x$bbox <- deserialize_object(x$bbox)
+  }
   if (assertthat::has_name(x, "layer")) {
     x$layer <- deserialize_object(x$layer, dataset = dataset)
   }
   if (assertthat::has_name(x, "costs")) {
     x$costs <- lapply(x$costs, deserialize_object, dataset = dataset)
+  }
+  if (assertthat::has_name(x, "tiles")) {
+    x$tiles <- lapply(x$tiles, deserialize_object)
+  }
+  if (assertthat::has_name(x, "tileset")) {
+    x$tileset <- deserialize_object(x$tileset)
   }
   if (assertthat::has_name(x, "features")) {
     x$features <- lapply(x$features, deserialize_object, dataset = dataset)
@@ -73,7 +85,13 @@ deserialize_object <- function(x, dataset = NULL) {
   # return object
   switch(
     x_class,
+    bbox = sf::st_bbox(
+      c(xmin = x$xmin, ymin = x$ymin, xmax = x$xmax, ymax = x$ymax),
+      crs = sf::st_crs(x$crs)
+    ),
     Provenance = do.call(new_provenance, x),
+    Tile = do.call(new_tile, x),
+    Tileset = do.call(new_tileset, x),
     CategoricalLegend = do.call(new_categorical_legend, x),
     ContinuousLegend = do.call(new_continuous_legend, x),
     Layer = do.call(new_layer, x),

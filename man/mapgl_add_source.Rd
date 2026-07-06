@@ -7,14 +7,49 @@
 mapgl_add_source(map, x)
 }
 \arguments{
-\item{map}{A [mapgl::mapboxgl()], [mapgl::maplibre()],
-[mapgl::mapboxgl_proxy()], or [mapgl::maplibre_proxy()].}
+\item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[Feature], [Cost], or [Lock] object.}
+\item{x}{[new_tile()] object.}
 }
 \description{
-Add feature, cost, or lock object as a data source to a \pkg{mapgl} object.
+Add a [new_tile()] object as a layer to a \pkg{mapgl} object.
 }
 \details{
-Data sources are added with [mapgl::add_image_source()].
+Sources are added with [mapgl::add_pmtiles_source()].
+}
+\examples{
+\dontshow{if (has_mapbox_token()) withAutoprint(\{ # examplesIf}
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
+# create objects
+dataset <- create_dataset(sim_data)
+tile <- create_tile(sim_data)
+cost <- new_cost(
+  name = "cost",
+  layer = new_layer(
+    column = "feat_1",
+    total = 500,
+    dataset = dataset,
+    tile = tile,
+    legend = simulate_continuous_legend(),
+    provenance = simulate_provenance(),
+    details = "extra info"
+  )
+)
+
+# create mapbox map
+map <- mapgl::mapboxgl()
+
+# add source for tile object
+map <- mapgl_add_source(map, tile)
+
+# add layer for cost object
+map <- mapgl_add_layer(map, cost)
+
+# display map
+\dontrun{
+print(map)
+}
+\dontshow{\}) # examplesIf}
 }

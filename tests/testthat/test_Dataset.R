@@ -1,74 +1,43 @@
 test_that("new_dataset", {
-
+  # create object
+  s <- simulate_spatial_data()
+  d <- sf::st_drop_geometry(s)
+  d[["_index"]] <- seq_len(nrow(d))
+  x <- new_dataset(d, prioritizr::boundary_matrix(s))
+  # run tests
+  expect_r6_class(x, "Dataset")
 })
 
-test_that("get methods", {
+test_that("methods", {
   # create object
-  x <- simulate_dataset()
-  bb <- x$get_bbox()
-  ct <- x$get_center()
+  x <- create_dataset(simulate_spatial_data())
   # run tests
-  ## has index
-  ## get_bbox
-  expect_s3_class(bb, "bbox")
-  expect_true(assertthat::noNA(as.vector(bb)))
-  ## get_data
-  expect_equal(x$get_data("pu"), x$attribute_data$pu)
-  ## get_raster_data
-  expect_s4_class(x$get_raster_data("pu"), "SpatRaster")
-  expect_equal(
-    x$attribute_data$pu,
-    x$get_raster_data("pu")[x$attribute_data[["_index"]]][[1]]
-  )
-  ## get_crs
-  expect_s3_class(x$get_crs(), "crs")
-  ## get_center
-  expect_type(ct, "double")
-  expect_length(ct, 2L)
-  expect_true(assertthat::noNA(ct))
-  ## get_total
-  expect_equal(
-    x$get_total("pu"),
-    sum(x$get_data("pu"), na.rm = TRUE)
-  )
-})
-
-test_that("set methods", {
-  # create object
-  x <- simulate_dataset()
-  # run tests
-  ## has_index
-  expect_false(x$has_index("new"))
-  ## set_data
-  v <- round(runif(nrow(x$attribute_data)), 3)
-  x$set_data(index = "new", v)
-  ## has_index
-  expect_true(x$has_index("new"))
-  ## get_data
-  expect_equal(x$get_data("new"), v)
+  ## n_pu
+  expect_equal(x$get_n_pu(), nrow(x$pu_data))
+  ## has column
+  expect_true(x$has_column("cost"))
+  ## get_column_data
+  expect_equal(x$get_column_data("cost"), x$pu_data$cost)
+  ## get_column_total
+  expect_equal(x$get_column_total("cost"), sum(x$pu_data$cost, na.rm = TRUE))
+  ## set_column_data
+  expect_false(x$has_column("new"))
+  v <- round(runif(x$get_n_pu()), 3)
+  x$set_column_data("new", v)
+  expect_equal(v, x$get_column_data("new"))
 })
 
 test_that("read_dataset/write_dataset", {
   # create object
-  x <- simulate_dataset()
-  path1 <- tempfile(fileext = ".tif")
+  x <- create_dataset(simulate_spatial_data())
+  path1 <- tempfile(fileext = ".gpkg")
   path2 <- tempfile(fileext = ".csv.gz")
-  path3 <- tempfile(fileext = ".csv.gz")
   # run file operations
-  write_dataset(x, path1, path2, path3)
-  y <- read_dataset(path1, path2, path3)
+  write_dataset(x, path1, path2)
+  y <- read_dataset(path1, path2)
   # run tests
-  expect_equal(
-    terra::as.data.frame(x$spatial_data),
-    terra::as.data.frame(y$spatial_data)
-  )
-  expect_equal(x$attribute_data, y$attribute_data, ignore_attr = TRUE)
+  expect_equal(x$pu_data, y$pu_data, ignore_attr = TRUE)
+  expect_false(assertthat::has_name(x$pu_data, "geometry"))
+  expect_false(assertthat::has_name(x$pu_data, "geom"))
   expect_equal(x$boundary_data, y$boundary_data)
-})
-
-test_that("simulate_dataset", {
-  # create object
-  x <- simulate_dataset()
-  # run tests
-  expect_true(inherits(x, "Dataset"))
 })

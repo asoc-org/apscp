@@ -15,22 +15,19 @@ NULL
 #' @return A `Solution` object.
 #'
 #' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
 #' # create object
 #' x <- new_solution(
 #'   name = "solution",
 #'   layer = new_layer(
-#'     dataset = simulate_dataset(),
-#'     index = "solution",
-#'     legend = new_categorical_legend(
-#'       c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
-#'       c("Conservation", "Tourism", "Science")
-#'     ),
-#'     units = "categorical",
-#'     provenance = new_provenance(
-#'      name = "Global", icon = "globe", color = "#123456",
-#'      description = "Data is global."
-#'     ),
+#'     column = "solution",
 #'     total = 500,
+#'     dataset = create_dataset(sim_data),
+#'     tile = create_tile(sim_data),
+#'     legend = simulate_solution_legend(),
+#'     provenance = simulate_provenance(),
 #'     details = "extra info"
 #'   )
 #' )

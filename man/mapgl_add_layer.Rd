@@ -7,18 +7,53 @@
 mapgl_add_layer(map, x, visibility = "visible", before_id = NULL)
 }
 \arguments{
-\item{map}{A [mapgl::mapboxgl()], [mapgl::maplibre()],
-[mapgl::mapboxgl_proxy()], or [mapgl::maplibre_proxy()].}
+\item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[Feature], [Cost], or [Lock] object.}
+\item{x}{[new_tile()] object.}
 
 \item{visibility}{Whether this layer is displayed.}
 
 \item{before_id}{The name of the layer that this layer appears "before", allowing you to insert layers below other layers in your basemap (e.g. labels).}
 }
 \description{
-Add feature, cost, or lock object as a layer to a \pkg{mapgl} object.
+Add object as a layer to a \pkg{mapgl} object.
 }
 \details{
-Layers are added with [mapgl::add_raster_layer()].
+Layers are added with [mapgl::add_fill_layer()].
+}
+\examples{
+\dontshow{if (has_mapbox_token()) withAutoprint(\{ # examplesIf}
+# simulate spatial data
+sim_data <- simulate_spatial_data()
+
+# create objects
+dataset <- create_dataset(sim_data)
+tile <- create_tile(sim_data)
+cost <- new_cost(
+  name = "cost",
+  layer = new_layer(
+    column = "feat_1",
+    total = 500,
+    dataset = dataset,
+    tile = tile,
+    legend = simulate_continuous_legend(),
+    provenance = simulate_provenance(),
+    details = "extra info"
+  )
+)
+
+# create mapbox map
+map <- mapgl::mapboxgl()
+
+# add source for tile object
+map <- mapgl_add_source(map, tile)
+
+# add layer for cost object
+map <- mapgl_add_layer(map, cost)
+
+# display map
+\dontrun{
+print(map)
+}
+\dontshow{\}) # examplesIf}
 }

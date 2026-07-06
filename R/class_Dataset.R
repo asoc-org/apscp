@@ -9,218 +9,98 @@ NULL
 Dataset <- R6::R6Class(
   "Dataset",
   public = list(
-    #' @field spatial_data [terra::rast()] object.
-    spatial_data = NULL,
-
-    #' @field attribute_data `data.frame` object.
-    attribute_data = NULL,
+    #' @field pu_data [tibble::tibble()] object.
+    pu_data = NULL,
 
     #' @field boundary_data [Matrix::sparseMatrix()] object.
     boundary_data = NULL,
 
     #' @description
     #' Create a `Dataset` object.
-    #' @param spatial_data [terra::rast()] object.
-    #' @param attribute_data `data.frame` object.
+    #' @param pu_data [tibble::tibble()] object.
     #' @param boundary_data [Matrix::sparseMatrix()] object.
     #' @return A new `Dataset` object.
-    initialize = function(spatial_data, attribute_data, boundary_data) {
-      ## assert that arguments are valid
+    initialize = function(pu_data, boundary_data) {
+      # assert that arguments a re valid
       assertthat::assert_that(
-        ## spatial_data
-        inherits(spatial_data, "SpatRaster"),
-        terra::nlyr(spatial_data) == 1L,
-        ## attribute data
-        is.data.frame(attribute_data),
-        assertthat::has_name(attribute_data, "_index"),
-        is.integer(attribute_data[["_index"]]),
-        assertthat::noNA(attribute_data[["_index"]]),
-        all(attribute_data[["_index"]] >= 1L),
-        all(attribute_data[["_index"]] <= terra::ncell(spatial_data)),
+        ## pu_data
+        is.data.frame(pu_data),
+        !inherits(pu_data, "sf"),
+        assertthat::has_name(pu_data, "_index"),
+        !assertthat::has_name(pu_data, "geometry"),
+        !assertthat::has_name(pu_data, "geom"),
         ## boundary_data
         inherits(boundary_data, "dsCMatrix"),
-        identical(ncol(boundary_data), nrow(attribute_data))
+        identical(ncol(boundary_data), nrow(pu_data))
       )
-      ## set fields
-      self$spatial_data <- spatial_data
-      self$attribute_data <- tibble::as_tibble(attribute_data)
+      # set fields
+      self$pu_data <- pu_data
       self$boundary_data <- boundary_data
     },
 
     #' @description
-    #' Get the coordinate reference system.
-    #' @return [sf::st_crs()] object.
-    get_crs = function() {
-      sf::st_crs(self$spatial_data)
+    #' Get number of planning units.
+    #' @return An `integer` value.
+    get_n_pu = function() {
+      nrow(self$pu_data)
     },
 
     #' @description
-    #' Get center point.
-    #' @return A `numeric` vector with two values.
-    get_center = function() {
-      c(
-        (terra::xmin(self$spatial_data) + terra::xmax(self$spatial_data)) / 2,
-        (terra::ymin(self$spatial_data) + terra::ymax(self$spatial_data)) / 2
-      )
+    #' Get column names.
+    #' @return A `character` vector.
+    get_column_names = function() {
+      setdiff(names(self$pu_data), "_index")
     },
 
     #' @description
-    #' Get the bounding box.
-    #' @param native `logical` value indicating if the bounding box should
-    #' be in (`TRUE`) the native coordinate reference system or (`FALSE`)
-    #' re-projected to longitude/latitude?
-    #' @param expand `numeric` value denoting the proportion to expand the
-    #' bounding box. For example, `expand = 0.1` would expand the bounding
-    #' box by 10 percent. Defaults to 0.
-    #' @return A [sf::st_bbox()] object.
-    get_bbox = function(native = TRUE, expand = 0) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        assertthat::is.flag(native),
-        assertthat::noNA(native),
-        assertthat::is.number(expand),
-        assertthat::noNA(expand)
-      )
-      # generate extent object
-      ext <- terra::ext(self$spatial_data)
-      if (!isTRUE(native)) {
-        # if not native, then convert to WGS1984
-        ext <- terra::project(
-          x = ext,
-          from = terra::crs(self$spatial_data),
-          to = "EPSG:4326"
-        )
-      }
-      # expand bounding box if needed
-      out <- c(
-        xmin = unname(ext[1] - (expand * (ext[2] - ext[1]))),
-        ymin = unname(ext[3] - (expand * (ext[4] - ext[3]))),
-        xmax = unname(ext[2] + (expand * (ext[2] - ext[1]))),
-        ymax = unname(ext[4] + (expand * (ext[4] - ext[3])))
-      )
-      # if using lon/lat CRS, then ensure valid extent
-      if (!native) {
-        out[[1]] <- max(out[[1]], -180)
-        out[[2]] <- max(out[[2]], -90)
-        out[[3]] <- min(out[[3]], 180)
-        out[[4]] <- min(out[[4]], 90)
-      }
-      # return result
-      sf::st_bbox(out)
-    },
-
-    #' @description
-    #' Get index values.
-    #' @return A `character` vector of layer names.
-    get_indices = function() {
-      setdiff(names(self$attribute_data), "_index")
-    },
-
-    #' @description
-    #' Get data from the dataset at an index.
-    #' @param index `character` or `integer` value..
+    #' Get column data.
+    #' @param column `character` or `integer` value.
     #' @return A `numeric` vector.
-    get_data = function(index) {
+    get_column_data = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(
-        assertthat::is.string(index) || assertthat::is.count(index),
-        assertthat::noNA(index),
-        self$has_index(index)
-      )
+      assertthat::assert_that(self$has_column(column))
       # return values
-      self$attribute_data[[index]]
+      self$pu_data[[column]]
     },
 
     #' @description
-    #' Get data from the dataset at an index.
-    #' @param index `character` or `integer` vector.
-    #' @return A [terra::rast()] object.
-    get_raster_data = function(index) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        is.character(index) || is.numeric(index),
-        assertthat::noNA(index),
-        all(self$has_index(index))
-      )
-      # extract planning unit indices
-      idx <- self$attribute_data[["_index"]]
-      # create blank raster
-      blank <- terra::setValues(self$spatial_data, NA_real_)
-      # create a list of raster objects with values from attribute data
-      out <- lapply(index, function(x) {
-        r <- blank
-        r[idx] <- self$attribute_data[[x]]
-        r
-      })
-      # convert list to SpatRaster object
-      if (length(index) == 1) {
-        out <- out[[1]]
-      } else {
-        out <- c(out)
-      }
-      # assign layer names
-      if (is.character(index)) {
-        names(out)[seq_along(index)] <- index
-      } else {
-        names(out)[seq_along(index)] <- paste0("V", index)
-      }
-      # return object
-      out
-    },
-
-    #' @description
-    #' Get total (sum) of values for an index.
-    #' @param index `character` or `integer` value.
+    #' Get total (sum) of values in a column.
+    #' @param column `character` or `integer` value.
     #' @return A `character` vector of layer names.
-    get_total = function(index) {
+    get_column_total = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(
-        assertthat::is.string(index) || assertthat::is.count(index),
-        assertthat::noNA(index)
-      )
+      assertthat::assert_that(self$has_column(column))
       # return sum of values
-      sum(self$attribute_data[[index]], na.rm = TRUE)
+      sum(self$pu_data[[column]], na.rm = TRUE)
     },
 
     #' @description
-    #' Check if the dataset has an index.
-    #' @param index `character` or `integer` vector.
+    #' Check if the dataset has a column or columns.
+    #' @param column `character vector.
     #' @return A `logical` value.
-    has_index = function(index) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        is.character(index) || is.numeric(index),
-        assertthat::noNA(index)
-      )
-      # determine if index is valid index of attribute data
-      if (is.numeric(index)) {
-        out <- index %in% which(names(self$attribute_data) != "_index")
-      } else {
-        out <- index %in% setdiff(names(self$attribute_data), "_index")
-      }
-      # return result
-      out
+    has_column = function(column) {
+      assertthat::has_name(self$pu_data, column)
     },
 
     #' @description
-    #' Set data at an index.
-    #' @param index `character` or `integer` value.
+    #' Set column data.
+    #' @param column `character` value.
     #' @param values `numeric` vector.
     #' @return An invisible `TRUE` indicating success.
-    set_data = function(index, values) {
+    set_column_data = function(column, values) {
       # assert arguments are valid
       assertthat::assert_that(
-        assertthat::is.string(index) || assertthat::is.count(index),
-        assertthat::noNA(index),
-        length(values) == nrow(self$attribute_data)
+        assertthat::is.string(column),
+        assertthat::noNA(column),
+        length(values) == nrow(self$pu_data)
       )
-      # if index is an integer, then generate new column name
-      # because each column must have a name
-      if (is.numeric(index)) {
-        index <- uuid::UUIDgenerate()
-      }
+      assertthat::assert_that(
+        !identical(column, "_index"),
+        msg = "Can't overwrite values in '_index' column."
+      )
+
       # insert new column with values
-      self$attribute_data[[index]] <- values
+      self$pu_data[[column]] <- values
       # return self
       invisible(self)
     }
@@ -231,84 +111,81 @@ Dataset <- R6::R6Class(
 #'
 #' Create a new [Dataset] object.
 #'
-#' @param spatial_data [terra::rast()] object.
+#' @param pu_data [tibble::tibble()] object with planning unit data.
 #'
-#' @param attribute_data [tibble::tibble()] object.
-#'
-#' @param boundary_data [Matrix::sparseMatrix()] object.
+#' @param boundary_data [Matrix::sparseMatrix()] object with boundary
+#' matrix data.
 #'
 #' @return A [Dataset] object.
 #'
+#' @seealso
+#' See [create_dataset()] to automatically convert a [sf::st_sf()] object
+#' to a [new_dataset()] object.
+#'
 #' @examples
-#' # TODO
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # manually prepare planning unit data
+#' pu_data <- sf::st_drop_geometry(sim_data)
+#' pu_data[["_index"]] <- seq_len(nrow(pu_data))
+#'
+#' # manually prepare boundary data
+#' bd_data <- prioritizr::boundary_matrix(sim_data)
+#'
+#' # create object
+#' x <- new_dataset(pu_data, bd_data)
+#'
+#' # preview object
+#' print(x)
 #'
 #' @export
-new_dataset <- function(spatial_data, attribute_data, boundary_data) {
+new_dataset <- function(pu_data, boundary_data) {
   # create new dataset
   Dataset$new(
-    spatial_data = spatial_data,
-    attribute_data = attribute_data,
+    pu_data = pu_data,
     boundary_data = boundary_data
   )
 }
 
 #' Create dataset
 #'
-#' Create a [Dataset] object from a [terra::rast()] object.
+#' Create a [Dataset] object from a [st::sf()] object.
 #'
-#' @param x [terra::rast()] object.
-#'
-#' @param pu_name `character` name of layer in `x` that is used to define
-#' which pixels are planning units are not. In particular, pixels
-#' that do not have missing (`NA`) values in this layer are treated
-#' as planning units.
+#' @param x [sf::st_sf()] object.
 #'
 #' @inherit new_dataset return
 #'
-#' @examples
-#' # TODO
+#' @examplesIf interactive()
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- create_dataset(sim_data)
+#'
+#' # preview object
+#' print(x)
 #'
 #' @export
-create_dataset <- function(x, pu_name) {
+create_dataset <- function(x) {
   # assert valid argument
-  assertthat::assert_that(
-    inherits(x, "SpatRaster"),
-    assertthat::has_name(x, pu_name)
-  )
+  assertthat::assert_that(inherits(x, "sf"))
 
-  # create spatial data
-  spatial_data <- terra::ifel(is.na(x[[pu_name]]), NA_real_, 1)
+  # convert data to tibble
+  d <- tibble::as_tibble(sf::st_drop_geometry(x))
 
-  # create attribute data
-  attribute_data <- terra::as.data.frame(x)
-  idx <- which(!is.na(attribute_data[[pu_name]]))
-  attribute_data <- attribute_data[idx, , drop = FALSE]
-  assertthat::assert_that(
-    nrow(attribute_data) >= 1L,
-    msg = "`x[[pu_name]]` must have at least one non-missing value."
-  )
-  attribute_data[["_index"]] <- as.integer(idx)
-
-  # manually convert all NAs to zeros in attribute data
-  for (i in seq_len(ncol(attribute_data) - 1L)) {
-    attribute_data[[i]] <-
-      replace(attribute_data[[i]], is.na(attribute_data[[i]]), 0)
-  }
+  # create _index column
+  d[["_index"]] <- seq_len(nrow(d))
 
   # make _index the first column
-  attribute_data <- attribute_data[,
-    c("_index", setdiff(names(attribute_data), "_index")),
+  d <- d[,
+    c("_index", setdiff(names(d), "_index")),
     drop = FALSE
   ]
 
-  # create boundary data
-  boundary_data <- prioritizr::boundary_matrix(spatial_data)
-  boundary_data <- boundary_data[idx, idx]
-
   # return object
   new_dataset(
-    spatial_data = spatial_data,
-    attribute_data = attribute_data,
-    boundary_data = boundary_data
+    pu_data = d,
+    boundary_data = prioritizr::boundary_matrix(x)
   )
 }

@@ -18,13 +18,9 @@ A [mapgl::mapboxgl()] object.
 Map project
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+\dontshow{if (has_mapbox_token()) withAutoprint(\{ # examplesIf}
 # find file path for built-in project
-path <- dir(
-  system.file("data", package = "apscp"),
-  pattern = "^.*\\\\.yml$",
-  full.names = TRUE
-)
+path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 
 # import project
 x <- read_project(path)
@@ -33,6 +29,11 @@ x <- read_project(path)
 print(x)
 
 # create interactive map for project data
-map_project(x)
+map <- map_project(x)
+
+# display map
+\dontrun{
+print(map)
+}
 \dontshow{\}) # examplesIf}
 }
