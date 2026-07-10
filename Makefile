@@ -51,6 +51,9 @@ examples:
 	$(R) --slave -e "devtools::run_examples();warnings()"  >> examples.log
 	rm -f Rplots.pdf
 
+example_sidebar:
+	$(R) --slave -e "source('inst/examples/sidebar_app.R')"
+
 ## run checks
 check:
 	echo "\n===== R CMD CHECK =====\n" > check.log 2>&1

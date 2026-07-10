@@ -22,7 +22,7 @@ app_ui <- function(request) {
       ),
 
       ## mapgl map
-      mapgl::mapboxglOutput("map", width = "100%", height = "100%")
+      mapgl::mapboxglOutput("map", width = "100vw", height = "100vh")
 
     )
 
