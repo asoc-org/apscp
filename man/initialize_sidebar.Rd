@@ -4,21 +4,27 @@
 \alias{initialize_sidebar}
 \title{Initialize sidebar}
 \usage{
-initialize_sidebar(
-  id,
-  opts = list(),
-  session = shiny::getDefaultReactiveDomain()
-)
+initialize_sidebar(id, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
 \item{id}{`character` value with identifier for sidebar.}
 
-\item{opts}{`list` with options for customizing sidebar.
-Defaults to an empty list.}
-
 \item{session}{The `session` object passed to function given to
 `shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+
+\item{opts}{`list` with options for customizing sidebar.
+Defaults to an empty list.}
 }
 \description{
 Initialize a sidebar.
 }
+\seealso{
+Other sidebar:
+\code{\link[=add_sidebar_control]{add_sidebar_control()}},
+\code{\link[=close_sidebar]{close_sidebar()}},
+\code{\link[=disable_sidebar]{disable_sidebar()}},
+\code{\link[=enable_sidebar]{enable_sidebar()}},
+\code{\link[=open_sidebar]{open_sidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}}
+}
+\concept{sidebar}

@@ -95,11 +95,6 @@ class MapSidebar {
       map.classList.add("sidebar-map");
     }
 
-    // show sidebar and content
-    setTimeout(function(){
-      $(".mapsidebar.collapsed .mapsidebar-tabs, .mapsidebar.collapsed .mapsidebar-content").css("display","block");
-    }, 400);
-
     // add click events so that clicking on icons will open and close panes
     this._tab_items.forEach((tab) => {
       var sub = tab.querySelector("a");
@@ -115,6 +110,14 @@ class MapSidebar {
     this._close_buttons.forEach((button) => {
       button.addEventListener("click", () => this._on_close_click());
     });
+
+    // show sidebar and content
+    setTimeout(function(){
+      $(".mapsidebar.collapsed .mapsidebar-tabs, .mapsidebar.collapsed .mapsidebar-content, .mapsidebar.collapsed").css("display", "block");
+    }, 400);
+
+    // return object
+    return this;
   }
 
   open(id) {

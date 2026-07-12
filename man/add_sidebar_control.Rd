@@ -4,7 +4,7 @@
 \alias{add_sidebar_control}
 \title{Add sidebar control}
 \usage{
-add_sidebar_control(map, id, sidebar_tabs, position = "top-right")
+add_sidebar_control(map, id, position = "top-right")
 }
 \arguments{
 \item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} functions.}
@@ -32,3 +32,13 @@ library(shiny)
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 }
 }
+\seealso{
+Other sidebar:
+\code{\link[=close_sidebar]{close_sidebar()}},
+\code{\link[=disable_sidebar]{disable_sidebar()}},
+\code{\link[=enable_sidebar]{enable_sidebar()}},
+\code{\link[=initialize_sidebar]{initialize_sidebar()}},
+\code{\link[=open_sidebar]{open_sidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}}
+}
+\concept{sidebar}

@@ -27,20 +27,8 @@ ui <- fluidPage(
       verbatimTextOutput("whichtab")
     ),
     tagList(
-      mapboxglOutput("map", height = "700px")
-    )
-  )
-)
-
-server <- function(input, output, session) {
-  output$map <- renderMapboxgl({
-    input$initialize
-    mapboxgl() |>
-    add_circle_layer(id = "pts", source = pts_data) |>
-    add_sidebar_control(
-      id = "mysidebar",
-      position = "top-left",
-      sidebar_tabs = sidebar_tabs(
+      sidebar_tabs(
+        id = "mysidebar",
         list(icon("car"), icon("user"), icon("envelope")),
         sidebar_pane(
           title = "home", id = "home_id", icon = icon("home"),
@@ -92,8 +80,19 @@ server <- function(input, output, session) {
             tableOutput("data")
           )
         )
-      )
+      ),
+      mapboxglOutput("map", height = "700px")
     )
+  )
+)
+
+server <- function(input, output, session) {
+  output$map <- renderMapboxgl({
+    input$initialize
+    bbox <- suppressWarnings(st_bbox(pts_data))
+    mapboxgl() |>
+      add_circle_layer(id = "pts", source = pts_data) |>
+      add_sidebar_control(id = "mysidebar", position = "top-left")
   })
 
   observe({
@@ -119,7 +118,6 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$open, {
-    print("here3")
     open_sidebar(
       "mysidebar",
       sample(c("home_id", "profile_id", "messages_id"), 1)
@@ -127,12 +125,10 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$close, {
-    print("here2")
     close_sidebar("mysidebar")
   })
 
-  observeEvent(input$map_bbox, once = TRUE, {
-    print("here1")
+  observeEvent(input$map, once = TRUE, {
     initialize_sidebar("mysidebar")
   })
 

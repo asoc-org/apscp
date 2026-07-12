@@ -103,5 +103,4 @@ Collate:
     'utils_simulate.R'
     'utils_tile_server.R'
     'widget_sidebar_methods.R'
-    'widget_sidebar_shiny.R'
     'widget_sidebar_ui.R'

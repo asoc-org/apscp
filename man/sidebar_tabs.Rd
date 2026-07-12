@@ -4,16 +4,17 @@
 \alias{sidebar_tabs}
 \title{Create a sidebar}
 \usage{
-sidebar_tabs(id = "sidebar", icon_list = NULL, ...)
+sidebar_tabs(id, icon_list = NULL, ...)
 }
 \arguments{
-\item{id}{The id of the sidebar, which must match the `id` of
-[add_sidebar_control()]. Default is \code{"sidebar"}}
+\item{id}{`character` identifier for sidebar.}
+
+\item{icon_list}{A list of [icon()] objects.
+These icons are shown when the sidebar is collapsed.
+Not that the list is required and must match the amount of [sidebar_pane()]
+objects.}
 
 \item{...}{The individual [sidebar_pane()] objects.}
-
-\item{iconList}{A list of icons to be shown, when the sidebar is collapsed.
-The list is required and must match the amount of [sidebar_pane()] objects.}
 }
 \value{
 A `shiny.tag` with individual sidebar panes
@@ -29,4 +30,5 @@ library(shiny)
 # run example app showing a single sidebar
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 }
+
 }

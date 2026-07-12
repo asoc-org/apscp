@@ -32,9 +32,19 @@ library(shiny)
 library(htmltools)
 sidebar_pane(id = "id", icon = icon("cars"), tags$div())
 }
+
 }
 \references{
 \url{https://github.com/Turbo87/sidebar-v2},
 \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
 }
-\concept{Sidebar Functions}
+\seealso{
+Other sidebar:
+\code{\link[=add_sidebar_control]{add_sidebar_control()}},
+\code{\link[=close_sidebar]{close_sidebar()}},
+\code{\link[=disable_sidebar]{disable_sidebar()}},
+\code{\link[=enable_sidebar]{enable_sidebar()}},
+\code{\link[=initialize_sidebar]{initialize_sidebar()}},
+\code{\link[=open_sidebar]{open_sidebar()}}
+}
+\concept{sidebar}

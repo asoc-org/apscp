@@ -17,3 +17,13 @@ open_sidebar(id, pane_id, session = shiny::getDefaultReactiveDomain())
 \description{
 Open a sidebar.
 }
+\seealso{
+Other sidebar:
+\code{\link[=add_sidebar_control]{add_sidebar_control()}},
+\code{\link[=close_sidebar]{close_sidebar()}},
+\code{\link[=disable_sidebar]{disable_sidebar()}},
+\code{\link[=enable_sidebar]{enable_sidebar()}},
+\code{\link[=initialize_sidebar]{initialize_sidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}}
+}
+\concept{sidebar}
