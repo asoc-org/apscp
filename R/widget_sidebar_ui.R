@@ -75,10 +75,13 @@ sidebar_pane <- function(
   htmltools::tags$div(
     class = "mapsidebar-pane", id = id,
     htmltools::tags$h3(
-      class = "mapsidebar-header", title,
+      class = "mapsidebar-pane-header", title,
       htmltools::tags$span(class = "mapsidebar-close", icon)
     ),
-    ...
+    htmltools::tags$div(
+      class = "mapsidebar-pane-content",
+      ...
+    )
   )
 }
 

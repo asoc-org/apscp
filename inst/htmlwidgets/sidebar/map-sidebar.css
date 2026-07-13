@@ -91,7 +91,6 @@
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.95);
   overflow-x: hidden;
-  overflow-y: auto;
 }
 .mapsidebar-left .mapsidebar-content {
   left: 40px;
@@ -110,13 +109,14 @@
   left: 0;
   right: 0;
   box-sizing: border-box;
-  padding: 10px 20px;
+  padding: 10px 1px 10px 20px;
+  height: 100%;
 }
 .mapsidebar-pane.active {
   display: block;
 }
 
-.mapsidebar-header {
+.mapsidebar-pane-header {
   margin: -10px -20px 0;
   height: 40px;
   padding: 0 20px;
@@ -125,8 +125,14 @@
   color: #fff;
   background-color: #0074d9;
 }
-.mapsidebar-right .mapsidebar-header {
+.mapsidebar-right .mapsidebar-pane-header {
   padding-left: 40px;
+}
+
+.mapsidebar-pane-content {
+  padding-right: 10px;
+  max-height: calc(100% - 20px);
+  overflow-y: auto;
 }
 
 .mapsidebar-close {
