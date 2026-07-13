@@ -5,8 +5,8 @@
 #'
 #' @export
 skip_if_missing_mapbox_token <- function() {
-  skip_if(
+  skip_if_not(
     nzchar(Sys.getenv("MAPBOX_PUBLIC_TOKEN")),
-    message = "MAPBOX_PUBLIC_TOKEN is missing"
+    message = "`MAPBOX_PUBLIC_TOKEN` is missing"
   )
 }

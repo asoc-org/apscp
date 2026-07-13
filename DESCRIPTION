@@ -42,10 +42,12 @@ Imports:
     cli (>= 3.6.0),
     rlang (>= 1.1.0),
     yaml (>= 2.3.12),
+    htmlwidgets (>= 1.6.4),
     prioritizr (>= 9.0.0.0),
     rcbc (>= 0.1.0.9003),
     shinybusy (>= 0.3.3),
     withr (>= 3.0.3),
+    freestiler (>= 0.2.0),
     Matrix (>= 1.3-0)
 Suggests:
     gurobi (>= 13.0-2),
@@ -60,7 +62,6 @@ Suggests:
     lobstr (>= 1.2.1),
     rbibutils (>= 2.4.1),
     whereami (>= 0.2.0),
-    freestiler (>= 0.2.0),
     piggyback (>= 0.1.5),
     usethis (>= 3.2.1)
 Remotes:
@@ -102,3 +103,5 @@ Collate:
     'utils_color_palette.R'
     'utils_simulate.R'
     'utils_tile_server.R'
+    'widget_sidebar_methods.R'
+    'widget_sidebar_ui.R'
