@@ -32,3 +32,20 @@ x <- new_tileset(tiles = list(t1, t2), dir = tempdir(), max_zoom = 3)
 print(x)
 
 }
+\seealso{
+Other class:
+\code{\link{Dataset}},
+\code{\link{Project}},
+\code{\link[=new_categorical_legend]{new_categorical_legend()}},
+\code{\link[=new_continuous_legend]{new_continuous_legend()}},
+\code{\link[=new_cost]{new_cost()}},
+\code{\link[=new_feature]{new_feature()}},
+\code{\link[=new_layer]{new_layer()}},
+\code{\link[=new_lock]{new_lock()}},
+\code{\link[=new_project]{new_project()}},
+\code{\link[=new_provenance]{new_provenance()}},
+\code{\link[=new_solution]{new_solution()}},
+\code{\link[=new_theme]{new_theme()}},
+\code{\link[=new_tile]{new_tile()}}
+}
+\concept{class}

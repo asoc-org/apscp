@@ -1,0 +1,30 @@
+# Close sidebar
+
+Close a sidebar.
+
+## Usage
+
+``` r
+close_sidebar(id, session = shiny::getDefaultReactiveDomain())
+```
+
+## Arguments
+
+- id:
+
+  \`character\` value with identifier for sidebar.
+
+- session:
+
+  The \`session\` object passed to function given to \`shinyServer\`
+  Default is \[shiny::getDefaultReactiveDomain()\].
+
+## See also
+
+Other sidebar:
+[`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
+[`disable_sidebar()`](https://asoc-org.github.io/apscp/reference/disable_sidebar.md),
+[`enable_sidebar()`](https://asoc-org.github.io/apscp/reference/enable_sidebar.md),
+[`open_sidebar()`](https://asoc-org.github.io/apscp/reference/open_sidebar.md),
+[`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md),
+[`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)

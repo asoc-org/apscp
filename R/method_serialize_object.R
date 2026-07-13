@@ -17,6 +17,8 @@ NULL
 #' @seealso
 #' See [deserialize_object()] for the opposite of this function.
 #'
+#' @family io
+#'
 #' @examples
 #' # create an object
 #' x <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))

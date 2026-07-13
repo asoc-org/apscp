@@ -14,6 +14,8 @@ NULL
 #'
 #' @return A `Solution` object.
 #'
+#' @family class
+#'
 #' @examples
 #' # simulate spatial data
 #' sim_data <- simulate_spatial_data()

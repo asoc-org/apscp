@@ -16,6 +16,8 @@ NULL
 #'
 #' @return A `Tile` object.
 #'
+#' @family class
+#'
 #' @examples
 #' # create object
 #' x <- new_tile(source = "data-src", file = "file.pmtiles", max_zoom = 5)
@@ -68,6 +70,8 @@ new_tile <- function(source_layer, file, max_zoom) {
 #' creation should be displayed? Defaults to `TRUE`.
 #'
 #' @return A [new_tile()] object.
+#'
+#' @family method
 #'
 #' @examples
 #' # simulate spatial data

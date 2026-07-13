@@ -8,6 +8,8 @@
 #'
 #' @inherit new_dataset return
 #'
+#' @family io
+#'
 #' @examples
 #' # specify file paths
 #' pu_path <- system.file(
@@ -80,6 +82,8 @@ read_dataset <- function(pu_path, boundary_path) {
 #' @inheritParams read_dataset
 #'
 #' @return An invisible `TRUE` indicating success.
+#'
+#' @family io
 #'
 #' @examples
 #' # simulate spatial data

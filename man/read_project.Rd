@@ -26,3 +26,12 @@ x <- read_project(path)
 print(x)
 
 }
+\seealso{
+Other io:
+\code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=serialize_object]{serialize_object()}},
+\code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_project]{write_project()}}
+}
+\concept{io}

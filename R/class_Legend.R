@@ -20,6 +20,8 @@ NULL
 #'
 #' @return A `CategoricalLegend` object.
 #'
+#' @family class
+#'
 #' @examples
 #' # create new object
 #' l <- new_categorical_legend(
@@ -90,6 +92,8 @@ new_categorical_legend <- function(
 #' @inheritParams new_categorical_legend
 #'
 #' @return A `ContinuousLegend` object.
+#'
+#' @family class
 #'
 #' @examples
 #' # create new object
@@ -171,6 +175,8 @@ new_continuous_legend <- function(
 #' @inheritParams new_categorical_legend
 #'
 #' @return A new [new_continuous_legend()] or [new_categorical_legend()] object.
+#'
+#' @family method
 #'
 #' @examples
 #' # simulate spatial data

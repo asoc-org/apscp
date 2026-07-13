@@ -38,6 +38,7 @@ features of the terrestrial Antarctic Peninsula. _Ambio_, 53:1037--1049.
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/asoc-org/apscp}
   \item \url{https://asoc-org.github.io/apscp/}
   \item Report bugs at \url{https://asoc-org.github.io/apscp/issues}
 }

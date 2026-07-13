@@ -18,7 +18,7 @@ A [mapgl::mapboxgl()] object.
 Map project
 }
 \examples{
-\dontshow{if (has_mapbox_token()) withAutoprint(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # find file path for built-in project
 path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 
@@ -37,3 +37,16 @@ print(map)
 }
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other mapping:
+\code{\link[=get_paint_parameters]{get_paint_parameters()}},
+\code{\link[=has_mapbox_token]{has_mapbox_token()}},
+\code{\link[=mapgl_add_layer]{mapgl_add_layer()}},
+\code{\link[=mapgl_add_source]{mapgl_add_source()}},
+\code{\link[=mapgl_clear_layer]{mapgl_clear_layer()}},
+\code{\link[=mapgl_layer_id]{mapgl_layer_id()}},
+\code{\link[=mapgl_source_id]{mapgl_source_id()}},
+\code{\link[=mapgl_source_layer_id]{mapgl_source_layer_id()}},
+\code{\link[=mapgl_source_url]{mapgl_source_url()}}
+}
+\concept{mapping}

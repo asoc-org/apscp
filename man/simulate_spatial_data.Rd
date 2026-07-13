@@ -19,3 +19,12 @@ d <- simulate_spatial_data()
 # preview object
 print(d)
 }
+\seealso{
+Other simulation:
+\code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
+\code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
+\code{\link[=simulate_project]{simulate_project()}},
+\code{\link[=simulate_provenance]{simulate_provenance()}},
+\code{\link[=simulate_solution_legend]{simulate_solution_legend()}}
+}
+\concept{simulation}

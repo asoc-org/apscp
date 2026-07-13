@@ -11,6 +11,8 @@ NULL
 #' # see if a Mapbox token is defined?
 #' has_mapbox_token()
 #'
+#' @family mapping
+#'
 #' @export
 has_mapbox_token <- function() {
   nzchar(Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
@@ -27,6 +29,8 @@ has_mapbox_token <- function() {
 #' This corresponds to the `id` parameter of [mapgl::add_fill_layer()].
 #'
 #' @return A `character` value.
+#'
+#' @family mapping
 #'
 #' @examples
 #' # simulate spatial data
@@ -66,6 +70,8 @@ mapgl_layer_id <- function(x) {
 #'
 #' @return A `character` value.
 #'
+#' @family mapping
+#'
 #' @examples
 #' # simulate spatial data
 #' sim_data <- simulate_spatial_data()
@@ -93,6 +99,8 @@ mapgl_source_url <- function(x) {
 #' This corresponds to the `source` parameter of [mapgl::add_fill_layer()].
 #'
 #' @inherit mapgl_layer_id  return
+#'
+#' @family mapping
 #'
 #' @examples
 #' # simulate spatial data
@@ -126,6 +134,8 @@ mapgl_source_id <- function(x) {
 #' [mapgl::add_fill_layer()].
 #'
 #' @inherit mapgl_layer_id  return
+#'
+#' @family mapping
 #'
 #' @examples
 #' # simulate spatial data
@@ -167,7 +177,9 @@ mapgl_source_layer_id <- function(x) {
 #' @details
 #' Sources are added with [mapgl::add_pmtiles_source()].
 #'
-#' @examplesIf has_mapbox_token()
+#' @family mapping
+#'
+#' @examplesIf interactive()
 #' # simulate spatial data
 #' sim_data <- simulate_spatial_data()
 #'
@@ -227,6 +239,8 @@ mapgl_add_source <- function(map, x) {
 #' Layers are added with [mapgl::add_fill_layer()].
 #'
 #' @inherit mapgl_add_source examples
+#'
+#' @family mapping
 #'
 #' @export
 mapgl_add_layer <- function(
@@ -294,6 +308,8 @@ mapgl_add_layer <- function(
 #'
 #' @details
 #' Layers are cleared with [mapgl::clear_layer()].
+#'
+#' @family mapping
 #'
 #' @export
 mapgl_clear_layer <- function(map, x) {

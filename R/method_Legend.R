@@ -14,6 +14,8 @@ NULL
 #'
 #' @return A named `list` object.
 #'
+#' @family mapping
+#'
 #' @examples
 #' # create object
 #' legend <- simulate_continuous_legend()

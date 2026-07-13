@@ -14,6 +14,8 @@ NULL
 #'
 #' @return A `Tileset` object.
 #'
+#' @family class
+#'
 #' @examples
 #' # create tile objects
 #' t1 <- new_tile(source = "data-src", file = "t1.pmtiles", max_zoom = 5)
@@ -61,6 +63,8 @@ new_tileset <- function(tiles, dir, max_zoom) {
 #' Defaults to a temporary folder..
 #'
 #' @return A [new_tileset()] object.
+#'
+#' @family method
 #'
 #' @examples
 #' # simulate spatial data

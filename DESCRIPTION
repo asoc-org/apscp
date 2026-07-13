@@ -13,7 +13,7 @@ Encoding: UTF-8
 LazyData: true
 Language: en-US
 VignetteBuilder: knitr, rmarkdown
-URL: https://asoc-org.github.io/apscp/
+URL: https://github.com/asoc-org/apscp, https://asoc-org.github.io/apscp/
 BugReports: https://asoc-org.github.io/apscp/issues
 Depends:
     R (>= 4.6.0),

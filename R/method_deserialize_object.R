@@ -15,6 +15,8 @@ NULL
 #' @seealso
 #' See [serialize_object()] for the opposite of this function.
 #'
+#' @family io
+#'
 #' @return An object.
 #'
 #' @export

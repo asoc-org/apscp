@@ -11,6 +11,8 @@ NULL
 #'
 #' @return A `Theme` object.
 #'
+#' @family class
+#'
 #' @examples
 #' # simulate spatial data
 #' sim_data <- simulate_spatial_data()

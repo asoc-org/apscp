@@ -6,6 +6,23 @@
 \description{
 A dataset is used to store and access information about a set spatial layers.
 }
+\seealso{
+Other class:
+\code{\link{Project}},
+\code{\link[=new_categorical_legend]{new_categorical_legend()}},
+\code{\link[=new_continuous_legend]{new_continuous_legend()}},
+\code{\link[=new_cost]{new_cost()}},
+\code{\link[=new_feature]{new_feature()}},
+\code{\link[=new_layer]{new_layer()}},
+\code{\link[=new_lock]{new_lock()}},
+\code{\link[=new_project]{new_project()}},
+\code{\link[=new_provenance]{new_provenance()}},
+\code{\link[=new_solution]{new_solution()}},
+\code{\link[=new_theme]{new_theme()}},
+\code{\link[=new_tile]{new_tile()}},
+\code{\link[=new_tileset]{new_tileset()}}
+}
+\concept{class}
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{

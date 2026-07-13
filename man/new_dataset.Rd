@@ -39,4 +39,11 @@ print(x)
 \seealso{
 See [create_dataset()] to automatically convert a [sf::st_sf()] object
 to a [new_dataset()] object.
+
+Other method:
+\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_legend]{create_legend()}},
+\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tileset]{create_tileset()}}
 }
+\concept{method}

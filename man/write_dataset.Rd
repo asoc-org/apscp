@@ -34,3 +34,12 @@ bd_path <- tempfile(fileext = ".csv.gz")
 write_dataset(dataset, pu_path, bd_path)
 
 }
+\seealso{
+Other io:
+\code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_project]{read_project()}},
+\code{\link[=serialize_object]{serialize_object()}},
+\code{\link[=write_project]{write_project()}}
+}
+\concept{io}

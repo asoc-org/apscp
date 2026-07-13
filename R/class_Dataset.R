@@ -5,6 +5,8 @@ NULL
 #'
 #' A dataset is used to store and access information about a set spatial layers.
 #'
+#' @family class
+#'
 #' @export
 Dataset <- R6::R6Class(
   "Dataset",
@@ -122,6 +124,8 @@ Dataset <- R6::R6Class(
 #' See [create_dataset()] to automatically convert a [sf::st_sf()] object
 #' to a [new_dataset()] object.
 #'
+#' @family method
+#'
 #' @examples
 #' # simulate spatial data
 #' sim_data <- simulate_spatial_data()
@@ -155,6 +159,8 @@ new_dataset <- function(pu_data, boundary_data) {
 #' @param x [sf::st_sf()] object.
 #'
 #' @inherit new_dataset return
+#'
+#' @family method
 #'
 #' @examplesIf interactive()
 #' # simulate spatial data

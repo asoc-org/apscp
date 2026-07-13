@@ -1,12 +1,63 @@
-url: https://jeffreyhanson.github.io/apscp
+url: https://asoc-org.github.io/apscp/
 
 template:
   bootstrap: 5
 
 navbar:
-  components:
+  structure:
+    left:  [home, intro, reference, articles, news]
+    right: [search, github]
     articles:
       text: Advanced topics
       menu:
       - text: Optimization
         href: articles/optimization.html
+
+reference:
+  - title: Overview
+    desc: Overview of the package.
+    contents:
+      - apscp
+
+  - title: Application
+    desc: >
+      Main functions and documentation for the application.
+    contents:
+      - apscp
+      - run_app
+
+  - title: Classes and methods
+    desc: >
+      Functions and definitions for new classes.
+    contents:
+      - has_concept("class")
+      - has_concept("method")
+
+  - title: Sidebars
+    desc: >
+      Functions for sidebars.
+    contents:
+      - has_concept("sidebar")
+
+  - title: Mapping
+    desc: >
+      Functions for mapping.
+    contents:
+      - has_concept("mapping")
+
+  - title: Reading and writing
+    desc: >
+      Functions for reading and writing from disk and memory.
+    contents:
+      - has_concept("io")
+
+  - title: Simulation
+    desc: >
+      Functions for simulating data.
+    contents:
+      - has_concept("simulation")
+
+  - title: Miscellaneous functions
+    contents:
+      - color_palette
+      - has_concept("tile_server")

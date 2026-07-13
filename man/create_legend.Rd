@@ -42,3 +42,11 @@ x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
 print(x)
 
 }
+\seealso{
+Other method:
+\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tileset]{create_tileset()}},
+\code{\link[=new_dataset]{new_dataset()}}
+}
+\concept{method}

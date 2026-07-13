@@ -5,6 +5,8 @@ NULL
 #'
 #' Definition for the Project class.
 #'
+#' @family class
+#'
 #' @seealso See [new_project()] to create a `Project` object.
 Project <- R6::R6Class(
   "Project",
@@ -239,6 +241,7 @@ Project <- R6::R6Class(
 #'
 #' @return A new `Project` object.
 #'
+#' @family class
 #'
 #' @examples
 #' # simulate spatial data

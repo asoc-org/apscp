@@ -9,6 +9,8 @@ NULL
 #'
 #' @return A [Project] object.
 #'
+#' @family io
+#'
 #' @examples
 #' # find file path for built-in project
 #' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
@@ -81,6 +83,8 @@ read_project <- function(path) {
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
+#' @family io
+#'
 #' @examples
 #' # find file path for built-in project
 #' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
@@ -152,7 +156,9 @@ write_project <- function(x, path) {
 #'
 #' @return A [mapgl::mapboxgl()] object.
 #'
-#' @examplesIf has_mapbox_token()
+#' @family mapping
+#'
+#' @examplesIf interactive()
 #' # find file path for built-in project
 #' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 #'

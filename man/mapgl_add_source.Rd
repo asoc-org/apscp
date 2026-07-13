@@ -18,7 +18,7 @@ Add a [new_tile()] object as a layer to a \pkg{mapgl} object.
 Sources are added with [mapgl::add_pmtiles_source()].
 }
 \examples{
-\dontshow{if (has_mapbox_token()) withAutoprint(\{ # examplesIf}
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # simulate spatial data
 sim_data <- simulate_spatial_data()
 
@@ -53,3 +53,16 @@ print(map)
 }
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+Other mapping:
+\code{\link[=get_paint_parameters]{get_paint_parameters()}},
+\code{\link[=has_mapbox_token]{has_mapbox_token()}},
+\code{\link[=map_project]{map_project()}},
+\code{\link[=mapgl_add_layer]{mapgl_add_layer()}},
+\code{\link[=mapgl_clear_layer]{mapgl_clear_layer()}},
+\code{\link[=mapgl_layer_id]{mapgl_layer_id()}},
+\code{\link[=mapgl_source_id]{mapgl_source_id()}},
+\code{\link[=mapgl_source_layer_id]{mapgl_source_layer_id()}},
+\code{\link[=mapgl_source_url]{mapgl_source_url()}}
+}
+\concept{mapping}

@@ -7,6 +7,8 @@ NULL
 #'
 #' @return A [sf::st_sf()] object.
 #'
+#' @family simulation
+#'
 #' @examples
 #' # simulate data
 #' d <- simulate_spatial_data()
@@ -79,6 +81,8 @@ simulate_spatial_data <- function() {
 #' Simulate a new project.
 #'
 #' @return A [Project] object.
+#'
+#' @family simulation
 #'
 #' @examples
 #' # create simulated project
@@ -214,6 +218,8 @@ simulate_project <- function() {
 #'
 #' @return A [new_continuous_legend()] object.
 #'
+#' @family simulation
+#'
 #' @export
 simulate_continuous_legend <- function() {
   new_continuous_legend(
@@ -231,6 +237,8 @@ simulate_continuous_legend <- function() {
 #'
 #' @return A [new_categorical_legend()] object.
 #'
+#' @family simulation
+#'
 #' @export
 simulate_solution_legend <- function() {
   new_categorical_legend(
@@ -247,6 +255,8 @@ simulate_solution_legend <- function() {
 #'
 #' @return A [new_categorical_legend()] object.
 #'
+#' @family simulation
+#'
 #' @export
 simulate_binary_legend <- function() {
   new_categorical_legend(
@@ -262,6 +272,8 @@ simulate_binary_legend <- function() {
 #' Simulate a provenance information.
 #'
 #' @return A [new_provenance()] object.
+#'
+#' @family simulation
 #'
 #' @export
 simulate_provenance <- function() {

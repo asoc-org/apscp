@@ -16,6 +16,8 @@ NULL
 #'
 #' @return A `Provenance` object.
 #'
+#' @family class
+#'
 #' @examples
 #' # create a provenance
 #' x <- new_provenance(

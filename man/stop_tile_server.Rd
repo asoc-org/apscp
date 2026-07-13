@@ -12,3 +12,8 @@ An invisible `TRUE` indicating success.
 \description{
 Stop tile servers.
 }
+\seealso{
+Other tile_server:
+\code{\link[=start_tile_server]{start_tile_server()}}
+}
+\concept{tile_server}

@@ -32,3 +32,13 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 }
 
 }
+\seealso{
+Other sidebar:
+\code{\link[=add_sidebar_control]{add_sidebar_control()}},
+\code{\link[=close_sidebar]{close_sidebar()}},
+\code{\link[=disable_sidebar]{disable_sidebar()}},
+\code{\link[=enable_sidebar]{enable_sidebar()}},
+\code{\link[=open_sidebar]{open_sidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}}
+}
+\concept{sidebar}

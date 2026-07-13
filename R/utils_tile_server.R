@@ -12,6 +12,8 @@
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
+#' @family tile_server
+#'
 #' @export
 start_tile_server <- function(x, dir = NULL, verbose = TRUE) {
   # assert valid arguments
@@ -65,6 +67,8 @@ start_tile_server <- function(x, dir = NULL, verbose = TRUE) {
 #' Stop tile servers.
 #'
 #' @return An invisible `TRUE` indicating success.
+#'
+#' @family tile_server
 #'
 #' @export
 stop_tile_server <- function() {

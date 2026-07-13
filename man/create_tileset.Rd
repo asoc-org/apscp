@@ -43,3 +43,11 @@ x <- create_tileset(sim_data)
 print(x)
 
 }
+\seealso{
+Other method:
+\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_legend]{create_legend()}},
+\code{\link[=create_tile]{create_tile()}},
+\code{\link[=new_dataset]{new_dataset()}}
+}
+\concept{method}

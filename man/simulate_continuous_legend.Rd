@@ -12,3 +12,12 @@ A [new_continuous_legend()] object.
 \description{
 Simulate a legend for continuous data.
 }
+\seealso{
+Other simulation:
+\code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
+\code{\link[=simulate_project]{simulate_project()}},
+\code{\link[=simulate_provenance]{simulate_provenance()}},
+\code{\link[=simulate_solution_legend]{simulate_solution_legend()}},
+\code{\link[=simulate_spatial_data]{simulate_spatial_data()}}
+}
+\concept{simulation}

@@ -1,0 +1,18 @@
+---
+title: "Getting started"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+    fig_caption: true
+    self_contained: yes
+fontsize: 11pt
+documentclass: article
+bibliography: references.bib
+csl: reference-style.csl
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Getting started}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+TODO.
