@@ -1,6 +1,7 @@
 class MapSidebar {
 
   id = undefined;
+  _height = undefined;
   _map = undefined;
   _sidebar = undefined;
   _pane_container = undefined;
@@ -9,14 +10,18 @@ class MapSidebar {
   _close_buttons = undefined;
   options = undefined;
 
-  constructor(id, options) {
+  constructor(id, height, options) {
     // set fields
     this.id = id;
     this.options = options;
+    this._height = height;
     this._sidebar = document.getElementById(id);
 
     // declare temporary variables
     var i, child;
+
+    // add height to sidebar
+    this._sidebar.style.height = height;
 
     // add sidebar left/right class
     this._sidebar.classList.add(
@@ -75,9 +80,6 @@ class MapSidebar {
   }
 
   onAdd(map) {
-    // logging
-    console.log("adding sidebar");
-
     // declare temporary variables
     var i, child;
 
@@ -87,6 +89,16 @@ class MapSidebar {
     // add css class sidebar-map to map
     if (!map._container.classList.contains("sidebar-map")) {
       map._container.classList.add("sidebar-map");
+    }
+
+    // if height is a percentage, then modify control position container
+    if (this._height.endsWith("%")) {
+      child = map._container.querySelector(
+        ".mapboxgl-ctrl-" + this.options.position
+      )
+      if (child) {
+        child.style.height = "calc(100% - 50px)";
+      }
     }
 
     // add click events so that clicking on icons will open and close panes
@@ -120,9 +132,6 @@ class MapSidebar {
   }
 
   open(id) {
-    // logging
-    console.log("opening pane: " + id);
-
     // declare temporary variables
     var i, child;
 
@@ -158,9 +167,6 @@ class MapSidebar {
   }
 
   close() {
-    // logging
-    console.log("closing pane");
-
     // declare temporary variables
     var i, child;
 

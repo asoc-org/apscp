@@ -1,22 +1,6 @@
-function mapgl_sidebar_initialize(el, id, options) {
-  el.map.addControl(new MapSidebar(id, options), options.position);
+function mapgl_sidebar_initialize(el, id, height, options) {
+  el.map.addControl(new MapSidebar(id, height, options), options.position);
 }
-
-// Shiny.addCustomMessageHandler("sidebar:initialize", function(message) {
-//   // extract variables
-//   var elementId = message.id;
-//   var sidebar = document.getElementById(elementId);
-//   var container = document.getElementById(elementId + "-ctrl");
-//   var map = document.querySelector(".mapboxgl-map:has(#" + elementId +"-ctrl)");
-//   // display HTML elements
-//   console.log(elementId);
-//   console.log(container)
-//   console.log(map);
-//   // initialize sidebar
-//   sidebar.widget = new MapSidebar(elementId, {position: "left"}).add_to(map);
-//   // move sidebar into container
-//   container.appendChild(sidebar);
-// })
 
 Shiny.addCustomMessageHandler("sidebar:open", function(message) {
   var el = document.getElementById(message.id);

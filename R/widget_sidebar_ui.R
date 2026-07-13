@@ -21,15 +21,20 @@
 #' runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #' }
 #' @export
-add_sidebar_control <- function(map, id, position = "top-right") {
+add_sidebar_control <- function(
+  map,
+  id,
+  position = "top-right",
+  height = "100%"
+) {
   # add control to map
   map |>
     htmlwidgets::onRender(
       paste0(
         "function(el, x, data) ",
-        "{mapgl_sidebar_initialize(el, data.id, data.options)}"
+        "{mapgl_sidebar_initialize(el, data.id, data.height, data.options)}"
       ),
-      data = list(id = id, options = list(position = position))
+      data = list(id = id, height = height, options = list(position = position))
     )
 }
 
