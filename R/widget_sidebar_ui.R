@@ -24,18 +24,12 @@
 add_sidebar_control <- function(map, id, position = "top-right") {
   # add control to map
   map |>
-    mapgl::add_control(
-      position = position,
-      html = as.character(
-        htmltools::tags$div(
-          id = paste0(id, "-ctrl"),
-          `map-position` = position
-        )
-      )
-    ) |>
     htmlwidgets::onRender(
-      "function(el, x, data) {mapgl_sidebar_initialize(data.map, data.id)}",
-      data = list(map = map, id = id)
+      paste0(
+        "function(el, x, data) ",
+        "{mapgl_sidebar_initialize(el, data.id, data.options)}"
+      ),
+      data = list(id = id, options = list(position = position))
     )
 }
 

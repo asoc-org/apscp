@@ -1,18 +1,5 @@
-function mapgl_sidebar_initialize(mapId, elementId) {
-  // extract variables
-  var sidebar = document.getElementById(elementId);
-  var container = document.getElementById(elementId + "-ctrl");
-  var map = document.getElementById(mapId);
-  // display HTML elements
-  console.log(elementId);
-  console.log(container)
-  console.log(map);
-  // initialize sidebar
-  sidebar.widget = new MapSidebar(elementId, {position: "left"}).add_to(map);
-  // move sidebar into container
-  container.appendChild(sidebar);
-  // return TRUE
-  return true;
+function mapgl_sidebar_initialize(el, id, options) {
+  el.map.addControl(new MapSidebar(id, options), options.position);
 }
 
 // Shiny.addCustomMessageHandler("sidebar:initialize", function(message) {

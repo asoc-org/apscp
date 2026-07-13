@@ -18,12 +18,14 @@ sample_pts_data <- function(data, n_obs) {
 ui <- fluidPage(
   tags$head(tags$style(".btn-default {display: block;}")),
   sidebar_deps(),
-  h4("Leaflet Sidebar Plugin"),
+  h4("Sidebar Demo"),
   splitLayout(
     cellWidths = c("20%", "80%"),
     tagList(
-      actionButton("open", "Open Sidebar"),
+      actionButton("open", "Open Random Sidebar"),
       actionButton("close", "Close Sidebar"),
+      actionButton("enable", "Enable Profile Sidebar"),
+      actionButton("disable", "Disable Profile Sidebar"),
       verbatimTextOutput("whichtab")
     ),
     tagList(
@@ -35,19 +37,7 @@ ui <- fluidPage(
           tagList(
             sliderInput(
               "obs", "Number of observations:",
-              min = 1, max = 32, value = 10
-            ),
-            sliderInput(
-              "opa", "Point Opacity:",
-              min = 0, max = 1, value = 0.5
-            ),
-            sliderInput(
-              "fillopa", "Fill Opacity:",
-              min = 0, max = 1, value = 0.2
-            ),
-            dateRangeInput(
-              "daterange4", "Date range:",
-              start = Sys.Date() - 10, end = Sys.Date() + 10
+              min = 1, max = nrow(pts_data), value = nrow(pts_data)
             ),
             verbatimTextOutput("tab1")
           )
@@ -88,20 +78,18 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$map <- renderMapboxgl({
-    input$initialize
-    bbox <- suppressWarnings(st_bbox(pts_data))
     mapboxgl() |>
+      add_sidebar_control(id = "mysidebar", position = "top-left") |>
       add_circle_layer(id = "pts", source = pts_data) |>
-      add_sidebar_control(id = "mysidebar", position = "top-left")
+      fit_bounds(pts_data)
   })
 
   observe({
     req(input$obs)
     df <- sample_pts_data(pts_data, n_obs = input$obs)
-    bbox <- suppressWarnings(st_bbox(df))
     mapboxgl_proxy("map", session) |>
       set_source(layer_id = "pts", source = df) |>
-      fit_bounds(bbox)
+      fit_bounds(df)
   })
 
   output$tab1 <- renderText({
@@ -128,8 +116,12 @@ server <- function(input, output, session) {
     close_sidebar("mysidebar")
   })
 
-  observeEvent(input$map, once = TRUE, {
-    initialize_sidebar("mysidebar")
+  observeEvent(input$enable, {
+    enable_sidebar("mysidebar", "profile_id")
+  })
+
+  observeEvent(input$disable, {
+    disable_sidebar("mysidebar", "profile_id")
   })
 
 }

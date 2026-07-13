@@ -3,26 +3,29 @@ class MapSidebar {
   id = undefined;
   _map = undefined;
   _sidebar = undefined;
-  _container = undefined;
-  _tab_items = undefined;
+  _pane_container = undefined;
+  _tabs = undefined;
   _panes = undefined;
   _close_buttons = undefined;
-  options = {position: "left"};
+  options = undefined;
 
   constructor(id, options) {
     // set fields
     this.id = id;
-    this.options.position = this.options.position;
+    this.options = options;
     this._sidebar = document.getElementById(id);
-
-    // logging
-    console.log("initializing sidebar");
 
     // declare temporary variables
     var i, child;
 
     // add sidebar left/right class
-    this._sidebar.classList.add("mapsidebar-" + this.options.position);
+    this._sidebar.classList.add(
+      "mapsidebar-" +
+      (this.options.position.includes("left") ? "left" : "right")
+    );
+
+    // add map box control class
+    this._sidebar.classList.add("mapboxgl-ctrl");
 
     // if needed, add touch styling
     if (
@@ -39,23 +42,23 @@ class MapSidebar {
         child.tagName == "DIV" &&
         child.classList.contains("mapsidebar-content")
       ) {
-        this._container = child;
+        this._pane_container = child;
       }
     }
 
     // find tab items
-    this._tab_items = this._sidebar.querySelectorAll(
+    this._tabs = this._sidebar.querySelectorAll(
       "ul.mapsidebar-tabs > li, .mapsidebar-tabs > ul > li"
     );
-    for (i = this._tab_items.length - 1; i >= 0; i--) {
-      this._tab_items[i]._sidebar = this;
+    for (i = this._tabs.length - 1; i >= 0; i--) {
+      this._tabs[i]._sidebar = this;
     }
 
     // find sidebar panes and close buttons
     this._panes = [];
     this._close_buttons = [];
-    for (i = this._container.children.length - 1; i >= 0; i--) {
-      child = this._container.children[i];
+    for (i = this._pane_container.children.length - 1; i >= 0; i--) {
+      child = this._pane_container.children[i];
       if (
         child.tagName == "DIV" &&
         child.classList.contains("mapsidebar-pane")
@@ -67,23 +70,14 @@ class MapSidebar {
       }
     }
 
-
-    console.log("this._map");
-    console.log(this._map);
-    console.log("this._sidebar");
-    console.log(this._sidebar);
-    console.log("this._container");
-    console.log(this._container);
-    console.log("this._tab_items");
-    console.log(this._tab_items);
-    console.log("this._panes");
-    console.log(this._panes);
-    console.log("this._close_buttons");
-    console.log(this._close_buttons);
-
+    // store JS object as field so API can access it
+    this._sidebar.widget = this;
   }
 
-  add_to(map) {
+  onAdd(map) {
+    // logging
+    console.log("adding sidebar");
+
     // declare temporary variables
     var i, child;
 
@@ -91,24 +85,24 @@ class MapSidebar {
     this._map = map;
 
     // add css class sidebar-map to map
-    if (!map.classList.contains("sidebar-map")) {
-      map.classList.add("sidebar-map");
+    if (!map._container.classList.contains("sidebar-map")) {
+      map._container.classList.add("sidebar-map");
     }
 
     // add click events so that clicking on icons will open and close panes
-    this._tab_items.forEach((tab) => {
-      var sub = tab.querySelector("a");
+    this._tabs.forEach((tab) => {
+      let sub = tab.querySelector("a");
       if (
         sub.hasAttribute("href") &&
         sub.getAttribute("href").slice(0, 1) == "#"
       ) {
-        sub.addEventListener("click", () => this._on_click.call(tab));
+        sub.addEventListener("click", () => this._onClick.call(tab));
      }
    });
 
     // add click events so that clicking on close buttons will close panes
     this._close_buttons.forEach((button) => {
-      button.addEventListener("click", () => this._on_close_click());
+      button.addEventListener("click", () => this._onCloseClick());
     });
 
     // show sidebar and content
@@ -117,7 +111,12 @@ class MapSidebar {
     }, 400);
 
     // return object
-    return this;
+    return this._sidebar;
+  }
+
+  onRemove() {
+    this._sidebar.parentNode.removeChild(this._sidebar);
+    this._map = undefined;
   }
 
   open(id) {
@@ -138,9 +137,9 @@ class MapSidebar {
     }
 
     // remove old active highlights and set new highlight
-    for (i = this._tab_items.length - 1; i >= 0; i--) {
-      child = this._tab_items[i];
-      if (child.querySelector("a").hash == "#" + id) {
+    for (i = this._tabs.length - 1; i >= 0; i--) {
+       child = this._tabs[i];
+      if (child.querySelector("a").hash.slice(1) === id) {
         child.classList.add("active");
       } else {
         child.classList.remove("active");
@@ -156,9 +155,6 @@ class MapSidebar {
         .forEach(e => {e.classList.add("extended")});
       this._sidebar.classList.remove("collapsed");
     }
-
-    // return object
-    return this;
   }
 
   close() {
@@ -169,9 +165,8 @@ class MapSidebar {
     var i, child;
 
     // remove old active highlights
-    for (i = this._tab_items.length - 1; i >= 0; i--) {
-        child = this._tab_items[i];
-        child.classList.remove("active");
+    for (i = this._tabs.length - 1; i >= 0; i--) {
+      this._tabs[i].classList.remove("active");
     }
 
     // if needed, close sidebar
@@ -183,25 +178,49 @@ class MapSidebar {
         .forEach(e => {e.classList.remove("extended")});
       this._sidebar.classList.add("collapsed");
     }
-
-    // return object
-    return this;
   }
 
   enable(id) {
-    // TODO
-    return this;
+    // declare temporary variables
+    var i, child;
+
+    // enable tab
+    for (i = this._tabs.length - 1; i >= 0; i--) {
+      child = this._tabs[i];
+      if (child.querySelector("a").hash.slice(1) === id) {
+        // found the desired tab, so enable it
+        child.classList.remove("disabled");
+        // since only one tab is being enabled, exit early
+        break;
+      }
+    }
   }
 
   disable(id) {
-    // TODO
-    return this;
+    // declare temporary variables
+    var i, child;
+
+    // disable tab
+    for (i = this._tabs.length - 1; i >= 0; i--) {
+      child = this._tabs[i];
+      if (child.querySelector("a").hash.slice(1) === id) {
+        // found the desired tab, so then...
+        // if tab is active, then close it
+        if (child.classList.contains("active")) {
+          this.close(id)
+        }
+        // disable the tab
+        child.classList.add("disabled");
+        // since only one tab is being disabled, exit early
+        break;
+      }
+    }
   }
 
   /**
    * @private
    */
-  _on_click() {
+  _onClick() {
     if (this.classList.contains("active")) {
       this._sidebar.close();
     } else if (!this.classList.contains("disabled")) {
@@ -212,7 +231,7 @@ class MapSidebar {
   /**
    * @private
    */
-  _on_close_click() {
+  _onCloseClick() {
     this.close();
   }
 
