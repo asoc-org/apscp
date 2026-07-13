@@ -22,18 +22,49 @@ ui <- fluidPage(
   splitLayout(
     cellWidths = c("20%", "80%"),
     tagList(
-      actionButton("open", "Open Random Sidebar"),
-      actionButton("close", "Close Sidebar"),
-      actionButton("enable", "Enable Profile Sidebar"),
-      actionButton("disable", "Disable Profile Sidebar"),
-      verbatimTextOutput("whichtab")
+      h3("Left sidebar"),
+      actionButton("open_left", "Open Random Sidebar"),
+      actionButton("close_left", "Close Sidebar"),
+      actionButton("enable_left", "Enable Profile Sidebar"),
+      actionButton("disable_left", "Disable Profile Sidebar"),
+      h3("Right sidebar"),
+      actionButton("open_right", "Open Sidebar"),
+      actionButton("close_right", "Close Sidebar"),
     ),
     tagList(
       sidebar_tabs(
-        id = "mysidebar",
+        id = "rightsidebar",
+        list(icon("hat-wizard"), icon("table")),
+        sidebar_pane(
+          title = "Style", id = "style_id", icon = NULL,
+          tagList(
+            selectInput(
+              "col", "Color of points:",
+              choices = c(
+                "blue" = "#0000FF",
+                "red" = "#880808",
+                "green" = "#00FF00",
+                "yellow" = "#FFFF00",
+                "black" = "#000000"
+              ),
+              selected = "blue"
+            ),
+            verbatimTextOutput("tab2")
+          )
+        ),
+        sidebar_pane(
+          title = "Table", id = "table_id",
+          icon = icon("table", verify_fa = FALSE),
+          tagList(
+            tableOutput("data2")
+          )
+        )
+      ),
+      sidebar_tabs(
+        id = "leftsidebar",
         list(icon("car"), icon("user"), icon("envelope")),
         sidebar_pane(
-          title = "home", id = "home_id", icon = icon("home"),
+          title = "Home", id = "home_id", icon = icon("home"),
           tagList(
             sliderInput(
               "obs", "Number of observations:",
@@ -43,7 +74,7 @@ ui <- fluidPage(
           )
         ),
         sidebar_pane(
-          title = "profile", id = "profile_id", icon = icon("wrench"),
+          title = "Profile", id = "profile_id", icon = icon("wrench"),
           tagList(
             textInput("caption", "Caption", "Data Summary"),
             selectInput(
@@ -60,8 +91,8 @@ ui <- fluidPage(
           )
         ),
         sidebar_pane(
-          title = "messages", id = "messages_id",
-          icon = icon("person", verify_fa = FALSE),
+          title = "Messages", id = "messages_id",
+          icon = NULL,
           tagList(
             checkboxGroupInput(
               "variable", "Variables to show:",
@@ -77,24 +108,57 @@ ui <- fluidPage(
 )
 
 server <- function(input, output, session) {
+  # map
   output$map <- renderMapboxgl({
     mapboxgl() |>
-      add_sidebar_control(id = "mysidebar", position = "top-left") |>
-      add_circle_layer(id = "pts", source = pts_data) |>
+      add_sidebar_control(id = "leftsidebar", position = "top-left") |>
+      add_sidebar_control(id = "rightsidebar", position = "top-right") |>
       fit_bounds(pts_data)
   })
 
   observe({
     req(input$obs)
+    req(input$col)
     df <- sample_pts_data(pts_data, n_obs = input$obs)
     mapboxgl_proxy("map", session) |>
-      set_source(layer_id = "pts", source = df) |>
+      clear_layer("pts") |>
+      add_circle_layer(
+        id = "pts", source = pts_data, circle_color = input$col
+      ) |>
       fit_bounds(df)
   })
 
-  output$tab1 <- renderText({
-    input$obs
+  # buttons for left side bar
+  observeEvent(input$open_left, {
+    open_sidebar(
+      "leftsidebar",
+      sample(c("home_id", "profile_id", "messages_id"), 1)
+    )
   })
+
+  observeEvent(input$close_left, {
+    close_sidebar("leftsidebar")
+  })
+
+  observeEvent(input$enable_left, {
+    enable_sidebar("leftsidebar", "profile_id")
+  })
+
+  observeEvent(input$disable_left, {
+    disable_sidebar("leftsidebar", "profile_id")
+  })
+
+  # buttons for right side bar
+  observeEvent(input$open_right, {
+    open_sidebar("rightsidebar", "style_id")
+  })
+
+  observeEvent(input$close_right, {
+    close_sidebar("rightsidebar")
+  })
+
+  # left sidebar content
+  output$tab1 <- renderText({input$obs})
 
   output$value <- renderText({
     req(input$go)
@@ -105,24 +169,13 @@ server <- function(input, output, session) {
     mtcars[, c("mpg", input$variable), drop = FALSE]
   })
 
-  observeEvent(input$open, {
-    open_sidebar(
-      "mysidebar",
-      sample(c("home_id", "profile_id", "messages_id"), 1)
-    )
+  # right sidebar content
+  output$tab2 <- renderText({input$col})
+
+  output$data2 <- renderTable(rownames = FALSE, {
+    mtcars[, c("mpg", input$variable), drop = FALSE]
   })
 
-  observeEvent(input$close, {
-    close_sidebar("mysidebar")
-  })
-
-  observeEvent(input$enable, {
-    enable_sidebar("mysidebar", "profile_id")
-  })
-
-  observeEvent(input$disable, {
-    disable_sidebar("mysidebar", "profile_id")
-  })
 
 }
 

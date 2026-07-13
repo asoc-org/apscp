@@ -41,9 +41,11 @@ add_sidebar_control <- function(
 #' Create a sidebar pane
 #' @param title A title for the sidebar pane
 #'
-#' @param id An id for the sidebar pane
+#' @param id An id for the sidebar pane.
 #'
-#' @param icon An icon for the sidebar pane
+#' @param icon An [icon()] object for the sidebar pane. This icon
+#' is used to create a button for closing the pane. If `NULL`, then
+#' no icon is added for the pane.
 #'
 #' @param ... List of elements to include in the pane
 #'
@@ -72,12 +74,19 @@ sidebar_pane <- function(
   if (is.null(id)) {
     stop("The sidebar pane needs an `id`.")
   }
-  htmltools::tags$div(
-    class = "mapsidebar-pane", id = id,
-    htmltools::tags$h3(
-      class = "mapsidebar-pane-header", title,
+  if (is.null(icon)) {
+    h <- htmltools::tags$h3(
+      class = "mapsidebar-pane-header", title
+    )
+  } else {
+    h <- htmltools::tags$h3(
+      class = c("mapsidebar-pane-header", "mapsidebar-pane-header-icon"), 
+      title,
       htmltools::tags$span(class = "mapsidebar-close", icon)
-    ),
+    )
+  }
+  htmltools::tags$div(
+    class = "mapsidebar-pane", id = id, h,
     htmltools::tags$div(
       class = "mapsidebar-pane-content",
       ...
