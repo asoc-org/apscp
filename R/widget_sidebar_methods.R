@@ -1,33 +1,11 @@
-#' Initialize sidebar
-#'
-#' Initialize a sidebar.
-#'
-#' @param id `character` value with identifier for sidebar.
-#'
-#' @param opts `list` with options for customizing sidebar.
-#' Defaults to an empty list.
-#'
-#' @param session The `session` object passed to function given to
-#' `shinyServer` Default is [shiny::getDefaultReactiveDomain()].
-#'
-#' @family sidebar
-#'
-#' @export
-initialize_sidebar <- function(
-  id,
-  session = shiny::getDefaultReactiveDomain()
-) {
-  session$sendCustomMessage(
-    "sidebar:initialize",
-    list(id = id)
-  )
-}
-
 #' Open sidebar
 #'
 #' Open a sidebar.
 #'
-#' @inheritParams initialize_sidebar
+#' @param id `character` value with identifier for sidebar.
+#'
+#' @param session The `session` object passed to function given to
+#' `shinyServer` Default is [shiny::getDefaultReactiveDomain()].
 #'
 #' @param pane_id `character` value with identifier for sidebar pane.
 #'

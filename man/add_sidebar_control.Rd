@@ -4,22 +4,24 @@
 \alias{add_sidebar_control}
 \title{Add sidebar control}
 \usage{
-add_sidebar_control(map, id, position = "top-right")
+add_sidebar_control(map, id, position = "top-right", height = "100\%")
 }
 \arguments{
-\item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} functions.}
+\item{map}{[mapgl::mapboxgl()] object.}
 
 \item{id}{`character` identifier for sidebar.}
 
 \item{position}{The position of the control. Can be one of "top-left", "top-right",
 "bottom-left", or "bottom-right". Default is "top-right".}
 
-\item{[mapgl::mapboxgl()]}{object.}
-
-\item{sidebar}{[sidebar_tabs()] object.}
+\item{height}{`character` value denoting the height of the widget
+in CSS units. For example, acceptable values include `"100%"`, `"30vh"`, or
+or `"400px"`. Note that if `height` is a percentage value, then it
+is recommended to add other map controls to a different
+`position` to avoid overlaps.}
 }
 \value{
-The modified map object with the custom control added.
+An updated [mapgl::mapboxgl()] object.
 }
 \description{
 Add a sidebar control to a [mapgl::mapboxgl()] object.
@@ -37,7 +39,6 @@ Other sidebar:
 \code{\link[=close_sidebar]{close_sidebar()}},
 \code{\link[=disable_sidebar]{disable_sidebar()}},
 \code{\link[=enable_sidebar]{enable_sidebar()}},
-\code{\link[=initialize_sidebar]{initialize_sidebar()}},
 \code{\link[=open_sidebar]{open_sidebar()}},
 \code{\link[=sidebar_pane]{sidebar_pane()}}
 }

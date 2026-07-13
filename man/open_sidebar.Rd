@@ -23,7 +23,6 @@ Other sidebar:
 \code{\link[=close_sidebar]{close_sidebar()}},
 \code{\link[=disable_sidebar]{disable_sidebar()}},
 \code{\link[=enable_sidebar]{enable_sidebar()}},
-\code{\link[=initialize_sidebar]{initialize_sidebar()}},
 \code{\link[=sidebar_pane]{sidebar_pane()}}
 }
 \concept{sidebar}

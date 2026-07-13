@@ -2,14 +2,19 @@
 #'
 #' Add a sidebar control to a [mapgl::mapboxgl()] object.
 #'
-#' @param [mapgl::mapboxgl()] object.
+#' @param map [mapgl::mapboxgl()] object.
 #'
 #' @param id `character` identifier for sidebar.
 #'
-#' @param sidebar [sidebar_tabs()] object.
+#' @param height `character` value denoting the height of the widget
+#' in CSS units. For example, acceptable values include `"100%"`, `"30vh"`, or
+#' or `"400px"`. Note that if `height` is a percentage value, then it
+#' is recommended to add other map controls to a different
+#' `position` to avoid overlaps.
+#'
 #' @inheritParams mapgl::add_control
 #'
-#' @inherit mapgl::add_control return
+#' @return An updated [mapgl::mapboxgl()] object.
 #'
 #' @family sidebar
 #'
@@ -80,7 +85,7 @@ sidebar_pane <- function(
     )
   } else {
     h <- htmltools::tags$h3(
-      class = c("mapsidebar-pane-header", "mapsidebar-pane-header-icon"), 
+      class = c("mapsidebar-pane-header", "mapsidebar-pane-header-icon"),
       title,
       htmltools::tags$span(class = "mapsidebar-close", icon)
     )
@@ -106,6 +111,8 @@ sidebar_pane <- function(
 #' @param ... The individual [sidebar_pane()] objects.
 #'
 #' @return A `shiny.tag` with individual sidebar panes
+#'
+#' @family sidebar
 #'
 #' @examples
 #' \dontrun{

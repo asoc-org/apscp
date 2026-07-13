@@ -14,9 +14,11 @@ sidebar_pane(
 \arguments{
 \item{title}{A title for the sidebar pane}
 
-\item{id}{An id for the sidebar pane}
+\item{id}{An id for the sidebar pane.}
 
-\item{icon}{An icon for the sidebar pane}
+\item{icon}{An [icon()] object for the sidebar pane. This icon
+is used to create a button for closing the pane. If `NULL`, then
+no icon is added for the pane.}
 
 \item{...}{List of elements to include in the pane}
 }
@@ -44,7 +46,6 @@ Other sidebar:
 \code{\link[=close_sidebar]{close_sidebar()}},
 \code{\link[=disable_sidebar]{disable_sidebar()}},
 \code{\link[=enable_sidebar]{enable_sidebar()}},
-\code{\link[=initialize_sidebar]{initialize_sidebar()}},
 \code{\link[=open_sidebar]{open_sidebar()}}
 }
 \concept{sidebar}

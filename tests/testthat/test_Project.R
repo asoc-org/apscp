@@ -91,6 +91,7 @@ test_that("new_project", {
 })
 
 test_that("map_project", {
+  skip_if_missing_mapbox_token()
   # create object
   x <- simulate_project()
   start_tile_server(x)
