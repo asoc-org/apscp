@@ -1,4 +1,4 @@
-import style from "./css/style.css";
+import "./css/style.css";
 
 /** Class representing a map sidebar. */
 export class MapSidebar {
