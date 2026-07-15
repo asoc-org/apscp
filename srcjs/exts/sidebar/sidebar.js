@@ -11,7 +11,7 @@ import {MapSidebar} from "./class.js"
 * values include `"top-left"` and `"top-right"`.
 * @return {void}
 */
-Shiny.mapgl_sidebar_initialize = function(el, id, height, options) {
+Shiny.mapglSidebarInitialize = function(el, id, height, options) {
   el.map.addControl(new MapSidebar(id, height, options), options.position);
 }
 

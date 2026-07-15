@@ -11,10 +11,10 @@ export class MapSidebar {
   _height = undefined;
   _map = undefined;
   _sidebar = undefined;
-  _pane_container = undefined;
+  _paneContainer = undefined;
   _tabs = undefined;
   _panes = undefined;
-  _close_buttons = undefined;
+  _closeButtons = undefined;
 
   /**
   * Initialize a new sidebar object.
@@ -62,7 +62,7 @@ export class MapSidebar {
         child.tagName == "DIV" &&
         child.classList.contains("mapsidebar-content")
       ) {
-        this._pane_container = child;
+        this._paneContainer = child;
       }
     }
 
@@ -76,9 +76,9 @@ export class MapSidebar {
 
     // find sidebar panes and close buttons
     this._panes = [];
-    this._close_buttons = [];
-    for (i = this._pane_container.children.length - 1; i >= 0; i--) {
-      child = this._pane_container.children[i];
+    this._closeButtons = [];
+    for (i = this._paneContainer.children.length - 1; i >= 0; i--) {
+      child = this._paneContainer.children[i];
       if (
         child.tagName == "DIV" &&
         child.classList.contains("mapsidebar-pane")
@@ -86,7 +86,7 @@ export class MapSidebar {
         this._panes.push(child);
         var close_buttons = child.querySelectorAll(".mapsidebar-close");
         for (var j = 0, len = close_buttons.length; j < len; j++)
-          this._close_buttons.push(close_buttons[j]);
+          this._closeButtons.push(close_buttons[j]);
       }
     }
 
@@ -133,7 +133,7 @@ export class MapSidebar {
    });
 
     // add click events so that clicking on close buttons will close panes
-    this._close_buttons.forEach((button) => {
+    this._closeButtons.forEach((button) => {
       button.addEventListener("click", () => this._onCloseClick());
     });
 

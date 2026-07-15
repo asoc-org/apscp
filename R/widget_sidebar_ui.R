@@ -37,7 +37,7 @@ add_sidebar_control <- function(
     htmlwidgets::onRender(
       paste0(
         "function(el, x, data) ",
-        "{Shiny.mapgl_sidebar_initialize(",
+        "{Shiny.mapglSidebarInitialize(",
         "el, data.id, data.height, data.options)}"
       ),
       data = list(id = id, height = height, options = list(position = position))
