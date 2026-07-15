@@ -113,17 +113,16 @@ server <- function(input, output, session) {
     mapboxgl() |>
       add_sidebar_control(id = "leftsidebar", position = "top-left") |>
       add_sidebar_control(id = "rightsidebar", position = "top-right") |>
-      fit_bounds(pts_data)
+      fit_bounds(pts_data) |>
+      add_circle_layer(id = "pts", source = pts_data, circle_color = "blue")
   })
 
-  observe({
-    req(input$obs)
-    req(input$col)
+  observeEvent(c(input$obs, input$col), {
     df <- sample_pts_data(pts_data, n_obs = input$obs)
-    mapboxgl_proxy("map", session) |>
+    mapboxgl_proxy("map", session = session) |>
       clear_layer("pts") |>
       add_circle_layer(
-        id = "pts", source = pts_data, circle_color = input$col
+        id = "pts", source = df, circle_color = input$col
       ) |>
       fit_bounds(df)
   })
@@ -175,7 +174,6 @@ server <- function(input, output, session) {
   output$data2 <- renderTable(rownames = FALSE, {
     mtcars[, c("mpg", input$variable), drop = FALSE]
   })
-
 
 }
 

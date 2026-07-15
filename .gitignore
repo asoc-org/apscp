@@ -48,3 +48,4 @@ rsconnect
 # R profile files
 *.Rhistory
 .Rproj.user/
+node_modules

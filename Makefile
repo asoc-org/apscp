@@ -25,6 +25,13 @@ init:
 	$(R) CMD BATCH --no-restore --no-save inst/scripts/init.R
 	rm -rf init.Rout
 
+## bundle javascript and css
+bundle:
+	$(R) --slave -e "packer::bundle_dev()"
+
+bundle_prod:
+	$(R) --slave -e "packer::bundle_prod()"
+
 ## build data
 data:
 	$(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-data.R
@@ -51,7 +58,7 @@ examples:
 	$(R) --slave -e "devtools::run_examples();warnings()"  >> examples.log
 	rm -f Rplots.pdf
 
-example_sidebar:
+example_sidebar: bundle_prod
 	$(R) --slave -e "source('inst/examples/sidebar_app.R')"
 
 ## run checks
