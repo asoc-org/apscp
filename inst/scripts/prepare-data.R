@@ -157,6 +157,7 @@ locks <-
         column = x$name,
         total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        visible = x$visible,
         tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
@@ -188,6 +189,7 @@ costs <-
         column = x$name,
         total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        visible = x$visible,
         tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
@@ -220,6 +222,7 @@ features <-
         column = x$name,
         total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        visible = x$visible,
         tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,

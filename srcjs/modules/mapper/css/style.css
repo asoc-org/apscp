@@ -1,0 +1,132 @@
+/* overall widget */
+.mapper-container {
+  padding-right: 3px;
+  cursor: move;
+  --active: #073b4c;
+  --icon: #0d1321;
+  --sub-icon: #0d1321;
+  --inactive: #B8B8B8;
+  --border: black;
+  --symbol-border: #D3D3D3;
+  --ghost: #C8EBFB;
+}
+
+/* menu item containers */
+.mapper-menu-item  {
+  width: 90%;
+  border: 1px var(--border) solid;
+  border-radius: 5px 5px 5px 5px;
+  margin-bottom: 8px;
+  margin-left: 17px;
+}
+
+/* ghost styling */
+.ghost {
+  background: --ghost;
+  opacity: 0.2;
+}
+
+/* cursor styling */
+.no-click {
+  cursor: not-allowed;
+}
+
+.mapper-menu-item .header div[title], .mapper-menu-item .header label[title], .mapper-menu-item .header i[title] {
+  cursor: default !important;
+}
+
+.mapper-container, .mapper-menu-item .theme-container label, .mapper-container, .mapper-menu-item .name-label {
+  cursor: move;
+}
+
+/* header */
+.mapper-menu-item .header {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.mapper-menu-item .header label {
+  margin-bottom: 0;
+}
+
+.mapper-menu-item .header .name-label {
+  margin-right: auto;
+  word-break: break-all;
+}
+
+.mapper-menu-item .header .layer-button {
+  margin-left: 3px;
+  margin-top: 0px;
+  padding: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0);
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.mapper-menu-item .header .icon-container {
+  margin-right: 5px;
+}
+
+/* theme container and label */
+.mapper-menu-item .theme-container {
+  padding-left: 5px;
+}
+.mapper-menu-item .theme-label {
+  margin-bottom: 0;
+}
+
+/* show legend checkbox */
+.mapper-menu-item .legend-checkbox-container {
+  margin-right: 1px;
+  cursor: pointer;
+}
+
+.mapper-menu-item .legend-checkbox-container input[type="checkbox"],
+.mapper-menu-item .legend-checkbox-container .checked {
+  display: none;
+  color: black;
+}
+
+.mapper-menu-item .legend-checkbox-container .unchecked {
+  color: black;
+}
+
+.mapper-menu-item .legend-checkbox-container input[type="checkbox"]:checked ~ .checked {
+  display: inline-block;
+}
+
+.mapper-menu-item .legend-checkbox-container input[type="checkbox"]:checked ~ .unchecked {
+  display: none;
+}
+
+/* show layer checkbox */
+.mapper-menu-item .layer-checkbox-container {
+  cursor: pointer;
+}
+
+.mapper-menu-item .layer-checkbox-container input[type="checkbox"],
+.mapper-menu-item .layer-checkbox-container .checked {
+  display: none;
+  color: black;
+}
+
+.mapper-menu-item .layer-checkbox-container .unchecked {
+  color: red;
+}
+
+.mapper-menu-item .layer-checkbox-container input[type="checkbox"]:checked ~ .checked
+{
+  display: inline-block;
+}
+
+.mapper-menu-item .layer-checkbox-container input[type="checkbox"]:checked ~ .unchecked
+{
+  display: none;
+}

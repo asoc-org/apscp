@@ -4,7 +4,7 @@
 #'
 #' @param map [mapgl::mapboxgl()] object.
 #'
-#' @param id `character` identifier for sidebar.
+#' @param id `character` HTML identifier for sidebar.
 #'
 #' @param height `character` value denoting the height of the widget
 #' in CSS units. For example, acceptable values include `"100%"`, `"30vh"`, or

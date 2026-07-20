@@ -4,18 +4,33 @@
 \alias{mapper}
 \title{Mapper}
 \usage{
-mapper(x, elementId, width = NULL, height = NULL)
+mapper(
+  project,
+  map_id,
+  max_layers = 15L,
+  width = NULL,
+  height = NULL,
+  id = NULL
+)
 }
 \arguments{
-\item{x}{[new_project()] object.}
+\item{project}{[new_project()] object.}
 
-\item{elementId}{`character` HTML identifier for the widget.}
+\item{map_id}{`character` HTML identifier for [mapgl::mapboxglOutput()].
+Defaults to `NULL` since these identifiers are not used by Shiny.}
+
+\item{max_layers}{`integer` maximum number of layers to be active on
+the [mapgl::mapboxglOutput()] at a single point in time.
+Defaults to 15.}
 
 \item{width}{`character` width of the displayed widget.
 Defaults to `NULL` such that the widget is automatically sized.}
 
 \item{height}{`character` width of the displayed widget.
 Defaults to `NULL` such that the widget is automatically sized.}
+
+\item{id}{`character` HTML identifier for the widget.
+Defaults to `NULL` since these identifiers are not used by Shiny.}
 }
 \description{
 Constructs a widget for managing layers on a [mapgl::mapboxgl()] map.
@@ -33,10 +48,6 @@ runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 \seealso{
 Other mapper:
 \code{\link{mapper-shiny}},
-\code{\link[=mapper_add_layer]{mapper_add_layer()}},
-\code{\link[=mapper_disable]{mapper_disable()}},
-\code{\link[=mapper_enable_layer]{mapper_enable_layer()}},
-\code{\link[=mapper_hide_layer]{mapper_hide_layer()}},
-\code{\link[=mapper_show_layer]{mapper_show_layer()}}
+\code{\link[=mapper_add_layer]{mapper_add_layer()}}
 }
 \concept{mapper}

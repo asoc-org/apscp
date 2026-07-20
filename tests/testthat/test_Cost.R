@@ -36,6 +36,7 @@ test_that("serialize_object", {
   expect_equal(x$name, "cost")
   expect_equal(x$layer, serialize_object(d$layer))
   expect_equal(x$class, "Cost")
+  expect_equal(x$id, d$id)
 })
 
 test_that("deserialize_object", {

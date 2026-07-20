@@ -16,7 +16,8 @@ NULL
 #' (e.g., a value of 0.1 corresponds to 10%).
 #' Note that `zones` and `targets` must have the same number of values.
 #'
-#' @inheritParams new_layer
+#' @param id `character` value with unique identifier.
+#' Defaults to a random identifier ([uuid::UUIDgenerate()]).
 #'
 #' @return A `Feature` object.
 #'
@@ -64,8 +65,9 @@ new_feature <- function(name, layer, targets, id = uuid::UUIDgenerate()) {
   structure(
     list(
       name = name,
-      layer = layer,
-      targets = targets
+      id = id,
+      targets = targets,
+      layer = layer
     ),
     class = "Feature"
   )

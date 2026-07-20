@@ -7,9 +7,12 @@
 mapper_add_layer(id, value, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{id}{`character` value with identifier for layer manager.}
+\item{id}{`character` value with identifier for [mapper()] object.}
 
-\item{value}{[Theme], [Cost], [Solution], or [Lock] object.}
+\item{value}{[Cost], [Solution], or [Lock] object.}
+
+\item{session}{The `session` object passed to function given to
+`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
 }
 \description{
 Add a new layer to a layer manager widget.
@@ -17,10 +20,6 @@ Add a new layer to a layer manager widget.
 \seealso{
 Other mapper:
 \code{\link[=mapper]{mapper()}},
-\code{\link{mapper-shiny}},
-\code{\link[=mapper_disable]{mapper_disable()}},
-\code{\link[=mapper_enable_layer]{mapper_enable_layer()}},
-\code{\link[=mapper_hide_layer]{mapper_hide_layer()}},
-\code{\link[=mapper_show_layer]{mapper_show_layer()}}
+\code{\link{mapper-shiny}}
 }
 \concept{mapper}

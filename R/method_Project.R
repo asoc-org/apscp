@@ -192,29 +192,37 @@ map_project <- function(x, ...) {
   )
 
   # add sources
-  for (i in seq_along(x$tiles)) {
-    m <- mapgl_add_source(m, x$tiles[[i]])
+  for (i in seq_along(x$tileset$tiles)) {
+    m <- mapgl_add_source(m, x$tileset$tiles[[i]])
   }
 
   # add layers
-  ## features
-  for (i in seq_along(x$themes)) {
-    for (j in seq_along(x$themes[[i]]$features)) {
-      m <- mapgl_add_layer(m, x$themes[[i]]$features[[j]])
+  ## solutions
+  if (length(x$solutions) > 0) {
+    for (i in seq(length(x$solutions), 1L)) {
+      if (isTRUE(x$solutions[[i]]$layer$visible)) {
+        m <- mapgl_add_layer(m, x$solutions[[i]])
+      }
     }
   }
   ## locks
-  for (i in seq_along(x$locks)) {
-    m <- mapgl_add_layer(m, x$locks[[i]])
+  for (i in seq(length(x$locks), 1L)) {
+    if (isTRUE(x$locks[[i]]$layer$visible)) {
+      m <- mapgl_add_layer(m, x$locks[[i]])
+    }
   }
   ## costs
-  for (i in seq_along(x$costs)) {
-    m <- mapgl_add_layer(m, x$costs[[i]])
+  for (i in seq(length(x$costs), 1L)) {
+    if (isTRUE(x$costs[[i]]$layer$visible)) {
+      m <- mapgl_add_layer(m, x$costs[[i]])
+    }
   }
-  ## solutions
-  if (length(x$solutions) > 0) {
-    for (i in seq_along(x$costs)) {
-      m <- mapgl_add_layer(m, x$solutions[[i]])
+  ## features
+  for (i in seq(length(x$themes), 1L)) {
+    for (j in seq(length(x$themes[[i]]$features), 1L)) {
+      if (isTRUE(x$themes[[i]]$features[[j]]$layer$visible)) {
+        m <- mapgl_add_layer(m, x$themes[[i]]$features[[j]])
+      }
     }
   }
 

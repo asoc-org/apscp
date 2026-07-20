@@ -22,9 +22,11 @@ tileset:
   class: Tileset
 costs:
 - name: Tourism vessel landings
+  id: 59ea247f-12f1-4821-adf2-7a3369bf952c
   layer:
     column: Tourism vessel landings
     total: 7171.0
+    visible: no
     details: ~
     legend:
       values:
@@ -63,13 +65,14 @@ costs:
       source_layer: layer
       max_zoom: 8.0
       class: Tile
-    id: cf808003-da7b-4376-b096-347460297bca
     class: Layer
   class: Cost
 - name: Tourism visitor landings
+  id: 79e4db3d-634d-483c-8b2d-41a9d8668968
   layer:
     column: Tourism visitor landings
     total: 378254.0
+    visible: no
     details: ~
     legend:
       values:
@@ -108,16 +111,21 @@ costs:
       source_layer: layer
       max_zoom: 8.0
       class: Tile
-    id: dec369de-4609-450e-835e-4e3f567ef3e3
     class: Layer
   class: Cost
 themes:
 - name: Geographic
   features:
   - name: Continental landing site
+    id: 1bbb7356-622f-4a37-adab-1baf7e2822b3
+    targets:
+    - 0.0
+    - 0.0
+    - 6.27e-05
     layer:
       column: Continental landing site
       total: 31895.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -137,17 +145,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 45af3eae-b06c-4841-8b68-37a658509466
       class: Layer
-    targets:
-    - 0.0
-    - 0.0
-    - 6.27e-05
     class: Feature
   - name: Potential expansion zones
+    id: 050602d5-9cb1-4653-8c37-44cd68725f57
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
     layer:
       column: Potential expansion zones
       total: 21.0
+      visible: no
       details: Zones that species might be likely to expand into with climate change
       legend:
         values:
@@ -188,17 +197,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 390295ca-6f83-4a15-86ee-4c2666982461
       class: Layer
-    targets:
-    - 0.3
-    - 0.05
-    - 0.0
     class: Feature
   - name: Sites past the Antarctic circle
+    id: 6424202b-fb5c-4f5c-81c5-98fd9a2c1d15
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0001051
     layer:
       column: Sites past the Antarctic circle
       total: 28554.0
+      visible: no
       details: Site is located south of the Antarctic Circle
       legend:
         values: 1.0
@@ -218,20 +228,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: fb2f77b3-4a82-4b91-9103-e60a70a1853d
       class: Layer
-    targets:
-    - 0.0
-    - 0.0
-    - 0.0001051
     class: Feature
   class: Theme
 - name: Habitats
   features:
   - name: Fresh water
+    id: 139c2a44-0a8b-41b3-8c8c-c4c2c7309f08
+    targets:
+    - 0.05
+    - 0.05
+    - 0.0
     layer:
       column: Fresh water
       total: 882.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -251,17 +262,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 4ec8aa76-1c0f-4bea-809c-c421f21791fe
       class: Layer
-    targets:
-    - 0.05
-    - 0.05
-    - 0.0
     class: Feature
   - name: Geotermal/volcanic sites
+    id: 06721e9f-a14a-46ca-a37c-eb66b9e5578a
+    targets:
+    - 0.6
+    - 0.3
+    - 0.0
     layer:
       column: Geotermal/volcanic sites
       total: 3.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -281,17 +293,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 018e8980-090a-4a81-adc8-e4b92fac9941
       class: Layer
-    targets:
-    - 0.6
-    - 0.3
-    - 0.0
     class: Feature
   - name: Invasive species
+    id: 419e25ff-6b32-4194-b289-64f6919646b8
+    targets:
+    - 0.0
+    - 0.5769231
+    - 0.0
     layer:
       column: Invasive species
       total: 26.0
+      visible: no
       details: Important for monitoring and management and inversely important to
         biodiversity (i.e. sites free of invasives important)
       legend:
@@ -312,20 +325,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: f3b94a5b-5c98-43b8-b795-11526fbc991b
       class: Layer
-    targets:
-    - 0.0
-    - 0.5769231
-    - 0.0
     class: Feature
   class: Theme
 - name: Historic
   features:
   - name: Historic monuments
+    id: 0798e38e-b923-4078-84af-066f842c0211
+    targets:
+    - 0.0
+    - 0.5
+    - 0.1034483
     layer:
       column: Historic monuments
       total: 29.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -345,20 +359,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: e0adce11-189f-4e8b-978d-a74598ff7574
       class: Layer
-    targets:
-    - 0.0
-    - 0.5
-    - 0.1034483
     class: Feature
   class: Theme
 - name: Ice
   features:
   - name: Crevasses
+    id: 97f44423-ce0c-45e6-a55a-6738c9f6e7f9
+    targets:
+    - 0.0111483
+    - 0.0089186
+    - 0.0
     layer:
       column: Crevasses
       total: 897.0
+      visible: no
       details: ~
       legend:
         values:
@@ -397,17 +412,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 61731ecd-55a4-4213-b17d-bfcccba68c91
       class: Layer
-    targets:
-    - 0.0111483
-    - 0.0089186
-    - 0.0
     class: Feature
   - name: Fast ice / shelf ice
+    id: 8764510c-d86b-48fb-b514-2bf6605e0f0d
+    targets:
+    - 0.2
+    - 0.4
+    - 0.0
     layer:
       column: Fast ice / shelf ice
       total: 10.0
+      visible: no
       details: ~
       legend:
         values:
@@ -446,17 +462,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 280f7ec5-4bad-44ac-8d98-58d7866b5ec4
       class: Layer
-    targets:
-    - 0.2
-    - 0.4
-    - 0.0
     class: Feature
   - name: Glaciers
+    id: 4f339035-5006-4a68-a310-9246b6290571
+    targets:
+    - 0.15
+    - 0.05
+    - 0.0
     layer:
       column: Glaciers
       total: 451.0
+      visible: no
       details: Including tidewater glaciers
       legend:
         values:
@@ -495,17 +512,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 1947d4cb-7fde-4f6b-92d4-e1da940544f1
       class: Layer
-    targets:
-    - 0.15
-    - 0.05
-    - 0.0
     class: Feature
   - name: Ice shelf
+    id: 8bba3266-9187-42b3-a0d5-05744061390d
+    targets:
+    - 0.0
+    - 0.05
+    - 0.0011485
     layer:
       column: Ice shelf
       total: 1306.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -525,20 +543,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: f486f8cb-e546-478b-9e80-575a2ff5bad9
       class: Layer
-    targets:
-    - 0.0
-    - 0.05
-    - 0.0011485
     class: Feature
   class: Theme
 - name: Invertebrates
   features:
   - name: Entomobryomorpha springtails
+    id: 2f005dc6-3568-45e9-a1aa-688bfe1a274f
+    targets:
+    - 0.1052356
+    - 0.0073298
+    - 0.0
     layer:
       column: Entomobryomorpha springtails
       total: 955.0
+      visible: no
       details: E.g., Isotoma klovstadi
       legend:
         values:
@@ -581,17 +600,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 1f4cbaed-511e-494b-b796-0f2ab44d9b7f
       class: Layer
-    targets:
-    - 0.1052356
-    - 0.0073298
-    - 0.0
     class: Feature
   - name: Freshwater copepods
+    id: 48f0bc4e-c72a-4f9c-8f04-531f34b982e4
+    targets:
+    - 0.2272727
+    - 0.1136364
+    - 0.0
     layer:
       column: Freshwater copepods
       total: 44.0
+      visible: no
       details: ~
       legend:
         values:
@@ -630,17 +650,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: fbfd5e6f-35e0-419b-b899-fa3729ff1d0b
       class: Layer
-    targets:
-    - 0.2272727
-    - 0.1136364
-    - 0.0
     class: Feature
   - name: General invertebrates
+    id: a467d11e-f166-4c44-a179-097ddd709b78
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0
     layer:
       column: General invertebrates
       total: 288.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -660,17 +681,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 63767bbb-7292-4e02-b14f-31c0aa287fef
       class: Layer
-    targets:
-    - 0.0
-    - 0.0
-    - 0.0
     class: Feature
   - name: Intertidal mites
+    id: 2f1dcbc1-1ad9-4b4d-a545-65077d54f6cc
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
     layer:
       column: Intertidal mites
       total: 12.0
+      visible: no
       details: ~
       legend:
         values:
@@ -711,17 +733,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: d561a662-e831-40bb-8355-af1f5c7bf049
       class: Layer
-    targets:
-    - 0.3
-    - 0.05
-    - 0.0
     class: Feature
   - name: Intertidal oligochaetes
+    id: 1f196208-a6d7-4f19-940c-6a6124a468b9
+    targets:
+    - 0.1111111
+    - 0.05
+    - 0.0
     layer:
       column: Intertidal oligochaetes
       total: 90.0
+      visible: no
       details: Including enchytraeids, such as Christensenia spp.
       legend:
         values:
@@ -760,17 +783,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 79c238bd-2e56-4857-ab81-ac63a17e931e
       class: Layer
-    targets:
-    - 0.1111111
-    - 0.05
-    - 0.0
     class: Feature
   - name: Intertidal springtails
+    id: 993e9748-b9dc-4870-ba47-17d30a9466a3
+    targets:
+    - 0.1398601
+    - 0.2097902
+    - 0.0
     layer:
       column: Intertidal springtails
       total: 143.0
+      visible: no
       details: ~
       legend:
         values:
@@ -809,17 +833,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 11f5c2d2-2a72-403d-8c85-19eccbe4e2f9
       class: Layer
-    targets:
-    - 0.1398601
-    - 0.2097902
-    - 0.0
     class: Feature
   - name: Moss-associated microfauna
+    id: d743a3d2-384a-4217-b910-bde7dbd4f756
+    targets:
+    - 0.1338983
+    - 0.05
+    - 0.0
     layer:
       column: Moss-associated microfauna
       total: 295.0
+      visible: no
       details: Terrestrial, moss associated nematodes, rotifers, tardigrades
       legend:
         values:
@@ -858,17 +883,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 60e98095-3f61-4b3a-bb71-f04bb0247780
       class: Layer
-    targets:
-    - 0.1338983
-    - 0.05
-    - 0.0
     class: Feature
   - name: Penguin rookery-associated nematodes
+    id: 20d6b652-1c3d-4b83-8a3e-ea67f0b17464
+    targets:
+    - 0.2
+    - 0.05
+    - 0.0
     layer:
       column: Penguin rookery-associated nematodes
       total: 185.0
+      visible: no
       details: Terrestrial, penguin rookery associated nematodes
       legend:
         values:
@@ -905,17 +931,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 25081f19-f7d0-4be0-a517-44fdc7f14fb3
       class: Layer
-    targets:
-    - 0.2
-    - 0.05
-    - 0.0
     class: Feature
   - name: Poduromorpha springtails
+    id: 94ae5c7f-1551-4004-8a4a-3ee546f1b49e
+    targets:
+    - 0.2222222
+    - 0.4444444
+    - 0.0
     layer:
       column: Poduromorpha springtails
       total: 9.0
+      visible: no
       details: E.g., Gomphiocephalus hodgsoni
       legend:
         values:
@@ -956,20 +983,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 7b4a895c-4a0f-420c-918d-280e60a3378e
       class: Layer
-    targets:
-    - 0.2222222
-    - 0.4444444
-    - 0.0
     class: Feature
   class: Theme
 - name: Microbes
   features:
   - name: Biological soil crust microbes
+    id: abd5c0ad-5429-4d64-bd5c-cf4ff8ff6fe6
+    targets:
+    - 0.7
+    - 0.05
+    - 0.0041494
     layer:
       column: Biological soil crust microbes
       total: 482.0
+      visible: no
       details: Biological soil crust microbial communities
       legend:
         values:
@@ -1012,17 +1040,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 36899c19-e732-475c-a311-87c6343c6187
       class: Layer
-    targets:
-    - 0.7
-    - 0.05
-    - 0.0041494
     class: Feature
   - name: Dry soil microbes
+    id: fcfc578c-41d7-4905-afaf-c41079d2771a
+    targets:
+    - 0.775
+    - 0.05
+    - 0.0
     layer:
       column: Dry soil microbes
       total: 10.0
+      visible: no
       details: Microbes that predominantly survive in the dry soil
       legend:
         values:
@@ -1063,17 +1092,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: f8718dd6-3ee3-475b-a682-df2d84444f78
       class: Layer
-    targets:
-    - 0.775
-    - 0.05
-    - 0.0
     class: Feature
   - name: Lithic microbes
+    id: 6c95c9af-e556-4402-9c1b-c33d295b3193
+    targets:
+    - 0.55
+    - 0.05
+    - 0.0199203
     layer:
       column: Lithic microbes
       total: 251.0
+      visible: no
       details: Microbes that predominantly survive on/in rocks (endolithic, hypolithic
         and chasmolithic)
       legend:
@@ -1115,17 +1145,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: d22f0e97-a730-4196-8266-8d067a9dcc50
       class: Layer
-    targets:
-    - 0.55
-    - 0.05
-    - 0.0199203
     class: Feature
   - name: Microbial mats
+    id: 747ae983-1cd8-4556-b7dc-cb2542fdedab
+    targets:
+    - 0.3157895
+    - 0.0315789
+    - 0.0
     layer:
       column: Microbial mats
       total: 95.0
+      visible: no
       details: Microbial mats, both lake and flush systems
       legend:
         values:
@@ -1166,17 +1197,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 6e04b812-7e09-4eb0-bbb9-d5a8dd7d5d4a
       class: Layer
-    targets:
-    - 0.3157895
-    - 0.0315789
-    - 0.0
     class: Feature
   - name: Plankton
+    id: 21ab18b3-7cd5-49da-a0d9-728b472c4910
+    targets:
+    - 0.75
+    - 0.05
+    - 0.0
     layer:
       column: Plankton
       total: 311.0
+      visible: no
       details: Non-marine aquatic system plankton
       legend:
         values:
@@ -1215,17 +1247,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 009e7ba8-ccef-447f-8adf-62fce2bd7ce4
       class: Layer
-    targets:
-    - 0.75
-    - 0.05
-    - 0.0
     class: Feature
   - name: Snow algae
+    id: 622110d8-21d2-4af8-8db7-dc5c2bebb9d7
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0071429
     layer:
       column: Snow algae
       total: 280.0
+      visible: no
       details: ~
       legend:
         values:
@@ -1264,17 +1297,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 1c0dd952-990e-45fa-92f1-a0abcff578f0
       class: Layer
-    targets:
-    - 0.6
-    - 0.05
-    - 0.0071429
     class: Feature
   - name: Snow algae 2
+    id: 55d9c86d-339a-496c-8aae-42f56b66136c
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
     layer:
       column: Snow algae 2
       total: 529.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -1294,17 +1328,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 3cb94e6c-3413-4f4c-8392-67b7645213b9
       class: Layer
-    targets:
-    - 0.3
-    - 0.05
-    - 0.0
     class: Feature
   - name: Wet soil microbes
+    id: bd597847-fde8-46d5-9a61-7c4de87a9d59
+    targets:
+    - 0.5
+    - 0.05
+    - 0.0
     layer:
       column: Wet soil microbes
       total: 180.0
+      visible: no
       details: Wet soil microbial communities
       legend:
         values:
@@ -1343,20 +1378,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: a04cdcea-95e3-4d70-a3a0-18c3cb5854aa
       class: Layer
-    targets:
-    - 0.5
-    - 0.05
-    - 0.0
     class: Feature
   class: Theme
 - name: Outstanding geological
   features:
   - name: Fossil bearing rocks
+    id: a003d8ee-8fea-4732-b322-4572e626ba07
+    targets:
+    - 0.0254237
+    - 0.0423729
+    - 0.0
     layer:
       column: Fossil bearing rocks
       total: 3540.0
+      visible: no
       details: ~
       legend:
         values:
@@ -1395,17 +1431,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 52653364-d300-40d6-a7b2-d7621fd3a4d0
       class: Layer
-    targets:
-    - 0.0254237
-    - 0.0423729
-    - 0.0
     class: Feature
   - name: Geological processes
+    id: 73ff96b3-de94-4c6c-a337-631d2f2a12b7
+    targets:
+    - 0.3
+    - 0.05
+    - 0.0
     layer:
       column: Geological processes
       total: 24.0
+      visible: no
       details: Sites containing examples of interesting geological processes (e.g.,
         ventifacts)
       legend:
@@ -1443,17 +1480,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 4aeab8c6-052e-4903-aa81-d9a783fc6058
       class: Layer
-    targets:
-    - 0.3
-    - 0.05
-    - 0.0
     class: Feature
   - name: Meteorites
+    id: 908a6b7c-84b4-436a-b3cc-943eddd2d51b
+    targets:
+    - 0.4
+    - 0.05
+    - 0.0
     layer:
       column: Meteorites
       total: 65.0
+      visible: no
       details: ~
       legend:
         values:
@@ -1492,17 +1530,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 3e10d8d9-9822-40b7-8c0d-4d4eb47bc881
       class: Layer
-    targets:
-    - 0.4
-    - 0.05
-    - 0.0
     class: Feature
   - name: Minerals and crystals
+    id: 0031ea8b-8b39-45c7-a3ad-66690d4614fe
+    targets:
+    - 0.55
+    - 0.05
+    - 0.0
     layer:
       column: Minerals and crystals
       total: 20.0
+      visible: no
       details: ~
       legend:
         values:
@@ -1543,20 +1582,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: f25778c2-2b9a-442a-b5fa-430c16fb9f3c
       class: Layer
-    targets:
-    - 0.55
-    - 0.05
-    - 0.0
     class: Feature
   class: Theme
 - name: Penguins
   features:
   - name: Adélie penguins
+    id: 5ca04b57-bec9-473c-88ec-fcdbc3ebdcf0
+    targets:
+    - 0.55
+    - 0.05
+    - 0.0
     layer:
       column: Adélie penguins
       total: 296.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -1595,17 +1635,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 7bf76105-bbb6-43b2-ba1a-574037f53186
       class: Layer
-    targets:
-    - 0.55
-    - 0.05
-    - 0.0
     class: Feature
   - name: Chinstrap penguins
+    id: 7a8bfcc2-dfc3-4ecb-9f9b-c992e0ec12b7
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0
     layer:
       column: Chinstrap penguins
       total: 255.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -1648,17 +1689,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: f9d0b9ae-7433-4700-9b24-fe0310d5653c
       class: Layer
+    class: Feature
+  - name: Emperor penguins
+    id: 7fea9053-f827-4e44-a832-f7fef9199e27
     targets:
     - 0.6
     - 0.05
     - 0.0
-    class: Feature
-  - name: Emperor penguins
     layer:
       column: Emperor penguins
       total: 3.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values: 1.0
@@ -1678,17 +1720,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 4baa8976-85af-4e53-9576-1ebd020acd88
       class: Layer
-    targets:
-    - 0.6
-    - 0.05
-    - 0.0
     class: Feature
   - name: Gentoo penguins
+    id: a3977e2b-a159-4daa-9af9-f0e51b7fb678
+    targets:
+    - 0.4
+    - 0.0851064
+    - 0.0
     layer:
       column: Gentoo penguins
       total: 235.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -1731,17 +1774,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 7bffb6c3-cf8c-4487-b431-1f537f6bf3cf
       class: Layer
-    targets:
-    - 0.4
-    - 0.0851064
-    - 0.0
     class: Feature
   - name: King penguins
+    id: 837c9019-9009-464f-8fbe-5f30cbf28466
+    targets:
+    - 0.875
+    - 0.05
+    - 0.0
     layer:
       column: King penguins
       total: 21.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -1782,17 +1826,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 462b3760-c8cb-4c9a-a026-1cbe7684db2d
       class: Layer
-    targets:
-    - 0.875
-    - 0.05
-    - 0.0
     class: Feature
   - name: Macaroni penguins
+    id: 4121c448-c078-4061-95cd-dcd26c465254
+    targets:
+    - 0.7
+    - 0.05
+    - 0.0
     layer:
       column: Macaroni penguins
       total: 124.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -1831,20 +1876,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 6a3500b3-87e2-4051-a514-120994a7d9cc
       class: Layer
-    targets:
-    - 0.7
-    - 0.05
-    - 0.0
     class: Feature
   class: Theme
 - name: Science
   features:
   - name: Monitoring sites
+    id: ea9c9fc3-f010-4a1a-8be0-dba5db1b3dee
+    targets:
+    - 0.0
+    - 0.1818182
+    - 0.0
     layer:
       column: Monitoring sites
       total: 165.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -1864,17 +1910,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 57a8b54a-d34f-4b31-8131-da3fbaaec9dc
       class: Layer
-    targets:
-    - 0.0
-    - 0.1818182
-    - 0.0
     class: Feature
   - name: Research stations
+    id: e9114288-dd9a-4713-bc5e-c6adebefaf83
+    targets:
+    - 0.0
+    - 0.6578947
+    - 0.0526316
     layer:
       column: Research stations
       total: 38.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -1894,17 +1941,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 8a92ede6-17df-44f8-8122-e8b57e346337
       class: Layer
-    targets:
-    - 0.0
-    - 0.6578947
-    - 0.0526316
     class: Feature
   - name: Scientific field camps
+    id: 8e09e02b-3788-482b-bf5b-4c16ac0659c7
+    targets:
+    - 0.0
+    - 1.0
+    - 0.0
     layer:
       column: Scientific field camps
       total: 5.0
+      visible: no
       details: ~
       legend:
         values: 1.0
@@ -1924,20 +1972,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: f5f11610-3202-49ca-8c2f-0212b7ec2a0e
       class: Layer
-    targets:
-    - 0.0
-    - 1.0
-    - 0.0
     class: Feature
   class: Theme
 - name: Seabirds
   features:
   - name: Antarctic shag
+    id: 6ce10254-3427-4644-a5fe-6999bce4507c
+    targets:
+    - 0.6
+    - 0.05
+    - 0.05
     layer:
       column: Antarctic shag
       total: 9.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values: 1.0
@@ -1957,17 +2006,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: d72ccdab-8be4-449e-84a0-cb0fe62e8950
       class: Layer
+    class: Feature
+  - name: Antarctic terns
+    id: 0e0d48c8-68bd-4f47-8ee7-37622f498fa1
     targets:
     - 0.6
     - 0.05
     - 0.05
-    class: Feature
-  - name: Antarctic terns
     layer:
       column: Antarctic terns
       total: 9.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values: 1.0
@@ -1987,17 +2037,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 0a67b10c-859d-41d7-a469-644ac9f4c545
       class: Layer
-    targets:
-    - 0.6
-    - 0.05
-    - 0.05
     class: Feature
   - name: Other seabird colonies
+    id: 18868d77-f4fd-4be5-b213-5a8f97113f31
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0123967
     layer:
       column: Other seabird colonies
       total: 242.0
+      visible: no
       details: E.g., southern giant petrels, sheathbills, Antarctic shag, terns, petrels
       legend:
         values: 1.0
@@ -2017,17 +2068,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 87e01660-2a10-4a54-a6fb-efbdaef172f8
       class: Layer
-    targets:
-    - 0.0
-    - 0.0
-    - 0.0123967
     class: Feature
   - name: Procellariids
+    id: 53084920-1a9d-4bb7-85b8-44558a62a2f2
+    targets:
+    - 0.6
+    - 0.05
+    - 0.0
     layer:
       column: Procellariids
       total: 4.0
+      visible: no
       details: Snow petrel, Southern Fulmar, Wilson's storm petrel, Antarctic petrel,
         Antarctic prion, Cape petrel, and associated ectoparasties
       legend:
@@ -2048,71 +2100,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: b4fcafcd-cd7b-4281-b212-bffb94b77870
       class: Layer
-    targets:
-    - 0.6
-    - 0.05
-    - 0.0
     class: Feature
   class: Theme
 - name: Seals
   features:
   - name: Antarctic fur seals
-    layer:
-      column: Antarctic fur seals
-      total: 9.0
-      details: Including associated ectoparasites
-      legend:
-        values:
-        - 0.0
-        - 0.5
-        - 1.0
-        - 1.5
-        - 2.0
-        colors:
-        - '#440154FF'
-        - '#3B528BFF'
-        - '#21908CFF'
-        - '#5DC863FF'
-        - '#FDE725FF'
-        breaks:
-        - 0.0
-        - 0.5
-        - 1.0
-        - 1.5
-        - 2.0
-        labels:
-        - '0'
-        - '0.5'
-        - '1'
-        - '1.5'
-        - '2'
-        units: abundance
-        class: ContinuousLegend
-      provenance:
-        name: Terauds et al. 2025
-        icon: book
-        color: '#000000'
-        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-          et al. 2025</a>
-        class: Provenance
-      tile:
-        file: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      id: 9ed4f322-585f-4269-9cee-be9a10db472e
-      class: Layer
+    id: 6d4c272b-54e9-4e6c-947b-e8305a41f643
     targets:
     - 0.3
     - 0.05
     - 0.0
-    class: Feature
-  - name: Elephant seals
     layer:
-      column: Elephant seals
+      column: Antarctic fur seals
       total: 9.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -2153,17 +2155,70 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: d915e281-aae6-4543-8ee8-c3c7ab5bd610
       class: Layer
+    class: Feature
+  - name: Elephant seals
+    id: da7075c9-63be-447c-9f63-686e28df2da4
     targets:
     - 0.5555556
     - 0.05
     - 0.0
+    layer:
+      column: Elephant seals
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        file: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
     class: Feature
   - name: Weddell seals
+    id: 4901cb18-8965-41ab-8694-505dae45ebd4
+    targets:
+    - 0.1
+    - 0.05
+    - 0.0
     layer:
       column: Weddell seals
       total: 30.0
+      visible: no
       details: Including associated ectoparasites
       legend:
         values:
@@ -2202,20 +2257,21 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 20622041-b4ed-4022-872a-f32b69399415
       class: Layer
-    targets:
-    - 0.1
-    - 0.05
-    - 0.0
     class: Feature
   class: Theme
 - name: Vegetation
   features:
   - name: Leafy liverworts
+    id: 73db138c-454e-448a-82a2-82ed7b37896e
+    targets:
+    - 0.168572
+    - 0.0660338
+    - 0.0
     layer:
       column: Leafy liverworts
       total: 2423.0
+      visible: no
       details: E.g., Cephaloziella varians
       legend:
         values:
@@ -2254,17 +2310,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 651c6530-2106-4300-8cd4-e9f9ce2a45a4
       class: Layer
-    targets:
-    - 0.168572
-    - 0.0660338
-    - 0.0
     class: Feature
   - name: Mesic mosses
+    id: 2410f12c-a3c6-48b8-ab3b-7cc174ef5728
+    targets:
+    - 0.1
+    - 0.0595238
+    - 0.0
     layer:
       column: Mesic mosses
       total: 336.0
+      visible: no
       details: ~
       legend:
         values:
@@ -2303,17 +2360,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 9c8e4ac3-c961-430e-b8e1-12151e19ee34
       class: Layer
-    targets:
-    - 0.1
-    - 0.0595238
-    - 0.0
     class: Feature
   - name: Thalloid liverworts
+    id: ba645d56-9143-44d7-a1e2-4b373ab74eef
+    targets:
+    - 0.5
+    - 0.05
+    - 0.0
     layer:
       column: Thalloid liverworts
       total: 86.0
+      visible: no
       details: ~
       legend:
         values:
@@ -2352,17 +2410,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: 9210f656-16a6-47cf-9a81-4da840bdf02a
       class: Layer
-    targets:
-    - 0.5
-    - 0.05
-    - 0.0
     class: Feature
   - name: Truly aquatic mosses
+    id: 28f6d9a8-67d0-44ce-aad1-4fe30345099b
+    targets:
+    - 0.1663755
+    - 0.0582242
+    - 0.0
     layer:
       column: Truly aquatic mosses
       total: 2748.0
+      visible: no
       details: I.e., lake-dwelling moss
       legend:
         values:
@@ -2401,17 +2460,18 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: b989b9e7-51c3-4325-b06d-8d48aed93b11
       class: Layer
-    targets:
-    - 0.1663755
-    - 0.0582242
-    - 0.0
     class: Feature
   - name: Vegetation
+    id: 6b6e6b10-2bad-48fd-8f0c-f00951818bbe
+    targets:
+    - 0.0
+    - 0.0
+    - 0.0026702
     layer:
       column: Vegetation
       total: 749.0
+      visible: no
       details: Sites with the two Antarctic plants or moss or lichens
       legend:
         values: 1.0
@@ -2431,19 +2491,16 @@ themes:
         source_layer: layer
         max_zoom: 8.0
         class: Tile
-      id: cb44c54d-c87d-47e0-aff7-61f591f36033
       class: Layer
-    targets:
-    - 0.0
-    - 0.0
-    - 0.0026702
     class: Feature
   class: Theme
 locks:
 - name: ASPA
+  id: 43e66ef4-6bca-4443-a985-a84c76210604
   layer:
     column: ASPA
     total: 719.0
+    visible: yes
     details: ~
     legend:
       values: 1.0
@@ -2463,13 +2520,14 @@ locks:
       source_layer: layer
       max_zoom: 8.0
       class: Tile
-    id: 25d7b012-97c9-4f4d-8610-824c7cf3338f
     class: Layer
   class: Lock
 - name: Inviolate sites
+  id: adbc2acc-9379-4859-b208-1e886f65179d
   layer:
     column: Inviolate sites
     total: 25753.0
+    visible: no
     details: Important for ASPA designation, also as future scientific monitoring/control
       sites. Including undisturbed coastal areas (which are rare in the Peninsula)
     legend:
@@ -2490,7 +2548,6 @@ locks:
       source_layer: layer
       max_zoom: 8.0
       class: Tile
-    id: e7eeb2fe-89a6-4499-bcc5-57d55d6a87f4
     class: Layer
   class: Lock
 solutions: []

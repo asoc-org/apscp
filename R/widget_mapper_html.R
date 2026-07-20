@@ -1,19 +1,29 @@
 #' @include internal.R
 NULL
 
-# Add custom HTML for the widget (automatically used by htmlwidgets)
+
+#' Scaffold for a mapper widget
+#'
+#' Create a HTML scaffold for a [mapper()] widget.
+#'
+#' @param id `character` value with HTML identifier for the widget.
+#'
+#' @param style Object passed to `htmltools::tags$div()`.
+#'
+#' @param class Object passed to `htmltools::tags$div()`.
+#'
+#' @param ... Additional arguments passed to a `htmltools::tags$div()`.
+#'
+#' @return A `shiny.tag` object.
+#'
+#' @noRd
 mapper_html <- function(id, style, class, ...) {
   # HTML scaffold
   x <- htmltools::tags$div(
     id = id, class = class, style = style,
     htmltools::div(
       class = "mapper-container",
-      htmltools::div(
-        class = "mapper-panel",
-        htmltools::tags$div(
-          class = "layers"
-        )
-      )
+      htmltools::div(class = "mapper-menu")
     )
   )
 
@@ -24,12 +34,9 @@ mapper_html <- function(id, style, class, ...) {
     htmltools::tags$template(
       class = "solution-layer-template",
       htmltools::tags$div(
-        class = c("mapper-layer", "solution-layer"),
-        mapper_layer_header_scaffold(type = "Solution"),
-        htmltools::tags$div(
-          class = "layer-legend-container",
-          mapper_legend_scaffold()
-        )
+        class = c("mapper-menu-item", "solution-layer"),
+        mapper_menu_item_header_scaffold(type = "Solution"),
+        htmltools::tags$div(class = "legend-container")
       )
     )
   )
@@ -40,12 +47,9 @@ mapper_html <- function(id, style, class, ...) {
     htmltools::tags$template(
       class = "lock-layer-template",
       htmltools::tags$div(
-        class = c("mapper-layer", "lock-layer"),
-        mapper_layer_header_scaffold(type = "Lock"),
-        htmltools::tags$div(
-          class = "layer-legend-container",
-          mapper_legend_scaffold()
-        )
+        class = c("mapper-menu-item", "lock-layer"),
+        mapper_menu_item_header_scaffold(type = "Lock"),
+        htmltools::tags$div(class = "legend-container")
       )
     )
   )
@@ -56,16 +60,12 @@ mapper_html <- function(id, style, class, ...) {
     htmltools::tags$template(
       class = "cost-layer-template",
       htmltools::tags$div(
-        class = c("mapper-layer", "cost-layer"),
-        mapper_layer_header_scaffold(type = "Cost"),
-        htmltools::tags$div(
-          class = "layer-legend-container",
-          mapper_legend_scaffold()
-        )
+        class = c("mapper-menu-item", "cost-layer"),
+        mapper_menu_item_header_scaffold(type = "Cost"),
+        htmltools::tags$div(class = "legend-container")
       )
     )
   )
-
 
   ## feature layer
   x <- htmltools::tagAppendChild(
@@ -73,12 +73,14 @@ mapper_html <- function(id, style, class, ...) {
     htmltools::tags$template(
       class = "feature-layer-template",
       htmltools::tags$div(
-        class = c("mapper-layer", "feature-layer"),
-        mapper_layer_header_scaffold(type = "Feature"),
+        class = c("mapper-menu-item", "feature-layer"),
+        mapper_menu_item_header_scaffold(type = "Feature"),
         htmltools::tags$div(
-          class = "layer-legend-container",
-          mapper_legend_scaffold()
-        )
+          class = "theme-container",
+          shiny::icon("chevron-right"),
+          htmltools::tags$label(class = "theme-label"),
+       ),
+       htmltools::tags$div(class = "legend-container")
       )
     )
   )
@@ -87,20 +89,9 @@ mapper_html <- function(id, style, class, ...) {
   x
 }
 
-#' Scaffold for the legend component of a layer in the mapper widget
+#' Scaffold for the header component of a menu item
 #'
-#' Create a HTML scaffold for a legend component of the [mapper()] widget.
-#'
-#' @return A `shiny.tag` object.
-#'
-#' @noRd
-mapper_legend_scaffold <- function() {
-  htmltools::tags$div(class = "legend")
-}
-
-#' Scaffold for the header component of a layer in the mapper widget
-#'
-#' Create a HTML scaffold for a header component of
+#' Create a HTML scaffold for a header component of a menu item for
 #' the [mapper()] widget.
 #'
 #' @param type `character` value indicating the type of layer.
@@ -109,25 +100,25 @@ mapper_legend_scaffold <- function() {
 #' @return A `shiny.tag` object.
 #'
 #' @noRd
-mapper_header_scaffold <- function(type) {
+mapper_menu_item_header_scaffold <- function(type) {
   # create tooltip text for type
   if (identical(type, "Feature")) {
     icon <- shiny::icon("star", class = "fa-solid")
-    icon_tooltip_text <- paste0(
+    icon_tooltip_text <- paste(
       "This feature layer denotes places that may be important",
       "for covering within priority areas."
     )
   } else if (identical(type, "Cost")) {
-    icon <- shiny::icon("weight-hanging")
-    icon_tooltip_text <- paste0(
+    icon <- shiny::icon("dollar-sign")
+    icon_tooltip_text <- paste(
       "This cost layer indicates places that should ideally be avoided",
       "by priority areas for conservation."
     )
   } else if (identical(type, "Lock")) {
     icon <- shiny::icon("lock")
-    icon_tooltip_text <- paste0(
-      "This lock layer indicates places that should ideally be avoided",
-      "by priority areas."
+    icon_tooltip_text <- paste(
+      "This lock layer indicates places that must either be selected",
+      "or avoided by priority areas."
     )
   } else if (identical(type, "Solution")) {
     icon <- shiny::icon("rocket")
@@ -136,66 +127,45 @@ mapper_header_scaffold <- function(type) {
     stop("`type` not recognized.") # nocov
   }
 
-  # create name element
-  if (identical(type, "Feature")) {
-    name <- htmltools::tags$div(
-      class = "pair-label",
-      htmltools::tags$label(
-        class = "theme-label"
-      ),
-      htmltools::tags$label(
-        class = "name-label"
-      )
-    )
-  } else {
-    name <- htmltools::tags$div(
-      class = "single-label",
-      htmltools::tags$label(
-        class = "name-label"
-      )
-    )
-  }
-
   # return scaffold
   htmltools::tags$div(
     class = "header",
     htmltools::tags$label(
-      class = "view-container",
+      class = "legend-checkbox-container",
       `data-toggle` = "tooltip",
       `data-placement` = "top",
       `data-container` = "body",
       title = "Show/hide legend",
       htmltools::tags$input(
-        class = "view-checkbox",
+        class = "legend-checkbox",
         type = "checkbox"
       ),
       htmltools::tags$i(class = "far fa-minus-square checked"),
       htmltools::tags$i(class = "far fa-plus-square unchecked")
     ),
     htmltools::tags$label(
-      class = "visible-container",
+      class = "layer-checkbox-container",
       `data-toggle` = "tooltip",
       `data-placement` = "top",
       `data-container` = "body",
       title = "Show/hide on map",
       htmltools::tags$input(
-        class = "visible-checkbox",
+        class = "layer-checkbox",
         type = "checkbox"
       ),
       htmltools::tags$i(class = "fa fa-eye checked"),
       htmltools::tags$i(class = "fa fa-eye-slash unchecked")
     ),
-    htmltools::tags$div(
-      class = "details-container",
-      name
+    htmltools::tags$label(
+      class = "name-label"
     ),
     htmltools::tags$button(
-      class = "disable-button",
+      class = "layer-button",
       type = "button",
       `data-toggle` = "tooltip",
       `data-placement` = "top",
       `data-container` = "body",
-      title = "Remove from menu and map",
+      title = "Remove from map",
       htmltools::tags$i(class = "fa fa-trash-alt")
     ),
     htmltools::tags$div(

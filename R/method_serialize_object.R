@@ -134,11 +134,11 @@ serialize_object.Layer <- function(x) {
   list(
     column = x$column,
     total = x$total,
+    visible = x$visible,
     details = x$details,
     legend = serialize_object(x$legend),
     provenance = serialize_object.Provenance(x$provenance),
     tile = serialize_object.Tile(x$tile),
-    id = x$id,
     class = "Layer"
   )
 }
@@ -149,8 +149,9 @@ serialize_object.Layer <- function(x) {
 serialize_object.Feature <- function(x) {
   list(
     name = x$name,
-    layer = serialize_object.Layer(x$layer),
+    id = x$id,
     targets = x$targets,
+    layer = serialize_object.Layer(x$layer),
     class = "Feature"
   )
 }
@@ -161,6 +162,7 @@ serialize_object.Feature <- function(x) {
 serialize_object.Lock <- function(x) {
   list(
     name = x$name,
+    id = x$id,
     layer = serialize_object.Layer(x$layer),
     class = "Lock"
   )
@@ -172,6 +174,7 @@ serialize_object.Lock <- function(x) {
 serialize_object.Cost <- function(x) {
   list(
     name = x$name,
+    id = x$id,
     layer = serialize_object.Layer(x$layer),
     class = "Cost"
   )
@@ -183,6 +186,7 @@ serialize_object.Cost <- function(x) {
 serialize_object.Solution <- function(x) {
   list(
     name = x$name,
+    id = x$id,
     layer = serialize_object.Layer(x$layer),
     class = "Solution"
   )

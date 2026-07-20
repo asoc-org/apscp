@@ -58,7 +58,7 @@ mapgl_layer_id <- function(x) {
   assertthat::assert_that(
     inherits(x, c("Feature", "Cost", "Lock", "Solution"))
   )
-  paste0(x$layer$id)
+  paste0("lyr-", x$id)
 }
 
 #' Get \pkg{mapgl} source URL.
@@ -163,7 +163,7 @@ mapgl_source_layer_id <- function(x) {
   assertthat::assert_that(
     inherits(x, c("Feature", "Cost", "Lock", "Solution"))
   )
-  paste0(x$layer$tile$source_layer)
+  x$layer$tile$source_layer
 }
 
 #' Add source
@@ -268,7 +268,7 @@ mapgl_add_layer <- function(
         stops = x$layer$legend$colors,
         na_color = "transparent"
       ),
-      fill_opacity = 0.5
+      fill_opacity = 0.8
     )
   } else {
     paint_params <- list(
@@ -279,7 +279,7 @@ mapgl_add_layer <- function(
         stops = x$layer$legend$colors,
         na_color = "transparent"
       ),
-      fill_opacity = 0.5
+      fill_opacity = 0.8
     )
   }
 

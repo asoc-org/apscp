@@ -7,7 +7,7 @@
 new_solution(name, layer, id = uuid::UUIDgenerate())
 }
 \arguments{
-\item{name}{`character` value with the name of the solution.}
+\item{name}{`character` value with the name.}
 
 \item{layer}{[new_layer()] object used to store information for
 visualization.}

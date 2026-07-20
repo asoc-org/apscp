@@ -217,7 +217,7 @@ Project <- R6::R6Class(
 #'
 #' @param dataset [new_dataset()] object.
 #'
-#' @param tileset [new_tileset()] objects.
+#' @param tileset [new_tileset()] object.
 #'
 #' @param costs `list` of [new_cost()] objects.
 #'

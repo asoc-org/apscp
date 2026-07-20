@@ -5,12 +5,7 @@ NULL
 #'
 #' Create a new lock object.
 #'
-#' @param name `character` value with the name.
-#'
-#' @param layer [new_layer()] object used to store information for
-#' visualization.
-#'
-#' @inheritParams new_layer
+#' @inheritParams new_feature
 #'
 #' @return A `Lock` object.
 #'
@@ -52,7 +47,7 @@ new_lock <- function(name, layer, id = uuid::UUIDgenerate()) {
   )
   # return object
   structure(
-    list(name = name, layer = layer),
+    list(name = name, id = id, layer = layer),
     class = "Lock"
   )
 }

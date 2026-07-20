@@ -27,10 +27,10 @@ init:
 
 ## bundle javascript and css
 bundle:
-	$(R) --slave -e "packer::bundle_dev()"
-
-bundle_prod:
 	$(R) --slave -e "packer::bundle_prod()"
+
+bundle_dev:
+	$(R) --slave -e "packer::bundle_dev()"
 
 ## build data
 data:
@@ -58,8 +58,11 @@ examples:
 	$(R) --slave -e "devtools::run_examples();warnings()"  >> examples.log
 	rm -f Rplots.pdf
 
-example_sidebar: bundle_prod
+example_sidebar: bundle
 	$(R) --slave -e "source('inst/examples/sidebar_app.R')"
+
+example_mapper: bundle_dev
+	$(R) --slave -e "source('inst/examples/mapper_app.R')"
 
 ## run checks
 check:
@@ -129,4 +132,4 @@ update-standalone:
 	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_vector.R')"
 	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-as_Matrix.R')"
 
-.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy demo demo-kill image debug snapshot vigns R init init_dev
+.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy demo demo-kill image debug snapshot vigns R init init_dev bundle example_sidebar example_mapper

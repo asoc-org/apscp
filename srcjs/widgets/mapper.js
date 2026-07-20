@@ -1,37 +1,31 @@
-import "widgets";
-import "../modules/utils/utils.js";
-import "../modules/mapper/mapper.js";
+import {Mapper} from "../modules/mapper/class.js";
 
 HTMLWidgets.widget({
-
-  name: "catalog",
-
+  name: "mapper",
   type: "output",
-
   factory: function(el, width, height) {
-
     // shared variables
     var elementId = el.id;
     var initialized = false;
-    var container = document.getElementById(elementId);
-    var handle = undefined;
+    var handle = new Mapper();
 
     return {
-
       renderValue: function(opts) {
 
-        // initialize widget
+        // alias this
+        let that = this;
+        let element = document.getElementById(elementId);
+
+        // if needed, initialize widget
         if (!initialized) {
           // set state to initialized
           initialized = true;
           // attach the widget to the DOM
-          container.widget = this;
+          element.widget = that;
           // initialize map manager
-          handle = new LayerManager(
-            elementId, container, opts.mapId, opts.project
+          handle.initialize(
+            elementId, opts.mapId, opts.project, opts.maxLayers
           );
-          // render HTML elements
-          handle.render();
         }
 
       },
@@ -40,31 +34,11 @@ HTMLWidgets.widget({
         // widget automatically resizes
       },
 
-      widget: container,
-
+      mapper: handle,
 
       /* API functions to manipulate widget */
-      add_layer: function(params) {
-        handle.add_layer(params.value);
-      },
-
-      enable_layer: function(params) {
-        handle.enable_layer(params.layer_id, params.position);
-        if (params.show) {
-          handle.show_layer(params.layer_id);
-        }
-      },
-
-      disable_layer: function(params) {
-        handle.disable_layer(params.layer_id);
-      },
-
-      hide_layer: function(params) {
-        handle.hide_layer(params.layer_id);
-      },
-
-      show_layer: function(params) {
-        handle.show_layer(params.layer_id);
+      addLayer: function(params) {
+        handle.addLayer(params.value);
       },
 
     };
@@ -73,9 +47,7 @@ HTMLWidgets.widget({
 
 // Attach message handlers if in Shiny mode (these correspond to API)
 if (HTMLWidgets.shinyMode) {
-  var fxns = [
-    "add_layer", "hide_layer", "show_layer", "enable_layer", "disable_layer"
-  ];
+  var fxns = ["addLayer"];
   var addShinyHandler = function(fxn) {
     return function() {
       Shiny.addCustomMessageHandler(
@@ -89,7 +61,6 @@ if (HTMLWidgets.shinyMode) {
       );
     }
   };
-
   for (var i = 0; i < fxns.length; ++i) {
     addShinyHandler(fxns[i])();
   }

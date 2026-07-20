@@ -61,6 +61,7 @@ var options = {
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, JSON.parse(outputPath)),
+    strictModuleExceptionHandling: true,
   },
   externals: externals,
   module: {

@@ -17,14 +17,14 @@ export class MapSidebar {
   _closeButtons = undefined;
 
   /**
-  * Initialize a new sidebar object.
-  * @param {string} id - HTML element identifier.
-  * @param {string} height - Height for sidebar (e.g., `"400px"`).
-  * @param {Object} options - Options for customizing the sidebar.
-  * @param {string} options.position - Position for sidebar. Acceptable
-  * values include `"top-left"` and `"top-right"`.
-  * @return {void}
-  */
+   * Initialize a new sidebar object.
+   * @param {string} id - HTML element identifier.
+   * @param {string} height - Height for sidebar (e.g., `"400px"`).
+   * @param {Object} options - Options for customizing the sidebar.
+   * @param {string} options.position - Position for sidebar. Acceptable
+   * values include `"top-left"` and `"top-right"`.
+   * @return {void}
+   */
   constructor(id, height, options) {
     // set fields
     this.id = id;
@@ -95,10 +95,10 @@ export class MapSidebar {
   }
 
   /**
-  * Add and display a sidebar to a Mapboxgl map.
-  * @param {Object} map - Mapboxgl Map object.
-  * @return {Object} Sidebar object.
-  */
+   * Add and display a sidebar to a Mapboxgl map.
+   * @param {Object} map - Mapboxgl Map object.
+   * @return {Object} Sidebar object.
+   */
   onAdd(map) {
     // declare temporary variables
     var i, child;
@@ -147,19 +147,19 @@ export class MapSidebar {
   }
 
   /**
-  * Remove sidebar from a Mapboxgl map.
-  * @return {void}
-  */
+   * Remove sidebar from a Mapboxgl map.
+   * @return {void}
+   */
   onRemove() {
     this._sidebar.parentNode.removeChild(this._sidebar);
     this._map = undefined;
   }
 
   /**
-  * Open sidebar pane.
-  * @param {string} id - HTML identifier for sidebar pane.
-  * @return {void}
-  */
+   * Open sidebar pane.
+   * @param {string} id - HTML identifier for sidebar pane.
+   * @return {void}
+   */
   open(id) {
     // declare temporary variables
     var i, child;
@@ -196,9 +196,9 @@ export class MapSidebar {
   }
 
   /**
-  * Close any sidebar panes that are open.
-  * @return {void}
-  */
+   * Close any sidebar panes that are open.
+   * @return {void}
+   */
   close() {
     // declare temporary variables
     var i, child;
@@ -220,10 +220,10 @@ export class MapSidebar {
   }
 
   /**
-  * Enable the menu button for opening a sidebar pane.
-  * @param {string} id - HTML identifier for sidebar pane.
-  * @return {void}
-  */
+   * Enable the menu button for opening a sidebar pane.
+   * @param {string} id - HTML identifier for sidebar pane.
+   * @return {void}
+   */
   enable(id) {
     // declare temporary variables
     var i, child;
@@ -241,10 +241,10 @@ export class MapSidebar {
   }
 
   /**
-  * Disable the menu button for opening a sidebar pane.
-  * @param {string} id - HTML identifier for sidebar pane.
-  * @return {void}
-  */
+   * Disable the menu button for opening a sidebar pane.
+   * @param {string} id - HTML identifier for sidebar pane.
+   * @return {void}
+   */
   disable(id) {
     // declare temporary variables
     var i, child;

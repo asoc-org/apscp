@@ -1,12 +1,15 @@
 /* overall widget */
 .continuous-legend {
   display: flex;
-  flex-direction: column;
-  padding: 3px 0px 3px 10px;
+  width: 95%;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 0px 0px 3px 10px;
+  --symbol-border: #D3D3D3;
 }
 
 .continuous-legend-plus {
-  width: 100%;
+  width: 95%;
   min-height: 115px;
   overflow: auto;
   position: relative;
@@ -14,35 +17,37 @@
 }
 
 .continuous-legend-minus {
-  width: 100%;
+  width: 95%;
   min-height: 0px;
   overflow: auto;
   position: relative;
   transition: 0.8s;
 }
 
-/* containers */
-.continuous-legend-flex {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+/* container */
+.colorbar-container {
+  flex-grow: 1;
 }
 
-.continuous-legend .color-bar {
+.continuous-legend .colorbar-ramp {
   height: 12px;
-  width: 300px;
-  border-radius: 5px;
+  border-radius: 2px;
+  margin-right: 1%;
   border: 1px solid var(--symbol-border);
 }
 
-.continuous-legend .items {
-  position: relative;
-  width: 300px;
+.continuous-legend .colorbar-items {
+  display: grid;
+  grid-template-columns: repeat(100, minmax(0, 1fr));
 }
 
-.continuous-legend .item {
-  position: absolute;
-  top: 100%;
+.continuous-legend .colorbar-item {
+  display: flex;
+  flex-direction: column;
+  justify-self: stretch;
+  width: 100%;
+  position: relative;
+  width: fit-content;
   transform: translateX(-50%);
 }
 
@@ -55,7 +60,7 @@
 }
 
 /* labels */
-.continuous-legend .items label {
+.continuous-legend .colorbar-items label {
   font-size: 10px;
   font-weight: 400;
   display: inline-block;
@@ -64,7 +69,7 @@
 }
 
 /* ticks */
-.continuous-legend .items .tick {
+.continuous-legend .colorbar-items .colorbar-tick {
     height: 5px;
     width: 2px;
     display: inline-block;
@@ -75,21 +80,19 @@
 
 /* small screens */
 @media only screen and (max-width: 991px) {
-  .continuous-legend .color-bar {
+  .continuous-legend .colorbar-ramp {
     width: 175px;
   }
-
-  .continuous-legend .items {
+  .continuous-legend .colorbar-items {
     width: 175px;
   }
 }
 
 /* medium screens */
 @media only screen and (max-width: 1199px) and (min-width: 992px) {
-  .continuous-legend .color-bar {
+  .continuous-legend .colorbar-ramp {
     width: 250px;
   }
-
   .continuous-legend .items {
     width: 250px;
   }

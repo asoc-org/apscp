@@ -31,10 +31,6 @@ applications.
 \seealso{
 Other mapper:
 \code{\link[=mapper]{mapper()}},
-\code{\link[=mapper_add_layer]{mapper_add_layer()}},
-\code{\link[=mapper_disable]{mapper_disable()}},
-\code{\link[=mapper_enable_layer]{mapper_enable_layer()}},
-\code{\link[=mapper_hide_layer]{mapper_hide_layer()}},
-\code{\link[=mapper_show_layer]{mapper_show_layer()}}
+\code{\link[=mapper_add_layer]{mapper_add_layer()}}
 }
 \concept{mapper}

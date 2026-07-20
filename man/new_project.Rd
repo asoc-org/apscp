@@ -23,7 +23,7 @@ new_project(
 
 \item{dataset}{[new_dataset()] object.}
 
-\item{tileset}{[new_tileset()] objects.}
+\item{tileset}{[new_tileset()] object.}
 
 \item{costs}{`list` of [new_cost()] objects.}
 

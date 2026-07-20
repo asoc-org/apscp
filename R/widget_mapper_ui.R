@@ -4,15 +4,23 @@
 #' This widget is designed to be used in conjunction with an existing
 #' map within a Shiny web application.
 #'
-#' @param x [new_project()] object.
+#' @param project [new_project()] object.
 #'
-#' @param elementId `character` HTML identifier for the widget.
+#' @param map_id `character` HTML identifier for [mapgl::mapboxglOutput()].
+#' Defaults to `NULL` since these identifiers are not used by Shiny.
+#'
+#' @param max_layers `integer` maximum number of layers to be active on
+#' the [mapgl::mapboxglOutput()] at a single point in time.
+#' Defaults to 15.
 #'
 #' @param width `character` width of the displayed widget.
 #' Defaults to `NULL` such that the widget is automatically sized.
 #'
 #' @param height `character` width of the displayed widget.
 #' Defaults to `NULL` such that the widget is automatically sized.
+#'
+#' @param id `character` HTML identifier for the widget.
+#' Defaults to `NULL` since these identifiers are not used by Shiny.
 #'
 #' @family mapper
 #'
@@ -25,26 +33,34 @@
 #' }
 #' @export
 mapper <- function(
-  x,
-  elementId,
+  project,
+  map_id,
+  max_layers = 15L,
   width = NULL,
-  height = NULL
+  height = NULL,
+  id = NULL
 ) {
   # assert valid arguments
-  asserttthat::assert_that(
-    inherits(x, "Project"),
-    assertthat::is.string(elementId),
-    assertthat::noNA(elementId)
+  assertthat::assert_that(
+    assertthat::is.string(map_id),
+    assertthat::noNA(map_id),
+    inherits(project, "Project"),
+    assertthat::is.count(max_layers),
+    assertthat::noNA(max_layers)
   )
 
   # create widget
   htmlwidgets::createWidget(
     name = "mapper",
-    serialize_object(x),
+    x = list(
+      mapId = map_id,
+      project = serialize_object(project),
+      maxLayers = max_layers
+    ),
     width = width,
     height = height,
     package = "apscp",
-    elementId = elementId
+    elementId = id
   )
 }
 

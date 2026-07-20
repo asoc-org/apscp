@@ -121,6 +121,7 @@ simulate_project <- function() {
       dataset = dataset,
       tile = tile,
       column = "cost",
+      visible = TRUE,
       legend = create_legend(d, "cost", units = "USD"),
       provenance = provenance,
       total = dataset$get_column_total("cost")
@@ -134,6 +135,7 @@ simulate_project <- function() {
       dataset = dataset,
       tile = tile,
       column = "solution",
+      visible = TRUE,
       legend = new_categorical_legend(
         c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
         c("Conservation", "Tourism", "Science"),
@@ -151,6 +153,7 @@ simulate_project <- function() {
       dataset = dataset,
       tile = tile,
       column = "locked_in",
+      visible = TRUE,
       legend = create_legend(
         d, "locked_in",
         palette = "Greens",
@@ -166,13 +169,15 @@ simulate_project <- function() {
       dataset = dataset,
       tile = tile,
       column = "locked_out",
+      visible = TRUE,
       legend = create_legend(
         d, "locked_out",
         palette = "Reds",
         units = "presence/absence"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("locked_out")
+      total = dataset$get_column_total("locked_out"),
+      details = "These sites include castles, monuments, and churches."
     )
   )
 
@@ -187,6 +192,7 @@ simulate_project <- function() {
           dataset = dataset,
           tile = tile,
           column = paste0("feat_", i),
+          visible = TRUE,
           legend = create_legend(
             d, paste0("feat_", i),
             palette = "viridis",

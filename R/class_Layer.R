@@ -20,11 +20,11 @@ NULL
 #'
 #' @param tile [new_tile()] object.
 #'
+#' @param visible `logical` value indicating if the layer should
+#' be visible by default? Defaults to `FALSE`.
+#'
 #' @param details `character` value with additional details for the layer.
 #' Defaults to `NULL`.
-#'
-#' @param id `character` value with unique identifier.
-#' Defaults to a random identifier ([uuid::UUIDgenerate()]).
 #'
 #' @return A `Layer` object.
 #'
@@ -42,6 +42,7 @@ NULL
 #'   tile = create_tile(sim_data),
 #'   legend = simulate_continuous_legend(),
 #'   provenance = simulate_provenance(),
+#'   visible = TRUE,
 #'   details = "extra info"
 #' )
 #'
@@ -56,8 +57,8 @@ new_layer <- function(
   tile,
   legend,
   provenance,
-  details = NULL,
-  id = uuid::UUIDgenerate()
+  visible = FALSE,
+  details = NULL
 ) {
   # assert that arguments are valid
   assertthat::assert_that(
@@ -65,6 +66,9 @@ new_layer <- function(
     inherits(dataset, "Dataset"),
     ## column
     assertthat::is.string(column) || assertthat::is.count(column),
+    assertthat::noNA(column),
+    ## visible
+    assertthat::is.flag(visible),
     assertthat::noNA(column),
     ## total
     assertthat::is.number(total),
@@ -75,10 +79,7 @@ new_layer <- function(
     #### provenance
     inherits(provenance, "Provenance"),
     #### tile
-    inherits(tile, "Tile"),
-    ## id
-    assertthat::is.string(id),
-    assertthat::noNA(id)
+    inherits(tile, "Tile")
   )
   if (!is.null(details)) {
     assertthat::assert_that(
@@ -90,13 +91,13 @@ new_layer <- function(
   # return object
   structure(
     list(
-      id = id,
       column = column,
       total = total,
       dataset = dataset,
       tile = tile,
       legend = legend,
       provenance = provenance,
+      visible = visible,
       details = details
     ),
     class = "Layer"

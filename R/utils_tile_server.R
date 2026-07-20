@@ -36,11 +36,14 @@ start_tile_server <- function(x, dir = NULL, verbose = TRUE) {
   }
 
   # copy pm tiles to directory
-  paths <- vapply(x$tiles, `[[`, "character", "path")
-  paths <- normalizePath(paths, mustWork = TRUE)
-  paths <- paths[dirname(paths) != dir]
-  if (length(paths) > 0) {
-    file.copy(paths, to = file.path(dir, basename(paths)), overwrite = TRUE)
+  files <- vapply(x$tileset$tiles, `[[`, "character", "file")
+  existing_paths <- file.path(x$tileset$dir, files)
+  new_paths <- file.path(dir, files)
+  idx <- !file.exists(new_paths)
+  new_paths <- new_paths[idx]
+  existing_paths <- existing_paths[idx]
+  if (length(new_paths) > 0) {
+    file.copy(existing_paths, to = new_paths)
   }
 
   # launch tile server process
