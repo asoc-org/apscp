@@ -48,6 +48,7 @@ print(d)
 See [serialize_object()] for the opposite of this function.
 
 Other io:
+\code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=serialize_object]{serialize_object()}},

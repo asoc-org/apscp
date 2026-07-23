@@ -51,3 +51,80 @@ new_solution <- function(name, layer, id = uuid::UUIDgenerate()) {
     class = "Solution"
   )
 }
+
+
+#' Create solution
+#'
+#' Create a [new_solution()] object.
+#'
+#' @param name `character` value with name.
+#'
+#' @param dataset [new_dataset() object that has a column with the solution.
+#'
+#' @param column `character` value with column name in `dataset` that
+#' has the values.
+#'
+#' @param tile [new_tile()] object tile information for the solution.
+#' Defaults to `NULL` such that a [new_tile()] object is automatically created.
+#'
+#' @param tileset [new_tileset()] object with information on creating
+#' the `tile` object. Note that this is only used if `tile = NULL`.
+#'
+#' @inheritParams new_feature
+#'
+#' @inheritParams new_layer
+#'
+#' @inherit new_solution return
+#'
+#' @export
+create_solution <- function(
+  name, dataset, column, legend, provenance,
+  tile = NULL, tileset = NULL, id = uuid::UUIDgenerate()
+) {
+  # assert valid arguments
+  assertthat::assert_that(
+    ## name
+    assertthat::is.string(name),
+    ## dataset
+    inherits(dataset, "Dataset"),
+    ## column_name
+    assertthat::is.string(column),
+    dataset$has_column(column),
+    ## legend
+    inherits(legend, c("ContinuousLegend", "CategoricalLegend")),
+    ## id
+    assertthat::is.string(id)
+  )
+
+  # if needed, create tile
+  if (is.null(tile)) {
+    assertthat::assert_that(
+      inherits(tileset, "Tileset"),
+      msg = "`tileset` must be provided if `tile = NULL`."
+    )
+    tile <- create_tile(
+      x = dataset$get_spatial_column_data(column),
+      source_layer = "layer",
+      path = tempfile(tmpdir = tileset$dir, fileext = ".pmtiles"),
+      max_zoom = tileset$max_zoom,
+      verbose = FALSE
+    )
+  }
+  assertthat::assert_that(inherits(tile, "Tile"))
+
+  # return new solution
+  new_solution(
+    name = name,
+    id = id,
+    layer = new_layer(
+      dataset = dataset,
+      column = column,
+      total = dataset$get_column_total(column),
+      legend = legend,
+      provenance = provenance,
+      tile = tile,
+      visible = FALSE,
+      details = NULL
+    )
+  )
+}

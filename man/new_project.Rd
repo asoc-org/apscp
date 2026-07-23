@@ -11,7 +11,6 @@ new_project(
   costs,
   themes,
   locks,
-  bbox,
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
@@ -30,8 +29,6 @@ new_project(
 \item{themes}{`list` of [new_themes()] objects.}
 
 \item{locks}{`list` of [new_locks()] objects.}
-
-\item{bbox}{[sf::st_bbox()] object.}
 
 \item{solutions}{`list` of [new_solution()] objects.
 Defaults to an empty list().}
@@ -124,8 +121,7 @@ x <- new_project(
   tileset = tileset,
   costs = list(cost),
   locks = list(lock),
-  themes = list(theme),
-  bbox = sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
+  themes = list(theme)
 )
 
 # preview object

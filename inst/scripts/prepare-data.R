@@ -134,7 +134,7 @@ boundary_data <- boundary_data[idx, idx]
 
 # Main processing
 ## create dataset
-dataset <- new_dataset(sf::st_drop_geometry(vector_data), boundary_data)
+dataset <- new_dataset(vector_data, boundary_data)
 
 ## create tiles
 td <- tempdir()
@@ -259,7 +259,6 @@ themes <-
 ## create project
 project <- new_project(
   zones = c("Conservation area", "Scientific area", "Tourism area"),
-  bbox = sf::st_transform(sf::st_bbox(vector_data), 3875),
   dataset = dataset,
   tileset = tileset,
   themes = themes,

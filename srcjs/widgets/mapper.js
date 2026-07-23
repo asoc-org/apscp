@@ -38,7 +38,17 @@ HTMLWidgets.widget({
 
       /* API functions to manipulate widget */
       addLayer: function(params) {
+        // debugging
+        console.log("params");
+        console.log(params);
+        // specify visibility
+        params.value.layer.visible = params.visible;
+        // add layer to mapper
         handle.addLayer(params.value);
+        // since R code is used to update the map, so updateMap = false
+        handle.showLayerOnMenu(
+          params.value.id, true, params.endPosition, false
+        );
       },
 
     };
@@ -51,7 +61,7 @@ if (HTMLWidgets.shinyMode) {
   var addShinyHandler = function(fxn) {
     return function() {
       Shiny.addCustomMessageHandler(
-        "catalog:" + fxn, function(message) {
+        "mapper:" + fxn, function(message) {
           var el = document.getElementById(message.id);
           if (el) {
             delete message["id"];

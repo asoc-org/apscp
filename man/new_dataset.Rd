@@ -7,7 +7,7 @@
 new_dataset(pu_data, boundary_data)
 }
 \arguments{
-\item{pu_data}{[tibble::tibble()] object with planning unit data.}
+\item{pu_data}{[sf::st_sf()] object with planning unit data.}
 
 \item{boundary_data}{[Matrix::sparseMatrix()] object with boundary
 matrix data.}
@@ -23,7 +23,7 @@ Create a new [Dataset] object.
 sim_data <- simulate_spatial_data()
 
 # manually prepare planning unit data
-pu_data <- sf::st_drop_geometry(sim_data)
+pu_data <- sim_data
 pu_data[["_index"]] <- seq_len(nrow(pu_data))
 
 # manually prepare boundary data

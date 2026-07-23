@@ -20,7 +20,7 @@ Import a [Dataset] object.
 \examples{
 # specify file paths
 pu_path <- system.file(
- "extdata", "antarctic-peninsula_pu.csv.gz",
+ "extdata", "antarctic-peninsula_pu.gpkg.zip",
  package = "apscp"
 )
 bd_path <- system.file(
@@ -38,6 +38,7 @@ print(x)
 \seealso{
 Other io:
 \code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=serialize_object]{serialize_object()}},
 \code{\link[=write_dataset]{write_dataset()}},

@@ -73,8 +73,7 @@ test_that("new_project", {
     themes = list(theme),
     name = "Project 1",
     author_name = "Greg",
-    author_email = "greg@gmail.com",
-    bbox = bb
+    author_email = "greg@gmail.com"
   )
   # run tests
   expect_true(inherits(x, "Project"))
@@ -87,15 +86,31 @@ test_that("new_project", {
   expect_equal(x$name, "Project 1")
   expect_equal(x$author_name, "Greg")
   expect_equal(x$author_email, "greg@gmail.com")
-  expect_equal(x$bbox, bb)
+})
+
+test_that("methods", {
+  # create object
+  x <- simulate_project()
+  # create dummy data
+  new_sol <- x$solutions[[1]]
+  new_sol$id <- "new_sol"
+  new_lock <- x$locks[[1]]
+  new_lock$id <- "new_lock"
+  # run tests
+  ## add new solution
+  x$add_solution(new_sol)
+  expect_true(any(vapply(x$solutions, `[[`, character(1), "id") == "new_sol"))
+  ## add new lock
+  x$add_lock(new_lock)
+  expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock"))
 })
 
 test_that("map_project", {
   skip_if_missing_mapbox_token()
   # create object
   x <- simulate_project()
-  start_tile_server(x)
-  on.exit(stop_tile_server(), add = TRUE)
+  tile_server_start(x)
+  on.exit(tile_server_stop(), add = TRUE)
   m <- map_project(x)
   # run tests
   expect_s3_class(m, "mapboxgl")
@@ -128,12 +143,6 @@ test_that("serialize_object", {
   expect_type(x$name, "character")
   expect_type(x$author_name, "character")
   expect_type(x$author_email, "character")
-  expect_type(x$bbox, "list")
-  expect_type(x$bbox$xmin, "double")
-  expect_type(x$bbox$ymin, "double")
-  expect_type(x$bbox$xmax, "double")
-  expect_type(x$bbox$ymax, "double")
-  expect_type(x$bbox$crs, "integer")
 })
 
 test_that("deserialize_object", {
@@ -157,7 +166,7 @@ test_that("read_project/write_project", {
   # run tests
   file <- tools::file_path_sans_ext(basename(path))
   yml_file <- paste0(file, ".yml")
-  pu_file <- paste0(file, "_pu.csv.gz")
+  pu_file <- paste0(file, "_pu.gpkg.zip")
   bd_file <- paste0(file, "_bd.csv.gz")
   pm_file <- x$tileset$tiles[[1]]$file
   ## file were saved
@@ -175,21 +184,7 @@ test_that("read_project/write_project", {
   )
 })
 
-test_that("built-in dataset", {
-  # find path
-  path <- dir(
-    system.file("extdata", package = "apscp"),
-    pattern = "^.*\\.yml$",
-    full.names = TRUE
-  )
-  skip_if_not(
-    nzchar(path) && file.exists(path),
-    message = "couldn't find built-in dataset"
-  )
-  # create object
-  x <- read_project(path)
+test_that("read_builtin_dataset", {
   # run tests
-  expect_true(inherits(x, "Project"))
-  expect_false(assertthat::has_name(x$dataset$pu_data, "geometry"))
-  expect_false(assertthat::has_name(x$dataset$pu_data, "geom"))
+  expect_r6_class(read_builtin_project(), "Project")
 })

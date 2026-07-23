@@ -149,9 +149,10 @@ export class Mapper {
   * @return {void}
   */
   addLayer(layer) {
-    // create element for layer
-    layer.visible = visible;
-    let el = createMenuItem(layer, this);
+    // create menu item
+    let el = createMenuItem(layer, this)
+    // add menu item to hidden menu items
+    this._hiddenMenuItems.set(el.id, el);
     // add to active layers
     this._activeLayerIds.push(layer.id);
     // if number of active layers exceeds limit, then remove oldest layer
@@ -164,46 +165,58 @@ export class Mapper {
   /**
   * Hide layer on menu.
   * @param {string} layerId - HTML identifier for layer.
+  * @param {boolean} updateMap - Should the map also be updated to reflect
+  * these changes to the menu?
   * @return {void}
   */
-  hideLayerOnMenu(layerId) {
+  hideLayerOnMenu(layerId, updateMap = true) {
     // find element for layer's menu item
     let el = this._menuElement.querySelector(`[data-id="${layerId}"]`);
+    // update menu
     if (el) {
       // remove element from menu
       el.remove();
       // add menu item to hidden menu items
       this._hiddenMenuItems.set(el.id, el);
     }
+    // if needed, update map
+    if (updateMap === true) {
+      this.hideLayerOnMap(layerId);
+    }
   }
 
   /**
   * Show layer on menu.
   * @param {string} layerId - HTML identifier for layer.
+  * @param {boolean} showLegend - Should the legend be shown on the menu?
   * @param {boolean} endPosition - Should the layer be added to the
   * beginning or the end of the menu?
+  * @param {boolean} updateMap - Should the map also be updated to reflect
+  * these changes to the menu?
   * @return {void}
   */
   showLayerOnMenu(
-    layerId, showLayerOnMap = true, showLegend = true, endPosition = true
+    layerId, showLegend = true, endPosition = true, updateMap = true
   ) {
     // find element for layer's menu item
     let el = this._hiddenMenuItems.get(layerId);
     // find menu item checkbox for showing map and set accordingly
     let layerCheckbox = el.querySelector(".layer-checkbox");
-    layerCheckbox.checked = showLayerOnMap;
+    layerCheckbox.checked = true;
     // find menu item checkbox for showing legend and set accordingly
     let legendCheckbox = el.querySelector(".legend-checkbox");
-    legendCheckbox.checked = true;
+    if (showLegend === true) {
+      legendCheckbox.checked = true;
+    }
     // if needed, show layer on map
-    if (showLayerOnMap === true) {
+    if (updateMap === true ) {
       this.showLayerOnMap(layerId);
     }
     // add layer to menu
     if (endPosition === true) {
       this._menuElement.appendChild(el);
     } else {
-      this._menuElement.prependChild(el);
+      this._menuElement.prepend(el);
     }
   }
 

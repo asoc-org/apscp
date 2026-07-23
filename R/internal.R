@@ -20,3 +20,29 @@ sanitize_text <- function(x) {
   # return text
   x
 }
+
+#' Make unique column name
+#'
+#' Create a column name based on a user-specified name, whilst ensuring
+#' that the new name is not a duplicate of any existing column names.
+#'
+#' @param x `character` value.
+#'
+#' @param existing_names `character` vector.
+#'
+#' @details
+#' This function uses [make.unique()] to make unique `character` values.
+#'
+#' @return A `character` name.
+#'
+#' @noRd
+make_unique_column_name <- function(x, existing_names) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    assertthat::is.string(x),
+    is.character(existing_names)
+  )
+  # make unique
+  x <- make.unique(c(existing_names, x), sep = "_")
+  x[[length(x)]]
+}

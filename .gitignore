@@ -1,5 +1,6 @@
 Meta
 doc
+
 # C++ compiled files
 *.o
 *.so
@@ -11,6 +12,9 @@ data-raw/*.pdf
 data-raw/29092346/*
 data-raw/29092346/*/*
 data-raw/29092346/*/*/*
+
+# temporary files
+tests/testthat/tiles/*.pmtiles
 
 # log files
 gurobi.log

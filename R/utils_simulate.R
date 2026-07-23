@@ -208,7 +208,6 @@ simulate_project <- function() {
   # return project
   new_project(
     zones = c("Conservation", "Tourism", "Science"),
-    bbox = sf::st_bbox(d),
     dataset = dataset,
     tileset = tileset,
     costs = list(cost),

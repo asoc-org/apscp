@@ -212,7 +212,6 @@ serialize_object.Project <- function(x) {
     author_name = x$author_name,
     author_email = x$author_email,
     zones = x$zones,
-    bbox = serialize_object.bbox(x$bbox),
     tileset = serialize_object.Tileset(x$tileset),
     costs = lapply(x$costs, function(y) serialize_object.Cost(y)),
     themes = lapply(x$themes, function(y) serialize_object.Theme(y)),

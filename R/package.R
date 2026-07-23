@@ -54,5 +54,6 @@ utils::globalVariables(
 #' @importFrom withr with_dir
 #' @importFrom R6 R6Class
 #' @importFrom promises promise
+#' @importFrom tibble as_tibble
 #' @export
 NULL

@@ -32,9 +32,6 @@ Project <- R6::R6Class(
     #' @field solutions `list` of [new_solution()] objects.
     solutions = NULL,
 
-    #' @field bbox [sf::st_bbox()] object.
-    bbox = NULL,
-
     #' @field name `character` name of the project.
     name = "Project",
 
@@ -54,7 +51,6 @@ Project <- R6::R6Class(
     #' @param costs `list` of [new_cost()] objects.
     #' @param solutions `list` of [new_solution()] objects.
     #' Defaults to an empty list.
-    #' @param bbox [sf::st_bbox()] object.
     #' @param name `character` name of the project.
     #' Defaults to `"Project"`.
     #' @param author_name `character` name of the project author.
@@ -63,7 +59,7 @@ Project <- R6::R6Class(
     #' Defaults to `"Unknown"`.
     #' @return A new `Project` object.
     initialize = function(
-      zones, bbox, dataset, tileset,
+      zones, dataset, tileset,
       themes, locks, costs, solutions = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown"
     ) {
@@ -80,10 +76,6 @@ Project <- R6::R6Class(
         ## name
         assertthat::is.string(name),
         assertthat::noNA(name),
-        ## bbox
-        inherits(bbox, "bbox"),
-        !is.na(sf::st_crs(bbox)),
-        !is.na(sf::st_crs(bbox)$epsg),
         ## author_name
         assertthat::is.string(author_name),
         assertthat::noNA(author_name),
@@ -117,7 +109,6 @@ Project <- R6::R6Class(
       self$costs <- costs
       self$solutions <- solutions
       self$name <- name
-      self$bbox <- bbox
       self$author_name <- author_name
       self$author_email <- author_email
     },
@@ -126,7 +117,7 @@ Project <- R6::R6Class(
     #' Get centroid.
     #' @return A `numeric` vector with two values.
     get_centroid = function() {
-      bb <- self$get_bbox()
+      bb <- self$dataset$get_bbox()
       c((bb[[1]] + bb[[3]]) * 0.5, (bb[[2]] + bb[[4]]) * 0.5)
     },
 
@@ -148,18 +139,19 @@ Project <- R6::R6Class(
         assertthat::noNA(expand)
       )
       # expand bounding box
-      x_buffer <- expand * (self$bbox$xmax - self$bbox$xmin)
-      y_buffer <- expand * (self$bbox$ymax - self$bbox$ymin)
+      bb <- self$dataset$get_bbox()
+      x_buffer <- expand * (bb$xmax - bb$xmin)
+      y_buffer <- expand * (bb$ymax - bb$ymin)
       b <- c(
-        xmin = unname(self$bbox$xmin - x_buffer),
-        ymin = unname(self$bbox$ymin - y_buffer),
-        xmax = unname(self$bbox$xmax + x_buffer),
-        ymax = unname(self$bbox$ymax + y_buffer)
+        xmin = unname(bb$xmin - x_buffer),
+        ymin = unname(bb$ymin - y_buffer),
+        xmax = unname(bb$xmax + x_buffer),
+        ymax = unname(bb$ymax + y_buffer)
       )
       # if not native, then convert to WGS1984
       if (!isTRUE(native)) {
         # reproject coordinates
-        b <- sf::st_bbox(b, crs = sf::st_crs(self$bbox))
+        b <- sf::st_bbox(b, crs = sf::st_crs(bb))
         b <- sf::st_bbox(sf::st_transform(sf::st_as_sfc(b), 4326))
         # ensure valid coordinates
         b <- c(
@@ -170,23 +162,58 @@ Project <- R6::R6Class(
         )
         crs <- sf::st_crs(4326)
       } else {
-        crs <- sf::st_crs(self$bbox)
+        crs <- sf::st_crs(bb)
       }
       # return result
       sf::st_bbox(b, crs = crs)
     },
 
+
     #' @description
-    #' Add a solution to the project.
+    #' Get solution from the project.
+    #' @param id `character` value.
+    #' @return A [new_solution()] object.
+    get_solution = function(id) {
+      # assert arguments are valid
+      assertthat::assert_that(assertthat::is.string(id))
+      # find identifiers
+      i <- which(vapply(self$solutions, `[[`, character(1), "id") == id)
+      assertthat::assert_that(
+        identical(length(i), 1L),
+        msg = "Couldn't find solution with matching `id`."
+      )
+      # return solution
+      self$solutions[[i]]
+    },
+
+    #' @description
+    #' Get lock from the project.
+    #' @param id `character` value.
+    #' @return A [new_solution()] object.
+    get_lock = function(id) {
+      # assert arguments are valid
+      assertthat::assert_that(assertthat::is.string(id))
+      # find identifiers
+      i <- which(vapply(self$locks, `[[`, character(1), "id") == id)
+      assertthat::assert_that(
+        identical(length(i), 1L),
+        msg = "Couldn't find lock with matching `id`."
+      )
+      # return locks
+      self$locks[[i]]
+    },
+
+    #' @description
+    #' Add a new solution to the project.
     #' @param x [new_solution()] object.
     #' @return An invisible `TRUE` indicating success.
     add_solution = function(x) {
       # assert arguments are valid
       assertthat::assert_that(inherits(x, "Solution"))
-      # add solution
+      # add solution to project
       self$solutions[[length(self$solutions)]] <- x
-      # add tile for solution
-      self$tileset$tiles[[length(self$tiletset$tiles) + 1L]] <- x$layer$tile
+      # add tile to tileset
+      self$add_tile(x$layer$tile)
       # return TRUE
       invisible(TRUE)
     },
@@ -199,13 +226,36 @@ Project <- R6::R6Class(
       # assert arguments are valid
       assertthat::assert_that(inherits(x, "Lock"))
       # add object
-      self$lock[[length(self$lock)]] <- x
-      # add tile for solution
-      self$tileset$tiles[[length(self$tiletset$tiles) + 1L]] <- x$layer$tile
+      self$locks[[length(self$locks)]] <- x
+      # add tile to tileset
+      self$add_tile(x$layer$tile)
+      # return TRUE
+      invisible(TRUE)
+    },
+
+    #' @description
+    #' Add a tile to the project.
+    #' @param x [new_tile()] object.
+    #' @return An invisible `TRUE` indicating success.
+    add_tile = function(x) {
+      # assert arguments are valid
+      assertthat::assert_that(inherits(x, "Tile"))
+      # assert that the tile can be added because it corresponds to a file
+      # that exists in the tileset directory
+      assertthat::assert_that(
+        isTRUE(file.exists(file.path(self$tileset$dir, x$file))),
+        msg = paste(
+          "Tile cannot be added because it does not exist in",
+          "tileset directory."
+        )
+      )
+      # if needed, add tile
+      if (!x$file %in% vapply(self$tileset$tiles, `[[`, character(1), "file")) {
+        self$tileset$tiles[[length(self$tileset$tiles) + 1L]] <- x
+      }
       # return TRUE
       invisible(TRUE)
     }
-
   )
 )
 
@@ -224,8 +274,6 @@ Project <- R6::R6Class(
 #' @param themes `list` of [new_themes()] objects.
 #'
 #' @param locks `list` of [new_locks()] objects.
-#'
-#' @param bbox [sf::st_bbox()] object.
 #'
 #' @param solutions `list` of [new_solution()] objects.
 #' Defaults to an empty list().
@@ -316,8 +364,7 @@ Project <- R6::R6Class(
 #'   tileset = tileset,
 #'   costs = list(cost),
 #'   locks = list(lock),
-#'   themes = list(theme),
-#'   bbox = sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
+#'   themes = list(theme)
 #' )
 #'
 #' # preview object
@@ -331,7 +378,6 @@ new_project <- function(
   costs,
   themes,
   locks,
-  bbox,
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
@@ -346,7 +392,6 @@ new_project <- function(
     themes = themes,
     locks = locks,
     solutions = solutions,
-    bbox,
     name = name,
     author_name = author_name,
     author_email = author_email

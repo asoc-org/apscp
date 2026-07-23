@@ -47,12 +47,6 @@ read_project <- function(path) {
     assertthat::has_name(l, "themes"),
     assertthat::has_name(l, "costs"),
     assertthat::has_name(l, "locks"),
-    assertthat::has_name(l, "bbox"),
-    assertthat::has_name(l$bbox, "xmin"),
-    assertthat::has_name(l$bbox, "ymin"),
-    assertthat::has_name(l$bbox, "xmax"),
-    assertthat::has_name(l$bbox, "ymax"),
-    assertthat::has_name(l$bbox, "crs"),
     msg = "`path` is not a valid project metadata file."
   )
 
@@ -113,7 +107,7 @@ write_project <- function(x, path) {
 
   # define file paths for datasets
   path_no_ext <- tools::file_path_sans_ext(path)
-  pu_path <- paste0(path_no_ext, "_pu.csv.gz")
+  pu_path <- paste0(path_no_ext, "_pu.gpkg.zip")
   boundary_path <- paste0(path_no_ext, "_bd.csv.gz")
 
   # save dataset
@@ -146,6 +140,39 @@ write_project <- function(x, path) {
 
   # return success
   invisible(TRUE)
+}
+
+#' Read builtin project
+#'
+#' Import builtin project data for the Antarctic Peninsula.
+#'
+#' @return A [new_project()] object.
+#'
+#' @family io
+#'
+#' @examples
+#' # import project
+#' x <- read_builtin_project()
+#'
+#' # preview project
+#' print(x)
+#'
+#' @export
+read_builtin_project <- function() {
+  # find path
+  path <- dir(
+    system.file("extdata", package = "apscp"),
+    pattern = "^.*\\.yml$",
+    full.names = TRUE
+  )
+  # if can't find path, throw error
+  assertthat::assert_that(
+    identical(length(path), 1L),
+    file.exists(path),
+    msg = "Can't find builtin project."
+  )
+  # return object
+  read_project(path)
 }
 
 #' Map project

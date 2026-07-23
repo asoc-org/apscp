@@ -11,7 +11,7 @@ NULL
 Dataset <- R6::R6Class(
   "Dataset",
   public = list(
-    #' @field pu_data [tibble::tibble()] object.
+    #' @field pu_data [sf::st_sf()] object.
     pu_data = NULL,
 
     #' @field boundary_data [Matrix::sparseMatrix()] object.
@@ -27,10 +27,8 @@ Dataset <- R6::R6Class(
       assertthat::assert_that(
         ## pu_data
         is.data.frame(pu_data),
-        !inherits(pu_data, "sf"),
+        inherits(pu_data, "sf"),
         assertthat::has_name(pu_data, "_index"),
-        !assertthat::has_name(pu_data, "geometry"),
-        !assertthat::has_name(pu_data, "geom"),
         ## boundary_data
         inherits(boundary_data, "dsCMatrix"),
         identical(ncol(boundary_data), nrow(pu_data))
@@ -48,6 +46,13 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Get bounding box.
+    #' @return An [sf::st_bbox()] object.
+    get_bbox = function() {
+      sf::st_bbox(self$pu_data)
+    },
+
+    #' @description
     #' Get column names.
     #' @return A `character` vector.
     get_column_names = function() {
@@ -60,9 +65,26 @@ Dataset <- R6::R6Class(
     #' @return A `numeric` vector.
     get_column_data = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(self$has_column(column))
+      assertthat::assert_that(
+        self$has_column(column),
+        msg = paste0("Dataset does not have column \"", column, "\".")
+      )
       # return values
       self$pu_data[[column]]
+    },
+
+    #' @description
+    #' Get column data.
+    #' @param column `character` or `integer` value.
+    #' @return A `numeric` vector.
+    get_spatial_column_data = function(column) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        self$has_column(column),
+        msg = paste0("Dataset does not have column \"", column, "\".")
+      )
+      # return values
+      self$pu_data[, column, drop = FALSE]
     },
 
     #' @description
@@ -113,7 +135,7 @@ Dataset <- R6::R6Class(
 #'
 #' Create a new [Dataset] object.
 #'
-#' @param pu_data [tibble::tibble()] object with planning unit data.
+#' @param pu_data [sf::st_sf()] object with planning unit data.
 #'
 #' @param boundary_data [Matrix::sparseMatrix()] object with boundary
 #' matrix data.
@@ -131,7 +153,7 @@ Dataset <- R6::R6Class(
 #' sim_data <- simulate_spatial_data()
 #'
 #' # manually prepare planning unit data
-#' pu_data <- sf::st_drop_geometry(sim_data)
+#' pu_data <- sim_data
 #' pu_data[["_index"]] <- seq_len(nrow(pu_data))
 #'
 #' # manually prepare boundary data
@@ -177,21 +199,18 @@ create_dataset <- function(x) {
   # assert valid argument
   assertthat::assert_that(inherits(x, "sf"))
 
-  # convert data to tibble
-  d <- tibble::as_tibble(sf::st_drop_geometry(x))
-
   # create _index column
-  d[["_index"]] <- seq_len(nrow(d))
+  x[["_index"]] <- seq_len(nrow(x))
 
   # make _index the first column
-  d <- d[,
-    c("_index", setdiff(names(d), "_index")),
+  x <- x[,
+    c("_index", setdiff(names(x), "_index")),
     drop = FALSE
   ]
 
   # return object
   new_dataset(
-    pu_data = d,
+    pu_data = x,
     boundary_data = prioritizr::boundary_matrix(x)
   )
 }

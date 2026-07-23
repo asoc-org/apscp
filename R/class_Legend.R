@@ -288,7 +288,7 @@ create_legend <- function(
      palette <- strsplit(palette, ";")[[1]]
     }
     # compute breaks
-    br <- scales::breaks_extended(n = 4)(v)
+    br <- labeling::extended(dmin = min(v), dmax = max(v), m = 4)
     # create legend
     out <- new_continuous_legend(
       values = seq(min(c(v, br)), max(c(v, br)), length.out = n_colors),
