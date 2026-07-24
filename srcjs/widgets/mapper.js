@@ -38,21 +38,14 @@ HTMLWidgets.widget({
 
       /* API functions to manipulate widget */
       addLayer: function(params) {
-        // debugging
-        console.log("params");
-        console.log(params);
         // specify visibility
-        console.log("here1");
         params.value.layer.visible = params.visible;
         // add layer to mapper
-        console.log("here2");
         handle.addLayer(params.value);
         // since R code is used to update the map, so updateMap = false
-        console.log("here3");
         handle.showLayerOnMenu(
           params.value.id, true, params.endPosition, false
         );
-        console.log("here4");
       },
 
     };

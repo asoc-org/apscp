@@ -3,6 +3,7 @@ devtools::load_all()
 library(sf)
 library(shiny)
 library(mapgl)
+library(datasets)
 
 # load data
 data(meuse, package = "sp")
