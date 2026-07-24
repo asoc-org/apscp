@@ -41,18 +41,10 @@ read_project <- function(path) {
     assertthat::has_name(l, "dataset_paths"),
     assertthat::has_name(l$dataset_paths, "pu_path"),
     assertthat::has_name(l$dataset_paths, "boundary_path"),
-    assertthat::has_name(l, "tileset"),
-    assertthat::has_name(l$tileset, "tiles"),
-    assertthat::has_name(l$tileset, "max_zoom"),
+    assertthat::has_name(l, "tiles"),
     assertthat::has_name(l, "themes"),
     assertthat::has_name(l, "costs"),
     assertthat::has_name(l, "locks"),
-    assertthat::has_name(l, "bbox"),
-    assertthat::has_name(l$bbox, "xmin"),
-    assertthat::has_name(l$bbox, "ymin"),
-    assertthat::has_name(l$bbox, "xmax"),
-    assertthat::has_name(l$bbox, "ymax"),
-    assertthat::has_name(l$bbox, "crs"),
     msg = "`path` is not a valid project metadata file."
   )
 
@@ -66,11 +58,17 @@ read_project <- function(path) {
   # set dataset paths to NULL because they are not a parameter of new_project
   l$dataset_paths <- NULL
 
-  # overwrite tileset directory
-  l$tileset$dir <- dirname(path)
-
   # return object
-  deserialize_object(l, d)
+
+  ## note we set global option so that the directory name for tile paths
+  ## is specified based on the directory name where the YAML file is found
+  withr::with_options(
+    list("apscp.project.io" = TRUE),
+    withr::with_dir(
+      dirname(path),
+      deserialize_object(l, d)
+    )
+  )
 }
 
 #' Write project
@@ -113,14 +111,19 @@ write_project <- function(x, path) {
 
   # define file paths for datasets
   path_no_ext <- tools::file_path_sans_ext(path)
-  pu_path <- paste0(path_no_ext, "_pu.csv.gz")
+  pu_path <- paste0(path_no_ext, "_pu.gpkg.zip")
   boundary_path <- paste0(path_no_ext, "_bd.csv.gz")
 
   # save dataset
   write_dataset(x$dataset, pu_path, boundary_path)
 
   # serialize project
-  l <- serialize_object(x)
+  ## note we set global option so that only the base file name is
+  ## stored in the serialized tile objects
+  l <- withr::with_options(
+    list("apscp.project.io" = TRUE),
+    serialize_object(x)
+  )
 
   # assign dataset paths
   l$dataset_paths <- list(
@@ -129,23 +132,52 @@ write_project <- function(x, path) {
   )
 
   # copy tile files to new directory
-  lapply(x$tileset$tiles, function(x) {
+  lapply(x$tiles, function(x) {
     file.copy(
-      file.path(l$tileset$dir, x$file),
-      to = file.path(dirname(path), x$file),
+      x$path,
+      to = file.path(dirname(path), basename(x$path)),
       overwrite = TRUE
     )
   })
-
-  # overwrite tileset directory with NULL,
-  # note that this will be overwritten in read_project()
-  l$tileset$dir <- NULL
 
   # save metadata
   yaml::write_yaml(l, file = path)
 
   # return success
   invisible(TRUE)
+}
+
+#' Read builtin project
+#'
+#' Import builtin project data for the Antarctic Peninsula.
+#'
+#' @return A [new_project()] object.
+#'
+#' @family io
+#'
+#' @examples
+#' # import project
+#' x <- read_builtin_project()
+#'
+#' # preview project
+#' print(x)
+#'
+#' @export
+read_builtin_project <- function() {
+  # find path
+  path <- dir(
+    system.file("extdata", package = "apscp"),
+    pattern = "^.*\\.yml$",
+    full.names = TRUE
+  )
+  # if can't find path, throw error
+  assertthat::assert_that(
+    identical(length(path), 1L),
+    file.exists(path),
+    msg = "Can't find builtin project."
+  )
+  # return object
+  read_project(path)
 }
 
 #' Map project
@@ -191,30 +223,38 @@ map_project <- function(x, ...) {
     ...
   )
 
-  # add sources
+  # add tiles
   for (i in seq_along(x$tiles)) {
     m <- mapgl_add_source(m, x$tiles[[i]])
   }
 
-  # add layers
-  ## features
-  for (i in seq_along(x$themes)) {
-    for (j in seq_along(x$themes[[i]]$features)) {
-      m <- mapgl_add_layer(m, x$themes[[i]]$features[[j]])
+  # add project components
+  ## solutions
+  if (length(x$solutions) > 0) {
+    for (i in seq(length(x$solutions), 1L)) {
+      if (isTRUE(x$solutions[[i]]$layer$visible)) {
+        m <- mapgl_add_layer(m, x$solutions[[i]])
+      }
     }
   }
   ## locks
-  for (i in seq_along(x$locks)) {
-    m <- mapgl_add_layer(m, x$locks[[i]])
+  for (i in seq(length(x$locks), 1L)) {
+    if (isTRUE(x$locks[[i]]$layer$visible)) {
+      m <- mapgl_add_layer(m, x$locks[[i]])
+    }
   }
   ## costs
-  for (i in seq_along(x$costs)) {
-    m <- mapgl_add_layer(m, x$costs[[i]])
+  for (i in seq(length(x$costs), 1L)) {
+    if (isTRUE(x$costs[[i]]$layer$visible)) {
+      m <- mapgl_add_layer(m, x$costs[[i]])
+    }
   }
-  ## solutions
-  if (length(x$solutions) > 0) {
-    for (i in seq_along(x$costs)) {
-      m <- mapgl_add_layer(m, x$solutions[[i]])
+  ## features
+  for (i in seq(length(x$themes), 1L)) {
+    for (j in seq(length(x$themes[[i]]$features), 1L)) {
+      if (isTRUE(x$themes[[i]]$features[[j]]$layer$visible)) {
+        m <- mapgl_add_layer(m, x$themes[[i]]$features[[j]])
+      }
     }
   }
 

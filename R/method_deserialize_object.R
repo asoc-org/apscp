@@ -51,6 +51,10 @@ deserialize_object <- function(x, dataset = NULL) {
     x$provenance <- deserialize_object(x$provenance)
   }
   if (assertthat::has_name(x, "tile")) {
+    # if needed for importing data, manually append working directory
+    if (isTRUE(getOption("apscp.project.io"))) {
+      x$tile$path <- file.path(getwd(), x$tile$path)
+    }
     x$tile <- deserialize_object(x$tile)
   }
   if (assertthat::has_name(x, "bbox")) {
@@ -64,9 +68,6 @@ deserialize_object <- function(x, dataset = NULL) {
   }
   if (assertthat::has_name(x, "tiles")) {
     x$tiles <- lapply(x$tiles, deserialize_object)
-  }
-  if (assertthat::has_name(x, "tileset")) {
-    x$tileset <- deserialize_object(x$tileset)
   }
   if (assertthat::has_name(x, "features")) {
     x$features <- lapply(x$features, deserialize_object, dataset = dataset)
@@ -93,7 +94,6 @@ deserialize_object <- function(x, dataset = NULL) {
     ),
     Provenance = do.call(new_provenance, x),
     Tile = do.call(new_tile, x),
-    Tileset = do.call(new_tileset, x),
     CategoricalLegend = do.call(new_categorical_legend, x),
     ContinuousLegend = do.call(new_continuous_legend, x),
     Layer = do.call(new_layer, x),

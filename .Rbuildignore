@@ -41,3 +41,11 @@ docker-compose.yml
 restart.txt
 logs
 ^vignettes/articles$
+^srcjs$
+^node_modules$
+^package\.json$
+^package-lock\.json$
+^webpack\.dev\.js$
+^webpack\.prod\.js$
+^webpack\.common\.js$
+^.Renviron$

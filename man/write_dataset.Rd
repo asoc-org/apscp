@@ -27,7 +27,7 @@ sim_data <- simulate_spatial_data()
 dataset <- create_dataset(sim_data)
 
 # define file paths for saving data
-pu_path <- tempfile(fileext = ".csv.gz")
+pu_path <- tempfile(fileext = ".gpkg.zip")
 bd_path <- tempfile(fileext = ".csv.gz")
 
 # save files
@@ -37,6 +37,7 @@ write_dataset(dataset, pu_path, bd_path)
 \seealso{
 Other io:
 \code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=serialize_object]{serialize_object()}},

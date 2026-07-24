@@ -36,6 +36,7 @@ test_that("serialize_object", {
   expect_equal(x$name, "solution")
   expect_equal(x$layer, serialize_object(d$layer))
   expect_equal(x$class, "Solution")
+  expect_equal(x$id, d$id)
 })
 
 test_that("deserialize_object", {
@@ -55,4 +56,24 @@ test_that("deserialize_object", {
   y <- deserialize_object(serialize_object(x), dataset = w)
   # run tests
   expect_equal(x, y)
+})
+
+test_that("create_solution", {
+  # prepare data
+  p <- simulate_project()
+  v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
+  p$dataset$set_column_data("solv", v)
+  # create object
+  x <- create_solution(
+    name = "sol",
+    dataset = p$dataset,
+    column = "solv",
+    provenance = simulate_provenance(),
+    legend = simulate_solution_legend()
+  )
+  # run tests
+  expect_s3_class(x, "Solution")
+  expect_equal(x$name, "sol")
+  expect_equal(x$layer$column, "solv")
+  expect_true(file.exists(x$layer$tile$path))
 })

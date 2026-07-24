@@ -9,7 +9,8 @@ mapgl_clear_layer(map, x)
 \arguments{
 \item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[new_tile()] object.}
+\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+[new_solution()] object.}
 }
 \description{
 Clear an object as a layer from a \pkg{mapgl} object.

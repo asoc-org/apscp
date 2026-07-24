@@ -12,6 +12,7 @@ test_that("new_layer", {
     legend = l,
     provenance = p,
     total = 500,
+    visible = TRUE,
     details = "extra info"
   )
   # run tests
@@ -21,6 +22,7 @@ test_that("new_layer", {
   expect_equal(x$column, "feat_1")
   expect_equal(x$legend, l)
   expect_equal(x$provenance, p)
+  expect_equal(x$visible, TRUE)
   expect_equal(x$details, "extra info")
 })
 
@@ -38,6 +40,7 @@ test_that("serialize_object", {
     legend = l,
     provenance = p,
     total = 500,
+    visible = TRUE,
     details = "extra info"
   )
   x <- serialize_object(d)
@@ -47,7 +50,7 @@ test_that("serialize_object", {
   expect_equal(x$legend, serialize_object(l))
   expect_equal(x$provenance, serialize_object(p))
   expect_equal(x$tile, serialize_object(r))
-  expect_equal(x$details, "extra info")
+  expect_equal(x$visible, TRUE)
   expect_equal(x$class, "Layer")
 })
 
@@ -65,6 +68,7 @@ test_that("deserialize_object", {
     legend = l,
     provenance = p,
     total = 500,
+    visible = TRUE,
     details = "extra info"
   )
   y <- deserialize_object(serialize_object(x), dataset = w)

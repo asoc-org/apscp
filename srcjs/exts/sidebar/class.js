@@ -1,15 +1,30 @@
-class MapSidebar {
+import "./css/style.css";
 
-  id = undefined;
+/** Class representing a map sidebar. */
+export class MapSidebar {
+
+  // public fields
+  id;
+  options;
+
+  // private fields
   _height = undefined;
   _map = undefined;
   _sidebar = undefined;
-  _pane_container = undefined;
+  _paneContainer = undefined;
   _tabs = undefined;
   _panes = undefined;
-  _close_buttons = undefined;
-  options = undefined;
+  _closeButtons = undefined;
 
+  /**
+   * Initialize a new sidebar object.
+   * @param {string} id - HTML element identifier.
+   * @param {string} height - Height for sidebar (e.g., `"400px"`).
+   * @param {Object} options - Options for customizing the sidebar.
+   * @param {string} options.position - Position for sidebar. Acceptable
+   * values include `"top-left"` and `"top-right"`.
+   * @return {void}
+   */
   constructor(id, height, options) {
     // set fields
     this.id = id;
@@ -47,7 +62,7 @@ class MapSidebar {
         child.tagName == "DIV" &&
         child.classList.contains("mapsidebar-content")
       ) {
-        this._pane_container = child;
+        this._paneContainer = child;
       }
     }
 
@@ -61,9 +76,9 @@ class MapSidebar {
 
     // find sidebar panes and close buttons
     this._panes = [];
-    this._close_buttons = [];
-    for (i = this._pane_container.children.length - 1; i >= 0; i--) {
-      child = this._pane_container.children[i];
+    this._closeButtons = [];
+    for (i = this._paneContainer.children.length - 1; i >= 0; i--) {
+      child = this._paneContainer.children[i];
       if (
         child.tagName == "DIV" &&
         child.classList.contains("mapsidebar-pane")
@@ -71,7 +86,7 @@ class MapSidebar {
         this._panes.push(child);
         var close_buttons = child.querySelectorAll(".mapsidebar-close");
         for (var j = 0, len = close_buttons.length; j < len; j++)
-          this._close_buttons.push(close_buttons[j]);
+          this._closeButtons.push(close_buttons[j]);
       }
     }
 
@@ -79,6 +94,11 @@ class MapSidebar {
     this._sidebar.widget = this;
   }
 
+  /**
+   * Add and display a sidebar to a Mapboxgl map.
+   * @param {Object} map - Mapboxgl Map object.
+   * @return {Object} Sidebar object.
+   */
   onAdd(map) {
     // declare temporary variables
     var i, child;
@@ -113,7 +133,7 @@ class MapSidebar {
    });
 
     // add click events so that clicking on close buttons will close panes
-    this._close_buttons.forEach((button) => {
+    this._closeButtons.forEach((button) => {
       button.addEventListener("click", () => this._onCloseClick());
     });
 
@@ -126,11 +146,20 @@ class MapSidebar {
     return this._sidebar;
   }
 
+  /**
+   * Remove sidebar from a Mapboxgl map.
+   * @return {void}
+   */
   onRemove() {
     this._sidebar.parentNode.removeChild(this._sidebar);
     this._map = undefined;
   }
 
+  /**
+   * Open sidebar pane.
+   * @param {string} id - HTML identifier for sidebar pane.
+   * @return {void}
+   */
   open(id) {
     // declare temporary variables
     var i, child;
@@ -166,6 +195,10 @@ class MapSidebar {
     }
   }
 
+  /**
+   * Close any sidebar panes that are open.
+   * @return {void}
+   */
   close() {
     // declare temporary variables
     var i, child;
@@ -186,6 +219,11 @@ class MapSidebar {
     }
   }
 
+  /**
+   * Enable the menu button for opening a sidebar pane.
+   * @param {string} id - HTML identifier for sidebar pane.
+   * @return {void}
+   */
   enable(id) {
     // declare temporary variables
     var i, child;
@@ -202,6 +240,11 @@ class MapSidebar {
     }
   }
 
+  /**
+   * Disable the menu button for opening a sidebar pane.
+   * @param {string} id - HTML identifier for sidebar pane.
+   * @return {void}
+   */
   disable(id) {
     // declare temporary variables
     var i, child;
@@ -224,6 +267,8 @@ class MapSidebar {
   }
 
   /**
+   * Define behavior for clicking a sidebar menu button.
+   * @return {void}
    * @private
    */
   _onClick() {
@@ -235,6 +280,8 @@ class MapSidebar {
   }
 
   /**
+   * Define behavior for clicking a sidebar close button.
+   * @return {void}
    * @private
    */
   _onCloseClick() {

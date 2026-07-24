@@ -20,3 +20,60 @@ sanitize_text <- function(x) {
   # return text
   x
 }
+
+#' Make unique column name
+#'
+#' Create a column name based on a user-specified name, whilst ensuring
+#' that the new name is not a duplicate of any existing column names.
+#'
+#' @param x `character` value.
+#'
+#' @param existing_names `character` vector.
+#'
+#' @details
+#' This function uses [make.unique()] to make unique `character` values.
+#'
+#' @return A `character` name.
+#'
+#' @noRd
+make_unique_column_name <- function(x, existing_names) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    assertthat::is.string(x),
+    is.character(existing_names)
+  )
+  # make unique
+  x <- make.unique(c(existing_names, x), sep = "_")
+  x[[length(x)]]
+}
+
+#' Update named elements in nested list
+#'
+#' Update all elements with a particular name in a nested list
+#' to have a new value.
+#'
+#' @param x `list` object.
+#'
+#' @param element_name `character` value with the name to identify
+#' which elements should be updated.
+#'
+#' @param new_value Object that is assigned to updated elements.
+#'
+#' @return A `list` object.
+#'
+#' @export
+update_named_list_elements <- function(x, element_name, new_value) {
+  if (is.list(x)) {
+    # Replace value if the name matches at the current level
+    if (element_name %in% names(x)) {
+      x[[element_name]] <- new_value
+    }
+    # Recursively apply to all child elements
+    lapply(
+      x, update_named_list_elements,
+      element_name = element_name, new_value = new_value
+    )
+  } else {
+    x
+  }
+}

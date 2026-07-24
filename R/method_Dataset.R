@@ -13,7 +13,7 @@
 #' @examples
 #' # specify file paths
 #' pu_path <- system.file(
-#'  "extdata", "antarctic-peninsula_pu.csv.gz",
+#'  "extdata", "antarctic-peninsula_pu.gpkg.zip",
 #'  package = "apscp"
 #' )
 #' bd_path <- system.file(
@@ -42,19 +42,8 @@ read_dataset <- function(pu_path, boundary_path) {
   )
 
   # import data
-  pu_data <- vroom::vroom(
-    pu_path,
-    col_type = vroom::cols(
-      "_index" = vroom::col_integer(),
-      .default = vroom::col_double()
-    )
-  )
+  pu_data <- read_sf_data(pu_path)
   boundary_data <- vroom::vroom(boundary_path, col_types = "iid")
-
-  # remove vroom attributes
-  class(pu_data) <- setdiff(class(pu_data), "spec_tbl_df")
-  attr(pu_data, "spec") <- NULL
-  attr(pu_data, "problems") <- NULL
 
   # coerce _index column to integer
   pu_data[["_index"]] <- as.integer(pu_data[["_index"]])
@@ -93,7 +82,7 @@ read_dataset <- function(pu_path, boundary_path) {
 #' dataset <- create_dataset(sim_data)
 #'
 #' # define file paths for saving data
-#' pu_path <- tempfile(fileext = ".csv.gz")
+#' pu_path <- tempfile(fileext = ".gpkg.zip")
 #' bd_path <- tempfile(fileext = ".csv.gz")
 #'
 #' # save files
@@ -116,7 +105,7 @@ write_dataset <- function(x, pu_path, boundary_path) {
   )
 
   # save planning unit data
-  vroom::vroom_write(x$pu_data, file = pu_path, progress = FALSE)
+  write_sf_data(x$pu_data, path = pu_path)
 
   # save boundary data
   m <- as_Matrix(x$boundary_data, "dsTMatrix")

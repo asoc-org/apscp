@@ -31,13 +31,18 @@ default:
   ## contacting controller process
   worker_time_out: 7200 # two hours
 
-  ## tile server URL
+  ## tile server details
   tile_server_url: "http://localhost:8080/"
   tile_server_port: 8080
+  tile_server_dir: null
+  tile_max_zoom: 8
+
+# production configuration:
+prod:
+  app_prod: yes
+  tile_server_dir: tiles
 
 # development configuration
 dev:
   golem_wd: !expr here::here()
   monitor: true
-  tile_server_url: "http://localhost:8080/"
-  tile_server_port: 8080

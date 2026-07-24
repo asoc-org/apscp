@@ -1,20 +1,24 @@
+# load packages
 devtools::load_all()
 library(sf)
 library(shiny)
 library(mapgl)
+library(datasets)
 
+# load data
 data(meuse, package = "sp")
-
 pts_data <-
   meuse |>
   st_as_sf(coords = c("x", "y"), crs = 28992, agr = "constant") |>
   st_transform(4326)
 
+# define function to sample point data
 sample_pts_data <- function(data, n_obs) {
   ii <- sample.int(nrow(data), n_obs, replace = TRUE)
   data[ii, , drop = FALSE]
 }
 
+# define user interface for Shiny application
 ui <- fluidPage(
   tags$head(tags$style(".btn-default {display: block;}")),
   sidebar_deps(),
@@ -107,23 +111,23 @@ ui <- fluidPage(
   )
 )
 
+# define server behavior for Shiny application
 server <- function(input, output, session) {
   # map
   output$map <- renderMapboxgl({
     mapboxgl() |>
       add_sidebar_control(id = "leftsidebar", position = "top-left") |>
       add_sidebar_control(id = "rightsidebar", position = "top-right") |>
-      fit_bounds(pts_data)
+      fit_bounds(pts_data) |>
+      add_circle_layer(id = "pts", source = pts_data, circle_color = "blue")
   })
 
-  observe({
-    req(input$obs)
-    req(input$col)
+  observeEvent(c(input$obs, input$col), {
     df <- sample_pts_data(pts_data, n_obs = input$obs)
-    mapboxgl_proxy("map", session) |>
+    mapboxgl_proxy("map", session = session) |>
       clear_layer("pts") |>
       add_circle_layer(
-        id = "pts", source = pts_data, circle_color = input$col
+        id = "pts", source = df, circle_color = input$col
       ) |>
       fit_bounds(df)
   })
@@ -176,7 +180,7 @@ server <- function(input, output, session) {
     mtcars[, c("mpg", input$variable), drop = FALSE]
   })
 
-
 }
 
+# launch Shiny application
 runApp(shinyApp(ui, server), launch.browser = TRUE)

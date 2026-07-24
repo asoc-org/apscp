@@ -45,7 +45,6 @@ Other class:
 \code{\link[=new_project]{new_project()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}

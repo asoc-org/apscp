@@ -21,8 +21,7 @@ Other class:
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}
 \section{Public fields}{
@@ -30,7 +29,7 @@ Other class:
   \describe{
     \item{\code{dataset}}{[new_dataset()] object.}
 
-    \item{\code{tileset}}{`[new_tile_set()] objects.}
+    \item{\code{tiles}}{`list` of [new_tile()] objects.}
 
     \item{\code{zones}}{`character` vector of zone names.}
 
@@ -41,8 +40,6 @@ Other class:
     \item{\code{costs}}{`list` of [new_cost()] objects.}
 
     \item{\code{solutions}}{`list` of [new_solution()] objects.}
-
-    \item{\code{bbox}}{[sf::st_bbox()] object.}
 
     \item{\code{name}}{`character` name of the project.}
 
@@ -58,8 +55,11 @@ Other class:
     \item \href{#method-Project-initialize}{\code{Project$new()}}
     \item \href{#method-Project-get_centroid}{\code{Project$get_centroid()}}
     \item \href{#method-Project-get_bbox}{\code{Project$get_bbox()}}
+    \item \href{#method-Project-get_solution}{\code{Project$get_solution()}}
+    \item \href{#method-Project-get_lock}{\code{Project$get_lock()}}
     \item \href{#method-Project-add_solution}{\code{Project$add_solution()}}
     \item \href{#method-Project-add_lock}{\code{Project$add_lock()}}
+    \item \href{#method-Project-add_tile}{\code{Project$add_tile()}}
     \item \href{#method-Project-clone}{\code{Project$clone()}}
   }
 }
@@ -72,9 +72,8 @@ Other class:
     \if{html}{\out{<div class="r">}}
     \preformatted{Project$new(
   zones,
-  bbox,
   dataset,
-  tileset,
+  tiles,
   themes,
   locks,
   costs,
@@ -89,9 +88,8 @@ Other class:
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{zones}}{`character` vector of zone names.}
-      \item{\code{bbox}}{[sf::st_bbox()] object.}
       \item{\code{dataset}}{[new_dataset()] object.}
-      \item{\code{tileset}}{`[new_tile_set()] object.}
+      \item{\code{tiles}}{`list` of [new_tile()] objects.}
       \item{\code{themes}}{`list` of [new_theme()] objects.}
       \item{\code{locks}}{`list` of [new_lock()] objects.}
       \item{\code{costs}}{`list` of [new_cost()] objects.}
@@ -154,10 +152,54 @@ box by 10 percent. Defaults to 0.}
 }
 
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-get_solution"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-get_solution}{}}}
+\subsection{\code{Project$get_solution()}}{
+  Get solution from the project.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$get_solution(id)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{`character` value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A [new_solution()] object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-get_lock"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-get_lock}{}}}
+\subsection{\code{Project$get_lock()}}{
+  Get lock from the project.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$get_lock(id)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{`character` value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A [new_solution()] object.
+  }
+}
+
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Project-add_solution"></a>}}
 \if{latex}{\out{\hypertarget{method-Project-add_solution}{}}}
 \subsection{\code{Project$add_solution()}}{
-  Add a solution to the project.
+  Add a new solution to the project.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Project$add_solution(x)}
@@ -189,6 +231,28 @@ box by 10 percent. Defaults to 0.}
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{x}}{[new_lock()] object.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible `TRUE` indicating success.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-add_tile"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-add_tile}{}}}
+\subsection{\code{Project$add_tile()}}{
+  Add a tile to the project.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$add_tile(x)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{[new_tile()] object.}
     }
     \if{html}{\out{</div>}}
   }

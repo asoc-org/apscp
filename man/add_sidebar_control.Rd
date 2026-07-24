@@ -9,7 +9,7 @@ add_sidebar_control(map, id, position = "top-right", height = "100\%")
 \arguments{
 \item{map}{[mapgl::mapboxgl()] object.}
 
-\item{id}{`character` identifier for sidebar.}
+\item{id}{`character` HTML identifier for sidebar.}
 
 \item{position}{The position of the control. Can be one of "top-left", "top-right",
 "bottom-left", or "bottom-right". Default is "top-right".}

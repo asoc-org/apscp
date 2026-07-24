@@ -29,6 +29,7 @@ print(x)
 \seealso{
 Other io:
 \code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
 \code{\link[=serialize_object]{serialize_object()}},
 \code{\link[=write_dataset]{write_dataset()}},

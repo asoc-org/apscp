@@ -11,8 +11,8 @@ new_layer(
   tile,
   legend,
   provenance,
-  details = NULL,
-  id = uuid::UUIDgenerate()
+  visible = FALSE,
+  details = NULL
 )
 }
 \arguments{
@@ -31,11 +31,11 @@ object.}
 
 \item{provenance}{[new_provenance()] object.}
 
+\item{visible}{`logical` value indicating if the layer should
+be visible by default? Defaults to `FALSE`.}
+
 \item{details}{`character` value with additional details for the layer.
 Defaults to `NULL`.}
-
-\item{id}{`character` value with unique identifier.
-Defaults to a random identifier ([uuid::UUIDgenerate()]).}
 }
 \value{
 A `Layer` object.
@@ -55,6 +55,7 @@ x <- new_layer(
   tile = create_tile(sim_data),
   legend = simulate_continuous_legend(),
   provenance = simulate_provenance(),
+  visible = TRUE,
   details = "extra info"
 )
 
@@ -75,7 +76,6 @@ Other class:
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}

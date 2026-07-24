@@ -5,7 +5,6 @@
 \alias{serialize_object.bbox}
 \alias{serialize_object.Provenance}
 \alias{serialize_object.Tile}
-\alias{serialize_object.Tileset}
 \alias{serialize_object.ContinuousLegend}
 \alias{serialize_object.CategoricalLegend}
 \alias{serialize_object.Layer}
@@ -24,8 +23,6 @@ serialize_object(x)
 \method{serialize_object}{Provenance}(x)
 
 \method{serialize_object}{Tile}(x)
-
-\method{serialize_object}{Tileset}(x)
 
 \method{serialize_object}{ContinuousLegend}(x)
 
@@ -85,6 +82,7 @@ See [deserialize_object()] for the opposite of this function.
 
 Other io:
 \code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=write_dataset]{write_dataset()}},

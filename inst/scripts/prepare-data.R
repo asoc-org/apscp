@@ -134,16 +134,15 @@ boundary_data <- boundary_data[idx, idx]
 
 # Main processing
 ## create dataset
-dataset <- new_dataset(sf::st_drop_geometry(vector_data), boundary_data)
+dataset <- new_dataset(vector_data, boundary_data)
 
-## create tiles
+## create tile
 td <- tempdir()
 tile <- create_tile(
   vector_data[, setdiff(names(vector_data), "_index"), drop = FALSE],
   path = file.path(td, "antarctic-peninsula.pmtiles"),
   max_zoom = max_zoom
 )
-tileset <- new_tileset(list(tile), dir = td, max_zoom = max_zoom)
 
 ## create locks
 locks <-
@@ -157,6 +156,7 @@ locks <-
         column = x$name,
         total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        visible = x$visible,
         tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
@@ -188,6 +188,7 @@ costs <-
         column = x$name,
         total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        visible = x$visible,
         tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
@@ -220,6 +221,7 @@ features <-
         column = x$name,
         total = dataset$get_column_total(x$name),
         details = convert_na_to_null(x$details),
+        visible = x$visible,
         tile = tile,
         provenance = new_provenance(
           name = x$provenance_source,
@@ -256,9 +258,8 @@ themes <-
 ## create project
 project <- new_project(
   zones = c("Conservation area", "Scientific area", "Tourism area"),
-  bbox = sf::st_transform(sf::st_bbox(vector_data), 3875),
   dataset = dataset,
-  tileset = tileset,
+  tiles = list(tile),
   themes = themes,
   costs = costs,
   locks = locks,

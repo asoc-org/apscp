@@ -19,14 +19,13 @@ Other class:
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
-    \item{\code{pu_data}}{[tibble::tibble()] object.}
+    \item{\code{pu_data}}{[sf::st_sf()] object.}
 
     \item{\code{boundary_data}}{[Matrix::sparseMatrix()] object.}
   }
@@ -37,8 +36,10 @@ Other class:
   \itemize{
     \item \href{#method-Dataset-initialize}{\code{Dataset$new()}}
     \item \href{#method-Dataset-get_n_pu}{\code{Dataset$get_n_pu()}}
+    \item \href{#method-Dataset-get_bbox}{\code{Dataset$get_bbox()}}
     \item \href{#method-Dataset-get_column_names}{\code{Dataset$get_column_names()}}
     \item \href{#method-Dataset-get_column_data}{\code{Dataset$get_column_data()}}
+    \item \href{#method-Dataset-get_spatial_column_data}{\code{Dataset$get_spatial_column_data()}}
     \item \href{#method-Dataset-get_column_total}{\code{Dataset$get_column_total()}}
     \item \href{#method-Dataset-has_column}{\code{Dataset$has_column()}}
     \item \href{#method-Dataset-set_column_data}{\code{Dataset$set_column_data()}}
@@ -84,6 +85,21 @@ Other class:
 }
 
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_bbox"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_bbox}{}}}
+\subsection{\code{Dataset$get_bbox()}}{
+  Get bounding box.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_bbox()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An [sf::st_bbox()] object.
+  }
+}
+
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Dataset-get_column_names"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-get_column_names}{}}}
 \subsection{\code{Dataset$get_column_names()}}{
@@ -106,6 +122,28 @@ Other class:
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Dataset$get_column_data(column)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{`character` or `integer` value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A `numeric` vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_spatial_column_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_spatial_column_data}{}}}
+\subsection{\code{Dataset$get_spatial_column_data()}}{
+  Get column data.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_spatial_column_data(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{

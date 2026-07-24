@@ -7,11 +7,10 @@
 new_project(
   zones,
   dataset,
-  tileset,
+  tiles,
   costs,
   themes,
   locks,
-  bbox,
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
@@ -23,15 +22,13 @@ new_project(
 
 \item{dataset}{[new_dataset()] object.}
 
-\item{tileset}{[new_tileset()] objects.}
+\item{tiles}{`list` of [new_tile()] objects.}
 
 \item{costs}{`list` of [new_cost()] objects.}
 
 \item{themes}{`list` of [new_themes()] objects.}
 
 \item{locks}{`list` of [new_locks()] objects.}
-
-\item{bbox}{[sf::st_bbox()] object.}
 
 \item{solutions}{`list` of [new_solution()] objects.
 Defaults to an empty list().}
@@ -57,8 +54,7 @@ sim_data <- simulate_spatial_data()
 
 # prepare data
 dataset <- create_dataset(sim_data)
-tileset <- create_tileset(sim_data)
-tile <- tileset$tiles[[1]]
+tile <- create_tile(sim_data)
 
 # create cost
 cost <- new_cost(
@@ -121,11 +117,10 @@ theme <- new_theme(
 x <- new_project(
   zones = c("Conservation", "Tourism", "Science"),
   dataset = dataset,
-  tileset = tileset,
+  tiles = list(tile),
   costs = list(cost),
   locks = list(lock),
-  themes = list(theme),
-  bbox = sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
+  themes = list(theme)
 )
 
 # preview object
@@ -145,7 +140,6 @@ Other class:
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}

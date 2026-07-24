@@ -4,7 +4,7 @@
 #'
 #' @param map [mapgl::mapboxgl()] object.
 #'
-#' @param id `character` identifier for sidebar.
+#' @param id `character` HTML identifier for sidebar.
 #'
 #' @param height `character` value denoting the height of the widget
 #' in CSS units. For example, acceptable values include `"100%"`, `"30vh"`, or
@@ -37,7 +37,8 @@ add_sidebar_control <- function(
     htmlwidgets::onRender(
       paste0(
         "function(el, x, data) ",
-        "{mapgl_sidebar_initialize(el, data.id, data.height, data.options)}"
+        "{Shiny.mapglSidebarInitialize(",
+        "el, data.id, data.height, data.options)}"
       ),
       data = list(id = id, height = height, options = list(position = position))
     )
@@ -172,12 +173,8 @@ sidebar_deps <- function() {
     htmltools::htmlDependency(
       "sidebar",
       "1.0.0",
-      src = system.file("htmlwidgets/sidebar", package = "apscp"),
-      script = c(
-        "map-sidebar.js",
-        "map-sidebar-binding.js"
-      ),
-      stylesheet = "map-sidebar.css"
+      src = system.file("htmlwidgets", package = "apscp"),
+      script = "sidebar.js"
     )
   )
 }
