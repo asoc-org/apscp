@@ -14,7 +14,8 @@ new_project(
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
-  author_email = "Unknown"
+  author_email = "Unknown",
+  version = NULL
 )
 }
 \arguments{
@@ -41,6 +42,9 @@ Defaults to `"Unknown"`.}
 
 \item{author_email}{`character` email of the project author.
 Defaults to `"Unknown"`.}
+
+\item{version}{`character` version of package used to create the project.
+Defaults to `NULL`, such that the current package version is used.}
 }
 \value{
 A new `Project` object.
@@ -59,6 +63,7 @@ tile <- create_tile(sim_data)
 # create cost
 cost <- new_cost(
   name = "cost",
+  zones_active = c(TRUE, FALSE, FALSE),
   layer = new_layer(
     column = "feat_1",
     total = 500,
@@ -72,6 +77,8 @@ cost <- new_cost(
 # create lock
 lock <- new_lock(
   name = "lock",
+  zones_in = c(TRUE, FALSE, FALSE),
+  zones_out = c(FALSE, FALSE, FALSE),
   layer = new_layer(
     column = "locked_in",
     total = 30,
@@ -88,7 +95,7 @@ theme <- new_theme(
   list(
     new_feature(
       name = "f1",
-      targets = c(0.1, 0.5),
+      zones_targets = c(0.1, 0.5),
       layer = new_layer(
         column = "feat_1",
         total = 500,
@@ -100,7 +107,7 @@ theme <- new_theme(
     ),
     new_feature(
       name = "f2",
-      targets = c(0.2, 0.9),
+      zones_targets = c(0.2, 0.9),
       layer = new_layer(
         column = "feat_2",
         total = 200,

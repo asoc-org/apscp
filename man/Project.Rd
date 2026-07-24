@@ -46,6 +46,9 @@ Other class:
     \item{\code{author_name}}{`character` name of the project author.}
 
     \item{\code{author_email}}{`character` email of the project author.}
+
+    \item{\code{version}}{`character` value with package version used
+to create the project.}
   }
   \if{html}{\out{</div>}}
 }
@@ -80,7 +83,8 @@ Other class:
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
-  author_email = "Unknown"
+  author_email = "Unknown",
+  version = "Unknown"
 )}
     \if{html}{\out{</div>}}
   }
@@ -100,6 +104,9 @@ Defaults to `"Project"`.}
       \item{\code{author_name}}{`character` name of the project author.
 Defaults to `"Unknown"`.}
       \item{\code{author_email}}{`character` email of the project author.
+Defaults to `"Unknown"`.}
+      \item{\code{version}}{`character` value with package version used
+to create the project.
 Defaults to `"Unknown"`.}
     }
     \if{html}{\out{</div>}}

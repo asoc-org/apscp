@@ -9,7 +9,7 @@ create_tile(
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
-  verbose = TRUE
+  verbose = FALSE
 )
 }
 \arguments{
@@ -25,7 +25,7 @@ Defaults to a temporary file path.}
 \item{max_zoom}{`integer` value with maximum zoom level. Defaults to 8.}
 
 \item{verbose}{`logical` value indicating if information about tile
-creation should be displayed? Defaults to `TRUE`.}
+creation should be displayed? Defaults to `FALSE`.}
 }
 \value{
 A [new_tile()] object.

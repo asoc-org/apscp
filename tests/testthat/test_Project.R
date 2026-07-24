@@ -8,6 +8,7 @@ test_that("new_project", {
   # create cost
   cost <- new_cost(
     name = "cost",
+    zones_active = c(FALSE, TRUE, FALSE),
     layer = new_layer(
       dataset = w,
       tile = g,
@@ -21,6 +22,8 @@ test_that("new_project", {
   # create lock
   lock <- new_lock(
     name = "lock",
+    zones_in = c(TRUE, FALSE, FALSE),
+    zones_out = rep(FALSE, 3L),
     layer = new_layer(
       dataset = w,
       tile = g,
@@ -37,7 +40,7 @@ test_that("new_project", {
     list(
       new_feature(
         name = "f1",
-        targets = c(0.1, 0.5),
+        zones_targets = c(0.1, 0.5, 0.4),
         layer = new_layer(
           dataset = w,
           tile = g,
@@ -50,7 +53,7 @@ test_that("new_project", {
       ),
       new_feature(
         name = "f2",
-        targets = c(0.2, 0.9),
+        zones_targets = c(0.2, 0.9, 0.2),
         layer = new_layer(
           dataset = w,
           tile = g,

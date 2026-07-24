@@ -10,11 +10,12 @@ NULL
 #' @param layer [new_layer()] object used to store information for
 #' visualization.
 #'
-#' @param targets `numeric` vector of initial targets for the feature.
+#' @param zones_targets `numeric` vector of initial targets for the feature.
 #' Each value should correspond to a particular zone and denote
 #' values should be specified as a proportion of the features total distribution
 #' (e.g., a value of 0.1 corresponds to 10%).
-#' Note that `zones` and `targets` must have the same number of values.
+#' Note `targets` must have a value for each zone in the [new_project()]
+#' to which this object belongs.
 #'
 #' @param id `character` value with unique identifier.
 #' Defaults to a random identifier ([uuid::UUIDgenerate()]).
@@ -30,7 +31,7 @@ NULL
 #' # create object
 #' x <- new_feature(
 #'   name = "species 1",
-#'   targets = c(0.1, 0.5),
+#'   zones_targets = c(0.1, 0.5),
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -46,15 +47,15 @@ NULL
 #' print(x)
 #'
 #' @export
-new_feature <- function(name, layer, targets, id = uuid::UUIDgenerate()) {
+new_feature <- function(name, layer, zones_targets, id = uuid::UUIDgenerate()) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
     assertthat::is.string(name),
     assertthat::noNA(name),
-    ## targets
-    is.numeric(targets),
-    assertthat::noNA(targets),
+    ## zones_targets
+    is.numeric(zones_targets),
+    assertthat::noNA(zones_targets),
     ## layer
     inherits(layer, "Layer"),
     ## id
@@ -66,7 +67,7 @@ new_feature <- function(name, layer, targets, id = uuid::UUIDgenerate()) {
     list(
       name = name,
       id = id,
-      targets = targets,
+      zones_targets = zones_targets,
       layer = layer
     ),
     class = c("Feature", "ProjectComponent")

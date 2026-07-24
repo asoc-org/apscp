@@ -4,13 +4,23 @@
 \alias{new_lock}
 \title{New lock}
 \usage{
-new_lock(name, layer, id = uuid::UUIDgenerate())
+new_lock(name, layer, zones_in, zones_out, id = uuid::UUIDgenerate())
 }
 \arguments{
 \item{name}{`character` value with the name.}
 
 \item{layer}{[new_layer()] object used to store information for
 visualization.}
+
+\item{zones_in}{`logical` vector of values indicating which zones
+the lock should be used to lock in planning units.
+Note `zones_in` must have a value for each zone in the [new_project()]
+to which this object belongs.}
+
+\item{zones_out}{`logical` vector of values indicating which zones
+the lock should be used to lock out planning units.
+Note `zones_out` must have a value for each zone in the [new_project()]
+to which this object belongs.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
@@ -28,6 +38,8 @@ sim_data <- simulate_spatial_data()
 # create object
 x <- new_lock(
   name = "lock",
+  zones_in = c(FALSE, TRUE),
+  zones_out = c(FALSE, FALSE),
   layer = new_layer(
     column = "locked_in",
     total = 500,

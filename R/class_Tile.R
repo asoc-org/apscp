@@ -72,7 +72,7 @@ new_tile <- function(source_layer, path, max_zoom) {
 #' @param max_zoom `integer` value with maximum zoom level. Defaults to 8.
 #'
 #' @param verbose `logical` value indicating if information about tile
-#' creation should be displayed? Defaults to `TRUE`.
+#' creation should be displayed? Defaults to `FALSE`.
 #'
 #' @return A [new_tile()] object.
 #'
@@ -94,7 +94,7 @@ create_tile <- function(
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
-  verbose = TRUE
+  verbose = FALSE
 ) {
   # assert arguments are valid
   assertthat::assert_that(

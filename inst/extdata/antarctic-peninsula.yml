@@ -2,7 +2,7 @@ name: Antarctic Peninsula
 author_name: Jasmine Lee
 author_email: jasmine.lee@monash.edu
 zones:
-- Conservation area
+- Biodiversity area
 - Scientific area
 - Tourism area
 tiles:
@@ -12,7 +12,11 @@ tiles:
   class: Tile
 costs:
 - name: Tourism vessel landings
-  id: e3c74e03-4198-431e-b073-213022125208
+  id: 47892efd-7d60-497c-8574-b3c43be4456e
+  zones_active:
+  - yes
+  - yes
+  - no
   layer:
     column: Tourism vessel landings
     total: 7171.0
@@ -58,7 +62,11 @@ costs:
     class: Layer
   class: Cost
 - name: Tourism visitor landings
-  id: fe077a5e-9059-4d33-aa53-9855d40a0c9a
+  id: 72595e9a-4a8a-48ee-ab69-22f684c43ef2
+  zones_active:
+  - yes
+  - yes
+  - no
   layer:
     column: Tourism visitor landings
     total: 378254.0
@@ -107,8 +115,8 @@ themes:
 - name: Geographic
   features:
   - name: Continental landing site
-    id: 94db0e88-fe42-47dd-8e14-7a857d3fad8f
-    targets:
+    id: 03461d75-2457-429d-a0c3-1df95f773446
+    zones_targets:
     - 0.0
     - 0.0
     - 6.27e-05
@@ -138,8 +146,8 @@ themes:
       class: Layer
     class: Feature
   - name: Potential expansion zones
-    id: 4f1101ca-5a4e-451c-b438-c45aee414899
-    targets:
+    id: da933c0a-ec1f-45ea-8bbb-c85f4db3b2c2
+    zones_targets:
     - 0.3
     - 0.05
     - 0.0
@@ -190,8 +198,8 @@ themes:
       class: Layer
     class: Feature
   - name: Sites past the Antarctic circle
-    id: 62682067-2830-410c-b424-298420f8f217
-    targets:
+    id: 724647a5-5dba-4d5a-a41f-678abcb4f130
+    zones_targets:
     - 0.0
     - 0.0
     - 0.0001051
@@ -224,8 +232,8 @@ themes:
 - name: Habitats
   features:
   - name: Fresh water
-    id: 945270d7-9011-40b4-93b8-10f99b0d5119
-    targets:
+    id: c62202a8-4e3a-4b31-aa59-feedd3bce597
+    zones_targets:
     - 0.05
     - 0.05
     - 0.0
@@ -255,8 +263,8 @@ themes:
       class: Layer
     class: Feature
   - name: Geotermal/volcanic sites
-    id: 818b656b-9d38-40cf-94f2-999d4d7cfcf6
-    targets:
+    id: 5611ab3d-fca9-453d-9f3d-7787086aa715
+    zones_targets:
     - 0.6
     - 0.3
     - 0.0
@@ -286,8 +294,8 @@ themes:
       class: Layer
     class: Feature
   - name: Invasive species
-    id: 9987d2cd-9e1f-40c6-96a9-10a2f2ec610b
-    targets:
+    id: aaf318e0-3b1c-4b04-85e4-678ad7b23f4c
+    zones_targets:
     - 0.0
     - 0.5769231
     - 0.0
@@ -321,8 +329,8 @@ themes:
 - name: Historic
   features:
   - name: Historic monuments
-    id: 65866c94-8731-4e69-ba69-c1716e38e322
-    targets:
+    id: dee05be7-1420-4d3d-b5dc-754832a3dbef
+    zones_targets:
     - 0.0
     - 0.5
     - 0.1034483
@@ -355,8 +363,8 @@ themes:
 - name: Ice
   features:
   - name: Crevasses
-    id: ca477419-a746-40a6-b7af-d1816dc33f02
-    targets:
+    id: d48ed2b3-7eae-49ba-a103-d31c9b497a3d
+    zones_targets:
     - 0.0111483
     - 0.0089186
     - 0.0
@@ -405,8 +413,8 @@ themes:
       class: Layer
     class: Feature
   - name: Fast ice / shelf ice
-    id: bd504f71-a4bd-4920-9910-b70066a90f50
-    targets:
+    id: 8bad37c6-9ab8-4669-b79d-7fc9d217201f
+    zones_targets:
     - 0.2
     - 0.4
     - 0.0
@@ -455,8 +463,8 @@ themes:
       class: Layer
     class: Feature
   - name: Glaciers
-    id: 898d9c19-2096-4b35-8e13-e19e76938454
-    targets:
+    id: 3a48d70f-3802-43dc-b377-51fd9c02ffa0
+    zones_targets:
     - 0.15
     - 0.05
     - 0.0
@@ -505,8 +513,8 @@ themes:
       class: Layer
     class: Feature
   - name: Ice shelf
-    id: 9b0b54d9-9bf8-462d-b517-8498cb5fe493
-    targets:
+    id: 61244bd7-e5f0-47f3-9990-27717d1134e5
+    zones_targets:
     - 0.0
     - 0.05
     - 0.0011485
@@ -539,8 +547,8 @@ themes:
 - name: Invertebrates
   features:
   - name: Entomobryomorpha springtails
-    id: 9ade3e8b-fcc2-4fb4-9cb4-80b1f985c1f7
-    targets:
+    id: 97fae580-2148-4902-be8e-69559d6c8956
+    zones_targets:
     - 0.1052356
     - 0.0073298
     - 0.0
@@ -593,8 +601,8 @@ themes:
       class: Layer
     class: Feature
   - name: Freshwater copepods
-    id: ccd19988-425e-44e6-8549-edbd87af795d
-    targets:
+    id: 73a19100-39d1-4321-95d4-a72b82acaec5
+    zones_targets:
     - 0.2272727
     - 0.1136364
     - 0.0
@@ -643,8 +651,8 @@ themes:
       class: Layer
     class: Feature
   - name: General invertebrates
-    id: af0f82b3-0e4a-49f0-882a-de42c5f2a433
-    targets:
+    id: b85770d5-e9c8-472e-a33d-f7a8ca382355
+    zones_targets:
     - 0.0
     - 0.0
     - 0.0
@@ -674,8 +682,8 @@ themes:
       class: Layer
     class: Feature
   - name: Intertidal mites
-    id: 45adaf46-fa7d-4268-a023-6fdb28097fc8
-    targets:
+    id: abb74e95-2d9e-4573-8112-16e93aaf7ac0
+    zones_targets:
     - 0.3
     - 0.05
     - 0.0
@@ -726,8 +734,8 @@ themes:
       class: Layer
     class: Feature
   - name: Intertidal oligochaetes
-    id: 48400248-f8fd-4f63-a011-d8b0daab0304
-    targets:
+    id: d83740bc-1819-4785-9c07-0e305a5f9de8
+    zones_targets:
     - 0.1111111
     - 0.05
     - 0.0
@@ -776,8 +784,8 @@ themes:
       class: Layer
     class: Feature
   - name: Intertidal springtails
-    id: 78705561-4c24-4cc0-b242-8a0f9118638f
-    targets:
+    id: 3606476c-255f-4049-86d4-fde702dc1b11
+    zones_targets:
     - 0.1398601
     - 0.2097902
     - 0.0
@@ -826,8 +834,8 @@ themes:
       class: Layer
     class: Feature
   - name: Moss-associated microfauna
-    id: af689d8e-87cf-492c-aaee-17a224e5915b
-    targets:
+    id: b02727d0-a789-4f5f-a303-6ad5c67ddd4e
+    zones_targets:
     - 0.1338983
     - 0.05
     - 0.0
@@ -876,8 +884,8 @@ themes:
       class: Layer
     class: Feature
   - name: Penguin rookery-associated nematodes
-    id: 52afd3b5-744b-4fe2-a9da-ba4e9ee387a7
-    targets:
+    id: bbfe801a-9ad1-445e-97fa-bd3ba8824e95
+    zones_targets:
     - 0.2
     - 0.05
     - 0.0
@@ -924,8 +932,8 @@ themes:
       class: Layer
     class: Feature
   - name: Poduromorpha springtails
-    id: 527adc78-116b-4099-b818-0a453a4f49de
-    targets:
+    id: 029f575f-6391-47e6-99f5-8158d6c89395
+    zones_targets:
     - 0.2222222
     - 0.4444444
     - 0.0
@@ -979,8 +987,8 @@ themes:
 - name: Microbes
   features:
   - name: Biological soil crust microbes
-    id: c23a9574-e00a-489e-ae69-460b10b77a71
-    targets:
+    id: 6db92d15-1dbf-4e2b-93a7-cfcd4eb91a71
+    zones_targets:
     - 0.7
     - 0.05
     - 0.0041494
@@ -1033,8 +1041,8 @@ themes:
       class: Layer
     class: Feature
   - name: Dry soil microbes
-    id: 3d7900f4-d8f0-4d8c-92eb-954866d4ae60
-    targets:
+    id: d4e3c4b9-ee9d-45f1-b2f4-50982a16a2ec
+    zones_targets:
     - 0.775
     - 0.05
     - 0.0
@@ -1085,8 +1093,8 @@ themes:
       class: Layer
     class: Feature
   - name: Lithic microbes
-    id: 9b4fd0ea-916e-4e06-95b7-bf04652cb0da
-    targets:
+    id: e9e6a511-90ee-4508-bf14-61c1f54115f5
+    zones_targets:
     - 0.55
     - 0.05
     - 0.0199203
@@ -1138,8 +1146,8 @@ themes:
       class: Layer
     class: Feature
   - name: Microbial mats
-    id: d189b06c-4238-4002-b6b0-722e97115b68
-    targets:
+    id: e91bf072-f2b5-47bf-8680-f98fdbaa0689
+    zones_targets:
     - 0.3157895
     - 0.0315789
     - 0.0
@@ -1190,8 +1198,8 @@ themes:
       class: Layer
     class: Feature
   - name: Plankton
-    id: 86f09fa9-3e4a-4fda-8125-5cda98a8aadf
-    targets:
+    id: 546044ec-7c53-40ff-8952-00bf2a9bd544
+    zones_targets:
     - 0.75
     - 0.05
     - 0.0
@@ -1240,8 +1248,8 @@ themes:
       class: Layer
     class: Feature
   - name: Snow algae
-    id: 01d5a829-5b90-4470-b97c-78507b9255fd
-    targets:
+    id: 82bc5f18-3713-44a7-9b93-5556fae87e07
+    zones_targets:
     - 0.6
     - 0.05
     - 0.0071429
@@ -1290,8 +1298,8 @@ themes:
       class: Layer
     class: Feature
   - name: Snow algae 2
-    id: ce301c5c-539f-40cb-b8cc-2ffd2751d0f5
-    targets:
+    id: 7b05a81e-1840-4d47-86bb-29023e39e040
+    zones_targets:
     - 0.3
     - 0.05
     - 0.0
@@ -1321,8 +1329,8 @@ themes:
       class: Layer
     class: Feature
   - name: Wet soil microbes
-    id: 05bb5166-36af-4efb-ba0c-5ae480a4f22b
-    targets:
+    id: af6a41f9-8a45-474c-ac78-c9076ba8f5fa
+    zones_targets:
     - 0.5
     - 0.05
     - 0.0
@@ -1374,8 +1382,8 @@ themes:
 - name: Outstanding geological
   features:
   - name: Fossil bearing rocks
-    id: 112ce82e-39bd-484a-98de-19aad94ed0b7
-    targets:
+    id: 15c6ff50-a91f-44ef-b898-2dedbe7911fa
+    zones_targets:
     - 0.0254237
     - 0.0423729
     - 0.0
@@ -1424,8 +1432,8 @@ themes:
       class: Layer
     class: Feature
   - name: Geological processes
-    id: af2070f0-aa3f-4f02-be2f-f3db714704d5
-    targets:
+    id: f53ad67c-937c-44a9-9c8c-f4e65e64bc82
+    zones_targets:
     - 0.3
     - 0.05
     - 0.0
@@ -1473,8 +1481,8 @@ themes:
       class: Layer
     class: Feature
   - name: Meteorites
-    id: e32c2239-31a4-4d94-944e-a5074f7fbe75
-    targets:
+    id: f6d909fe-e16e-4a18-b03c-33f622eb5e6d
+    zones_targets:
     - 0.4
     - 0.05
     - 0.0
@@ -1523,8 +1531,8 @@ themes:
       class: Layer
     class: Feature
   - name: Minerals and crystals
-    id: bd715c5a-c76d-4993-a9d2-a14f23cd11ba
-    targets:
+    id: 3425fe3f-7553-448f-b60c-cf108d462cf3
+    zones_targets:
     - 0.55
     - 0.05
     - 0.0
@@ -1578,8 +1586,8 @@ themes:
 - name: Penguins
   features:
   - name: Adélie penguins
-    id: 9b202eef-dc80-4be9-8879-bd6396498bf3
-    targets:
+    id: b4a1cec3-8405-497a-8d15-71e40fb66aaa
+    zones_targets:
     - 0.55
     - 0.05
     - 0.0
@@ -1628,8 +1636,8 @@ themes:
       class: Layer
     class: Feature
   - name: Chinstrap penguins
-    id: 498654c6-6b3e-43a6-9414-bb6b8a6bda72
-    targets:
+    id: c8fa8543-f338-4d7e-9631-a92e51f9472b
+    zones_targets:
     - 0.6
     - 0.05
     - 0.0
@@ -1682,8 +1690,8 @@ themes:
       class: Layer
     class: Feature
   - name: Emperor penguins
-    id: 2a6ad198-a9ca-455c-8968-94455123a23a
-    targets:
+    id: a0ca6d46-1d1b-4122-869e-3188415d3039
+    zones_targets:
     - 0.6
     - 0.05
     - 0.0
@@ -1713,8 +1721,8 @@ themes:
       class: Layer
     class: Feature
   - name: Gentoo penguins
-    id: 39cffda6-c3a9-45de-9013-9c01701abc09
-    targets:
+    id: d790f1f5-bf79-4eab-9f3c-29688a185571
+    zones_targets:
     - 0.4
     - 0.0851064
     - 0.0
@@ -1767,8 +1775,8 @@ themes:
       class: Layer
     class: Feature
   - name: King penguins
-    id: 27e670ec-bb6d-4e02-ab5f-4a6ca560e4a7
-    targets:
+    id: 92b547b9-066d-4a70-9ef5-3381860ff01c
+    zones_targets:
     - 0.875
     - 0.05
     - 0.0
@@ -1819,8 +1827,8 @@ themes:
       class: Layer
     class: Feature
   - name: Macaroni penguins
-    id: c9eb1806-1b79-4cab-9841-80a0874f9173
-    targets:
+    id: d6160224-e93a-44ee-906e-f596df97fe13
+    zones_targets:
     - 0.7
     - 0.05
     - 0.0
@@ -1872,8 +1880,8 @@ themes:
 - name: Science
   features:
   - name: Monitoring sites
-    id: feeadd07-c329-4245-b7c2-15254521d241
-    targets:
+    id: 718647d3-4dc7-444f-b800-2c007b11c643
+    zones_targets:
     - 0.0
     - 0.1818182
     - 0.0
@@ -1903,8 +1911,8 @@ themes:
       class: Layer
     class: Feature
   - name: Research stations
-    id: 8ce76639-b291-4493-b707-18b572b5723a
-    targets:
+    id: e375aa8d-0b50-44cc-b0d6-ed2dd6c8db3b
+    zones_targets:
     - 0.0
     - 0.6578947
     - 0.0526316
@@ -1934,8 +1942,8 @@ themes:
       class: Layer
     class: Feature
   - name: Scientific field camps
-    id: 8e96f363-8381-47b3-beeb-06abc91135ce
-    targets:
+    id: 81c448d0-fcd2-4257-803d-4e564463a669
+    zones_targets:
     - 0.0
     - 1.0
     - 0.0
@@ -1968,8 +1976,8 @@ themes:
 - name: Seabirds
   features:
   - name: Antarctic shag
-    id: 11dc55b8-9cde-4d35-bb82-614db35cac1b
-    targets:
+    id: 6f4cd3ea-15dd-4fb8-b72a-5649a1dde63e
+    zones_targets:
     - 0.6
     - 0.05
     - 0.05
@@ -1999,8 +2007,8 @@ themes:
       class: Layer
     class: Feature
   - name: Antarctic terns
-    id: 49555a0e-d0b8-43b7-b824-e2da74569d0b
-    targets:
+    id: a19f9079-a398-4881-8f1d-5a71caf275b6
+    zones_targets:
     - 0.6
     - 0.05
     - 0.05
@@ -2030,8 +2038,8 @@ themes:
       class: Layer
     class: Feature
   - name: Other seabird colonies
-    id: 66e61f74-a0b9-4dd5-85f7-62af1f3f96dc
-    targets:
+    id: 4bd18651-a30b-4153-ae86-28bfd7ee592e
+    zones_targets:
     - 0.0
     - 0.0
     - 0.0123967
@@ -2061,8 +2069,8 @@ themes:
       class: Layer
     class: Feature
   - name: Procellariids
-    id: c9e969af-338f-4f8f-9ea8-3971ca310524
-    targets:
+    id: 445b81be-0570-41a1-bbe2-19bae3c0ed50
+    zones_targets:
     - 0.6
     - 0.05
     - 0.0
@@ -2096,8 +2104,8 @@ themes:
 - name: Seals
   features:
   - name: Antarctic fur seals
-    id: ea2b96e5-d810-4bcd-b7bb-eaaff5dd3139
-    targets:
+    id: af9c87e8-d981-4fd1-88f5-293b38b71a12
+    zones_targets:
     - 0.3
     - 0.05
     - 0.0
@@ -2148,8 +2156,8 @@ themes:
       class: Layer
     class: Feature
   - name: Elephant seals
-    id: 0fb77d1a-291c-4107-b9d9-a7386cfb3822
-    targets:
+    id: 02fc08b3-01ec-4962-87bf-85e1a92e794b
+    zones_targets:
     - 0.5555556
     - 0.05
     - 0.0
@@ -2200,8 +2208,8 @@ themes:
       class: Layer
     class: Feature
   - name: Weddell seals
-    id: fe8e6267-3430-42f2-88eb-f8124c7eb1f5
-    targets:
+    id: d8fbe341-d43c-4305-a9c7-4267b95ddd9a
+    zones_targets:
     - 0.1
     - 0.05
     - 0.0
@@ -2253,8 +2261,8 @@ themes:
 - name: Vegetation
   features:
   - name: Leafy liverworts
-    id: 05d2cf5d-ae56-46f1-872a-e4371cdc9bfc
-    targets:
+    id: b741e98e-d357-413d-b646-50b1d3979076
+    zones_targets:
     - 0.168572
     - 0.0660338
     - 0.0
@@ -2303,8 +2311,8 @@ themes:
       class: Layer
     class: Feature
   - name: Mesic mosses
-    id: f530e707-8ac3-4d47-a464-9e785ff2177e
-    targets:
+    id: 87fd2cba-b1da-4750-bf10-3acd27a9f9b0
+    zones_targets:
     - 0.1
     - 0.0595238
     - 0.0
@@ -2353,8 +2361,8 @@ themes:
       class: Layer
     class: Feature
   - name: Thalloid liverworts
-    id: b159829b-4b20-4963-b02b-4af665512d1d
-    targets:
+    id: 4e3f5fa3-3ad9-4d0a-9fe1-1d5640066017
+    zones_targets:
     - 0.5
     - 0.05
     - 0.0
@@ -2403,8 +2411,8 @@ themes:
       class: Layer
     class: Feature
   - name: Truly aquatic mosses
-    id: d0236400-8301-4631-9b43-ab2ba8f1e76d
-    targets:
+    id: 2d3404fe-e3d3-4fe6-8f4b-4238d3989d89
+    zones_targets:
     - 0.1663755
     - 0.0582242
     - 0.0
@@ -2453,8 +2461,8 @@ themes:
       class: Layer
     class: Feature
   - name: Vegetation
-    id: 1baa85a9-408a-447b-8a93-937632289277
-    targets:
+    id: df607b5f-8131-4ce2-aa86-5438ab87be49
+    zones_targets:
     - 0.0
     - 0.0
     - 0.0026702
@@ -2486,7 +2494,15 @@ themes:
   class: Theme
 locks:
 - name: ASPA
-  id: c09744c9-dc63-47ed-aa30-e46db2df2abf
+  id: 7b089e31-d20c-41bc-96af-5138fb4618b1
+  zones_in:
+  - yes
+  - no
+  - no
+  zones_out:
+  - no
+  - no
+  - no
   layer:
     column: ASPA
     total: 719.0
@@ -2513,7 +2529,15 @@ locks:
     class: Layer
   class: Lock
 - name: Inviolate sites
-  id: ffc2ffd4-4f57-4ab6-b4f9-0d0cef7a802d
+  id: 8c0878f1-61f6-4c5d-b77e-74e129aeecf4
+  zones_in:
+  - yes
+  - no
+  - no
+  zones_out:
+  - no
+  - no
+  - no
   layer:
     column: Inviolate sites
     total: 25753.0

@@ -7,6 +7,11 @@ NULL
 #'
 #' @inheritParams new_feature
 #'
+#' @param zones_active `logical` vector of values indicating which zones
+#' the cost should be used to avoid allocating planning units.
+#' Note `zones_active` must have a value for each zone in the [new_project()]
+#' to which this object belongs.
+#'
 #' @return A `Cost` object.
 #'
 #' @family class
@@ -18,6 +23,7 @@ NULL
 #' # create object
 #' x <- new_cost(
 #'   name = "cost",
+#'   zones_active = c(TRUE, FALSE),
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -33,7 +39,7 @@ NULL
 #' print(x)
 #'
 #' @export
-new_cost <- function(name, layer, id = uuid::UUIDgenerate()) {
+new_cost <- function(name, layer, zones_active, id = uuid::UUIDgenerate()) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
@@ -41,13 +47,15 @@ new_cost <- function(name, layer, id = uuid::UUIDgenerate()) {
     assertthat::noNA(name),
     ## layer
     inherits(layer, "Layer"),
+    ## zones_active
+    is.logical(zones_active),
     ## id
     assertthat::is.string(id),
     assertthat::noNA(id)
   )
   # return object
   structure(
-    list(name = name, layer = layer, id = id),
+    list(name = name, layer = layer, zones_active = zones_active, id = id),
     class = c("Cost", "ProjectComponent")
   )
 }

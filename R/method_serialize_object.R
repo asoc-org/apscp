@@ -50,20 +50,6 @@ serialize_object.default <- function(x) {
 }
 
 #' @rdname serialize_object
-#' @method serialize_object bbox
-#' @export
-serialize_object.bbox <- function(x) {
-  list(
-    xmin = x$xmin[[1]],
-    ymin = x$ymin[[1]],
-    xmax = x$xmax[[1]],
-    ymax = x$ymax[[1]],
-    crs = sf::st_crs(x)$epsg,
-    class = "bbox"
-  )
-}
-
-#' @rdname serialize_object
 #' @method serialize_object Provenance
 #' @export
 serialize_object.Provenance <- function(x) {
@@ -142,7 +128,7 @@ serialize_object.Feature <- function(x) {
   list(
     name = x$name,
     id = x$id,
-    targets = x$targets,
+    zones_targets = x$zones_targets,
     layer = serialize_object.Layer(x$layer),
     class = "Feature"
   )
@@ -155,6 +141,8 @@ serialize_object.Lock <- function(x) {
   list(
     name = x$name,
     id = x$id,
+    zones_in = x$zones_in,
+    zones_out = x$zones_out,
     layer = serialize_object.Layer(x$layer),
     class = "Lock"
   )
@@ -167,6 +155,7 @@ serialize_object.Cost <- function(x) {
   list(
     name = x$name,
     id = x$id,
+    zones_active = x$zones_active,
     layer = serialize_object.Layer(x$layer),
     class = "Cost"
   )
@@ -201,6 +190,7 @@ serialize_object.Theme <- function(x) {
 serialize_object.Project <- function(x) {
   list(
     name = x$name,
+    version = x$version,
     author_name = x$author_name,
     author_email = x$author_email,
     zones = x$zones,

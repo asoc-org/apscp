@@ -7,6 +7,16 @@ NULL
 #'
 #' @inheritParams new_feature
 #'
+#' @param zones_in `logical` vector of values indicating which zones
+#' the lock should be used to lock in planning units.
+#' Note `zones_in` must have a value for each zone in the [new_project()]
+#' to which this object belongs.
+#'
+#' @param zones_out `logical` vector of values indicating which zones
+#' the lock should be used to lock out planning units.
+#' Note `zones_out` must have a value for each zone in the [new_project()]
+#' to which this object belongs.
+#'
 #' @return A `Lock` object.
 #'
 #' @family class
@@ -18,6 +28,8 @@ NULL
 #' # create object
 #' x <- new_lock(
 #'   name = "lock",
+#'   zones_in = c(FALSE, TRUE),
+#'   zones_out = c(FALSE, FALSE),
 #'   layer = new_layer(
 #'     column = "locked_in",
 #'     total = 500,
@@ -33,12 +45,20 @@ NULL
 #' print(x)
 #'
 #' @export
-new_lock <- function(name, layer, id = uuid::UUIDgenerate()) {
+new_lock <- function(
+  name, layer, zones_in, zones_out,
+  id = uuid::UUIDgenerate()
+) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
     assertthat::is.string(name),
     assertthat::noNA(name),
+    ## in
+    is.logical(zones_in),
+    ## out
+    is.logical(zones_out),
+    identical(length(zones_in), length(zones_out)),
     ## layer
     inherits(layer, "Layer"),
     ## id
@@ -47,7 +67,13 @@ new_lock <- function(name, layer, id = uuid::UUIDgenerate()) {
   )
   # return object
   structure(
-    list(name = name, id = id, layer = layer),
+    list(
+      name = name,
+      zones_in = zones_in,
+      zones_out = zones_out,
+      id = id,
+      layer = layer
+    ),
     class = c("Lock", "ProjectComponent")
   )
 }

@@ -4,7 +4,7 @@
 \alias{new_feature}
 \title{New feature}
 \usage{
-new_feature(name, layer, targets, id = uuid::UUIDgenerate())
+new_feature(name, layer, zones_targets, id = uuid::UUIDgenerate())
 }
 \arguments{
 \item{name}{`character` value with the name.}
@@ -12,11 +12,12 @@ new_feature(name, layer, targets, id = uuid::UUIDgenerate())
 \item{layer}{[new_layer()] object used to store information for
 visualization.}
 
-\item{targets}{`numeric` vector of initial targets for the feature.
+\item{zones_targets}{`numeric` vector of initial targets for the feature.
 Each value should correspond to a particular zone and denote
 values should be specified as a proportion of the features total distribution
 (e.g., a value of 0.1 corresponds to 10%).
-Note that `zones` and `targets` must have the same number of values.}
+Note `targets` must have a value for each zone in the [new_project()]
+to which this object belongs.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
@@ -34,7 +35,7 @@ sim_data <- simulate_spatial_data()
 # create object
 x <- new_feature(
   name = "species 1",
-  targets = c(0.1, 0.5),
+  zones_targets = c(0.1, 0.5),
   layer = new_layer(
     column = "feat_1",
     total = 500,

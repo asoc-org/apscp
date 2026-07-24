@@ -27,7 +27,7 @@ NULL
 #'   list(
 #'     new_feature(
 #'       name = "f1",
-#'       targets = c(0.1, 0.5),
+#'       zones_targets = c(0.1, 0.5),
 #'       layer = new_layer(
 #'         column = "feat_1",
 #'         total = 500,
@@ -40,7 +40,7 @@ NULL
 #'     ),
 #'     new_feature(
 #'       name = "f2",
-#'       targets = c(0.2, 0.9),
+#'       zones_targets = c(0.2, 0.9),
 #'       layer = new_layer(
 #'         column = "feat_2",
 #'         total = 500,

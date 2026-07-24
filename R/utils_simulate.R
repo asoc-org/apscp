@@ -116,6 +116,7 @@ simulate_project <- function() {
   # create cost
   cost <- new_cost(
     name = "Tourism revenue",
+    zones_active = c(TRUE, TRUE, FALSE),
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -148,6 +149,8 @@ simulate_project <- function() {
   # create object
   locked_in <- new_lock(
     name = "Protected areas",
+    zones_in = c(TRUE, FALSE, FALSE),
+    zones_out = c(FALSE, FALSE, FALSE),
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -164,6 +167,8 @@ simulate_project <- function() {
   )
   locked_out <- new_lock(
     name = "Historical sites",
+    zones_in = c(FALSE, FALSE, TRUE),
+    zones_out = c(FALSE, FALSE, FALSE),
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -186,7 +191,7 @@ simulate_project <- function() {
     lapply(seq_len(5), function(i) {
       new_feature(
         name = paste0("Species ", i),
-        targets = stats::runif(3, min = 0, max = 1),
+        zones_targets = stats::runif(3, min = 0, max = 1),
         layer = new_layer(
           dataset = dataset,
           tile = tile,
@@ -206,7 +211,7 @@ simulate_project <- function() {
 
   # return project
   new_project(
-    zones = c("Conservation", "Tourism", "Science"),
+    zones = c("Biodiversity", "Tourism", "Science"),
     dataset = dataset,
     tiles = list(tile),
     costs = list(cost),
@@ -248,7 +253,7 @@ simulate_solution_legend <- function() {
   new_categorical_legend(
     values = c(1, 2, 3),
     colors = c("#000000", "#DDDDDD", "#AAAAAA"),
-    labels = c("Conservation", "Tourism", "Science"),
+    labels = c("Biodiversity", "Tourism", "Science"),
     units = "ternary"
   )
 }

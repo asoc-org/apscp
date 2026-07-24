@@ -41,6 +41,10 @@ Project <- R6::R6Class(
     #' @field author_email `character` email of the project author.
     author_email = "Unknown",
 
+    #' @field version `character` value with package version used
+    #' to create the project.
+    version = "Unknown",
+
     #' @description
     #' Create a `Project` object.
     #' @param dataset [new_dataset()] object.
@@ -57,11 +61,15 @@ Project <- R6::R6Class(
     #' Defaults to `"Unknown"`.
     #' @param author_email `character` email of the project author.
     #' Defaults to `"Unknown"`.
+    #' @param version `character` value with package version used
+    #' to create the project.
+    #' Defaults to `"Unknown"`.
     #' @return A new `Project` object.
     initialize = function(
       zones, dataset, tiles,
       themes, locks, costs, solutions = list(),
-      name = "Project", author_name = "Unknown", author_email = "Unknown"
+      name = "Project", author_name = "Unknown", author_email = "Unknown",
+      version = "Unknown"
     ) {
       # assert arguments are valid
       assertthat::assert_that(
@@ -83,6 +91,9 @@ Project <- R6::R6Class(
         ## author_email
         assertthat::is.string(author_email),
         assertthat::noNA(author_email),
+        ## version
+        assertthat::is.string(version),
+        assertthat::noNA(version),
         ## themes
         is.list(themes),
         all_elements_inherit(themes, "Theme"),
@@ -112,6 +123,7 @@ Project <- R6::R6Class(
       self$name <- name
       self$author_name <- author_name
       self$author_email <- author_email
+      self$version <- version
     },
 
     #' @description
@@ -279,6 +291,9 @@ Project <- R6::R6Class(
 #' @param author_email `character` email of the project author.
 #' Defaults to `"Unknown"`.
 #'
+#' @param version `character` version of package used to create the project.
+#' Defaults to `NULL`, such that the current package version is used.
+#'
 #' @return A new `Project` object.
 #'
 #' @family class
@@ -294,6 +309,7 @@ Project <- R6::R6Class(
 #' # create cost
 #' cost <- new_cost(
 #'   name = "cost",
+#'   zones_active = c(TRUE, FALSE, FALSE),
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -307,6 +323,8 @@ Project <- R6::R6Class(
 #' # create lock
 #' lock <- new_lock(
 #'   name = "lock",
+#'   zones_in = c(TRUE, FALSE, FALSE),
+#'   zones_out = c(FALSE, FALSE, FALSE),
 #'   layer = new_layer(
 #'     column = "locked_in",
 #'     total = 30,
@@ -323,7 +341,7 @@ Project <- R6::R6Class(
 #'   list(
 #'     new_feature(
 #'       name = "f1",
-#'       targets = c(0.1, 0.5),
+#'       zones_targets = c(0.1, 0.5),
 #'       layer = new_layer(
 #'         column = "feat_1",
 #'         total = 500,
@@ -335,7 +353,7 @@ Project <- R6::R6Class(
 #'     ),
 #'     new_feature(
 #'       name = "f2",
-#'       targets = c(0.2, 0.9),
+#'       zones_targets = c(0.2, 0.9),
 #'       layer = new_layer(
 #'         column = "feat_2",
 #'         total = 200,
@@ -372,8 +390,13 @@ new_project <- function(
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
-  author_email = "Unknown"
+  author_email = "Unknown",
+  version = NULL
 ) {
+  # if needed, set version based on current version
+  if (is.null(version)) {
+    version <-  as.character(utils::packageVersion("apscp"))
+  }
   # create new dataset
   Project$new(
     zones = zones,
@@ -385,6 +408,7 @@ new_project <- function(
     solutions = solutions,
     name = name,
     author_name = author_name,
-    author_email = author_email
+    author_email = author_email,
+    version = version
   )
 }

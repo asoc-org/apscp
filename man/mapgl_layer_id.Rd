@@ -26,6 +26,7 @@ sim_data <- simulate_spatial_data()
 # create object
 x <- new_cost(
   name = "cost",
+  zones_active = c(FALSE, FALSE, FALSE),
   layer = new_layer(
     column = "feat_1",
     total = 500,

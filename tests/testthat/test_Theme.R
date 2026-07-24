@@ -21,8 +21,8 @@ test_that("new_theme", {
     total = 600,
     details = "extra info 2"
   )
-  f1 <- new_feature(name = "f1", targets = c(0.1, 0.5), layer = l1)
-  f2 <- new_feature(name = "f2", targets = c(0.2, 0.9), layer = l2)
+  f1 <- new_feature(name = "f1", zones_targets = c(0.1, 0.5), layer = l1)
+  f2 <- new_feature(name = "f2", zones_targets = c(0.2, 0.9), layer = l2)
   x <- new_theme("species", list(f1, f2))
   # run tests
   expect_s3_class(x, "Theme")
@@ -53,8 +53,8 @@ test_that("serialize_object", {
     total = 600,
     details = "extra info 2"
   )
-  f1 <- new_feature(name = "f1", targets = c(0.1, 0.5), layer = l1)
-  f2 <- new_feature(name = "f2", targets = c(0.2, 0.9), layer = l2)
+  f1 <- new_feature(name = "f1", zones_targets = c(0.1, 0.5), layer = l1)
+  f2 <- new_feature(name = "f2", zones_targets = c(0.2, 0.9), layer = l2)
   d <- new_theme("species", list(f1, f2))
   x <- serialize_object(d)
   # run tests
@@ -87,8 +87,8 @@ test_that("deserialize_object", {
     total = 600,
     details = "extra info 2"
   )
-  f1 <- new_feature(name = "f1", targets = c(0.1, 0.5), layer = l1)
-  f2 <- new_feature(name = "f2", targets = c(0.2, 0.9), layer = l2)
+  f1 <- new_feature(name = "f1", zones_targets = c(0.1, 0.5), layer = l1)
+  f2 <- new_feature(name = "f2", zones_targets = c(0.2, 0.9), layer = l2)
   x <- new_theme("species", list(f1, f2))
   y <- deserialize_object(serialize_object(x), dataset = w)
   # run tests

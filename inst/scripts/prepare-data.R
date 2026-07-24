@@ -151,6 +151,9 @@ locks <-
   lapply(function(x) {
     new_lock(
       name = x$name,
+      ## note that all locks are assumed to be for the biodiversity zone
+      zones_in = c(TRUE, FALSE, FALSE),
+      zones_out = c(FALSE, FALSE, FALSE),
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -183,6 +186,9 @@ costs <-
   lapply(function(x) {
     new_cost(
       name = x$name,
+      ## note that all costs are assumed to avoid allocating planning units
+      ## to the tourism zone
+      zones_active = c(TRUE, TRUE, FALSE),
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -215,7 +221,9 @@ features <-
   lapply(function(x) {
     new_feature(
       name = x$name,
-      targets = c(x$conservation_target, x$scientific_target, x$tourism_target),
+      zones_targets = c(
+        x$conservation_target, x$scientific_target, x$tourism_target
+      ),
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -257,7 +265,7 @@ themes <-
 
 ## create project
 project <- new_project(
-  zones = c("Conservation area", "Scientific area", "Tourism area"),
+  zones = c("Biodiversity area", "Scientific area", "Tourism area"),
   dataset = dataset,
   tiles = list(tile),
   themes = themes,

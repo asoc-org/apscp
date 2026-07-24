@@ -4,13 +4,18 @@
 \alias{new_cost}
 \title{New cost}
 \usage{
-new_cost(name, layer, id = uuid::UUIDgenerate())
+new_cost(name, layer, zones_active, id = uuid::UUIDgenerate())
 }
 \arguments{
 \item{name}{`character` value with the name.}
 
 \item{layer}{[new_layer()] object used to store information for
 visualization.}
+
+\item{zones_active}{`logical` vector of values indicating which zones
+the cost should be used to avoid allocating planning units.
+Note `zones_active` must have a value for each zone in the [new_project()]
+to which this object belongs.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
@@ -28,6 +33,7 @@ sim_data <- simulate_spatial_data()
 # create object
 x <- new_cost(
   name = "cost",
+  zones_active = c(TRUE, FALSE),
   layer = new_layer(
     column = "feat_1",
     total = 500,
