@@ -63,16 +63,13 @@ server <- function(input, output, session) {
       new_name,
       dataset = sim_data$dataset,
       column = new_name,
-      tileset = sim_data$tileset,
       provenance = simulate_provenance(),
       legend = simulate_solution_legend()
     )
     # add in solution
     sim_data$add_solution(new_sol)
-    # add solution to tile server
-    tile_server_add_file(sim_data, new_sol)
     # add solution to mapper
-    mapper_add_solution_to_map(
+    mapper_add_solution(
       id = "mapper",
       map = mapboxgl_proxy("map"),
       solution = new_sol,

@@ -9,7 +9,8 @@ mapgl_add_source(map, x)
 \arguments{
 \item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[new_tile()] object.}
+\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+[new_solution()] object.}
 }
 \description{
 Add a [new_tile()] object as a layer to a \pkg{mapgl} object.

@@ -48,7 +48,7 @@ new_solution <- function(name, layer, id = uuid::UUIDgenerate()) {
   # return object
   structure(
     list(name = name, id = id, layer = layer),
-    class = "Solution"
+    class = c("Solution", "ProjectComponent")
   )
 }
 
@@ -67,9 +67,6 @@ new_solution <- function(name, layer, id = uuid::UUIDgenerate()) {
 #' @param tile [new_tile()] object tile information for the solution.
 #' Defaults to `NULL` such that a [new_tile()] object is automatically created.
 #'
-#' @param tileset [new_tileset()] object with information on creating
-#' the `tile` object. Note that this is only used if `tile = NULL`.
-#'
 #' @inheritParams new_feature
 #'
 #' @inheritParams new_layer
@@ -79,7 +76,7 @@ new_solution <- function(name, layer, id = uuid::UUIDgenerate()) {
 #' @export
 create_solution <- function(
   name, dataset, column, legend, provenance,
-  tile = NULL, tileset = NULL, id = uuid::UUIDgenerate()
+  tile = NULL, id = uuid::UUIDgenerate()
 ) {
   # assert valid arguments
   assertthat::assert_that(
@@ -91,22 +88,18 @@ create_solution <- function(
     assertthat::is.string(column),
     dataset$has_column(column),
     ## legend
-    inherits(legend, c("ContinuousLegend", "CategoricalLegend")),
+    inherits(legend, "Legend"),
     ## id
     assertthat::is.string(id)
   )
 
   # if needed, create tile
   if (is.null(tile)) {
-    assertthat::assert_that(
-      inherits(tileset, "Tileset"),
-      msg = "`tileset` must be provided if `tile = NULL`."
-    )
     tile <- create_tile(
       x = dataset$get_spatial_column_data(column),
       source_layer = "layer",
-      path = tempfile(tmpdir = tileset$dir, fileext = ".pmtiles"),
-      max_zoom = tileset$max_zoom,
+      path = tempfile(fileext = ".pmtiles"),
+      max_zoom = get_golem_config("tile_max_zoom"),
       verbose = FALSE
     )
   }

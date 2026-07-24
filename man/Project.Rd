@@ -21,8 +21,7 @@ Other class:
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}
 \section{Public fields}{
@@ -30,7 +29,7 @@ Other class:
   \describe{
     \item{\code{dataset}}{[new_dataset()] object.}
 
-    \item{\code{tileset}}{`[new_tile_set()] objects.}
+    \item{\code{tiles}}{`list` of [new_tile()] objects.}
 
     \item{\code{zones}}{`character` vector of zone names.}
 
@@ -74,7 +73,7 @@ Other class:
     \preformatted{Project$new(
   zones,
   dataset,
-  tileset,
+  tiles,
   themes,
   locks,
   costs,
@@ -90,7 +89,7 @@ Other class:
     \describe{
       \item{\code{zones}}{`character` vector of zone names.}
       \item{\code{dataset}}{[new_dataset()] object.}
-      \item{\code{tileset}}{`[new_tile_set()] object.}
+      \item{\code{tiles}}{`list` of [new_tile()] objects.}
       \item{\code{themes}}{`list` of [new_theme()] objects.}
       \item{\code{locks}}{`list` of [new_lock()] objects.}
       \item{\code{costs}}{`list` of [new_cost()] objects.}

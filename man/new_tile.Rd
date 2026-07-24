@@ -4,13 +4,13 @@
 \alias{new_tile}
 \title{New tile}
 \usage{
-new_tile(source_layer, file, max_zoom)
+new_tile(source_layer, path, max_zoom)
 }
 \arguments{
 \item{source_layer}{`character` value with name of layer source in the
 archive file.}
 
-\item{file}{`character` value with file name for the archive file.
+\item{path}{`character` value with file path for the archive file.
 Note that `file` must have a `".pmtiles"` file extension.}
 
 \item{max_zoom}{`integer` maximum zoom level for the archive.}
@@ -23,8 +23,12 @@ Create a new tile object to store information for rendering a layer from
 a PMTiles archive file.
 }
 \examples{
+# create dummy file
+path <- tempfile(fileext = ".pmtiles")
+writeLines("dummy", path)
+
 # create object
-x <- new_tile(source = "data-src", file = "file.pmtiles", max_zoom = 5)
+x <- new_tile(source = "data-src", path = path, max_zoom = 5)
 
 # print object
 print(x)
@@ -43,7 +47,6 @@ Other class:
 \code{\link[=new_project]{new_project()}},
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
-\code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_theme]{new_theme()}}
 }
 \concept{class}

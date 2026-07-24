@@ -7,8 +7,8 @@
 mapgl_source_layer_id(x)
 }
 \arguments{
-\item{x}{[new_feature()], [new_cost()], [new_lock()], or [new_solution()]
-object.}
+\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+[new_solution()] object.}
 }
 \value{
 A `character` value.

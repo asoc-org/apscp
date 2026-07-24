@@ -46,3 +46,34 @@ make_unique_column_name <- function(x, existing_names) {
   x <- make.unique(c(existing_names, x), sep = "_")
   x[[length(x)]]
 }
+
+#' Update named elements in nested list
+#'
+#' Update all elements with a particular name in a nested list
+#' to have a new value.
+#'
+#' @param x `list` object.
+#'
+#' @param element_name `character` value with the name to identify
+#' which elements should be updated.
+#'
+#' @param new_value Object that is assigned to updated elements.
+#'
+#' @return A `list` object.
+#'
+#' @export
+update_named_list_elements <- function(x, element_name, new_value) {
+  if (is.list(x)) {
+    # Replace value if the name matches at the current level
+    if (element_name %in% names(x)) {
+      x[[element_name]] <- new_value
+    }
+    # Recursively apply to all child elements
+    lapply(
+      x, update_named_list_elements,
+      element_name = element_name, new_value = new_value
+    )
+  } else {
+    x
+  }
+}

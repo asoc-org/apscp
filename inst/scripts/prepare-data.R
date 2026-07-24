@@ -136,14 +136,13 @@ boundary_data <- boundary_data[idx, idx]
 ## create dataset
 dataset <- new_dataset(vector_data, boundary_data)
 
-## create tiles
+## create tile
 td <- tempdir()
 tile <- create_tile(
   vector_data[, setdiff(names(vector_data), "_index"), drop = FALSE],
   path = file.path(td, "antarctic-peninsula.pmtiles"),
   max_zoom = max_zoom
 )
-tileset <- new_tileset(list(tile), dir = td, max_zoom = max_zoom)
 
 ## create locks
 locks <-
@@ -260,7 +259,7 @@ themes <-
 project <- new_project(
   zones = c("Conservation area", "Scientific area", "Tourism area"),
   dataset = dataset,
-  tileset = tileset,
+  tiles = list(tile),
   themes = themes,
   costs = costs,
   locks = locks,

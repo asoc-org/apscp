@@ -48,6 +48,6 @@ new_lock <- function(name, layer, id = uuid::UUIDgenerate()) {
   # return object
   structure(
     list(name = name, id = id, layer = layer),
-    class = "Lock"
+    class = c("Lock", "ProjectComponent")
   )
 }

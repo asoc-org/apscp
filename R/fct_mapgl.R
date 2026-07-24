@@ -55,9 +55,7 @@ has_mapbox_token <- function() {
 #'
 #' @export
 mapgl_layer_id <- function(x) {
-  assertthat::assert_that(
-    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
-  )
+  assertthat::assert_that(inherits(x, "ProjectComponent"))
   paste0("lyr-", x$id)
 }
 
@@ -84,8 +82,15 @@ mapgl_layer_id <- function(x) {
 #'
 #' @export
 mapgl_source_url <- function(x) {
-  assertthat::assert_that(inherits(x, "Tile"))
-  paste0(get_golem_config("tile_server_url"), x$file)
+  # assert argument is valid
+  assertthat::assert_that(
+    inherits(x, "ProjectComponent") || inherits(x, "Tile")
+  )
+  # if neededd, extact tile
+  if (!inherits(x, "Tile")) {
+    x <- x$layer$tile
+  }
+  paste0(get_golem_config("tile_server_url"), sanitize_text(basename(x$path)))
 }
 
 #' Get \pkg{mapgl} source identifier
@@ -114,20 +119,23 @@ mapgl_source_url <- function(x) {
 #'
 #' @export
 mapgl_source_id <- function(x) {
+  # assert argument is valid
   assertthat::assert_that(
-    inherits(x, c("Feature", "Cost", "Lock", "Solution", "Tile"))
+    inherits(x, "ProjectComponent") || inherits(x, "Tile")
   )
+  # if neededd, extact tile
   if (!inherits(x, "Tile")) {
     x <- x$layer$tile
   }
-  paste0("src-", sanitize_text(x$file))
+  # return value
+  paste0("src-", sanitize_text(basename(x$path)))
 }
 
 #' Get \pkg{mapgl} source layer identifier
 #'
 #' Get the source layer identifier.
 #'
-#' @inheritParams mapgl_layer_id
+#' @inheritParams mapgl_source_id
 #'
 #' @details
 #' This corresponds to the `source_layer` parameter of
@@ -160,18 +168,23 @@ mapgl_source_id <- function(x) {
 #'
 #' @export
 mapgl_source_layer_id <- function(x) {
+  # assert argument is valid
   assertthat::assert_that(
-    inherits(x, c("Feature", "Cost", "Lock", "Solution"))
+    inherits(x, "ProjectComponent") || inherits(x, "Tile")
   )
-  x$layer$tile$source_layer
+  # if needed, extract tile
+  if (!inherits(x, "Tile")) {
+    x <- x$layer$tile
+  }
+  # return value
+  x$source_layer
 }
 
 #' Add source
 #'
 #' Add a [new_tile()] object as a layer to a \pkg{mapgl} object.
 #'
-#' @param x [new_tile()] object.
-#'
+#' @inheritParams mapgl_source_id
 #' @inheritParams mapgl::add_pmtiles_source
 #'
 #' @details
@@ -255,7 +268,7 @@ mapgl_add_layer <- function(
     inherits(x, c("Feature", "Cost", "Lock", "Solution")),
     assertthat::is.string(visibility),
     assertthat::noNA(visibility),
-    inherits(x$layer$legend, c("ContinuousLegend", "CategoricalLegend"))
+    inherits(x$layer$legend, "Legend")
   )
 
   # prepare legend
@@ -270,7 +283,7 @@ mapgl_add_layer <- function(
       ),
       fill_opacity = 0.8
     )
-  } else {
+  } else if(inherits(x$layer$legend, "CategoricalLegend")) {
     paint_params <- list(
       fill_color = mapgl::step_expr(
         column = x$layer$column,
@@ -281,6 +294,8 @@ mapgl_add_layer <- function(
       ),
       fill_opacity = 0.8
     )
+  } else {
+    stop("`x$layer$legend` is not a valid legend.") # nocov
   }
 
   # return updated map with layer

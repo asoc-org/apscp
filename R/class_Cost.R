@@ -48,6 +48,6 @@ new_cost <- function(name, layer, id = uuid::UUIDgenerate()) {
   # return object
   structure(
     list(name = name, layer = layer, id = id),
-    class = "Cost"
+    class = c("Cost", "ProjectComponent")
   )
 }

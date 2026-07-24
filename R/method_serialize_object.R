@@ -81,22 +81,14 @@ serialize_object.Provenance <- function(x) {
 #' @export
 serialize_object.Tile <- function(x) {
   list(
-    file = x$file,
+    path = ifelse(
+      isTRUE(getOption("apscp.project.io")),
+      basename(x$path),
+      x$path
+    ),
     source_layer = x$source_layer,
     max_zoom = x$max_zoom,
     class = "Tile"
-  )
-}
-
-#' @rdname serialize_object
-#' @method serialize_object Tileset
-#' @export
-serialize_object.Tileset <- function(x) {
-  list(
-    tiles = lapply(x$tiles, serialize_object.Tile),
-    dir = x$dir,
-    max_zoom = x$max_zoom,
-    class = "Tileset"
   )
 }
 
@@ -212,7 +204,7 @@ serialize_object.Project <- function(x) {
     author_name = x$author_name,
     author_email = x$author_email,
     zones = x$zones,
-    tileset = serialize_object.Tileset(x$tileset),
+    tiles = lapply(x$tiles, function(y) serialize_object.Tile(y)),
     costs = lapply(x$costs, function(y) serialize_object.Cost(y)),
     themes = lapply(x$themes, function(y) serialize_object.Theme(y)),
     locks = lapply(x$locks, function(y) serialize_object.Lock(y)),

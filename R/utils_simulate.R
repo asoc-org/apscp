@@ -106,7 +106,6 @@ simulate_project <- function() {
     path = tempfile(tmpdir = td, fileext = ".pmtiles"),
     max_zoom = 8, verbose = FALSE
   )
-  tileset <- new_tileset(list(tile), dir = td, max_zoom = 8)
 
   # create provenance
   provenance <- new_provenance(
@@ -209,7 +208,7 @@ simulate_project <- function() {
   new_project(
     zones = c("Conservation", "Tourism", "Science"),
     dataset = dataset,
-    tileset = tileset,
+    tiles = list(tile),
     costs = list(cost),
     locks = list(locked_in, locked_out),
     themes = list(theme),
@@ -288,4 +287,20 @@ simulate_provenance <- function() {
    color = "#123456",
    description = "Data is global."
   )
+}
+
+#' Simulate PMtiles file
+#'
+#' Simulate a PMtiles file by creating a dummy file on disk.
+#'
+#' @return A `character` value with the file path.
+#'
+#' @export
+simulate_pmtiles_file <- function() {
+  # define file path
+  p <- tempfile(fileext = ".pmtiles")
+  # create dummy file
+  writeLines("dummy file", p)
+  # return path
+  p
 }

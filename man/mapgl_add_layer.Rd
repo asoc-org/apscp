@@ -9,7 +9,8 @@ mapgl_add_layer(map, x, visibility = "visible", before_id = NULL)
 \arguments{
 \item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[new_tile()] object.}
+\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+[new_solution()] object.}
 
 \item{visibility}{Whether this layer is displayed.}
 

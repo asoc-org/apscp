@@ -12,11 +12,6 @@ print.Tile <- function(x, ...) {
 }
 
 #' @export
-print.Tileset <- function(x, ...) {
-  cli::cli_text("A {.cls Tileset} object.")
-}
-
-#' @export
 print.CategoricalLegend <- function(x, ...) {
   cli::cli_text("A {.cls CategoricalLegend} object.")
 }

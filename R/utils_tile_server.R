@@ -29,9 +29,8 @@ tile_server_start <- function(x, verbose = TRUE) {
   dir <- tile_server_dir()
 
   # copy pm tiles to directory
-  files <- vapply(x$tileset$tiles, `[[`, "character", "file")
-  existing_paths <- file.path(x$tileset$dir, files)
-  new_paths <- file.path(dir, files)
+  existing_paths <- vapply(x$tiles, `[[`, "character", "path")
+  new_paths <- file.path(dir, basename(existing_paths))
   idx <- !file.exists(new_paths)
   new_paths <- new_paths[idx]
   existing_paths <- existing_paths[idx]
@@ -72,41 +71,41 @@ tile_server_start <- function(x, verbose = TRUE) {
   invisible(TRUE)
 }
 
-#' Add file to tile server
+#' Add a tile to tile server
 #'
 #' Add PMTile file to a tile server.
 #'
-#' @param project [new_project()] object.
-#'
-#' @param x [new_solution()], [new_lock()], [new_cost()], or [new_feature()]
-#' object.
+#' @param x [new_tile()], [new_solution()], [new_lock()], [new_cost()], or
+#' [new_feature()] object.
 #'
 #' @family tile_server
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
 #' @export
-tile_server_add_file <- function(project, x) {
+tile_server_add_tile <- function(x) {
   # assert argument is valid
   assertthat::assert_that(
-    inherits(project, "Project"),
-    inherits(x, c("Solution", "Cost", "Lock", "Feautre"))
+    inherits(x, "ProjectComponent") || inherits(x, "Tile")
   )
 
   # obtain directory for tile server
   dir <- tile_server_dir()
 
-  # copy PMTile to directory
-  file <- x$layer$tile$file
-  existing_path <- file.path(project$tileset$dir, file)
-  new_path <- file.path(dir, file)
+  # if needed, extract tile
+  if (inherits(x, "ProjectComponent")) {
+    x <- x$layer$tile
+  }
+
+  # add PMTile file to directory
+  new_path <- file.path(dir, basename(x$path))
   if (!file.exists(new_path)) {
     if (!identical(.Platform$OS.type, "unix")) {
       ## if on Windows, then copy the file
-      file.copy(existing_path, to = new_path)
+      file.copy(x$path, to = new_path)
     } else {
       ## otherwise, use symlink to reduce storage burden
-      file.symlink(existing_path, to = new_path)
+      file.symlink(x$path, to = new_path)
     }
   }
 

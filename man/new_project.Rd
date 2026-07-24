@@ -7,7 +7,7 @@
 new_project(
   zones,
   dataset,
-  tileset,
+  tiles,
   costs,
   themes,
   locks,
@@ -22,7 +22,7 @@ new_project(
 
 \item{dataset}{[new_dataset()] object.}
 
-\item{tileset}{[new_tileset()] object.}
+\item{tiles}{`list` of [new_tile()] objects.}
 
 \item{costs}{`list` of [new_cost()] objects.}
 
@@ -54,8 +54,7 @@ sim_data <- simulate_spatial_data()
 
 # prepare data
 dataset <- create_dataset(sim_data)
-tileset <- create_tileset(sim_data)
-tile <- tileset$tiles[[1]]
+tile <- create_tile(sim_data)
 
 # create cost
 cost <- new_cost(
@@ -118,7 +117,7 @@ theme <- new_theme(
 x <- new_project(
   zones = c("Conservation", "Tourism", "Science"),
   dataset = dataset,
-  tileset = tileset,
+  tiles = list(tile),
   costs = list(cost),
   locks = list(lock),
   themes = list(theme)
@@ -141,7 +140,6 @@ Other class:
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_theme]{new_theme()}},
-\code{\link[=new_tile]{new_tile()}},
-\code{\link[=new_tileset]{new_tileset()}}
+\code{\link[=new_tile]{new_tile()}}
 }
 \concept{class}

@@ -9,7 +9,7 @@ NULL
 #' @param source_layer `character` value with name of layer source in the
 #' archive file.
 #'
-#' @param file `character` value with file name for the archive file.
+#' @param path `character` value with file path for the archive file.
 #' Note that `file` must have a `".pmtiles"` file extension.
 #'
 #' @param max_zoom `integer` maximum zoom level for the archive.
@@ -19,23 +19,28 @@ NULL
 #' @family class
 #'
 #' @examples
+#' # create dummy file
+#' path <- tempfile(fileext = ".pmtiles")
+#' writeLines("dummy", path)
+#'
 #' # create object
-#' x <- new_tile(source = "data-src", file = "file.pmtiles", max_zoom = 5)
+#' x <- new_tile(source = "data-src", path = path, max_zoom = 5)
 #'
 #' # print object
 #' print(x)
 #'
 #' @export
-new_tile <- function(source_layer, file, max_zoom) {
+new_tile <- function(source_layer, path, max_zoom) {
   # assert arguments are valid
   assertthat::assert_that(
     ## source
     assertthat::is.string(source_layer),
     assertthat::noNA(source_layer),
-    ## file
-    assertthat::is.string(file),
-    assertthat::noNA(file),
-    endsWith(file, ".pmtiles"),
+    ## path
+    assertthat::is.string(path),
+    assertthat::noNA(path),
+    endsWith(path, ".pmtiles"),
+    file.exists(path),
     ## max_zoom
     assertthat::is.number(max_zoom),
     assertthat::noNA(max_zoom)
@@ -44,7 +49,7 @@ new_tile <- function(source_layer, file, max_zoom) {
   structure(
     list(
       source_layer = source_layer,
-      file = basename(file),
+      path = path,
       max_zoom = max_zoom
     ),
     class = "Tile"
@@ -120,7 +125,7 @@ create_tile <- function(
   )
   # return object
   new_tile(
-    file = basename(path),
+    path = path,
     source_layer = source_layer,
     max_zoom = max_zoom
   )

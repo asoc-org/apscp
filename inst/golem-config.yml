@@ -35,6 +35,7 @@ default:
   tile_server_url: "http://localhost:8080/"
   tile_server_port: 8080
   tile_server_dir: null
+  tile_max_zoom: 8
 
 # production configuration:
 prod:
@@ -45,6 +46,3 @@ prod:
 dev:
   golem_wd: !expr here::here()
   monitor: true
-  tile_server_url: "http://localhost:8080/"
-  tile_server_port: 8080
-  tile_server_dir: null

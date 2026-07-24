@@ -69,6 +69,6 @@ new_feature <- function(name, layer, targets, id = uuid::UUIDgenerate()) {
       targets = targets,
       layer = layer
     ),
-    class = "Feature"
+    class = c("Feature", "ProjectComponent")
   )
 }

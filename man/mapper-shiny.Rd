@@ -31,6 +31,6 @@ applications.
 \seealso{
 Other mapper:
 \code{\link[=mapper]{mapper()}},
-\code{\link[=mapper_add_solution_to_map]{mapper_add_solution_to_map()}}
+\code{\link[=mapper_add_solution]{mapper_add_solution()}}
 }
 \concept{mapper}

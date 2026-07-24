@@ -48,7 +48,6 @@ print(x)
 Other method:
 \code{\link[=create_dataset]{create_dataset()}},
 \code{\link[=create_legend]{create_legend()}},
-\code{\link[=create_tileset]{create_tileset()}},
 \code{\link[=new_dataset]{new_dataset()}}
 }
 \concept{method}

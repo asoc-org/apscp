@@ -87,7 +87,6 @@ Collate:
     'class_Solution.R'
     'class_Theme.R'
     'class_Tile.R'
-    'class_Tileset.R'
     'fct_mapgl.R'
     'import-standalone-as_Matrix.R'
     'import-standalone-assertions_class.R'

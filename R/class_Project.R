@@ -14,8 +14,8 @@ Project <- R6::R6Class(
     #' @field dataset [new_dataset()] object.
     dataset = NULL,
 
-    #' @field tileset `[new_tile_set()] objects.
-    tileset = NULL,
+    #' @field tiles `list` of [new_tile()] objects.
+    tiles = NULL,
 
     #' @field zones `character` vector of zone names.
     zones = NULL,
@@ -44,7 +44,7 @@ Project <- R6::R6Class(
     #' @description
     #' Create a `Project` object.
     #' @param dataset [new_dataset()] object.
-    #' @param tileset `[new_tile_set()] object.
+    #' @param tiles `list` of [new_tile()] objects.
     #' @param zones `character` vector of zone names.
     #' @param themes `list` of [new_theme()] objects.
     #' @param locks `list` of [new_lock()] objects.
@@ -59,7 +59,7 @@ Project <- R6::R6Class(
     #' Defaults to `"Unknown"`.
     #' @return A new `Project` object.
     initialize = function(
-      zones, dataset, tileset,
+      zones, dataset, tiles,
       themes, locks, costs, solutions = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown"
     ) {
@@ -67,8 +67,9 @@ Project <- R6::R6Class(
       assertthat::assert_that(
         ## dataset
         inherits(dataset, "Dataset"),
-        ## tileset
-        inherits(tileset, "Tileset"),
+        ## tiles
+        is.list(tiles),
+        all_elements_inherit(tiles, "Tile"),
         ## zones
         is.character(zones),
         assertthat::noNA(zones),
@@ -102,7 +103,7 @@ Project <- R6::R6Class(
 
       # assign fields
       self$dataset <- dataset
-      self$tileset <- tileset
+      self$tiles <- tiles
       self$zones <- zones
       self$themes <- themes
       self$locks <- locks
@@ -212,7 +213,7 @@ Project <- R6::R6Class(
       assertthat::assert_that(inherits(x, "Solution"))
       # add solution to project
       self$solutions[[length(self$solutions)]] <- x
-      # add tile to tileset
+      # add tile
       self$add_tile(x$layer$tile)
       # return TRUE
       invisible(TRUE)
@@ -227,7 +228,7 @@ Project <- R6::R6Class(
       assertthat::assert_that(inherits(x, "Lock"))
       # add object
       self$locks[[length(self$locks)]] <- x
-      # add tile to tileset
+      # add tile
       self$add_tile(x$layer$tile)
       # return TRUE
       invisible(TRUE)
@@ -240,18 +241,9 @@ Project <- R6::R6Class(
     add_tile = function(x) {
       # assert arguments are valid
       assertthat::assert_that(inherits(x, "Tile"))
-      # assert that the tile can be added because it corresponds to a file
-      # that exists in the tileset directory
-      assertthat::assert_that(
-        isTRUE(file.exists(file.path(self$tileset$dir, x$file))),
-        msg = paste(
-          "Tile cannot be added because it does not exist in",
-          "tileset directory."
-        )
-      )
       # if needed, add tile
-      if (!x$file %in% vapply(self$tileset$tiles, `[[`, character(1), "file")) {
-        self$tileset$tiles[[length(self$tileset$tiles) + 1L]] <- x
+      if (!x$path %in% vapply(self$tiles, `[[`, character(1), "path")) {
+        self$tiles[[length(self$tiles) + 1L]] <- x
       }
       # return TRUE
       invisible(TRUE)
@@ -267,7 +259,7 @@ Project <- R6::R6Class(
 #'
 #' @param dataset [new_dataset()] object.
 #'
-#' @param tileset [new_tileset()] object.
+#' @param tiles `list` of [new_tile()] objects.
 #'
 #' @param costs `list` of [new_cost()] objects.
 #'
@@ -297,8 +289,7 @@ Project <- R6::R6Class(
 #'
 #' # prepare data
 #' dataset <- create_dataset(sim_data)
-#' tileset <- create_tileset(sim_data)
-#' tile <- tileset$tiles[[1]]
+#' tile <- create_tile(sim_data)
 #'
 #' # create cost
 #' cost <- new_cost(
@@ -361,7 +352,7 @@ Project <- R6::R6Class(
 #' x <- new_project(
 #'   zones = c("Conservation", "Tourism", "Science"),
 #'   dataset = dataset,
-#'   tileset = tileset,
+#'   tiles = list(tile),
 #'   costs = list(cost),
 #'   locks = list(lock),
 #'   themes = list(theme)
@@ -374,7 +365,7 @@ Project <- R6::R6Class(
 new_project <- function(
   zones,
   dataset,
-  tileset,
+  tiles,
   costs,
   themes,
   locks,
@@ -387,7 +378,7 @@ new_project <- function(
   Project$new(
     zones = zones,
     dataset = dataset,
-    tileset = tileset,
+    tiles = tiles,
     costs = costs,
     themes = themes,
     locks = locks,

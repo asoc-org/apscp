@@ -75,7 +75,7 @@ new_layer <- function(
     assertthat::noNA(total),
     isTRUE(total >= 0),
     ## legend
-    inherits(legend, c("ContinuousLegend", "CategoricalLegend")),
+    inherits(legend, "Legend"),
     #### provenance
     inherits(provenance, "Provenance"),
     #### tile

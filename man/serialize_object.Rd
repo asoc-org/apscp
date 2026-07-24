@@ -5,7 +5,6 @@
 \alias{serialize_object.bbox}
 \alias{serialize_object.Provenance}
 \alias{serialize_object.Tile}
-\alias{serialize_object.Tileset}
 \alias{serialize_object.ContinuousLegend}
 \alias{serialize_object.CategoricalLegend}
 \alias{serialize_object.Layer}
@@ -24,8 +23,6 @@ serialize_object(x)
 \method{serialize_object}{Provenance}(x)
 
 \method{serialize_object}{Tile}(x)
-
-\method{serialize_object}{Tileset}(x)
 
 \method{serialize_object}{ContinuousLegend}(x)
 

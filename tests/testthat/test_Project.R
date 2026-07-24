@@ -2,7 +2,7 @@ test_that("new_project", {
   # create data
   s <- simulate_spatial_data()
   w <- create_dataset(s)
-  g <- create_tileset(s, verbose = FALSE)
+  g <- create_tile(s)
   # create bbox
   bb <- sf::st_bbox(c(0, 1, 0, 1),  crs = sf::st_crs(4326))
   # create cost
@@ -10,7 +10,7 @@ test_that("new_project", {
     name = "cost",
     layer = new_layer(
       dataset = w,
-      tile = g$tiles[[1]],
+      tile = g,
       column = "feat_1",
       legend = simulate_continuous_legend(),
       provenance = simulate_provenance(),
@@ -23,7 +23,7 @@ test_that("new_project", {
     name = "lock",
     layer = new_layer(
       dataset = w,
-      tile = g$tiles[[1]],
+      tile = g,
       column = "locked_in",
       legend = simulate_binary_legend(),
       provenance = simulate_provenance(),
@@ -40,7 +40,7 @@ test_that("new_project", {
         targets = c(0.1, 0.5),
         layer = new_layer(
           dataset = w,
-          tile = g$tiles[[1]],
+          tile = g,
           column = "feat_1",
           legend = simulate_continuous_legend(),
           provenance = simulate_provenance(),
@@ -53,7 +53,7 @@ test_that("new_project", {
         targets = c(0.2, 0.9),
         layer = new_layer(
           dataset = w,
-          tile = g$tiles[[1]],
+          tile = g,
           column = "feat_2",
           legend = simulate_continuous_legend(),
           provenance = simulate_provenance(),
@@ -67,7 +67,7 @@ test_that("new_project", {
   x <- new_project(
     zones = c("Conservation", "Tourism", "Science"),
     dataset = w,
-    tileset = g,
+    tiles = list(g),
     costs = list(cost),
     locks = list(lock),
     themes = list(theme),
@@ -77,7 +77,7 @@ test_that("new_project", {
   )
   # run tests
   expect_true(inherits(x, "Project"))
-  expect_equal(x$tileset, g)
+  expect_equal(x$tiles, list(g))
   expect_equal(x$dataset, w)
   expect_equal(x$costs, list(cost))
   expect_equal(x$locks, list(lock))
@@ -129,9 +129,8 @@ test_that("serialize_object", {
   x <- serialize_object(d)
   # run tests
   expect_type(x, "list")
-  expect_type(x$tileset, "list")
-  expect_type(x$tileset$tiles, "list")
-  expect_equal(x$tileset$class, "Tileset")
+  expect_type(x$tiles, "list")
+  expect_equal(x$tiles[[1]]$class, "Tile")
   expect_type(x$costs, "list")
   expect_equal(x$costs[[1]]$class, "Cost")
   expect_type(x$locks, "list")
@@ -168,7 +167,7 @@ test_that("read_project/write_project", {
   yml_file <- paste0(file, ".yml")
   pu_file <- paste0(file, "_pu.gpkg.zip")
   bd_file <- paste0(file, "_bd.csv.gz")
-  pm_file <- x$tileset$tiles[[1]]$file
+  pm_file <- basename(x$tiles[[1]]$path)
   ## file were saved
   expect_true(file.exists(file.path(td, yml_file)))
   expect_true(file.exists(file.path(td, pu_file)))
@@ -176,10 +175,11 @@ test_that("read_project/write_project", {
   expect_true(file.exists(file.path(td, pm_file)))
   ## data imported correctly
   x1 <- serialize_object(x)
-  x1$tileset$dir <- td
   expect_equal(
-    x1,
-    serialize_object(y),
+    ## note that path elements are set to NULL because the file paths
+    ## should correspond to different locations
+    update_named_list_elements(x1, "path", NULL),
+    update_named_list_elements(serialize_object(y), "path", NULL),
     tolerance = 1e-6
   )
 })

@@ -68,7 +68,6 @@ test_that("create_solution", {
     name = "sol",
     dataset = p$dataset,
     column = "solv",
-    tileset = p$tileset,
     provenance = simulate_provenance(),
     legend = simulate_solution_legend()
   )
@@ -76,5 +75,5 @@ test_that("create_solution", {
   expect_s3_class(x, "Solution")
   expect_equal(x$name, "sol")
   expect_equal(x$layer$column, "solv")
-  expect_true(file.exists(file.path(p$tileset$dir, x$layer$tile$file)))
+  expect_true(file.exists(x$layer$tile$path))
 })

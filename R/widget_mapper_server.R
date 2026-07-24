@@ -19,7 +19,7 @@ NULL
 #' @family mapper
 #'
 #' @export
-mapper_add_solution_to_map <- function(
+mapper_add_solution <- function(
   id, map, solution, visible = TRUE,
   session = shiny::getDefaultReactiveDomain()
 ) {
@@ -32,9 +32,11 @@ mapper_add_solution_to_map <- function(
     assertthat::noNA(visible),
     inherits(solution, "Solution")
   )
-  # update map proxy with tile file added to it
+  # if needed, add tile to tile server
+  tile_server_add_tile(solution)
+  # update map proxy with tile source
   mapgl_add_source(map = map, x = solution$layer$tile)
-  # update map proxy with solution added to it
+  # update map proxy with solution
   mapgl_add_layer(
     map = map,
     x = solution,

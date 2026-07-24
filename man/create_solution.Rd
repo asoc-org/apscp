@@ -11,7 +11,6 @@ create_solution(
   legend,
   provenance,
   tile = NULL,
-  tileset = NULL,
   id = uuid::UUIDgenerate()
 )
 }
@@ -30,9 +29,6 @@ object.}
 
 \item{tile}{[new_tile()] object tile information for the solution.
 Defaults to `NULL` such that a [new_tile()] object is automatically created.}
-
-\item{tileset}{[new_tileset()] object with information on creating
-the `tile` object. Note that this is only used if `tile = NULL`.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
