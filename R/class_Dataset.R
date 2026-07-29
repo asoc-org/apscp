@@ -28,7 +28,6 @@ Dataset <- R6::R6Class(
         ## pu_data
         is.data.frame(pu_data),
         inherits(pu_data, "sf"),
-        assertthat::has_name(pu_data, "_index"),
         ## boundary_data
         inherits(boundary_data, "dsCMatrix"),
         identical(ncol(boundary_data), nrow(pu_data))
@@ -56,7 +55,7 @@ Dataset <- R6::R6Class(
     #' Get column names.
     #' @return A `character` vector.
     get_column_names = function() {
-      setdiff(names(self$pu_data), "_index")
+      names(self$pu_data)
     },
 
     #' @description
@@ -118,11 +117,6 @@ Dataset <- R6::R6Class(
         assertthat::noNA(column),
         length(values) == nrow(self$pu_data)
       )
-      assertthat::assert_that(
-        !identical(column, "_index"),
-        msg = "Can't overwrite values in '_index' column."
-      )
-
       # insert new column with values
       self$pu_data[[column]] <- values
       # return self
@@ -154,7 +148,6 @@ Dataset <- R6::R6Class(
 #'
 #' # manually prepare planning unit data
 #' pu_data <- sim_data
-#' pu_data[["_index"]] <- seq_len(nrow(pu_data))
 #'
 #' # manually prepare boundary data
 #' bd_data <- prioritizr::boundary_matrix(sim_data)
@@ -171,46 +164,5 @@ new_dataset <- function(pu_data, boundary_data) {
   Dataset$new(
     pu_data = pu_data,
     boundary_data = boundary_data
-  )
-}
-
-#' Create dataset
-#'
-#' Create a [Dataset] object from a [st::sf()] object.
-#'
-#' @param x [sf::st_sf()] object.
-#'
-#' @inherit new_dataset return
-#'
-#' @family method
-#'
-#' @examplesIf interactive()
-#' # simulate spatial data
-#' sim_data <- simulate_spatial_data()
-#'
-#' # create object
-#' x <- create_dataset(sim_data)
-#'
-#' # preview object
-#' print(x)
-#'
-#' @export
-create_dataset <- function(x) {
-  # assert valid argument
-  assertthat::assert_that(inherits(x, "sf"))
-
-  # create _index column
-  x[["_index"]] <- seq_len(nrow(x))
-
-  # make _index the first column
-  x <- x[,
-    c("_index", setdiff(names(x), "_index")),
-    drop = FALSE
-  ]
-
-  # return object
-  new_dataset(
-    pu_data = x,
-    boundary_data = prioritizr::boundary_matrix(x)
   )
 }

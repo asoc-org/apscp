@@ -128,7 +128,7 @@ serialize_object.Feature <- function(x) {
   list(
     name = x$name,
     id = x$id,
-    zones_targets = x$zones_targets,
+    target = x$target,
     layer = serialize_object.Layer(x$layer),
     class = "Feature"
   )
@@ -141,8 +141,7 @@ serialize_object.Lock <- function(x) {
   list(
     name = x$name,
     id = x$id,
-    zones_in = x$zones_in,
-    zones_out = x$zones_out,
+    zone = x$zone,
     layer = serialize_object.Layer(x$layer),
     class = "Lock"
   )
@@ -155,7 +154,7 @@ serialize_object.Cost <- function(x) {
   list(
     name = x$name,
     id = x$id,
-    zones_active = x$zones_active,
+    zone = x$zone,
     layer = serialize_object.Layer(x$layer),
     class = "Cost"
   )
@@ -179,6 +178,7 @@ serialize_object.Solution <- function(x) {
 serialize_object.Theme <- function(x) {
   list(
     name = x$name,
+    zone = x$zone,
     features = lapply(x$features, function(y) serialize_object.Feature(y)),
     class = "Theme"
   )

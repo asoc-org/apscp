@@ -10,11 +10,11 @@ test_that("new_feature", {
     total = 500,
     details = "extra info"
   )
-  x <- new_feature(name = "feature", zones_targets = c(0.1, 0.5), layer = l)
+  x <- new_feature(name = "feature", target = 0.1, layer = l)
   # run tests
   expect_s3_class(x, "Feature")
   expect_equal(x$name, "feature")
-  expect_equal(x$zones_targets, c(0.1, 0.5))
+  expect_equal(x$target, 0.1)
   expect_equal(x$layer, l)
 })
 
@@ -30,13 +30,13 @@ test_that("serialize_object", {
     total = 500,
     details = "extra info"
   )
-  d <- new_feature(name = "feature", zones_targets = c(0.1, 0.5), layer = l)
+  d <- new_feature(name = "feature", target = 0.1, layer = l)
   x <- serialize_object(d)
   # run tests
   expect_type(x, "list")
   expect_equal(x$name, "feature")
   expect_equal(x$layer, serialize_object(d$layer))
-  expect_equal(x$zones_targets, c(0.1, 0.5))
+  expect_equal(x$target, 0.1)
   expect_equal(x$id, d$id)
 })
 
@@ -53,7 +53,7 @@ test_that("deserialize_object", {
     total = 500,
     details = "extra info"
   )
-  x <- new_feature(name = "feature", zones_targets = c(0.1, 0.5), layer = l)
+  x <- new_feature(name = "feature", target = 0.1, layer = l)
   y <- deserialize_object(serialize_object(x), dataset = w)
   # run tests
   expect_equal(x, y)

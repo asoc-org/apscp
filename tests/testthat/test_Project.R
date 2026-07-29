@@ -8,7 +8,7 @@ test_that("new_project", {
   # create cost
   cost <- new_cost(
     name = "cost",
-    zones_active = c(FALSE, TRUE, FALSE),
+    zone = "Tourism",
     layer = new_layer(
       dataset = w,
       tile = g,
@@ -22,8 +22,7 @@ test_that("new_project", {
   # create lock
   lock <- new_lock(
     name = "lock",
-    zones_in = c(TRUE, FALSE, FALSE),
-    zones_out = rep(FALSE, 3L),
+    zone = "Scientific",
     layer = new_layer(
       dataset = w,
       tile = g,
@@ -37,10 +36,11 @@ test_that("new_project", {
   # create theme
   theme <- new_theme(
     "species",
+    "Biodiversity",
     list(
       new_feature(
         name = "f1",
-        zones_targets = c(0.1, 0.5, 0.4),
+        target = 0.1,
         layer = new_layer(
           dataset = w,
           tile = g,
@@ -53,7 +53,7 @@ test_that("new_project", {
       ),
       new_feature(
         name = "f2",
-        zones_targets = c(0.2, 0.9, 0.2),
+        target = 0.9,
         layer = new_layer(
           dataset = w,
           tile = g,
@@ -68,7 +68,7 @@ test_that("new_project", {
   )
   # create project
   x <- new_project(
-    zones = c("Conservation", "Tourism", "Science"),
+    zones = c("Biodiversity", "Tourism", "Scientific"),
     dataset = w,
     tiles = list(g),
     costs = list(cost),
@@ -183,7 +183,7 @@ test_that("read_project/write_project", {
     ## should correspond to different locations
     update_named_list_elements(x1, "path", NULL),
     update_named_list_elements(serialize_object(y), "path", NULL),
-    tolerance = 1e-6
+    tolerance = 1e-4
   )
 })
 

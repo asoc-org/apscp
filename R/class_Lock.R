@@ -7,15 +7,10 @@ NULL
 #'
 #' @inheritParams new_feature
 #'
-#' @param zones_in `logical` vector of values indicating which zones
-#' the lock should be used to lock in planning units.
-#' Note `zones_in` must have a value for each zone in the [new_project()]
-#' to which this object belongs.
-#'
-#' @param zones_out `logical` vector of values indicating which zones
-#' the lock should be used to lock out planning units.
-#' Note `zones_out` must have a value for each zone in the [new_project()]
-#' to which this object belongs.
+#' @param zone `character` name of zone to which this lock pertains.
+#' During optimization, planning units are forcibly allocated to this zone.
+#' Note that `zone` must have a value that corresponds to one of the zone
+#' names associated with the [new_project()] to which this object belongs.
 #'
 #' @return A `Lock` object.
 #'
@@ -28,8 +23,7 @@ NULL
 #' # create object
 #' x <- new_lock(
 #'   name = "lock",
-#'   zones_in = c(FALSE, TRUE),
-#'   zones_out = c(FALSE, FALSE),
+#'   zone = "scientific",
 #'   layer = new_layer(
 #'     column = "locked_in",
 #'     total = 500,
@@ -45,20 +39,15 @@ NULL
 #' print(x)
 #'
 #' @export
-new_lock <- function(
-  name, layer, zones_in, zones_out,
-  id = uuid::UUIDgenerate()
-) {
+new_lock <- function(name, layer, zone, id = uuid::UUIDgenerate()) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
     assertthat::is.string(name),
     assertthat::noNA(name),
-    ## in
-    is.logical(zones_in),
-    ## out
-    is.logical(zones_out),
-    identical(length(zones_in), length(zones_out)),
+    ## zone
+    assertthat::is.string(zone),
+    assertthat::noNA(zone),
     ## layer
     inherits(layer, "Layer"),
     ## id
@@ -69,8 +58,7 @@ new_lock <- function(
   structure(
     list(
       name = name,
-      zones_in = zones_in,
-      zones_out = zones_out,
+      zone = zone,
       id = id,
       layer = layer
     ),

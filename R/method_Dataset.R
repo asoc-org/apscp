@@ -45,9 +45,6 @@ read_dataset <- function(pu_path, boundary_path) {
   pu_data <- read_sf_data(pu_path)
   boundary_data <- vroom::vroom(boundary_path, col_types = "iid")
 
-  # coerce _index column to integer
-  pu_data[["_index"]] <- as.integer(pu_data[["_index"]])
-
   # convert boundary data to sparse matrix format
   boundary_data <- Matrix::sparseMatrix(
     i = boundary_data[[1]], j = boundary_data[[2]], x = boundary_data[[3]],
@@ -117,4 +114,36 @@ write_dataset <- function(x, pu_path, boundary_path) {
 
   # return success
   invisible(TRUE)
+}
+
+#' Create dataset
+#'
+#' Create a [Dataset] object from a [st::sf()] object.
+#'
+#' @param x [sf::st_sf()] object.
+#'
+#' @inherit new_dataset return
+#'
+#' @family method
+#'
+#' @examplesIf interactive()
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- create_dataset(sim_data)
+#'
+#' # preview object
+#' print(x)
+#'
+#' @export
+create_dataset <- function(x) {
+  # assert valid argument
+  assertthat::assert_that(inherits(x, "sf"))
+
+  # return object
+  new_dataset(
+    pu_data = x,
+    boundary_data = prioritizr::boundary_matrix(x)
+  )
 }

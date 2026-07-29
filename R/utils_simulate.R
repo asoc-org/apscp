@@ -63,6 +63,9 @@ simulate_spatial_data <- function() {
     )
   )
 
+  # handle missing cost values
+  d <- d[!is.na(d$cost), , drop = FALSE]
+
   # set coordinate reference system
   suppressWarnings(
     d <- sf::st_set_crs(d, sf::st_crs(4326))
@@ -116,7 +119,7 @@ simulate_project <- function() {
   # create cost
   cost <- new_cost(
     name = "Tourism revenue",
-    zones_active = c(TRUE, TRUE, FALSE),
+    zone = "Tourism",
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -147,10 +150,9 @@ simulate_project <- function() {
   )
 
   # create object
-  locked_in <- new_lock(
+  lock1 <- new_lock(
     name = "Protected areas",
-    zones_in = c(TRUE, FALSE, FALSE),
-    zones_out = c(FALSE, FALSE, FALSE),
+    zone = "Biodiversity",
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -165,10 +167,9 @@ simulate_project <- function() {
       total = dataset$get_column_total("locked_in")
     )
   )
-  locked_out <- new_lock(
-    name = "Historical sites",
-    zones_in = c(FALSE, FALSE, TRUE),
-    zones_out = c(FALSE, FALSE, FALSE),
+  lock2 <- new_lock(
+    name = "Field camps",
+    zone = "Scientific",
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -186,12 +187,59 @@ simulate_project <- function() {
   )
 
   # create theme object
-  theme <- new_theme(
+  theme1 <- new_theme(
     "Species",
+    "Biodiversity",
     lapply(seq_len(5), function(i) {
       new_feature(
         name = paste0("Species ", i),
-        zones_targets = stats::runif(3, min = 0, max = 1),
+        target = stats::runif(1L, min = 0, max = 1),
+        layer = new_layer(
+          dataset = dataset,
+          tile = tile,
+          column = paste0("feat_", i),
+          visible = TRUE,
+          legend = create_legend(
+            d, paste0("feat_", i),
+            palette = "viridis",
+            units = "suitability"
+          ),
+          provenance = provenance,
+          total = dataset$get_column_total(paste0("feat_", i))
+        )
+      )
+    })
+  )
+  theme2 <- new_theme(
+    "Iconic species",
+    "Tourism",
+    lapply(seq(3, 5), function(i) {
+      new_feature(
+        name = paste0("Species ", i),
+        target = stats::runif(1L, min = 0, max = 1),
+        layer = new_layer(
+          dataset = dataset,
+          tile = tile,
+          column = paste0("feat_", i),
+          visible = TRUE,
+          legend = create_legend(
+            d, paste0("feat_", i),
+            palette = "viridis",
+            units = "suitability"
+          ),
+          provenance = provenance,
+          total = dataset$get_column_total(paste0("feat_", i))
+        )
+      )
+    })
+  )
+  theme3 <- new_theme(
+    "Medicinal species",
+    "Scientific",
+    lapply(seq(1, 3), function(i) {
+      new_feature(
+        name = paste0("Species ", i),
+        target = stats::runif(1L, min = 0, max = 1),
         layer = new_layer(
           dataset = dataset,
           tile = tile,
@@ -211,12 +259,12 @@ simulate_project <- function() {
 
   # return project
   new_project(
-    zones = c("Biodiversity", "Tourism", "Science"),
+    zones = c("Biodiversity", "Tourism", "Scientific"),
     dataset = dataset,
     tiles = list(tile),
     costs = list(cost),
-    locks = list(locked_in, locked_out),
-    themes = list(theme),
+    locks = list(lock1, lock2),
+    themes = list(theme1, theme2, theme3),
     solutions = list(solution)
   )
 }
@@ -300,6 +348,8 @@ simulate_provenance <- function() {
 #'
 #' @return A `character` value with the file path.
 #'
+#' @family simulation
+#'
 #' @export
 simulate_pmtiles_file <- function() {
   # define file path
@@ -308,4 +358,94 @@ simulate_pmtiles_file <- function() {
   writeLines("dummy file", p)
   # return path
   p
+}
+
+#' Simulate prioritization settings
+#'
+#' Simulate settings for generating a [prioritization()].
+#'
+#' @param project [new_project()] object.
+#'
+#' @family simulation
+#'
+#' @return
+#' A `list` with the following elements:
+#' `feature_settings`, `lock_in_setting`, `lock_out_settings`,
+#' and `cost_settings`.
+#'
+#' @export
+simulate_prioritization_settings <- function(project) {
+  # assert that argument is valid
+  assertthat::assert_that(inherits(project, "Project"))
+
+  # create feature settings
+  feature_settings <- do.call(
+    rbind,
+    lapply(project$themes, function(x) {
+      # set weight and target values
+      wt <- sample(
+        get_golem_config("prioritization_scenario_weight_values"),
+        1L
+      )
+      tg <- sample(
+        get_golem_config("prioritization_scenario_target_values"),
+        1L
+      )
+      # generate settings for each feature
+      do.call(
+        rbind,
+        lapply(x$features, function(y) {
+          data.frame(
+            id = y$id,
+            name = y$name,
+            column = y$layer$column,
+            zone = x$zone,
+            target = y$layer$total * tg,
+            weight = wt
+          )
+        })
+      )
+    })
+  )
+
+  # create lock settings
+  lock_settings <- do.call(
+    rbind,
+    lapply(project$locks, function(x) {
+      data.frame(
+        id = x$id,
+        name = x$name,
+        column = x$layer$column,
+        zone = x$zone
+      )
+    })
+  )
+
+  # create cost settings
+  cost_settings <- do.call(
+    rbind,
+    lapply(project$costs, function(x) {
+      data.frame(
+        id = x$id,
+        name = x$name,
+        column = x$layer$column,
+        zone = x$zone,
+        weight = 1
+      )
+    })
+  )
+
+  # create reference point settings
+  zone_settings <- data.frame(
+    zone = project$zones,
+    weight = rep(1, length(project$zones))
+  )
+
+  # return result
+  list(
+    features = feature_settings,
+    locks = lock_settings,
+    costs = cost_settings,
+    zones = zone_settings
+  )
 }

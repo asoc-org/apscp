@@ -106,6 +106,18 @@ Project <- R6::R6Class(
         ## solutions
         is.list(solutions)
       )
+      assertthat::assert_that(
+        all(vapply(themes, `[[`, character(1), "zone") %in% zones),
+        msg = "`themes` must contain only zones that are present in `zones`."
+      )
+      assertthat::assert_that(
+        all(vapply(locks, `[[`, character(1), "zone") %in% zones),
+        msg = "`locks` must contain only zones that are present in `zones`."
+      )
+      assertthat::assert_that(
+        all(vapply(costs, `[[`, character(1), "zone") %in% zones),
+        msg = "`costs` must contain only zones that are present in `zones`."
+      )
       if (length(solutions) > 0) {
         assertthat::assert_that(
           all_elements_inherit(solutions, "Solution")

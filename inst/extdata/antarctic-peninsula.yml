@@ -1,10 +1,11 @@
 name: Antarctic Peninsula
+version: 0.0.0.9000
 author_name: Jasmine Lee
 author_email: jasmine.lee@monash.edu
 zones:
-- Biodiversity area
-- Scientific area
-- Tourism area
+- Biodiversity
+- Scientific
+- Tourism
 tiles:
 - path: antarctic-peninsula.pmtiles
   source_layer: layer
@@ -12,11 +13,8 @@ tiles:
   class: Tile
 costs:
 - name: Tourism vessel landings
-  id: 47892efd-7d60-497c-8574-b3c43be4456e
-  zones_active:
-  - yes
-  - yes
-  - no
+  id: 6c13c675-ff56-452c-9d0f-7eedde4056e0
+  zone: Tourism
   layer:
     column: Tourism vessel landings
     total: 7171.0
@@ -62,11 +60,8 @@ costs:
     class: Layer
   class: Cost
 - name: Tourism visitor landings
-  id: 72595e9a-4a8a-48ee-ab69-22f684c43ef2
-  zones_active:
-  - yes
-  - yes
-  - no
+  id: f54a477e-74d3-43c7-bf6b-9a9ffc8a6cb2
+  zone: Tourism
   layer:
     column: Tourism visitor landings
     total: 378254.0
@@ -113,44 +108,11 @@ costs:
   class: Cost
 themes:
 - name: Geographic
+  zone: Biodiversity
   features:
-  - name: Continental landing site
-    id: 03461d75-2457-429d-a0c3-1df95f773446
-    zones_targets:
-    - 0.0
-    - 0.0
-    - 6.27e-05
-    layer:
-      column: Continental landing site
-      total: 31895.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#fe9929'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Antarctic Digital Database
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-          Digital Database</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
   - name: Potential expansion zones
-    id: da933c0a-ec1f-45ea-8bbb-c85f4db3b2c2
-    zones_targets:
-    - 0.3
-    - 0.05
-    - 0.0
+    id: 2f6cb36c-d6cf-474a-a51b-71e8a9b8a503
+    target: 0.3
     layer:
       column: Potential expansion zones
       total: 21.0
@@ -197,46 +159,13 @@ themes:
         class: Tile
       class: Layer
     class: Feature
-  - name: Sites past the Antarctic circle
-    id: 724647a5-5dba-4d5a-a41f-678abcb4f130
-    zones_targets:
-    - 0.0
-    - 0.0
-    - 0.0001051
-    layer:
-      column: Sites past the Antarctic circle
-      total: 28554.0
-      visible: no
-      details: Site is located south of the Antarctic Circle
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#cc4c02'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Antarctic Digital Database
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-          Digital Database</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
   class: Theme
 - name: Habitats
+  zone: Biodiversity
   features:
   - name: Fresh water
-    id: c62202a8-4e3a-4b31-aa59-feedd3bce597
-    zones_targets:
-    - 0.05
-    - 0.05
-    - 0.0
+    id: 8841dcdf-b349-4da3-9e3f-6538c6961a12
+    target: 0.05
     layer:
       column: Fresh water
       total: 882.0
@@ -263,11 +192,8 @@ themes:
       class: Layer
     class: Feature
   - name: Geotermal/volcanic sites
-    id: 5611ab3d-fca9-453d-9f3d-7787086aa715
-    zones_targets:
-    - 0.6
-    - 0.3
-    - 0.0
+    id: b39d3608-1d69-4ebf-aa22-9f7226e5fd35
+    target: 0.6
     layer:
       column: Geotermal/volcanic sites
       total: 3.0
@@ -293,81 +219,17 @@ themes:
         class: Tile
       class: Layer
     class: Feature
-  - name: Invasive species
-    id: aaf318e0-3b1c-4b04-85e4-678ad7b23f4c
-    zones_targets:
-    - 0.0
-    - 0.5769231
-    - 0.0
-    layer:
-      column: Invasive species
-      total: 26.0
-      visible: no
-      details: Important for monitoring and management and inversely important to
-        biodiversity (i.e. sites free of invasives important)
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#984ea3'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Hughes et al. 2015
-        icon: book
-        color: '#000000'
-        description: Obtained from <a href="https://doi.org/10.1007/s10531-015-0896-6">Hughes
-          et al. 2015</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
   class: Theme
 - name: Historic
-  features:
-  - name: Historic monuments
-    id: dee05be7-1420-4d3d-b5dc-754832a3dbef
-    zones_targets:
-    - 0.0
-    - 0.5
-    - 0.1034483
-    layer:
-      column: Historic monuments
-      total: 29.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#fee391'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Antarctic Protected Areas Database
-        icon: question
-        color: '#000000'
-        description: Obtained from <a href="https://www.ats.aq/devph/en/apa-database/">Antarctic
-          Protected Areas Database</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
+  zone: Biodiversity
+  features: []
   class: Theme
 - name: Ice
+  zone: Biodiversity
   features:
   - name: Crevasses
-    id: d48ed2b3-7eae-49ba-a103-d31c9b497a3d
-    zones_targets:
-    - 0.0111483
-    - 0.0089186
-    - 0.0
+    id: b26ae803-168e-4877-9f17-e799eee1755b
+    target: 0.0111483
     layer:
       column: Crevasses
       total: 897.0
@@ -413,11 +275,8 @@ themes:
       class: Layer
     class: Feature
   - name: Fast ice / shelf ice
-    id: 8bad37c6-9ab8-4669-b79d-7fc9d217201f
-    zones_targets:
-    - 0.2
-    - 0.4
-    - 0.0
+    id: d371a514-8634-487e-b168-2db9c59a15b7
+    target: 0.2
     layer:
       column: Fast ice / shelf ice
       total: 10.0
@@ -463,11 +322,8 @@ themes:
       class: Layer
     class: Feature
   - name: Glaciers
-    id: 3a48d70f-3802-43dc-b377-51fd9c02ffa0
-    zones_targets:
-    - 0.15
-    - 0.05
-    - 0.0
+    id: add6f7cb-7dd0-46cb-aa36-01355a462095
+    target: 0.15
     layer:
       column: Glaciers
       total: 451.0
@@ -512,46 +368,13 @@ themes:
         class: Tile
       class: Layer
     class: Feature
-  - name: Ice shelf
-    id: 61244bd7-e5f0-47f3-9990-27717d1134e5
-    zones_targets:
-    - 0.0
-    - 0.05
-    - 0.0011485
-    layer:
-      column: Ice shelf
-      total: 1306.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#cab2d6'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Antarctic Digital Database
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
-          Digital Database</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
   class: Theme
 - name: Invertebrates
+  zone: Biodiversity
   features:
   - name: Entomobryomorpha springtails
-    id: 97fae580-2148-4902-be8e-69559d6c8956
-    zones_targets:
-    - 0.1052356
-    - 0.0073298
-    - 0.0
+    id: 262676ac-4511-4f2e-8c50-d73df4ed130c
+    target: 0.1052356
     layer:
       column: Entomobryomorpha springtails
       total: 955.0
@@ -601,11 +424,8 @@ themes:
       class: Layer
     class: Feature
   - name: Freshwater copepods
-    id: 73a19100-39d1-4321-95d4-a72b82acaec5
-    zones_targets:
-    - 0.2272727
-    - 0.1136364
-    - 0.0
+    id: 2b127ff6-8a78-47ce-b0c1-c8cddb54d73f
+    target: 0.2272727
     layer:
       column: Freshwater copepods
       total: 44.0
@@ -650,43 +470,9 @@ themes:
         class: Tile
       class: Layer
     class: Feature
-  - name: General invertebrates
-    id: b85770d5-e9c8-472e-a33d-f7a8ca382355
-    zones_targets:
-    - 0.0
-    - 0.0
-    - 0.0
-    layer:
-      column: General invertebrates
-      total: 288.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#984ea3'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Terauds et al. 2025
-        icon: book
-        color: '#000000'
-        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-          et al. 2025</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
   - name: Intertidal mites
-    id: abb74e95-2d9e-4573-8112-16e93aaf7ac0
-    zones_targets:
-    - 0.3
-    - 0.05
-    - 0.0
+    id: f5095538-3338-448b-9952-f4d3ec51e13b
+    target: 0.3
     layer:
       column: Intertidal mites
       total: 12.0
@@ -734,11 +520,8 @@ themes:
       class: Layer
     class: Feature
   - name: Intertidal oligochaetes
-    id: d83740bc-1819-4785-9c07-0e305a5f9de8
-    zones_targets:
-    - 0.1111111
-    - 0.05
-    - 0.0
+    id: 696766f7-fa9e-492c-a37d-fdd7a80e8ee0
+    target: 0.1111111
     layer:
       column: Intertidal oligochaetes
       total: 90.0
@@ -784,11 +567,8 @@ themes:
       class: Layer
     class: Feature
   - name: Intertidal springtails
-    id: 3606476c-255f-4049-86d4-fde702dc1b11
-    zones_targets:
-    - 0.1398601
-    - 0.2097902
-    - 0.0
+    id: a3dd62be-2de2-48aa-abec-f790ef458041
+    target: 0.1398601
     layer:
       column: Intertidal springtails
       total: 143.0
@@ -834,11 +614,8 @@ themes:
       class: Layer
     class: Feature
   - name: Moss-associated microfauna
-    id: b02727d0-a789-4f5f-a303-6ad5c67ddd4e
-    zones_targets:
-    - 0.1338983
-    - 0.05
-    - 0.0
+    id: 54d1ea6c-ce26-478d-87cc-bcd518cfc35e
+    target: 0.1338983
     layer:
       column: Moss-associated microfauna
       total: 295.0
@@ -884,11 +661,8 @@ themes:
       class: Layer
     class: Feature
   - name: Penguin rookery-associated nematodes
-    id: bbfe801a-9ad1-445e-97fa-bd3ba8824e95
-    zones_targets:
-    - 0.2
-    - 0.05
-    - 0.0
+    id: f2ff9768-76e3-4a7a-8357-a19fd4d42296
+    target: 0.2
     layer:
       column: Penguin rookery-associated nematodes
       total: 185.0
@@ -932,11 +706,8 @@ themes:
       class: Layer
     class: Feature
   - name: Poduromorpha springtails
-    id: 029f575f-6391-47e6-99f5-8158d6c89395
-    zones_targets:
-    - 0.2222222
-    - 0.4444444
-    - 0.0
+    id: d208b64c-b40d-4f43-a765-efcd3afa40da
+    target: 0.2222222
     layer:
       column: Poduromorpha springtails
       total: 9.0
@@ -985,13 +756,11 @@ themes:
     class: Feature
   class: Theme
 - name: Microbes
+  zone: Biodiversity
   features:
   - name: Biological soil crust microbes
-    id: 6db92d15-1dbf-4e2b-93a7-cfcd4eb91a71
-    zones_targets:
-    - 0.7
-    - 0.05
-    - 0.0041494
+    id: 290cfd36-f381-4496-b1d5-134caa20371f
+    target: 0.7
     layer:
       column: Biological soil crust microbes
       total: 482.0
@@ -1041,11 +810,8 @@ themes:
       class: Layer
     class: Feature
   - name: Dry soil microbes
-    id: d4e3c4b9-ee9d-45f1-b2f4-50982a16a2ec
-    zones_targets:
-    - 0.775
-    - 0.05
-    - 0.0
+    id: fc93d68d-5a48-4d46-95d9-28e58e9eb8f8
+    target: 0.775
     layer:
       column: Dry soil microbes
       total: 10.0
@@ -1093,11 +859,8 @@ themes:
       class: Layer
     class: Feature
   - name: Lithic microbes
-    id: e9e6a511-90ee-4508-bf14-61c1f54115f5
-    zones_targets:
-    - 0.55
-    - 0.05
-    - 0.0199203
+    id: 7a4bfef2-d8bf-49b4-af1d-9973c368b406
+    target: 0.55
     layer:
       column: Lithic microbes
       total: 251.0
@@ -1146,11 +909,8 @@ themes:
       class: Layer
     class: Feature
   - name: Microbial mats
-    id: e91bf072-f2b5-47bf-8680-f98fdbaa0689
-    zones_targets:
-    - 0.3157895
-    - 0.0315789
-    - 0.0
+    id: 007ee093-3df8-47e8-8e61-4366b5f035e6
+    target: 0.3157895
     layer:
       column: Microbial mats
       total: 95.0
@@ -1198,11 +958,8 @@ themes:
       class: Layer
     class: Feature
   - name: Plankton
-    id: 546044ec-7c53-40ff-8952-00bf2a9bd544
-    zones_targets:
-    - 0.75
-    - 0.05
-    - 0.0
+    id: 8fc0925a-7dcd-4256-9f38-4c89dccf8e2c
+    target: 0.75
     layer:
       column: Plankton
       total: 311.0
@@ -1248,11 +1005,8 @@ themes:
       class: Layer
     class: Feature
   - name: Snow algae
-    id: 82bc5f18-3713-44a7-9b93-5556fae87e07
-    zones_targets:
-    - 0.6
-    - 0.05
-    - 0.0071429
+    id: b40f5497-4465-4829-af63-4a74f9c8e784
+    target: 0.6
     layer:
       column: Snow algae
       total: 280.0
@@ -1298,11 +1052,8 @@ themes:
       class: Layer
     class: Feature
   - name: Snow algae 2
-    id: 7b05a81e-1840-4d47-86bb-29023e39e040
-    zones_targets:
-    - 0.3
-    - 0.05
-    - 0.0
+    id: 2d1cf439-1f6d-41a0-885c-27a983a4942c
+    target: 0.3
     layer:
       column: Snow algae 2
       total: 529.0
@@ -1329,11 +1080,8 @@ themes:
       class: Layer
     class: Feature
   - name: Wet soil microbes
-    id: af6a41f9-8a45-474c-ac78-c9076ba8f5fa
-    zones_targets:
-    - 0.5
-    - 0.05
-    - 0.0
+    id: 3c0980be-1bf2-4683-a593-59b48262b994
+    target: 0.5
     layer:
       column: Wet soil microbes
       total: 180.0
@@ -1380,13 +1128,11 @@ themes:
     class: Feature
   class: Theme
 - name: Outstanding geological
+  zone: Biodiversity
   features:
   - name: Fossil bearing rocks
-    id: 15c6ff50-a91f-44ef-b898-2dedbe7911fa
-    zones_targets:
-    - 0.0254237
-    - 0.0423729
-    - 0.0
+    id: e7fab7b6-1e51-4c3a-b208-6486ef3d0bf3
+    target: 0.0254237
     layer:
       column: Fossil bearing rocks
       total: 3540.0
@@ -1432,11 +1178,8 @@ themes:
       class: Layer
     class: Feature
   - name: Geological processes
-    id: f53ad67c-937c-44a9-9c8c-f4e65e64bc82
-    zones_targets:
-    - 0.3
-    - 0.05
-    - 0.0
+    id: 5c8f66dc-b2f0-4e6c-9bdc-cb80df5f963c
+    target: 0.3
     layer:
       column: Geological processes
       total: 24.0
@@ -1481,11 +1224,8 @@ themes:
       class: Layer
     class: Feature
   - name: Meteorites
-    id: f6d909fe-e16e-4a18-b03c-33f622eb5e6d
-    zones_targets:
-    - 0.4
-    - 0.05
-    - 0.0
+    id: 7086d26d-9968-487d-8385-18e6d326bc73
+    target: 0.4
     layer:
       column: Meteorites
       total: 65.0
@@ -1531,11 +1271,8 @@ themes:
       class: Layer
     class: Feature
   - name: Minerals and crystals
-    id: 3425fe3f-7553-448f-b60c-cf108d462cf3
-    zones_targets:
-    - 0.55
-    - 0.05
-    - 0.0
+    id: 17391651-d8d9-4867-8157-fe590f556b32
+    target: 0.55
     layer:
       column: Minerals and crystals
       total: 20.0
@@ -1584,13 +1321,11 @@ themes:
     class: Feature
   class: Theme
 - name: Penguins
+  zone: Biodiversity
   features:
   - name: Adélie penguins
-    id: b4a1cec3-8405-497a-8d15-71e40fb66aaa
-    zones_targets:
-    - 0.55
-    - 0.05
-    - 0.0
+    id: 182e587d-7f13-4c38-83d6-bfabad0c200b
+    target: 0.55
     layer:
       column: Adélie penguins
       total: 296.0
@@ -1636,11 +1371,8 @@ themes:
       class: Layer
     class: Feature
   - name: Chinstrap penguins
-    id: c8fa8543-f338-4d7e-9631-a92e51f9472b
-    zones_targets:
-    - 0.6
-    - 0.05
-    - 0.0
+    id: 0316ad54-965a-42d4-9c33-46a9f8ce8087
+    target: 0.6
     layer:
       column: Chinstrap penguins
       total: 255.0
@@ -1690,11 +1422,8 @@ themes:
       class: Layer
     class: Feature
   - name: Emperor penguins
-    id: a0ca6d46-1d1b-4122-869e-3188415d3039
-    zones_targets:
-    - 0.6
-    - 0.05
-    - 0.0
+    id: 1e592d9f-ab0e-41f1-b59c-b8766853a1b7
+    target: 0.6
     layer:
       column: Emperor penguins
       total: 3.0
@@ -1721,11 +1450,8 @@ themes:
       class: Layer
     class: Feature
   - name: Gentoo penguins
-    id: d790f1f5-bf79-4eab-9f3c-29688a185571
-    zones_targets:
-    - 0.4
-    - 0.0851064
-    - 0.0
+    id: 7cf8623a-cb86-461d-8845-2aada1de947f
+    target: 0.4
     layer:
       column: Gentoo penguins
       total: 235.0
@@ -1775,11 +1501,8 @@ themes:
       class: Layer
     class: Feature
   - name: King penguins
-    id: 92b547b9-066d-4a70-9ef5-3381860ff01c
-    zones_targets:
-    - 0.875
-    - 0.05
-    - 0.0
+    id: f1d8c8b5-b667-4e30-aad8-f329fb1bab61
+    target: 0.875
     layer:
       column: King penguins
       total: 21.0
@@ -1827,11 +1550,8 @@ themes:
       class: Layer
     class: Feature
   - name: Macaroni penguins
-    id: d6160224-e93a-44ee-906e-f596df97fe13
-    zones_targets:
-    - 0.7
-    - 0.05
-    - 0.0
+    id: f356eec7-e47e-4bfa-9fd0-b77cc8121f70
+    target: 0.7
     layer:
       column: Macaroni penguins
       total: 124.0
@@ -1878,109 +1598,15 @@ themes:
     class: Feature
   class: Theme
 - name: Science
-  features:
-  - name: Monitoring sites
-    id: 718647d3-4dc7-444f-b800-2c007b11c643
-    zones_targets:
-    - 0.0
-    - 0.1818182
-    - 0.0
-    layer:
-      column: Monitoring sites
-      total: 165.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#6baed6'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Penguin Watch (T. Hart pers comm)
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://www.polarsentinels.org/projects/penguin-watch">Penguin
-          Watch (T. Hart pers comm)</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
-  - name: Research stations
-    id: e375aa8d-0b50-44cc-b0d6-ed2dd6c8db3b
-    zones_targets:
-    - 0.0
-    - 0.6578947
-    - 0.0526316
-    layer:
-      column: Research stations
-      total: 38.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#3182bd'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: COMNAP 2023
-        icon: question
-        color: '#000000'
-        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
-          2023</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
-  - name: Scientific field camps
-    id: 81c448d0-fcd2-4257-803d-4e564463a669
-    zones_targets:
-    - 0.0
-    - 1.0
-    - 0.0
-    layer:
-      column: Scientific field camps
-      total: 5.0
-      visible: no
-      details: ~
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#08519c'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: COMNAP 2023
-        icon: server
-        color: '#000000'
-        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
-          2023</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
+  zone: Biodiversity
+  features: []
   class: Theme
 - name: Seabirds
+  zone: Biodiversity
   features:
   - name: Antarctic shag
-    id: 6f4cd3ea-15dd-4fb8-b72a-5649a1dde63e
-    zones_targets:
-    - 0.6
-    - 0.05
-    - 0.05
+    id: aea4b619-0641-4a54-8cc0-b19b228b879c
+    target: 0.6
     layer:
       column: Antarctic shag
       total: 9.0
@@ -2007,11 +1633,8 @@ themes:
       class: Layer
     class: Feature
   - name: Antarctic terns
-    id: a19f9079-a398-4881-8f1d-5a71caf275b6
-    zones_targets:
-    - 0.6
-    - 0.05
-    - 0.05
+    id: f5d3592c-9677-4ffc-8c4b-01da955b729f
+    target: 0.6
     layer:
       column: Antarctic terns
       total: 9.0
@@ -2037,43 +1660,9 @@ themes:
         class: Tile
       class: Layer
     class: Feature
-  - name: Other seabird colonies
-    id: 4bd18651-a30b-4153-ae86-28bfd7ee592e
-    zones_targets:
-    - 0.0
-    - 0.0
-    - 0.0123967
-    layer:
-      column: Other seabird colonies
-      total: 242.0
-      visible: no
-      details: E.g., southern giant petrels, sheathbills, Antarctic shag, terns, petrels
-      legend:
-        values: 1.0
-        labels: presence
-        colors: '#984ea3'
-        units: presence
-        class: CategoricalLegend
-      provenance:
-        name: Terauds et al. 2025
-        icon: book
-        color: '#000000'
-        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
-          et al. 2025</a>
-        class: Provenance
-      tile:
-        path: antarctic-peninsula.pmtiles
-        source_layer: layer
-        max_zoom: 8.0
-        class: Tile
-      class: Layer
-    class: Feature
   - name: Procellariids
-    id: 445b81be-0570-41a1-bbe2-19bae3c0ed50
-    zones_targets:
-    - 0.6
-    - 0.05
-    - 0.0
+    id: 1b771013-6be1-416e-b5b9-a151d1c2a5cb
+    target: 0.6
     layer:
       column: Procellariids
       total: 4.0
@@ -2102,13 +1691,11 @@ themes:
     class: Feature
   class: Theme
 - name: Seals
+  zone: Biodiversity
   features:
   - name: Antarctic fur seals
-    id: af9c87e8-d981-4fd1-88f5-293b38b71a12
-    zones_targets:
-    - 0.3
-    - 0.05
-    - 0.0
+    id: b10094e5-c39a-4495-9154-d4c3d2b3852d
+    target: 0.3
     layer:
       column: Antarctic fur seals
       total: 9.0
@@ -2156,11 +1743,8 @@ themes:
       class: Layer
     class: Feature
   - name: Elephant seals
-    id: 02fc08b3-01ec-4962-87bf-85e1a92e794b
-    zones_targets:
-    - 0.5555556
-    - 0.05
-    - 0.0
+    id: 6fb962a1-0224-42fe-8fb4-172120ae7cf8
+    target: 0.5555556
     layer:
       column: Elephant seals
       total: 9.0
@@ -2208,11 +1792,8 @@ themes:
       class: Layer
     class: Feature
   - name: Weddell seals
-    id: d8fbe341-d43c-4305-a9c7-4267b95ddd9a
-    zones_targets:
-    - 0.1
-    - 0.05
-    - 0.0
+    id: 42906773-f53c-4ae3-ab25-41ddaa26ee7a
+    target: 0.1
     layer:
       column: Weddell seals
       total: 30.0
@@ -2259,13 +1840,11 @@ themes:
     class: Feature
   class: Theme
 - name: Vegetation
+  zone: Biodiversity
   features:
   - name: Leafy liverworts
-    id: b741e98e-d357-413d-b646-50b1d3979076
-    zones_targets:
-    - 0.168572
-    - 0.0660338
-    - 0.0
+    id: 9d045a0a-6971-4a44-a04e-8940adcb3a9a
+    target: 0.168572
     layer:
       column: Leafy liverworts
       total: 2423.0
@@ -2311,11 +1890,8 @@ themes:
       class: Layer
     class: Feature
   - name: Mesic mosses
-    id: 87fd2cba-b1da-4750-bf10-3acd27a9f9b0
-    zones_targets:
-    - 0.1
-    - 0.0595238
-    - 0.0
+    id: 7c2cffa1-53f9-4a04-8ffa-f1b07b282558
+    target: 0.1
     layer:
       column: Mesic mosses
       total: 336.0
@@ -2361,11 +1937,8 @@ themes:
       class: Layer
     class: Feature
   - name: Thalloid liverworts
-    id: 4e3f5fa3-3ad9-4d0a-9fe1-1d5640066017
-    zones_targets:
-    - 0.5
-    - 0.05
-    - 0.0
+    id: e2c5992a-4309-4ec7-80da-4687355d95e8
+    target: 0.5
     layer:
       column: Thalloid liverworts
       total: 86.0
@@ -2411,11 +1984,8 @@ themes:
       class: Layer
     class: Feature
   - name: Truly aquatic mosses
-    id: 2d3404fe-e3d3-4fe6-8f4b-4238d3989d89
-    zones_targets:
-    - 0.1663755
-    - 0.0582242
-    - 0.0
+    id: dc5ee391-7328-4d48-8554-897977fdf9ff
+    target: 0.1663755
     layer:
       column: Truly aquatic mosses
       total: 2748.0
@@ -2460,12 +2030,2522 @@ themes:
         class: Tile
       class: Layer
     class: Feature
+  class: Theme
+- name: Geographic
+  zone: Scientific
+  features:
+  - name: Potential expansion zones
+    id: 88a19fb6-bac8-4832-b4ee-e50e541ca468
+    target: 0.05
+    layer:
+      column: Potential expansion zones
+      total: 21.0
+      visible: no
+      details: Zones that species might be likely to expand into with climate change
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Habitats
+  zone: Scientific
+  features:
+  - name: Fresh water
+    id: 0389badb-c80c-4324-8f6d-65ebdd8f45ad
+    target: 0.05
+    layer:
+      column: Fresh water
+      total: 882.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#a6cee3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Geotermal/volcanic sites
+    id: 50cfdb50-862e-4aaa-8a21-96fcbff5d5c1
+    target: 0.3
+    layer:
+      column: Geotermal/volcanic sites
+      total: 3.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#fb9a99'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Fraster et al. 2014
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1073/pnas.1321437111">Fraster
+          et al. 2014</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Invasive species
+    id: b180f0bd-724e-4e9a-ab0e-91ac3b450bd1
+    target: 0.5769231
+    layer:
+      column: Invasive species
+      total: 26.0
+      visible: no
+      details: Important for monitoring and management and inversely important to
+        biodiversity (i.e. sites free of invasives important)
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Hughes et al. 2015
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1007/s10531-015-0896-6">Hughes
+          et al. 2015</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Historic
+  zone: Scientific
+  features:
+  - name: Historic monuments
+    id: 511d4dea-30e9-4f96-aa9d-1e68727c0d89
+    target: 0.5
+    layer:
+      column: Historic monuments
+      total: 29.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#fee391'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Protected Areas Database
+        icon: question
+        color: '#000000'
+        description: Obtained from <a href="https://www.ats.aq/devph/en/apa-database/">Antarctic
+          Protected Areas Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Ice
+  zone: Scientific
+  features:
+  - name: Crevasses
+    id: 4acd4b5c-ba7d-4326-934a-e574393c91cf
+    target: 0.0089186
+    layer:
+      column: Crevasses
+      total: 897.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 15.0
+        - 30.0
+        - 45.0
+        - 60.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 20.0
+        - 40.0
+        - 60.0
+        labels:
+        - '0'
+        - '20'
+        - '40'
+        - '60'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Fast ice / shelf ice
+    id: 8d10f2e8-4ea6-41f1-b3f9-17bc41615cea
+    target: 0.4
+    layer:
+      column: Fast ice / shelf ice
+      total: 10.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Glaciers
+    id: c3731223-6337-4162-94ca-33a85d35193a
+    target: 0.05
+    layer:
+      column: Glaciers
+      total: 451.0
+      visible: no
+      details: Including tidewater glaciers
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Ice shelf
+    id: 5296e451-6ff6-4ff6-b908-4ee815241b11
+    target: 0.05
+    layer:
+      column: Ice shelf
+      total: 1306.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#cab2d6'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Invertebrates
+  zone: Scientific
+  features:
+  - name: Entomobryomorpha springtails
+    id: b365fb50-6e63-4fa9-8dea-adf0d82d275b
+    target: 0.0073298
+    layer:
+      column: Entomobryomorpha springtails
+      total: 955.0
+      visible: no
+      details: E.g., Isotoma klovstadi
+      legend:
+        values:
+        - 0.0
+        - 6.25
+        - 12.5
+        - 18.75
+        - 25.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        - 15.0
+        - 20.0
+        - 25.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        - '15'
+        - '20'
+        - '25'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Freshwater copepods
+    id: dbc1e491-a6e3-4cc3-9503-10c04709af4b
+    target: 0.1136364
+    layer:
+      column: Freshwater copepods
+      total: 44.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Intertidal mites
+    id: 4bec200d-32cd-417e-994c-7cf583319246
+    target: 0.05
+    layer:
+      column: Intertidal mites
+      total: 12.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Intertidal oligochaetes
+    id: 9b52ccd8-7579-43ed-8929-0253ea199d5c
+    target: 0.05
+    layer:
+      column: Intertidal oligochaetes
+      total: 90.0
+      visible: no
+      details: Including enchytraeids, such as Christensenia spp.
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Intertidal springtails
+    id: 2fb84766-a627-4e2a-8a9f-69ba6ffd943d
+    target: 0.2097902
+    layer:
+      column: Intertidal springtails
+      total: 143.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Moss-associated microfauna
+    id: 7aa27d79-bd9a-4786-867e-6a719fd79f7b
+    target: 0.05
+    layer:
+      column: Moss-associated microfauna
+      total: 295.0
+      visible: no
+      details: Terrestrial, moss associated nematodes, rotifers, tardigrades
+      legend:
+        values:
+        - 0.0
+        - 3.0
+        - 6.0
+        - 9.0
+        - 12.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 4.0
+        - 8.0
+        - 12.0
+        labels:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Penguin rookery-associated nematodes
+    id: 6d131b3b-d97e-4ec3-be28-64576fab0808
+    target: 0.05
+    layer:
+      column: Penguin rookery-associated nematodes
+      total: 185.0
+      visible: no
+      details: Terrestrial, penguin rookery associated nematodes
+      legend:
+        values:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        - 10.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Poduromorpha springtails
+    id: b6b1a023-e3ca-4925-8f4b-f4305b42ac23
+    target: 0.4444444
+    layer:
+      column: Poduromorpha springtails
+      total: 9.0
+      visible: no
+      details: E.g., Gomphiocephalus hodgsoni
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Microbes
+  zone: Scientific
+  features:
+  - name: Biological soil crust microbes
+    id: 922e7b49-33b3-45ce-a89a-537983051cdc
+    target: 0.05
+    layer:
+      column: Biological soil crust microbes
+      total: 482.0
+      visible: no
+      details: Biological soil crust microbial communities
+      legend:
+        values:
+        - 0.0
+        - 1.25
+        - 2.5
+        - 3.75
+        - 5.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        - 5.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Dry soil microbes
+    id: 8c411b49-5b72-4316-907b-f4ded85f4bd9
+    target: 0.05
+    layer:
+      column: Dry soil microbes
+      total: 10.0
+      visible: no
+      details: Microbes that predominantly survive in the dry soil
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Lithic microbes
+    id: 816d0e1c-6fc9-420f-b128-00d6cca5181f
+    target: 0.05
+    layer:
+      column: Lithic microbes
+      total: 251.0
+      visible: no
+      details: Microbes that predominantly survive on/in rocks (endolithic, hypolithic
+        and chasmolithic)
+      legend:
+        values:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Microbial mats
+    id: e78c0a07-189e-48cb-bc80-540d49a0dfa0
+    target: 0.0315789
+    layer:
+      column: Microbial mats
+      total: 95.0
+      visible: no
+      details: Microbial mats, both lake and flush systems
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Plankton
+    id: 69136802-b236-47eb-bc9b-65ac67b94dde
+    target: 0.05
+    layer:
+      column: Plankton
+      total: 311.0
+      visible: no
+      details: Non-marine aquatic system plankton
+      legend:
+        values:
+        - 0.0
+        - 22.5
+        - 45.0
+        - 67.5
+        - 90.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 30.0
+        - 60.0
+        - 90.0
+        labels:
+        - '0'
+        - '30'
+        - '60'
+        - '90'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Snow algae
+    id: c04ffc8b-bf99-4a0a-935f-53918217646e
+    target: 0.05
+    layer:
+      column: Snow algae
+      total: 280.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Snow algae 2
+    id: a8096f45-57b6-41f9-b557-02e87d15d388
+    target: 0.05
+    layer:
+      column: Snow algae 2
+      total: 529.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Gray et al. 2020
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1038/s41467-020-16018-w">Gray
+          et al. 2020</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Wet soil microbes
+    id: fa773f20-dbd8-4516-b3ba-05ab690647e3
+    target: 0.05
+    layer:
+      column: Wet soil microbes
+      total: 180.0
+      visible: no
+      details: Wet soil microbial communities
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Outstanding geological
+  zone: Scientific
+  features:
+  - name: Fossil bearing rocks
+    id: cce7ef9e-f523-41f5-9925-1cf7d10f90bf
+    target: 0.0423729
+    layer:
+      column: Fossil bearing rocks
+      total: 3540.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 16.0
+        - 32.0
+        - 48.0
+        - 64.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 20.0
+        - 40.0
+        - 60.0
+        labels:
+        - '0'
+        - '20'
+        - '40'
+        - '60'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Geological processes
+    id: 8b7a0dc1-b560-4572-8075-2c236abac1f9
+    target: 0.05
+    layer:
+      column: Geological processes
+      total: 24.0
+      visible: no
+      details: Sites containing examples of interesting geological processes (e.g.,
+        ventifacts)
+      legend:
+        values:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        - 10.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Meteorites
+    id: a6355ff6-bf0a-47d2-ad1b-0670f92fa854
+    target: 0.05
+    layer:
+      column: Meteorites
+      total: 65.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 3.75
+        - 7.5
+        - 11.25
+        - 15.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        - 15.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        - '15'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Minerals and crystals
+    id: c5e7ff8a-2666-40da-b39c-4c8fc770bd0b
+    target: 0.05
+    layer:
+      column: Minerals and crystals
+      total: 20.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Penguins
+  zone: Scientific
+  features:
+  - name: Adélie penguins
+    id: 9d110f40-3285-4b4a-8e05-2f066319431c
+    target: 0.05
+    layer:
+      column: Adélie penguins
+      total: 296.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 1.5
+        - 3.0
+        - 4.5
+        - 6.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.0
+        - 4.0
+        - 6.0
+        labels:
+        - '0'
+        - '2'
+        - '4'
+        - '6'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Chinstrap penguins
+    id: 771efd9a-a4d2-468c-973f-6b164e13bc9b
+    target: 0.05
+    layer:
+      column: Chinstrap penguins
+      total: 255.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 1.25
+        - 2.5
+        - 3.75
+        - 5.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        - 5.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Emperor penguins
+    id: f8ade288-d667-46bc-b111-b5390b916ea0
+    target: 0.05
+    layer:
+      column: Emperor penguins
+      total: 3.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Gentoo penguins
+    id: 53e9dc01-d799-40b4-9138-6f48cf5c8fa4
+    target: 0.0851064
+    layer:
+      column: Gentoo penguins
+      total: 235.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 6.25
+        - 12.5
+        - 18.75
+        - 25.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 5.0
+        - 10.0
+        - 15.0
+        - 20.0
+        - 25.0
+        labels:
+        - '0'
+        - '5'
+        - '10'
+        - '15'
+        - '20'
+        - '25'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: King penguins
+    id: 4b027cc7-145f-4e18-ac18-4f73d5cde6d5
+    target: 0.05
+    layer:
+      column: King penguins
+      total: 21.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Macaroni penguins
+    id: 81247c89-3f36-47c9-8cac-8435a8554b75
+    target: 0.05
+    layer:
+      column: Macaroni penguins
+      total: 124.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Science
+  zone: Scientific
+  features:
+  - name: Monitoring sites
+    id: 55ce60f4-4a55-489b-82ef-1692f0eabb9f
+    target: 0.1818182
+    layer:
+      column: Monitoring sites
+      total: 165.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#6baed6'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Penguin Watch (T. Hart pers comm)
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.polarsentinels.org/projects/penguin-watch">Penguin
+          Watch (T. Hart pers comm)</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Research stations
+    id: 5585fb1a-a28d-4ce2-aa59-36811877d22c
+    target: 0.6578947
+    layer:
+      column: Research stations
+      total: 38.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#3182bd'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: COMNAP 2023
+        icon: question
+        color: '#000000'
+        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
+          2023</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Scientific field camps
+    id: 7c78932e-11bd-483a-850e-2e14d9eb939b
+    target: 1.0
+    layer:
+      column: Scientific field camps
+      total: 5.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#08519c'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: COMNAP 2023
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
+          2023</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Seabirds
+  zone: Scientific
+  features:
+  - name: Antarctic shag
+    id: 7498e25e-5115-49f0-a50a-2b8ba9825b1d
+    target: 0.05
+    layer:
+      column: Antarctic shag
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Antarctic terns
+    id: a633aa4a-3286-4dc1-bb14-1397d3d55eed
+    target: 0.05
+    layer:
+      column: Antarctic terns
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Procellariids
+    id: 17aa5d2d-a8c4-428d-a17f-8dc0f64d69ce
+    target: 0.05
+    layer:
+      column: Procellariids
+      total: 4.0
+      visible: no
+      details: Snow petrel, Southern Fulmar, Wilson's storm petrel, Antarctic petrel,
+        Antarctic prion, Cape petrel, and associated ectoparasties
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Seals
+  zone: Scientific
+  features:
+  - name: Antarctic fur seals
+    id: 52158f93-b1bf-458c-9f9a-d98d86b3f02f
+    target: 0.05
+    layer:
+      column: Antarctic fur seals
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Elephant seals
+    id: c4c950a6-c474-4504-a668-3dcccb9457a1
+    target: 0.05
+    layer:
+      column: Elephant seals
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 0.5
+        - 1.0
+        - 1.5
+        - 2.0
+        labels:
+        - '0'
+        - '0.5'
+        - '1'
+        - '1.5'
+        - '2'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Weddell seals
+    id: e787c5df-5baa-477c-965b-2e1b10dbc017
+    target: 0.05
+    layer:
+      column: Weddell seals
+      total: 30.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values:
+        - 0.0
+        - 0.75
+        - 1.5
+        - 2.25
+        - 3.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Vegetation
+  zone: Scientific
+  features:
+  - name: Leafy liverworts
+    id: d85f74b7-7f4c-4028-83f3-986a78268b54
+    target: 0.0660338
+    layer:
+      column: Leafy liverworts
+      total: 2423.0
+      visible: no
+      details: E.g., Cephaloziella varians
+      legend:
+        values:
+        - 0.0
+        - 19.75
+        - 39.5
+        - 59.25
+        - 79.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 25.0
+        - 50.0
+        - 75.0
+        labels:
+        - '0'
+        - '25'
+        - '50'
+        - '75'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Mesic mosses
+    id: 692d1893-fd83-4ebd-9743-976eaf941100
+    target: 0.0595238
+    layer:
+      column: Mesic mosses
+      total: 336.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 3.0
+        - 6.0
+        - 9.0
+        - 12.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 4.0
+        - 8.0
+        - 12.0
+        labels:
+        - '0'
+        - '4'
+        - '8'
+        - '12'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Thalloid liverworts
+    id: 99333cb3-d828-471c-8cb1-b7a73d0ff05b
+    target: 0.05
+    layer:
+      column: Thalloid liverworts
+      total: 86.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 2.0
+        - 4.0
+        - 6.0
+        - 8.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Truly aquatic mosses
+    id: cab8757d-e40c-4976-9a08-af8f4ea269ab
+    target: 0.0582242
+    layer:
+      column: Truly aquatic mosses
+      total: 2748.0
+      visible: no
+      details: I.e., lake-dwelling moss
+      legend:
+        values:
+        - 0.0
+        - 19.0
+        - 38.0
+        - 57.0
+        - 76.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 25.0
+        - 50.0
+        - 75.0
+        labels:
+        - '0'
+        - '25'
+        - '50'
+        - '75'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Geographic
+  zone: Tourism
+  features:
+  - name: Continental landing site
+    id: 882668ec-538b-434a-8a36-08c9afd62962
+    target: 6.27e-05
+    layer:
+      column: Continental landing site
+      total: 31895.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#fe9929'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Sites past the Antarctic circle
+    id: 5c2d9543-f99c-410e-9cda-9a5f71e154bd
+    target: 0.0001051
+    layer:
+      column: Sites past the Antarctic circle
+      total: 28554.0
+      visible: no
+      details: Site is located south of the Antarctic Circle
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#cc4c02'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Habitats
+  zone: Tourism
+  features: []
+  class: Theme
+- name: Historic
+  zone: Tourism
+  features:
+  - name: Historic monuments
+    id: fd5fbe84-6800-4e0c-bb86-0aed1834297a
+    target: 0.1034483
+    layer:
+      column: Historic monuments
+      total: 29.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#fee391'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Protected Areas Database
+        icon: question
+        color: '#000000'
+        description: Obtained from <a href="https://www.ats.aq/devph/en/apa-database/">Antarctic
+          Protected Areas Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Ice
+  zone: Tourism
+  features:
+  - name: Ice shelf
+    id: 85d4fc74-2954-4325-969c-eba9c06695a8
+    target: 0.0011485
+    layer:
+      column: Ice shelf
+      total: 1306.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#cab2d6'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Antarctic Digital Database
+        icon: server
+        color: '#000000'
+        description: Obtained from <a href="https://www.bas.ac.uk/project/add/">Antarctic
+          Digital Database</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Invertebrates
+  zone: Tourism
+  features: []
+  class: Theme
+- name: Microbes
+  zone: Tourism
+  features:
+  - name: Biological soil crust microbes
+    id: f8e62edd-0911-463a-ba13-d91de9730ceb
+    target: 0.0041494
+    layer:
+      column: Biological soil crust microbes
+      total: 482.0
+      visible: no
+      details: Biological soil crust microbial communities
+      legend:
+        values:
+        - 0.0
+        - 1.25
+        - 2.5
+        - 3.75
+        - 5.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        - 5.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        - '5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Lithic microbes
+    id: c942c3e7-25c1-41b1-8b64-22d504671ad2
+    target: 0.0199203
+    layer:
+      column: Lithic microbes
+      total: 251.0
+      visible: no
+      details: Microbes that predominantly survive on/in rocks (endolithic, hypolithic
+        and chasmolithic)
+      legend:
+        values:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 1.0
+        - 2.0
+        - 3.0
+        - 4.0
+        labels:
+        - '0'
+        - '1'
+        - '2'
+        - '3'
+        - '4'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Snow algae
+    id: a17631ba-5839-45e0-af00-dcc40a342812
+    target: 0.0071429
+    layer:
+      column: Snow algae
+      total: 280.0
+      visible: no
+      details: ~
+      legend:
+        values:
+        - 0.0
+        - 1.875
+        - 3.75
+        - 5.625
+        - 7.5
+        colors:
+        - '#440154FF'
+        - '#3B528BFF'
+        - '#21908CFF'
+        - '#5DC863FF'
+        - '#FDE725FF'
+        breaks:
+        - 0.0
+        - 2.5
+        - 5.0
+        - 7.5
+        labels:
+        - '0'
+        - '2.5'
+        - '5'
+        - '7.5'
+        units: abundance
+        class: ContinuousLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Outstanding geological
+  zone: Tourism
+  features: []
+  class: Theme
+- name: Penguins
+  zone: Tourism
+  features: []
+  class: Theme
+- name: Science
+  zone: Tourism
+  features:
+  - name: Research stations
+    id: 0f45931e-500b-41de-bc66-1ec393d510da
+    target: 0.0526316
+    layer:
+      column: Research stations
+      total: 38.0
+      visible: no
+      details: ~
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#3182bd'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: COMNAP 2023
+        icon: question
+        color: '#000000'
+        description: Obtained from <a href="https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities">COMNAP
+          2023</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Seabirds
+  zone: Tourism
+  features:
+  - name: Antarctic shag
+    id: dc460c55-0a78-437a-b7df-056fc4d3b2db
+    target: 0.05
+    layer:
+      column: Antarctic shag
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Antarctic terns
+    id: 0de1eb81-98ff-4553-9253-72d6dfbb8c3c
+    target: 0.05
+    layer:
+      column: Antarctic terns
+      total: 9.0
+      visible: no
+      details: Including associated ectoparasites
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  - name: Other seabird colonies
+    id: 20e9254a-643c-46f4-975c-4763c953c415
+    target: 0.0123967
+    layer:
+      column: Other seabird colonies
+      total: 242.0
+      visible: no
+      details: E.g., southern giant petrels, sheathbills, Antarctic shag, terns, petrels
+      legend:
+        values: 1.0
+        labels: presence
+        colors: '#984ea3'
+        units: presence
+        class: CategoricalLegend
+      provenance:
+        name: Terauds et al. 2025
+        icon: book
+        color: '#000000'
+        description: Obtained from <a href="https://doi.org/10.1002/ecy.70000">Terauds
+          et al. 2025</a>
+        class: Provenance
+      tile:
+        path: antarctic-peninsula.pmtiles
+        source_layer: layer
+        max_zoom: 8.0
+        class: Tile
+      class: Layer
+    class: Feature
+  class: Theme
+- name: Seals
+  zone: Tourism
+  features: []
+  class: Theme
+- name: Vegetation
+  zone: Tourism
+  features:
   - name: Vegetation
-    id: df607b5f-8131-4ce2-aa86-5438ab87be49
-    zones_targets:
-    - 0.0
-    - 0.0
-    - 0.0026702
+    id: 986d7934-ded7-4626-bff1-8f26af588529
+    target: 0.0026702
     layer:
       column: Vegetation
       total: 749.0
@@ -2494,15 +4574,8 @@ themes:
   class: Theme
 locks:
 - name: ASPA
-  id: 7b089e31-d20c-41bc-96af-5138fb4618b1
-  zones_in:
-  - yes
-  - no
-  - no
-  zones_out:
-  - no
-  - no
-  - no
+  id: b3a1dc69-b460-4168-b3ca-4f0d54ce4a7d
+  zone: Biodiversity
   layer:
     column: ASPA
     total: 719.0
@@ -2529,15 +4602,8 @@ locks:
     class: Layer
   class: Lock
 - name: Inviolate sites
-  id: 8c0878f1-61f6-4c5d-b77e-74e129aeecf4
-  zones_in:
-  - yes
-  - no
-  - no
-  zones_out:
-  - no
-  - no
-  - no
+  id: 8f64324c-c0ba-4226-8d29-d1d480021f80
+  zone: Biodiversity
   layer:
     column: Inviolate sites
     total: 25753.0

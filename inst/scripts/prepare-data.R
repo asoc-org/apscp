@@ -1,6 +1,7 @@
 # Initialization
 ## load package
 devtools::load_all()
+library(magrittr)
 
 ## set parameters
 ### parameters for loading in data
@@ -146,14 +147,13 @@ tile <- create_tile(
 
 ## create locks
 locks <-
-  {metadata[metadata$class == "lock", , drop = FALSE]} |>
-  split(~ name) |>
+  {metadata[metadata$class == "lock", , drop = FALSE]} %>%
+  split(~ name) %>%
   lapply(function(x) {
     new_lock(
       name = x$name,
       ## note that all locks are assumed to be for the biodiversity zone
-      zones_in = c(TRUE, FALSE, FALSE),
-      zones_out = c(FALSE, FALSE, FALSE),
+      zone = "Biodiversity",
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -181,14 +181,14 @@ locks <-
 
 ## create costs
 costs <-
-  {metadata[metadata$class == "cost", , drop = FALSE]} |>
-  split(~ name) |>
+  {metadata[metadata$class == "cost", , drop = FALSE]} %>%
+  split(~ name) %>%
   lapply(function(x) {
     new_cost(
       name = x$name,
       ## note that all costs are assumed to avoid allocating planning units
       ## to the tourism zone
-      zones_active = c(TRUE, TRUE, FALSE),
+      zone = "Tourism",
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -215,15 +215,14 @@ costs <-
   unname()
 
 ## create features
-features <-
-  {metadata[metadata$class == "feature", , drop = FALSE]} |>
-  split(~ name) |>
+features_biodiversity <-
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  {metadata[metadata$conservation_target > 1e-10, , drop = FALSE]} %>%
+  split(~ name) %>%
   lapply(function(x) {
     new_feature(
       name = x$name,
-      zones_targets = c(
-        x$conservation_target, x$scientific_target, x$tourism_target
-      ),
+      target = x$conservation_target,
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -246,29 +245,120 @@ features <-
         )
       )
     )
-  }) %>%
-  unname()
+  })
+features_scientific <-
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  {metadata[metadata$scientific_target > 1e-10, , drop = FALSE]} %>%
+  split(~ name) %>%
+  lapply(function(x) {
+    new_feature(
+      name = x$name,
+      target = x$scientific_target,
+      layer = new_layer(
+        dataset = dataset,
+        column = x$name,
+        total = dataset$get_column_total(x$name),
+        details = convert_na_to_null(x$details),
+        visible = x$visible,
+        tile = tile,
+        provenance = new_provenance(
+          name = x$provenance_source,
+          icon = x$provenance_icon,
+          color = "#000000",
+          description = x$provenance_description
+        ),
+        legend = create_legend(
+          x = vector_data,
+          column = x$name,
+          palette = x$palette,
+          type = x$type,
+          units = x$units
+        )
+      )
+    )
+  })
+features_tourism <-
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  {metadata[metadata$tourism_target > 1e-10, , drop = FALSE]} %>%
+  split(~ name) %>%
+  lapply(function(x) {
+    new_feature(
+      name = x$name,
+      target = x$tourism_target,
+      layer = new_layer(
+        dataset = dataset,
+        column = x$name,
+        total = dataset$get_column_total(x$name),
+        details = convert_na_to_null(x$details),
+        visible = x$visible,
+        tile = tile,
+        provenance = new_provenance(
+          name = x$provenance_source,
+          icon = x$provenance_icon,
+          color = "#000000",
+          description = x$provenance_description
+        ),
+        legend = create_legend(
+          x = vector_data,
+          column = x$name,
+          palette = x$palette,
+          type = x$type,
+          units = x$units
+        )
+      )
+    )
+  })
 
 ## create themes
-themes <-
-  {metadata[metadata$class == "feature", , drop = FALSE]} |>
-  split(~ theme) |>
+themes_biodiversity <-
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  split(~ theme) %>%
   lapply(function(x) {
     new_theme(
       name = x$theme[[1]],
-      features = features[
-        vapply(features, function(x) x$name, character(1)) %in% x$name
-      ]
+      zone = "Biodiversity",
+      features = unname(
+        features_biodiversity[names(features_biodiversity) %in% x$name]
+      )
+    )
+  }) %>%
+  unname()
+themes_scientific <-
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  split(~ theme) %>%
+  lapply(function(x) {
+    new_theme(
+      name = x$theme[[1]],
+      zone = "Scientific",
+      features = unname(
+        features_scientific[names(features_scientific) %in% x$name]
+      )
+    )
+  }) %>%
+  unname()
+themes_tourism <-
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  split(~ theme) %>%
+  lapply(function(x) {
+    new_theme(
+      name = x$theme[[1]],
+      zone = "Tourism",
+      features = unname(
+        features_tourism[names(features_tourism) %in% x$name]
+      )
     )
   }) %>%
   unname()
 
 ## create project
 project <- new_project(
-  zones = c("Biodiversity area", "Scientific area", "Tourism area"),
+  zones = c("Biodiversity", "Scientific", "Tourism"),
   dataset = dataset,
   tiles = list(tile),
-  themes = themes,
+  themes = append(
+    themes_biodiversity,
+    append(themes_scientific, themes_tourism)
+  ),
   costs = costs,
   locks = locks,
   name = project_name,

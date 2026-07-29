@@ -1,4 +1,5 @@
 {
   "mapper": "./srcjs/widgets/mapper.js",
+  "solver": "./srcjs/widgets/solver.js",
   "sidebar": "./srcjs/exts/sidebar/sidebar.js"
 }

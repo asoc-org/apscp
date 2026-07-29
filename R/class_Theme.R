@@ -7,6 +7,10 @@ NULL
 #'
 #' @param name `character` value with name.
 #'
+#' @param zone `character` name of zone associated with the theme.
+#' Note that `zone` should match one of the zone names associated with
+#' the [new_project()] to which this theme belongs.
+#'
 #' @param features [new_feature()] object or `list` of such objects.
 #'
 #' @return A `Theme` object.
@@ -24,10 +28,11 @@ NULL
 #' # create object
 #' x <- new_theme(
 #'   "species",
+#'   zone = "biodiversity",
 #'   list(
 #'     new_feature(
 #'       name = "f1",
-#'       zones_targets = c(0.1, 0.5),
+#'       target = 0.5,
 #'       layer = new_layer(
 #'         column = "feat_1",
 #'         total = 500,
@@ -40,7 +45,7 @@ NULL
 #'     ),
 #'     new_feature(
 #'       name = "f2",
-#'       zones_targets = c(0.2, 0.9),
+#'       target = 0.9,
 #'       layer = new_layer(
 #'         column = "feat_2",
 #'         total = 500,
@@ -58,7 +63,7 @@ NULL
 #' print(x)
 #'
 #' @export
-new_theme <- function(name, features) {
+new_theme <- function(name, zone, features) {
   # if needed, put feature in a list if needed
   if (inherits(features, "Feature")) {
     features <- list(features)
@@ -69,6 +74,9 @@ new_theme <- function(name, features) {
     ## name
     assertthat::is.string(name),
     assertthat::noNA(name),
+    ## zone
+    assertthat::is.string(zone),
+    assertthat::noNA(zone),
     ## feature
     is.list(features),
     all_elements_inherit(features, "Feature")
@@ -76,7 +84,7 @@ new_theme <- function(name, features) {
 
   # return new theme
   structure(
-    list(name = name, features = features),
+    list(name = name, zone = zone, features = features),
     class = "Theme"
   )
 }

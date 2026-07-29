@@ -10,15 +10,11 @@ test_that("new_lock", {
     total = 500,
     details = "extra info"
   )
-  x <- new_lock(
-    name = "lock", zones_in = c(TRUE, FALSE), zones_out = c(FALSE, TRUE),
-    layer = l
-  )
+  x <- new_lock(name = "lock", zone = "Biodiversity", layer = l)
   # run tests
   expect_s3_class(x, "Lock")
   expect_equal(x$name, "lock")
-  expect_equal(x$zones_in, c(TRUE, FALSE))
-  expect_equal(x$zones_out, c(FALSE, TRUE))
+  expect_equal(x$zone, "Biodiversity")
 })
 
 test_that("serialize_object", {
@@ -33,14 +29,12 @@ test_that("serialize_object", {
     total = 500,
     details = "extra info"
   )
-  d <- new_lock(
-    name = "lock", zones_in = c(TRUE, FALSE), zones_out = c(FALSE, TRUE),
-    layer = l
-  )
+  d <- new_lock(name = "lock", zone = "Biodiversity", layer = l)
   x <- serialize_object(d)
   # run tests
   expect_type(x, "list")
   expect_equal(x$name, "lock")
+  expect_equal(x$zone, "Biodiversity")
   expect_equal(x$layer, serialize_object(d$layer))
   expect_equal(x$class, "Lock")
   expect_equal(x$id, d$id)
@@ -59,10 +53,7 @@ test_that("deserialize_object", {
     total = 500,
     details = "extra info"
   )
-  x <- new_lock(
-    name = "lock", zones_in = c(TRUE, FALSE), zones_out = c(FALSE, TRUE),
-    layer = l
-  )
+  x <- new_lock(name = "lock", zone = "Biodiversity", layer = l)
   y <- deserialize_object(serialize_object(x), dataset = w)
   # run tests
   expect_equal(x, y)

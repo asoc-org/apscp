@@ -7,10 +7,11 @@ NULL
 #'
 #' @inheritParams new_feature
 #'
-#' @param zones_active `logical` vector of values indicating which zones
-#' the cost should be used to avoid allocating planning units.
-#' Note `zones_active` must have a value for each zone in the [new_project()]
-#' to which this object belongs.
+#' @param zone `character` name of zone to which this cost pertains.
+#' During optimization, planning units that are not allocated to this zone
+#' accrue a penalty based on these cost data.
+#' Note that `zone` must have a value that corresponds to one of the zone
+#' names associated with the [new_project()] to which this object belongs.
 #'
 #' @return A `Cost` object.
 #'
@@ -23,7 +24,7 @@ NULL
 #' # create object
 #' x <- new_cost(
 #'   name = "cost",
-#'   zones_active = c(TRUE, FALSE),
+#'   zone = "tourism",
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -39,7 +40,7 @@ NULL
 #' print(x)
 #'
 #' @export
-new_cost <- function(name, layer, zones_active, id = uuid::UUIDgenerate()) {
+new_cost <- function(name, zone, layer, id = uuid::UUIDgenerate()) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
@@ -47,15 +48,16 @@ new_cost <- function(name, layer, zones_active, id = uuid::UUIDgenerate()) {
     assertthat::noNA(name),
     ## layer
     inherits(layer, "Layer"),
-    ## zones_active
-    is.logical(zones_active),
+    ## zone
+    assertthat::is.string(zone),
+    assertthat::noNA(zone),
     ## id
     assertthat::is.string(id),
     assertthat::noNA(id)
   )
   # return object
   structure(
-    list(name = name, layer = layer, zones_active = zones_active, id = id),
+    list(name = name, zone = zone, layer = layer, id = id),
     class = c("Cost", "ProjectComponent")
   )
 }

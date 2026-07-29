@@ -1,7 +1,6 @@
 test_that("new_dataset", {
   # create object
   d <- simulate_spatial_data()
-  d[["_index"]] <- seq_len(nrow(d))
   x <- new_dataset(d, prioritizr::boundary_matrix(d))
   # run tests
   expect_r6_class(x, "Dataset")

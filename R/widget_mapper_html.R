@@ -1,7 +1,6 @@
 #' @include internal.R
 NULL
 
-
 #' Scaffold for a mapper widget
 #'
 #' Create a HTML scaffold for a [mapper()] widget.
