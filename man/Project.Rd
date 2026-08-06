@@ -33,7 +33,7 @@ Other class:
 
     \item{\code{zones}}{`character` vector of zone names.}
 
-    \item{\code{themes}}{`list` of [new_theme()] objects.}
+    \item{\code{features}}{`list` of [new_feature()] objects.}
 
     \item{\code{locks}}{`list` of [new_lock()] objects.}
 
@@ -77,7 +77,7 @@ to create the project.}
   zones,
   dataset,
   tiles,
-  themes,
+  features,
   locks,
   costs,
   solutions = list(),
@@ -94,7 +94,7 @@ to create the project.}
       \item{\code{zones}}{`character` vector of zone names.}
       \item{\code{dataset}}{[new_dataset()] object.}
       \item{\code{tiles}}{`list` of [new_tile()] objects.}
-      \item{\code{themes}}{`list` of [new_theme()] objects.}
+      \item{\code{features}}{`list` of [new_feature()] objects.}
       \item{\code{locks}}{`list` of [new_lock()] objects.}
       \item{\code{costs}}{`list` of [new_cost()] objects.}
       \item{\code{solutions}}{`list` of [new_solution()] objects.

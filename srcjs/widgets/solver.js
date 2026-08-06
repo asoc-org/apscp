@@ -11,19 +11,21 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function(opts) {
-
-        // alias this
-        let that = this;
-        let element = document.getElementById(elementId);
-
         // if needed, initialize widget
         if (!initialized) {
           // set state to initialized
           initialized = true;
           // attach the widget to the DOM
-          element.widget = that;
+          let el = document.getElementById(elementId);
+          el.widget = this;
           // initialize solver
-          handle.initialize(elementId, opts.project);
+          handle.initialize(
+            el, opts.project,
+            opts.featureTargetChoices,
+            opts.featureWeightChoices,
+            opts.costWeightChoices,
+            opts.zoneColors,
+          );
         }
 
       },
@@ -39,17 +41,17 @@ HTMLWidgets.widget({
         handle.addLock(params.value, params.type);
       },
 
-      getSettings: function(params) {
-        handle.getSettings();
+      reset: function(params) {
+        handle.reset();
       },
-      
+
     };
   }
 });
 
 // Attach message handlers if in Shiny mode (these correspond to API)
 if (HTMLWidgets.shinyMode) {
-  var fxns = ["addLock"];
+  var fxns = ["addLock", "reset"];
   var addShinyHandler = function(fxn) {
     return function() {
       Shiny.addCustomMessageHandler(

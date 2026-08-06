@@ -20,6 +20,7 @@ Add a [new_lock()] to a Solver widget.
 \seealso{
 Other solver:
 \code{\link[=solver]{solver()}},
-\code{\link{solver-shiny}}
+\code{\link{solver-shiny}},
+\code{\link[=solver_reset]{solver_reset()}}
 }
 \concept{solver}

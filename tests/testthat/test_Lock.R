@@ -4,7 +4,7 @@ test_that("new_lock", {
   l <- new_layer(
     dataset = create_dataset(s),
     tile = create_tile(s, verbose = FALSE),
-    column = "locked_in",
+    column = "aspas",
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),
     total = 500,
@@ -23,7 +23,7 @@ test_that("serialize_object", {
   l <- new_layer(
     dataset = create_dataset(s),
     tile = create_tile(s, verbose = FALSE),
-    column = "locked_in",
+    column = "aspas",
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),
     total = 500,
@@ -47,7 +47,7 @@ test_that("deserialize_object", {
   l <- new_layer(
     dataset = w,
     tile = create_tile(s, verbose = FALSE),
-    column = "locked_in",
+    column = "aspas",
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),
     total = 500,

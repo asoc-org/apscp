@@ -21,124 +21,122 @@ solver_html <- function(id, style, class, ...) {
   x <- htmltools::tags$div(
     id = id, class = class, style = style,
     htmltools::div(
-     class = "solver-container",
-     # define tabset for panels
-     bslib::navset_tab(
-        id = paste0(id, "-settings-tabset")
+      class = "solver-container",
+      # define tabset for panels
+      bslib::navset_tab(
+        id = paste0(id, "-settings-tabset"),
+        selected = "features-panel",
         # define panel for multi-objective settings
-        bslib::nav_panel(id = paste0(id, "-moo-panel")),
-        # define panel for theme settings
         bslib::nav_panel(
-          id = paste0(id, "-theme-panel"),
-          bslib::navset_pill(id = paste0(id, "-zone-tabset"))
+          id = paste0(id, "-objectives-panel"),
+          value = "objectives-panel",
+          class = "objectives-panel",
+          title = htmltools::tags$div(
+            `data-toggle` = "tooltip",
+            `data-placement` = "top",
+            `data-container` = "body",
+            `data-trigger` = "hover",
+            title = "Settings for objectives",
+            fontawesome::fa_i("scale-balanced")
+          )
         ),
-        # define panel for setting locks
+        # define panel for features settings
         bslib::nav_panel(
-          id = paste0(id, "-lock-panel"),
-          htmltools::tags$div("lock-settings")
+          id = paste0(id, "-features-panel"),
+          value = "features-panel",
+          class = "features-panel",
+          title = htmltools::tags$div(
+            `data-toggle` = "tooltip",
+            `data-placement` = "top",
+            `data-container` = "body",
+            `data-trigger` = "hover",
+            title = "Settings for Features",
+            fontawesome::fa_i("star")
+          )
         ),
-        # define panel for setting costs
+        # define panel for setting locks settings
         bslib::nav_panel(
-          id = paste0(id, "-costs-panel")
-          htmltools::tags$div("cost-settings")
+          id = paste0(id, "-locks-panel"),
+          value = "locks-panel",
+          class = "locks-panel",
+          title = htmltools::tags$div(
+            `data-toggle` = "tooltip",
+            `data-placement` = "top",
+            `data-container` = "body",
+            `data-trigger` = "hover",
+            title = "Settings for Locks",
+            fontawesome::fa_i("lock")
+          )
+        ),
+        # define panel for setting costs settings
+        bslib::nav_panel(
+          id = paste0(id, "-costs-panel"),
+          value = "costs-panel",
+          class = "costs-panel",
+          title = htmltools::tags$div(
+            `data-toggle` = "tooltip",
+            `data-placement` = "top",
+            `data-container` = "body",
+            `data-trigger` = "hover",
+            title = "Settings for Costs",
+            fontawesome::fa_i("dollar-sign")
+          )
         )
       ),
       # define container for elements to generate solutions
       htmltools::tags$div(
-        class = "solver-footer",
+        class = "solver-footer align-items-stretch",
         # text input to specify name for solution
         htmltools::tags$div(
-          class = "solver-name-container",
+          class = "name-container",
           `data-toggle` = "tooltip",
           `data-placement` = "top",
           `data-container` = "body",
           `data-trigger` = "hover",
           title = "Specify a name for the new solution",
           htmltools::tags$input(
-            id = paste0(id, "-name"),
+            id = paste0(id, "_name"),
+            class = c("name", "form-control"),
             placeholder = "enter name (required)"
-          ),
-          # start button to generate a new solution
-          htmltools::tags$div(
-            class = "solution-footer-start-button",
-            `data-toggle` = "tooltip",
-            `data-placement` = "top",
-            `data-container` = "body",
-            `data-trigger` = "hover",
-            title = "Generate a new solution"
-          ),
-          # stop button to stop optimization process
-          htmltools::tags$div(
-            class = "solver-footer-stop-button",
-            `data-toggle` = "tooltip",
-            `data-placement` = "top",
-            `data-container` = "body",
-            `data-trigger` = "hover",
-            title = "Stop optimizing",
-            shinyBS::bsButton(
-              inputId = paste0(id, "_stop_button"),
-              label = "",
-              icon = shiny::icon("ban"),
-              style = "danger"
-            )
+          )
+        ),
+        # start button to generate a new solution
+        htmltools::tags$div(
+          class = "button-container",
+          `data-toggle` = "tooltip",
+          `data-placement` = "top",
+          `data-container` = "body",
+          `data-trigger` = "hover",
+          title = "Generate a new solution",
+          bslib::input_task_button(
+            id = paste0(id, "_start_button"),
+            disabled = NA,
+            class = "start-button",
+            label = "Solve!",
+            label_busy = "",
+            type = "primary",
+            auto_reset = FALSE
+          )
+        ),
+        # stop button to stop optimization process
+        htmltools::tags$div(
+          class = "button-container",
+          `data-toggle` = "tooltip",
+          `data-placement` = "top",
+          `data-container` = "body",
+          `data-trigger` = "hover",
+          title = "Stop optimizing",
+          bslib::input_task_button(
+            id = paste0(id, "_stop_button"),
+            disabled = NA,
+            class = "stop-button",
+            label = "",
+            label_busy = "",
+            icon = fontawesome::fa_i("ban"),
+            type = "danger",
+            auto_reset = FALSE
           )
         )
-      )
-    )
-  )
-
-  # add HTML template scaffolds for dynamic content
-  ## zone panels under the theme panel
-  x <- htmltools::tagAppendChild(
-    x,
-    htmltools::tags$template(
-      class = "zone-settings-template",
-        bslib::nav_panel(
-          class = "zone-settings",
-          title = "placeholder-title",
-          id = "placeholder-id"
-          htmltools::tags$div(
-            htmltools::tags$label(
-              class = "zone-theme-label",
-              "placeholder text"
-            ),
-            htmltools::tags$select(
-              class = "zone-theme-select form-select",
-              id = "placeholder-id"
-            ),
-            htmltools::tags$div(
-              class = "zone-theme-container",
-              id = "placeholder-id"
-            )
-          )
-        )
-      )
-    )
-  )
-
-  ## feature settings inside the zone panels
-  x <- htmltools::tagAppendChild(
-    x,
-    htmltools::tags$template(
-      class = "feature-settings-template",
-      htmltools::tags$div(
-        class = c("solver-menu-item", "feature-settings"),
-        htmltools::tags$div(class = paste0(type, "-feature-header-container")),
-        htmltools::tags$div(class = paste0(type, "-theme-target-container")),
-        htmltools::tags$div(class = paste0(type, "-theme-weight-container"))
-      )
-    )
-  )
-
-  ## cost settings
-  x <- htmltools::tagAppendChild(
-    x,
-    htmltools::tags$template(
-      class = "cost-settings-template",
-      htmltools::tags$div(
-        class = c("solver-menu-item", "cost-settings"),
-        htmltools::tags$div(class = paste0(type, "-cost-header-container")),
-        htmltools::tags$div(class = paste0(type, "-cost-weight-container"))
       )
     )
   )

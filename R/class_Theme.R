@@ -11,64 +11,19 @@ NULL
 #' Note that `zone` should match one of the zone names associated with
 #' the [new_project()] to which this theme belongs.
 #'
-#' @param features [new_feature()] object or `list` of such objects.
-#'
 #' @return A `Theme` object.
 #'
 #' @family class
 #'
 #' @examples
-#' # simulate spatial data
-#' sim_data <- simulate_spatial_data()
-#'
-#' # prepare data
-#' dataset <- create_dataset(sim_data)
-#' tile <- create_tile(sim_data)
-#'
-#' # create object
-#' x <- new_theme(
-#'   "species",
-#'   zone = "biodiversity",
-#'   list(
-#'     new_feature(
-#'       name = "f1",
-#'       target = 0.5,
-#'       layer = new_layer(
-#'         column = "feat_1",
-#'         total = 500,
-#'         dataset = dataset,
-#'         tile = tile,
-#'         legend = simulate_continuous_legend(),
-#'         provenance = simulate_provenance(),
-#'         details = "extra info"
-#'       )
-#'     ),
-#'     new_feature(
-#'       name = "f2",
-#'       target = 0.9,
-#'       layer = new_layer(
-#'         column = "feat_2",
-#'         total = 500,
-#'         dataset = dataset,
-#'         tile = tile,
-#'         legend = simulate_continuous_legend(),
-#'         provenance = simulate_provenance(),
-#'         details = "extra info 2"
-#'       )
-#'     )
-#'   )
-#' )
+#' # crate a theme
+#' x <- new_theme(name = "Penguins", zone = "Biodiversity")
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-new_theme <- function(name, zone, features) {
-  # if needed, put feature in a list if needed
-  if (inherits(features, "Feature")) {
-    features <- list(features)
-  }
-
+new_theme <- function(name, zone) {
   # assert that arguments are valid
   assertthat::assert_that(
     ## name
@@ -76,15 +31,12 @@ new_theme <- function(name, zone, features) {
     assertthat::noNA(name),
     ## zone
     assertthat::is.string(zone),
-    assertthat::noNA(zone),
-    ## feature
-    is.list(features),
-    all_elements_inherit(features, "Feature")
+    assertthat::noNA(zone)
   )
 
   # return new theme
   structure(
-    list(name = name, zone = zone, features = features),
+    list(name = name, zone = zone),
     class = "Theme"
   )
 }

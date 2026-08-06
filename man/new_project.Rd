@@ -9,7 +9,7 @@ new_project(
   dataset,
   tiles,
   costs,
-  themes,
+  features,
   locks,
   solutions = list(),
   name = "Project",
@@ -27,7 +27,7 @@ new_project(
 
 \item{costs}{`list` of [new_cost()] objects.}
 
-\item{themes}{`list` of [new_themes()] objects.}
+\item{features}{`list` of [new_features()] objects.}
 
 \item{locks}{`list` of [new_locks()] objects.}
 
@@ -127,7 +127,7 @@ x <- new_project(
   tiles = list(tile),
   costs = list(cost),
   locks = list(lock),
-  themes = list(theme)
+  features = list(theme)
 )
 
 # preview object

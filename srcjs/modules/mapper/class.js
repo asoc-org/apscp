@@ -38,7 +38,6 @@ export class Mapper {
    */
   _maxLayers;
 
-
   /**
   * Construct a new Mapper object.
   * @return {void}
@@ -54,7 +53,6 @@ export class Mapper {
   * @param {string} menuId - HTML element identifier for menu container.
   * @param {string} mapId - HTML element identifier for the mapgl map.
   * @param {Object} project - Object with various types of objects.
-  * @param {Array<Object>} project.themes - Array of theme objects.
   * @param {Array<Object>} project.features - Array of feature objects.
   * @param {Array<Object>} project.costs - Array of cost objects.
   * @param {Array<Object>} project.lock - Array of lock objects.
@@ -79,19 +77,15 @@ export class Mapper {
     // initialized with layers that have the visible property set to true,
     // also note that layers must be added in the order that is the reverse
     // of that used to add layers to the map
-    for (i = 0; i < project.themes.length; i++) {
-      for (j = 0; j < project.themes[0].features.length; j++) {
+      for (i = 0; i < project.features.length; i++) {
           el = createMenuItem(
-            project.themes[i].features[j],
-            this,
-            project.themes[i].name
+            project.features[i], this, project.features[i].themes
           );
-          if (project.themes[i].features[j].layer.visible === true) {
+          if (project.features[i].layer.visible === true) {
             this._menuElement.appendChild(el);
             this._activeLayerIds.push(el.id);
           } else {
             this._hiddenMenuItems.set(el.id, el);
-        }
       }
     }
     for (i = 0; i < project.costs.length; i++) {

@@ -4,7 +4,15 @@
 \alias{new_feature}
 \title{New feature}
 \usage{
-new_feature(name, layer, zones_targets, id = uuid::UUIDgenerate())
+new_feature(
+  name,
+  layer,
+  zone_targets,
+  zone_weights,
+  zone_helds,
+  themes,
+  id = uuid::UUIDgenerate()
+)
 }
 \arguments{
 \item{name}{`character` value with the name.}
@@ -12,12 +20,27 @@ new_feature(name, layer, zones_targets, id = uuid::UUIDgenerate())
 \item{layer}{[new_layer()] object used to store information for
 visualization.}
 
-\item{zones_targets}{`numeric` vector of initial targets for the feature.
-Each value should correspond to a particular zone and denote
-values should be specified as a proportion of the features total distribution
-(e.g., a value of 0.1 corresponds to 10%).
-Note `targets` must have a value for each zone in the [new_project()]
-to which this object belongs.}
+\item{zone_targets}{`numeric` vector with initial target values for
+representing the feature within each zone associated with the project.
+These value should be specified
+as a proportion of the features total distribution (e.g., a value of 0.1
+corresponds to 10%) and the sum of these values should not exceed
+a value of 1.}
+
+\item{zone_weights}{`numeric` vector with initial weight values
+for acheiving the tagrgets for each zone associated with the project.
+Each of these values should range
+between 0 and 1. Note that the sum of these values does not
+have any constraints (unlike `zone_targets`).}
+
+\item{zone_helds}{`numeric` vector with the proportion of each feature's
+distribution held within planning units that are locked in.
+Each of these values should range
+between 0 and 1. Note that the sum of these values does not
+have any constraints (unlike `zone_targets`).}
+
+\item{themes}{`list` of [new_theme()] objects indicating the themes
+to which the feature belongs.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
@@ -35,7 +58,10 @@ sim_data <- simulate_spatial_data()
 # create object
 x <- new_feature(
   name = "species 1",
-  zones_targets = c(0.1, 0.5),
+  zone_targets = c(0.1, 0.2, 0.3),
+  zone_weights = c(0.5, 1, 0.7),
+  zone_helds = c(0.2, 0.3, 0.1),
+  themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),
   layer = new_layer(
     column = "feat_1",
     total = 500,

@@ -4,10 +4,34 @@
 \alias{solver}
 \title{Solver}
 \usage{
-solver(project, width = NULL, height = NULL, id = NULL)
+solver(
+  project,
+  feature_targets = get_golem_config("prioritization_feature_targets"),
+  feature_weights = get_golem_config("prioritization_feature_weights"),
+  cost_weights = get_golem_config("prioritization_cost_weights"),
+  zone_colors = get_golem_config("zone_colors"),
+  width = NULL,
+  height = NULL,
+  id = NULL
+)
 }
 \arguments{
 \item{project}{[new_project()] object.}
+
+\item{feature_targets}{`numeric` vector of values representing
+different options for setting target values for features.
+Defaults to `get_golem_config("prioritization_feature_targets")`.}
+
+\item{feature_weights}{`numeric` vector of values representing
+different options for setting target weights for features.
+Defaults to `get_golem_config("prioritization_feature_weights")`.}
+
+\item{cost_weights}{`numeric` vector of values representing
+different  options for setting weights for costs.
+Defaults to `get_golem_config("prioritization_cost_weights")`.}
+
+\item{zone_colors}{`character` vector of colors for each zone.
+Defaults to `get_golem_config("zone_colors")`.}
 
 \item{width}{`character` width of the displayed widget.
 Defaults to `NULL` such that the widget is automatically sized.}
@@ -22,6 +46,24 @@ Defaults to `NULL` since these identifiers are not used by Shiny.}
 Constructs a widget for specifying solver settings to generate a solution.
 This widget is designed to be used within a Shiny web application.
 }
+\section{Server value}{
+
+The widget sends the following values to the server:
+
+\describe{
+\item{start}{
+This is sent when the "Solve!" button is clicked and
+it sends a `list` that contains the settings for generating a prioritization.
+See documentation for the `settings` parameter of [prioritization()]
+for further details on the format of this value.
+}
+
+\item{stop}{
+This is sent when the stop button is clicked.
+}
+}
+}
+
 \examples{
 \dontrun{
 library(shiny)
@@ -33,6 +75,7 @@ runApp(system.file("examples", "solver_app.R", package = "apscp"))
 \seealso{
 Other solver:
 \code{\link{solver-shiny}},
-\code{\link[=solver_add_lock]{solver_add_lock()}}
+\code{\link[=solver_add_lock]{solver_add_lock()}},
+\code{\link[=solver_reset]{solver_reset()}}
 }
 \concept{solver}

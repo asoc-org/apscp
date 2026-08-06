@@ -5,6 +5,21 @@
 #'
 #' @param project [new_project()] object.
 #'
+#' @param feature_targets `numeric` vector of values representing
+#' different options for setting target values for features.
+#' Defaults to `get_golem_config("prioritization_feature_targets")`.
+#'
+#' @param feature_weights `numeric` vector of values representing
+#' different options for setting target weights for features.
+#' Defaults to `get_golem_config("prioritization_feature_weights")`.
+#'
+#' @param cost_weights `numeric` vector of values representing
+#' different  options for setting weights for costs.
+#' Defaults to `get_golem_config("prioritization_cost_weights")`.
+#'
+#' @param zone_colors `character` vector of colors for each zone.
+#' Defaults to `get_golem_config("zone_colors")`.
+#'
 #' @param width `character` width of the displayed widget.
 #' Defaults to `NULL` such that the widget is automatically sized.
 #'
@@ -13,6 +28,22 @@
 #'
 #' @param id `character` HTML identifier for the widget.
 #' Defaults to `NULL` since these identifiers are not used by Shiny.
+#'
+#' @section Server value:
+#' The widget sends the following values to the server:
+#'
+#' \describe{
+#' \item{start}{
+#' This is sent when the "Solve!" button is clicked and
+#' it sends a `list` that contains the settings for generating a prioritization.
+#' See documentation for the `settings` parameter of [prioritization()]
+#' for further details on the format of this value.
+#' }
+#'
+#' \item{stop}{
+#' This is sent when the stop button is clicked.
+#' }
+#' }
 #'
 #' @family solver
 #'
@@ -26,6 +57,10 @@
 #' @export
 solver <- function(
   project,
+  feature_targets = get_golem_config("prioritization_feature_targets"),
+  feature_weights = get_golem_config("prioritization_feature_weights"),
+  cost_weights = get_golem_config("prioritization_cost_weights"),
+  zone_colors = get_golem_config("zone_colors"),
   width = NULL,
   height = NULL,
   id = NULL
@@ -33,6 +68,13 @@ solver <- function(
   # assert valid arguments
   assertthat::assert_that(
     inherits(project, "Project"),
+    is.numeric(feature_targets),
+    assertthat::noNA(feature_targets),
+    is.numeric(feature_weights),
+    assertthat::noNA(feature_weights),
+    is.numeric(cost_weights),
+    assertthat::noNA(cost_weights),
+    length(zone_colors) >= length(project$zones)
   )
 
   # create widget
@@ -40,6 +82,10 @@ solver <- function(
     name = "solver",
     x = list(
       project = serialize_object(project),
+      featureTargetChoices = feature_targets,
+      featureWeightChoices = feature_weights,
+      costWeightChoices = feature_weights,
+      zoneColors = zone_colors[seq_along(project$zones)]
     ),
     width = width,
     height = height,

@@ -20,6 +20,22 @@ test_that("methods", {
   expect_equal(x$get_spatial_column_data("cost"), x$pu_data[, "cost"])
   ## get_column_total
   expect_equal(x$get_column_total("cost"), sum(x$pu_data$cost, na.rm = TRUE))
+  ## get_column_held
+  expect_equal(
+    x$get_column_held(
+      "cost", "Biodiversity",
+      c("Biodiversity" = "aspas", "Scientific" = "camps")
+    ),
+    sum(x$pu_data$aspas * x$pu_data$cost, na.rm = TRUE) /
+      sum(x$pu_data$cost, na.rm = TRUE)
+  )
+  expect_equal(
+    x$get_column_held(
+      "cost", "Tourism",
+      c("Biodiversity" = "aspas", "Scientific" = "camps")
+    ),
+    0
+  )
   ## set_column_data
   expect_false(x$has_column("new"))
   v <- round(runif(x$get_n_pu()), 3)

@@ -74,6 +74,7 @@ create_solution <- function(
 #'
 #' Create a new solution based on spatial prioritization techniques.
 #'
+#' @inheritParams new_solution
 #' @inheritParams prioritization
 #'
 #' @return A [new_solution()] object.

@@ -7,11 +7,7 @@
 create_optimized_solution(
   name,
   project,
-  feature_settings,
-  lock_in_settings,
-  lock_out_settings,
-  cost_settings,
-  ref_point_settings,
+  settings,
   gap = 0.1,
   solver = "cbc",
   verbose = FALSE,
@@ -24,21 +20,8 @@ create_optimized_solution(
 \item{project}{[new_project()] object. These data are used to specify
 the underlying data for generating the solution.}
 
-\item{feature_settings}{`data.frame` with the theme and feature settings.
-These are used to specify the targets and weights considered for the
-features during optimization.}
-
-\item{lock_in_settings}{`data.frame` with the settings to specify which
-locks are used to lock in planning units to a particular zone.}
-
-\item{lock_out_settings}{`data.frame` with the settings to specify which
-locks are used to lock out planning units from a particular zone.}
-
-\item{cost_settings}{`data.frame` with the cost settings. These
-are used to specify which costs are considered for each zone.}
-
-\item{ref_point_settings}{`data.frame` with settings for the
-multi-objective optimization.}
+\item{settings}{`list` object with settings for generating a solution.
+See Settings format section for further details.}
 
 \item{gap}{`numeric` value denoting optimality gap.
 Defaults to 0.1 (10\% from optimality).}
@@ -57,7 +40,7 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).}
 A [new_solution()] object.
 }
 \description{
-Create a new solution based on optimization techniques.
+Create a new solution based on spatial prioritization techniques.
 }
 \examples{
 # TODO

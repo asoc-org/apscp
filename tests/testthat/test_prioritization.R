@@ -2,7 +2,7 @@ test_that("no locks", {
   skip_if_not_installed("rcbc")
   # simulate data
   p <- simulate_project()
-  s <- simulate_prioritization_settings(p)
+  s <- withr::with_seed(500, simulate_prioritization_settings(p))
   # ensure no active locks
   s$locks <- s$locks[FALSE, , drop = FALSE]
   # generate solution

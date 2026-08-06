@@ -1,0 +1,251 @@
+/* overall */
+.feature-setting {
+  border: 1px var(--border) solid;
+  border-radius: 5px 5px 5px 5px;
+  margin: 10px 0px 10px 0px;
+  padding-bottom: 0px;
+  background: white;
+}
+
+/* header componenent */
+.feature-setting .header {
+  display: flex;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.feature-setting .header label {
+  margin-bottom: 0;
+}
+
+/* switches component of header */
+.feature-setting .switches {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  margin-bottom: 5px;
+}
+
+.feature-setting .form-switch {
+  min-height: 0 !important;
+}
+
+.feature-setting .switch {
+  font-size: 10px;
+  --switch-primary-color: var(--switch-color) !important;
+  --switch-secondary-color: color-mix(in srgb, var(--switch-color), white 30%) !important;
+}
+
+.feature-setting .switch:checked {
+  background-color: var(--switch-primary-color) !important;
+  border-color: var(--switch-primary-color) !important;
+  color: var(--switch-primary-color) !important;
+}
+
+.feature-setting .switch:focus {
+  border-color: var(--switch-secondary-color) !important;
+  box-shadow: 0 0 0 0.25rem var(--switch-secondary-color) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280,0,0,0.25%29'/%3e%3c/svg%3e") !important;
+}
+
+/* name component of header */
+.feature-setting .name-label {
+  margin-right: auto;
+  word-break: break-all;
+}
+
+/* provenance component of header */
+.feature-setting .provenance {
+  margin-left: auto;
+  margin-right: 5px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.feature-setting .icon-container {
+  margin-right: 5px;
+}
+
+/* statuses component */
+.feature-setting .statuses {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 8px;
+}
+
+.feature-setting .statuses label {
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+.feature-setting .statuses .held-symbol,
+.feature-setting .statuses .target-symbol {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 4px;
+  border: 1px solid var(--symbol-border);
+  box-sizing: border-box;
+  margin-right: 3px;
+}
+
+.feature-setting .held-status, .feature-setting .target-status, .feature-setting .weight-status {
+  display: flex;
+  align-items: center;
+}
+
+/* weight component of statuses */
+.feature-setting .weight-status {
+  position: relative;
+  display: inline-block;
+}
+
+.feature-setting .weight-button {
+  width: max(90px, 90%);
+  color: white;
+  font-size: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.feature-setting .weight-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  width: max(90px, 90%);
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  list-style: none;
+  z-index: 10;
+}
+
+.feature-setting .weight-options .weight-option {
+  color: #333;
+  text-align: center;
+  font-size: 10px;
+  text-display: block;
+  text-decoration: none;
+  display: block;
+}
+
+.feature-setting .weight-options .weight-option:hover {
+  background-color: #f1f1f1;
+}
+
+.feature-setting .weight-status:hover:not([disabled]) .weight-options {
+  display: block;
+}
+
+/* target component */
+.feature-setting .targets {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+
+.feature-setting .slider {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding-top: 2px;
+  padding-left: 5px;
+}
+
+/* bar components of targets */
+.feature-setting .targets .bar-cap,
+.feature-setting .targets .bar-held {
+  width: 0%;
+  height: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.feature-setting .targets .bar-held {
+  position: absolute;
+  margin-left: 5px;
+}
+
+.feature-setting .targets .bar-cap {
+  z-index: 1;
+  padding-left: 5px;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.feature-setting .targets .bars,
+.feature-setting .targets .noUiSlider-widget {
+  width: 95%;
+  position: absolute;
+  padding-right: 0px;
+  margin-right: 0px;
+}
+
+.feature-setting .targets .bars {
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.feature-setting .targets .noUiSlider-widget {
+  z-index: 2;
+  margin-left: 5px;
+}
+
+/* slider component of targets */
+.feature-setting .targets .noUi-horizontal {
+  height: 10px;
+}
+
+.feature-setting .targets .noUi-horizontal .noUi-handle {
+  box-shadow: 0 3px 6px -3px #BBB;
+  width: 14px;
+  height: 20px;
+  right: -7px;
+}
+
+.feature-setting .targets .noUi-handle:before,
+.feature-setting .targets .noUi-handle:after {
+  height: 6px;
+  left: 4px;
+}
+
+.feature-setting .targets .noUi-handle:after {
+  left: 7px;
+}
+
+/* disabled elements */
+.feature-setting div[disabled] label,
+.feature-setting label[disabled] {
+  color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.feature-setting div[disabled] button {
+  background-color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.feature-setting .targets .noUi-origin[disabled] .noUi-handle {
+  background-color: var(--disabled) !important;
+}
+
+.feature-setting .targets .noUi-origin[disabled] {
+  z-index: 3 !important;
+}

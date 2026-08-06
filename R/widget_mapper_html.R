@@ -74,11 +74,6 @@ mapper_html <- function(id, style, class, ...) {
       htmltools::tags$div(
         class = c("mapper-menu-item", "feature-layer"),
         mapper_menu_item_header_scaffold(type = "Feature"),
-        htmltools::tags$div(
-          class = "theme-container",
-          shiny::icon("chevron-right"),
-          htmltools::tags$label(class = "theme-label"),
-       ),
        htmltools::tags$div(class = "legend-container")
       )
     )
@@ -155,8 +150,8 @@ mapper_menu_item_header_scaffold <- function(type) {
       htmltools::tags$i(class = "fa fa-eye checked"),
       htmltools::tags$i(class = "fa fa-eye-slash unchecked")
     ),
-    htmltools::tags$label(
-      class = "name-label"
+    htmltools::tags$div(
+      class = "name-container"
     ),
     htmltools::tags$button(
       class = "layer-button",

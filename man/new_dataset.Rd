@@ -24,7 +24,6 @@ sim_data <- simulate_spatial_data()
 
 # manually prepare planning unit data
 pu_data <- sim_data
-pu_data[["_index"]] <- seq_len(nrow(pu_data))
 
 # manually prepare boundary data
 bd_data <- prioritizr::boundary_matrix(sim_data)

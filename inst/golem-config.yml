@@ -20,24 +20,16 @@ default:
   ## monitor memory usage
   monitor: false
 
-  ## scenario details
-  prioritization_scenario_theme_weights:
+  ## define options for generating different solutions
+  prioritization_feature_weights:
     - 0.0
     - 0.5
     - 1.0
-  prioritization_scenario_theme_targets:
-    - 0.0
-    - 0.1
-    - 0.2
-    - 0.3
-    - 0.4
-    - 0.5
-    - 0.6
-    - 0.7
-    - 0.8
-    - 0.9
-    - 1.0
-  prioritization_scenario_cost_weights:
+  prioritization_feature_targets:
+    - 0.0 # minimum target value
+    - 1.0 # maximum target value
+    - 0.2 # step in target value
+  prioritization_cost_weights:
     - 0.0
     - 0.5
     - 1.0
@@ -63,8 +55,8 @@ default:
   ### the first set of color values are used
   zone_colors:
     - "#4daf4a"
-    - "#377eb8"
     - "#f781bf"
+    - "#377eb8"
     - "#ff7f00"
     - "#984ea3"
     - "#ffff33"

@@ -21,8 +21,6 @@ NULL
 #' @param verbose `logical` value indicating if information should be
 #' displayed during optimization process. Defaults to `FALSE`.
 #'
-#' @inheritParams new_solution
-#'
 #' @section Settings format:
 #' The argument to `settings` must be a `list` with the following elements.
 #' \describe{
@@ -32,6 +30,8 @@ NULL
 #' features during optimization. Each row corresponds to a different
 #' feature, and it must have the following columns:
 #' `"id"`, `"name"`, `"column"`, `"zone"`, `"target"`, and `"weight"`.
+#' Note that target values must be expressed as a proportion (i.e.,
+#' value between zero and one).
 #' }
 #'
 #' \item{locks}{
@@ -64,7 +64,7 @@ NULL
 #' with values indicating the zone for each planning unit, and a `results`
 #' element that contains supplementary information.
 #'
-#' @noRd
+#' @export
 prioritization <- function(
   project,
   settings,
@@ -136,6 +136,11 @@ prioritization <- function(
     zone_settings$feature <- zone_settings$column
     zone_settings$sense <- ">="
     zone_settings$type <- "absolute"
+    ## convert targets to aboslute values
+    zone_settings$target <- unname(
+      zone_settings$target *
+      colSums(pu_data)[zone_settings$column]
+    )
     ## return problem
     suppressWarnings(prioritizr::problem(
       x = pu_data,

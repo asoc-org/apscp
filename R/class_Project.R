@@ -20,8 +20,8 @@ Project <- R6::R6Class(
     #' @field zones `character` vector of zone names.
     zones = NULL,
 
-    #' @field themes `list` of [new_theme()] objects.
-    themes = NULL,
+    #' @field features `list` of [new_feature()] objects.
+    features = NULL,
 
     #' @field locks `list` of [new_lock()] objects.
     locks = NULL,
@@ -50,7 +50,7 @@ Project <- R6::R6Class(
     #' @param dataset [new_dataset()] object.
     #' @param tiles `list` of [new_tile()] objects.
     #' @param zones `character` vector of zone names.
-    #' @param themes `list` of [new_theme()] objects.
+    #' @param features `list` of [new_feature()] objects.
     #' @param locks `list` of [new_lock()] objects.
     #' @param costs `list` of [new_cost()] objects.
     #' @param solutions `list` of [new_solution()] objects.
@@ -67,7 +67,7 @@ Project <- R6::R6Class(
     #' @return A new `Project` object.
     initialize = function(
       zones, dataset, tiles,
-      themes, locks, costs, solutions = list(),
+      features, locks, costs, solutions = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown",
       version = "Unknown"
     ) {
@@ -94,9 +94,9 @@ Project <- R6::R6Class(
         ## version
         assertthat::is.string(version),
         assertthat::noNA(version),
-        ## themes
-        is.list(themes),
-        all_elements_inherit(themes, "Theme"),
+        ## features
+        is.list(features),
+        all_elements_inherit(features, "Feature"),
         ## locks
         is.list(locks),
         all_elements_inherit(locks, "Lock"),
@@ -107,8 +107,14 @@ Project <- R6::R6Class(
         is.list(solutions)
       )
       assertthat::assert_that(
-        all(vapply(themes, `[[`, character(1), "zone") %in% zones),
-        msg = "`themes` must contain only zones that are present in `zones`."
+        all(
+          vapply(features, function(y) length(y$zone_targets), integer(1)) ==
+          length(zones)
+        ),
+        msg = paste(
+          "All `features` must have `zone_targets` that specify a value",
+          "for each zone in `zones`."
+        )
       )
       assertthat::assert_that(
         all(vapply(locks, `[[`, character(1), "zone") %in% zones),
@@ -128,7 +134,7 @@ Project <- R6::R6Class(
       self$dataset <- dataset
       self$tiles <- tiles
       self$zones <- zones
-      self$themes <- themes
+      self$features <- features
       self$locks <- locks
       self$costs <- costs
       self$solutions <- solutions
@@ -287,7 +293,7 @@ Project <- R6::R6Class(
 #'
 #' @param costs `list` of [new_cost()] objects.
 #'
-#' @param themes `list` of [new_themes()] objects.
+#' @param features `list` of [new_features()] objects.
 #'
 #' @param locks `list` of [new_locks()] objects.
 #'
@@ -385,7 +391,7 @@ Project <- R6::R6Class(
 #'   tiles = list(tile),
 #'   costs = list(cost),
 #'   locks = list(lock),
-#'   themes = list(theme)
+#'   features = list(theme)
 #' )
 #'
 #' # preview object
@@ -397,7 +403,7 @@ new_project <- function(
   dataset,
   tiles,
   costs,
-  themes,
+  features,
   locks,
   solutions = list(),
   name = "Project",
@@ -415,7 +421,7 @@ new_project <- function(
     dataset = dataset,
     tiles = tiles,
     costs = costs,
-    themes = themes,
+    features = features,
     locks = locks,
     solutions = solutions,
     name = name,

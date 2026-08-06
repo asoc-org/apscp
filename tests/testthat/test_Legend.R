@@ -140,7 +140,7 @@ test_that("create_legend (presence)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),
-    column = "locked_in",
+    column = "aspas",
     palette = "PuBu",
     units = "presence"
   )

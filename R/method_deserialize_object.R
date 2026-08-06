@@ -30,7 +30,7 @@ deserialize_object <- function(x, dataset = NULL) {
 
   # check if dataset required
   need_dataset_classes <- c(
-    "Layer", "Cost", "Theme", "Feature", "Lock", "Solution", "Project"
+    "Layer", "Cost", "Feature", "Lock", "Solution", "Project"
   )
   if (x$class %in% need_dataset_classes) {
     assertthat::assert_that(

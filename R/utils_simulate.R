@@ -48,8 +48,8 @@ simulate_spatial_data <- function() {
   names(d) <- c(
     "cost",
     paste0("feat_", seq_len(terra::nlyr(fts))),
-    "locked_in",
-    "locked_out",
+    "aspas",
+    "camps",
     "invasive_species",
     "solution"
   )
@@ -72,8 +72,8 @@ simulate_spatial_data <- function() {
   )
 
   # set 0s to NA values for locked columns
-  d$locked_in[d$locked_in < 0.99] <- NA_real_
-  d$locked_out[d$locked_out < 0.99] <- NA_real_
+  d$aspas[d$aspas < 0.99] <- NA_real_
+  d$camps[d$camps < 0.99] <- NA_real_
 
   # return result
   d
@@ -156,15 +156,15 @@ simulate_project <- function() {
     layer = new_layer(
       dataset = dataset,
       tile = tile,
-      column = "locked_in",
+      column = "aspas",
       visible = TRUE,
       legend = create_legend(
-        d, "locked_in",
+        d, "aspas",
         palette = "Greens",
         units = "presence-only"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("locked_in")
+      total = dataset$get_column_total("aspas")
     )
   )
   lock2 <- new_lock(
@@ -173,89 +173,67 @@ simulate_project <- function() {
     layer = new_layer(
       dataset = dataset,
       tile = tile,
-      column = "locked_out",
+      column = "camps",
       visible = TRUE,
       legend = create_legend(
-        d, "locked_out",
+        d, "camps",
         palette = "Reds",
         units = "presence/absence"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("locked_out"),
+      total = dataset$get_column_total("camps"),
       details = "These sites include castles, monuments, and churches."
     )
   )
 
-  # create theme object
-  theme1 <- new_theme(
-    "Species",
-    "Biodiversity",
-    lapply(seq_len(5), function(i) {
-      new_feature(
-        name = paste0("Species ", i),
-        target = stats::runif(1L, min = 0, max = 1),
-        layer = new_layer(
-          dataset = dataset,
-          tile = tile,
-          column = paste0("feat_", i),
-          visible = TRUE,
-          legend = create_legend(
-            d, paste0("feat_", i),
-            palette = "viridis",
-            units = "suitability"
-          ),
-          provenance = provenance,
-          total = dataset$get_column_total(paste0("feat_", i))
-        )
-      )
-    })
+  # create theme objects
+  themes <- list(
+    new_theme("Species", "Biodiversity"),
+    new_theme("Iconic species", "Tourism"),
+    new_theme("Medicinal species", "Scientific")
   )
-  theme2 <- new_theme(
-    "Iconic species",
-    "Tourism",
-    lapply(seq(3, 5), function(i) {
-      new_feature(
-        name = paste0("Species ", i),
-        target = stats::runif(1L, min = 0, max = 1),
-        layer = new_layer(
-          dataset = dataset,
-          tile = tile,
+
+  # create feature objects
+  features <- lapply(seq_len(5), function(i) {
+    new_feature(
+      name = paste0("Species ", i),
+      zone_targets = standardize_zone_targets(sample(c(0, 0.25, 0.5), 3L), 1L),
+      zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
+      zone_helds = c(
+        dataset$get_column_held(
           column = paste0("feat_", i),
-          visible = TRUE,
-          legend = create_legend(
-            d, paste0("feat_", i),
-            palette = "viridis",
-            units = "suitability"
-          ),
-          provenance = provenance,
-          total = dataset$get_column_total(paste0("feat_", i))
-        )
-      )
-    })
-  )
-  theme3 <- new_theme(
-    "Medicinal species",
-    "Scientific",
-    lapply(seq(1, 3), function(i) {
-      new_feature(
-        name = paste0("Species ", i),
-        target = stats::runif(1L, min = 0, max = 1),
-        layer = new_layer(
-          dataset = dataset,
-          tile = tile,
+          zone = "Biodiversity",
+          status = c("Biodiversity" = "aspas", "Tourism" = "camps")
+        ),
+        dataset$get_column_held(
           column = paste0("feat_", i),
-          visible = TRUE,
-          legend = create_legend(
-            d, paste0("feat_", i),
-            palette = "viridis",
-            units = "suitability"
-          ),
-          provenance = provenance,
-          total = dataset$get_column_total(paste0("feat_", i))
+          zone = "Scientific",
+          status = c("Biodiversity" = "aspas", "Tourism" = "camps")
+        ),
+        dataset$get_column_held(
+          column = paste0("feat_", i),
+          zone = "Tourism",
+          status = c("Biodiversity" = "aspas", "Tourism" = "camps")
         )
+      ),
+      themes = themes[
+        sample.int(length(themes), sample.int(length(themes), 1L))
+      ],
+      layer = new_layer(
+        dataset = dataset,
+        tile = tile,
+        column = paste0("feat_", i),
+        visible = TRUE,
+        legend = create_legend(
+          d, paste0("feat_", i),
+          palette = "viridis",
+          units = "suitability"
+        ),
+        provenance = provenance,
+        total = dataset$get_column_total(paste0("feat_", i))
       )
-    })
-  )
+    )
+  })
 
   # return project
   new_project(
@@ -264,7 +242,7 @@ simulate_project <- function() {
     tiles = list(tile),
     costs = list(cost),
     locks = list(lock1, lock2),
-    themes = list(theme1, theme2, theme3),
+    features = features,
     solutions = list(solution)
   )
 }
@@ -378,32 +356,20 @@ simulate_prioritization_settings <- function(project) {
   # assert that argument is valid
   assertthat::assert_that(inherits(project, "Project"))
 
+  # calculate constants
+  nz <- length(project$zones)
+
   # create feature settings
   feature_settings <- do.call(
     rbind,
-    lapply(project$themes, function(x) {
-      # set weight and target values
-      wt <- sample(
-        get_golem_config("prioritization_scenario_weight_values"),
-        1L
-      )
-      tg <- sample(
-        get_golem_config("prioritization_scenario_target_values"),
-        1L
-      )
-      # generate settings for each feature
-      do.call(
-        rbind,
-        lapply(x$features, function(y) {
-          data.frame(
-            id = y$id,
-            name = y$name,
-            column = y$layer$column,
-            zone = x$zone,
-            target = y$layer$total * tg,
-            weight = wt
-          )
-        })
+    lapply(project$features, function(x) {
+      data.frame(
+        id = rep(x$id, nz),
+        name = rep(x$name, nz),
+        column = rep(x$layer$column, nz),
+        zone = project$zones,
+        target = x$zone_targets,
+        weight = x$zone_weights
       )
     })
   )

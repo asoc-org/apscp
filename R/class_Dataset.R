@@ -98,6 +98,54 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Get proportion of values in a column that would be considered to by
+    #' held by planning units that are allocated to zones based on other
+    #' columns.
+    #' @param column `character` or `integer` value.
+    #' @param zone `character` value with name of zone to consider
+    #' for calculations.
+    #' @param status Named `character` vector with column names
+    #' indicating which planning units should be allocated to each zone.
+    #' Note that the names of `status` indicate the zone names.
+    #' Additionally, zones are allocated in order of decreasing priority. For
+    #' example with
+    #' `status = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
+    #' planning units are first assigned to the Scientific zone based on
+    #' the values in the `"camps"` column, and then to the Biodiversity zone
+    #' based on the values in the `"aspas"` column. If  any planning unit
+    #' was previously assigned to the Scientific zone,  then it is overridden
+    #' wit the Biodiversity zone.
+    #' @return A `numeric` value.
+    get_column_held = function(column, zone, status) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        self$has_column(column),
+        assertthat::is.string(zone),
+        assertthat::noNA(zone)
+      )
+      if (length(status) > 0L) {
+        assertthat::assert_that(
+          is.character(status),
+          !is.null(names(status)),
+          self$has_column(status)
+        )
+      }
+      # if no planning units allocated to zone, then return 0
+      if (identical(length(status), 0L)) return(0)
+      if (!zone %in% names(status)) return(0)
+      # create vector with binary values indicating if planning unit is assigned
+      # the zone based on the data in the status columns
+      x <- numeric(nrow(self$pu_data))
+      for (i in seq(length(status), 1L)) {
+        idx <- which(self$pu_data[[status[[i]]]] > 1e-5)
+        x[idx] <- as.numeric(identical(names(status)[[i]], zone))
+      }
+      # return proportion held
+      sum(x * self$pu_data[[column]], na.rm = TRUE) /
+        sum(self$pu_data[[column]], na.rm = TRUE)
+    },
+
+    #' @description
     #' Check if the dataset has a column or columns.
     #' @param column `character vector.
     #' @return A `logical` value.
