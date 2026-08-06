@@ -8,7 +8,7 @@ import {order} from "../utils/math.js";
 /**
  * Create a feature setting
  * @param {Object} feature - Feature object.
- * @param {string} feature.name - Feature object.
+ * @param {string} feature.name - Feature name.
  * @param {Array<number>} feature.zone_targets - Initial target values.
  * @param {Array<number>} feature.zone_weights - Initial weights values.
  * @param {Array<number>} feature.zone_helds - Initial held values.

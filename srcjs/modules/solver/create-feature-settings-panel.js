@@ -2,7 +2,6 @@ import {createFeatureSetting} from "./create-feature-setting.js";
 
 /**
  * Create a features settings panel
- * @param {string} id - HTML identifier.
  * @param {Object} project - HTML element to update.
  * @param {Array<Object>} project.features - Array of feature objects.
  * @param {Array<number>} featureTargetChoices - Array of numbers used to

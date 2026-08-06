@@ -4,7 +4,7 @@ import {convertTargetsToSliderValues} from "./slider-math.js";
 import {convertSliderValuesToTargets} from "./slider-math.js";
 import {order} from "../utils/math.js";
 
-/** Class representing an object for generating a solution. */
+/** Class representing an object for a feature's setting. */
 export class FeatureSetting {
 
   // private fields

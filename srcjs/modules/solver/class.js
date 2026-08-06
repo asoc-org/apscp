@@ -2,6 +2,8 @@ import "./css/style.css";
 import TomSelect from "tom-select";
 import "tom-select/dist/css/tom-select.bootstrap5.css";
 import {createFeatureSettingsPanel} from "./create-feature-settings-panel.js";
+import {createLockSettingsPanel} from "./create-lock-settings-panel.js";
+import {createCostSettingsPanel} from "./create-cost-settings-panel.js";
 
 /** Class representing an object for generating a solution. */
 export class Solver {
@@ -109,17 +111,21 @@ export class Solver {
       featurePanelElement.querySelectorAll(".feature-setting")
     );
 
-    console.log("this._featureSettingElements");
-    console.log(this._featureSettingElements);
-
     // initialize locks panel
     let lockPanelElement = el.querySelector(".locks-panel");
-    // TODO
+    lockPanelElement.appendChild(createLockSettingsPanel(project));
+    this._lockSettingElements = Array.from(
+      lockPanelElement.querySelectorAll(".lock-setting")
+    );
 
     // initialize costs panel
     let costPanelElement = el.querySelector(".costs-panel");
-    // TODO
-
+    costPanelElement.appendChild(
+      createCostSettingsPanel(project, costWeightChoices)
+    );
+    this._costSettingElements = Array.from(
+      costPanelElement.querySelectorAll(".cost-setting")
+    );
 
     // initialize footer
     this._startButton = el.querySelector(`#${el.id}_start_button`);
