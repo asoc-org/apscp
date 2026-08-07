@@ -119,6 +119,14 @@ simulate_project <- function() {
   # create cost
   cost <- new_cost(
     name = "Tourism revenue",
+    weight = sample(
+      seq(
+        from = get_golem_config("prioritization_cost_weights")[1],
+        to = get_golem_config("prioritization_cost_weights")[2],
+        by = get_golem_config("prioritization_cost_weights")[3]
+      ),
+      1L
+    ),
     zone = "Tourism",
     layer = new_layer(
       dataset = dataset,
@@ -197,7 +205,14 @@ simulate_project <- function() {
   features <- lapply(seq_len(5), function(i) {
     new_feature(
       name = paste0("Species ", i),
-      zone_targets = standardize_zone_targets(sample(c(0, 0.25, 0.5), 3L), 1L),
+      zone_targets = simulate_feature_zone_targets(
+        seq(
+          from = get_golem_config("prioritization_feature_targets")[1],
+          to = get_golem_config("prioritization_feature_targets")[2],
+          by = get_golem_config("prioritization_feature_targets")[3]
+        ),
+        3L
+      ),
       zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
       zone_helds = c(
         dataset$get_column_held(
@@ -414,4 +429,42 @@ simulate_prioritization_settings <- function(project) {
     costs = cost_settings,
     zones = zone_settings
   )
+}
+
+#' Simulate targets
+#'
+#' Simulate a set of zone target values for a feature.
+#'
+#' @param x `numeric` vector with options for targets.
+#' Note that `x` must range betweeen 0 and 1.
+#'
+#' @param n `integer` number of zones.
+#'
+#' @family simulation
+#'
+#' @return A `numeric` vector with a value for each zone.
+#'
+#' @export
+simulate_feature_zone_targets <- function(x, n) {
+  # assert valid arguments
+  assertthat::assert_that(
+    ## x
+    is.numeric(x),
+    assertthat::noNA(x),
+    ## n
+    assertthat::is.count(n),
+    assertthat::noNA(n)
+  )
+  # prepare values
+  x <- unique(c(0, x))
+  # sample values
+  out <- numeric(n)
+  for (i in seq_len(n)) {
+    ## pick value
+    out[i] <- sample(x, 1L)
+    ## remove values from x that would result in the sum exceeding 1
+    x <- x[x + sum(out) <= 1]
+  }
+  ## return output
+  out
 }

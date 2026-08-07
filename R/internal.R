@@ -80,7 +80,7 @@ update_named_list_elements <- function(x, element_name, new_value) {
 
 #' Standardize target values
 #'
-#' Standarzie a set of values to ensure that they sum to a value of 1,
+#' Standardize a set of values to ensure that they sum to a value of 1,
 #' and have a pre-specified number of significant digits.
 #'
 #' @param x `numeric` values.

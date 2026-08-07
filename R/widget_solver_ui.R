@@ -84,7 +84,7 @@ solver <- function(
       project = serialize_object(project),
       featureTargetChoices = feature_targets,
       featureWeightChoices = feature_weights,
-      costWeightChoices = feature_weights,
+      costWeightChoices = cost_weights,
       zoneColors = zone_colors[seq_along(project$zones)]
     ),
     width = width,

@@ -1,17 +1,245 @@
 import noUiSlider from "nouislider";
 import "nouislider/dist/nouislider.css";
+import {scaffoldCostSetting} from "./cost-setting-scaffold.js";
+import "./css/cost-setting.css";
+import {roundToDigits} from "../utils/math.js";
 
-/** Class representing an object for a cost's setting. */
+/** Class representing the setting for a single cost. */
 export class CostSetting {
+
+  // public fields
+
+  /**
+   * Cost identifier.
+   * @type {string}
+   */
+  id;
+
+  /**
+   * Cost name.
+   * @type {string}
+   */
+  name;
+
+  /**
+   * Cost column.
+   * @type {string}
+   */
+  column;
+
+  /**
+   * HTML element.
+   * @type {HTMLElement}
+   */
+  element;
 
   // private fields
 
   /**
-   * List of HTML elements that contain switches for feature.
+   * Array of zone names.
+   * @type {Array<string>}
+   */
+  _zones;
+
+  /**
+   * HTML element that contains the switch.
    * @type {NodeList<HTMLElement>}
    */
-  _zoneButton;
+  _switch;
 
+  /**
+   * HTML element.
+   * @type {HTMLElement}
+   */
+  _status;
 
+  /**
+   * HTML element.
+   * @type {HTMLElement}
+   */
+  _label;
+
+  /**
+   * HTML element that contains slider for weight setting.
+   * @type {HTMLElement}
+   */
+  _slider;
+
+  /**
+   * Initial weight value.
+   * @type {number}
+   */
+  _initialWeightValue;
+
+  /**
+   * Previous weight value.
+   * @type {number}
+   */
+  _previousWeightValue;
+
+  /**
+   * Previous zone status.
+   * @type {number}
+   */
+  _previousZoneStatus;
+
+  /**
+   * Slider range.
+   * @type {object}
+   */
+  _sliderRange;
+
+  /**
+   * Slider step.
+   * @type {number}
+   */
+  _sliderStep;
+
+  /**
+  * Construct a new CostSetting object.
+ * @param {Object} cost - Cost object.
+ * @param {string} cost.id - Unique identifier.
+ * @param {string} cost.name - Name.
+ * @param {string} cost.weight - Weight value.
+ * @param {string} cost.layer.column - Column with data.
+ * @param {Array<string>} zones - Array of zone names.
+ * @param {Array<number>} costWeightChoices - Array of numbers used to
+ * define the potential values for setting cost weights.
+  * @return {void}
+  */
+  constructor(cost, zones, costWeightChoices) {
+    // initialize public fields
+    this.id = cost.id;
+    this.name = cost.name;
+    this.column = cost.layer.column;
+    this.element = scaffoldCostSetting(cost, zones, costWeightChoices);
+
+    // initialize private fields
+    this._switch = this.element.querySelector(".switch");
+    this._status = this.element.querySelector(".zone-status");
+    this._label = this.element.querySelector(".weight-label");
+    this._slider = this.element.querySelector(".noUiSlider-widget");
+    this._initialSliderValue = cost.weight;
+    this._previousSliderValue = cost.weight;
+    this._previousZoneStatus = this.zone;
+    this._zones = zones;
+    this._sliderRange = {
+      "min": costWeightChoices[0],
+      "max": costWeightChoices[1]
+    };
+    this._sliderStep = costWeightChoices[2];
+
+    console.log("this");
+    console.log(this);
+
+    // initialize weight slider
+    noUiSlider.create(this._slider, {
+      range: this._sliderRange,
+      step: this._sliderStep,
+      behaviour: "drag",
+      connect: "lower",
+      start: this._initialSliderValue,
+    });
+
+    // set event handler for slider
+    this._slider.noUiSlider.on("update", (values, handle) => {
+      // convert value to number
+      let v = Number(values[0]);
+      // update weight label
+      this._label.setAttribute("data-weight", v);
+      this._label.innerText = `Weight: ${Math.round(v * 100)}%`;
+    });
+
+    // set event handler for switch
+    this._switch.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        this._setSliderHandle(this._previousSliderValue);
+        this._status.setAttribute("data-zone", this._previousZoneStatus);
+        this._status.children[0].innerText = this._previousZoneStatus;
+        this.enable();
+      } else {
+        this._previousSliderValue = this._getSliderHandle();
+        this._previousZoneStatus = this._status.getAttribute("data-zone");
+        this.disable();
+        this._setSliderHandle(0);
+        this._status.setAttribute("data-zone", "Off");
+        this._status.children[0].innerText = "Off";
+      }
+    });
+  }
+
+  /**
+  * Append the HTML element for the class to another HTML element.
+  * @param {HTMLElement} element - HTML element.
+  * @return {void}
+  */
+  appendTo(element) {
+    // append to element
+    element.appendChild(this.element);
+  }
+
+  /**
+  * Enable object.
+  * @return {void}
+  */
+  enable(i) {
+    // enable weight label
+    this._label.removeAttribute("disabled")
+    // enable zone status
+    this._status.removeAttribute("disabled");
+    // enable slider
+    this._slider.noUiSlider.enable();
+  }
+
+  /**
+  * Disable object.
+  * @return {void}
+  */
+  disable() {
+    // disable weight label
+    this._label.setAttribute("disabled", "");
+    // disable zone status
+    this._status.setAttribute("disabled", "");
+    // disable slider
+    this._slider.noUiSlider.disable();
+  }
+
+  /**
+  * Get zone name.
+  * @return {string}
+  */
+  getZone() {
+    return this._status.dataset.zone;
+  }
+
+  /**
+  * Get cost weight.
+  * @return {number}
+  */
+  getWeight() {
+    return this._getSliderHandle();
+  }
+
+  // private methods
+
+  /**
+  * Set slider handle.
+  * @param {number} - Index
+  * @param {number} - New value.
+  * @param {bool} - Should update event be triggered?
+  * @return {void}
+  */
+  _setSliderHandle(value, update = true) {
+    this._slider.noUiSlider.setHandle(0, value, update);
+  }
+
+  /**
+  * Get slider handle.
+  * @param {number} - Index
+  * @return {void}
+  */
+  _getSliderHandle() {
+    return this._slider.noUiSlider.get(true);
+  }
 
 }

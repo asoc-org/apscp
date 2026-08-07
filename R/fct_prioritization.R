@@ -1,7 +1,7 @@
 #' @include internal.R
 NULL
 
-# Generate a prioritization
+#' Generate a prioritization
 #'
 #' Generate a prioritization using multi-objective optimization techniques.
 #'

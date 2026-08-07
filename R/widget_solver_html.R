@@ -25,7 +25,7 @@ solver_html <- function(id, style, class, ...) {
       # define tabset for panels
       bslib::navset_tab(
         id = paste0(id, "-settings-tabset"),
-        selected = "features-panel",
+        selected = "costs-panel",
         # define panel for multi-objective settings
         bslib::nav_panel(
           id = paste0(id, "-objectives-panel"),

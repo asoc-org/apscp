@@ -184,6 +184,7 @@ costs <-
       ## note that all costs are assumed to avoid allocating planning units
       ## to the tourism zone
       zone = "Tourism",
+      weight = 1,
       layer = new_layer(
         dataset = dataset,
         column = x$name,

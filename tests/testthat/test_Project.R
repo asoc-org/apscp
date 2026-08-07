@@ -8,6 +8,7 @@ test_that("new_project", {
   # create cost
   cost <- new_cost(
     name = "cost",
+    weight = 0.5,
     zone = "Tourism",
     layer = new_layer(
       dataset = w,

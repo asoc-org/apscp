@@ -36,7 +36,9 @@ format_settings <- function(x) {
   ## TODO
 
   # convert cost settings
-  ## TODO
+  x$costs <- as.data.frame(
+    lapply(x$costs, unlist, use.names = FALSE, recursive = TRUE)
+  )
 
   # return result
   x

@@ -1,0 +1,164 @@
+import TomSelect from "tom-select";
+import "tom-select/dist/css/tom-select.bootstrap5.css";
+import {FeatureSetting} from "./feature-setting-class.js";
+
+/** Class representing the settings for multiple features. */
+export class FeatureSettings {
+
+  // private fields
+
+  /**
+   * Array of zone names.
+   * @type {Array<string>}
+   */
+  _zones;
+
+  /**
+   * Map of settings.
+   * @type {Map<FeatureSettings>}
+   */
+  _settings = new Map();
+
+  /**
+   * Object used to temporarily store settings for select menu.
+   * @type {Object}
+   */
+  _cache;
+
+  /**
+  * Construct a new FeatureSettings object.
+  * @param {Object} project - Object with various types of objects.
+  * @param {Array<Object>} project.features - Array of feature objects.
+  * @param {Array<number>} featureTargetChoices - Array of numbers used to
+  * define the potential values for setting feature targets.
+  * @param {Array<number>} featureWeightChoices - Array of numbers used to
+  * define the potential values for setting feature weights.
+  * @return {void}
+  */
+  constructor(project, featureTargetChoices, featureWeightChoices) {
+    // initialize fields
+    this._zones = project.zones;
+    // create feature setting objects
+    for (let i = 0; i < project.features.length; ++i) {
+      this._settings.set(
+        project.features[i].id,
+        new FeatureSetting(
+          project.features[i], project.zones,
+          featureTargetChoices, featureWeightChoices
+        )
+      );
+    }
+    // create parameters for select menu
+    let features = [];
+    let themes = new Set;
+    for (let i = 0; i < project.features.length; ++i) {
+      features.push({
+        value: project.features[i].id,
+        name: project.features[i].name,
+        zone: project.features[i].themes.map(x => x.zone)
+      });
+      for (let j = 0; j < project.features[i].themes.length; ++j) {
+        themes.add(project.features[i].themes[j].zone);
+      }
+    }
+    // cache parameters for select menu
+    this._cache = {
+      options: features,
+      optgroups: Array.from(themes).map(x => {return {value: x}})
+    };
+  }
+
+  /**
+  * Append the HTML element for the class to another HTML element.
+  * @param {HTMLElement} element - HTML element.
+  * @return {void}
+  */
+  appendTo(element) {
+    // create container
+    let el = document.createElement("div");
+    el.classList.add("feature-settings");
+    // create menu element
+    let menuElement = document.createElement("div");
+    menuElement.classList.add("feature-menu");
+    // create feature setting objects and add them to the menu
+    this._settings.forEach(x => x.appendTo(menuElement));
+    // create select menu
+    let selectElement = document.createElement("input");
+    selectElement.setAttribute("multiple", "");
+    selectElement.setAttribute("placeholder", "Choose features...");
+    // append elements to container
+    el.appendChild(selectElement);
+    el.appendChild(menuElement);
+    element.appendChild(el);
+    // initialize select menu
+    new TomSelect(selectElement, {
+      options: this._cache.options,
+      create: false,
+      dropdownParent: "body",
+      labelField: "name",
+      searchField: ["name"],
+      maxItems: null,
+      sortField: "name",
+      plugins: ["checkbox_options"],
+      closeAfterSelect: false,
+      optgroups: this._cache.optgroups,
+      optgroupField: "zone",
+      render: {
+        optgroup_header: function(data, escape) {
+          return '<div class="optgroup-header">' +
+            escape(data.value + " zone") +
+            '</div>';
+        }
+      },
+      onItemAdd: (value) => {
+        let x = this._settings.get(value);
+        if (x) {
+          x.element.style.display = "block";
+        }
+      },
+      onItemRemove: (value) => {
+        let x = this._settings.get(value);
+        if (x) {
+          x.element.style.display = "none";
+        }
+      }
+    });
+    // free memory
+    this._cache = undefined;
+  }
+
+  /**
+  * Get settings for generating a solution.
+  * @return {Object}
+  */
+  getSettings() {
+    let settings = [...this._settings.values()];
+    return {
+      id:
+        settings
+        .map(x => Array(this._zones.length).fill(x.id))
+        .flat(1),
+      name:
+        settings
+        .map(x => Array(this._zones.length).fill(x.name))
+        .flat(1),
+      column:
+        settings
+        .map(x => Array(this._zones.length).fill(x.column))
+        .flat(1),
+      zone:
+        settings
+        .map(x => this._zones)
+        .flat(1),
+      target:
+        settings
+        .map(x => x.getTargets())
+        .flat(1),
+      weight:
+        settings
+        .map(x => x.getWeights())
+        .flat(1)
+    };
+  }
+
+}

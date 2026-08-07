@@ -158,6 +158,7 @@ serialize_object.Cost <- function(x) {
     name = x$name,
     id = x$id,
     zone = x$zone,
+    weight = x$weight,
     layer = serialize_object.Layer(x$layer),
     class = "Cost"
   )

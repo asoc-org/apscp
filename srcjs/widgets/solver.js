@@ -1,4 +1,4 @@
-import {Solver} from "../modules/solver/class.js";
+import {Solver} from "../modules/solver/solver-class.js";
 
 HTMLWidgets.widget({
   name: "solver",

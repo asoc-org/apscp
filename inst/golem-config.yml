@@ -26,13 +26,13 @@ default:
     - 0.5
     - 1.0
   prioritization_feature_targets:
-    - 0.0 # minimum target value
-    - 1.0 # maximum target value
-    - 0.2 # step in target value
+    - 0.0 # minimum value
+    - 1.0 # maximum value
+    - 0.2 # step value
   prioritization_cost_weights:
-    - 0.0
-    - 0.5
-    - 1.0
+    - 0.0 # minimum value
+    - 1.0 # maximum value
+    - 0.25 # step value
 
   ## solver details
   solver_gap: 0.01 # optimality gap, e.g., 0.01 = 1%

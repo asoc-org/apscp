@@ -1,11 +1,37 @@
 import noUiSlider from "nouislider";
 import "nouislider/dist/nouislider.css";
-import {convertTargetsToSliderValues} from "./slider-math.js";
-import {convertSliderValuesToTargets} from "./slider-math.js";
-import {order} from "../utils/math.js";
+import {scaffoldFeatureSetting} from "./feature-setting-scaffold.js";
+import "./css/feature-setting.css";
+import {order, roundToDigits} from "../utils/math.js";
 
-/** Class representing an object for a feature's setting. */
+/** Class representing the setting for a single feature. */
 export class FeatureSetting {
+
+  // public fields
+
+  /**
+   * Feature identifier.
+   * @type {string}
+   */
+  id;
+
+  /**
+   * Feature name.
+   * @type {string}
+   */
+  name;
+
+  /**
+   * Feature column.
+   * @type {string}
+   */
+  column;
+
+  /**
+  * HTML element.
+  * @type {HTMLElement}
+  */
+  element;
 
   // private fields
 
@@ -92,6 +118,9 @@ export class FeatureSetting {
   /**
   * Construct a new FeatureSetting object.
  * @param {Object} feature - Feature object.
+ * @param {string} feature.id - Unique identifier.
+ * @param {string} feature.name - Name.
+ * @param {string} feature.layer.column - Column with data.
  * @param {Array<number>} feature.zone_targets - Initial target values.
  * @param {Array<number>} feature.zone_weights - Initial weights values.
  * @param {Array<string>} zones - Array of zone names.
@@ -102,16 +131,28 @@ export class FeatureSetting {
   * @return {void}
   */
   constructor(
-    el, feature, zones, featureTargetChoices, featureWeightChoices
+    feature, zones, featureTargetChoices, featureWeightChoices
   ) {
-    // initialize fields
-    this._zoneSwitches = el.querySelectorAll(".switch");
-    this._heldStatuses = el.querySelectorAll(".held-status");
-    this._heldBars = el.querySelectorAll(".bar-held");
-    this._barCap = el.querySelector(".bar-cap");
-    this._targetStatuses = Array.from(el.querySelectorAll(".target-status"));
-    this._weightStatuses = Array.from(el.querySelectorAll(".weight-status"));
-    this._targetSlider = el.querySelector(".noUiSlider-widget");
+    // initialize public fields
+    this.id = feature.id;
+    this.name = feature.name;
+    this.column = feature.layer.column;
+    this.element = scaffoldFeatureSetting(
+      feature, zones, featureTargetChoices, featureWeightChoices
+    );
+
+    // initialize private fields
+    this._zoneSwitches = this.element.querySelectorAll(".switch");
+    this._heldStatuses = this.element.querySelectorAll(".held-status");
+    this._heldBars = this.element.querySelectorAll(".bar-held");
+    this._barCap = this.element.querySelector(".bar-cap");
+    this._targetStatuses = Array.from(
+      this.element.querySelectorAll(".target-status")
+    );
+    this._weightStatuses = Array.from(
+      this.element.querySelectorAll(".weight-status")
+    );
+    this._targetSlider = this.element.querySelector(".noUiSlider-widget");
     this._initialSliderValues = convertTargetsToSliderValues(
       feature.zone_targets
     );
@@ -155,7 +196,7 @@ export class FeatureSetting {
         `var(--zone-${zones[i]}-primary-color)`;
     }
 
-    // set event handlers for target labels
+    // set event handlers for target slider
     this._targetSlider.noUiSlider.on("update", (values, handle) => {
       // convert values to numbers
       values = values.map(Number);
@@ -185,11 +226,11 @@ export class FeatureSetting {
           // restore previous values
           this._setWeightValue(i, this._previousWeightValues[i]);
           this._setSliderHandle(i, this._previousSliderValues[i]);
-          this.enableZone(i);
+          this._enableZone(i);
         } else {
           this._previousSliderValues[i] = this._getSliderHandle(i);
           this._previousWeightValues[i] = this._getWeightValue(i);
-          this.disableZone(i);
+          this._disableZone(i);
           this._setWeightValue(i, 0);
           this._setSliderHandle(i, 0);
         }
@@ -199,45 +240,37 @@ export class FeatureSetting {
   }
 
   /**
+  * Append the HTML element for the class to another HTML element.
+  * @param {HTMLElement} element - HTML element.
+  * @return {void}
+  */
+  appendTo(element) {
+    // append to element
+    element.appendChild(this.element);
+  }
+
+  /**
   * Enable feature setting for zone.
-  * @param {number} - Index.
+  * @param {string} - Zone name.
   * @return {void}
   */
-  enableZone(i) {
-    // enable target status for zone
-    this._targetStatuses[i].removeAttribute("disabled");
-    // enable weight status zone
-    this._weightStatuses[i].removeAttribute("disabled");
-    // enable target slider for zone
-    this._targetSlider.noUiSlider.enable(i);
+  enableZone(zone) {
+    let i = this._zones.indexOf(zone);
+    if (i > -1) {
+      this._enableZone(i);
+    }
   }
 
   /**
   * Disable feature setting for zone.
-  * @param {number} - Index.
+  * @param {string} - Zone name.
   * @return {void}
   */
-  disableZone(i) {
-    // disable target status for zone
-    this._targetStatuses[i].setAttribute("disabled", "");
-    // disable weight status zone
-    this._weightStatuses[i].setAttribute("disabled", "");
-    // disable target slider handle for zone
-    this._targetSlider.noUiSlider.disable(i);
-  }
-
-  /**
-  * Disable feature setting for zone.
-  * @param {number} - Index.
-  * @return {void}
-  */
-  disableZone(i) {
-    // disable target status for zone
-    this._targetStatuses[i].setAttribute("disabled", "");
-    // disable weight status zone
-    this._weightStatuses[i].setAttribute("disabled", "");
-    // disable target slider handle for zone
-    this._targetSlider.noUiSlider.disable(i);
+  disableZone(zone) {
+    let i = this._zones.indexOf(zone);
+    if (i > -1) {
+      this._disableZone(i);
+    }
   }
 
   /**
@@ -314,6 +347,34 @@ export class FeatureSetting {
   // Private methods
 
   /**
+  * Enable feature setting for zone based on index.
+  * @param {number} - Index.
+  * @return {void}
+  */
+  _enableZone(i) {
+    // enable target status for zone
+    this._targetStatuses[i].removeAttribute("disabled");
+    // enable weight status zone
+    this._weightStatuses[i].removeAttribute("disabled");
+    // enable target slider for zone
+    this._targetSlider.noUiSlider.enable(i);
+  }
+
+  /**
+  * Disable feature setting for zone on index.
+  * @param {number} - Index.
+  * @return {void}
+  */
+  _disableZone(i) {
+    // disable target status for zone
+    this._targetStatuses[i].setAttribute("disabled", "");
+    // disable weight status zone
+    this._weightStatuses[i].setAttribute("disabled", "");
+    // disable target slider handle for zone
+    this._targetSlider.noUiSlider.disable(i);
+  }
+
+  /**
   * Set slider handle.
   * @param {number} - Index
   * @param {number} - New value.
@@ -354,4 +415,33 @@ export class FeatureSetting {
     return this._weightStatuses[i].getAttribute("data-weight");
   }
 
+}
+
+/**
+ * Convert targets to slider values
+ * @param {Array<number>} x - Array of numbers.
+ * @return {Array<number>}
+ */
+function convertTargetsToSliderValues(x) {
+  let y = [x[0]];
+  for (let i = 1; i < x.length; i++) {
+    y.push(x[i] + y[i - 1]);
+  }
+  return y;
+}
+
+/**
+ * Convert slider values to targets
+ * @param {Array<number>} x - Array of numbers.
+ * @return {Array<number>}
+ */
+function convertSliderValuesToTargets(x) {
+  let o = order(x);
+  let y = new Array(x.length).fill(0);
+  let sum = 0;
+  for (let i = 0; i < x.length; i++) {
+    y[o[i]] = roundToDigits(x[o[i]] - sum, 3);
+    sum += y[o[i]];
+  }
+  return y;
 }

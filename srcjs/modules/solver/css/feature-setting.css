@@ -203,12 +203,12 @@
   align-items: center;
 }
 
+/* slider component of targets */
 .feature-setting .targets .noUiSlider-widget {
   z-index: 2;
   margin-left: 5px;
 }
 
-/* slider component of targets */
 .feature-setting .targets .noUi-horizontal {
   height: 10px;
 }

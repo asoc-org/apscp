@@ -1,0 +1,204 @@
+/* overall */
+.cost-setting {
+  border: 1px var(--border) solid;
+  border-radius: 5px 5px 5px 5px;
+  margin: 10px 0px 10px 0px;
+  padding-bottom: 0px;
+  background: white;
+}
+
+/* header componenent */
+.cost-setting .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  font-size: 14px;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.cost-setting .header label {
+  margin-bottom: 0;
+}
+
+/* switches component of header */
+.cost-setting .switches {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+}
+
+.cost-setting .form-switch {
+  min-height: 0 !important;
+}
+
+.cost-setting .switch {
+  font-size: 10px;
+  --switch-primary-color: var(--switch-color) !important;
+  --switch-secondary-color: color-mix(in srgb, var(--switch-color), white 30%) !important;
+}
+
+.cost-setting .switch:checked {
+  background-color: var(--switch-primary-color) !important;
+  border-color: var(--switch-primary-color) !important;
+  color: var(--switch-primary-color) !important;
+}
+
+.cost-setting .switch:focus {
+  border-color: var(--switch-secondary-color) !important;
+  box-shadow: 0 0 0 0.25rem var(--switch-secondary-color) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280,0,0,0.25%29'/%3e%3c/svg%3e") !important;
+}
+
+/* name component of header */
+.cost-setting .name-label {
+  margin-right: auto;
+  word-break: break-all;
+}
+
+/* provenance component of header */
+.cost-setting .provenance {
+  margin-left: auto;
+  margin-right: 5px;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.cost-setting .icon-container {
+  margin-right: 5px;
+}
+
+/* weight component */
+.cost-setting .weight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+
+/* label component of weight */
+.cost-setting .weight-label {
+  width: 12ch;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+/* zone button component of weight */
+.cost-setting .zone-status {
+  position: relative;
+  display: inline-block;
+  width: max-content;
+}
+
+.cost-setting .zone-button {
+  width: 100px;
+  color: white;
+  font-size: 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.cost-setting .zone-button:disabled {
+  background-color: --disabled;
+  color: white;
+}
+
+.cost-setting .zone-options {
+  width: 100%;
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  width: max(90px, 90%);
+  box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  list-style: none;
+  z-index: 10;
+}
+
+.cost-setting .zone-options .zone-option {
+  color: #333;
+  text-align: center;
+  font-size: 10px;
+  text-display: block;
+  text-decoration: none;
+  display: block;
+}
+
+.cost-setting .zone-options .zone-option:hover {
+  background-color: #f1f1f1;
+}
+
+.cost-setting .zone-status:hover:not([disabled]) .zone-options {
+  display: block;
+}
+
+/* slider component of weight */
+.cost-setting .slider {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.cost-setting .weight .noUiSlider-widget {
+  width: 100%;
+  z-index: 2;
+  margin-left: 5px;
+}
+
+.cost-setting .weight .noUi-horizontal {
+  height: 10px;
+}
+
+.cost-setting .weight .noUi-horizontal .noUi-handle {
+  box-shadow: 0 3px 6px -3px #BBB;
+  width: 14px;
+  height: 20px;
+  right: -7px;
+}
+
+.cost-setting .weight .noUi-handle:before,
+.cost-setting .weight .noUi-handle:after {
+  height: 6px;
+  left: 4px;
+}
+
+.cost-setting .weight .noUi-handle:after {
+  left: 7px;
+}
+
+/* disabled elements */
+.cost-setting div[disabled] label,
+.cost-setting label[disabled] {
+  color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.cost-setting div[disabled] button {
+  background-color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.cost-setting .weight .noUi-origin[disabled] .noUi-handle {
+  background-color: var(--disabled) !important;
+}
+
+.cost-setting .weight .noUi-origin[disabled] {
+  z-index: 3 !important;
+}

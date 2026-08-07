@@ -1,43 +1,9 @@
-import "./css/feature-setting.css";
-import {FeatureSetting} from "./feature-setting-class.js";
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
-import {order} from "../utils/math.js";
 
 /**
- * Create a feature setting
- * @param {Object} feature - Feature object.
- * @param {string} feature.name - Feature name.
- * @param {Array<number>} feature.zone_targets - Initial target values.
- * @param {Array<number>} feature.zone_weights - Initial weights values.
- * @param {Array<number>} feature.zone_helds - Initial held values.
- * @param {Array<Object>} feature.themes - Array of theme object.s
- * @param {string} feature.id - Unique identifier for feature.
- * @param {Array<string>} zones - Array of zone names.
- * @param {Array<number>} featureTargetChoices - Array of numbers used to
- * define the potential values for setting feature targets.
- * @param {Array<number>} featureWeightChoices - Array of numbers used to
- * define the potential values for setting feature weights.
- * @return {HTMLElement}
- */
-export function createFeatureSetting(
-  feature, zones, featureTargetChoices, featureWeightChoices
-) {
-  // create element
-  let el = createFeatureSettingElement(
-    feature, zones, featureTargetChoices, featureWeightChoices
-  );
-  // create new feature setting widget
-  el.widget = new FeatureSetting(
-    el, feature, zones, featureTargetChoices, featureWeightChoices
-  );
-  // return element
-  return el;
-}
-
-/**
- * Create a feature setting HTML element
+ * Scaffold a feature setting element
  * @param {Object} feature - Feature object.
  * @param {string} feature.name - Feature object.
  * @param {Object} feature.layer - Layer object.
@@ -52,26 +18,20 @@ export function createFeatureSetting(
  * define the potential values for setting feature weights.
  * @return {HTMLElement}
  */
-export function createFeatureSettingElement(
-   feature, zones, featureTargetChoices, featureWeightChoices
+export function scaffoldFeatureSetting(
+ feature, zones, featureTargetChoices, featureWeightChoices
 ) {
-  // create container
+  // create element
   let el = document.createElement("div");
   el.classList.add("feature-setting", "hidden-setting");
   // set data id attribute for feature id
   el.setAttribute("data-id", feature.id);
   // create feature setting header
-  el.appendChild(
-    createFeatureSettingHeader(feature, zones)
-  );
+  el.appendChild(featureSettingHeader(feature, zones));
   // create feature setting statuses and weight buttons
-  el.appendChild(
-    createFeatureSettingStatuses(feature, zones, featureWeightChoices)
-  );
+  el.appendChild(featureSettingStatuses(feature, zones, featureWeightChoices));
   // create feature setting targets
-  el.appendChild(
-    createFeatureSettingTargets(feature, zones, featureTargetChoices)
-  );
+  el.appendChild(featureSettingTargets(feature, zones, featureTargetChoices));
   // return element
   return el;
 }
@@ -84,7 +44,7 @@ export function createFeatureSettingElement(
  * @param {Array<string>} zones - Array of zone names.
  * @return {HTMLElement}
  */
-function createFeatureSettingHeader(feature, zones) {
+function featureSettingHeader(feature, zones) {
   // create container
   let el = document.createElement("div");
   el.classList.add("header");
@@ -125,7 +85,7 @@ function createFeatureSettingHeader(feature, zones) {
 }
 
 /**
- * Create a status component for a feature setting
+ * Create a statuses component for a feature setting
  * @param {Object} feature - Feature object.
  * @param {string} feature.name - Feature object.
  * @param {string} feature.id - Unique identifier for feature.
@@ -133,7 +93,7 @@ function createFeatureSettingHeader(feature, zones) {
  * @param {Array<Number>} choices - Array of numbers for weight choices.
  * @return {HTMLElement}
  */
-function createFeatureSettingStatuses(feature, zones, choices) {
+function featureSettingStatuses(feature, zones, choices) {
   // initialize element
   let el = document.createElement("div");
   el.classList.add("statuses");
@@ -179,8 +139,8 @@ function createFeatureSettingStatuses(feature, zones, choices) {
       `Target for the ${zones[i]} zone to generate solutions`
     );
     // create container for weight status
-    let weightStatus = createWeightStatus(
-      feature, zones[i], feature.zone_weights[i], choices
+    let weightStatus = featureSettingWeightZoneButton(
+      zones[i], feature.zone_weights[i], choices
     );
     // assemble containers
     heldStatus.appendChild(heldStatusIcon);
@@ -204,7 +164,7 @@ function createFeatureSettingStatuses(feature, zones, choices) {
  * @param {Array<Number>} choices - Array of numbers for target choices.
  * @return {HTMLElement}
  */
-function createFeatureSettingTargets(feature, zones, choices) {
+function featureSettingTargets(feature, zones, choices) {
   // initialize element
   let el = document.createElement("div");
   el.classList.add("targets");
@@ -241,16 +201,13 @@ function createFeatureSettingTargets(feature, zones, choices) {
 }
 
 /**
- * Create a weights component for a feature setting.
- * @param {Object} feature - Feature object.
- * @param {string} feature.name - Feature object.
- * @param {string} feature.id - Unique identifier for feature.
- * @param {string} zone - Array of zone names.
+ * Create a zone weight button component for a feature status
+ * @param {string} zone - Zone name.
  * @param {number} value - Default weight value.
  * @param {Array<Number>} choices - Array of numbers for weight choices.
  * @return {HTMLElement}
  */
-function createWeightStatus(feature, zone, value, choices) {
+function featureSettingWeightZoneButton(zone, value, choices) {
   // initialize element
   let el = document.createElement("div");
   el.classList.add("weight-status");

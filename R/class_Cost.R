@@ -7,6 +7,9 @@ NULL
 #'
 #' @inheritParams new_feature
 #'
+#' @param weight `numeric` value denoting the relative importance of the
+#' cost.
+#'
 #' @param zone `character` name of zone to which this cost pertains.
 #' During optimization, planning units that are not allocated to this zone
 #' accrue a penalty based on these cost data.
@@ -24,6 +27,7 @@ NULL
 #' # create object
 #' x <- new_cost(
 #'   name = "cost",
+#'   weight = 0.3,
 #'   zone = "tourism",
 #'   layer = new_layer(
 #'     column = "feat_1",
@@ -40,7 +44,7 @@ NULL
 #' print(x)
 #'
 #' @export
-new_cost <- function(name, zone, layer, id = uuid::UUIDgenerate()) {
+new_cost <- function(name, layer, zone, weight, id = uuid::UUIDgenerate()) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
@@ -48,6 +52,9 @@ new_cost <- function(name, zone, layer, id = uuid::UUIDgenerate()) {
     assertthat::noNA(name),
     ## layer
     inherits(layer, "Layer"),
+    ## weight
+    assertthat::is.number(weight),
+    assertthat::noNA(weight),
     ## zone
     assertthat::is.string(zone),
     assertthat::noNA(zone),
@@ -57,7 +64,7 @@ new_cost <- function(name, zone, layer, id = uuid::UUIDgenerate()) {
   )
   # return object
   structure(
-    list(name = name, zone = zone, layer = layer, id = id),
+    list(name = name, zone = zone, weight = weight, layer = layer, id = id),
     class = c("Cost", "ProjectComponent")
   )
 }
