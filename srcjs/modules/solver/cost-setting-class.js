@@ -72,6 +72,12 @@ export class CostSetting {
   _initialWeightValue;
 
   /**
+   * Initial status value.
+   * @type {number}
+   */
+  _initialStatusValue;
+
+  /**
    * Previous weight value.
    * @type {number}
    */
@@ -81,7 +87,7 @@ export class CostSetting {
    * Previous zone status.
    * @type {number}
    */
-  _previousZoneStatus;
+  _previousStatusValue;
 
   /**
    * Slider range.
@@ -120,17 +126,15 @@ export class CostSetting {
     this._label = this.element.querySelector(".weight-label");
     this._slider = this.element.querySelector(".noUiSlider-widget");
     this._initialSliderValue = cost.weight;
+    this._initialStatusValue = this.zone;
     this._previousSliderValue = cost.weight;
-    this._previousZoneStatus = this.zone;
+    this._previousStatusValue = this.zone;
     this._zones = zones;
     this._sliderRange = {
       "min": costWeightChoices[0],
       "max": costWeightChoices[1]
     };
     this._sliderStep = costWeightChoices[2];
-
-    console.log("this");
-    console.log(this);
 
     // initialize weight slider
     noUiSlider.create(this._slider, {
@@ -153,17 +157,9 @@ export class CostSetting {
     // set event handler for switch
     this._switch.addEventListener("change", (event) => {
       if (event.target.checked) {
-        this._setSliderHandle(this._previousSliderValue);
-        this._status.setAttribute("data-zone", this._previousZoneStatus);
-        this._status.children[0].innerText = this._previousZoneStatus;
         this.enable();
       } else {
-        this._previousSliderValue = this._getSliderHandle();
-        this._previousZoneStatus = this._status.getAttribute("data-zone");
         this.disable();
-        this._setSliderHandle(0);
-        this._status.setAttribute("data-zone", "Off");
-        this._status.children[0].innerText = "Off";
       }
     });
   }
@@ -183,11 +179,13 @@ export class CostSetting {
   * @return {void}
   */
   enable(i) {
-    // enable weight label
+    // update element values
+    this._setSliderHandle(this._previousSliderValue);
+    this._status.setAttribute("data-zone", this._previousStatusValue);
+    this._status.children[0].innerText = this._previousStatusValue;
+    // update disable property on elements
     this._label.removeAttribute("disabled")
-    // enable zone status
     this._status.removeAttribute("disabled");
-    // enable slider
     this._slider.noUiSlider.enable();
   }
 
@@ -196,11 +194,16 @@ export class CostSetting {
   * @return {void}
   */
   disable() {
-    // disable weight label
+    // store values
+    this._previousSliderValue = this._getSliderHandle();
+    this._previousStatusValue = this._status.getAttribute("data-zone");
+    // update element values
+    this._setSliderHandle(0);
+    this._status.setAttribute("data-zone", "Off");
+    this._status.children[0].innerText = "Off";
+    // update disable property on elements
     this._label.setAttribute("disabled", "");
-    // disable zone status
     this._status.setAttribute("disabled", "");
-    // disable slider
     this._slider.noUiSlider.disable();
   }
 
