@@ -52,7 +52,9 @@ loaders.forEach((loader) => {
 })
 
 // placeholder for plugins
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var plugins = [
+  new MiniCssExtractPlugin()
 ];
 
 // define options
@@ -65,7 +67,12 @@ var options = {
   },
   externals: externals,
   module: {
-    rules: loaders
+    rules: [
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      }
+    ]
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
