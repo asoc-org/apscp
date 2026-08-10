@@ -1,7 +1,6 @@
-import noUiSlider from "nouislider";
-import "nouislider/dist/nouislider.css";
-import {scaffoldFeatureSetting} from "./feature-setting-scaffold.js";
 import "./css/feature-setting.css";
+import noUiSlider from "nouislider";
+import {scaffoldFeatureSetting} from "./feature-setting-scaffold.js";
 import {order, roundToDigits} from "../utils/math.js";
 
 /** Class representing the setting for a single feature. */
@@ -212,7 +211,7 @@ export class FeatureSetting {
       // update target labels
       values = convertSliderValuesToTargets(values);
       for (let i = 0; i < values.length; ++i) {
-        this._targetStatuses[i].setAttribute("data-target", values[i]);
+        this._targetStatuses[i].setAttribute("data-value", values[i]);
         this._targetStatuses[i].children[1].innerText =
           `Target: ${Math.round(values[i] * 100)}%`;
       }
@@ -278,7 +277,7 @@ export class FeatureSetting {
   * @return {Array<number>}
   */
   getTargets() {
-    return this._targetStatuses.map(x => {return x.dataset.target});
+    return this._targetStatuses.map(x => {return x.dataset.value});
   }
 
   /**
@@ -286,7 +285,7 @@ export class FeatureSetting {
   * @return {Array<number>}
   */
   getWeights() {
-    return this._weightStatuses.map(x => {return x.dataset.weight});
+    return this._weightStatuses.map(x => {return x.dataset.value});
   }
 
   /**
@@ -401,9 +400,9 @@ export class FeatureSetting {
   * @return {void}
   */
   _setWeightValue(i, value) {
-    this._weightStatuses[i].setAttribute("data-weight", value);
+    this._weightStatuses[i].setAttribute("data-value", value);
     this._weightStatuses[i].children[0].innerText =
-      `Weight: ${value * 100}`;
+      `Weight: ${value * 100}%`;
   }
 
   /**
@@ -412,7 +411,7 @@ export class FeatureSetting {
   * @return {void}
   */
   _getWeightValue(i) {
-    return this._weightStatuses[i].getAttribute("data-weight");
+    return this._weightStatuses[i].getAttribute("data-value");
   }
 
 }

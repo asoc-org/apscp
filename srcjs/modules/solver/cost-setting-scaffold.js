@@ -1,5 +1,6 @@
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
+import {createSwitches} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 
 /**
@@ -15,7 +16,7 @@ import {addTooltip} from "../utils/element.js";
 export function scaffoldCostSetting(cost, zones, costWeightChoices) {
   // create element
   let el = document.createElement("div");
-  el.classList.add("cost-setting");
+  el.classList.add("cost-setting", "setting");
   // set data id attribute for feature id
   el.setAttribute("data-id", cost.id);
   // create feature setting header
@@ -40,31 +41,14 @@ function costSettingHeader(cost, zones) {
   let el = document.createElement("div");
   el.classList.add("header");
   // create container for switch
-  let switchContainer = document.createElement("div");
-  switchContainer.classList.add("switches");
-  // create switch form
-  let switchForm = document.createElement("div");
-  switchForm.classList.add("form-check", "form-switch", "p-0", "m-0");
-  // create switch input
-  let switchInput = document.createElement("input");
-  switchInput.setAttribute("type", "checkbox");
-  switchInput.classList.add("form-check-input", "switch", "ms-0");
-  switchInput.setAttribute("role", "switch");
-  switchInput.setAttribute("data-cost", cost.id);
-  switchInput.checked = true;
-  // append switch elements
-  switchForm.appendChild(switchInput);
-  switchContainer.appendChild(switchForm);
+  let switchElement = createSwitches(1);
+  switchElement.children[0].children[0].setAttribute("data-cost", cost.id);
   // create name element
-  let nameElement = document.createElement("div");
-  nameElement.classList.add("name-container");
-  nameElement.appendChild(createNameLabel(cost));
+  let nameElement = createNameLabel(cost);
   // create provenance element
-  let provenanceElement = document.createElement("div");
-  provenanceElement.classList.add("provenance");
-  provenanceElement.appendChild(createProvenance(cost.layer.provenance));
+  let provenanceElement = createProvenance(cost.layer.provenance);
   // append elements
-  el.appendChild(switchContainer);
+  el.appendChild(switchElement);
   el.appendChild(nameElement);
   el.appendChild(provenanceElement);
   // return element
@@ -119,32 +103,32 @@ function costSettingWeight(cost, zones, choices) {
 function costSettingZoneButton(cost, zones) {
   // initialize element
   let el = document.createElement("div");
-  el.classList.add("zone-status");
-  el.setAttribute("data-zone", cost.zone);
+  el.classList.add("zone-status", "hover-select");
+  el.setAttribute("data-value", cost.zone);
   // create button
   let button = document.createElement("button");
-  button.classList.add("zone-button");
+  button.classList.add("select-button");
   button.style.backgroundColor = `var(--zone-${cost.zone}-primary)`;
   button.innerText = `${cost.zone}`;
   addTooltip(
     button,
-    "Specify which zone that solutions should prefer to allocate" +
+    "Specify which zone that solutions should prefer to allocate " +
     "planning units to when considering this cost."
   );
   // initialize options
   let options = document.createElement("ul");
-  options.classList.add("zone-options");
+  options.classList.add("select-options");
   for (let i = 0; i < zones.length; ++i) {
     let optionContainer = document.createElement("li");
     let option = document.createElement("a");
     option.innerText = `${zones[i]}`;
-    option.setAttribute("data-value", zones[i]);
-    option.classList.add("zone-option");
+    option.setAttribute("data-option", zones[i]);
+    option.classList.add("select-option");
     option.addEventListener("click", function(event) {
-      let z = event.target.getAttribute("data-value");
+      let z = event.target.getAttribute("data-option");
       button.innerText = `${z}`;
       button.style.backgroundColor = `var(--zone-${z}-primary)`;
-      el.setAttribute("data-zone", z);
+      el.setAttribute("data-value", z);
     });
     optionContainer.appendChild(option);
     options.appendChild(optionContainer);

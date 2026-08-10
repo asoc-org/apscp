@@ -1,5 +1,11 @@
-/* overall settings */
-.solver-container {
+/* ==========================================================================
+   Solver style
+   ========================================================================== */
+
+/* Main container style
+   ========================================================================== */
+
+.solver .solver-container {
   --icon: #0d1321;
   --disabled: #B8B8B8;
   --border: #0d1321;
@@ -12,21 +18,20 @@
   height: 100%;
 }
 
-.solver-container .tab-pane{
+.solver .solver-container .tab-pane{
   margin-left: 3px;
   margin-left: 3px;
 }
 
-.solver-container .hidden-setting {
-  display: none;
-}
-
-.solver-container button:disabled {
+.solver .solver-container button:disabled {
   cursor: not-allowed;
 }
 
-/* footer */
-.solver-footer {
+/* Footer style
+   ========================================================================== */
+
+/* footer container */
+.solver .solver-footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -36,23 +41,27 @@
   margin: auto 0px 3px 3px;
 }
 
-.solver-footer .name-container .form-group.shiny-input-container {
+/* footer name text input */
+.solver .solver-footer .name-container .form-group.shiny-input-container {
   margin-bottom: 0px;
 }
 
-.solver-footer .name {
+.solver .solver-footer .name {
   flex-grow: 1;
 }
 
-.solver-footer .button-container:has(button:disabled) {
+/* footer button container */
+.solver .solver-footer .button-container:has(button:disabled) {
   cursor: not-allowed;
 }
 
-.solver-footer .start-button {
+/* footer start button */
+.solver .solver-footer .start-button {
   width: 60px;
 }
 
-.solver-footer button {
+/* footer buttons */
+.solver .solver-footer button {
   padding-left: 6px;
   padding-right: 6px;
   padding-top: 0.375rem;

@@ -1,5 +1,6 @@
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
+import {createSwitches} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 
 /**
@@ -23,7 +24,7 @@ export function scaffoldFeatureSetting(
 ) {
   // create element
   let el = document.createElement("div");
-  el.classList.add("feature-setting", "hidden-setting");
+  el.classList.add("feature-setting", "setting", "hidden-setting");
   // set data id attribute for feature id
   el.setAttribute("data-id", feature.id);
   // create feature setting header
@@ -48,31 +49,18 @@ function featureSettingHeader(feature, zones) {
   // create container
   let el = document.createElement("div");
   el.classList.add("header");
-  // create buttons to switch off for each zone
-  let switchContainer = document.createElement("div");
-  switchContainer.classList.add("switches");
+  // create switches for each zone
+  let switchContainer = createSwitches(zones.length);
   for (let i = 0; i < zones.length; ++i) {
-    let d = document.createElement("div");
-    d.classList.add("form-check", "form-switch", "p-0", "m-0");
-    let x = document.createElement("input");
-    x.setAttribute("type", "checkbox");
-    x.classList.add("form-check-input", "switch", "ms-0");
-    x.setAttribute("role", "switch");
-    x.setAttribute("data-zone", zones[i]);
-    x.setAttribute("data-feature", feature.id);
-    x.checked = true;
-    x.style.setProperty("--switch-primary", `var(--zone-${zones[i]}-primary)`);
-    d.appendChild(x);
-    switchContainer.appendChild(d);
+    switchContainer.children[i].children[0]
+      .setAttribute("data-zone", zones[i]);
+    switchContainer.children[i].children[0]
+      .style.setProperty("--switch-primary", `var(--zone-${zones[i]}-primary)`);
   }
   // create name element
-  let nameElement = document.createElement("div");
-  nameElement.classList.add("name-container");
-  nameElement.appendChild(createNameLabel(feature));
+  let nameElement = createNameLabel(feature);
   // create provenance element
-  let provenanceElement = document.createElement("div");
-  provenanceElement.classList.add("provenance");
-  provenanceElement.appendChild(createProvenance(feature.layer.provenance));
+  let provenanceElement = createProvenance(feature.layer.provenance);
   // append elements
   el.appendChild(switchContainer);
   el.appendChild(nameElement);
@@ -205,12 +193,11 @@ function featureSettingTargets(feature, zones, choices) {
 function featureSettingWeightZoneButton(zone, value, choices) {
   // initialize element
   let el = document.createElement("div");
-  el.classList.add("weight-status");
-  el.setAttribute("data-weight", value);
+  el.classList.add("weight-status", "hover-select");
+  el.setAttribute("data-value", value);
   // create button
   let button = document.createElement("button");
-  button.classList.add("weight-button");
-  button.setAttribute("data-zone", zone);
+  button.classList.add("weight-button", "select-button");
   button.style.backgroundColor = `var(--zone-${zone}-primary)`;
   button.innerText = `Weight: ${value * 100}%`;
   addTooltip(
@@ -219,17 +206,17 @@ function featureSettingWeightZoneButton(zone, value, choices) {
   );
   // initialize options
   let options = document.createElement("ul");
-  options.classList.add("weight-options");
+  options.classList.add("select-options");
   for (let i = 0; i < choices.length; ++i) {
     let optionContainer = document.createElement("li");
     let option = document.createElement("a");
     option.innerText = `${choices[i] * 100}%`;
-    option.setAttribute("data-value", choices[i]);
-    option.classList.add("weight-option");
+    option.setAttribute("data-option", choices[i]);
+    option.classList.add("select-option");
     option.addEventListener("click", function(event) {
       button.innerText =
-        `Weight: ${event.target.getAttribute("data-value") * 100}%`;
-      el.setAttribute("data-weight", event.target.getAttribute("data-value"));
+        `Weight: ${event.target.getAttribute("data-option") * 100}%`;
+      el.setAttribute("data-value", event.target.getAttribute("data-option"));
     });
     optionContainer.appendChild(option);
     options.appendChild(optionContainer);

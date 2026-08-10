@@ -1,7 +1,6 @@
-import noUiSlider from "nouislider";
-import "nouislider/dist/nouislider.css";
-import {scaffoldCostSetting} from "./cost-setting-scaffold.js";
 import "./css/cost-setting.css";
+import noUiSlider from "nouislider";
+import {scaffoldCostSetting} from "./cost-setting-scaffold.js";
 import {roundToDigits} from "../utils/math.js";
 
 /** Class representing the setting for a single cost. */
@@ -119,7 +118,6 @@ export class CostSetting {
     this.name = cost.name;
     this.column = cost.layer.column;
     this.element = scaffoldCostSetting(cost, zones, costWeightChoices);
-
     // initialize private fields
     this._switch = this.element.querySelector(".switch");
     this._status = this.element.querySelector(".zone-status");
@@ -135,7 +133,6 @@ export class CostSetting {
       "max": costWeightChoices[1]
     };
     this._sliderStep = costWeightChoices[2];
-
     // initialize weight slider
     noUiSlider.create(this._slider, {
       range: this._sliderRange,
@@ -144,7 +141,6 @@ export class CostSetting {
       connect: "lower",
       start: this._initialSliderValue,
     });
-
     // set event handler for slider
     this._slider.noUiSlider.on("update", (values, handle) => {
       // convert value to number
@@ -153,7 +149,6 @@ export class CostSetting {
       this._label.setAttribute("data-weight", v);
       this._label.innerText = `Weight: ${Math.round(v * 100)}%`;
     });
-
     // set event handler for switch
     this._switch.addEventListener("change", (event) => {
       if (event.target.checked) {
@@ -181,7 +176,7 @@ export class CostSetting {
   enable() {
     // update element values
     this._setSliderHandle(this._previousSliderValue);
-    this._status.setAttribute("data-zone", this._previousStatusValue);
+    this._status.setAttribute("data-value", this._previousStatusValue);
     this._status.children[0].innerText = this._previousStatusValue;
     // update disable property on elements
     this._label.removeAttribute("disabled")
@@ -196,10 +191,10 @@ export class CostSetting {
   disable() {
     // store values
     this._previousSliderValue = this._getSliderHandle();
-    this._previousStatusValue = this._status.getAttribute("data-zone");
+    this._previousStatusValue = this._status.getAttribute("data-value");
     // update element values
     this._setSliderHandle(0);
-    this._status.setAttribute("data-zone", "");
+    this._status.setAttribute("data-value", "");
     this._status.children[0].innerText = "Off";
     // update disable property on elements
     this._label.setAttribute("disabled", "");
@@ -212,7 +207,7 @@ export class CostSetting {
   * @return {string}
   */
   getZone() {
-    return this._status.dataset.zone;
+    return this._status.dataset.value;
   }
 
   /**

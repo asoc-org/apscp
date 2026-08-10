@@ -1,5 +1,4 @@
 import TomSelect from "tom-select";
-import "tom-select/dist/css/tom-select.bootstrap5.css";
 import {FeatureSetting} from "./feature-setting-class.js";
 
 /** Class representing the settings for multiple features. */
@@ -76,7 +75,7 @@ export class FeatureSettings {
   appendTo(element) {
     // create container
     let el = document.createElement("div");
-    el.classList.add("feature-settings");
+    el.classList.add("feature-settings", "settings");
     // create menu element
     let menuElement = document.createElement("div");
     menuElement.classList.add("feature-menu");

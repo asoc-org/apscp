@@ -44,7 +44,7 @@ export class LockSettings {
   appendTo(element) {
     // create container
     let el = document.createElement("el");
-    el.classList.add("lock-settings-container");
+    el.classList.add("lock-settings", "settings");
     element.appendChild(el);
     // append elements for lock settings
     this._settings.forEach(x => x.appendTo(el));

@@ -1,6 +1,5 @@
+import "./css/lock-setting.css"
 import TomSelect from "tom-select";
-import "tom-select/dist/css/tom-select.bootstrap5.css";
-import "./css/lock-setting.css";
 import {scaffoldLockSetting} from "./lock-setting-scaffold.js";
 import {createProvenance} from "../utils/element.js";
 

@@ -1,6 +1,7 @@
 import {addTooltip} from "../utils/element.js";
 import {createNameLabel} from "../utils/element.js";
 import {createHandle} from "../utils/element.js";
+import {createSwitches} from "../utils/element.js";
 
 /**
  * Scaffold a lock setting element
@@ -11,7 +12,7 @@ import {createHandle} from "../utils/element.js";
 export function scaffoldLockSetting(zone, locks, priority) {
   // create container
   let el = document.createElement("div");
-  el.classList.add("lock-setting");
+  el.classList.add("lock-setting", "setting");
   el.style.backgroundColor = `var(--zone-${zone}-secondary)`;
   // set data zone attribute
   el.setAttribute("data-zone", zone);
@@ -33,41 +34,24 @@ function lockSettingHeader(zone, priority) {
   // create container
   let el = document.createElement("div");
   el.classList.add("header");
-  // create container for switch
-  let switchContainer = document.createElement("div");
-  switchContainer.classList.add("switches");
-  // create switch form
-  let switchForm = document.createElement("div");
-  switchForm.classList.add("form-check", "form-switch", "p-0", "m-0");
-  // create switch input
-  let switchInput = document.createElement("input");
-  switchInput.setAttribute("type", "checkbox");
-  switchInput.classList.add("form-check-input", "switch", "ms-0");
-  switchInput.setAttribute("role", "switch");
-  switchInput.setAttribute("data-zone", zone);
-  switchInput.checked = true;
-  switchInput.style.setProperty(
+  // create switch
+  let switchElement = createSwitches(1);
+  switchElement.children[0].children[0].setAttribute("data-zone", zone);
+  switchElement.children[0].children[0].style.setProperty(
     "--switch-primary",
     `var(--zone-${zone}-primary)`
   );
-  // append switch elements
-  switchForm.appendChild(switchInput);
-  switchContainer.appendChild(switchForm);
   // create name element
-  let nameElement = document.createElement("div");
-  nameElement.classList.add("name-container");
-  nameElement.appendChild(
-    createNameLabel({
-      name: `${zone} zone`,
-      details: `Select locks for the ${zone} zone`
-    })
-  );
+  let nameElement = createNameLabel({
+    name: `${zone} zone`,
+    details: `Select locks for the ${zone} zone`
+  });
   // create handle
   let handle = createHandle(
     "Drag to specify priority order for locking in planning units"
   );
   // append elements
-  el.appendChild(switchContainer);
+  el.appendChild(switchElement);
   el.appendChild(nameElement);
   el.appendChild(handle);
   // return element

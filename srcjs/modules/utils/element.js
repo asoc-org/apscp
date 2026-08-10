@@ -21,6 +21,7 @@ export function addTooltip(element, text) {
  */
 export function createProvenance(x) {
   let el = document.createElement("i");
+  el.classList.add("provenance");
   if (typeof(x.description) === "string") {
     addTooltip(el, x.description);
   }
@@ -41,6 +42,7 @@ export function createProvenance(x) {
 export function createNameLabel(x) {
   // create element
   let el = document.createElement("label");
+  el.classList.add("name-label");
   // set layer name
   el.innerText = x.name;
   // initialize popup text
@@ -86,6 +88,34 @@ export function createHandle(description) {
   icon.style.color = "--handle";
   // append icon to element
   el.appendChild(icon);
+  // return element
+  return el;
+}
+
+/**
+ * Create a set of switches
+ * @param {number} n - Number of switches to create.
+ * @return {HTMLElement}
+ */
+export function createSwitches(n = 1, checked = true) {
+  // create container
+  let el = document.createElement("div");
+  el.classList.add("switches");
+  // create switches
+  for (let i = 0; i < n; ++i) {
+    // create switch form
+    let form = document.createElement("div");
+    form.classList.add("form-check", "form-switch", "p-0", "m-0");
+    // create switch input
+    let input = document.createElement("input");
+    input.setAttribute("type", "checkbox");
+    input.classList.add("form-check-input", "switch", "ms-0");
+    input.setAttribute("role", "switch");
+    input.checked = checked;
+    // append element
+    form.appendChild(input);
+    el.appendChild(form);
+  }
   // return element
   return el;
 }

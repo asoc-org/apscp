@@ -1,4 +1,12 @@
 import "./css/style.css";
+import "./css/switch.css";
+import "./css/settings.css";
+import "./css/setting.css";
+import "./css/hover-select.css";
+import "./css/tom-select.css";
+import "nouislider/dist/nouislider.css";
+import "tom-select/dist/css/tom-select.bootstrap5.css";
+
 import {FeatureSettings} from "./feature-settings-class.js";
 import {LockSettings} from "./lock-settings-class.js";
 import {CostSettings} from "./cost-settings-class.js";

@@ -45,7 +45,7 @@ export class CostSettings {
   appendTo(element) {
     // create container
     let el = document.createElement("el");
-    el.classList.add("cost-settings");
+    el.classList.add("cost-settings", "settings");
     // create menu element
     let menuElement = document.createElement("div");
     menuElement.classList.add("cost-menu");
