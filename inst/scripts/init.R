@@ -1,3 +1,5 @@
+# set default npm scope
+npm_scope <- "prod"
 
 # if needed, use developer settings
 if (identical(Sys.getenv("PROFILE", "dev"))) {
@@ -5,10 +7,14 @@ if (identical(Sys.getenv("PROFILE", "dev"))) {
     c("Imports", "Depends", "LinkingTo", "Suggests"),
     persist = FALSE
   )
+  npm_scope <- "dev"
 }
 
 # restore library
 renv::restore()
+
+# restore npm library
+packer::npm_install(scope = npm_scope)
 
 # install gurobi R package
 try(

@@ -58,13 +58,13 @@ examples:
 	$(R) --slave -e "devtools::run_examples();warnings()"  >> examples.log
 	rm -f Rplots.pdf
 
-example_sidebar: bundle
+example_sidebar: bundle_dev
 	$(R) --slave -e "source('inst/examples/sidebar_app.R')"
 
-example_mapper: bundle
+example_mapper: bundle_dev
 	$(R) --slave -e "source('inst/examples/mapper_app.R')"
 
-example_solver: bundle
+example_solver: bundle_dev
 	$(R) --slave -e "source('inst/examples/solver_app.R')"
 
 ## run checks

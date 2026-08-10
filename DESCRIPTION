@@ -64,10 +64,12 @@ Suggests:
     rbibutils (>= 2.4.1),
     whereami (>= 0.2.0),
     piggyback (>= 0.1.5),
+    packer (>= 0.1.3),
     usethis (>= 3.2.1)
 Remotes:
     dirkschumacher/rcbc,
-    prioritizr/prioritizr
+    prioritizr/prioritizr,
+    JohnCoene/packer
 Config/roxygen2/version: 8.0.0
 Collate:
     'aaa.R'

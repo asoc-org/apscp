@@ -10,8 +10,12 @@ source("renv/activate.R")
 
 # load default packages when R is run interactively
 if (interactive()) {
-  library(devtools)
-  library(testthat)
+  if (requireNamespace("devtools", quietly = TRUE)) {
+    library(devtools)
+  }
+  if (requireNamespace("testthat", quietly = TRUE)) {
+    library(testthat)
+  }
 }
 
 # set default browser as google-chrome if possible
