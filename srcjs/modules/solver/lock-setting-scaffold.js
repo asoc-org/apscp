@@ -12,7 +12,7 @@ export function scaffoldLockSetting(zone, locks, priority) {
   // create container
   let el = document.createElement("div");
   el.classList.add("lock-setting");
-  el.style.backgroundColor = `var(--zone-${zone}-secondary-color)`;
+  el.style.backgroundColor = `var(--zone-${zone}-secondary)`;
   // set data zone attribute
   el.setAttribute("data-zone", zone);
   // create feature setting header
@@ -47,8 +47,8 @@ function lockSettingHeader(zone, priority) {
   switchInput.setAttribute("data-zone", zone);
   switchInput.checked = true;
   switchInput.style.setProperty(
-    "--switch-color",
-    `var(--zone-${zone}-primary-color)`
+    "--switch-primary",
+    `var(--zone-${zone}-primary)`
   );
   // append switch elements
   switchForm.appendChild(switchInput);

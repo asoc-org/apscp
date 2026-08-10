@@ -87,11 +87,11 @@ export class Solver {
     // assign styling to element based on zone colors
     for (let i = 0; i < project.zones.length; ++i) {
       el.style.setProperty(
-        `--zone-${project.zones[i]}-primary-color`,
+        `--zone-${project.zones[i]}-primary`,
         zoneColors[i]
       );
       el.style.setProperty(
-        `--zone-${project.zones[i]}-secondary-color`,
+        `--zone-${project.zones[i]}-secondary`,
         `color-mix(in srgb, ${zoneColors[i]}, white 50%)`
       );
     }

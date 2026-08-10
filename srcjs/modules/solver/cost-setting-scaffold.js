@@ -124,7 +124,7 @@ function costSettingZoneButton(cost, zones) {
   // create button
   let button = document.createElement("button");
   button.classList.add("zone-button");
-  button.style.backgroundColor = `var(--zone-${cost.zone}-primary-color)`;
+  button.style.backgroundColor = `var(--zone-${cost.zone}-primary)`;
   button.innerText = `${cost.zone}`;
   addTooltip(
     button,
@@ -143,7 +143,7 @@ function costSettingZoneButton(cost, zones) {
     option.addEventListener("click", function(event) {
       let z = event.target.getAttribute("data-value");
       button.innerText = `${z}`;
-      button.style.backgroundColor = `var(--zone-${z}-primary-color)`;
+      button.style.backgroundColor = `var(--zone-${z}-primary)`;
       el.setAttribute("data-zone", z);
     });
     optionContainer.appendChild(option);

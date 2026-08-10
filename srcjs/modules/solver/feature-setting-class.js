@@ -187,13 +187,13 @@ export class FeatureSetting {
     let connectElements = this._targetSlider.querySelectorAll(".noUi-connect");
     for (let i = 0; i < zones.length; ++i) {
       connectElements[i].style.background =
-        `var(--zone-${zones[i]}-primary-color)`;
+        `var(--zone-${zones[i]}-primary)`;
     }
     // color the handles
     let handleElements = this._targetSlider.querySelectorAll(".noUi-handle");
     for (let i = 0; i < zones.length; ++i) {
       handleElements[i].style.background =
-        `var(--zone-${zones[i]}-primary-color)`;
+        `var(--zone-${zones[i]}-primary)`;
     }
 
     // set event handlers for target slider
@@ -204,7 +204,7 @@ export class FeatureSetting {
       let o = order(values);
       for (let i = 0; i < values.length; ++i) {
         connectElements[i].style.background =
-          `var(--zone-${zones[o[i]]}-primary-color)`;
+          `var(--zone-${zones[o[i]]}-primary)`;
         connectElements[i].style.transform =
           `translate(0%, 0px) scale(${values[o[i]]}, 1)`;
         connectElements[i].style["z-index"] = values.length - i;
@@ -301,9 +301,9 @@ export class FeatureSetting {
     let v = convertTargetsToSliderValues(values);
     // update bar cap style
     this._barCap.style.color =
-      `var(--zone-${this._zones[o[0]]}-secondary-color)`;
+      `var(--zone-${this._zones[o[0]]}-secondary)`;
     this._barCap.style.background =
-      `var(--zone-${this._zones[o[0]]}-secondary-color)`;
+      `var(--zone-${this._zones[o[0]]}-secondary)`;
     // update labels and bars
     for (let i = 0; i < values.length; ++i) {
       // set held label
@@ -314,7 +314,7 @@ export class FeatureSetting {
         `${Math.min(Math.round(v[i] * 100), 100)}%`;
       this._heldBars[o[i]].style["z-index"] = values.length - i;
       this._heldBars[o[i]].style.background =
-        `var(--zone-${this._zones[i]}-secondary-color)`;
+        `var(--zone-${this._zones[i]}-secondary)`;
     }
   }
 

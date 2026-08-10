@@ -36,19 +36,17 @@
 
 .cost-setting .switch {
   font-size: 10px;
-  --switch-primary-color: var(--switch-color) !important;
-  --switch-secondary-color: color-mix(in srgb, var(--switch-color), white 30%) !important;
 }
 
 .cost-setting .switch:checked {
-  background-color: var(--switch-primary-color) !important;
-  border-color: var(--switch-primary-color) !important;
-  color: var(--switch-primary-color) !important;
+  background-color: var(--switch-primary) !important;
+  border-color: var(--switch-primary) !important;
+  color: var(--switch-primary) !important;
 }
 
 .cost-setting .switch:focus {
-  border-color: var(--switch-secondary-color) !important;
-  box-shadow: 0 0 0 0.25rem var(--switch-secondary-color) !important;
+  border-color: var(--switch-secondary) !important;
+  box-shadow: 0 0 0 0.25rem var(--switch-secondary) !important;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280,0,0,0.25%29'/%3e%3c/svg%3e") !important;
 }
 

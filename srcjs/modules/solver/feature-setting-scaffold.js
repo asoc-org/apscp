@@ -61,10 +61,7 @@ function featureSettingHeader(feature, zones) {
     x.setAttribute("data-zone", zones[i]);
     x.setAttribute("data-feature", feature.id);
     x.checked = true;
-    x.style.setProperty(
-      "--switch-color",
-      `var(--zone-${zones[i]}-primary-color)`
-    );
+    x.style.setProperty("--switch-primary", `var(--zone-${zones[i]}-primary)`);
     d.appendChild(x);
     switchContainer.appendChild(d);
   }
@@ -105,10 +102,8 @@ function featureSettingStatuses(feature, zones, choices) {
     // create icon to show held status
     let heldStatusIcon = document.createElement("div");
     heldStatusIcon.classList.add("held-symbol");
-    heldStatusIcon.style.backgroundColor =
-      `var(--zone-${zones[i]}-secondary-color)`;
-    heldStatusIcon.style.color =
-      `var(--zone-${zones[i]}-secondary-color)`;
+    heldStatusIcon.style.backgroundColor = `var(--zone-${zones[i]}-secondary)`;
+    heldStatusIcon.style.color = `var(--zone-${zones[i]}-secondary)`;
     // create label to show held status
     let heldStatusLabel = document.createElement("label");
     heldStatusLabel.setAttribute("data-zone", zones[i]);
@@ -125,9 +120,9 @@ function featureSettingStatuses(feature, zones, choices) {
     let targetStatusIcon = document.createElement("div");
     targetStatusIcon.classList.add("target-symbol");
     targetStatusIcon.style.backgroundColor =
-      `var(--zone-${zones[i]}-primary-color)`;
+      `var(--zone-${zones[i]}-primary)`;
     targetStatusIcon.style.color =
-      `var(--zone-${zones[i]}-primary-color)`;
+      `var(--zone-${zones[i]}-primary)`;
     // create label to show target status
     let targetStatusLabel = document.createElement("label");
     targetStatusLabel.classList.add("target-label");
@@ -216,7 +211,7 @@ function featureSettingWeightZoneButton(zone, value, choices) {
   let button = document.createElement("button");
   button.classList.add("weight-button");
   button.setAttribute("data-zone", zone);
-  button.style.backgroundColor = `var(--zone-${zone}-primary-color)`;
+  button.style.backgroundColor = `var(--zone-${zone}-primary)`;
   button.innerText = `Weight: ${value * 100}%`;
   addTooltip(
     button,

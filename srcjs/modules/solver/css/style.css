@@ -4,8 +4,9 @@
   --disabled: #B8B8B8;
   --border: #0d1321;
   --symbol-border: #D3D3D3;
-  --switch-color: #073b4c;
   --handle: #0d1321;
+  --switch-primary: #073b4c;
+  --switch-secondary: color-mix(in srgb, var(--switch-primary), white 30%) !important;
   display: flex;
   flex-direction: column;
   height: 100%;
