@@ -168,13 +168,11 @@ export class Solver {
   */
   getSettings() {
     return {
+      objectives: null,
       // objectives: this._objectiveSettings.getSettings(),
       features: this._featureSettings.getSettings(),
-      // locks: this._lockSettings.getSettings(),
-      costs: this._costSettings.getSettings(),
-      objectives: null,
-      locks: null
-      // costs: null
+      locks: this._lockSettings.getSettings(),
+      costs: this._costSettings.getSettings()
     };
   }
 

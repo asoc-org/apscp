@@ -2,9 +2,10 @@
 .solver-container {
   --icon: #0d1321;
   --disabled: #B8B8B8;
-  --border: black;
+  --border: #0d1321;
   --symbol-border: #D3D3D3;
   --switch-color: #073b4c;
+  --handle: #0d1321;
   display: flex;
   flex-direction: column;
   height: 100%;

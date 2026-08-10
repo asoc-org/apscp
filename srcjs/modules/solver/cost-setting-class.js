@@ -178,7 +178,7 @@ export class CostSetting {
   * Enable object.
   * @return {void}
   */
-  enable(i) {
+  enable() {
     // update element values
     this._setSliderHandle(this._previousSliderValue);
     this._status.setAttribute("data-zone", this._previousStatusValue);
@@ -199,7 +199,7 @@ export class CostSetting {
     this._previousStatusValue = this._status.getAttribute("data-zone");
     // update element values
     this._setSliderHandle(0);
-    this._status.setAttribute("data-zone", "Off");
+    this._status.setAttribute("data-zone", "");
     this._status.children[0].innerText = "Off";
     // update disable property on elements
     this._label.setAttribute("disabled", "");

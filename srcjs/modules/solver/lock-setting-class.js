@@ -1,5 +1,8 @@
-import "./css/feature-setting.css";
+import TomSelect from "tom-select";
+import "tom-select/dist/css/tom-select.bootstrap5.css";
+import "./css/lock-setting.css";
 import {scaffoldLockSetting} from "./lock-setting-scaffold.js";
+import {createProvenance} from "../utils/element.js";
 
 /** Class representing the setting for a single lock. */
 export class LockSetting {
@@ -16,33 +19,51 @@ export class LockSetting {
    * Priority value.
    * @type {number}
    */
-  priority;
-
-  // private fields
+  priority = -1;
 
   /**
    * HTML element.
    * @type {HTMLElement}
    */
-  _element;
+  element;
+
+  // private fields
 
   /**
-   * Array of lock objects.
-   * @type {Array<Object>}
+   * Map of lock objects.
+   * @type {Map<Object>}
    */
-  _locks
+  _locks = new Map();
 
   /**
-   * Sec of lock objects.
-   * @type {Array<Object>}
+   * Array of previously selected lock identifiers.
+   * @type {HTMLElement}
    */
-  _selectedLocks
+  _previousLockIds = [];
+
+  /**
+   * Array of initial lock identifiers.
+   * @type {HTMLElement}
+   */
+  _initialLockIds = [];
+
+  /**
+   * Tom Select object.
+   * @type {object}
+   */
+  _select;
+
+  /**
+   * Object used to temporarily store settings for select menu.
+   * @type {object}
+   */
+  _cache;
 
   /**
   * Construct a new LockSetting object.
   * @param {string} zone - Zone name.
   * @param {Array<Object>} locks - Array of lock objects.
-  * @param {number} - Priority value.
+  * @param {number} priority - Priority value.
   * @return {void}
   */
   constructor(zone, locks, priority) {
@@ -50,8 +71,26 @@ export class LockSetting {
     this.zone = zone;
     this.priority = priority;
     // initialize private fields
-    this._locks = locks;
-    this._element = scaffoldLockSetting(zone, locks);
+    this._element = scaffoldLockSetting(zone, locks, priority);
+    this._cache = {options: []};
+    for (let i = 0; i < locks.length; ++i) {
+      this._locks.set(locks[i].id, locks[i]);
+      this._cache.options.push({name: locks[i].name, value: locks[i].id});
+      if (locks[i].zone === zone) {
+        this._initialLockIds.push(locks[i].id);
+      }
+    }
+    this._previousLockIds = this._initialLockIds;
+    // set event handler for switch
+    this._element
+      .querySelector(".switch")
+      .addEventListener("change", (event) => {
+        if (event.target.checked) {
+          this.enable();
+        } else {
+          this.disable();
+        }
+      });
   }
 
   /**
@@ -63,7 +102,66 @@ export class LockSetting {
     // append to element
     element.appendChild(this._element);
     // initialize select menu
-    // TODO
+    this._select = new TomSelect(this._element.querySelector(".lock-select"), {
+      options: this._cache.options,
+      items: this._initialLockIds,
+      create: false,
+      dropdownParent: "body",
+      labelField: "name",
+      searchField: ["name"],
+      maxItems: null,
+      sortField: "name",
+      plugins: ["checkbox_options"],
+      closeAfterSelect: false,
+      render: {
+        option: (data, escape) => {
+          let el = document.createElement("div");
+          el.classList.add("lock-option");
+          let text = document.createElement("span");
+          text.innerText = escape(data.name);
+          el.appendChild(text);
+          el.appendChild(
+            createProvenance(this._locks.get(data.value).layer.provenance)
+          );
+          return el;
+        }
+      }
+    });
+    // free memory
+    this._cache = undefined;
+  }
+
+  /**
+  * Enable object.
+  * @return {void}
+  */
+  enable() {
+    // update select values
+    this._select.setValue(this._previousLockIds);
+    // update disable property on element
+    this._select.enable();
+  }
+
+  /**
+  * Disable object.
+  * @return {void}
+  */
+  disable() {
+    // update select values
+    this._previousLockIds = this.getLockIds().slice();
+    // clear select
+    this._select.clear();
+    // update disable property on element
+    this._select.disable();
+  }
+
+  /**
+  * Set priority value.
+  * @param {number} value - New priority value.
+  * @return {void}
+  */
+  setPriorityValue(value) {
+    this.priority = value;
   }
 
   /**
@@ -71,7 +169,7 @@ export class LockSetting {
   * @return {Array<string>}
   */
   getLockIds() {
-    return Array.from(this._selectedLocks).map(x => x.id);
+    return this._select.getValue();
   }
 
   /**
@@ -79,7 +177,7 @@ export class LockSetting {
   * @return {Array<string>}
   */
   getLockNames() {
-    return Array.from(this._selectedLocks).map(x => x.name);
+    return this.getLockIds().map(x => this._locks.get(x).name);
   }
 
   /**
@@ -87,7 +185,7 @@ export class LockSetting {
   * @return {Array<string>}
   */
   getLockColumns() {
-    return Array.from(this._selectedLocks).map(x => x.layer.name);
+    return this.getLockIds().map(x => this._locks.get(x).layer.column);
   }
 
   /**
@@ -95,15 +193,15 @@ export class LockSetting {
   * @return {Array<string>}
   */
   getLockZones() {
-    return Array(this._selectedLocks.length).fill(this.zone);
+    return this.getLockIds().map(x => this.zone);
   }
 
   /**
   * Get priority values for selected locks.
   * @return {Array<number>}
   */
-  getPriorityValues() {
-    return Array(this._selectedLocks.length).fill(this.priority);
+  getLockPriorityValues() {
+    return this.getLockIds().map(x => this.priority);
   }
 
 }

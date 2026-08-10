@@ -54,7 +54,7 @@ export function createNameLabel(x) {
     }
   }
   // if needed, add details to popup text
-  if (typeof(x.layer.details) === "string") {
+  if (typeof(x.layer) === "object" && typeof(x.layer.details) === "string") {
     if (title.length > 0) {
       title += " ";
     }
@@ -64,6 +64,28 @@ export function createNameLabel(x) {
   if (title.length > 0) {
     addTooltip(el, title + ".");
   }
+  // return element
+  return el;
+}
+
+/**
+ * Create a handle.
+ * @param {string} description - Text to display in tool tip.
+ * @return {HTMLElement}
+ */
+export function createHandle(description) {
+  // create element
+  let el = document.createElement("div");
+  el.classList.add("handle");
+  // create icon
+  let icon = document.createElement("i");
+  if (typeof(description) === "string") {
+    addTooltip(el, description);
+  }
+  icon.classList.add("fas", "fa-arrows-alt");
+  icon.style.color = "--handle";
+  // append icon to element
+  el.appendChild(icon);
   // return element
   return el;
 }

@@ -72,7 +72,7 @@ function costSettingHeader(cost, zones) {
 }
 
 /**
- * Create a weight component for a cost.
+ * Create a weight component for a cost setting.
  * @param {Object} cost - Cost object.
  * @param {string} cost.name - Feature name.
  * @param {string} cost.zone - Zone name.

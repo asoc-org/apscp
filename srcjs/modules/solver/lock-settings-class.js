@@ -14,9 +14,9 @@ export class LockSettings {
 
   /**
    * Array of settings.
-   * @type {Array<LockSettings>}
+   * @type {Map<LockSettings>}
    */
-  _settings;
+  _settings = new Map();
 
   /**
   * Construct a new LockSettings object.
@@ -27,11 +27,11 @@ export class LockSettings {
   constructor(project) {
     // initialize fields
     this._zones = project.zones;
-    this._settings = [];
     // create lock setting for each zone
     for (let i = 0; i < this._zones.length; ++i) {
-      this._settings.push(
-        new LockSetting(project.zones[i], project.locks)
+      this._settings.set(
+        project.zones[i],
+        new LockSetting(project.zones[i], project.locks, this._zones.length - i)
       );
     }
   }
@@ -47,13 +47,19 @@ export class LockSettings {
     el.classList.add("lock-settings-container");
     element.appendChild(el);
     // append elements for lock settings
-    for (let i = 0; i < this._settings.length; ++i) {
-      this._settings[i].appendTo(el);
-    }
+    this._settings.forEach(x => x.appendTo(el));
     // initialize sortable class on lock settings
     Sortable.create(el, {
-      onUpdate: function(event) {
-        console.log("sortable update");
+      handle: ".handle",
+      animation: 150,
+      dataIdAttr: "data-zone",
+      ghostClass: "ghost",
+      onUpdate: event => {
+        for (let i = 0; i < this._zones.length; ++i) {
+          this._settings
+            .get(event.to.children[i].getAttribute("data-zone"))
+            .setPriorityValue(this._zones.length - i);
+        }
       }
     });
   }
@@ -65,24 +71,19 @@ export class LockSettings {
   getSettings() {
     return {
       id:
-        this._settings
-        .map(x => x.getLockIds())
+        Array.from(this._settings.values(), x => x.getLockIds())
         .flat(1),
       name:
-        this._settings
-        .map(x => x.getLockNames())
+        Array.from(this._settings.values(), x => x.getLockNames())
         .flat(1),
       column:
-        this._settings
-        .map(x => x.getLockColumns())
+        Array.from(this._settings.values(), x => x.getLockColumns())
         .flat(1),
       zone:
-        this._settings
-        .map(x => x.getLockZones())
+        Array.from(this._settings.values(), x => x.getLockZones())
         .flat(1),
       priority:
-        this._settings
-        .map(x => x.getPriorityValues())
+        Array.from(this._settings.values(), x => x.getLockPriorityValues())
         .flat(1)
     }
   }
