@@ -11,7 +11,7 @@ sim_data <- simulate_project()
 ui <- bslib::page_fluid(
   h4("Mapp Demo"),
   splitLayout(
-    cellWidths = c("300px", "80%"),
+    cellWidths = c("380px", "80%"),
     tagList(
       h3("Solver"),
       htmltools::tags$div(

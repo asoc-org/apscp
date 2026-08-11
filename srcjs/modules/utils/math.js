@@ -46,3 +46,13 @@ export function order(x) {
     .sort((a, b) => a.value - b.value)
     .map(item => item.index);
 }
+
+/**
+* Replace NaN with another value.
+* @param {number} x - Value.
+* @param {number} y - New value if x is NaN.
+* @return {Number}
+*/
+export function replaceNaN(x, y) {
+  return Number.isNaN(x) ? y : x;
+}

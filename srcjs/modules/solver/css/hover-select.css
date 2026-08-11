@@ -15,14 +15,26 @@
    ========================================================================== */
 
 .solver .hover-select .select-button {
-  width: 90px;
+  display: inline-grid;
+  grid-template-areas: "stack";
   color: white;
-  font-size: 10px;
+  font-size: 16px;
   border: none;
   cursor: pointer;
   border-radius: 2px;
   padding-top: 0;
   padding-bottom: 0;
+}
+
+.solver .hover-select .select-button-text {
+  pointer-events: auto;
+}
+
+.solver .hover-select .select-button-spacer {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  grid-area: stack;
 }
 
 /* Container for options in drop down menu
@@ -53,7 +65,7 @@
 .solver .hover-select .select-options .select-option {
   color: #333;
   text-align: center;
-  font-size: 10px;
+  font-size: 16px;
   text-display: block;
   text-decoration: none;
   display: block;

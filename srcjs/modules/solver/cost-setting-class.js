@@ -32,73 +32,49 @@ export class CostSetting {
    */
   element;
 
+  /**
+   * Weight value.
+   * @type {number}
+   */
+  weight;
+
+  /**
+   * Zone value.
+   * @type {string}
+   */
+  zone;
+
   // private fields
-
-  /**
-   * Array of zone names.
-   * @type {Array<string>}
-   */
-  _zones;
-
-  /**
-   * HTML element that contains the switch.
-   * @type {NodeList<HTMLElement>}
-   */
-  _switch;
-
-  /**
-   * HTML element.
-   * @type {HTMLElement}
-   */
-  _status;
-
-  /**
-   * HTML element.
-   * @type {HTMLElement}
-   */
-  _label;
-
-  /**
-   * HTML element that contains slider for weight setting.
-   * @type {HTMLElement}
-   */
-  _slider;
 
   /**
    * Initial weight value.
    * @type {number}
    */
-  _initialWeightValue;
+  _initialWeight;
 
   /**
-   * Initial status value.
+   * Initial zone value.
    * @type {number}
    */
-  _initialStatusValue;
+  _initialZone;
 
   /**
    * Previous weight value.
    * @type {number}
    */
-  _previousWeightValue;
+  _previousWeight;
 
   /**
-   * Previous zone status.
+   * Previous zone value.
    * @type {number}
    */
-  _previousStatusValue;
+  _previousZone;
 
   /**
-   * Slider range.
+   * Object used to temporarily store settings for select menu.
    * @type {object}
    */
-  _sliderRange;
-
-  /**
-   * Slider step.
-   * @type {number}
-   */
-  _sliderStep;
+  _cache = {};
 
   /**
   * Construct a new CostSetting object.
@@ -118,45 +94,19 @@ export class CostSetting {
     this.name = cost.name;
     this.column = cost.layer.column;
     this.element = scaffoldCostSetting(cost, zones, costWeightChoices);
+    this.zone = cost.zone;
+    this.weight = cost.weight;
     // initialize private fields
-    this._switch = this.element.querySelector(".switch");
-    this._status = this.element.querySelector(".zone-status");
-    this._label = this.element.querySelector(".weight-label");
-    this._slider = this.element.querySelector(".noUiSlider-widget");
-    this._initialSliderValue = cost.weight;
-    this._initialStatusValue = this.zone;
-    this._previousSliderValue = cost.weight;
-    this._previousStatusValue = this.zone;
-    this._zones = zones;
-    this._sliderRange = {
+    this._initialWeight = cost.weight;
+    this._initialZone = this.zone;
+    this._previousWeight = cost.weight;
+    this._previousZone = this.zone;
+    // set cache
+    this._cache.sliderRange = {
       "min": costWeightChoices[0],
       "max": costWeightChoices[1]
     };
-    this._sliderStep = costWeightChoices[2];
-    // initialize weight slider
-    noUiSlider.create(this._slider, {
-      range: this._sliderRange,
-      step: this._sliderStep,
-      behaviour: "drag",
-      connect: "lower",
-      start: this._initialSliderValue,
-    });
-    // set event handler for slider
-    this._slider.noUiSlider.on("update", (values, handle) => {
-      // convert value to number
-      let v = Number(values[0]);
-      // update weight label
-      this._label.setAttribute("data-weight", v);
-      this._label.innerText = `Weight: ${Math.round(v * 100)}%`;
-    });
-    // set event handler for switch
-    this._switch.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        this.enable();
-      } else {
-        this.disable();
-      }
-    });
+    this._cache.sliderStep = costWeightChoices[2];
   }
 
   /**
@@ -165,79 +115,69 @@ export class CostSetting {
   * @return {void}
   */
   appendTo(element) {
+    // find components of element
+    let toggle = this.element.querySelector(".switch");
+    let select = this.element.querySelector(".zone-status");
+    let label = this.element.querySelector(".weight-label");
+    let slider = this.element.querySelector(".noUiSlider-widget");
+    // initialize weight slider
+    noUiSlider.create(slider, {
+      range: this._cache.sliderRange,
+      step: this._cache.sliderStep,
+      behaviour: "drag",
+      connect: "lower",
+      start: this._initialWeight,
+    })
+    // set event handler for slider
+    slider.noUiSlider.on("update", (values, handle) => {
+      // convert value to number
+      let v = Number(values[0]);
+      // update weight label
+      label.innerText = `Weight: ${Math.round(v * 100)}%`;
+      // update weight field
+      this.weight = v;
+    });
+    // set event handler for select options
+    select
+      .querySelectorAll(".select-option")
+      .forEach((x) => {
+        x.addEventListener("click", (event) => {
+          this.zone = event.target.getAttribute("data-option");
+        })
+      });
+    // set event handler for toggle
+    toggle.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        // update element values
+        slider.noUiSlider.setHandle(0, this._previousWeight);
+        select.children[0].children[0].innerText = this._previousZone;
+        // update disable property on elements
+        label.removeAttribute("disabled")
+        select.removeAttribute("disabled");
+        slider.noUiSlider.enable();
+        // update fields
+        this.weight = this._previousWeight;
+        this.zone = this._previousZone;
+      } else {
+        // store values
+        this._previousWeight = this.weight;
+        this._previousZone = this.zone;
+        // update element values
+        slider.noUiSlider.setHandle(0, 0);
+        select.children[0].children[0].innerText = "Off";
+        // update disable property on elements
+        label.setAttribute("disabled", "");
+        select.setAttribute("disabled", "");
+        slider.noUiSlider.disable();
+        // update fields
+        this.weight = 0;
+        this.zone = "";
+      }
+    });
+    // free memory
+    this._cache = undefined;
     // append to element
     element.appendChild(this.element);
-  }
-
-  /**
-  * Enable object.
-  * @return {void}
-  */
-  enable() {
-    // update element values
-    this._setSliderHandle(this._previousSliderValue);
-    this._status.setAttribute("data-value", this._previousStatusValue);
-    this._status.children[0].innerText = this._previousStatusValue;
-    // update disable property on elements
-    this._label.removeAttribute("disabled")
-    this._status.removeAttribute("disabled");
-    this._slider.noUiSlider.enable();
-  }
-
-  /**
-  * Disable object.
-  * @return {void}
-  */
-  disable() {
-    // store values
-    this._previousSliderValue = this._getSliderHandle();
-    this._previousStatusValue = this._status.getAttribute("data-value");
-    // update element values
-    this._setSliderHandle(0);
-    this._status.setAttribute("data-value", "");
-    this._status.children[0].innerText = "Off";
-    // update disable property on elements
-    this._label.setAttribute("disabled", "");
-    this._status.setAttribute("disabled", "");
-    this._slider.noUiSlider.disable();
-  }
-
-  /**
-  * Get zone name.
-  * @return {string}
-  */
-  getZone() {
-    return this._status.dataset.value;
-  }
-
-  /**
-  * Get cost weight.
-  * @return {number}
-  */
-  getWeight() {
-    return this._getSliderHandle();
-  }
-
-  // private methods
-
-  /**
-  * Set slider handle.
-  * @param {number} - Index
-  * @param {number} - New value.
-  * @param {bool} - Should update event be triggered?
-  * @return {void}
-  */
-  _setSliderHandle(value, update = true) {
-    this._slider.noUiSlider.setHandle(0, value, update);
-  }
-
-  /**
-  * Get slider handle.
-  * @param {number} - Index
-  * @return {void}
-  */
-  _getSliderHandle() {
-    return this._slider.noUiSlider.get(true);
   }
 
 }

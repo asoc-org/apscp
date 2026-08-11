@@ -1,6 +1,7 @@
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
 import {createSwitches} from "../utils/element.js";
+import {createHoverSelect} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 
 /**
@@ -192,37 +193,20 @@ function featureSettingTargets(feature, zones, choices) {
  */
 function featureSettingWeightZoneButton(zone, value, choices) {
   // initialize element
-  let el = document.createElement("div");
-  el.classList.add("weight-status", "hover-select");
-  el.setAttribute("data-value", value);
-  // create button
-  let button = document.createElement("button");
-  button.classList.add("weight-button", "select-button");
-  button.style.backgroundColor = `var(--zone-${zone}-primary)`;
-  button.innerText = `Weight: ${value * 100}%`;
-  addTooltip(
-    button,
-    `Weight for the ${zone} zone to generate solutions`
+  let el = createHoverSelect(
+    choices.map(x => {
+      return {
+        value: x,
+        text: `Weight: ${x * 100}%`,
+        color: `var(--zone-${zone}-primary`
+      }
+    }),
+    value
   );
-  // initialize options
-  let options = document.createElement("ul");
-  options.classList.add("select-options");
-  for (let i = 0; i < choices.length; ++i) {
-    let optionContainer = document.createElement("li");
-    let option = document.createElement("a");
-    option.innerText = `${choices[i] * 100}%`;
-    option.setAttribute("data-option", choices[i]);
-    option.classList.add("select-option");
-    option.addEventListener("click", function(event) {
-      button.innerText =
-        `Weight: ${event.target.getAttribute("data-option") * 100}%`;
-      el.setAttribute("data-value", event.target.getAttribute("data-option"));
-    });
-    optionContainer.appendChild(option);
-    options.appendChild(optionContainer);
-  }
+  // add class
+  el.classList.add("weight-status");
+  // add tooltip
+  addTooltip(el, `Weight for the ${zone} zone to generate solutions`);
   // return element
-  el.appendChild(button);
-  el.appendChild(options);
   return el;
 }

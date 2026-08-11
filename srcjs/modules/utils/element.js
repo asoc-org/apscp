@@ -121,29 +121,67 @@ export function createSwitches(n = 1, checked = true) {
 }
 
 /**
-* Convert a string to a HTML element. This is done by creating a span element
-* that contains a separate span element for each word.
-* @param {string} x - String.
-* @return {HTMLElement}
-*/
-function stringToHtmlElement(x) {
-  let out = document.createElement("span");
-  x.split(" ").forEach((x) => {
-    let s = document.createElement("span");
-    s.innerText = x;
-    out.appendChild(s);
-  })
-  return out;
-}
-
-/**
-* Remove all child nodes from a HTML element.
-* @param {Object} parent - HTML element.
-* @return {void}
-* @see https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
-*/
-function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
+ * Create hover select button.
+ * @param {Array<options>} options - Array of options.
+ * @param {string} options.color -Option color.
+ * @param {string} options.text - Option color.
+ * @param {string} options.value -Option value.
+ * @param {string} selectedOptionValue - Default option value.
+ * @return {HTMLElement}
+ */
+export function createHoverSelect(options, selectedOptionValue) {
+  // process options
+  let selectedOption =
+    options.find(option => option.value === selectedOptionValue);
+  let longestOption =
+    options.reduce((a, b) => a.text.length > b.text.length ? a : b);
+  // if selectedOption is invalid, then throw error
+  if (selectedOption === undefined) {
+    console.error("createHoverSelect: selectedOptionValue not valid.")
   }
+  // initialize element
+  let el = document.createElement("div");
+  el.classList.add("hover-select");
+  el.setAttribute("data-value", selectedOption.value);
+  // create button
+  let button = document.createElement("button");
+  button.classList.add("select-button");
+  button.style.backgroundColor = selectedOption.color;
+  // create element to specify button text
+  let text = document.createElement("span");
+  text.classList.add("select-button-text");
+  text.innerText = selectedOption.text;
+  button.appendChild(text);
+  // create dummy element to ensure button width remains constant when
+  // different options are selected
+  let span = document.createElement("span");
+  span.classList.add("select-button-spacer");
+  span.innerText = longestOption.text;
+  button.appendChild(span);
+  // create elements for options
+  let ul = document.createElement("ul");
+  ul.classList.add("select-options");
+  for (let i = 0; i < options.length; ++i) {
+    let li = document.createElement("li");
+    let a = document.createElement("a");
+    a.innerText = options[i].text;
+    a.setAttribute("data-option", options[i].value);
+    a.setAttribute("data-color", options[i].color);
+    a.classList.add("select-option");
+    li.appendChild(a);
+    ul.appendChild(li);
+  }
+  // add event listener to options
+  ul.addEventListener("click", function(event) {
+    let elem = event.target;
+    if (elem.matches(".select-option")) {
+      button.children[0].innerText = elem.innerText;
+      el.setAttribute("data-value", elem.getAttribute("data-option"));
+      button.style.backgroundColor = elem.getAttribute("data-color");
+    }
+  });
+  // return element
+  el.appendChild(button);
+  el.appendChild(ul);
+  return el;
 }

@@ -1,7 +1,7 @@
 import "./css/feature-setting.css";
 import noUiSlider from "nouislider";
 import {scaffoldFeatureSetting} from "./feature-setting-scaffold.js";
-import {order, roundToDigits} from "../utils/math.js";
+import {order, roundToDigits, replaceNaN} from "../utils/math.js";
 
 /** Class representing the setting for a single feature. */
 export class FeatureSetting {
@@ -401,7 +401,7 @@ export class FeatureSetting {
   */
   _setWeightValue(i, value) {
     this._weightStatuses[i].setAttribute("data-value", value);
-    this._weightStatuses[i].children[0].innerText =
+    this._weightStatuses[i].children[0].children[0].innerText =
       `Weight: ${value * 100}%`;
   }
 
@@ -424,7 +424,7 @@ export class FeatureSetting {
 function convertTargetsToSliderValues(x) {
   let y = [x[0]];
   for (let i = 1; i < x.length; i++) {
-    y.push(x[i] + y[i - 1]);
+    y.push(replaceNaN(x[i] + y[i - 1], 0));
   }
   return y;
 }
@@ -439,7 +439,7 @@ function convertSliderValuesToTargets(x) {
   let y = new Array(x.length).fill(0);
   let sum = 0;
   for (let i = 0; i < x.length; i++) {
-    y[o[i]] = roundToDigits(x[o[i]] - sum, 3);
+    y[o[i]] = replaceNaN(roundToDigits(x[o[i]] - sum, 3), 0);
     sum += y[o[i]];
   }
   return y;

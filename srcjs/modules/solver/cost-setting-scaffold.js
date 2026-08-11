@@ -1,6 +1,7 @@
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
 import {createSwitches} from "../utils/element.js";
+import {createHoverSelect} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 
 /**
@@ -102,39 +103,24 @@ function costSettingWeight(cost, zones, choices) {
  */
 function costSettingZoneButton(cost, zones) {
   // initialize element
-  let el = document.createElement("div");
-  el.classList.add("zone-status", "hover-select");
-  el.setAttribute("data-value", cost.zone);
-  // create button
-  let button = document.createElement("button");
-  button.classList.add("select-button");
-  button.style.backgroundColor = `var(--zone-${cost.zone}-primary)`;
-  button.innerText = `${cost.zone}`;
+  let el = createHoverSelect(
+    zones.map(x => {
+      return {
+        value: x,
+        text: x,
+        color: `var(--zone-${x}-primary`
+      }
+    }),
+    cost.zone
+  );
+  // add class
+  el.classList.add("zone-status");
+  // add tooltip
   addTooltip(
-    button,
+    el,
     "Specify which zone that solutions should prefer to allocate " +
     "planning units to when considering this cost."
   );
-  // initialize options
-  let options = document.createElement("ul");
-  options.classList.add("select-options");
-  for (let i = 0; i < zones.length; ++i) {
-    let optionContainer = document.createElement("li");
-    let option = document.createElement("a");
-    option.innerText = `${zones[i]}`;
-    option.setAttribute("data-option", zones[i]);
-    option.classList.add("select-option");
-    option.addEventListener("click", function(event) {
-      let z = event.target.getAttribute("data-option");
-      button.innerText = `${z}`;
-      button.style.backgroundColor = `var(--zone-${z}-primary)`;
-      el.setAttribute("data-value", z);
-    });
-    optionContainer.appendChild(option);
-    options.appendChild(optionContainer);
-  }
   // return element
-  el.appendChild(button);
-  el.appendChild(options);
   return el;
 }

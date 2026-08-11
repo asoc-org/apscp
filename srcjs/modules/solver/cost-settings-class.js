@@ -75,10 +75,10 @@ export class CostSettings {
         .map(x => x.column),
       zone:
         this._settings
-        .map(x => x.getZone()),
+        .map(x => x.zone),
       weight:
         this._settings
-        .map(x => x.getWeight())
+        .map(x => x.weight)
     };
   }
 

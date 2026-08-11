@@ -19,7 +19,7 @@
 /* label component of weight */
 .cost-setting .weight-label {
   width: 12ch;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 400;
   margin-bottom: 0px;
 }
@@ -38,6 +38,10 @@
   width: 100%;
   z-index: 2;
   margin-left: 5px;
+}
+
+.cost-setting .weight .noUi-connect {
+  background: var(--slider-primary);
 }
 
 .cost-setting .weight .noUi-horizontal {
