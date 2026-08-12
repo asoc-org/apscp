@@ -1,3 +1,5 @@
+/** Import dependencies */
+// classes to create components
 import {MapSidebar} from "./class.js"
 
 /**

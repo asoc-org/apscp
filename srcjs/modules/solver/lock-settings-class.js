@@ -1,5 +1,5 @@
 /** Import dependencies */
-// npm modules
+// Sortable module
 import Sortable from "sortablejs/modular/sortable.core.esm.js";
 // classes to create components
 import {LockSetting} from "./lock-setting-class.js";

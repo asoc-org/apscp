@@ -1,4 +1,5 @@
 /** Import dependencies */
+// classes to create components
 import SmartSlider from "../smartslider/smartslider.js";
 import HoverSelect from "../hoverselect/hoverselect.js";
 // functions to create elements

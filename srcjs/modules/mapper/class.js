@@ -1,6 +1,10 @@
-import "./css/style.css";
+/** Import dependencies */
+// node modules
 import {Sortable} from "sortablejs";
+// functions to create elements
 import {createMenuItem} from "./create-menu-item.js";
+// styling
+import "./css/style.css";
 
 /** Class representing an object for managing a map. */
 export class Mapper {

@@ -1,5 +1,5 @@
 /** Import dependencies */
-// npm modules
+// noUiSlider module
 import noUiSlider from "nouislider";
 import "nouislider/dist/nouislider.css";
 // utility functions

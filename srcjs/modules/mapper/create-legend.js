@@ -1,6 +1,9 @@
+/** Import dependencies */
+// functions to create elements
+import {addTooltip} from  "../utils/element.js";
+// styling
 import "./css/categorical-legend.css";
 import "./css/continuous-legend.css";
-import {addTooltip} from  "../utils/element.js";
 
 /**
  * Create a categorical legend.

@@ -1,3 +1,5 @@
+/** Import dependencies */
+// functions to create elements
 import {createLegend} from "./create-legend.js";
 import {createProvenance} from "../utils/element.js";
 import {createNameLabel} from "../utils/element.js";

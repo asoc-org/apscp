@@ -1,3 +1,5 @@
+/** Import dependencies */
+// styling
 import "./css/style.css";
 
 /** Class representing a map sidebar. */
@@ -8,13 +10,13 @@ export class MapSidebar {
   options;
 
   // private fields
-  _height = undefined;
-  _map = undefined;
-  _sidebar = undefined;
-  _paneContainer = undefined;
-  _tabs = undefined;
-  _panes = undefined;
-  _closeButtons = undefined;
+  _height;
+  _map;
+  _sidebar;
+  _paneContainer;
+  _tabs;
+  _panes;
+  _closeButtons;
 
   /**
    * Initialize a new sidebar object.
