@@ -1,3 +1,5 @@
+/** Import dependencies */
+// functions to create elements
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
 import {createSwitches} from "../utils/element.js";

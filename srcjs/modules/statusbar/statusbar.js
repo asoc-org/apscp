@@ -1,7 +1,10 @@
-import "./css/style.css";
+/** Import dependencies */
+// utility functions
 import {order} from "../utils/math.js";
 import {convertTargetsToSliderValues} from "../utils/math.js";
 import {convertSliderValuesToTargets} from "../utils/math.js";
+// styling
+import "./css/style.css";
 
 /** Class representing a status bar. */
 export default class StatusBar {
@@ -13,8 +16,6 @@ export default class StatusBar {
    * @type {HTMLElement}
    */
   element;
-
-  // private fields
 
   // private HTML fields
 

@@ -27,7 +27,6 @@ HTMLWidgets.widget({
             opts.zoneColors,
           );
         }
-
       },
 
       resize: function(width, height) {

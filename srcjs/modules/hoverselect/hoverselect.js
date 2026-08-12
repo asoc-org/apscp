@@ -1,3 +1,5 @@
+/** Import dependencies */
+// styling
 import "./css/style.css";
 
 /** Class representing a hover select. */
@@ -54,13 +56,13 @@ export default class HoverSelect {
   * @param {HTMLElement} element - Element to create hover select.
   * @param {object} options - Configuration settings.
   * @param {Array<object>} options.options - Array of select options.
-  * @param {Array<number>} options.options.value - Value for option.
+  * @param {Array<string>} options.options.value - Value for option.
   * @param {Array<string>} options.options.text - Text for option.
   * @param {Array<string>} options.options.color - Color for option.
   * @param {string} options.selected - Value for default selected option.
   * @param {object} options.disabledOption - Option to display when
   * disabled.
-  * @param {number} options.disabledOption.value - Value when disabled.
+  * @param {string} options.disabledOption.value - Value when disabled.
   * @param {string} options.disabledOption.text - Text to display when
   * disabled.
   * @param {string} options.disabledOption.color - Color to display when
@@ -213,7 +215,7 @@ export default class HoverSelect {
       let elem = event.target;
       if (elem.matches(".select-option")) {
         // select active option
-        this.set(Number(elem.getAttribute("data-option")));
+        this.set(elem.getAttribute("data-option"));
         // call on onClick method
         this._onClick(event);
       }

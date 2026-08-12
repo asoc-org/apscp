@@ -1,4 +1,8 @@
+/** Import dependencies */
+// classes to create components
 import {CostSetting} from "./cost-setting-class.js";
+// styling
+import "./css/settings.css";
 
 /** Class representing the settings for multiple cost. */
 export class CostSettings {
@@ -9,7 +13,7 @@ export class CostSettings {
    * Array of settings.
    * @type {Array<CostSettings>}
    */
-  _settings;
+  _settings = [];
 
   /**
   * Construct a new CostSettings object.
@@ -20,8 +24,6 @@ export class CostSettings {
   * @return {void}
   */
   constructor(project, costWeightChoices) {
-    // initialize fields
-    this._settings = [];
     // create cost setting objects
     for (let i = 0; i < project.costs.length; ++i) {
       this._settings.push(
@@ -57,21 +59,11 @@ export class CostSettings {
   */
   getSettings() {
     return {
-      id:
-        this._settings
-        .map(x => x.id),
-      name:
-        this._settings
-        .map(x => x.name),
-      column:
-        this._settings
-        .map(x => x.column),
-      zone:
-        this._settings
-        .map(x => x.zone),
-      weight:
-        this._settings
-        .map(x => x.weight)
+      id: this._settings.map(x => x.id),
+      name: this._settings.map(x => x.name),
+      column: this._settings.map(x => x.column),
+      zone: this._settings.map(x => x.zone),
+      weight: this._settings.map(x => x.weight)
     };
   }
 

@@ -1,3 +1,5 @@
+/** Import dependencies */
+// functions to create elements
 import {addTooltip} from "../utils/element.js";
 import {createNameLabel} from "../utils/element.js";
 import {createHandle} from "../utils/element.js";

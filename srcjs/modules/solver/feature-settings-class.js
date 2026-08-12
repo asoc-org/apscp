@@ -1,5 +1,12 @@
-import TomSelect from "tom-select";
+/** Import dependencies */
+// Tom Select module
+import "./css/tom-select.css";
+import "tom-select/dist/css/tom-select.bootstrap5.css";
+import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
+// classes to create components
 import {FeatureSetting} from "./feature-setting-class.js";
+// styling
+import "./css/settings.css";
 
 /** Class representing the settings for multiple features. */
 export class FeatureSettings {

@@ -1,8 +1,11 @@
-import "./css/cost-setting.css";
+/** Import dependencies */
 import SmartSlider from "../smartslider/smartslider.js";
 import HoverSelect from "../hoverselect/hoverselect.js";
+// functions to create elements
 import {scaffoldCostSetting} from "./cost-setting-scaffold.js";
-import {roundToDigits} from "../utils/math.js";
+// styling
+import "./css/setting.css";
+import "./css/cost-setting.css";
 
 /** Class representing the setting for a single cost. */
 export class CostSetting {
@@ -149,7 +152,7 @@ export class CostSetting {
    * @return {string}
    */
   get zone() {
-    this._select.get();
+    return this._select.hoverSelect.get();
   }
 
   /**
@@ -157,7 +160,7 @@ export class CostSetting {
    * @return {number}
    */
   get weight() {
-    this._slider.get()[0];
+    return this._slider.smartSlider.get()[0];
   }
 
   /**

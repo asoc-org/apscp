@@ -1,5 +1,10 @@
+/** Import dependencies */
+// npm modules
 import Sortable from "sortablejs/modular/sortable.core.esm.js";
+// classes to create components
 import {LockSetting} from "./lock-setting-class.js";
+// styling
+import "./css/settings.css";
 
 /** Class representing the settings for multiple locks. */
 export class LockSettings {

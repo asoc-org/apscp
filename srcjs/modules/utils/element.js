@@ -1,3 +1,7 @@
+/** Import dependencies */
+// styling
+import "./css/style.css";
+
 /**
  * Add a tool tip.
  * @param {HTMLElement} element - HTML element that requires a tool tip.;

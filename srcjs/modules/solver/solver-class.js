@@ -1,15 +1,10 @@
-import "./css/style.css";
-import "./css/switch.css";
-import "./css/settings.css";
-import "./css/setting.css";
-import "./css/tom-select.css";
-import "../hoverselect/css/style.css";
-import "nouislider/dist/nouislider.css";
-import "tom-select/dist/css/tom-select.bootstrap5.css";
-
+/** Import dependencies */
+// classes to create components
 import {FeatureSettings} from "./feature-settings-class.js";
 import {LockSettings} from "./lock-settings-class.js";
 import {CostSettings} from "./cost-settings-class.js";
+// styling
+import "./css/style.css";
 
 /** Class representing an object for generating a solution. */
 export class Solver {

@@ -1,9 +1,19 @@
-import "./css/feature-setting.css";
+/** Import dependencies */
+// classes to create components
 import SmartSlider from "../smartslider/smartslider.js";
 import HoverSelect from "../hoverselect/hoverselect.js";
 import StatusBar from "../statusbar/statusbar.js";
+// functions to create elements
 import {scaffoldFeatureSetting} from "./feature-setting-scaffold.js";
-import {order, roundToDigits, replaceNaN} from "../utils/math.js";
+import {createNameLabel} from "../utils/element.js";
+import {createProvenance} from "../utils/element.js";
+import {createSwitches} from "../utils/element.js";
+import {addTooltip} from "../utils/element.js";
+// styling
+import "./css/setting.css";
+import "./css/feature-setting.css";
+// utility functions
+import {order} from "../utils/math.js";
 import {convertTargetsToSliderValues} from "../utils/math.js";
 import {convertSliderValuesToTargets} from "../utils/math.js";
 
@@ -160,21 +170,20 @@ export class FeatureSetting {
     // initialize select widgets
     for (let i = 0; i < this._zones.length; ++i) {
       new HoverSelect(this._selects[i], {
-        selected: feature.zone_weights[i],
+        selected: String(feature.zone_weights[i]),
         options: featureWeightChoices.map(x => {
           return {
-            value: x,
+            value: String(x),
             text: `Weight: ${x * 100}%`,
             color: `var(--zone-${zones[i]}-primary`
           }
         }),
         disabledOption: {
-          value: 0, text: `Weight: 0%`, color: "var(--disabled)"
+          value: "0", text: `Weight: 0%`, color: "var(--disabled)"
         }
       });
     }
     // initialize status bar widget
-    console.log(this.name);
     new StatusBar(this._status, {
       values: feature.zone_helds,
       colors: this._zones.map(x => `var(--zone-${x}-secondary)`),
@@ -214,7 +223,7 @@ export class FeatureSetting {
    * @type {number}
    */
   get targets() {
-    return convertSliderValuesToTargets(this._slider.get());
+    return convertSliderValuesToTargets(this._slider.smartSlider.get());
   };
 
   /**
@@ -222,7 +231,7 @@ export class FeatureSetting {
    * @type {number}
    */
   get weights() {
-    return Array.from(this._selects, x => x.get());
+    return Array.from(this._selects, x => Number(x.hoverSelect.get()));
   };
 
   /**

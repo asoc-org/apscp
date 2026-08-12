@@ -45,6 +45,7 @@ server <- function(input, output, session) {
   observeEvent(input$solver_settings, {
     req(input$solver_settings)
     # format settings
+    print(input$solver_settings)
     d <- format_settings(input$solver_settings)
     # update text box with settings
     output$text <- renderPrint(print(d))

@@ -1,4 +1,8 @@
+/** Import dependencies */
+// npm modules
 import noUiSlider from "nouislider";
+import "nouislider/dist/nouislider.css";
+// utility functions
 import {toArray} from "../utils/misc.js";
 
 /** Class representing a smart slider. */
