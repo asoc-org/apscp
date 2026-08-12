@@ -31,10 +31,16 @@ export default class StatusBar {
   _segments;
 
   /**
-   * HTML element that contains the bar cap.
+   * HTML element that contains the start bar cap.
    * @type {HTMLElement}
    */
-  _cap;
+  _start_cap;
+
+  /**
+   * HTML element that contains the start bar cap.
+   * @type {HTMLElement}
+   */
+  _end_cap;
 
   /**
   * Construct a new StatusBar object.
@@ -55,14 +61,17 @@ export default class StatusBar {
     this._colors = options.colors;
     this._labels = options.labels;
     this._formatter = options.format || ((labels, values) => {});
-    // create bar cap element
-    this._cap = document.createElement("div");
-    this._cap.classList.add("bar-cap");
+    // create end bar cap element
+    this._end_cap = document.createElement("div");
+    this._end_cap.classList.add("bar-end-cap");
+    // create start bar cap element
+    this._start_cap = document.createElement("div");
+    this._start_cap.classList.add("bar-start-cap");
     // create bars element
     let bars = document.createElement("div");
     bars.classList.add("bars");
     // create segment elements
-    this._segments = []
+    this._segments = [];
     for (let i = 0; i < options.values.length; ++i) {
       let segment = document.createElement("div");
       segment.classList.add("bar-segment");
@@ -71,8 +80,9 @@ export default class StatusBar {
     }
     // render elements
     element.classList.add("statusBars-target");
-    element.appendChild(this._cap);
+    element.appendChild(this._start_cap);
     element.appendChild(bars);
+    element.appendChild(this._end_cap);
     // set values.
     this.set(options.values);
   }
@@ -88,14 +98,25 @@ export default class StatusBar {
     let v = convertTargetsToSliderValues(values);
     // update labels
     this._formatter(this._labels, values);
-    // update cap style
-    this._cap.style.color = this._colors[o[0]];
-    this._cap.style.background = this._colors[o[0]];
-    // update segments
+    // by default, make start cap the color of smallest value
+    this._start_cap.style.color = this._colors[o[0]];
+    this._start_cap.style.background = this._colors[o[0]];
+    // by default, make end cap transparent
+    this._end_cap.style.color = "transparent";
+    this._end_cap.style.background = "transparent";
+    // update segments and, if needed, start and end caps too
     for (let i = 0; i < values.length; ++i) {
+      // update i'th segment
       this._segments[o[i]].style.width = `${Math.round(v[i] * 100)}%`;
       this._segments[o[i]].style["z-index"] = values.length - i;
       this._segments[o[i]].style.background = this._colors[i];
+      // if i'th segment covers 100%, then update caps
+      if (values[i] > 0.995) {
+        this._end_cap.style.color = this._colors[i];
+        this._end_cap.style.background = this._colors[i];
+        this._start_cap.style.color = this._colors[i];
+        this._start_cap.style.background = this._colors[i];
+      }
     }
   }
 }

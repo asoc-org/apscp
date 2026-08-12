@@ -174,6 +174,7 @@ export class FeatureSetting {
       });
     }
     // initialize status bar widget
+    console.log(this.name);
     new StatusBar(this._status, {
       values: feature.zone_helds,
       colors: this._zones.map(x => `var(--zone-${x}-secondary)`),
