@@ -151,11 +151,11 @@ export class FeatureSettings {
         .flat(1),
       target:
         settings
-        .map(x => x.getTargets())
+        .map(x => x.targets)
         .flat(1),
       weight:
         settings
-        .map(x => x.getWeights())
+        .map(x => x.weights)
         .flat(1)
     };
   }

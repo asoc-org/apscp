@@ -36,8 +36,8 @@
 /* name component of header */
 .solver .setting .header .name-label {
   font-weight: 600;
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 1px;
+  padding-bottom: 1px;
 }
 
 /* provenance component of header */
@@ -52,4 +52,26 @@
 .solver .setting .name-label {
   margin-right: auto;
   word-break: break-all;
+}
+
+/* Disabled elements
+   ========================================================================== */
+
+.solver .setting div[disabled] label,
+.solver .setting label[disabled] {
+  color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.solver .setting div[disabled] button {
+  background-color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.solver .setting .noUi-origin[disabled] .noUi-handle {
+  background-color: var(--disabled) !important;
+}
+
+.solver .setting .noUi-origin[disabled] {
+  z-index: 3 !important;
 }

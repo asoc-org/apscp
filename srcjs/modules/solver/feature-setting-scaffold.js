@@ -1,7 +1,6 @@
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
 import {createSwitches} from "../utils/element.js";
-import {createHoverSelect} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 
 /**
@@ -49,14 +48,14 @@ export function scaffoldFeatureSetting(
 function featureSettingHeader(feature, zones) {
   // create container
   let el = document.createElement("div");
-  el.classList.add("header");
+  el.classList.add("feature-header", "header");
   // create switches for each zone
   let switchContainer = createSwitches(zones.length);
   for (let i = 0; i < zones.length; ++i) {
-    switchContainer.children[i].children[0]
-      .setAttribute("data-zone", zones[i]);
-    switchContainer.children[i].children[0]
-      .style.setProperty("--switch-primary", `var(--zone-${zones[i]}-primary)`);
+    switchContainer.children[i].style.setProperty(
+      "--switch-primary",
+      `var(--zone-${zones[i]}-primary)`
+    );
   }
   // create name element
   let nameElement = createNameLabel(feature);
@@ -123,8 +122,11 @@ function featureSettingStatuses(feature, zones, choices) {
       `Target for the ${zones[i]} zone to generate solutions`
     );
     // create container for weight status
-    let weightStatus = featureSettingWeightZoneButton(
-      zones[i], feature.zone_weights[i], choices
+    let weightStatus = document.createElement("div");
+    weightStatus.classList.add("weight-status");
+    addTooltip(
+      weightStatus,
+      `Weight for the ${zones[i]} zone to generate solutions`
     );
     // assemble containers
     heldStatus.appendChild(heldStatusIcon);
@@ -152,61 +154,19 @@ function featureSettingTargets(feature, zones, choices) {
   // initialize element
   let el = document.createElement("div");
   el.classList.add("targets");
-  // create container with status bars and slider widget
-  let sliderContainer = document.createElement("div");
-  sliderContainer.classList.add("zone-slider");
-  addTooltip(sliderContainer, "Set targets to generate solutions");
-  // create slider element
+  addTooltip(el, "Set targets to generate solutions");
+  // create body container
+  let targetsBody = document.createElement("div");
+  targetsBody.classList.add("targets-body");
+  // create status bar container
+  let status = document.createElement("div");
+  status.classList.add("status-bar");
+  // create slider container
   let slider = document.createElement("div");
-  slider.classList.add("slider");
-  slider.id = `${feature.id}-slider`;
-  // create bar cap element
-  let barCap = document.createElement("div");
-  barCap.classList.add("bar-cap");
-  slider.appendChild(barCap);
-  // create bars element
-  let bars = document.createElement("div");
-  bars.classList.add("bars");
-  slider.appendChild(bars);
-  // create bars for each zone to show held values
-  for (let i = 0; i < zones.length; ++i) {
-    let bar = document.createElement("div");
-    bar.classList.add("bar-held");
-    bars.appendChild(bar);
-  }
-  // create slider widget
-  let widget = document.createElement("div");
-  widget.classList.add("noUiSlider-widget", "disable-if-inactive");
-  widget.id = `${feature.id}-slider-widget`;
+  slider.classList.add("target-slider");
   // return element
-  slider.appendChild(widget);
-  el.appendChild(slider);
-  return el;
-}
-
-/**
- * Create a zone weight button component for a feature status
- * @param {string} zone - Zone name.
- * @param {number} value - Default weight value.
- * @param {Array<Number>} choices - Array of numbers for weight choices.
- * @return {HTMLElement}
- */
-function featureSettingWeightZoneButton(zone, value, choices) {
-  // initialize element
-  let el = createHoverSelect(
-    choices.map(x => {
-      return {
-        value: x,
-        text: `Weight: ${x * 100}%`,
-        color: `var(--zone-${zone}-primary`
-      }
-    }),
-    value
-  );
-  // add class
-  el.classList.add("weight-status");
-  // add tooltip
-  addTooltip(el, `Weight for the ${zone} zone to generate solutions`);
-  // return element
+  targetsBody.appendChild(status);
+  targetsBody.appendChild(slider);
+  el.appendChild(targetsBody);
   return el;
 }

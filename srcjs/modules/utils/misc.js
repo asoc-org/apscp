@@ -4,7 +4,7 @@
 * @param {string} x - String.
 * @return {HTMLElement}
 */
-function stringToHtmlElement(x) {
+export function stringToHtmlElement(x) {
   let out = document.createElement("span");
   x.split(" ").forEach((x) => {
     let s = document.createElement("span");
@@ -16,12 +16,24 @@ function stringToHtmlElement(x) {
 
 /**
 * Remove all child nodes from a HTML element.
-* @param {Object} parent - HTML element.
+* @param {object} parent - HTML element.
 * @return {void}
 * @see https://www.javascripttutorial.net/dom/manipulating/remove-all-child-nodes/
 */
-function removeAllChildNodes(parent) {
+export function removeAllChildNodes(parent) {
   while (parent.firstChild) {
       parent.removeChild(parent.firstChild);
   }
+}
+
+/**
+* Convert to array.
+* @param {object} x - Object.
+* @return {Array<object>}
+*/
+export function toArray(object) {
+  if (Array.isArray(object)) {
+    return object;
+  }
+  return [object];
 }

@@ -6,12 +6,6 @@ export class CostSettings {
   // private fields
 
   /**
-   * Array of zone names.
-   * @type {Array<string>}
-   */
-  _zones;
-
-  /**
    * Array of settings.
    * @type {Array<CostSettings>}
    */
@@ -27,7 +21,6 @@ export class CostSettings {
   */
   constructor(project, costWeightChoices) {
     // initialize fields
-    this._zones = project.zones;
     this._settings = [];
     // create cost setting objects
     for (let i = 0; i < project.costs.length; ++i) {

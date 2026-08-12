@@ -1,7 +1,11 @@
 import "./css/feature-setting.css";
-import noUiSlider from "nouislider";
+import SmartSlider from "../smartslider/smartslider.js";
+import HoverSelect from "../hoverselect/hoverselect.js";
+import StatusBar from "../statusbar/statusbar.js";
 import {scaffoldFeatureSetting} from "./feature-setting-scaffold.js";
 import {order, roundToDigits, replaceNaN} from "../utils/math.js";
+import {convertTargetsToSliderValues} from "../utils/math.js";
+import {convertSliderValuesToTargets} from "../utils/math.js";
 
 /** Class representing the setting for a single feature. */
 export class FeatureSetting {
@@ -35,72 +39,34 @@ export class FeatureSetting {
   // private fields
 
   /**
-   * List of HTML elements that contain switches for feature.
-   * @type {NodeList<HTMLElement>}
-   */
-  _zoneSwitches;
-
-  /**
-   * List of HTML elements that contain statuses for amount held by lock in
-   * planning units.
-   * @type {NodeList<HTMLElement>}
-   */
-  _heldStatuses;
-
-  /**
-   * List of HTML elements that contain bars for amount held by lock in
-   * planning units.
-   * @type {NodeList<HTMLElement>}
-   */
-  _heldBars;
-
-  /**
-   * HTML element that contains the bar cap.
-   * @type {HTMLElement}
-   */
-  _barCap;
-
-  /**
-   * HTML element that contains slider for target setting.
-   * @type {HTMLElement}
-   */
-  _targetSlider;
-
-  /**
-   * Array of HTML elements that contain status for target setting.
-   * @type {Array<HTMLElement>}
-   */
-  _targetStatuses;
-
-  /**
-   * Array of HTML element that contains status for weight setting.
-   * @type {Array<HTMLElement>}
-   */
-  _weightStatuses;
-
-  /**
-   * Array of previous slider values.
-   * @type {Array<number>}
-   */
-  _previousSliderValues;
-
-  /**
-   * Array of initial slider values.
-   * @type {Array<number>}
-   */
-  _initialSliderValues;
-
-  /**
-   * Array of initial weight values.
-   * @type {Array<number>}
-   */
-  _initialWeightValues;
-
-  /**
    * Array of zone names.
    * @type {Array<string>}
    */
   _zones;
+
+  /**
+   * Slider element.
+   * @type {HTMLElement}
+   */
+  _slider;
+
+  /**
+   * Status bar element.
+   * @type {HTMLElement}
+   */
+  _status;
+
+  /**
+   * List of hover select elements.
+   * @type {NodeList<HTMLElement>}
+   */
+  _selects;
+
+  /**
+   * List of switch elements.
+   * @type {NodeList<HTMLElement>}
+   */
+  _selects;
 
   /**
    * Slider range.
@@ -139,103 +105,97 @@ export class FeatureSetting {
     this.element = scaffoldFeatureSetting(
       feature, zones, featureTargetChoices, featureWeightChoices
     );
-
     // initialize private fields
-    this._zoneSwitches = this.element.querySelectorAll(".switch");
-    this._heldStatuses = this.element.querySelectorAll(".held-status");
-    this._heldBars = this.element.querySelectorAll(".bar-held");
-    this._barCap = this.element.querySelector(".bar-cap");
-    this._targetStatuses = Array.from(
-      this.element.querySelectorAll(".target-status")
-    );
-    this._weightStatuses = Array.from(
-      this.element.querySelectorAll(".weight-status")
-    );
-    this._targetSlider = this.element.querySelector(".noUiSlider-widget");
-    this._initialSliderValues = convertTargetsToSliderValues(
-      feature.zone_targets
-    );
-    this._previousSliderValues = this._initialSliderValues;
-    this._initialWeightValues = feature.zone_weights;
-    this._previousWeightValues = feature.zone_weights;
     this._zones = zones;
     this._sliderRange = {
       "min": featureTargetChoices[0],
       "max": featureTargetChoices[1]
     };
     this._sliderStep = featureTargetChoices[2];
-
-    // set zone held bars
-    this.setHeld(feature.zone_helds);
-
-    // define options for slider
-    let connectOption = Array(zones.length + 1).fill(true);
-    connectOption[zones.length] = false;
-
-    // initialize target slider
-    noUiSlider.create(this._targetSlider, {
-      range: this._sliderRange,
-      step: this._sliderStep,
-      behaviour: "unconstrained-drag",
-      connect: connectOption,
-      start: this._initialSliderValues,
-      handleAttributes: zones.map(x => {return {"data-zone": x}})
-    });
-
-    // color the slider bars
-    let connectElements = this._targetSlider.querySelectorAll(".noUi-connect");
-    for (let i = 0; i < zones.length; ++i) {
-      connectElements[i].style.background =
-        `var(--zone-${zones[i]}-primary)`;
-    }
-    // color the handles
-    let handleElements = this._targetSlider.querySelectorAll(".noUi-handle");
-    for (let i = 0; i < zones.length; ++i) {
-      handleElements[i].style.background =
-        `var(--zone-${zones[i]}-primary)`;
-    }
-
-    // set event handlers for target slider
-    this._targetSlider.noUiSlider.on("update", (values, handle) => {
-      // convert values to numbers
-      values = values.map(Number);
-      // update connect elements to display correct colors between handles
-      let o = order(values);
-      for (let i = 0; i < values.length; ++i) {
-        connectElements[i].style.background =
-          `var(--zone-${zones[o[i]]}-primary)`;
-        connectElements[i].style.transform =
-          `translate(0%, 0px) scale(${values[o[i]]}, 1)`;
-        connectElements[i].style["z-index"] = values.length - i;
-      }
-      // update target labels
-      values = convertSliderValuesToTargets(values);
-      for (let i = 0; i < values.length; ++i) {
-        this._targetStatuses[i].setAttribute("data-value", values[i]);
-        this._targetStatuses[i].children[1].innerText =
-          `Target: ${Math.round(values[i] * 100)}%`;
-      }
-    });
-
-    // set event handlers for switches
-    this._zoneSwitches.forEach((x) => {
-      x.addEventListener("change", (event) => {
-        let i = this._zones.indexOf(event.target.getAttribute("data-zone"));
-        if (event.target.checked) {
-          // restore previous values
-          this._setWeightValue(i, this._previousWeightValues[i]);
-          this._setSliderHandle(i, this._previousSliderValues[i]);
-          this._enableZone(i);
-        } else {
-          this._previousSliderValues[i] = this._getSliderHandle(i);
-          this._previousWeightValues[i] = this._getWeightValue(i);
-          this._disableZone(i);
-          this._setWeightValue(i, 0);
-          this._setSliderHandle(i, 0);
+    // initialize private HTML fields
+    this._slider = this.element.querySelector(".target-slider");
+    this._status = this.element.querySelector(".status-bar");
+    this._switches = this.element.querySelectorAll(".switch");
+    this._selects = this.element.querySelectorAll(".weight-status");
+    // initialize slider widget
+    new SmartSlider(
+      this._slider,
+      {
+        range: this._sliderRange,
+        step: this._sliderStep,
+        behaviour: "unconstrained-drag",
+        connect:
+          new Array(zones.length + 1).fill(true).with(zones.length, false),
+        start: convertTargetsToSliderValues(feature.zone_targets)
+      },
+      {
+        labels: this.element.querySelectorAll(".target-label"),
+        format: (labels, values) => {
+          // update target labels
+          let v = convertSliderValuesToTargets(values);
+          for (let i = 0; i < v.length; ++i) {
+            labels[i].innerText = `Target: ${Math.round(v[i] * 100)}%`;
+          }
         }
-      })
+      }
+    );
+    // set update handler to recolor connect elements of the slider
+    let connects = this._slider.querySelectorAll(".noUi-connect");
+    this._slider.noUiSlider.on("update", (values, handle) => {
+      // run calculations
+      let v = values.map(Number);
+      let o = order(v);
+      // update connect elements
+      for (let i = 0; i < v.length; ++i) {
+        connects[i].style.background = `var(--zone-${zones[o[i]]}-primary)`;
+        connects[i].style.transform = `translate(0%, 0px) scale(${v[o[i]]}, 1)`;
+        connects[i].style["z-index"] = v.length - i;
+      }
     });
-
+    // color the handles
+    let handles = this._slider.querySelectorAll(".noUi-handle");
+    for (let i = 0; i < this._zones.length; ++i) {
+      handles[i].style.background = `var(--zone-${this._zones[i]}-primary)`;
+    }
+    // initialize select widgets
+    for (let i = 0; i < this._zones.length; ++i) {
+      new HoverSelect(this._selects[i], {
+        selected: feature.zone_weights[i],
+        options: featureWeightChoices.map(x => {
+          return {
+            value: x,
+            text: `Weight: ${x * 100}%`,
+            color: `var(--zone-${zones[i]}-primary`
+          }
+        }),
+        disabledOption: {
+          value: 0, text: `Weight: 0%`, color: "var(--disabled)"
+        }
+      });
+    }
+    // initialize status bar widget
+    new StatusBar(this._status, {
+      values: feature.zone_helds,
+      colors: this._zones.map(x => `var(--zone-${x}-secondary)`),
+      labels: this.element.querySelectorAll(".held-label"),
+      format: (labels, values) => {
+        for (let i = 0; i < labels.length; ++i) {
+          labels[i].innerText = `Lock: ${Math.round(values[i] * 100)}%`;
+        }
+      }
+    });
+    // set event handlers for switches
+    for (let i = 0; i < zones.length; ++i) {
+      this._switches[i].addEventListener("change", (event) => {
+        if (event.target.checked) {
+          this._slider.smartSlider.enableHandle(i);
+          this._selects[i].hoverSelect.enable();
+        } else {
+          this._slider.smartSlider.disableHandle(i);
+          this._selects[i].hoverSelect.disable();
+        }
+      });
+    }
   }
 
   /**
@@ -249,198 +209,68 @@ export class FeatureSetting {
   }
 
   /**
-  * Enable feature setting for zone.
-  * @param {string} - Zone name.
-  * @return {void}
-  */
-  enableZone(zone) {
-    let i = this._zones.indexOf(zone);
-    if (i > -1) {
-      this._enableZone(i);
-    }
-  }
+   * Target values for each zone.
+   * @type {number}
+   */
+  get targets() {
+    return convertSliderValuesToTargets(this._slider.get());
+  };
 
   /**
-  * Disable feature setting for zone.
-  * @param {string} - Zone name.
-  * @return {void}
-  */
-  disableZone(zone) {
-    let i = this._zones.indexOf(zone);
-    if (i > -1) {
-      this._disableZone(i);
-    }
-  }
-
-  /**
-  * Get feature targets.
-  * @return {Array<number>}
-  */
-  getTargets() {
-    return this._targetStatuses.map(x => {return x.dataset.value});
-  }
-
-  /**
-  * Get feature weights.
-  * @return {Array<number>}
-  */
-  getWeights() {
-    return this._weightStatuses.map(x => {return x.dataset.value});
-  }
+   * Weight values for each zone.
+   * @type {number}
+   */
+  get weights() {
+    return Array.from(this._selects, x => x.get());
+  };
 
   /**
   * Set amount held for each feature.
   * @param {Array<number>} - New held values.
   * @return {void}
   */
-  setHeld(values) {
-    // calculate order for zones
-    let o = order(values);
-    // convert to slider values for setting bar widths
-    let v = convertTargetsToSliderValues(values);
-    // update bar cap style
-    this._barCap.style.color =
-      `var(--zone-${this._zones[o[0]]}-secondary)`;
-    this._barCap.style.background =
-      `var(--zone-${this._zones[o[0]]}-secondary)`;
-    // update labels and bars
-    for (let i = 0; i < values.length; ++i) {
-      // set held label
-      this._heldStatuses[i].children[1].innerText =
-        `Lock: ${Math.min(Math.round(values[i] * 100), 100)}%`;
-      // set held bar
-      this._heldBars[o[i]].style.width =
-        `${Math.min(Math.round(v[i] * 100), 100)}%`;
-      this._heldBars[o[i]].style["z-index"] = values.length - i;
-      this._heldBars[o[i]].style.background =
-        `var(--zone-${this._zones[i]}-secondary)`;
-    }
+  setHeldStatus(values) {
+    this._status.set(values);
   }
 
   /**
   * Increment the target for a zone.
-  * @param {string} - Zone name.
+  * @param {string} zone - Zone name.
   * @return {void}
   */
   incrementZoneTarget(zone) {
     let i = this._zones.indexOf(zone);
-    this._setSliderHandle(
-      i,
-      min(this._getSliderHandle(i) + this._sliderStep, this._sliderRange.max)
-    );
+    // TODO
   }
 
   /**
   * Decrement the target for a zone.
-  * @param {string} - Zone name.
+  * @param {string} zone - Zone name.
   * @return {void}
   */
   decrementZoneTarget(zone) {
     let i = this._zones.indexOf(zone);
-    this._setSliderHandle(
-      i,
-      max(this._getSliderHandle(i) - this._sliderStep, this._sliderRange.min)
-    );
-  }
-
-  // Private methods
-
-  /**
-  * Enable feature setting for zone based on index.
-  * @param {number} - Index.
-  * @return {void}
-  */
-  _enableZone(i) {
-    // enable target status for zone
-    this._targetStatuses[i].removeAttribute("disabled");
-    // enable weight status zone
-    this._weightStatuses[i].removeAttribute("disabled");
-    // enable target slider for zone
-    this._targetSlider.noUiSlider.enable(i);
+    // TODO
   }
 
   /**
-  * Disable feature setting for zone on index.
-  * @param {number} - Index.
+  * Increment the weight for a zone.
+  * @param {string} zone - Zone name.
   * @return {void}
   */
-  _disableZone(i) {
-    // disable target status for zone
-    this._targetStatuses[i].setAttribute("disabled", "");
-    // disable weight status zone
-    this._weightStatuses[i].setAttribute("disabled", "");
-    // disable target slider handle for zone
-    this._targetSlider.noUiSlider.disable(i);
+  incrementZoneWeight(zone) {
+    let i = this._zones.indexOf(zone);
+    // TODO
   }
 
   /**
-  * Set slider handle.
-  * @param {number} - Index
-  * @param {number} - New value.
-  * @param {bool} - Should update event be triggered?
+  * Decrement the weight for a zone.
+  * @param {string} zone - Zone name.
   * @return {void}
   */
-  _setSliderHandle(i, value, update = true) {
-    this._targetSlider.noUiSlider.setHandle(i, value, update);
+  decrementZoneWeight(zone) {
+    let i = this._zones.indexOf(zone);
+    // TODO
   }
 
-  /**
-  * Get slider handle.
-  * @param {number} - Index
-  * @return {void}
-  */
-  _getSliderHandle(i) {
-    return this._targetSlider.noUiSlider.get(true)[i];
-  }
-
-  /**
-  * Set feature weight value.
-  * @param {number} - Index.
-  * @param {value} - New value.
-  * @return {void}
-  */
-  _setWeightValue(i, value) {
-    this._weightStatuses[i].setAttribute("data-value", value);
-    this._weightStatuses[i].children[0].children[0].innerText =
-      `Weight: ${value * 100}%`;
-  }
-
-  /**
-  * Get feature weight value.
-  * @param {number} - Index.
-  * @return {void}
-  */
-  _getWeightValue(i) {
-    return this._weightStatuses[i].getAttribute("data-value");
-  }
-
-}
-
-/**
- * Convert targets to slider values
- * @param {Array<number>} x - Array of numbers.
- * @return {Array<number>}
- */
-function convertTargetsToSliderValues(x) {
-  let y = [x[0]];
-  for (let i = 1; i < x.length; i++) {
-    y.push(replaceNaN(x[i] + y[i - 1], 0));
-  }
-  return y;
-}
-
-/**
- * Convert slider values to targets
- * @param {Array<number>} x - Array of numbers.
- * @return {Array<number>}
- */
-function convertSliderValuesToTargets(x) {
-  let o = order(x);
-  let y = new Array(x.length).fill(0);
-  let sum = 0;
-  for (let i = 0; i < x.length; i++) {
-    y[o[i]] = replaceNaN(roundToDigits(x[o[i]] - sum, 3), 0);
-    sum += y[o[i]];
-  }
-  return y;
 }

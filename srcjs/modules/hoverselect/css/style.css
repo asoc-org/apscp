@@ -5,7 +5,7 @@
 /* Overall container
    ========================================================================== */
 
-.solver .hover-select {
+.hoverSelect-widget {
   position: relative;
   display: inline-block;
   width: max-content;
@@ -14,7 +14,7 @@
 /* Select button
    ========================================================================== */
 
-.solver .hover-select .select-button {
+.hoverSelect-widget .select-button {
   display: inline-grid;
   grid-template-areas: "stack";
   color: white;
@@ -26,11 +26,11 @@
   padding-bottom: 0;
 }
 
-.solver .hover-select .select-button-text {
+.hoverSelect-widget .select-button-text {
   pointer-events: auto;
 }
 
-.solver .hover-select .select-button-spacer {
+.hoverSelect-widget .select-button-spacer {
   height: 0;
   opacity: 0;
   pointer-events: none;
@@ -40,7 +40,7 @@
 /* Container for options in drop down menu
    ========================================================================== */
 
-.solver .hover-select .select-options {
+.hoverSelect-widget .select-options {
   display: none;
   position: absolute;
   top: 100%;
@@ -55,14 +55,14 @@
   z-index: 10;
 }
 
-.solver .hover-select:hover:not([disabled]) .select-options {
+.hoverSelect-widget:hover:not([disabled]) .select-options {
   display: block;
 }
 
 /* Options in drop down menu
    ========================================================================== */
 
-.solver .hover-select .select-options .select-option {
+.hoverSelect-widget .select-options .select-option {
   color: #333;
   text-align: center;
   font-size: 16px;
@@ -71,13 +71,13 @@
   display: block;
 }
 
-.solver .hover-select .select-options .select-option:hover {
+.hoverSelect-widget .select-options .select-option:hover {
   background-color: #f1f1f1;
 }
 
 /* Disabled styles
    ========================================================================== */
-.solver .select-button:disabled {
+.hoverSelect-widget .select-button:disabled {
   background-color: --disabled;
   color: white;
 }

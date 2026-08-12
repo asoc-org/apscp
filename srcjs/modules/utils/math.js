@@ -56,3 +56,32 @@ export function order(x) {
 export function replaceNaN(x, y) {
   return Number.isNaN(x) ? y : x;
 }
+
+/**
+ * Convert targets to slider values
+ * @param {Array<number>} x - Array of numbers.
+ * @return {Array<number>}
+ */
+export function convertTargetsToSliderValues(x) {
+  let y = [x[0]];
+  for (let i = 1; i < x.length; i++) {
+    y.push(replaceNaN(x[i] + y[i - 1], 0));
+  }
+  return y;
+}
+
+/**
+ * Convert slider values to targets
+ * @param {Array<number>} x - Array of numbers.
+ * @return {Array<number>}
+ */
+export function convertSliderValuesToTargets(x) {
+  let o = order(x);
+  let y = new Array(x.length).fill(0);
+  let sum = 0;
+  for (let i = 0; i < x.length; i++) {
+    y[o[i]] = replaceNaN(roundToDigits(x[o[i]] - sum, 3), 0);
+    sum += y[o[i]];
+  }
+  return y;
+}

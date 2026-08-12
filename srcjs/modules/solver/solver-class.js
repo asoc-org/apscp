@@ -2,8 +2,8 @@ import "./css/style.css";
 import "./css/switch.css";
 import "./css/settings.css";
 import "./css/setting.css";
-import "./css/hover-select.css";
 import "./css/tom-select.css";
+import "../hoverselect/css/style.css";
 import "nouislider/dist/nouislider.css";
 import "tom-select/dist/css/tom-select.bootstrap5.css";
 

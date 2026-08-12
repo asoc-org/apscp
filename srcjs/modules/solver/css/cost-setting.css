@@ -2,11 +2,11 @@
    Cost setting
    ========================================================================== */
 
-/* Weight compononent
+/* Components
    ========================================================================== */
 
-/* weight component */
-.cost-setting .weight {
+/* body container */
+.cost-setting .cost-body {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -16,7 +16,7 @@
   margin-bottom: 3px;
 }
 
-/* label component of weight */
+/* label component */
 .cost-setting .weight-label {
   width: 12ch;
   font-size: 16px;
@@ -24,8 +24,8 @@
   margin-bottom: 0px;
 }
 
-/* slider component of weight */
-.cost-setting .slider {
+/* slider container */
+.cost-setting .weight-slider {
   width: 100%;
   display: inline-flex;
   align-items: center;
@@ -34,55 +34,34 @@
   padding-right: 5px;
 }
 
-.cost-setting .weight .noUiSlider-widget {
+/* noUiSlider */
+.cost-setting .noUi-target {
   width: 100%;
   z-index: 2;
   margin-left: 5px;
 }
 
-.cost-setting .weight .noUi-connect {
+.cost-setting .noUi-connect {
   background: var(--slider-primary);
 }
 
-.cost-setting .weight .noUi-horizontal {
+.cost-setting .noUi-horizontal {
   height: 10px;
 }
 
-.cost-setting .weight .noUi-horizontal .noUi-handle {
+.cost-setting .noUi-horizontal .noUi-handle {
   box-shadow: 0 3px 6px -3px #BBB;
   width: 14px;
   height: 20px;
   right: -7px;
 }
 
-.cost-setting .weight .noUi-handle:before,
-.cost-setting .weight .noUi-handle:after {
+.cost-setting .noUi-handle:before,
+.cost-setting .noUi-handle:after {
   height: 6px;
   left: 4px;
 }
 
-.cost-setting .weight .noUi-handle:after {
+.cost-setting .cost-body .noUi-handle:after {
   left: 7px;
-}
-
-/* Disabled styling
-   ========================================================================== */
-
-.cost-setting div[disabled] label,
-.cost-setting label[disabled] {
-  color: var(--disabled) !important;
-  cursor: not-allowed !important;
-}
-
-.cost-setting div[disabled] button {
-  background-color: var(--disabled) !important;
-  cursor: not-allowed !important;
-}
-
-.cost-setting .weight .noUi-origin[disabled] .noUi-handle {
-  background-color: var(--disabled) !important;
-}
-
-.cost-setting .weight .noUi-origin[disabled] {
-  z-index: 3 !important;
 }

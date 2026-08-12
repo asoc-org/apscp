@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Status bar
+   ========================================================================== */
+
+/* Overall container
+   ========================================================================== */
+
+.statusBars-target {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+}
+
+.statusBars-target .bars {
+  padding-right: 0px;
+  margin-right: 0px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Bar components
+   ========================================================================== */
+
+.statusBars-target .bar-cap,
+.statusBars-target .bar-segment {
+  width: 0%;
+  height: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.statusBars-target .bar-segment {
+  position: absolute;
+  /* margin-left: 5px; */
+}
+
+.statusBars-target .bar-cap {
+  z-index: 1;
+  padding-left: 5px;
+  border-radius: 5px 0px 0px 5px;
+}

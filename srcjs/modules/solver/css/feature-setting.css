@@ -8,16 +8,17 @@
 .feature-setting .statuses {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 3px;
   margin-left: 5px;
   margin-right: 5px;
-  margin-bottom: 8px;
+  margin-bottom: 1px;
 }
 
 .feature-setting .statuses label {
   font-size: 16px;
   font-weight: 400;
-  margin-bottom: 0px;
+  margin-bottom: 1px;
 }
 
 /* Status elements
@@ -31,15 +32,16 @@
   align-items: center;
 }
 
-.feature-setting .held-status label {
+/* labels */
+.feature-setting .held-label {
   width: 9ch;
 }
 
-.feature-setting .target-status label {
+.feature-setting .target-label {
   width: 11ch;
 }
 
-/* symbol boxes */
+/* symbols */
 .feature-setting .statuses .held-symbol,
 .feature-setting .statuses .target-symbol {
   width: 16px;
@@ -57,57 +59,24 @@
 
 /* containers */
 .feature-setting .targets {
+  width: auto;
   margin-left: 5px;
   margin-right: 5px;
-  margin-bottom: 3px;
+  margin-bottom: 13px;
 }
-
-.feature-setting .targets .slider {
-  width: 100%;
+.feature-setting .targets-body {
+  width: calc(100% - 10px);
+  display: none;
   display: inline-flex;
   align-items: center;
   position: relative;
-  padding-top: 2px;
-  padding-left: 5px;
-}
-
-/* bar components */
-.feature-setting .targets .bar-cap,
-.feature-setting .targets .bar-held {
-  width: 0%;
-  height: 12px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.feature-setting .targets .bar-held {
-  position: absolute;
-  margin-left: 5px;
-}
-
-.feature-setting .targets .bar-cap {
-  z-index: 1;
-  padding-left: 5px;
-  border-radius: 5px 0px 0px 5px;
-}
-
-.feature-setting .targets .bars {
-  width: 95%;
-  position: absolute;
-  padding-right: 0px;
-  margin-right: 0px;
-  z-index: 1;
-  display: inline-flex;
-  align-items: center;
 }
 
 /* Slider components of targets
    ========================================================================== */
 
-.feature-setting .targets .noUiSlider-widget {
-  width: 95%;
+.feature-setting .noUi-target {
+  width: 100%;
   position: absolute;
   padding-right: 0px;
   margin-right: 0px;
@@ -115,45 +84,23 @@
   margin-left: 5px;
 }
 
-.feature-setting .targets .noUi-horizontal {
+.feature-setting .noUi-horizontal {
   height: 10px;
 }
 
-.feature-setting .targets .noUi-horizontal .noUi-handle {
+.feature-setting .noUi-horizontal .noUi-handle {
   box-shadow: 0 3px 6px -3px #BBB;
   width: 14px;
   height: 20px;
   right: -7px;
 }
 
-.feature-setting .targets .noUi-handle:before,
-.feature-setting .targets .noUi-handle:after {
+.feature-setting .noUi-handle:before,
+.feature-setting .noUi-handle:after {
   height: 6px;
   left: 4px;
 }
 
-.feature-setting .targets .noUi-handle:after {
+.feature-setting .noUi-handle:after {
   left: 7px;
-}
-
-/* Disabled elements
-   ========================================================================== */
-
-.feature-setting div[disabled] label,
-.feature-setting label[disabled] {
-  color: var(--disabled) !important;
-  cursor: not-allowed !important;
-}
-
-.feature-setting div[disabled] button {
-  background-color: var(--disabled) !important;
-  cursor: not-allowed !important;
-}
-
-.feature-setting .targets .noUi-origin[disabled] .noUi-handle {
-  background-color: var(--disabled) !important;
-}
-
-.feature-setting .targets .noUi-origin[disabled] {
-  z-index: 3 !important;
 }

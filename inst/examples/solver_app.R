@@ -7,6 +7,8 @@ library(mapgl)
 # simulate project data
 sim_data <- simulate_project()
 
+sim_data$features[[1]]$zone_helds <- c(0, 1, 0)
+
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
   h4("Mapp Demo"),

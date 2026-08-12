@@ -1,5 +1,6 @@
 import "./css/cost-setting.css";
-import noUiSlider from "nouislider";
+import SmartSlider from "../smartslider/smartslider.js";
+import HoverSelect from "../hoverselect/hoverselect.js";
 import {scaffoldCostSetting} from "./cost-setting-scaffold.js";
 import {roundToDigits} from "../utils/math.js";
 
@@ -32,49 +33,39 @@ export class CostSetting {
    */
   element;
 
-  /**
-   * Weight value.
-   * @type {number}
-   */
-  weight;
-
-  /**
-   * Zone value.
-   * @type {string}
-   */
-  zone;
-
   // private fields
 
   /**
-   * Initial weight value.
-   * @type {number}
-   */
-  _initialWeight;
-
-  /**
-   * Initial zone value.
-   * @type {number}
-   */
-  _initialZone;
-
-  /**
-   * Previous weight value.
-   * @type {number}
-   */
-  _previousWeight;
-
-  /**
-   * Previous zone value.
-   * @type {number}
-   */
-  _previousZone;
-
-  /**
-   * Object used to temporarily store settings for select menu.
+   * Slider range.
    * @type {object}
    */
-  _cache = {};
+  _sliderRange;
+
+  /**
+   * Slider step.
+   * @type {number}
+   */
+  _sliderStep;
+
+  // private HTML fields
+
+  /**
+   * Hover select element.
+   * @type {HTMLElement}
+   */
+  _select;
+
+  /**
+   * noUiSlider element.
+   * @type {HTMLElement}
+   */
+  _slider;
+
+  /**
+   * Switch element.
+   * @type {HTMLElement}
+   */
+  _switch;
 
   /**
   * Construct a new CostSetting object.
@@ -94,19 +85,45 @@ export class CostSetting {
     this.name = cost.name;
     this.column = cost.layer.column;
     this.element = scaffoldCostSetting(cost, zones, costWeightChoices);
-    this.zone = cost.zone;
-    this.weight = cost.weight;
     // initialize private fields
-    this._initialWeight = cost.weight;
-    this._initialZone = this.zone;
-    this._previousWeight = cost.weight;
-    this._previousZone = this.zone;
-    // set cache
-    this._cache.sliderRange = {
+    this._sliderRange = {
       "min": costWeightChoices[0],
       "max": costWeightChoices[1]
     };
-    this._cache.sliderStep = costWeightChoices[2];
+    this._sliderStep = costWeightChoices[2];
+    // initialize private HTML fields
+    this._select = this.element.querySelector(".zone-status");
+    this._slider = this.element.querySelector(".weight-slider");
+    this._switch = this.element.querySelector(".switch");
+    // initialize select widget
+    new HoverSelect(this._select, {
+      selected: cost.zone,
+      options: zones.map(x => {
+        return {
+          value: x,
+          text: x,
+          color: `var(--zone-${x}-primary`
+        }
+      }),
+      disabledOption: {value: "", text: "Off", color: "var(--disabled)"}
+    });
+    // initialize slider widget
+    new SmartSlider(
+      this._slider,
+      {
+        range: this._sliderRange,
+        step: this._sliderStep,
+        behaviour: "drag",
+        connect: "lower",
+        start: cost.weight
+      },
+      {
+        labels: this.element.querySelectorAll(".weight-label"),
+        format: (labels, values) => {
+          labels[0].innerText = `Weight: ${Math.round(values[0] * 100)}%`;
+        }
+      }
+    );
   }
 
   /**
@@ -115,69 +132,52 @@ export class CostSetting {
   * @return {void}
   */
   appendTo(element) {
-    // find components of element
-    let toggle = this.element.querySelector(".switch");
-    let select = this.element.querySelector(".zone-status");
-    let label = this.element.querySelector(".weight-label");
-    let slider = this.element.querySelector(".noUiSlider-widget");
-    // initialize weight slider
-    noUiSlider.create(slider, {
-      range: this._cache.sliderRange,
-      step: this._cache.sliderStep,
-      behaviour: "drag",
-      connect: "lower",
-      start: this._initialWeight,
-    })
-    // set event handler for slider
-    slider.noUiSlider.on("update", (values, handle) => {
-      // convert value to number
-      let v = Number(values[0]);
-      // update weight label
-      label.innerText = `Weight: ${Math.round(v * 100)}%`;
-      // update weight field
-      this.weight = v;
-    });
-    // set event handler for select options
-    select
-      .querySelectorAll(".select-option")
-      .forEach((x) => {
-        x.addEventListener("click", (event) => {
-          this.zone = event.target.getAttribute("data-option");
-        })
-      });
     // set event handler for toggle
-    toggle.addEventListener("change", (event) => {
+    this._switch.addEventListener("change", (event) => {
       if (event.target.checked) {
-        // update element values
-        slider.noUiSlider.setHandle(0, this._previousWeight);
-        select.children[0].children[0].innerText = this._previousZone;
-        // update disable property on elements
-        label.removeAttribute("disabled")
-        select.removeAttribute("disabled");
-        slider.noUiSlider.enable();
-        // update fields
-        this.weight = this._previousWeight;
-        this.zone = this._previousZone;
+        this.enable();
       } else {
-        // store values
-        this._previousWeight = this.weight;
-        this._previousZone = this.zone;
-        // update element values
-        slider.noUiSlider.setHandle(0, 0);
-        select.children[0].children[0].innerText = "Off";
-        // update disable property on elements
-        label.setAttribute("disabled", "");
-        select.setAttribute("disabled", "");
-        slider.noUiSlider.disable();
-        // update fields
-        this.weight = 0;
-        this.zone = "";
+        this.disable();
       }
     });
-    // free memory
-    this._cache = undefined;
     // append to element
     element.appendChild(this.element);
+  }
+
+  /**
+   * Get zone.
+   * @return {string}
+   */
+  get zone() {
+    this._select.get();
+  }
+
+  /**
+   * Get weight
+   * @return {number}
+   */
+  get weight() {
+    this._slider.get()[0];
+  }
+
+  /**
+   * Enable widget
+   * @return {void}
+   */
+  enable() {
+    this._slider.smartSlider.enable();
+    this._select.hoverSelect.enable();
+    this._switch.checked = true;
+  }
+
+  /**
+   * Disable widget.
+   * @return {void}
+   */
+  disable() {
+    this._slider.smartSlider.disable();
+    this._select.hoverSelect.disable();
+    this._switch.checked = false;
   }
 
 }

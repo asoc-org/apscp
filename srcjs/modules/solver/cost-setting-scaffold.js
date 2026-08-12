@@ -1,7 +1,6 @@
 import {createNameLabel} from "../utils/element.js";
 import {createProvenance} from "../utils/element.js";
 import {createSwitches} from "../utils/element.js";
-import {createHoverSelect} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 
 /**
@@ -23,7 +22,7 @@ export function scaffoldCostSetting(cost, zones, costWeightChoices) {
   // create feature setting header
   el.appendChild(costSettingHeader(cost, zones));
   // create feature setting weights
-  el.appendChild(costSettingWeight(cost, zones, costWeightChoices));
+  el.appendChild(costSettingBody(cost, zones, costWeightChoices));
   // return element
   return el;
 }
@@ -40,10 +39,9 @@ export function scaffoldCostSetting(cost, zones, costWeightChoices) {
 function costSettingHeader(cost, zones) {
   // create container
   let el = document.createElement("div");
-  el.classList.add("header");
+  el.classList.add("cost-header", "header");
   // create container for switch
   let switchElement = createSwitches(1);
-  switchElement.children[0].children[0].setAttribute("data-cost", cost.id);
   // create name element
   let nameElement = createNameLabel(cost);
   // create provenance element
@@ -57,7 +55,7 @@ function costSettingHeader(cost, zones) {
 }
 
 /**
- * Create a weight component for a cost setting.
+ * Create a body component for a cost setting.
  * @param {Object} cost - Cost object.
  * @param {string} cost.name - Feature name.
  * @param {string} cost.zone - Zone name.
@@ -66,61 +64,28 @@ function costSettingHeader(cost, zones) {
  * @param {Array<number>} costWeightChoices - Array of choices for cost weights.
  * @return {HTMLElement}
  */
-function costSettingWeight(cost, zones, choices) {
+function costSettingBody(cost, zones, choices) {
   // initialize element
-  let el = document.createElement("div");
-  el.classList.add("weight");
+  let el = document.createElement("div")
+  el.classList.add("cost-body");
   // create label weight value
-  let weightLabel = document.createElement("label");
-  weightLabel.setAttribute("data-weight", cost.weight);
-  weightLabel.classList.add("weight-label");
+  let label = document.createElement("label");
+  label.classList.add("weight-label");
+  addTooltip(label, "Weight value for cost");
+  // create element for hover select
+  let select = document.createElement("div");
+  select.classList.add("zone-status");
   addTooltip(
-    weightLabel,
-    "Weight value for cost"
-  );
-  // create zone button
-  let zoneButton = costSettingZoneButton(cost, zones);
-  // create slider element
-  let slider = document.createElement("div");
-  slider.classList.add("slider");
-  // create slider widget
-  let widget = document.createElement("div");
-  widget.classList.add("noUiSlider-widget", "disable-if-inactive");
-  // return element
-  slider.appendChild(widget);
-  el.appendChild(weightLabel);
-  el.appendChild(slider);
-  el.appendChild(zoneButton);
-  return el;
-}
-
-/**
- * Create a zone button component for a cost setting.
- * @param {Object} cost - Cost object.
- * @param {string} cost.zone - Zone name.
- * @param {Array<string>} zones - Array of potential zone names.
- * @return {HTMLElement}
- */
-function costSettingZoneButton(cost, zones) {
-  // initialize element
-  let el = createHoverSelect(
-    zones.map(x => {
-      return {
-        value: x,
-        text: x,
-        color: `var(--zone-${x}-primary`
-      }
-    }),
-    cost.zone
-  );
-  // add class
-  el.classList.add("zone-status");
-  // add tooltip
-  addTooltip(
-    el,
+    select,
     "Specify which zone that solutions should prefer to allocate " +
     "planning units to when considering this cost."
   );
+  // create slider element
+  let slider = document.createElement("div");
+  slider.classList.add("weight-slider");
   // return element
+  el.appendChild(label);
+  el.appendChild(slider);
+  el.appendChild(select);
   return el;
 }
