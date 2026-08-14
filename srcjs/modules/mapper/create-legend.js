@@ -46,11 +46,11 @@ export function createCategoricalLegend(x) {
     item.className = "item";
     // create text component to display the text
     let itemLabel = document.createElement("label");
-    itemLabel.className = "item-label disable-if-inactive";
+    itemLabel.className = "item-label";
     itemLabel.innerText = `${x.labels[i]}`;
     // create symbol component to display the color
     let itemSymbol = document.createElement("div");
-    itemSymbol.className = "item-symbol disable-if-inactive";
+    itemSymbol.className = "item-symbol";
     itemSymbol.style.backgroundColor = x.colors[i];
     itemSymbol.style.color = x.colors[i];
     // add item to legend
@@ -172,5 +172,7 @@ export function createLegend(x) {
     return createContinuousLegend(x);
   } else if (x.class === "CategoricalLegend") {
     return createCategoricalLegend(x);
+  } else {
+    console.log("createLegend(): `x` not a recognized value.");
   }
 }

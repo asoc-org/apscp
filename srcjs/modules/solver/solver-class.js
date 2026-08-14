@@ -80,7 +80,7 @@ export class Solver {
   * @return {void}
   */
   initialize(
-    el, project,
+    element, project,
     featureTargetChoices, featureWeightChoices, costWeightChoices,
     zoneColors
   ) {
@@ -89,11 +89,11 @@ export class Solver {
 
     // assign styling to element based on zone colors
     for (let i = 0; i < project.zones.length; ++i) {
-      el.style.setProperty(
+      element.style.setProperty(
         `--zone-${project.zones[i]}-primary`,
         zoneColors[i]
       );
-      el.style.setProperty(
+      element.style.setProperty(
         `--zone-${project.zones[i]}-secondary`,
         `color-mix(in srgb, ${zoneColors[i]}, white 50%)`
       );
@@ -101,26 +101,29 @@ export class Solver {
 
     // initialize objective settings
     // this._objectiveSettings = new ObjectiveSettings(project);
-    // this._objectiveSettings.appendTo(el.querySelector(".features-panel"));
+    // this._objectiveSettings.appendTo(element.querySelector(".features-panel"));
 
     // initialize feature settings
     this._featureSettings = new FeatureSettings(
       project, featureTargetChoices, featureWeightChoices
     );
-    this._featureSettings.appendTo(el.querySelector(".features-panel"));
+    this._featureSettings.appendTo(element.querySelector(".features-panel"));
 
     // initialize lock settings
     this._lockSettings = new LockSettings(project)
-    this._lockSettings.appendTo(el.querySelector(".locks-panel"), el.id);
+    this._lockSettings.appendTo(
+      element.querySelector(".locks-panel"),
+      element.id
+    );
 
     // initialize cost settings
     this._costSettings = new CostSettings(project, costWeightChoices);
-    this._costSettings.appendTo(el.querySelector(".costs-panel"));
+    this._costSettings.appendTo(element.querySelector(".costs-panel"));
 
     // initialize footer
-    this._startButton = el.querySelector(`#${el.id}_start_button`);
-    this._stopButton = el.querySelector(`#${el.id}_stop_button`);
-    this._nameInput = el.querySelector(`#${el.id}_name`);
+    this._startButton = element.querySelector(`#${element.id}_start_button`);
+    this._stopButton = element.querySelector(`#${element.id}_stop_button`);
+    this._nameInput = element.querySelector(`#${element.id}_name`);
 
     // set event handler for name input
     this._nameInput.addEventListener("input", (event) => {
@@ -137,7 +140,7 @@ export class Solver {
       // send message to R session with settings
       if (HTMLWidgets.shinyMode) {
         Shiny.setInputValue(
-          `${el.id}_settings:apscp.JsDataFrameList`,
+          `${element.id}_settings:apscp.JsDataFrameList`,
           this.getSettings(),
           {priority: "event"}
         );
