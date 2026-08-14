@@ -24,7 +24,7 @@ ui <- bslib::page_fluid(
       )
     ),
     tagList(
-      h3("Settings"),
+      h3("Settings output"),
       htmltools::tags$div(
         verbatimTextOutput("text"),
         style = "height: 100%; width = 100%; overflow-y: auto;"
@@ -41,14 +41,17 @@ server <- function(input, output, session) {
     solver(project = sim_data)
   })
 
+  # define behavior to synchronize different settings
+  observeEvent(input$solver_sync, {
+    req(input$solver_sync)
+    solver_sync("solver", project = sim_data, data = input$solver_sync)
+  })
+
   # display solver settings in text box
   observeEvent(input$solver_settings, {
     req(input$solver_settings)
-    # format settings
-    print(input$solver_settings)
-    d <- format_settings(input$solver_settings)
     # update text box with settings
-    output$text <- renderPrint(print(d))
+    output$text <- renderPrint(print(input$solver_settings))
     # reset solver status
     solver_reset("solver")
   })

@@ -92,7 +92,7 @@ prioritization <- function(
     is.data.frame(settings$locks),
     assertthat::has_name(
       settings$locks,
-      c("id", "name", "column", "zone")
+      c("id", "name", "column", "zone", "priority")
     ),
     ## costs settings
     is.data.frame(settings$costs),
@@ -115,6 +115,11 @@ prioritization <- function(
     assertthat::noNA(solver),
     solver %in% c("cbc", "gurobi")
   )
+
+  # preliminary data processing
+  ## cost settings
+  x$costs$zone[nchar(x$costs$zone) == 0L] <- NA_character_
+  x$costs <- x$costs[!is.na(x$costs), , drop = FALSE]
 
   # build list of problems based on meeting target shortfalls
   prob <- lapply(project$zones, function(x) {
@@ -188,23 +193,20 @@ prioritization <- function(
   # if needed, add locked constraints
   if (nrow(settings$locks) > 0L) {
     ## create data frame with all locked planning units
-    lock_data <- lapply(seq_len(nrow(settings$locks)), function(i) {
-      data.frame(
-        pu = which(
-          project$dataset$get_column_data(settings$lock$column[[i]]) > 1e-3
-        ),
-        zone = settings$locks$zone[[i]],
-        status = 1
-      )
-    })
-    if (identical(length(lock_data), 1L)) {
-      lock_data <- lock_data[[1]]
-    } else {
-      lock_data <- do.call(rbind, lock_data)
-    }
-    ## remove rows that would cause infeasibility due to planning units
-    ## being allocated to multiple zones
-    lock_data <- lock_data[!duplicated(lock_data$pu), , drop = FALSE]
+    lock_data <- convert_lock_settings_to_allocation(settings$locks)
+    lock_data <- vapply(
+      seq_along(project$zones),
+      FUN.VALUE = numeric(project$dataset$get_n_pu()),
+      USE.NAMES = FALSE,
+      function(i) project$dataset$get_pu_status(project$zones[[i]], allocation)
+    )
+    lock_data <- lock_data[rowSums(lock_data) > 0, , drop = FALSE]
+    lock_data <- which(lock_data, arr.ind = TRUE)
+    lock_data <- data.frame(
+      pu = lock_data[, 1],
+      zone = project$zones[lock_data[, 2]],
+      status = 1
+    )
     ## add constraints to the first problem
     prob[[1]] <- prioritizr::add_manual_locked_constraints(prob[[1]], lock_data)
   }
@@ -251,4 +253,42 @@ prioritization <- function(
     solution = prioritizr::category_vector(raw_sol),
     results = NULL
   )
+}
+
+#' Convert lock settings to zone allocation
+#'
+#' Prepare lock settings data to identify which layers should be used
+#' to allocate planning units to zone. This function is designed
+#' to prepare data for `Dataset$get_pu_status()`.
+#'
+#' @param data `data.frame` with lock settings.
+#'
+#' @return A named `character` vector.
+#'
+#' @family solver
+#'
+#' @noRd
+convert_lock_settings_to_allocation <- function(data) {
+  # assert valid arguments
+  assertthat::assert_that(
+    is.data.frame(data),
+    assertthat::has_name(data, "id"),
+    assertthat::has_name(data, "column"),
+    assertthat::has_name(data, "zone"),
+    assertthat::has_name(data, "priority")
+  )
+  # if has zero rows, then return empty vector
+  if (identical(nrow(data), 0L)) return(character(0))
+  # remove any rows with a missing zone value
+  data <- data[!is.na(data$zone), , drop = FALSE]
+  # if no rows remain, then return empty vector
+  if (identical(nrow(data), 0L)) return(c())
+  # sort data frame according to order of priority
+  data <- data[order(data$priority, decreasing = TRUE), , drop = FALSE]
+  # initialize vector with allocations
+  out <- stats::setNames(data$column, data$zone)
+  # remove duplicate values
+  out <- out[!duplicated(out)]
+  # return result
+  out
 }

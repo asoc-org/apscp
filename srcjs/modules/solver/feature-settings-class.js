@@ -134,6 +134,22 @@ export class FeatureSettings {
   }
 
   /**
+  * Synchronize settings. This method is used to update the
+  * feature status bars to reflect changes to the lock settings.
+  * @param {object} data - Data frame with new status bar values.
+  * @param {object} data.id - Feature identifier.
+  * @param {object} data.[*] - Value for each feature in each zone.
+  * @return {void}
+  */
+  sync(data) {
+    for (let i = 0; i < data.id.length; ++i) {
+      this._settings.get(data.id[i]).setHeldStatus(
+        this._zones.map(x => data[x][i])
+      );
+    }
+  }
+
+  /**
   * Get settings for generating a solution.
   * @return {Object}
   */

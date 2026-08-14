@@ -128,13 +128,11 @@ export class Mapper {
       dataIdAttr: "data-id",
       ghostClass: "ghost",
       onUpdate: function(evt) {
-        if (HTMLWidgets.shinyMode) {
-          let beforeId = undefined;
-          if (evt.newIndex > 0) {
-            evt.to.children[evt.newIndex - 1].getAttribute("data-id");
-          }
-          that.moveLayerOnMap(evt.item.getAttribute("data-id"), beforeId);
+        let beforeId = undefined;
+        if (evt.newIndex > 0) {
+          evt.to.children[evt.newIndex - 1].getAttribute("data-id");
         }
+        that.moveLayerOnMap(evt.item.getAttribute("data-id"), beforeId);
       }
     });
   }

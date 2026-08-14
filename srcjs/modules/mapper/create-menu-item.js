@@ -53,34 +53,28 @@ export function createMenuItem(x, mapper, themes = undefined) {
   provenanceElement.appendChild(createProvenance(x.layer.provenance));
 
   // set listener for checkbox to show/hide legend
-  if (HTMLWidgets.shinyMode) {
-    showLegendCheckbox.addEventListener("change", function () {
-      if (this.checked) {
-        legendElement.style.display = "block";
-      } else {
-        legendElement.style.display = "none";
-      }
-    });
-  }
+  showLegendCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      legendElement.style.display = "block";
+    } else {
+      legendElement.style.display = "none";
+    }
+  });
 
   // set listener for button to hide layer
-  if (HTMLWidgets.shinyMode) {
-    showLayerCheckbox.addEventListener("change", function () {
-      if (this.checked) {
-        mapper.showLayerOnMap(x.id);
-      } else {
-        mapper.hideLayerOnMap(x.id);
-      }
-    });
-  }
+  showLayerCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      mapper.showLayerOnMap(x.id);
+    } else {
+      mapper.hideLayerOnMap(x.id);
+    }
+  });
 
   // set listener for button to drop layer
-  if (HTMLWidgets.shinyMode) {
-    removeLayerFromMapButton.addEventListener("click", function () {
-      mapper.hideLayerOnMap(x.id);
-      mapper.hideLayerOnMenu(x.id);
-    });
-  }
+  removeLayerFromMapButton.addEventListener("click", function () {
+    mapper.hideLayerOnMap(x.id);
+    mapper.hideLayerOnMenu(x.id);
+  });
 
   // return element
   return el;

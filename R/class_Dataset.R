@@ -98,51 +98,77 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get proportion of values in a column that would be considered to by
-    #' held by planning units that are allocated to zones based on other
-    #' columns.
-    #' @param column `character` or `integer` value.
-    #' @param zone `character` value with name of zone to consider
-    #' for calculations.
-    #' @param status Named `character` vector with column names
+    #' Identify which planning units would be associated with a zone
+    #' depending on columns used to allocate them.
+    #' @param zone `character` value with name of zone.
+    #' @param allocation Named `character` vector with column names
     #' indicating which planning units should be allocated to each zone.
-    #' Note that the names of `status` indicate the zone names.
+    #' Note that the names of `allocation` indicate the zone names.
     #' Additionally, zones are allocated in order of decreasing priority. For
     #' example with
-    #' `status = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
+    #' `allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
     #' planning units are first assigned to the Scientific zone based on
     #' the values in the `"camps"` column, and then to the Biodiversity zone
     #' based on the values in the `"aspas"` column. If  any planning unit
     #' was previously assigned to the Scientific zone,  then it is overridden
-    #' wit the Biodiversity zone.
-    #' @return A `numeric` value.
-    get_column_held = function(column, zone, status) {
+    #' with the Biodiversity zone.
+    #' @return A `numeric` vector with binary values indicating if each
+    #' planning unit is allocated to the `zone`.
+    get_pu_status = function(zone, allocation) {
       # assert arguments are valid
       assertthat::assert_that(
-        self$has_column(column),
         assertthat::is.string(zone),
+        is.character(allocation),
         assertthat::noNA(zone)
       )
-      if (length(status) > 0L) {
+      if (length(allocation) > 0L) {
         assertthat::assert_that(
-          is.character(status),
-          !is.null(names(status)),
-          self$has_column(status)
+          !is.null(names(allocation)),
+          self$has_column(allocation)
         )
       }
       # if no planning units allocated to zone, then return 0
-      if (identical(length(status), 0L)) return(0)
-      if (!zone %in% names(status)) return(0)
-      # create vector with binary values indicating if planning unit is assigned
-      # the zone based on the data in the status columns
-      x <- numeric(nrow(self$pu_data))
-      for (i in seq(length(status), 1L)) {
-        idx <- which(self$pu_data[[status[[i]]]] > 1e-5)
-        x[idx] <- as.numeric(identical(names(status)[[i]], zone))
+      if (
+        identical(length(allocation), 0L) ||
+        !zone %in% names(allocation)
+      ) {
+        return(rep(0, nrow(self$pu_data)))
       }
+      # create vector with binary values indicating if planning unit is assigned
+      # the zone based on the data in the allocation columns
+      out <- numeric(nrow(self$pu_data))
+      for (i in seq(length(allocation), 1L)) {
+        idx <- which(self$pu_data[[allocation[[i]]]] > 1e-5)
+        out[idx] <- as.numeric(identical(names(allocation)[[i]], zone))
+      }
+      # return output
+      out
+    },
+
+    #' @description
+    #' Get proportion of values in a column that would be considered to by
+    #' held by selected planning units.
+    #' @param column `character` or `integer` vector.
+    #' @param status `numeric` vector with binary values for each
+    #' planning unit.
+    #' @return A `numeric` value.
+    get_column_held = function(column, status) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        length(column) > 0,
+        self$has_column(column),
+        is.numeric(status),
+        identical(length(status), nrow(self$pu_data))
+      )
+      # run calculations
+      m <- as.matrix(sf::st_drop_geometry(self$pu_data)[, column, drop = FALSE])
+      total <- colSums(m, na.rm = TRUE)
+      held <- colSums(
+        m * matrix(status, ncol = length(column), nrow = nrow(m)),
+        na.rm = TRUE
+      )
       # return proportion held
-      sum(x * self$pu_data[[column]], na.rm = TRUE) /
-        sum(self$pu_data[[column]], na.rm = TRUE)
+      unname(held / total)
     },
 
     #' @description
@@ -150,7 +176,8 @@ Dataset <- R6::R6Class(
     #' @param column `character vector.
     #' @return A `logical` value.
     has_column = function(column) {
-      assertthat::has_name(self$pu_data, column)
+      (length(column) > 0) &&
+        assertthat::has_name(self$pu_data, column)
     },
 
     #' @description

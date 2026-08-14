@@ -2,7 +2,7 @@
 % Please edit documentation in R/fct_prioritization.R
 \name{prioritization}
 \alias{prioritization}
-\title{Generate a prioritization using multi-objective optimization techniques.}
+\title{Generate a prioritization}
 \usage{
 prioritization(project, settings, gap = 0.1, solver = "cbc", verbose = FALSE)
 }

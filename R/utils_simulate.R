@@ -201,6 +201,11 @@ simulate_project <- function() {
     new_theme("Medicinal species", "Scientific")
   )
 
+  # create status values for each zone
+  alloc <- c("Biodiversity" = "aspas", "Tourism" = "camps")
+  s1 <- dataset$get_pu_status(zone = "Biodiversity", alloc)
+  s2 <- dataset$get_pu_status(zone = "Tourism", alloc)
+  s3 <- dataset$get_pu_status(zone = "Scientific", alloc)
   # create feature objects
   features <- lapply(seq_len(5), function(i) {
     new_feature(
@@ -214,22 +219,12 @@ simulate_project <- function() {
         3L
       ),
       zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
-      zone_helds = c(
-        dataset$get_column_held(
-          column = paste0("feat_", i),
-          zone = "Biodiversity",
-          status = c("Biodiversity" = "aspas", "Tourism" = "camps")
+      zone_helds = unname(
+        c(
+          dataset$get_column_held(column = paste0("feat_", i), s1),
+          dataset$get_column_held(column = paste0("feat_", i), s2),
+          dataset$get_column_held(column = paste0("feat_", i), s3)
         ),
-        dataset$get_column_held(
-          column = paste0("feat_", i),
-          zone = "Scientific",
-          status = c("Biodiversity" = "aspas", "Tourism" = "camps")
-        ),
-        dataset$get_column_held(
-          column = paste0("feat_", i),
-          zone = "Tourism",
-          status = c("Biodiversity" = "aspas", "Tourism" = "camps")
-        )
       ),
       themes = themes[
         sample.int(length(themes), sample.int(length(themes), 1L))

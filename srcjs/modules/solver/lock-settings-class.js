@@ -36,7 +36,11 @@ export class LockSettings {
     for (let i = 0; i < this._zones.length; ++i) {
       this._settings.set(
         project.zones[i],
-        new LockSetting(project.zones[i], project.locks, this._zones.length - i)
+        new LockSetting(
+          project.zones[i],
+          project.locks,
+          this._zones.length - i
+        )
       );
     }
   }
@@ -44,9 +48,10 @@ export class LockSettings {
   /**
   * Append the HTML element for the class to another HTML element.
   * @param {HTMLElement} element - HTML element.
+  * @param {string} id - Identifier for HTML element to register Shiny bindings.
   * @return {void}
   */
-  appendTo(element) {
+  appendTo(element, id) {
     // create container
     let el = document.createElement("el");
     el.classList.add("lock-settings", "settings");
@@ -60,13 +65,35 @@ export class LockSettings {
       dataIdAttr: "data-zone",
       ghostClass: "ghost",
       onUpdate: event => {
+        // update priority orders
         for (let i = 0; i < this._zones.length; ++i) {
           this._settings
             .get(event.to.children[i].getAttribute("data-zone"))
             .setPriorityValue(this._zones.length - i);
         }
+        // trigger synchronization
+        if (HTMLWidgets.shinyMode) {
+          Shiny.setInputValue(
+            `${id}_sync:apscp.JsDataFrame`,
+            this.getSettings(),
+            {priority: "event"}
+          );
+        }
       }
     });
+    // set event handlers for synchronization
+    if (HTMLWidgets.shinyMode) {
+      // set events based on each zone's select input
+      this._settings.forEach(x => {
+        x._select.on("change", value => {
+          Shiny.setInputValue(
+            `${id}_sync:apscp.JsDataFrame`,
+            this.getSettings(),
+            {priority: "event"}
+          );
+        });
+      });
+    }
   }
 
   /**

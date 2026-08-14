@@ -240,7 +240,7 @@ export class FeatureSetting {
   * @return {void}
   */
   setHeldStatus(values) {
-    this._status.set(values);
+    this._status.statusBar.set(values);
   }
 
   /**

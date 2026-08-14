@@ -210,6 +210,11 @@ costs <-
   }) %>%
   unname()
 
+## create status values for biodiversity zone
+lock_columns <- metadata$name[metadata$class == "lock"]
+names(lock_columns) <- rep("Biodiversity", length(lock_columns))
+biodiversity_status <- dataset$get_pu_status("Biodiversity", lock_columns)
+
 ## create features
 features <-
   {metadata[metadata$class == "feature", , drop = FALSE]} %>%
@@ -230,9 +235,6 @@ features <-
       )
     ]
     theme_names <- c(theme_names, x$theme)
-    # calculate held
-    lock_columns <- metadata$name[metadata$class == "lock"]
-    names(lock_columns) <- rep("Biodiversity", length(lock_columns))
     # return feature
     new_feature(
       name = x$name,
@@ -242,7 +244,7 @@ features <-
       ),
       zone_weights = rep(1, 3L),
       zone_helds = c(
-        dataset$get_column_held(x$name, "Biodiversity", lock_columns),
+        dataset$get_column_held(x$name, biodiversity_status),
         0,
         0
       ),

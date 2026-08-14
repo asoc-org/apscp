@@ -111,7 +111,7 @@ export class Solver {
 
     // initialize lock settings
     this._lockSettings = new LockSettings(project)
-    this._lockSettings.appendTo(el.querySelector(".locks-panel"));
+    this._lockSettings.appendTo(el.querySelector(".locks-panel"), el.id);
 
     // initialize cost settings
     this._costSettings = new CostSettings(project, costWeightChoices);
@@ -135,11 +135,16 @@ export class Solver {
     // set event handler for start button
     this._startButton.addEventListener("click", (event) => {
       // send message to R session with settings
-      Shiny.setInputValue(`${el.id}_settings`, this.getSettings());
+      if (HTMLWidgets.shinyMode) {
+        Shiny.setInputValue(
+          `${el.id}_settings:apscp.JsDataFrameList`,
+          this.getSettings(),
+          {priority: "event"}
+        );
+      }
       // enable stop button
       this._stopButton.removeAttribute("disabled");
     });
-
   }
 
   /**
@@ -152,7 +157,7 @@ export class Solver {
   }
 
   /**
-  * Reset the Solver object.
+  * Reset so that solver can be used to generate a new solution.
   * @return {void}
   */
   reset() {
@@ -166,12 +171,23 @@ export class Solver {
   }
 
   /**
+  * Synchronize solver. This method is used to update the
+  * feature status bars to reflect changes to the lock settings.
+  * @param {object} data - Data frame with new status bar values.
+  * @param {object} data.id - Feature identifier.
+  * @return {void}
+  */
+  sync(data) {
+    this._featureSettings.sync(data);
+  }
+
+  /**
   * Get settings for generating a solution.
   * @return {Object}
   */
   getSettings() {
     return {
-      objectives: null,
+      objectives: {id: 1, zone: "PLACEHOLDER"},
       // objectives: this._objectiveSettings.getSettings(),
       features: this._featureSettings.getSettings(),
       locks: this._lockSettings.getSettings(),

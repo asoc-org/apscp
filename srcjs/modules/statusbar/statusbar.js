@@ -86,6 +86,8 @@ export default class StatusBar {
     element.appendChild(this._end_cap);
     // set values.
     this.set(options.values);
+    // attach this object to the element
+    element.statusBar = this;
   }
 
   /**

@@ -41,6 +41,7 @@ Other class:
     \item \href{#method-Dataset-get_column_data}{\code{Dataset$get_column_data()}}
     \item \href{#method-Dataset-get_spatial_column_data}{\code{Dataset$get_spatial_column_data()}}
     \item \href{#method-Dataset-get_column_total}{\code{Dataset$get_column_total()}}
+    \item \href{#method-Dataset-get_pu_status}{\code{Dataset$get_pu_status()}}
     \item \href{#method-Dataset-get_column_held}{\code{Dataset$get_column_held()}}
     \item \href{#method-Dataset-has_column}{\code{Dataset$has_column()}}
     \item \href{#method-Dataset-set_column_data}{\code{Dataset$set_column_data()}}
@@ -182,34 +183,57 @@ Other class:
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_held"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_held}{}}}
-\subsection{\code{Dataset$get_column_held()}}{
-  Get proportion of values in a column that would be considered to by
-held by planning units that are allocated to zones based on other
-columns.
+\if{html}{\out{<a id="method-Dataset-get_pu_status"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_status}{}}}
+\subsection{\code{Dataset$get_pu_status()}}{
+  Identify which planning units would be associated with a zone
+depending on columns used to allocate them.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_held(column, zone, status)}
+    \preformatted{Dataset$get_pu_status(zone, allocation)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` or `integer` value.}
-      \item{\code{zone}}{`character` value with name of zone to consider
-for calculations.}
-      \item{\code{status}}{Named `character` vector with column names
+      \item{\code{zone}}{`character` value with name of zone.}
+      \item{\code{allocation}}{Named `character` vector with column names
 indicating which planning units should be allocated to each zone.
-Note that the names of `status` indicate the zone names.
+Note that the names of `allocation` indicate the zone names.
 Additionally, zones are allocated in order of decreasing priority. For
 example with
-`status = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
+`allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
 planning units are first assigned to the Scientific zone based on
 the values in the `"camps"` column, and then to the Biodiversity zone
 based on the values in the `"aspas"` column. If  any planning unit
 was previously assigned to the Scientific zone,  then it is overridden
-wit the Biodiversity zone.}
+with the Biodiversity zone.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A `numeric` vector with binary values indicating if each
+planning unit is allocated to the `zone`.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_column_held"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_column_held}{}}}
+\subsection{\code{Dataset$get_column_held()}}{
+  Get proportion of values in a column that would be considered to by
+held by selected planning units.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_column_held(column, status)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{`character` or `integer` vector.}
+      \item{\code{status}}{`numeric` vector with binary values for each
+planning unit.}
     }
     \if{html}{\out{</div>}}
   }

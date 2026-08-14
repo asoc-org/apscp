@@ -21,6 +21,7 @@ Add a [new_lock()] to a Solver widget.
 Other solver:
 \code{\link[=solver]{solver()}},
 \code{\link{solver-shiny}},
-\code{\link[=solver_reset]{solver_reset()}}
+\code{\link[=solver_reset]{solver_reset()}},
+\code{\link[=solver_sync]{solver_sync()}}
 }
 \concept{solver}
