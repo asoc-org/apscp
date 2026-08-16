@@ -6,6 +6,7 @@ import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // classes to create components
 import {FeatureSetting} from "./feature-setting-class.js";
 // styling
+import "./css/feature-settings.css";
 import "./css/settings.css";
 
 /** Class representing the settings for multiple features. */
@@ -104,16 +105,12 @@ export class FeatureSettings {
       labelField: "name",
       searchField: ["name"],
       maxOptions: null,
-      hidePlaceholder: true,
       sortField: "name",
       closeAfterSelect: false,
       optgroups: this._cache.optgroups,
       optgroupField: "zone",
       plugins: {
-        checkbox_options: {},
-        clear_button: {
-          "title": "Hide all feature settings",
-        }
+        checkbox_options: {}
       },
       render: {
         optgroup_header: function(data, escape) {
