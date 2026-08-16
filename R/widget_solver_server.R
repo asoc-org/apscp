@@ -9,7 +9,7 @@ NULL
 #'
 #' @param lock [new_lock()] object.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @family solver
 #'
@@ -40,7 +40,7 @@ solver_add_lock <- function(
 #'
 #' @param id `character` value with identifier for [solver()] object.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @details
 #' The solver is reset by (i) clearing the text from the input element for
@@ -73,7 +73,7 @@ solver_reset <- function(id, session = shiny::getDefaultReactiveDomain()) {
 #'
 #' @param data `list` with data.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @details
 #' This function is specifically used to update the feature held status

@@ -14,7 +14,7 @@ NULL
 #' @param visible `logical` value indicating if layer should be visible.
 #' Defaults to `TRUE`.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @family mapper
 #'

@@ -12,7 +12,7 @@
 #' @family sidebar
 #'
 #' @export
-open_sidebar <- function(
+sidebar_open <- function(
   id, pane_id,
   session = shiny::getDefaultReactiveDomain()
 ) {
@@ -26,12 +26,12 @@ open_sidebar <- function(
 #'
 #' Close a sidebar.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @family sidebar
 #'
 #' @export
-close_sidebar <- function(id, session = shiny::getDefaultReactiveDomain()) {
+sidebar_close <- function(id, session = shiny::getDefaultReactiveDomain()) {
   session$sendCustomMessage(
     "sidebar:close",
     list(id = id)
@@ -42,12 +42,12 @@ close_sidebar <- function(id, session = shiny::getDefaultReactiveDomain()) {
 #'
 #' Enable a sidebar.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @family sidebar
 #'
 #' @export
-enable_sidebar <- function(
+sidebar_enable <- function(
   id, pane_id,
   session = shiny::getDefaultReactiveDomain()
 ) {
@@ -61,12 +61,12 @@ enable_sidebar <- function(
 #'
 #' Disable a sidebar.
 #'
-#' @inheritParams open_sidebar
+#' @inheritParams sidebar_open
 #'
 #' @family sidebar
 #'
 #' @export
-disable_sidebar <- function(
+sidebar_disable <- function(
   id, pane_id,
   session = shiny::getDefaultReactiveDomain()
 ) {

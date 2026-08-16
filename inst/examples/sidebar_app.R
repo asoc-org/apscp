@@ -134,31 +134,31 @@ server <- function(input, output, session) {
 
   # buttons for left side bar
   observeEvent(input$open_left, {
-    open_sidebar(
+    sidebar_open(
       "leftsidebar",
       sample(c("home_id", "profile_id", "messages_id"), 1)
     )
   })
 
   observeEvent(input$close_left, {
-    close_sidebar("leftsidebar")
+    sidebar_close("leftsidebar")
   })
 
   observeEvent(input$enable_left, {
-    enable_sidebar("leftsidebar", "profile_id")
+    sidebar_enable("leftsidebar", "profile_id")
   })
 
   observeEvent(input$disable_left, {
-    disable_sidebar("leftsidebar", "profile_id")
+    sidebar_disable("leftsidebar", "profile_id")
   })
 
   # buttons for right side bar
   observeEvent(input$open_right, {
-    open_sidebar("rightsidebar", "style_id")
+    sidebar_open("rightsidebar", "style_id")
   })
 
   observeEvent(input$close_right, {
-    close_sidebar("rightsidebar")
+    sidebar_close("rightsidebar")
   })
 
   # left sidebar content
