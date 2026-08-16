@@ -92,3 +92,12 @@ color_palette("random", NULL)
 # obtain 5 colors from random palette(s)
 color_palette("random", 5)
 }
+\seealso{
+Other misc:
+\code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
+\code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
+\code{\link[=is_relative_path]{is_relative_path()}},
+\code{\link[=read_sf_data]{read_sf_data()}},
+\code{\link[=write_sf_data]{write_sf_data()}}
+}
+\concept{misc}

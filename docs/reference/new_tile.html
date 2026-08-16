@@ -47,7 +47,7 @@ a PMTiles archive file.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_tile</span><span class="op">(</span><span class="va">source_layer</span>, <span class="va">file</span>, <span class="va">max_zoom</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_tile</span><span class="op">(</span><span class="va">source_layer</span>, <span class="va">path</span>, <span class="va">max_zoom</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -59,8 +59,8 @@ a PMTiles archive file.</p>
 archive file.</p></dd>
 
 
-<dt id="arg-file">file<a class="anchor" aria-label="anchor" href="#arg-file"></a></dt>
-<dd><p>`character` value with file name for the archive file.
+<dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
+<dd><p>`character` value with file path for the archive file.
 Note that `file` must have a `".pmtiles"` file extension.</p></dd>
 
 
@@ -86,15 +86,18 @@ Note that `file` must have a `".pmtiles"` file extension.</p></dd>
 <code><a href="new_project.html">new_project()</a></code>,
 <code><a href="new_provenance.html">new_provenance()</a></code>,
 <code><a href="new_solution.html">new_solution()</a></code>,
-<code><a href="new_theme.html">new_theme()</a></code>,
-<code><a href="new_tileset.html">new_tileset()</a></code></p></div>
+<code><a href="new_theme.html">new_theme()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create object</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_tile</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"data-src"</span>, file <span class="op">=</span> <span class="st">"file.pmtiles"</span>, max_zoom <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_tile(source = "data-src", file = "file.pmtiles", max_zoom = 5):</span> could not find function "new_tile"</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create dummy file</span></span></span>
+<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".pmtiles"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/writeLines.html" class="external-link">writeLines</a></span><span class="op">(</span><span class="st">"dummy"</span>, <span class="va">path</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create object</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_tile</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"data-src"</span>, path <span class="op">=</span> <span class="va">path</span>, max_zoom <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_tile(source = "data-src", path = path, max_zoom = 5):</span> could not find function "new_tile"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># print object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

@@ -11,10 +11,10 @@ NULL
 #'
 #' @return A `data.frame` object.
 #'
-#' @noRd
-NULL
-
+#' @family misc
+#'
 #' @method as.data.frame JsDataFrame
+#'
 #' @export
 as.data.frame.JsDataFrame <- function(x, ...) {
   # assert valid object
@@ -42,10 +42,10 @@ as.data.frame.JsDataFrame <- function(x, ...) {
 #'
 #' @return A `list` of `data.frame` objects.
 #'
-#' @noRd
-NULL
-
+#' @family misc
+#'
 #' @method as.list JsDataFrameList
+#'
 #' @export
 as.list.JsDataFrameList <- function(x, ...) {
   # assert valid object

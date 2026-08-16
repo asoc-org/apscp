@@ -12,7 +12,7 @@ new_dataset(pu_data, boundary_data)
 
 - pu_data:
 
-  \[tibble::tibble()\] object with planning unit data.
+  \[sf::st_sf()\] object with planning unit data.
 
 - boundary_data:
 
@@ -30,8 +30,11 @@ object to a \[new_dataset()\] object.
 Other method:
 [`create_dataset()`](https://asoc-org.github.io/apscp/reference/create_dataset.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
+[`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md),
+[`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
+[`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
 [`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md),
-[`create_tileset()`](https://asoc-org.github.io/apscp/reference/create_tileset.md)
+[`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
 
@@ -41,10 +44,8 @@ sim_data <- simulate_spatial_data()
 #> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # manually prepare planning unit data
-pu_data <- sf::st_drop_geometry(sim_data)
+pu_data <- sim_data
 #> Error: object 'sim_data' not found
-pu_data[["_index"]] <- seq_len(nrow(pu_data))
-#> Error: object 'pu_data' not found
 
 # manually prepare boundary data
 bd_data <- prioritizr::boundary_matrix(sim_data)

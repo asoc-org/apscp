@@ -84,11 +84,8 @@ Overview of the package.
 
 ## Application
 
-Main functions and documentation for the application.
+Main function for the application.
 
-- [`apscp`](https://asoc-org.github.io/apscp/reference/apscp.md)
-  [`apscp-package`](https://asoc-org.github.io/apscp/reference/apscp.md)
-  : apscp: Decision Support Tool for the Antarctic Peninsula
 - [`run_app()`](https://asoc-org.github.io/apscp/reference/run_app.md) :
   Run the Shiny Application
 
@@ -122,22 +119,26 @@ Functions and definitions for new classes.
   : New theme
 - [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
   : New tile
-- [`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
-  : New tileset
 - [`create_dataset()`](https://asoc-org.github.io/apscp/reference/create_dataset.md)
   : Create dataset
 - [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
   : Create a new legend
+- [`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md)
+  : Create optimized solution
+- [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md)
+  : Create solution
+- [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
+  : Create solution legend
 - [`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md)
   : Create tile
-- [`create_tileset()`](https://asoc-org.github.io/apscp/reference/create_tileset.md)
-  : Create tileset
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
   : New dataset
+- [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
+  : Tool generated provenance
 
-## Sidebars
+## Widgets
 
-Functions for sidebars.
+Functions for custom widgets.
 
 - [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md)
   : Add sidebar control
@@ -153,6 +154,31 @@ Functions for sidebars.
   : Create a sidebar pane
 - [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)
   : Create a sidebar
+- [`mapperOutput()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+  [`renderMapper()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+  : Shiny bindings for mapper
+- [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md) :
+  Mapper
+- [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
+  : Add solution to map
+- [`solverOutput()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
+  [`renderSolver()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
+  : Shiny bindings for solver
+- [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md) :
+  Solver
+- [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md)
+  : Add lock to solver
+- [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md)
+  : Reset solver
+- [`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
+  : Synchronize solver settings
+
+## Optimization
+
+Functions for optimization.
+
+- [`prioritization()`](https://asoc-org.github.io/apscp/reference/prioritization.md)
+  : Generate a prioritization
 
 ## Mapping
 
@@ -202,6 +228,8 @@ Functions for reading and writing from disk and memory.
 
 - [`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md)
   : Deserialize
+- [`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md)
+  : Read builtin project
 - [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md)
   : Read dataset
 - [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md)
@@ -221,6 +249,12 @@ Functions for simulating data.
   : Simulate binary legend
 - [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md)
   : Simulate continuous legend
+- [`simulate_feature_zone_targets()`](https://asoc-org.github.io/apscp/reference/simulate_feature_zone_targets.md)
+  : Simulate targets
+- [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
+  : Simulate PMtiles file
+- [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md)
+  : Simulate prioritization settings
 - [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md)
   : Simulate project
 - [`simulate_provenance()`](https://asoc-org.github.io/apscp/reference/simulate_provenance.md)
@@ -232,11 +266,25 @@ Functions for simulating data.
 
 ## Miscellaneous functions
 
+- [`as.data.frame(`*`<JsDataFrame>`*`)`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md)
+  : Convert \`JsDataFrame\` object to data.frame
+- [`as.list(`*`<JsDataFrameList>`*`)`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md)
+  : Convert \`JsDataFrameList\` object to list object.
 - [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
   : Color palette
-- [`start_tile_server()`](https://asoc-org.github.io/apscp/reference/start_tile_server.md)
+- [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
+  : Is relative path?
+- [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
+  : Read sf data from zip file
+- [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
+  : Write sf data to zip file
+- [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)
+  : Add a tile to tile server
+- [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md)
+  : Tile server directory
+- [`tile_server_start()`](https://asoc-org.github.io/apscp/reference/tile_server_start.md)
   : Start tile server
-- [`stop_tile_server()`](https://asoc-org.github.io/apscp/reference/stop_tile_server.md)
+- [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)
   : Stop tile server
 
 # Articles

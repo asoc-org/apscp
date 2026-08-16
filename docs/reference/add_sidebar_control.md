@@ -16,7 +16,7 @@ add_sidebar_control(map, id, position = "top-right", height = "100%")
 
 - id:
 
-  \`character\` identifier for sidebar.
+  \`character\` HTML identifier for sidebar.
 
 - position:
 
@@ -54,27 +54,27 @@ library(shiny)
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> ℹ Loading apscp
 #> ! Skipping missing files:
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/app_config.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/app_server.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/app_startup.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/app_ui.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/internal.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Dataset.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Layer.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Cost.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Feature.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Legend.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Lock.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Project.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Provenance.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Solution.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Theme.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Tile.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/class_Tileset.R,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/fct_mapgl.R, …,
-#>   /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/widget_sidebar_methods.R,
-#>   and /tmp/RtmpdtrJ1u/temp_libpath10c11363bcf3b/apscp/R/widget_sidebar_ui.R
-#> Warning: S3 methods ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘print.Tileset’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.Tileset’, ‘serialize_object.bbox’, ‘serialize_object.default’ were declared in NAMESPACE but not found
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/aaa.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_config.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_server.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_startup.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_ui.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/internal.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Dataset.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Layer.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Cost.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Feature.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Legend.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Lock.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Project.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Provenance.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Solution.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Theme.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Tile.R,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/fct_mapgl.R, …,
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/widget_solver_ui.R, and
+#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/zzz.R
+#> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.default’ were declared in NAMESPACE but not found
 #> Warning: Objects listed as exports, but not present in namespace:
 #> • Dataset
 #> • add_sidebar_control
@@ -82,13 +82,16 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • color_palette
 #> • create_dataset
 #> • create_legend
+#> • create_optimized_solution
+#> • create_solution
+#> • create_solution_legend
 #> • create_tile
-#> • create_tileset
 #> • deserialize_object
 #> • disable_sidebar
 #> • enable_sidebar
 #> • get_paint_parameters
 #> • has_mapbox_token
+#> • is_relative_path
 #> • map_project
 #> • mapgl_add_layer
 #> • mapgl_add_source
@@ -97,6 +100,9 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • mapgl_source_id
 #> • mapgl_source_layer_id
 #> • mapgl_source_url
+#> • mapper
+#> • mapperOutput
+#> • mapper_add_solution
 #> • new_categorical_legend
 #> • new_continuous_legend
 #> • new_cost
@@ -109,24 +115,40 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • new_solution
 #> • new_theme
 #> • new_tile
-#> • new_tileset
 #> • open_sidebar
+#> • prioritization
+#> • read_builtin_project
 #> • read_dataset
 #> • read_project
+#> • read_sf_data
+#> • renderMapper
+#> • renderSolver
 #> • run_app
 #> • serialize_object
 #> • sidebar_pane
 #> • sidebar_tabs
 #> • simulate_binary_legend
 #> • simulate_continuous_legend
+#> • simulate_feature_zone_targets
+#> • simulate_pmtiles_file
+#> • simulate_prioritization_settings
 #> • simulate_project
 #> • simulate_provenance
 #> • simulate_solution_legend
 #> • simulate_spatial_data
-#> • start_tile_server
-#> • stop_tile_server
+#> • solver
+#> • solverOutput
+#> • solver_add_lock
+#> • solver_reset
+#> • solver_sync
+#> • tile_server_add_tile
+#> • tile_server_dir
+#> • tile_server_start
+#> • tile_server_stop
+#> • tool_generated_provenance
 #> • write_dataset
 #> • write_project
+#> • write_sf_data
 #> Linking to GEOS 3.12.2, GDAL 3.9.3, PROJ 9.4.1; sf_use_s2() is TRUE
 #> Error in sidebar_deps(): could not find function "sidebar_deps"
 # }

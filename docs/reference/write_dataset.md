@@ -30,6 +30,7 @@ An invisible \`TRUE\` indicating success.
 
 Other io:
 [`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md),
+[`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md),
 [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md),
 [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md),
 [`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md),
@@ -47,7 +48,7 @@ dataset <- create_dataset(sim_data)
 #> Error in create_dataset(sim_data): could not find function "create_dataset"
 
 # define file paths for saving data
-pu_path <- tempfile(fileext = ".csv.gz")
+pu_path <- tempfile(fileext = ".gpkg.zip")
 bd_path <- tempfile(fileext = ".csv.gz")
 
 # save files

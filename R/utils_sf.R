@@ -7,6 +7,8 @@ NULL
 #'
 #' @return A [sf::st_sf()] object.
 #'
+#' @family misc
+#'
 #' @export
 read_sf_data <- function(path) {
   # import data
@@ -20,6 +22,8 @@ read_sf_data <- function(path) {
 #' @param path `character` file path.
 #'
 #' @return An invisible `TRUE`.
+#'
+#' @family misc
 #'
 #' @export
 write_sf_data <- function(x, path) {
@@ -65,6 +69,8 @@ write_sf_data <- function(x, path) {
 #' @param x `character` value with file path.
 #'
 #' @return A `logical` value.
+#'
+#' @family misc
 #'
 #' @export
 is_relative_path <- function(x) {

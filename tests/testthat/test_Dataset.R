@@ -21,20 +21,30 @@ test_that("methods", {
   ## get_column_total
   expect_equal(x$get_column_total("cost"), sum(x$pu_data$cost, na.rm = TRUE))
   ## get_column_held
+  status <- sample(c(0, 1), x$get_n_pu(), replace = TRUE)
   expect_equal(
-    x$get_column_held(
-      "cost", "Biodiversity",
-      c("Biodiversity" = "aspas", "Scientific" = "camps")
-    ),
-    sum(x$pu_data$aspas * x$pu_data$cost, na.rm = TRUE) /
+    x$get_column_held("cost", status),
+    sum(x$pu_data$cost * status, na.rm = TRUE) /
       sum(x$pu_data$cost, na.rm = TRUE)
   )
+  ## get_pu_status
   expect_equal(
-    x$get_column_held(
-      "cost", "Tourism",
+    x$get_pu_status(
+      "Biodiversity",
       c("Biodiversity" = "aspas", "Scientific" = "camps")
     ),
-    0
+    replace(
+      rep(0, x$get_n_pu()),
+      which(x$pu_data$aspas > 0.5),
+      1
+    )
+  )
+  expect_equal(
+    x$get_pu_status(
+      "Biodiversity",
+      c("Scientific" = "aspas", "Biodiversity" = "aspas")
+    ),
+    rep(0, x$get_n_pu())
   )
   ## set_column_data
   expect_false(x$has_column("new"))

@@ -44,7 +44,15 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_feature</span><span class="op">(</span><span class="va">name</span>, <span class="va">layer</span>, <span class="va">targets</span>, id <span class="op">=</span> <span class="fu">uuid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/uuid/man/UUIDgenerate.html" class="external-link">UUIDgenerate</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_feature</span><span class="op">(</span></span>
+<span>  <span class="va">name</span>,</span>
+<span>  <span class="va">layer</span>,</span>
+<span>  <span class="va">zone_targets</span>,</span>
+<span>  <span class="va">zone_weights</span>,</span>
+<span>  <span class="va">zone_helds</span>,</span>
+<span>  <span class="va">themes</span>,</span>
+<span>  id <span class="op">=</span> <span class="fu">uuid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/uuid/man/UUIDgenerate.html" class="external-link">UUIDgenerate</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,12 +68,34 @@
 visualization.</p></dd>
 
 
-<dt id="arg-targets">targets<a class="anchor" aria-label="anchor" href="#arg-targets"></a></dt>
-<dd><p>`numeric` vector of initial targets for the feature.
-Each value should correspond to a particular zone and denote
-values should be specified as a proportion of the features total distribution
-(e.g., a value of 0.1 corresponds to 10<!-- %). -->
-Note that `zones` and `targets` must have the same number of values.</p></dd>
+<dt id="arg-zone-targets">zone_targets<a class="anchor" aria-label="anchor" href="#arg-zone-targets"></a></dt>
+<dd><p>`numeric` vector with initial target values for
+representing the feature within each zone associated with the project.
+These value should be specified
+as a proportion of the features total distribution (e.g., a value of 0.1
+corresponds to 10<!-- %) and the sum of these values should not exceed -->
+a value of 1.</p></dd>
+
+
+<dt id="arg-zone-weights">zone_weights<a class="anchor" aria-label="anchor" href="#arg-zone-weights"></a></dt>
+<dd><p>`numeric` vector with initial weight values
+for acheiving the tagrgets for each zone associated with the project.
+Each of these values should range
+between 0 and 1. Note that the sum of these values does not
+have any constraints (unlike `zone_targets`).</p></dd>
+
+
+<dt id="arg-zone-helds">zone_helds<a class="anchor" aria-label="anchor" href="#arg-zone-helds"></a></dt>
+<dd><p>`numeric` vector with the proportion of each feature's
+distribution held within planning units that are locked in.
+Each of these values should range
+between 0 and 1. Note that the sum of these values does not
+have any constraints (unlike `zone_targets`).</p></dd>
+
+
+<dt id="arg-themes">themes<a class="anchor" aria-label="anchor" href="#arg-themes"></a></dt>
+<dd><p>`list` of [new_theme()] objects indicating the themes
+to which the feature belongs.</p></dd>
 
 
 <dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
@@ -91,8 +121,7 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
 <code><a href="new_provenance.html">new_provenance()</a></code>,
 <code><a href="new_solution.html">new_solution()</a></code>,
 <code><a href="new_theme.html">new_theme()</a></code>,
-<code><a href="new_tile.html">new_tile()</a></code>,
-<code><a href="new_tileset.html">new_tileset()</a></code></p></div>
+<code><a href="new_tile.html">new_tile()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -104,7 +133,10 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
 <span class="r-in"><span><span class="co"># create object</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_feature</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"species 1"</span>,</span></span>
-<span class="r-in"><span>  targets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  zone_targets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  zone_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span>, <span class="fl">0.7</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  zone_helds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.3</span>, <span class="fl">0.1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  themes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="new_theme.html">new_theme</a></span><span class="op">(</span>zone <span class="op">=</span> <span class="st">"Biodiversity"</span>, name <span class="op">=</span> <span class="st">"Penguins"</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    column <span class="op">=</span> <span class="st">"feat_1"</span>,</span></span>
 <span class="r-in"><span>    total <span class="op">=</span> <span class="fl">500</span>,</span></span>
@@ -115,7 +147,7 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
 <span class="r-in"><span>    details <span class="op">=</span> <span class="st">"extra info"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_feature(name = "species 1", targets = c(0.1, 0.5), layer = new_layer(column = "feat_1",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_continuous_legend(), provenance = simulate_provenance(),     details = "extra info")):</span> could not find function "new_feature"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_feature(name = "species 1", zone_targets = c(0.1, 0.2, 0.3),     zone_weights = c(0.5, 1, 0.7), zone_helds = c(0.2, 0.3, 0.1),     themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),     layer = new_layer(column = "feat_1", total = 500, dataset = create_dataset(sim_data),         tile = create_tile(sim_data), legend = simulate_continuous_legend(),         provenance = simulate_provenance(), details = "extra info")):</span> could not find function "new_feature"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

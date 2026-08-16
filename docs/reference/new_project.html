@@ -47,15 +47,15 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_project</span><span class="op">(</span></span>
 <span>  <span class="va">zones</span>,</span>
 <span>  <span class="va">dataset</span>,</span>
-<span>  <span class="va">tileset</span>,</span>
+<span>  <span class="va">tiles</span>,</span>
 <span>  <span class="va">costs</span>,</span>
-<span>  <span class="va">themes</span>,</span>
+<span>  <span class="va">features</span>,</span>
 <span>  <span class="va">locks</span>,</span>
-<span>  <span class="va">bbox</span>,</span>
 <span>  solutions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"Project"</span>,</span>
 <span>  author_name <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
-<span>  author_email <span class="op">=</span> <span class="st">"Unknown"</span></span>
+<span>  author_email <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
+<span>  version <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -71,24 +71,20 @@
 <dd><p>[new_dataset()] object.</p></dd>
 
 
-<dt id="arg-tileset">tileset<a class="anchor" aria-label="anchor" href="#arg-tileset"></a></dt>
-<dd><p>[new_tileset()] objects.</p></dd>
+<dt id="arg-tiles">tiles<a class="anchor" aria-label="anchor" href="#arg-tiles"></a></dt>
+<dd><p>`list` of [new_tile()] objects.</p></dd>
 
 
 <dt id="arg-costs">costs<a class="anchor" aria-label="anchor" href="#arg-costs"></a></dt>
 <dd><p>`list` of [new_cost()] objects.</p></dd>
 
 
-<dt id="arg-themes">themes<a class="anchor" aria-label="anchor" href="#arg-themes"></a></dt>
-<dd><p>`list` of [new_themes()] objects.</p></dd>
+<dt id="arg-features">features<a class="anchor" aria-label="anchor" href="#arg-features"></a></dt>
+<dd><p>`list` of [new_features()] objects.</p></dd>
 
 
 <dt id="arg-locks">locks<a class="anchor" aria-label="anchor" href="#arg-locks"></a></dt>
 <dd><p>`list` of [new_locks()] objects.</p></dd>
-
-
-<dt id="arg-bbox">bbox<a class="anchor" aria-label="anchor" href="#arg-bbox"></a></dt>
-<dd><p>[sf::st_bbox()] object.</p></dd>
 
 
 <dt id="arg-solutions">solutions<a class="anchor" aria-label="anchor" href="#arg-solutions"></a></dt>
@@ -110,6 +106,11 @@ Defaults to `"Unknown"`.</p></dd>
 <dd><p>`character` email of the project author.
 Defaults to `"Unknown"`.</p></dd>
 
+
+<dt id="arg-version">version<a class="anchor" aria-label="anchor" href="#arg-version"></a></dt>
+<dd><p>`character` version of package used to create the project.
+Defaults to `NULL`, such that the current package version is used.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -129,8 +130,7 @@ Defaults to `"Unknown"`.</p></dd>
 <code><a href="new_provenance.html">new_provenance()</a></code>,
 <code><a href="new_solution.html">new_solution()</a></code>,
 <code><a href="new_theme.html">new_theme()</a></code>,
-<code><a href="new_tile.html">new_tile()</a></code>,
-<code><a href="new_tileset.html">new_tileset()</a></code></p></div>
+<code><a href="new_tile.html">new_tile()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -142,14 +142,14 @@ Defaults to `"Unknown"`.</p></dd>
 <span class="r-in"><span><span class="co"># prepare data</span></span></span>
 <span class="r-in"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_dataset(sim_data):</span> could not find function "create_dataset"</span>
-<span class="r-in"><span><span class="va">tileset</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_tileset.html">create_tileset</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_tileset(sim_data):</span> could not find function "create_tileset"</span>
-<span class="r-in"><span><span class="va">tile</span> <span class="op">&lt;-</span> <span class="va">tileset</span><span class="op">$</span><span class="va">tiles</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'tileset' not found</span>
+<span class="r-in"><span><span class="va">tile</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_tile.html">create_tile</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_tile(sim_data):</span> could not find function "create_tile"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create cost</span></span></span>
 <span class="r-in"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_cost.html">new_cost</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"cost"</span>,</span></span>
+<span class="r-in"><span>  zone <span class="op">=</span> <span class="st">"Science"</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
 <span class="r-in"><span>  layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    column <span class="op">=</span> <span class="st">"feat_1"</span>,</span></span>
 <span class="r-in"><span>    total <span class="op">=</span> <span class="fl">500</span>,</span></span>
@@ -159,11 +159,12 @@ Defaults to `"Unknown"`.</p></dd>
 <span class="r-in"><span>    provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_cost(name = "cost", layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_cost"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_cost(name = "cost", zone = "Science", weight = 0.1, layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_cost"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create lock</span></span></span>
 <span class="r-in"><span><span class="va">lock</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_lock.html">new_lock</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"lock"</span>,</span></span>
+<span class="r-in"><span>  zone <span class="op">=</span> <span class="st">"Biodiversity"</span>,</span></span>
 <span class="r-in"><span>  layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    column <span class="op">=</span> <span class="st">"locked_in"</span>,</span></span>
 <span class="r-in"><span>    total <span class="op">=</span> <span class="fl">30</span>,</span></span>
@@ -173,51 +174,56 @@ Defaults to `"Unknown"`.</p></dd>
 <span class="r-in"><span>    provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_lock(name = "lock", layer = new_layer(column = "locked_in",     total = 30, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_lock"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_lock(name = "lock", zone = "Biodiversity", layer = new_layer(column = "locked_in",     total = 30, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_lock"</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># create theme</span></span></span>
-<span class="r-in"><span><span class="va">theme</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_theme.html">new_theme</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="st">"species"</span>,</span></span>
-<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="fu"><a href="new_feature.html">new_feature</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      name <span class="op">=</span> <span class="st">"f1"</span>,</span></span>
-<span class="r-in"><span>      targets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.5</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        column <span class="op">=</span> <span class="st">"feat_1"</span>,</span></span>
-<span class="r-in"><span>        total <span class="op">=</span> <span class="fl">500</span>,</span></span>
-<span class="r-in"><span>        dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
-<span class="r-in"><span>        tile <span class="op">=</span> <span class="va">tile</span>,</span></span>
-<span class="r-in"><span>        legend <span class="op">=</span> <span class="fu"><a href="simulate_continuous_legend.html">simulate_continuous_legend</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># create features</span></span></span>
+<span class="r-in"><span><span class="va">features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="new_feature.html">new_feature</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    name <span class="op">=</span> <span class="st">"f1"</span>,</span></span>
+<span class="r-in"><span>    zone_targets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    zone_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.1</span>, <span class="fl">0.3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    zone_helds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0.1</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    themes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="new_theme.html">new_theme</a></span><span class="op">(</span>zone <span class="op">=</span> <span class="st">"Biodiversity"</span>, name <span class="op">=</span> <span class="st">"Penguins"</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      column <span class="op">=</span> <span class="st">"feat_1"</span>,</span></span>
+<span class="r-in"><span>      total <span class="op">=</span> <span class="fl">500</span>,</span></span>
+<span class="r-in"><span>      dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
+<span class="r-in"><span>      tile <span class="op">=</span> <span class="va">tile</span>,</span></span>
+<span class="r-in"><span>      legend <span class="op">=</span> <span class="fu"><a href="simulate_continuous_legend.html">simulate_continuous_legend</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  <span class="fu"><a href="new_feature.html">new_feature</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    name <span class="op">=</span> <span class="st">"f2"</span>,</span></span>
+<span class="r-in"><span>    zone_targets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.04</span>, <span class="fl">0.9</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    zone_weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.8</span>, <span class="fl">0.1</span>, <span class="fl">0.05</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    zone_helds <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    themes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="fu"><a href="new_theme.html">new_theme</a></span><span class="op">(</span>zone <span class="op">=</span> <span class="st">"Biodiversity"</span>, name <span class="op">=</span> <span class="st">"Penguins"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      <span class="fu"><a href="new_theme.html">new_theme</a></span><span class="op">(</span>zone <span class="op">=</span> <span class="st">"Tourism"</span>, name <span class="op">=</span> <span class="st">"Charismatic species"</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="new_feature.html">new_feature</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>      name <span class="op">=</span> <span class="st">"f2"</span>,</span></span>
-<span class="r-in"><span>      targets <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.2</span>, <span class="fl">0.9</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>      layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>        column <span class="op">=</span> <span class="st">"feat_2"</span>,</span></span>
-<span class="r-in"><span>        total <span class="op">=</span> <span class="fl">200</span>,</span></span>
-<span class="r-in"><span>        dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
-<span class="r-in"><span>        tile <span class="op">=</span> <span class="va">tile</span>,</span></span>
-<span class="r-in"><span>        legend <span class="op">=</span> <span class="fu"><a href="simulate_continuous_legend.html">simulate_continuous_legend</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>        provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span>      <span class="op">)</span></span></span>
+<span class="r-in"><span>    layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      column <span class="op">=</span> <span class="st">"feat_2"</span>,</span></span>
+<span class="r-in"><span>      total <span class="op">=</span> <span class="fl">200</span>,</span></span>
+<span class="r-in"><span>      dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
+<span class="r-in"><span>      tile <span class="op">=</span> <span class="va">tile</span>,</span></span>
+<span class="r-in"><span>      legend <span class="op">=</span> <span class="fu"><a href="simulate_continuous_legend.html">simulate_continuous_legend</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>      provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_theme("species", list(new_feature(name = "f1", targets = c(0.1,     0.5), layer = new_layer(column = "feat_1", total = 500, dataset = dataset,     tile = tile, legend = simulate_continuous_legend(), provenance = simulate_provenance())),     new_feature(name = "f2", targets = c(0.2, 0.9), layer = new_layer(column = "feat_2",         total = 200, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),         provenance = simulate_provenance())))):</span> could not find function "new_theme"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_feature(name = "f1", zone_targets = c(0.1, 0.2, 0.5), zone_weights = c(0.2,     0.1, 0.3), zone_helds = c(0, 0.1, 0), themes = list(new_theme(zone = "Biodiversity",     name = "Penguins")), layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_feature"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create project</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_project</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  zones <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Conservation"</span>, <span class="st">"Tourism"</span>, <span class="st">"Science"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  zones <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Biodiversity"</span>, <span class="st">"Tourism"</span>, <span class="st">"Science"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
-<span class="r-in"><span>  tileset <span class="op">=</span> <span class="va">tileset</span>,</span></span>
+<span class="r-in"><span>  tiles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tile</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  costs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cost</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  locks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">lock</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  themes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">theme</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>  bbox <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html" class="external-link">st_bbox</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, crs <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_crs.html" class="external-link">st_crs</a></span><span class="op">(</span><span class="fl">4326</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  features <span class="op">=</span> <span class="va">features</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_project(zones = c("Conservation", "Tourism", "Science"),     dataset = dataset, tileset = tileset, costs = list(cost),     locks = list(lock), themes = list(theme), bbox = sf::st_bbox(c(0,         1, 0, 1), crs = sf::st_crs(4326))):</span> could not find function "new_project"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     dataset = dataset, tiles = list(tile), costs = list(cost),     locks = list(lock), features = features):</span> could not find function "new_project"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

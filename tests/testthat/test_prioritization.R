@@ -1,10 +1,14 @@
-test_that("no locks", {
+test_that("basic", {
   skip_if_not_installed("rcbc")
   # simulate data
   p <- simulate_project()
   s <- withr::with_seed(500, simulate_prioritization_settings(p))
-  # ensure no active locks
+  # set all targets and weights to be equal
+  s$features$target <- 0.3
+  s$features$weight <- 1
+  # ensure no active costs or locks
   s$locks <- s$locks[FALSE, , drop = FALSE]
+  s$costs$zones <- NA
   # generate solution
   x <- prioritization(p, s)
   # run tests
@@ -14,11 +18,39 @@ test_that("no locks", {
   expect_true(all(seq_along(p$zones) %in% x$solution))
 })
 
+test_that("active costs", {
+  skip_if_not_installed("rcbc")
+  # simulate data
+  p <- simulate_project()
+  s <- withr::with_seed(500, simulate_prioritization_settings(p))
+  # identify targets for zones with costs
+  i <- s$features$zone %in% s$cost$zone
+  # set all targets and weights for zones with costs to be zero
+  s$features$target[i] <- 0
+  # set all targets and weights for other zones to be positive
+  s$features$target[!i] <- 0.3
+  s$features$weight[!i] <- 1
+  # ensure no active locks
+  s$locks <- s$locks[FALSE, , drop = FALSE]
+  # generate solution
+  x <- prioritization(p, s)
+  # run tests
+  expect_type(x, "list")
+  expect_named(x, c("solution", "results"))
+  expect_type(x$solution, "double")
+  expect_true(all(match(s$locks$zone, p$zones) %in% x$solution))
+})
+
 test_that("active locks", {
   skip_if_not_installed("rcbc")
   # simulate data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
+  # set all targets and weights to be equal
+  s$features$target <- 0.01
+  s$features$weight <- 1
+  # ensure no active costs
+  s$costs$zones <- NA
   # generate solution
   x <- prioritization(p, s)
   # run tests

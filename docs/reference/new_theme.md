@@ -5,7 +5,7 @@ Create a new theme object.
 ## Usage
 
 ``` r
-new_theme(name, features)
+new_theme(name, zone)
 ```
 
 ## Arguments
@@ -14,9 +14,11 @@ new_theme(name, features)
 
   \`character\` value with name.
 
-- features:
+- zone:
 
-  \[new_feature()\] object or \`list\` of such objects.
+  \`character\` name of zone associated with the theme. Note that
+  \`zone\` should match one of the zone names associated with the
+  \[new_project()\] to which this theme belongs.
 
 ## Value
 
@@ -36,55 +38,14 @@ Other class:
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Examples
 
 ``` r
-# simulate spatial data
-sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
-
-# prepare data
-dataset <- create_dataset(sim_data)
-#> Error in create_dataset(sim_data): could not find function "create_dataset"
-tile <- create_tile(sim_data)
-#> Error in create_tile(sim_data): could not find function "create_tile"
-
-# create object
-x <- new_theme(
-  "species",
-  list(
-    new_feature(
-      name = "f1",
-      targets = c(0.1, 0.5),
-      layer = new_layer(
-        column = "feat_1",
-        total = 500,
-        dataset = dataset,
-        tile = tile,
-        legend = simulate_continuous_legend(),
-        provenance = simulate_provenance(),
-        details = "extra info"
-      )
-    ),
-    new_feature(
-      name = "f2",
-      targets = c(0.2, 0.9),
-      layer = new_layer(
-        column = "feat_2",
-        total = 500,
-        dataset = dataset,
-        tile = tile,
-        legend = simulate_continuous_legend(),
-        provenance = simulate_provenance(),
-        details = "extra info 2"
-      )
-    )
-  )
-)
-#> Error in new_theme("species", list(new_feature(name = "f1", targets = c(0.1,     0.5), layer = new_layer(column = "feat_1", total = 500, dataset = dataset,     tile = tile, legend = simulate_continuous_legend(), provenance = simulate_provenance(),     details = "extra info")), new_feature(name = "f2", targets = c(0.2,     0.9), layer = new_layer(column = "feat_2", total = 500, dataset = dataset,     tile = tile, legend = simulate_continuous_legend(), provenance = simulate_provenance(),     details = "extra info 2")))): could not find function "new_theme"
+# crate a theme
+x <- new_theme(name = "Penguins", zone = "Biodiversity")
+#> Error in new_theme(name = "Penguins", zone = "Biodiversity"): could not find function "new_theme"
 
 # preview object
 print(x)

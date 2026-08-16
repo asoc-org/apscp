@@ -32,7 +32,8 @@ dataset <- create_dataset(sim_data)
 tile <- create_tile(sim_data)
 cost <- new_cost(
   name = "cost",
-  zones_active = c(FALSE, FALSE, FALSE),
+  zone = "Science",
+  weight = 0.1,
   layer = new_layer(
     column = "feat_1",
     total = 500,

@@ -15,3 +15,12 @@ A [sf::st_sf()] object.
 \description{
 Read sf data from zip file
 }
+\seealso{
+Other misc:
+\code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
+\code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
+\code{\link[=color_palette]{color_palette()}},
+\code{\link[=is_relative_path]{is_relative_path()}},
+\code{\link[=write_sf_data]{write_sf_data()}}
+}
+\concept{misc}

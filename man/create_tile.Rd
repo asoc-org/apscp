@@ -48,6 +48,10 @@ print(x)
 Other method:
 \code{\link[=create_dataset]{create_dataset()}},
 \code{\link[=create_legend]{create_legend()}},
-\code{\link[=new_dataset]{new_dataset()}}
+\code{\link[=create_optimized_solution]{create_optimized_solution()}},
+\code{\link[=create_solution]{create_solution()}},
+\code{\link[=create_solution_legend]{create_solution_legend()}},
+\code{\link[=new_dataset]{new_dataset()}},
+\code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }
 \concept{method}

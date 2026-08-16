@@ -72,3 +72,19 @@ columns:
 }
 }
 
+\examples{
+# simulate data
+project <- simulate_project()
+solver_settings <- simulate_prioritization_settings(project)
+
+# preview settings
+print(solver_settings)
+
+# generate solution
+sol <- prioritization(project, solver_settings)
+
+# preview solution
+print(sol)
+
+}
+\concept{optimization}

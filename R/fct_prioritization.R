@@ -64,6 +64,22 @@ NULL
 #' with values indicating the zone for each planning unit, and a `results`
 #' element that contains supplementary information.
 #'
+#' @family optimization
+#'
+#' @examples
+#' # simulate data
+#' project <- simulate_project()
+#' solver_settings <- simulate_prioritization_settings(project)
+#'
+#' # preview settings
+#' print(solver_settings)
+#'
+#' # generate solution
+#' sol <- prioritization(project, solver_settings)
+#'
+#' # preview solution
+#' print(sol)
+#'
 #' @export
 prioritization <- function(
   project,
@@ -118,14 +134,24 @@ prioritization <- function(
 
   # preliminary data processing
   ## cost settings
-  x$costs$zone[nchar(x$costs$zone) == 0L] <- NA_character_
-  x$costs <- x$costs[!is.na(x$costs), , drop = FALSE]
+  settings$costs$zone[nchar(settings$costs$zone) == 0L] <- NA_character_
+  settings$costs <- settings$costs[!is.na(settings$costs$zone), , drop = FALSE]
+  ## feature settings
+  settings$feature <- settings$feature[
+    settings$features$target > 1e-4 & settings$features$weight > 1e-4, ,
+    drop = FALSE
+  ]
+
+  # initialize vector of zone names for each problem
+  prob_zones <- project$zones
 
   # build list of problems based on meeting target shortfalls
   prob <- lapply(project$zones, function(x) {
     ## extract settings for zone
     zone_settings <-
       settings$features[settings$features$zone == x, , drop = FALSE]
+    ## if no features, then skip
+    if (identical(nrow(zone_settings), 0L)) return(NULL)
     ## prepare zones object
     zones <-
       list(rep("_zeros", nrow(zone_settings)))[rep(1, length(project$zones))]
@@ -163,6 +189,11 @@ prioritization <- function(
       prioritizr::add_binary_decisions()
   })
 
+  # remove any skipped zones because they had no feature targets
+  skipped_zones <- vapply(prob, is.null, logical(1))
+  prob_zones <- prob_zones[!skipped_zones]
+  prob <- prob[!skipped_zones]
+
   # add in extra problems based on cost layers
   {for (i in seq_len(nrow(settings$costs))) {
     ## prepare zones object
@@ -198,10 +229,9 @@ prioritization <- function(
       seq_along(project$zones),
       FUN.VALUE = numeric(project$dataset$get_n_pu()),
       USE.NAMES = FALSE,
-      function(i) project$dataset$get_pu_status(project$zones[[i]], allocation)
+      function(i) project$dataset$get_pu_status(project$zones[[i]], lock_data)
     )
-    lock_data <- lock_data[rowSums(lock_data) > 0, , drop = FALSE]
-    lock_data <- which(lock_data, arr.ind = TRUE)
+    lock_data <- which(lock_data > 0.5, arr.ind = TRUE)
     lock_data <- data.frame(
       pu = lock_data[, 1],
       zone = project$zones[lock_data[, 2]],
@@ -234,7 +264,7 @@ prioritization <- function(
 
   # add multi-objective approach
   ## initialize weights
-  moo_zones <- c(project$zones, settings$costs$zone)
+  moo_zones <- c(prob_zones, settings$costs$zone)
   moo_freq <- as.data.frame(table(moo_zones))
   moo_weights <- 1 / moo_freq[[2]][match(moo_zones, moo_freq[[1]])]
   ## add approach

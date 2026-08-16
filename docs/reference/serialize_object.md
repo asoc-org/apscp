@@ -7,16 +7,10 @@ Serialize an object.
 ``` r
 serialize_object(x)
 
-# S3 method for class 'bbox'
-serialize_object(x)
-
 # S3 method for class 'Provenance'
 serialize_object(x)
 
 # S3 method for class 'Tile'
-serialize_object(x)
-
-# S3 method for class 'Tileset'
 serialize_object(x)
 
 # S3 method for class 'ContinuousLegend'
@@ -69,6 +63,7 @@ See \[deserialize_object()\] for the opposite of this function.
 
 Other io:
 [`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md),
+[`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md),
 [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md),
 [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md),
 [`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md),

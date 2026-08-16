@@ -22,9 +22,12 @@ A \[Dataset\] object.
 
 Other method:
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
+[`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md),
+[`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
+[`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
 [`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md),
-[`create_tileset()`](https://asoc-org.github.io/apscp/reference/create_tileset.md),
-[`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
+[`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
 

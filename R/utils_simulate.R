@@ -396,6 +396,7 @@ simulate_prioritization_settings <- function(project) {
       )
     })
   )
+  lock_settings$priority <- seq(nrow(lock_settings), 1L)
 
   # create cost settings
   cost_settings <- do.call(

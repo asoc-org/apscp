@@ -58,8 +58,7 @@
 <code><a href="new_provenance.html">new_provenance()</a></code>,
 <code><a href="new_solution.html">new_solution()</a></code>,
 <code><a href="new_theme.html">new_theme()</a></code>,
-<code><a href="new_tile.html">new_tile()</a></code>,
-<code><a href="new_tileset.html">new_tileset()</a></code></p></div>
+<code><a href="new_tile.html">new_tile()</a></code></p></div>
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
@@ -67,16 +66,16 @@
 <dd><p>[new_dataset()] object.</p></dd>
 
 
-    <dt><code>tileset</code></dt>
-<dd><p>`[new_tile_set()] objects.</p></dd>
+    <dt><code>tiles</code></dt>
+<dd><p>`list` of [new_tile()] objects.</p></dd>
 
 
     <dt><code>zones</code></dt>
 <dd><p>`character` vector of zone names.</p></dd>
 
 
-    <dt><code>themes</code></dt>
-<dd><p>`list` of [new_theme()] objects.</p></dd>
+    <dt><code>features</code></dt>
+<dd><p>`list` of [new_feature()] objects.</p></dd>
 
 
     <dt><code>locks</code></dt>
@@ -91,10 +90,6 @@
 <dd><p>`list` of [new_solution()] objects.</p></dd>
 
 
-    <dt><code>bbox</code></dt>
-<dd><p>[sf::st_bbox()] object.</p></dd>
-
-
     <dt><code>name</code></dt>
 <dd><p>`character` name of the project.</p></dd>
 
@@ -107,6 +102,11 @@
 <dd><p>`character` email of the project author.</p></dd>
 
 
+    <dt><code>version</code></dt>
+<dd><p>`character` value with package version used
+to create the project.</p></dd>
+
+
 </dl><p></p></div>
     </div>
     <div class="section level2">
@@ -117,8 +117,11 @@
 <p></p><ul><li><p><a href="#method-Project-initialize"><code>Project$new()</code></a></p></li>
 <li><p><a href="#method-Project-get_centroid"><code>Project$get_centroid()</code></a></p></li>
 <li><p><a href="#method-Project-get_bbox"><code>Project$get_bbox()</code></a></p></li>
+<li><p><a href="#method-Project-get_solution"><code>Project$get_solution()</code></a></p></li>
+<li><p><a href="#method-Project-get_lock"><code>Project$get_lock()</code></a></p></li>
 <li><p><a href="#method-Project-add_solution"><code>Project$add_solution()</code></a></p></li>
 <li><p><a href="#method-Project-add_lock"><code>Project$add_lock()</code></a></p></li>
+<li><p><a href="#method-Project-add_tile"><code>Project$add_tile()</code></a></p></li>
 <li><p><a href="#method-Project-clone"><code>Project$clone()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-Project-initialize"></a><div class="section">
 <h3 id="project-new-"><code>Project$new()</code><a class="anchor" aria-label="anchor" href="#project-new-"></a></h3>
@@ -126,33 +129,30 @@
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Project.html">Project</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  <span class="va">zones</span>,</span>
-<span>  <span class="va">bbox</span>,</span>
 <span>  <span class="va">dataset</span>,</span>
-<span>  <span class="va">tileset</span>,</span>
-<span>  <span class="va">themes</span>,</span>
+<span>  <span class="va">tiles</span>,</span>
+<span>  <span class="va">features</span>,</span>
 <span>  <span class="va">locks</span>,</span>
 <span>  <span class="va">costs</span>,</span>
 <span>  solutions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"Project"</span>,</span>
 <span>  author_name <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
-<span>  author_email <span class="op">=</span> <span class="st">"Unknown"</span></span>
+<span>  author_email <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
+<span>  version <span class="op">=</span> <span class="st">"Unknown"</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>zones</code></dt>
 <dd><p>`character` vector of zone names.</p></dd>
 
-      <dt><code>bbox</code></dt>
-<dd><p>[sf::st_bbox()] object.</p></dd>
-
       <dt><code>dataset</code></dt>
 <dd><p>[new_dataset()] object.</p></dd>
 
-      <dt><code>tileset</code></dt>
-<dd><p>`[new_tile_set()] object.</p></dd>
+      <dt><code>tiles</code></dt>
+<dd><p>`list` of [new_tile()] objects.</p></dd>
 
-      <dt><code>themes</code></dt>
-<dd><p>`list` of [new_theme()] objects.</p></dd>
+      <dt><code>features</code></dt>
+<dd><p>`list` of [new_feature()] objects.</p></dd>
 
       <dt><code>locks</code></dt>
 <dd><p>`list` of [new_lock()] objects.</p></dd>
@@ -174,6 +174,11 @@ Defaults to `"Unknown"`.</p></dd>
 
       <dt><code>author_email</code></dt>
 <dd><p>`character` email of the project author.
+Defaults to `"Unknown"`.</p></dd>
+
+      <dt><code>version</code></dt>
+<dd><p>`character` value with package version used
+to create the project.
 Defaults to `"Unknown"`.</p></dd>
 
 
@@ -223,20 +228,58 @@ box by 10 percent. Defaults to 0.</p></dd>
 
 </div>
 
-<p></p><hr><a id="method-Project-add_solution"></a><div class="section">
-<h3 id="project-add-solution-"><code>Project$add_solution()</code><a class="anchor" aria-label="anchor" href="#project-add-solution-"></a></h3>
-<p>Add a solution to the project.</p><div class="section">
+<p></p><hr><a id="method-Project-get_solution"></a><div class="section">
+<h3 id="project-get-solution-"><code>Project$get_solution()</code><a class="anchor" aria-label="anchor" href="#project-get-solution-"></a></h3>
+<p>Get solution from the project.</p><div class="section">
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_solution</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_solution</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>id</code></dt>
+<dd><p>`character` value.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<p>A [new_solution()] object.</p>
+</div>
+
+</div>
+
+<p></p><hr><a id="method-Project-get_lock"></a><div class="section">
+<h3 id="project-get-lock-"><code>Project$get_lock()</code><a class="anchor" aria-label="anchor" href="#project-get-lock-"></a></h3>
+<p>Get lock from the project.</p><div class="section">
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_lock</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>id</code></dt>
+<dd><p>`character` value.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<p>A [new_solution()] object.</p>
+</div>
+
+</div>
+
+<p></p><hr><a id="method-Project-add_solution"></a><div class="section">
+<h3 id="project-add-solution-"><code>Project$add_solution()</code><a class="anchor" aria-label="anchor" href="#project-add-solution-"></a></h3>
+<p>Add a new solution to the project.</p><div class="section">
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_solution</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>[new_solution()] object.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>An invisible `TRUE` indicating success.</p>
 </div>
 
@@ -245,17 +288,36 @@ box by 10 percent. Defaults to 0.</p></dd>
 <p></p><hr><a id="method-Project-add_lock"></a><div class="section">
 <h3 id="project-add-lock-"><code>Project$add_lock()</code><a class="anchor" aria-label="anchor" href="#project-add-lock-"></a></h3>
 <p>Add a lock to the project.</p><div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_lock</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>[new_lock()] object.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
+<p>An invisible `TRUE` indicating success.</p>
+</div>
+
+</div>
+
+<p></p><hr><a id="method-Project-add_tile"></a><div class="section">
+<h3 id="project-add-tile-"><code>Project$add_tile()</code><a class="anchor" aria-label="anchor" href="#project-add-tile-"></a></h3>
+<p>Add a tile to the project.</p><div class="section">
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_tile</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>x</code></dt>
+<dd><p>[new_tile()] object.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
 <p>An invisible `TRUE` indicating success.</p>
 </div>
 
@@ -264,10 +326,10 @@ box by 10 percent. Defaults to 0.</p></dd>
 <p></p><hr><a id="method-Project-clone"></a><div class="section">
 <h3 id="project-clone-"><code>Project$clone()</code><a class="anchor" aria-label="anchor" href="#project-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

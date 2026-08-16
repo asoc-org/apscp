@@ -8,15 +8,15 @@ Create a new project object.
 new_project(
   zones,
   dataset,
-  tileset,
+  tiles,
   costs,
-  themes,
+  features,
   locks,
-  bbox,
   solutions = list(),
   name = "Project",
   author_name = "Unknown",
-  author_email = "Unknown"
+  author_email = "Unknown",
+  version = NULL
 )
 ```
 
@@ -30,25 +30,21 @@ new_project(
 
   \[new_dataset()\] object.
 
-- tileset:
+- tiles:
 
-  \[new_tileset()\] objects.
+  \`list\` of \[new_tile()\] objects.
 
 - costs:
 
   \`list\` of \[new_cost()\] objects.
 
-- themes:
+- features:
 
-  \`list\` of \[new_themes()\] objects.
+  \`list\` of \[new_features()\] objects.
 
 - locks:
 
   \`list\` of \[new_locks()\] objects.
-
-- bbox:
-
-  \[sf::st_bbox()\] object.
 
 - solutions:
 
@@ -65,6 +61,11 @@ new_project(
 - author_email:
 
   \`character\` email of the project author. Defaults to \`"Unknown"\`.
+
+- version:
+
+  \`character\` version of package used to create the project. Defaults
+  to \`NULL\`, such that the current package version is used.
 
 ## Value
 
@@ -84,8 +85,7 @@ Other class:
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Examples
 
@@ -97,14 +97,14 @@ sim_data <- simulate_spatial_data()
 # prepare data
 dataset <- create_dataset(sim_data)
 #> Error in create_dataset(sim_data): could not find function "create_dataset"
-tileset <- create_tileset(sim_data)
-#> Error in create_tileset(sim_data): could not find function "create_tileset"
-tile <- tileset$tiles[[1]]
-#> Error: object 'tileset' not found
+tile <- create_tile(sim_data)
+#> Error in create_tile(sim_data): could not find function "create_tile"
 
 # create cost
 cost <- new_cost(
   name = "cost",
+  zone = "Science",
+  weight = 0.1,
   layer = new_layer(
     column = "feat_1",
     total = 500,
@@ -114,11 +114,12 @@ cost <- new_cost(
     provenance = simulate_provenance()
   )
 )
-#> Error in new_cost(name = "cost", layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_cost"
+#> Error in new_cost(name = "cost", zone = "Science", weight = 0.1, layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_cost"
 
 # create lock
 lock <- new_lock(
   name = "lock",
+  zone = "Biodiversity",
   layer = new_layer(
     column = "locked_in",
     total = 30,
@@ -128,51 +129,56 @@ lock <- new_lock(
     provenance = simulate_provenance()
   )
 )
-#> Error in new_lock(name = "lock", layer = new_layer(column = "locked_in",     total = 30, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_lock"
+#> Error in new_lock(name = "lock", zone = "Biodiversity", layer = new_layer(column = "locked_in",     total = 30, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_lock"
 
-# create theme
-theme <- new_theme(
-  "species",
-  list(
-    new_feature(
-      name = "f1",
-      targets = c(0.1, 0.5),
-      layer = new_layer(
-        column = "feat_1",
-        total = 500,
-        dataset = dataset,
-        tile = tile,
-        legend = simulate_continuous_legend(),
-        provenance = simulate_provenance()
-      )
+# create features
+features <- list(
+  new_feature(
+    name = "f1",
+    zone_targets = c(0.1, 0.2, 0.5),
+    zone_weights = c(0.2, 0.1, 0.3),
+    zone_helds = c(0, 0.1, 0),
+    themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),
+    layer = new_layer(
+      column = "feat_1",
+      total = 500,
+      dataset = dataset,
+      tile = tile,
+      legend = simulate_continuous_legend(),
+      provenance = simulate_provenance()
+    )
+  ),
+  new_feature(
+    name = "f2",
+    zone_targets = c(0.01, 0.04, 0.9),
+    zone_weights = c(0.8, 0.1, 0.05),
+    zone_helds = c(0.2, 0, 0),
+    themes = list(
+      new_theme(zone = "Biodiversity", name = "Penguins"),
+      new_theme(zone = "Tourism", name = "Charismatic species")
     ),
-    new_feature(
-      name = "f2",
-      targets = c(0.2, 0.9),
-      layer = new_layer(
-        column = "feat_2",
-        total = 200,
-        dataset = dataset,
-        tile = tile,
-        legend = simulate_continuous_legend(),
-        provenance = simulate_provenance()
-      )
+    layer = new_layer(
+      column = "feat_2",
+      total = 200,
+      dataset = dataset,
+      tile = tile,
+      legend = simulate_continuous_legend(),
+      provenance = simulate_provenance()
     )
   )
 )
-#> Error in new_theme("species", list(new_feature(name = "f1", targets = c(0.1,     0.5), layer = new_layer(column = "feat_1", total = 500, dataset = dataset,     tile = tile, legend = simulate_continuous_legend(), provenance = simulate_provenance())),     new_feature(name = "f2", targets = c(0.2, 0.9), layer = new_layer(column = "feat_2",         total = 200, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),         provenance = simulate_provenance())))): could not find function "new_theme"
+#> Error in new_feature(name = "f1", zone_targets = c(0.1, 0.2, 0.5), zone_weights = c(0.2,     0.1, 0.3), zone_helds = c(0, 0.1, 0), themes = list(new_theme(zone = "Biodiversity",     name = "Penguins")), layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_feature"
 
 # create project
 x <- new_project(
-  zones = c("Conservation", "Tourism", "Science"),
+  zones = c("Biodiversity", "Tourism", "Science"),
   dataset = dataset,
-  tileset = tileset,
+  tiles = list(tile),
   costs = list(cost),
   locks = list(lock),
-  themes = list(theme),
-  bbox = sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
+  features = features
 )
-#> Error in new_project(zones = c("Conservation", "Tourism", "Science"),     dataset = dataset, tileset = tileset, costs = list(cost),     locks = list(lock), themes = list(theme), bbox = sf::st_bbox(c(0,         1, 0, 1), crs = sf::st_crs(4326))): could not find function "new_project"
+#> Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     dataset = dataset, tiles = list(tile), costs = list(cost),     locks = list(lock), features = features): could not find function "new_project"
 
 # preview object
 print(x)

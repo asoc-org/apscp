@@ -12,7 +12,7 @@ new_solution(name, layer, id = uuid::UUIDgenerate())
 
 - name:
 
-  \`character\` value with the name of the solution.
+  \`character\` value with the name.
 
 - layer:
 
@@ -41,8 +41,7 @@ Other class:
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Examples
 

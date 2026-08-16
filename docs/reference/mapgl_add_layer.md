@@ -16,7 +16,8 @@ mapgl_add_layer(map, x, visibility = "visible", before_id = NULL)
 
 - x:
 
-  \[new_tile()\] object.
+  \[new_tile()\], \[new_feature()\], \[new_cost()\], \[new_lock()\], or
+  \[new_solution()\] object.
 
 - visibility:
 
@@ -56,6 +57,8 @@ dataset <- create_dataset(sim_data)
 tile <- create_tile(sim_data)
 cost <- new_cost(
   name = "cost",
+  zone = "Science",
+  weight = 0.1,
   layer = new_layer(
     column = "feat_1",
     total = 500,

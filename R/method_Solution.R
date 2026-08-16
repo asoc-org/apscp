@@ -21,6 +21,8 @@ NULL
 #'
 #' @inherit new_solution return
 #'
+#' @family method
+#'
 #' @export
 create_solution <- function(
   name, dataset, column, legend, provenance,
@@ -78,6 +80,8 @@ create_solution <- function(
 #' @inheritParams prioritization
 #'
 #' @return A [new_solution()] object.
+#'
+#' @family method
 #'
 #' @examples
 #' # TODO

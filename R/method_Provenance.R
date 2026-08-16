@@ -8,6 +8,8 @@ NULL
 #'
 #' @return A [new_provenance()] object
 #'
+#' @family method
+#'
 #' @export
 tool_generated_provenance <- function() {
   structure(

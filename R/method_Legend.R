@@ -160,6 +160,8 @@ create_legend <- function(
 #' @details
 #' Note that colors for zones are specified in the golem configuration file.
 #'
+#' @family method
+#'
 #' @return A [new_categorical_legend()] object.
 #'
 #' @export
