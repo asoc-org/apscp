@@ -107,9 +107,16 @@ export class LockSetting {
       labelField: "name",
       searchField: ["name"],
       maxItems: null,
+      hidePlaceholder: true,
       sortField: "name",
       plugins: ["checkbox_options"],
       closeAfterSelect: false,
+      plugins: {
+        checkbox_options: {},
+        clear_button: {
+          "title": "Clear all locks from zone",
+        }
+      },
       render: {
         option: (data, escape) => {
           let el = document.createElement("div");

@@ -103,12 +103,18 @@ export class FeatureSettings {
       dropdownParent: "body",
       labelField: "name",
       searchField: ["name"],
-      maxItems: null,
+      maxOptions: null,
+      hidePlaceholder: true,
       sortField: "name",
-      plugins: ["checkbox_options"],
       closeAfterSelect: false,
       optgroups: this._cache.optgroups,
       optgroupField: "zone",
+      plugins: {
+        checkbox_options: {},
+        clear_button: {
+          "title": "Hide all feature settings",
+        }
+      },
       render: {
         optgroup_header: function(data, escape) {
           return '<div class="optgroup-header">' +

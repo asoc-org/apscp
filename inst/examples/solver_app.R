@@ -5,8 +5,8 @@ library(shiny)
 library(mapgl)
 
 # simulate project data
+set.seed(500)
 sim_data <- simulate_project()
-
 sim_data$features[[1]]$zone_helds <- c(1, 0, 0)
 sim_data$features[[2]]$zone_helds <- c(0, 1, 0)
 sim_data$features[[3]]$zone_helds <- c(0, 0, 1)

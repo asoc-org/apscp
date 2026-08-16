@@ -53,9 +53,9 @@ function lockSettingHeader(zone, priority) {
     "Drag to specify priority order for locking in planning units"
   );
   // append elements
+  el.appendChild(handle);
   el.appendChild(switchElement);
   el.appendChild(nameElement);
-  el.appendChild(handle);
   // return element
   return el;
 }

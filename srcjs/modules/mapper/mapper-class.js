@@ -109,8 +109,8 @@ export class Mapper {
       }
     }
     // enable sorting in menu
-    new Sortable(
-      this._menu, {
+    new Sortable(this._menu, {
+      handle: ".handle",
       animation: 150,
       dataIdAttr: "data-id",
       ghostClass: "ghost",

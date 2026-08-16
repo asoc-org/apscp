@@ -32,6 +32,7 @@ export function createMenuItem(x, mapper, themes = undefined) {
   let legendElement = el.querySelector(".legend-container");
   let nameElement = el.querySelector(".name-container");
   let provenanceElement = el.querySelector(".provenance-container");
+  let handleElement = el.querySelector(".handle");
 
   // set layer id
   el.id = x.id;
