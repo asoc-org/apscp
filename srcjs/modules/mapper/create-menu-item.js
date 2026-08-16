@@ -1,5 +1,8 @@
+/** Import dependencies */
+// functions to create elements
 import {createLegend} from "./create-legend.js";
-import {createProvenance} from "./create-provenance.js";
+import {createProvenance} from "../utils/element.js";
+import {createNameLabel} from "../utils/element.js";
 
 /**
  * Create a new menu item.
@@ -10,11 +13,11 @@ import {createProvenance} from "./create-provenance.js";
  * @param {String} x.class - Class for layer. Available options include
  * `"Feature"`, `"Cost"`, `"Lock"`, and `"Solution"`.
  * @param {Object} mapper - {@link Mapper} object.
- * @param {string} group - Group to which the menu item belongs.
- * Note that this is the name of the theme for feature layers.
+ * @param {Array<Object>} themes - Themes to which the menu item belongs.
+ * Note that this is the names of the themes for feature layers.
  * @return
  */
-export function createMenuItem(x, mapper, group = undefined) {
+export function createMenuItem(x, mapper, themes = undefined) {
   // initialize container element
   let el = document.importNode(
     document
@@ -27,31 +30,16 @@ export function createMenuItem(x, mapper, group = undefined) {
   let showLayerCheckbox = el.querySelector(".layer-checkbox");
   let removeLayerFromMapButton = el.querySelector(".layer-button");
   let legendElement = el.querySelector(".legend-container");
-  let nameElement = el.querySelector(".name-label");
+  let nameElement = el.querySelector(".name-container");
   let provenanceElement = el.querySelector(".provenance-container");
+  let handleElement = el.querySelector(".handle");
 
   // set layer id
   el.id = x.id;
   el.setAttribute("data-id", el.id);
 
-  // set layer name
-  nameElement.innerText = x.name;
-
-  // set layer details
-  if (typeof(x.layer.details) === "string") {
-    nameElement.setAttribute("data-toggle", "tooltip");
-    nameElement.setAttribute("data-placement", "top");
-    nameElement.setAttribute("data-container", "body");
-    nameElement.setAttribute("title", x.layer.details);
-  }
-
-  // set layer group
-  if (typeof(group) === "string") {
-    let themeLabel = el.querySelector(".theme-label");
-    if (themeLabel) {
-      themeLabel.innerText = group;
-    }
-  }
+  // create name label
+  nameElement.appendChild(createNameLabel(x));
 
   // set layer checkbox status
   showLayerCheckbox.checked = x.layer.visible;
@@ -66,34 +54,28 @@ export function createMenuItem(x, mapper, group = undefined) {
   provenanceElement.appendChild(createProvenance(x.layer.provenance));
 
   // set listener for checkbox to show/hide legend
-  if (HTMLWidgets.shinyMode) {
-    showLegendCheckbox.addEventListener("change", function () {
-      if (this.checked) {
-        legendElement.style.display = "block";
-      } else {
-        legendElement.style.display = "none";
-      }
-    });
-  }
+  showLegendCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      legendElement.style.display = "block";
+    } else {
+      legendElement.style.display = "none";
+    }
+  });
 
   // set listener for button to hide layer
-  if (HTMLWidgets.shinyMode) {
-    showLayerCheckbox.addEventListener("change", function () {
-      if (this.checked) {
-        mapper.showLayerOnMap(x.id);
-      } else {
-        mapper.hideLayerOnMap(x.id);
-      }
-    });
-  }
+  showLayerCheckbox.addEventListener("change", function () {
+    if (this.checked) {
+      mapper.showLayerOnMap(x.id);
+    } else {
+      mapper.hideLayerOnMap(x.id);
+    }
+  });
 
   // set listener for button to drop layer
-  if (HTMLWidgets.shinyMode) {
-    removeLayerFromMapButton.addEventListener("click", function () {
-      mapper.hideLayerOnMap(x.id);
-      mapper.hideLayerOnMenu(x.id);
-    });
-  }
+  removeLayerFromMapButton.addEventListener("click", function () {
+    mapper.hideLayerOnMap(x.id);
+    mapper.hideLayerOnMenu(x.id);
+  });
 
   // return element
   return el;

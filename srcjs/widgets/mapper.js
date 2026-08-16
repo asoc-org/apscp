@@ -1,4 +1,4 @@
-import {Mapper} from "../modules/mapper/class.js";
+import {Mapper} from "../modules/mapper/mapper-class.js";
 
 HTMLWidgets.widget({
   name: "mapper",
@@ -11,23 +11,16 @@ HTMLWidgets.widget({
 
     return {
       renderValue: function(opts) {
-
-        // alias this
-        let that = this;
-        let element = document.getElementById(elementId);
-
         // if needed, initialize widget
         if (!initialized) {
           // set state to initialized
           initialized = true;
           // attach the widget to the DOM
-          element.widget = that;
+          let el = document.getElementById(elementId);
+          el.widget = this;
           // initialize map manager
-          handle.initialize(
-            elementId, opts.mapId, opts.project, opts.maxLayers
-          );
+          handle.initialize(el, opts.mapId, opts.project, opts.maxLayers);
         }
-
       },
 
       resize: function(width, height) {

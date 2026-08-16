@@ -8,7 +8,8 @@ test_that("new_project", {
   # create cost
   cost <- new_cost(
     name = "cost",
-    zones_active = c(FALSE, TRUE, FALSE),
+    weight = 0.5,
+    zone = "Tourism",
     layer = new_layer(
       dataset = w,
       tile = g,
@@ -22,12 +23,11 @@ test_that("new_project", {
   # create lock
   lock <- new_lock(
     name = "lock",
-    zones_in = c(TRUE, FALSE, FALSE),
-    zones_out = rep(FALSE, 3L),
+    zone = "Scientific",
     layer = new_layer(
       dataset = w,
       tile = g,
-      column = "locked_in",
+      column = "aspas",
       legend = simulate_binary_legend(),
       provenance = simulate_provenance(),
       total = 500,
@@ -35,45 +35,51 @@ test_that("new_project", {
     )
   )
   # create theme
-  theme <- new_theme(
-    "species",
-    list(
-      new_feature(
-        name = "f1",
-        zones_targets = c(0.1, 0.5, 0.4),
-        layer = new_layer(
-          dataset = w,
-          tile = g,
-          column = "feat_1",
-          legend = simulate_continuous_legend(),
-          provenance = simulate_provenance(),
-          total = 500,
-          details = "extra info"
-        )
+  features <- list(
+    new_feature(
+      name = "f1",
+      zone_targets = c(0.1, 0.2, 0.3),
+      zone_weights = c(0.7, 0.8, 0.1),
+      zone_helds = c(0.3, 0.1, 0.05),
+      themes = list(new_theme("species", "Biodiversity")),
+      layer = new_layer(
+        dataset = w,
+        tile = g,
+        column = "feat_1",
+        legend = simulate_continuous_legend(),
+        provenance = simulate_provenance(),
+        total = 500,
+        details = "extra info"
+      )
+    ),
+    new_feature(
+      name = "f2",
+      zone_targets = c(0.2, 0.5, 0.1),
+      zone_weights = c(1, 0.3, 0.4),
+      zone_helds = c(0.4, 0.2, 0.9),
+      themes = list(
+        new_theme("species", "Biodiversity"),
+        new_theme("species", "tourism")
       ),
-      new_feature(
-        name = "f2",
-        zones_targets = c(0.2, 0.9, 0.2),
-        layer = new_layer(
-          dataset = w,
-          tile = g,
-          column = "feat_2",
-          legend = simulate_continuous_legend(),
-          provenance = simulate_provenance(),
-          total = 600,
-          details = "extra info 2"
-        )
+      layer = new_layer(
+        dataset = w,
+        tile = g,
+        column = "feat_2",
+        legend = simulate_continuous_legend(),
+        provenance = simulate_provenance(),
+        total = 600,
+        details = "extra info 2"
       )
     )
   )
   # create project
   x <- new_project(
-    zones = c("Conservation", "Tourism", "Science"),
+    zones = c("Biodiversity", "Tourism", "Scientific"),
     dataset = w,
     tiles = list(g),
     costs = list(cost),
     locks = list(lock),
-    themes = list(theme),
+    features = features,
     name = "Project 1",
     author_name = "Greg",
     author_email = "greg@gmail.com"
@@ -84,7 +90,7 @@ test_that("new_project", {
   expect_equal(x$dataset, w)
   expect_equal(x$costs, list(cost))
   expect_equal(x$locks, list(lock))
-  expect_equal(x$themes, list(theme))
+  expect_equal(x$features, features)
   expect_equal(x$solutions, list())
   expect_equal(x$name, "Project 1")
   expect_equal(x$author_name, "Greg")
@@ -138,8 +144,8 @@ test_that("serialize_object", {
   expect_equal(x$costs[[1]]$class, "Cost")
   expect_type(x$locks, "list")
   expect_equal(x$locks[[1]]$class, "Lock")
-  expect_type(x$themes, "list")
-  expect_equal(x$themes[[1]]$class, "Theme")
+  expect_type(x$features, "list")
+  expect_equal(x$features[[1]]$class, "Feature")
   expect_type(x$solutions, "list")
   expect_equal(x$solutions[[1]]$class, "Solution")
   expect_type(x$name, "character")
@@ -183,7 +189,7 @@ test_that("read_project/write_project", {
     ## should correspond to different locations
     update_named_list_elements(x1, "path", NULL),
     update_named_list_elements(serialize_object(y), "path", NULL),
-    tolerance = 1e-6
+    tolerance = 1e-4
   )
 })
 

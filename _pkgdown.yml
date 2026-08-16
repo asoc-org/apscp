@@ -21,9 +21,8 @@ reference:
 
   - title: Application
     desc: >
-      Main functions and documentation for the application.
+      Main function for the application.
     contents:
-      - apscp
       - run_app
 
   - title: Classes and methods
@@ -33,11 +32,19 @@ reference:
       - has_concept("class")
       - has_concept("method")
 
-  - title: Sidebars
+  - title: Widgets
     desc: >
-      Functions for sidebars.
+      Functions for custom widgets.
     contents:
       - has_concept("sidebar")
+      - has_concept("mapper")
+      - has_concept("solver")
+
+  - title: Optimization
+    desc: >
+      Functions for optimization.
+    contents:
+      - has_concept("optimization")
 
   - title: Mapping
     desc: >
@@ -59,5 +66,5 @@ reference:
 
   - title: Miscellaneous functions
     contents:
-      - color_palette
+      - has_concept("misc")
       - has_concept("tile_server")

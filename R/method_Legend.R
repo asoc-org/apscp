@@ -1,6 +1,194 @@
 #' @include internal.R
 NULL
 
+#' Create a new legend
+#'
+#' Create a new legend automatically for a column in a [sf::st_sf()] object.
+#'
+#' @param x [sf::st_sf()] object.
+#'
+#' @param column `character` value with name of column.
+#'
+#' @param palette `character` value with the color palette. In particular,
+#' `palette` can be the name of a color palette that is recognized by
+#' [color_palette()]. Alternatively, it can be a set of
+#' hex color code delimited by semicolons
+#' (e.g., `palette = "#000000;#DDDDDD;#123456"`).
+#'
+#' @param type `character` value indicating if legend should be `"continuous"`
+#' `"categorical"`, `"presence/absence"`, or `"presence".
+#' Defaults to `NULL`, such that
+#' the legend type will be determined automatically.
+#'
+#' @inheritParams new_categorical_legend
+#'
+#' @return A new [new_continuous_legend()] or [new_categorical_legend()] object.
+#'
+#' @family method
+#'
+#' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create object
+#' x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
+#'
+#' # preview object
+#' print(x)
+#'
+#' @export
+create_legend <- function(
+  x,
+  column,
+  units = NULL,
+  palette = "viridis",
+  type = NULL
+) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    inherits(x, "sf"),
+    assertthat::is.string(column),
+    assertthat::noNA(column),
+    assertthat::has_name(x, column)
+  )
+  if (!is.null(units)) {
+    assertthat::assert_that(
+      ## units
+      assertthat::is.string(units),
+      assertthat::noNA(units)
+    )
+  }
+
+  # compute layer values
+  v <- sort(unique(x[[column]]))
+
+  # if needed, determine type
+  if (is.null(type)) {
+    if (any(v == 0) && all(v == 0 | v == 1)) {
+      type <- "presence/absence"
+    } else if (all(v == 1)) {
+      type <- "presence"
+    } else if (all(v == round(v))) {
+      type <- "categorical"
+    } else {
+      type <- "continuous"
+    }
+  }
+
+  # further argument validation
+  assertthat::assert_that(
+    assertthat::is.string(type),
+    is_match_of(
+      type,
+      c("presence/absence", "presence", "categorical", "continuous")
+    )
+  )
+
+  # depending on the type...
+  if (identical(type, "presence/absence")) {
+    # generate colors
+    if (!startsWith(palette, "#")) {
+      palette <- color_palette(palette, n = 2L)
+    } else {
+      palette <- strsplit(palette, ";")[[1]]
+    }
+    # create legend
+    out <- new_categorical_legend(
+      values = c(0, 1),
+      labels = c("absent", "present"),
+      colors = palette,
+      units = units
+    )
+  } else if (identical(type, "presence")) {
+    # generate colors
+    if (!startsWith(palette, "#")) {
+      palette <- color_palette(palette, n = 2L)[[2]]
+    } else {
+      palette <- strsplit(palette, ";")[[1]]
+    }
+    # create legend
+    out <- new_categorical_legend(
+      values = 1,
+      labels = "presence",
+      colors = palette,
+      units = units
+    )
+  } else if (identical(type, "categorical")) {
+    # generate colors
+    if (!startsWith(palette, "#")) {
+      palette <- color_palette(palette, n = length(v))
+    } else {
+     palette <- strsplit(palette, ";")[[1]]
+    }
+    # create legend
+    out <- new_categorical_legend(
+      values = v,
+      labels = as.character(v),
+      colors = palette,
+      units = units
+    )
+  } else {
+    # generate colors
+    n_colors <- 5
+    if (!startsWith(palette, "#")) {
+      palette <- color_palette(palette, n = n_colors)
+    } else {
+     palette <- strsplit(palette, ";")[[1]]
+    }
+    # compute breaks
+    br <- labeling::extended(dmin = min(v), dmax = max(v), m = 4)
+    # create legend
+    out <- new_continuous_legend(
+      values = seq(min(c(v, br)), max(c(v, br)), length.out = n_colors),
+      colors = palette,
+      breaks = br,
+      labels = as.character(br),
+      units = units
+    )
+  }
+
+  # return legend
+  out
+}
+
+#' Create solution legend
+#'
+#' Create a legend for solutions generated with the tool.
+#'
+#' @param project [new_project()] object.
+#'
+#' @details
+#' Note that colors for zones are specified in the golem configuration file.
+#'
+#' @family method
+#'
+#' @return A [new_categorical_legend()] object.
+#'
+#' @export
+create_solution_legend <- function(project) {
+  # assert argument is valid
+  assertthat::assert_that(inherits(project, "Project"))
+
+  # obtain zone names
+  zones <- project$zones
+
+  # obtain colors
+  cols <- get_golem_config("zone_colors")
+
+  # if needed, add extra colors
+  if (length(zones) > length(cols)) {
+    cols <- c(cols, color_palette("plasma", length(zones) - length(cols) + 1L))
+  }
+
+  # create legend
+  new_categorical_legend(
+    values = seq_along(zones),
+    colors = cols[seq_along(zones)],
+    labels = zones,
+    units = NULL
+  )
+}
+
 #' Get paint parameters
 #'
 #' Get parameters for painting a [new_layer] object.

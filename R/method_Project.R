@@ -42,7 +42,7 @@ read_project <- function(path) {
     assertthat::has_name(l$dataset_paths, "pu_path"),
     assertthat::has_name(l$dataset_paths, "boundary_path"),
     assertthat::has_name(l, "tiles"),
-    assertthat::has_name(l, "themes"),
+    assertthat::has_name(l, "features"),
     assertthat::has_name(l, "costs"),
     assertthat::has_name(l, "locks"),
     msg = "`path` is not a valid project metadata file."
@@ -250,11 +250,9 @@ map_project <- function(x, ...) {
     }
   }
   ## features
-  for (i in seq(length(x$themes), 1L)) {
-    for (j in seq(length(x$themes[[i]]$features), 1L)) {
-      if (isTRUE(x$themes[[i]]$features[[j]]$layer$visible)) {
-        m <- mapgl_add_layer(m, x$themes[[i]]$features[[j]])
-      }
+  for (i in seq(length(x$features), 1L)) {
+    if (isTRUE(x$features[[i]]$layer$visible)) {
+      m <- mapgl_add_layer(m, x$features[[i]])
     }
   }
 

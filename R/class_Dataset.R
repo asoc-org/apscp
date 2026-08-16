@@ -28,7 +28,6 @@ Dataset <- R6::R6Class(
         ## pu_data
         is.data.frame(pu_data),
         inherits(pu_data, "sf"),
-        assertthat::has_name(pu_data, "_index"),
         ## boundary_data
         inherits(boundary_data, "dsCMatrix"),
         identical(ncol(boundary_data), nrow(pu_data))
@@ -56,7 +55,7 @@ Dataset <- R6::R6Class(
     #' Get column names.
     #' @return A `character` vector.
     get_column_names = function() {
-      setdiff(names(self$pu_data), "_index")
+      names(self$pu_data)
     },
 
     #' @description
@@ -99,11 +98,86 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Identify which planning units would be associated with a zone
+    #' depending on columns used to allocate them.
+    #' @param zone `character` value with name of zone.
+    #' @param allocation Named `character` vector with column names
+    #' indicating which planning units should be allocated to each zone.
+    #' Note that the names of `allocation` indicate the zone names.
+    #' Additionally, zones are allocated in order of decreasing priority. For
+    #' example with
+    #' `allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
+    #' planning units are first assigned to the Scientific zone based on
+    #' the values in the `"camps"` column, and then to the Biodiversity zone
+    #' based on the values in the `"aspas"` column. If  any planning unit
+    #' was previously assigned to the Scientific zone,  then it is overridden
+    #' with the Biodiversity zone.
+    #' @return A `numeric` vector with binary values indicating if each
+    #' planning unit is allocated to the `zone`.
+    get_pu_status = function(zone, allocation) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.string(zone),
+        is.character(allocation),
+        assertthat::noNA(zone)
+      )
+      if (length(allocation) > 0L) {
+        assertthat::assert_that(
+          !is.null(names(allocation)),
+          self$has_column(allocation)
+        )
+      }
+      # if no planning units allocated to zone, then return 0
+      if (
+        identical(length(allocation), 0L) ||
+        !zone %in% names(allocation)
+      ) {
+        return(rep(0, nrow(self$pu_data)))
+      }
+      # create vector with binary values indicating if planning unit is assigned
+      # the zone based on the data in the allocation columns
+      out <- numeric(nrow(self$pu_data))
+      for (i in seq(length(allocation), 1L)) {
+        idx <- which(self$pu_data[[allocation[[i]]]] > 1e-5)
+        out[idx] <- as.numeric(identical(names(allocation)[[i]], zone))
+      }
+      # return output
+      out
+    },
+
+    #' @description
+    #' Get proportion of values in a column that would be considered to by
+    #' held by selected planning units.
+    #' @param column `character` or `integer` vector.
+    #' @param status `numeric` vector with binary values for each
+    #' planning unit.
+    #' @return A `numeric` value.
+    get_column_held = function(column, status) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        length(column) > 0,
+        self$has_column(column),
+        is.numeric(status),
+        identical(length(status), nrow(self$pu_data))
+      )
+      # run calculations
+      m <- as.matrix(sf::st_drop_geometry(self$pu_data)[, column, drop = FALSE])
+      total <- colSums(m, na.rm = TRUE)
+      held <- colSums(
+        m * matrix(status, ncol = length(column), nrow = nrow(m)),
+        na.rm = TRUE
+      )
+      # return proportion held
+      unname(held / total)
+    },
+
+    #' @description
     #' Check if the dataset has a column or columns.
     #' @param column `character vector.
     #' @return A `logical` value.
     has_column = function(column) {
-      assertthat::has_name(self$pu_data, column)
+      (length(column) > 0) &&
+        assertthat::has_name(self$pu_data, column)
     },
 
     #' @description
@@ -118,11 +192,6 @@ Dataset <- R6::R6Class(
         assertthat::noNA(column),
         length(values) == nrow(self$pu_data)
       )
-      assertthat::assert_that(
-        !identical(column, "_index"),
-        msg = "Can't overwrite values in '_index' column."
-      )
-
       # insert new column with values
       self$pu_data[[column]] <- values
       # return self
@@ -154,7 +223,6 @@ Dataset <- R6::R6Class(
 #'
 #' # manually prepare planning unit data
 #' pu_data <- sim_data
-#' pu_data[["_index"]] <- seq_len(nrow(pu_data))
 #'
 #' # manually prepare boundary data
 #' bd_data <- prioritizr::boundary_matrix(sim_data)
@@ -171,46 +239,5 @@ new_dataset <- function(pu_data, boundary_data) {
   Dataset$new(
     pu_data = pu_data,
     boundary_data = boundary_data
-  )
-}
-
-#' Create dataset
-#'
-#' Create a [Dataset] object from a [st::sf()] object.
-#'
-#' @param x [sf::st_sf()] object.
-#'
-#' @inherit new_dataset return
-#'
-#' @family method
-#'
-#' @examplesIf interactive()
-#' # simulate spatial data
-#' sim_data <- simulate_spatial_data()
-#'
-#' # create object
-#' x <- create_dataset(sim_data)
-#'
-#' # preview object
-#' print(x)
-#'
-#' @export
-create_dataset <- function(x) {
-  # assert valid argument
-  assertthat::assert_that(inherits(x, "sf"))
-
-  # create _index column
-  x[["_index"]] <- seq_len(nrow(x))
-
-  # make _index the first column
-  x <- x[,
-    c("_index", setdiff(names(x), "_index")),
-    drop = FALSE
-  ]
-
-  # return object
-  new_dataset(
-    pu_data = x,
-    boundary_data = prioritizr::boundary_matrix(x)
   )
 }

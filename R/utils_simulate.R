@@ -48,8 +48,8 @@ simulate_spatial_data <- function() {
   names(d) <- c(
     "cost",
     paste0("feat_", seq_len(terra::nlyr(fts))),
-    "locked_in",
-    "locked_out",
+    "aspas",
+    "camps",
     "invasive_species",
     "solution"
   )
@@ -63,14 +63,17 @@ simulate_spatial_data <- function() {
     )
   )
 
+  # handle missing cost values
+  d <- d[!is.na(d$cost), , drop = FALSE]
+
   # set coordinate reference system
   suppressWarnings(
     d <- sf::st_set_crs(d, sf::st_crs(4326))
   )
 
   # set 0s to NA values for locked columns
-  d$locked_in[d$locked_in < 0.99] <- NA_real_
-  d$locked_out[d$locked_out < 0.99] <- NA_real_
+  d$aspas[d$aspas < 0.99] <- NA_real_
+  d$camps[d$camps < 0.99] <- NA_real_
 
   # return result
   d
@@ -116,7 +119,15 @@ simulate_project <- function() {
   # create cost
   cost <- new_cost(
     name = "Tourism revenue",
-    zones_active = c(TRUE, TRUE, FALSE),
+    weight = sample(
+      seq(
+        from = get_golem_config("prioritization_cost_weights")[1],
+        to = get_golem_config("prioritization_cost_weights")[2],
+        by = get_golem_config("prioritization_cost_weights")[3]
+      ),
+      1L
+    ),
+    zone = "Tourism",
     layer = new_layer(
       dataset = dataset,
       tile = tile,
@@ -147,76 +158,101 @@ simulate_project <- function() {
   )
 
   # create object
-  locked_in <- new_lock(
+  lock1 <- new_lock(
     name = "Protected areas",
-    zones_in = c(TRUE, FALSE, FALSE),
-    zones_out = c(FALSE, FALSE, FALSE),
+    zone = "Biodiversity",
     layer = new_layer(
       dataset = dataset,
       tile = tile,
-      column = "locked_in",
+      column = "aspas",
       visible = TRUE,
       legend = create_legend(
-        d, "locked_in",
+        d, "aspas",
         palette = "Greens",
         units = "presence-only"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("locked_in")
+      total = dataset$get_column_total("aspas")
     )
   )
-  locked_out <- new_lock(
-    name = "Historical sites",
-    zones_in = c(FALSE, FALSE, TRUE),
-    zones_out = c(FALSE, FALSE, FALSE),
+  lock2 <- new_lock(
+    name = "Field camps",
+    zone = "Scientific",
     layer = new_layer(
       dataset = dataset,
       tile = tile,
-      column = "locked_out",
+      column = "camps",
       visible = TRUE,
       legend = create_legend(
-        d, "locked_out",
+        d, "camps",
         palette = "Reds",
         units = "presence/absence"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("locked_out"),
+      total = dataset$get_column_total("camps"),
       details = "These sites include castles, monuments, and churches."
     )
   )
 
-  # create theme object
-  theme <- new_theme(
-    "Species",
-    lapply(seq_len(5), function(i) {
-      new_feature(
-        name = paste0("Species ", i),
-        zones_targets = stats::runif(3, min = 0, max = 1),
-        layer = new_layer(
-          dataset = dataset,
-          tile = tile,
-          column = paste0("feat_", i),
-          visible = TRUE,
-          legend = create_legend(
-            d, paste0("feat_", i),
-            palette = "viridis",
-            units = "suitability"
-          ),
-          provenance = provenance,
-          total = dataset$get_column_total(paste0("feat_", i))
-        )
-      )
-    })
+  # create theme objects
+  themes <- list(
+    new_theme("Species", "Biodiversity"),
+    new_theme("Iconic species", "Tourism"),
+    new_theme("Medicinal species", "Scientific")
   )
+
+  # create status values for each zone
+  alloc <- c("Biodiversity" = "aspas", "Tourism" = "camps")
+  s1 <- dataset$get_pu_status(zone = "Biodiversity", alloc)
+  s2 <- dataset$get_pu_status(zone = "Tourism", alloc)
+  s3 <- dataset$get_pu_status(zone = "Scientific", alloc)
+  # create feature objects
+  features <- lapply(seq_len(5), function(i) {
+    new_feature(
+      name = paste0("Species ", i),
+      zone_targets = simulate_feature_zone_targets(
+        seq(
+          from = get_golem_config("prioritization_feature_targets")[1],
+          to = get_golem_config("prioritization_feature_targets")[2],
+          by = get_golem_config("prioritization_feature_targets")[3]
+        ),
+        3L
+      ),
+      zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
+      zone_helds = unname(
+        c(
+          dataset$get_column_held(column = paste0("feat_", i), s1),
+          dataset$get_column_held(column = paste0("feat_", i), s2),
+          dataset$get_column_held(column = paste0("feat_", i), s3)
+        ),
+      ),
+      themes = themes[
+        sample.int(length(themes), sample.int(length(themes), 1L))
+      ],
+      layer = new_layer(
+        dataset = dataset,
+        tile = tile,
+        column = paste0("feat_", i),
+        visible = TRUE,
+        legend = create_legend(
+          d, paste0("feat_", i),
+          palette = "viridis",
+          units = "suitability"
+        ),
+        provenance = provenance,
+        total = dataset$get_column_total(paste0("feat_", i))
+      )
+    )
+  })
 
   # return project
   new_project(
-    zones = c("Biodiversity", "Tourism", "Science"),
+    zones = c("Biodiversity", "Tourism", "Scientific"),
     dataset = dataset,
     tiles = list(tile),
     costs = list(cost),
-    locks = list(locked_in, locked_out),
-    themes = list(theme),
+    locks = list(lock1, lock2),
+    features = features,
     solutions = list(solution)
   )
 }
@@ -300,6 +336,8 @@ simulate_provenance <- function() {
 #'
 #' @return A `character` value with the file path.
 #'
+#' @family simulation
+#'
 #' @export
 simulate_pmtiles_file <- function() {
   # define file path
@@ -308,4 +346,121 @@ simulate_pmtiles_file <- function() {
   writeLines("dummy file", p)
   # return path
   p
+}
+
+#' Simulate prioritization settings
+#'
+#' Simulate settings for generating a [prioritization()].
+#'
+#' @param project [new_project()] object.
+#'
+#' @family simulation
+#'
+#' @return
+#' A `list` with the following elements:
+#' `feature_settings`, `lock_in_setting`, `lock_out_settings`,
+#' and `cost_settings`.
+#'
+#' @export
+simulate_prioritization_settings <- function(project) {
+  # assert that argument is valid
+  assertthat::assert_that(inherits(project, "Project"))
+
+  # calculate constants
+  nz <- length(project$zones)
+
+  # create feature settings
+  feature_settings <- do.call(
+    rbind,
+    lapply(project$features, function(x) {
+      data.frame(
+        id = rep(x$id, nz),
+        name = rep(x$name, nz),
+        column = rep(x$layer$column, nz),
+        zone = project$zones,
+        target = x$zone_targets,
+        weight = x$zone_weights
+      )
+    })
+  )
+
+  # create lock settings
+  lock_settings <- do.call(
+    rbind,
+    lapply(project$locks, function(x) {
+      data.frame(
+        id = x$id,
+        name = x$name,
+        column = x$layer$column,
+        zone = x$zone
+      )
+    })
+  )
+  lock_settings$priority <- seq(nrow(lock_settings), 1L)
+
+  # create cost settings
+  cost_settings <- do.call(
+    rbind,
+    lapply(project$costs, function(x) {
+      data.frame(
+        id = x$id,
+        name = x$name,
+        column = x$layer$column,
+        zone = x$zone,
+        weight = 1
+      )
+    })
+  )
+
+  # create reference point settings
+  zone_settings <- data.frame(
+    zone = project$zones,
+    weight = rep(1, length(project$zones))
+  )
+
+  # return result
+  list(
+    features = feature_settings,
+    locks = lock_settings,
+    costs = cost_settings,
+    zones = zone_settings
+  )
+}
+
+#' Simulate targets
+#'
+#' Simulate a set of zone target values for a feature.
+#'
+#' @param x `numeric` vector with options for targets.
+#' Note that `x` must range betweeen 0 and 1.
+#'
+#' @param n `integer` number of zones.
+#'
+#' @family simulation
+#'
+#' @return A `numeric` vector with a value for each zone.
+#'
+#' @export
+simulate_feature_zone_targets <- function(x, n) {
+  # assert valid arguments
+  assertthat::assert_that(
+    ## x
+    is.numeric(x),
+    assertthat::noNA(x),
+    ## n
+    assertthat::is.count(n),
+    assertthat::noNA(n)
+  )
+  # prepare values
+  x <- unique(c(0, x))
+  # sample values
+  out <- numeric(n)
+  for (i in seq_len(n)) {
+    ## pick value
+    out[i] <- sample(x, 1L)
+    ## remove values from x that would result in the sum exceeding 1
+    x <- x[x + sum(out) <= 1]
+  }
+  ## return output
+  out
 }

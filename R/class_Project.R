@@ -20,8 +20,8 @@ Project <- R6::R6Class(
     #' @field zones `character` vector of zone names.
     zones = NULL,
 
-    #' @field themes `list` of [new_theme()] objects.
-    themes = NULL,
+    #' @field features `list` of [new_feature()] objects.
+    features = NULL,
 
     #' @field locks `list` of [new_lock()] objects.
     locks = NULL,
@@ -50,7 +50,7 @@ Project <- R6::R6Class(
     #' @param dataset [new_dataset()] object.
     #' @param tiles `list` of [new_tile()] objects.
     #' @param zones `character` vector of zone names.
-    #' @param themes `list` of [new_theme()] objects.
+    #' @param features `list` of [new_feature()] objects.
     #' @param locks `list` of [new_lock()] objects.
     #' @param costs `list` of [new_cost()] objects.
     #' @param solutions `list` of [new_solution()] objects.
@@ -67,7 +67,7 @@ Project <- R6::R6Class(
     #' @return A new `Project` object.
     initialize = function(
       zones, dataset, tiles,
-      themes, locks, costs, solutions = list(),
+      features, locks, costs, solutions = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown",
       version = "Unknown"
     ) {
@@ -94,9 +94,9 @@ Project <- R6::R6Class(
         ## version
         assertthat::is.string(version),
         assertthat::noNA(version),
-        ## themes
-        is.list(themes),
-        all_elements_inherit(themes, "Theme"),
+        ## features
+        is.list(features),
+        all_elements_inherit(features, "Feature"),
         ## locks
         is.list(locks),
         all_elements_inherit(locks, "Lock"),
@@ -105,6 +105,24 @@ Project <- R6::R6Class(
         all_elements_inherit(costs, "Cost"),
         ## solutions
         is.list(solutions)
+      )
+      assertthat::assert_that(
+        all(
+          vapply(features, function(y) length(y$zone_targets), integer(1)) ==
+          length(zones)
+        ),
+        msg = paste(
+          "All `features` must have `zone_targets` that specify a value",
+          "for each zone in `zones`."
+        )
+      )
+      assertthat::assert_that(
+        all(vapply(locks, `[[`, character(1), "zone") %in% zones),
+        msg = "`locks` must contain only zones that are present in `zones`."
+      )
+      assertthat::assert_that(
+        all(vapply(costs, `[[`, character(1), "zone") %in% zones),
+        msg = "`costs` must contain only zones that are present in `zones`."
       )
       if (length(solutions) > 0) {
         assertthat::assert_that(
@@ -116,7 +134,7 @@ Project <- R6::R6Class(
       self$dataset <- dataset
       self$tiles <- tiles
       self$zones <- zones
-      self$themes <- themes
+      self$features <- features
       self$locks <- locks
       self$costs <- costs
       self$solutions <- solutions
@@ -275,7 +293,7 @@ Project <- R6::R6Class(
 #'
 #' @param costs `list` of [new_cost()] objects.
 #'
-#' @param themes `list` of [new_themes()] objects.
+#' @param features `list` of [new_features()] objects.
 #'
 #' @param locks `list` of [new_locks()] objects.
 #'
@@ -309,7 +327,8 @@ Project <- R6::R6Class(
 #' # create cost
 #' cost <- new_cost(
 #'   name = "cost",
-#'   zones_active = c(TRUE, FALSE, FALSE),
+#'   zone = "Science",
+#'   weight = 0.1,
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -323,8 +342,7 @@ Project <- R6::R6Class(
 #' # create lock
 #' lock <- new_lock(
 #'   name = "lock",
-#'   zones_in = c(TRUE, FALSE, FALSE),
-#'   zones_out = c(FALSE, FALSE, FALSE),
+#'   zone = "Biodiversity",
 #'   layer = new_layer(
 #'     column = "locked_in",
 #'     total = 30,
@@ -335,45 +353,51 @@ Project <- R6::R6Class(
 #'   )
 #' )
 #'
-#' # create theme
-#' theme <- new_theme(
-#'   "species",
-#'   list(
-#'     new_feature(
-#'       name = "f1",
-#'       zones_targets = c(0.1, 0.5),
-#'       layer = new_layer(
-#'         column = "feat_1",
-#'         total = 500,
-#'         dataset = dataset,
-#'         tile = tile,
-#'         legend = simulate_continuous_legend(),
-#'         provenance = simulate_provenance()
-#'       )
+#' # create features
+#' features <- list(
+#'   new_feature(
+#'     name = "f1",
+#'     zone_targets = c(0.1, 0.2, 0.5),
+#'     zone_weights = c(0.2, 0.1, 0.3),
+#'     zone_helds = c(0, 0.1, 0),
+#'     themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),
+#'     layer = new_layer(
+#'       column = "feat_1",
+#'       total = 500,
+#'       dataset = dataset,
+#'       tile = tile,
+#'       legend = simulate_continuous_legend(),
+#'       provenance = simulate_provenance()
+#'     )
+#'   ),
+#'   new_feature(
+#'     name = "f2",
+#'     zone_targets = c(0.01, 0.04, 0.9),
+#'     zone_weights = c(0.8, 0.1, 0.05),
+#'     zone_helds = c(0.2, 0, 0),
+#'     themes = list(
+#'       new_theme(zone = "Biodiversity", name = "Penguins"),
+#'       new_theme(zone = "Tourism", name = "Charismatic species")
 #'     ),
-#'     new_feature(
-#'       name = "f2",
-#'       zones_targets = c(0.2, 0.9),
-#'       layer = new_layer(
-#'         column = "feat_2",
-#'         total = 200,
-#'         dataset = dataset,
-#'         tile = tile,
-#'         legend = simulate_continuous_legend(),
-#'         provenance = simulate_provenance()
-#'       )
+#'     layer = new_layer(
+#'       column = "feat_2",
+#'       total = 200,
+#'       dataset = dataset,
+#'       tile = tile,
+#'       legend = simulate_continuous_legend(),
+#'       provenance = simulate_provenance()
 #'     )
 #'   )
 #' )
 #'
 #' # create project
 #' x <- new_project(
-#'   zones = c("Conservation", "Tourism", "Science"),
+#'   zones = c("Biodiversity", "Tourism", "Science"),
 #'   dataset = dataset,
 #'   tiles = list(tile),
 #'   costs = list(cost),
 #'   locks = list(lock),
-#'   themes = list(theme)
+#'   features = features
 #' )
 #'
 #' # preview object
@@ -385,7 +409,7 @@ new_project <- function(
   dataset,
   tiles,
   costs,
-  themes,
+  features,
   locks,
   solutions = list(),
   name = "Project",
@@ -403,7 +427,7 @@ new_project <- function(
     dataset = dataset,
     tiles = tiles,
     costs = costs,
-    themes = themes,
+    features = features,
     locks = locks,
     solutions = solutions,
     name = name,

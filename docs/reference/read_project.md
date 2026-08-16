@@ -22,6 +22,7 @@ A \[Project\] object.
 
 Other io:
 [`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md),
+[`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md),
 [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md),
 [`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md),
 [`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md),

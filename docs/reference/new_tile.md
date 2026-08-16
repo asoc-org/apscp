@@ -6,7 +6,7 @@ a PMTiles archive file.
 ## Usage
 
 ``` r
-new_tile(source_layer, file, max_zoom)
+new_tile(source_layer, path, max_zoom)
 ```
 
 ## Arguments
@@ -15,9 +15,9 @@ new_tile(source_layer, file, max_zoom)
 
   \`character\` value with name of layer source in the archive file.
 
-- file:
+- path:
 
-  \`character\` value with file name for the archive file. Note that
+  \`character\` value with file path for the archive file. Note that
   \`file\` must have a \`".pmtiles"\` file extension.
 
 - max_zoom:
@@ -42,15 +42,18 @@ Other class:
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
-[`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md)
 
 ## Examples
 
 ``` r
+# create dummy file
+path <- tempfile(fileext = ".pmtiles")
+writeLines("dummy", path)
+
 # create object
-x <- new_tile(source = "data-src", file = "file.pmtiles", max_zoom = 5)
-#> Error in new_tile(source = "data-src", file = "file.pmtiles", max_zoom = 5): could not find function "new_tile"
+x <- new_tile(source = "data-src", path = path, max_zoom = 5)
+#> Error in new_tile(source = "data-src", path = path, max_zoom = 5): could not find function "new_tile"
 
 # print object
 print(x)

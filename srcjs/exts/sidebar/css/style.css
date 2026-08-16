@@ -9,6 +9,7 @@
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
   background-color: #fff;
 }
+
 .mapsidebar.collapsed {
   width: 40px;
 }
@@ -26,12 +27,15 @@
   height: inherit;
   background-color: #fff;
 }
+
 .mapsidebar-left .mapsidebar-tabs {
   left: 0;
 }
+
 .mapsidebar-right .mapsidebar-tabs {
   right: 0;
 }
+
 .mapsidebar-tabs,
 .mapsidebar-tabs > ul {
   position: absolute;
@@ -40,6 +44,7 @@
   padding: 0;
   list-style-type: none;
 }
+
 .mapsidebar-tabs > li,
 .mapsidebar-tabs > ul > li {
   width: 100%;
@@ -49,28 +54,34 @@
   overflow: hidden;
   transition: all 80ms;
 }
+
 .mapsidebar-tabs > li:hover,
 .mapsidebar-tabs > ul > li:hover {
   color: #000;
     background-color: #eee;
 }
+
 .mapsidebar-tabs > li.active,
 .mapsidebar-tabs > ul > li.active {
   color: #fff;
     background-color: #0074d9;
 }
+
 .mapsidebar-tabs > li.disabled,
 .mapsidebar-tabs > ul > li.disabled {
   color: rgba(51, 51, 51, 0.4);
 }
+
 .mapsidebar-tabs > li.disabled:hover,
 .mapsidebar-tabs > ul > li.disabled:hover {
   background: transparent;
 }
+
 .mapsidebar-tabs > li.disabled > a,
 .mapsidebar-tabs > ul > li.disabled > a {
   cursor: default;
 }
+
 .mapsidebar-tabs > li > a,
 .mapsidebar-tabs > ul > li > a {
   display: block;
@@ -81,6 +92,7 @@
   text-decoration: none;
   text-align: center;
 }
+
 .mapsidebar-tabs > ul + ul {
   bottom: 0;
 }
@@ -92,14 +104,17 @@
   background-color: rgba(255, 255, 255, 0.95);
   overflow-x: hidden;
 }
+
 .mapsidebar-left .mapsidebar-content {
   left: 40px;
   right: 0;
 }
+
 .mapsidebar-right .mapsidebar-content {
   left: 0;
   right: 40px;
 }
+
 .mapsidebar.collapsed > .mapsidebar-content {
   overflow-y: hidden;
 }
@@ -147,6 +162,7 @@
 .mapsidebar-left .mapsidebar-close {
   right: 0;
 }
+
 .mapsidebar-right .mapsidebar-close {
   left: 0;
 }
@@ -168,11 +184,13 @@
     width: 305px;
   }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .mapsidebar {
     width: 390px;
   }
 }
+
 @media (min-width: 1200px) {
   .mapsidebar {
     width: 460px;
@@ -184,11 +202,13 @@
     min-width: 265px;
   }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .mapsidebar-pane {
     min-width: 350px;
   }
 }
+
 @media (min-width: 1200px) {
   .mapsidebar-pane {
     min-width: 420px;
@@ -217,6 +237,7 @@
     right: 460px;
   }
 }
+
 @media (min-width: 768px) and (max-width: 991px) {
   .sidebar-map .map-left.extended {
     left: 305px;
@@ -225,6 +246,7 @@
     right: 305px;
   }
 }
+
 @media (min-width: 992px) and (max-width: 1199px) {
   .sidebar-map .map-left.extended {
     left: 390px;
@@ -233,6 +255,7 @@
     right: 390px;
   }
 }
+
 @media (min-width: 1200px) {
   .sidebar-map .map-left.extended {
     left: 460px;

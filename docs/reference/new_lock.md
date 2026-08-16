@@ -5,7 +5,7 @@ Create a new lock object.
 ## Usage
 
 ``` r
-new_lock(name, layer, id = uuid::UUIDgenerate())
+new_lock(name, layer, zone, id = uuid::UUIDgenerate())
 ```
 
 ## Arguments
@@ -17,6 +17,14 @@ new_lock(name, layer, id = uuid::UUIDgenerate())
 - layer:
 
   \[new_layer()\] object used to store information for visualization.
+
+- zone:
+
+  \`character\` name of zone to which this lock pertains. During
+  optimization, planning units are forcibly allocated to this zone. Note
+  that \`zone\` must have a value that corresponds to one of the zone
+  names associated with the \[new_project()\] to which this object
+  belongs.
 
 - id:
 
@@ -41,8 +49,7 @@ Other class:
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Examples
 
@@ -54,6 +61,7 @@ sim_data <- simulate_spatial_data()
 # create object
 x <- new_lock(
   name = "lock",
+  zone = "scientific",
   layer = new_layer(
     column = "locked_in",
     total = 500,
@@ -64,7 +72,7 @@ x <- new_lock(
     details = "extra info"
   )
 )
-#> Error in new_lock(name = "lock", layer = new_layer(column = "locked_in",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_binary_legend(), provenance = simulate_provenance(),     details = "extra info")): could not find function "new_lock"
+#> Error in new_lock(name = "lock", zone = "scientific", layer = new_layer(column = "locked_in",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_binary_legend(), provenance = simulate_provenance(),     details = "extra info")): could not find function "new_lock"
 
 # preview object
 print(x)

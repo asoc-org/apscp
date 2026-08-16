@@ -68,6 +68,8 @@ NULL
 #' * `"YlOrRd`" (see [RColorBrewer::brewer.pal()])
 #' * `"random"` (the above palettes are randomly used to generate colors)
 #'
+#' @family misc
+#'
 #' @examples
 #' # obtain 5 colors from the Greens palette
 #' color_palette("Greens", 5)

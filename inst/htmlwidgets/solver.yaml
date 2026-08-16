@@ -1,0 +1,6 @@
+dependencies:
+  - name: style
+    version: 1.0.0
+    src: htmlwidgets
+    stylesheet:
+      - solver.css

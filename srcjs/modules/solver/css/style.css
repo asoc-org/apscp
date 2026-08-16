@@ -1,0 +1,70 @@
+/* ==========================================================================
+   Solver style
+   ========================================================================== */
+
+/* Main container style
+   ========================================================================== */
+
+.solver .solver-container {
+  --icon: #0d1321;
+  --disabled: #B8B8B8;
+  --border: #0d1321;
+  --symbol-border: #D3D3D3;
+  --handle: #0d1321;
+  --slider-primary: #073b4c;
+  --switch-primary: #073b4c;
+  --switch-secondary: color-mix(in srgb, var(--switch-primary), white 30%) !important;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.solver .solver-container .tab-pane{
+  margin-left: 3px;
+  margin-left: 3px;
+}
+
+.solver .solver-container button:disabled {
+  cursor: not-allowed;
+}
+
+/* Footer style
+   ========================================================================== */
+
+/* footer container */
+.solver .solver-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  left: 20px;
+  gap: 3px;
+  margin: auto 3px 3px 3px;
+}
+
+/* footer name text input */
+.solver .solver-footer .name-container {
+  flex-grow: 1;
+  margin-bottom: 0px;
+}
+
+.solver .solver-footer .name {
+  flex-grow: 1;
+}
+
+/* footer button container */
+.solver .solver-footer .button-container:has(button:disabled) {
+  cursor: not-allowed;
+}
+
+/* footer start button */
+.solver .solver-footer .start-button {
+  width: 60px;
+}
+
+/* footer buttons */
+.solver .solver-footer button {
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}

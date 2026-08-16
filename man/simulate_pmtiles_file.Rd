@@ -12,3 +12,15 @@ A `character` value with the file path.
 \description{
 Simulate a PMtiles file by creating a dummy file on disk.
 }
+\seealso{
+Other simulation:
+\code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
+\code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
+\code{\link[=simulate_feature_zone_targets]{simulate_feature_zone_targets()}},
+\code{\link[=simulate_prioritization_settings]{simulate_prioritization_settings()}},
+\code{\link[=simulate_project]{simulate_project()}},
+\code{\link[=simulate_provenance]{simulate_provenance()}},
+\code{\link[=simulate_solution_legend]{simulate_solution_legend()}},
+\code{\link[=simulate_spatial_data]{simulate_spatial_data()}}
+}
+\concept{simulation}

@@ -34,6 +34,7 @@ reading and writing objects to disk.
 See \[serialize_object()\] for the opposite of this function.
 
 Other io:
+[`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md),
 [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md),
 [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md),
 [`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md),

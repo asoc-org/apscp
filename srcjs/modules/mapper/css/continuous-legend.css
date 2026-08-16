@@ -1,3 +1,10 @@
+/* ==========================================================================
+   Continuous legend
+   ========================================================================== */
+
+/* Main container style
+   ========================================================================== */
+
 /* overall widget */
 .continuous-legend {
   display: flex;
@@ -8,27 +15,15 @@
   --symbol-border: #D3D3D3;
 }
 
-.continuous-legend-plus {
-  width: 95%;
-  min-height: 115px;
-  overflow: auto;
-  position: relative;
-  transition: 0.8s;
-}
-
-.continuous-legend-minus {
-  width: 95%;
-  min-height: 0px;
-  overflow: auto;
-  position: relative;
-  transition: 0.8s;
-}
+/* Legend colorbar
+   ========================================================================== */
 
 /* container */
 .colorbar-container {
   flex-grow: 1;
 }
 
+/* color ramp */
 .continuous-legend .colorbar-ramp {
   height: 12px;
   border-radius: 2px;
@@ -36,6 +31,7 @@
   border: 1px solid var(--symbol-border);
 }
 
+/* color bar items */
 .continuous-legend .colorbar-items {
   display: grid;
   grid-template-columns: repeat(100, minmax(0, 1fr));

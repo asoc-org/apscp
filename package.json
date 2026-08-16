@@ -28,13 +28,19 @@
   "homepage": "https://github.com/asoc-org/apscp#readme",
   "devDependencies": {
     "css-loader": "^7.1.4",
+    "cssnano": "^8.0.4",
     "mini-css-extract-plugin": "^2.10.2",
+    "postcss": "^8.5.26",
+    "postcss-loader": "^8.2.1",
     "style-loader": "^4.0.0",
     "webpack": "^5.108.4",
     "webpack-cli": "^7.2.1",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
-    "sortablejs": "^1.15.7"
+    "nouislider": "^15.8.1",
+    "selectize": "^0.12.6",
+    "sortablejs": "^1.15.7",
+    "tom-select": "^2.6.2"
   }
 }

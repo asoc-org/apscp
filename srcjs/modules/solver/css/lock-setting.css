@@ -1,0 +1,21 @@
+/* ==========================================================================
+   Lock setting
+   ========================================================================== */
+
+/* Drop down menu in Tom select
+   ========================================================================== */
+
+.ts-dropdown .lock-option {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ts-dropdown .lock-option .provenance {
+  margin-left: auto;
+}
+
+/* sortable handle */
+.lock-setting .handle {
+  cursor: pointer;
+}

@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Cost setting
+   ========================================================================== */
+
+/* Components
+   ========================================================================== */
+
+/* body container */
+.cost-setting .cost-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 3px;
+}
+
+/* label component */
+.cost-setting .weight-label {
+  flex: 0 0 11ch;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0px;
+}
+
+/* slider container */
+.cost-setting .weight-slider {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  margin-right: 8px;
+}
+
+/* noUiSlider */
+.cost-setting .noUi-target {
+  width: 100%;
+  z-index: 2;
+}
+
+.cost-setting .noUi-connect {
+  background: var(--slider-primary);
+}
+
+.cost-setting .noUi-horizontal {
+  height: 10px;
+}
+
+.cost-setting .noUi-horizontal .noUi-handle {
+  box-shadow: 0 3px 6px -3px #BBB;
+  width: 14px;
+  height: 20px;
+  right: -7px;
+}
+
+.cost-setting .noUi-handle:before,
+.cost-setting .noUi-handle:after {
+  height: 6px;
+  left: 4px;
+}
+
+.cost-setting .cost-body .noUi-handle:after {
+  left: 7px;
+}

@@ -9,7 +9,7 @@ new_project(
   dataset,
   tiles,
   costs,
-  themes,
+  features,
   locks,
   solutions = list(),
   name = "Project",
@@ -27,7 +27,7 @@ new_project(
 
 \item{costs}{`list` of [new_cost()] objects.}
 
-\item{themes}{`list` of [new_themes()] objects.}
+\item{features}{`list` of [new_features()] objects.}
 
 \item{locks}{`list` of [new_locks()] objects.}
 
@@ -63,7 +63,8 @@ tile <- create_tile(sim_data)
 # create cost
 cost <- new_cost(
   name = "cost",
-  zones_active = c(TRUE, FALSE, FALSE),
+  zone = "Science",
+  weight = 0.1,
   layer = new_layer(
     column = "feat_1",
     total = 500,
@@ -77,8 +78,7 @@ cost <- new_cost(
 # create lock
 lock <- new_lock(
   name = "lock",
-  zones_in = c(TRUE, FALSE, FALSE),
-  zones_out = c(FALSE, FALSE, FALSE),
+  zone = "Biodiversity",
   layer = new_layer(
     column = "locked_in",
     total = 30,
@@ -89,45 +89,51 @@ lock <- new_lock(
   )
 )
 
-# create theme
-theme <- new_theme(
-  "species",
-  list(
-    new_feature(
-      name = "f1",
-      zones_targets = c(0.1, 0.5),
-      layer = new_layer(
-        column = "feat_1",
-        total = 500,
-        dataset = dataset,
-        tile = tile,
-        legend = simulate_continuous_legend(),
-        provenance = simulate_provenance()
-      )
+# create features
+features <- list(
+  new_feature(
+    name = "f1",
+    zone_targets = c(0.1, 0.2, 0.5),
+    zone_weights = c(0.2, 0.1, 0.3),
+    zone_helds = c(0, 0.1, 0),
+    themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),
+    layer = new_layer(
+      column = "feat_1",
+      total = 500,
+      dataset = dataset,
+      tile = tile,
+      legend = simulate_continuous_legend(),
+      provenance = simulate_provenance()
+    )
+  ),
+  new_feature(
+    name = "f2",
+    zone_targets = c(0.01, 0.04, 0.9),
+    zone_weights = c(0.8, 0.1, 0.05),
+    zone_helds = c(0.2, 0, 0),
+    themes = list(
+      new_theme(zone = "Biodiversity", name = "Penguins"),
+      new_theme(zone = "Tourism", name = "Charismatic species")
     ),
-    new_feature(
-      name = "f2",
-      zones_targets = c(0.2, 0.9),
-      layer = new_layer(
-        column = "feat_2",
-        total = 200,
-        dataset = dataset,
-        tile = tile,
-        legend = simulate_continuous_legend(),
-        provenance = simulate_provenance()
-      )
+    layer = new_layer(
+      column = "feat_2",
+      total = 200,
+      dataset = dataset,
+      tile = tile,
+      legend = simulate_continuous_legend(),
+      provenance = simulate_provenance()
     )
   )
 )
 
 # create project
 x <- new_project(
-  zones = c("Conservation", "Tourism", "Science"),
+  zones = c("Biodiversity", "Tourism", "Science"),
   dataset = dataset,
   tiles = list(tile),
   costs = list(cost),
   locks = list(lock),
-  themes = list(theme)
+  features = features
 )
 
 # preview object

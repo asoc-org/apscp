@@ -1,0 +1,81 @@
+/* ==========================================================================
+   Setting style
+   ========================================================================== */
+
+.solver .setting {
+  border: 1px var(--border) solid;
+  border-radius: 5px 5px 5px 5px;
+  margin: 10px 0px 10px 0px;
+  padding-bottom: 0px;
+  background: white;
+}
+
+.solver .setting:not(:first-child) {
+  margin-top: 0px;
+}
+
+/* Hidden setting
+   ========================================================================== */
+
+.solver .hidden-setting {
+  display: none;
+}
+
+/* Header component
+   ========================================================================== */
+
+/* overall container */
+.solver .setting .header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  font-size: 16px;
+  padding-left: 5px;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  margin-right: 5px;
+}
+
+/* name component of header */
+.solver .setting .header .name-label {
+  font-weight: 600;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+/* provenance component of header */
+.solver .setting .provenance {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+/* Name label components
+   ========================================================================== */
+
+.solver .setting .name-label {
+  margin-right: auto;
+  word-break: break-all;
+}
+
+/* Disabled elements
+   ========================================================================== */
+
+.solver .setting div[disabled] label,
+.solver .setting label[disabled] {
+  color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.solver .setting div[disabled] button {
+  background-color: var(--disabled) !important;
+  cursor: not-allowed !important;
+}
+
+.solver .setting .noUi-origin[disabled] .noUi-handle {
+  background-color: var(--disabled) !important;
+}
+
+.solver .setting .noUi-origin[disabled] {
+  z-index: 3 !important;
+}

@@ -1,7 +1,6 @@
 #' @include internal.R
 NULL
 
-
 #' Scaffold for a mapper widget
 #'
 #' Create a HTML scaffold for a [mapper()] widget.
@@ -75,11 +74,6 @@ mapper_html <- function(id, style, class, ...) {
       htmltools::tags$div(
         class = c("mapper-menu-item", "feature-layer"),
         mapper_menu_item_header_scaffold(type = "Feature"),
-        htmltools::tags$div(
-          class = "theme-container",
-          shiny::icon("chevron-right"),
-          htmltools::tags$label(class = "theme-label"),
-       ),
        htmltools::tags$div(class = "legend-container")
       )
     )
@@ -130,6 +124,14 @@ mapper_menu_item_header_scaffold <- function(type) {
   # return scaffold
   htmltools::tags$div(
     class = "header",
+    htmltools::tags$div(
+      class = "handle",
+      `data-toggle` = "tooltip",
+      `data-placement` = "top",
+      `data-container` = "body",
+      title = "Drag to re-order layers on the map",
+      shiny::icon("arrows-alt", color = "--handle")
+    ),
     htmltools::tags$label(
       class = "legend-checkbox-container",
       `data-toggle` = "tooltip",
@@ -156,9 +158,6 @@ mapper_menu_item_header_scaffold <- function(type) {
       htmltools::tags$i(class = "fa fa-eye checked"),
       htmltools::tags$i(class = "fa fa-eye-slash unchecked")
     ),
-    htmltools::tags$label(
-      class = "name-label"
-    ),
     htmltools::tags$button(
       class = "layer-button",
       type = "button",
@@ -166,7 +165,10 @@ mapper_menu_item_header_scaffold <- function(type) {
       `data-placement` = "top",
       `data-container` = "body",
       title = "Remove from map",
-      htmltools::tags$i(class = "fa fa-trash-alt")
+      htmltools::tags$i(class = "fa fa-trash-can fa-regular")
+    ),
+    htmltools::tags$div(
+      class = "name-container"
     ),
     htmltools::tags$div(
       class = "provenance-container"

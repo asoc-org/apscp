@@ -1,11 +1,12 @@
 # Initialization
 ## load package
 devtools::load_all()
+library(magrittr)
 
 ## set parameters
 ### parameters for loading in data
 metadata_path <- "data-raw/metadata.csv"
-target_path <- "Targets/Unadjusted/Tar_BG_tves_baseline_unadjust.csv"
+target_path <- "Targets/Adjusted/Tar_BG_tves_baseline.csv"
 data_path <- "data-raw/29092346.zip"
 ### parameters for project metadata
 project_name = "Antarctic Peninsula"
@@ -64,21 +65,21 @@ metadata$provenance_description[is.na(metadata$provenance_url)] <-
 match_name <- tools::file_path_sans_ext(metadata$file)
 match_name <- gsub("_1km", "", match_name, fixed = TRUE)
 idx <- match(target_data$NAME, match_name)
-metadata$conservation_target <- NA_real_
+metadata$biodiversity_target <- NA_real_
 metadata$scientific_target <- NA_real_
 metadata$tourism_target <- NA_real_
-metadata$conservation_target[idx] <- target_data$Bio_Tar
+metadata$biodiversity_target[idx] <- target_data$Bio_Tar
 metadata$scientific_target[idx] <- target_data$Sci_Tar
 metadata$tourism_target[idx] <- target_data$Tour_Tar
 ### set targets to NA for non-feature data
 idx <- metadata$class != "feature"
-metadata$conservation_target[idx] <- NA_real_
+metadata$biodiversity_target[idx] <- NA_real_
 metadata$scientific_target[idx] <- NA_real_
 metadata$tourism_target[idx] <- NA_real_
 ## assert that all features have targets
 idx <- metadata$class == "feature"
 assertthat::assert_that(
-  assertthat::noNA(metadata$conservation_target[idx]),
+  assertthat::noNA(metadata$biodiversity_target[idx]),
   assertthat::noNA(metadata$scientific_target[idx]),
   assertthat::noNA(metadata$tourism_target[idx]),
   msg = "targets must not have missing values"
@@ -119,11 +120,6 @@ vector_data <- sf::st_as_sf(
     pu_data, values = TRUE, na.rm = TRUE, na.all = TRUE, dissolve = FALSE
   )
 )
-vector_data[["_index"]] <- seq_len(nrow(vector_data))
-vector_data <- vector_data[,
-  c("_index", setdiff(names(vector_data), "_index")),
-  drop = FALSE
-]
 for (i in names(raster_data)) {
   vector_data[[i]] <- raster_data[[i]][idx][[1]]
 }
@@ -146,14 +142,13 @@ tile <- create_tile(
 
 ## create locks
 locks <-
-  {metadata[metadata$class == "lock", , drop = FALSE]} |>
-  split(~ name) |>
+  {metadata[metadata$class == "lock", , drop = FALSE]} %>%
+  split(~ name) %>%
   lapply(function(x) {
     new_lock(
       name = x$name,
       ## note that all locks are assumed to be for the biodiversity zone
-      zones_in = c(TRUE, FALSE, FALSE),
-      zones_out = c(FALSE, FALSE, FALSE),
+      zone = "Biodiversity",
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -181,14 +176,15 @@ locks <-
 
 ## create costs
 costs <-
-  {metadata[metadata$class == "cost", , drop = FALSE]} |>
-  split(~ name) |>
+  {metadata[metadata$class == "cost", , drop = FALSE]} %>%
+  split(~ name) %>%
   lapply(function(x) {
     new_cost(
       name = x$name,
       ## note that all costs are assumed to avoid allocating planning units
       ## to the tourism zone
-      zones_active = c(TRUE, TRUE, FALSE),
+      zone = "Tourism",
+      weight = 1,
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -213,17 +209,46 @@ costs <-
     )
   }) %>%
   unname()
+
+## create status values for biodiversity zone
+lock_columns <- metadata$name[metadata$class == "lock"]
+names(lock_columns) <- rep("Biodiversity", length(lock_columns))
+biodiversity_status <- dataset$get_pu_status("Biodiversity", lock_columns)
 
 ## create features
 features <-
-  {metadata[metadata$class == "feature", , drop = FALSE]} |>
-  split(~ name) |>
+  {metadata[metadata$class == "feature", , drop = FALSE]} %>%
+  split(~ name) %>%
   lapply(function(x) {
+    # find themes
+    theme_data <- metadata[
+      metadata$class == "feature" & metadata$theme == x$theme, ,
+      drop = FALSE
+    ]
+    theme_names <- c("Biodiversity", "Scientific", "Tourism")[
+      which(
+        c(
+          max(theme_data$biodiversity_target, na.rm = TRUE),
+          max(theme_data$scientific_target, na.rm = TRUE),
+          max(theme_data$tourism_target, na.rm = TRUE)
+        ) > 1e-5
+      )
+    ]
+    theme_names <- c(theme_names, x$theme)
+    # return feature
     new_feature(
       name = x$name,
-      zones_targets = c(
-        x$conservation_target, x$scientific_target, x$tourism_target
+      zone_targets = standardize_zone_targets(
+        c(x$biodiversity_target, x$scientific_target, x$tourism_target),
+        digits = 1
       ),
+      zone_weights = rep(1, 3L),
+      zone_helds = c(
+        dataset$get_column_held(x$name, biodiversity_status),
+        0,
+        0
+      ),
+      themes = lapply(theme_names, new_theme, name = x$theme),
       layer = new_layer(
         dataset = dataset,
         column = x$name,
@@ -245,30 +270,16 @@ features <-
           units = x$units
         )
       )
-    )
-  }) %>%
-  unname()
-
-## create themes
-themes <-
-  {metadata[metadata$class == "feature", , drop = FALSE]} |>
-  split(~ theme) |>
-  lapply(function(x) {
-    new_theme(
-      name = x$theme[[1]],
-      features = features[
-        vapply(features, function(x) x$name, character(1)) %in% x$name
-      ]
     )
   }) %>%
   unname()
 
 ## create project
 project <- new_project(
-  zones = c("Biodiversity area", "Scientific area", "Tourism area"),
+  zones = c("Biodiversity", "Scientific", "Tourism"),
   dataset = dataset,
   tiles = list(tile),
-  themes = themes,
+  features = features,
   costs = costs,
   locks = locks,
   name = project_name,

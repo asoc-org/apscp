@@ -18,8 +18,7 @@ Other class:
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Public fields
 
@@ -27,17 +26,17 @@ Other class:
 
   \[new_dataset()\] object.
 
-- `tileset`:
+- `tiles`:
 
-  \`\[new_tile_set()\] objects.
+  \`list\` of \[new_tile()\] objects.
 
 - `zones`:
 
   \`character\` vector of zone names.
 
-- `themes`:
+- `features`:
 
-  \`list\` of \[new_theme()\] objects.
+  \`list\` of \[new_feature()\] objects.
 
 - `locks`:
 
@@ -51,10 +50,6 @@ Other class:
 
   \`list\` of \[new_solution()\] objects.
 
-- `bbox`:
-
-  \[sf::st_bbox()\] object.
-
 - `name`:
 
   \`character\` name of the project.
@@ -67,6 +62,10 @@ Other class:
 
   \`character\` email of the project author.
 
+- `version`:
+
+  \`character\` value with package version used to create the project.
+
 ## Methods
 
 ### Public methods
@@ -77,9 +76,15 @@ Other class:
 
 - [`Project$get_bbox()`](#method-Project-get_bbox)
 
+- [`Project$get_solution()`](#method-Project-get_solution)
+
+- [`Project$get_lock()`](#method-Project-get_lock)
+
 - [`Project$add_solution()`](#method-Project-add_solution)
 
 - [`Project$add_lock()`](#method-Project-add_lock)
+
+- [`Project$add_tile()`](#method-Project-add_tile)
 
 - [`Project$clone()`](#method-Project-clone)
 
@@ -93,16 +98,16 @@ Create a \`Project\` object.
 
     Project$new(
       zones,
-      bbox,
       dataset,
-      tileset,
-      themes,
+      tiles,
+      features,
       locks,
       costs,
       solutions = list(),
       name = "Project",
       author_name = "Unknown",
-      author_email = "Unknown"
+      author_email = "Unknown",
+      version = "Unknown"
     )
 
 #### Arguments
@@ -111,21 +116,17 @@ Create a \`Project\` object.
 
   \`character\` vector of zone names.
 
-- `bbox`:
-
-  \[sf::st_bbox()\] object.
-
 - `dataset`:
 
   \[new_dataset()\] object.
 
-- `tileset`:
+- `tiles`:
 
-  \`\[new_tile_set()\] object.
+  \`list\` of \[new_tile()\] objects.
 
-- `themes`:
+- `features`:
 
-  \`list\` of \[new_theme()\] objects.
+  \`list\` of \[new_feature()\] objects.
 
 - `locks`:
 
@@ -150,6 +151,11 @@ Create a \`Project\` object.
 - `author_email`:
 
   \`character\` email of the project author. Defaults to \`"Unknown"\`.
+
+- `version`:
+
+  \`character\` value with package version used to create the project.
+  Defaults to \`"Unknown"\`.
 
 #### Returns
 
@@ -199,9 +205,49 @@ A \[sf::st_bbox()\] object.
 
 ------------------------------------------------------------------------
 
+### `Project$get_solution()`
+
+Get solution from the project.
+
+#### Usage
+
+    Project$get_solution(id)
+
+#### Arguments
+
+- `id`:
+
+  \`character\` value.
+
+#### Returns
+
+A \[new_solution()\] object.
+
+------------------------------------------------------------------------
+
+### `Project$get_lock()`
+
+Get lock from the project.
+
+#### Usage
+
+    Project$get_lock(id)
+
+#### Arguments
+
+- `id`:
+
+  \`character\` value.
+
+#### Returns
+
+A \[new_solution()\] object.
+
+------------------------------------------------------------------------
+
 ### `Project$add_solution()`
 
-Add a solution to the project.
+Add a new solution to the project.
 
 #### Usage
 
@@ -232,6 +278,26 @@ Add a lock to the project.
 - `x`:
 
   \[new_lock()\] object.
+
+#### Returns
+
+An invisible \`TRUE\` indicating success.
+
+------------------------------------------------------------------------
+
+### `Project$add_tile()`
+
+Add a tile to the project.
+
+#### Usage
+
+    Project$add_tile(x)
+
+#### Arguments
+
+- `x`:
+
+  \[new_tile()\] object.
 
 #### Returns
 

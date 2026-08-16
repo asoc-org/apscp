@@ -39,7 +39,8 @@ has_mapbox_token <- function() {
 #' # create object
 #' x <- new_cost(
 #'   name = "cost",
-#'   zones_active = c(FALSE, FALSE, FALSE),
+#'   zone = "Science",
+#'   weight = 0.1,
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -153,7 +154,8 @@ mapgl_source_id <- function(x) {
 #' # create object
 #' x <- new_cost(
 #'   name = "cost",
-#'   zones_active = c(FALSE, FALSE, FALSE),
+#'   zone = "Science",
+#'   weight = 0.1,
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
@@ -203,7 +205,8 @@ mapgl_source_layer_id <- function(x) {
 #' tile <- create_tile(sim_data)
 #' cost <- new_cost(
 #'   name = "cost",
-#'   zones_active = c(FALSE, FALSE, FALSE),
+#'   zone = "Science",
+#'   weight = 0.1,
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,

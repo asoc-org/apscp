@@ -1,0 +1,8 @@
+/* ==========================================================================
+   Feature settings style
+   ========================================================================== */
+
+/* hide selected options in Tom Select */
+.feature-settings .ts-control .item {
+  display: none;
+}

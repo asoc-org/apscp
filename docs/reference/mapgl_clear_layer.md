@@ -16,7 +16,8 @@ mapgl_clear_layer(map, x)
 
 - x:
 
-  \[new_tile()\] object.
+  \[new_tile()\], \[new_feature()\], \[new_cost()\], \[new_lock()\], or
+  \[new_solution()\] object.
 
 ## Details
 

@@ -174,7 +174,8 @@ sidebar_deps <- function() {
       "sidebar",
       "1.0.0",
       src = system.file("htmlwidgets", package = "apscp"),
-      script = "sidebar.js"
+      script = "sidebar.js",
+      stylesheet = "sidebar.css"
     )
   )
 }

@@ -20,11 +20,24 @@ default:
   ## monitor memory usage
   monitor: false
 
-  ## optimality gap
-  solver_gap: 0.01 # 1% from optimality for initial optimization
+  ## define options for generating different solutions
+  prioritization_feature_weights:
+    - 0.0
+    - 0.5
+    - 1.0
+  prioritization_feature_targets:
+    - 0.0 # minimum value
+    - 1.0 # maximum value
+    - 0.2 # step value
+  prioritization_cost_weights:
+    - 0.0 # minimum value
+    - 1.0 # maximum value
+    - 0.25 # step value
 
-  ## time limit (seconds) for generating solutions
-  solver_time_limit: 300 # 5 minutes for spatial clustering optimization
+  ## solver details
+  solver_gap: 0.01 # optimality gap, e.g., 0.01 = 1%
+  solver_time_limit: 300 # in seconds
+  solver_gurobi_server: null
 
   ## time out (seconds) for worker processes
   ## i.e. maximum time that worker process should remain active after
@@ -37,10 +50,25 @@ default:
   tile_server_dir: null
   tile_max_zoom: 8
 
+  ## define color palette used for zones in solutions
+  ### note that if more colors are defined than zones, then only
+  ### the first set of color values are used
+  zone_colors:
+    - "#4daf4a"
+    - "#f781bf"
+    - "#377eb8"
+    - "#ff7f00"
+    - "#984ea3"
+    - "#ffff33"
+    - "#a65628"
+    - "#999999"
+    - "#e41a1c"
+
 # production configuration:
 prod:
   app_prod: yes
   tile_server_dir: tiles
+  solver_gurobi_server: "localhost:61000"
 
 # development configuration
 dev:

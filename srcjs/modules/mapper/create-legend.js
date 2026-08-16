@@ -1,3 +1,7 @@
+/** Import dependencies */
+// functions to create elements
+import {addTooltip} from  "../utils/element.js";
+// styling
 import "./css/categorical-legend.css";
 import "./css/continuous-legend.css";
 
@@ -20,15 +24,10 @@ export function createCategoricalLegend(x) {
   // initialize legend
   let el = document.createElement("div");
   el.className = "categorical-legend";
-  el.setAttribute("data-toggle", "tooltip");
-  el.setAttribute("data-placement", "bottom");
-  el.setAttribute("data-delay", "{\"show\":500, \"hide\":100}");
-  el.setAttribute("data-container", "body");
-  el.setAttribute(
-    "title",
+  addTooltip(
+    el,
     "This layer has categorical data and colors indicate each category."
   );
-
   // if needed, force values into an array
   if (!Array.isArray(x.labels)) {
     x.labels = [x.labels]
@@ -47,11 +46,11 @@ export function createCategoricalLegend(x) {
     item.className = "item";
     // create text component to display the text
     let itemLabel = document.createElement("label");
-    itemLabel.className = "item-label disable-if-inactive";
+    itemLabel.className = "item-label";
     itemLabel.innerText = `${x.labels[i]}`;
     // create symbol component to display the color
     let itemSymbol = document.createElement("div");
-    itemSymbol.className = "item-symbol disable-if-inactive";
+    itemSymbol.className = "item-symbol";
     itemSymbol.style.backgroundColor = x.colors[i];
     itemSymbol.style.color = x.colors[i];
     // add item to legend
@@ -84,14 +83,10 @@ export function createContinuousLegend(x) {
   // initialize legend
   let el = document.createElement("div");
   el.classList.add("continuous-legend");
-  el.setAttribute("data-toggle", "tooltip");
-  el.setAttribute("data-placement", "bottom");
-  el.setAttribute("data-delay", "{\"show\":500, \"hide\":100}");
-  el.setAttribute("data-container", "body");
-  el.setAttribute(
-    "title",
+  addTooltip(
+    el,
     "This layer has continuous data and the " +
-    "legend shows the range of colors used for display"
+      "legend shows the range of colors used for display"
   );
 
   // compute values
@@ -177,5 +172,7 @@ export function createLegend(x) {
     return createContinuousLegend(x);
   } else if (x.class === "CategoricalLegend") {
     return createCategoricalLegend(x);
+  } else {
+    console.log("createLegend(): `x` not a recognized value.");
   }
 }

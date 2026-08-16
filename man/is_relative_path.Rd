@@ -15,3 +15,12 @@ A `logical` value.
 \description{
 Check if a file path is relative or not.
 }
+\seealso{
+Other misc:
+\code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
+\code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
+\code{\link[=color_palette]{color_palette()}},
+\code{\link[=read_sf_data]{read_sf_data()}},
+\code{\link[=write_sf_data]{write_sf_data()}}
+}
+\concept{misc}

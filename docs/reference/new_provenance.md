@@ -44,8 +44,7 @@ Other class:
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Examples
 

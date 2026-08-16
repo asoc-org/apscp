@@ -12,8 +12,8 @@ new_layer(
   tile,
   legend,
   provenance,
-  details = NULL,
-  id = uuid::UUIDgenerate()
+  visible = FALSE,
+  details = NULL
 )
 ```
 
@@ -44,15 +44,15 @@ new_layer(
 
   \[new_provenance()\] object.
 
+- visible:
+
+  \`logical\` value indicating if the layer should be visible by
+  default? Defaults to \`FALSE\`.
+
 - details:
 
   \`character\` value with additional details for the layer. Defaults to
   \`NULL\`.
-
-- id:
-
-  \`character\` value with unique identifier. Defaults to a random
-  identifier (\[uuid::UUIDgenerate()\]).
 
 ## Value
 
@@ -72,8 +72,7 @@ Other class:
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
-[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
-[`new_tileset()`](https://asoc-org.github.io/apscp/reference/new_tileset.md)
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 
 ## Examples
 
@@ -90,9 +89,10 @@ x <- new_layer(
   tile = create_tile(sim_data),
   legend = simulate_continuous_legend(),
   provenance = simulate_provenance(),
+  visible = TRUE,
   details = "extra info"
 )
-#> Error in new_layer(column = "feat_1", total = 500, dataset = create_dataset(sim_data),     tile = create_tile(sim_data), legend = simulate_continuous_legend(),     provenance = simulate_provenance(), details = "extra info"): could not find function "new_layer"
+#> Error in new_layer(column = "feat_1", total = 500, dataset = create_dataset(sim_data),     tile = create_tile(sim_data), legend = simulate_continuous_legend(),     provenance = simulate_provenance(), visible = TRUE, details = "extra info"): could not find function "new_layer"
 
 # preview object
 print(x)

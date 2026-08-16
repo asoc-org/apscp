@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Tom select styles
+   ========================================================================== */
+
+/* Style disabled elements
+   ========================================================================== */
+
+/* specify cursor for disabled select element  */
+.ts-wrapper.disabled .ts-control,
+.ts-wrapper.disabled .ts-control input {
+  cursor: not-allowed !important;
+}
+.ts-wrapper.disabled {
+  pointer-events: fill !important;
+}

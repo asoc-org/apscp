@@ -61,7 +61,7 @@ make_unique_column_name <- function(x, existing_names) {
 #'
 #' @return A `list` object.
 #'
-#' @export
+#' @noRd
 update_named_list_elements <- function(x, element_name, new_value) {
   if (is.list(x)) {
     # Replace value if the name matches at the current level
@@ -76,4 +76,45 @@ update_named_list_elements <- function(x, element_name, new_value) {
   } else {
     x
   }
+}
+
+#' Standardize target values
+#'
+#' Standardize a set of values to ensure that they sum to a value of 1,
+#' and have a pre-specified number of significant digits.
+#'
+#' @param x `numeric` values.
+#'
+#' @param digits `numeric` value indicating the number of digits desired
+#' for the output. Defaults to 2.
+#'
+#' @return A `numeric` vector.
+#'
+#' @noRd
+standardize_zone_targets <- function(x, digits = 2) {
+  # if needed, ensure values sum to 1
+  if (sum(x) > 1) {
+    x <- x / sum(x)
+  }
+  # define constants
+  up <- 10^digits
+  xmin <- 1 / up
+  # try simply ceiling the values to begin with
+  y <- ceiling(x * up) / up
+  # if needed, apply further standardization to help meet targets
+  while (sum(y) > 1) {
+    # find indices for target values that would not get reduced to zero
+    nz <- which(y > xmin)
+    # find the index that should be reduced
+    i <- which.max(y[nz] - x[nz])
+    # reduced the value by smallest rounding increment
+    y[nz[i]] <- y[nz[i]] - xmin
+  }
+  # ensure that rounding worked
+  assertthat::assert_that(
+    sum(y) <= 1,
+    msg = "Failed to standardize targets."
+  )
+  # return value
+  y
 }

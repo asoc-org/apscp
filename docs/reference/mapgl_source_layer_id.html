@@ -52,8 +52,8 @@
 
 
 <dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>[new_feature()], [new_cost()], [new_lock()], or [new_solution()]
-object.</p></dd>
+<dd><p>[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
+[new_solution()] object.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -88,6 +88,8 @@ object.</p></dd>
 <span class="r-in"><span><span class="co"># create object</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_cost.html">new_cost</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  name <span class="op">=</span> <span class="st">"cost"</span>,</span></span>
+<span class="r-in"><span>  zone <span class="op">=</span> <span class="st">"Science"</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
 <span class="r-in"><span>  layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    column <span class="op">=</span> <span class="st">"feat_1"</span>,</span></span>
 <span class="r-in"><span>    total <span class="op">=</span> <span class="fl">500</span>,</span></span>
@@ -98,7 +100,7 @@ object.</p></dd>
 <span class="r-in"><span>    details <span class="op">=</span> <span class="st">"extra info"</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_cost(name = "cost", layer = new_layer(column = "feat_1",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_continuous_legend(), provenance = simulate_provenance(),     details = "extra info")):</span> could not find function "new_cost"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_cost(name = "cost", zone = "Science", weight = 0.1, layer = new_layer(column = "feat_1",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_continuous_legend(), provenance = simulate_provenance(),     details = "extra info")):</span> could not find function "new_cost"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># get layer identifier</span></span></span>
 <span class="r-in"><span><span class="fu">mapgl_source_layer_id</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

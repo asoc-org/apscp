@@ -77,6 +77,15 @@ Specifically, available palettes include: \* \`"viridis"\` (see
 \[RColorBrewer::brewer.pal()\]) \* \`"random"\` (the above palettes are
 randomly used to generate colors)
 
+## See also
+
+Other misc:
+[`as.data.frame.JsDataFrame()`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md),
+[`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
+[`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md),
+[`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md),
+[`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
+
 ## Examples
 
 ``` r
