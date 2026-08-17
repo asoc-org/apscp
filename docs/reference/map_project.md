@@ -1,6 +1,6 @@
 # Map project
 
-Map project
+Create a map to display the project.
 
 ## Usage
 

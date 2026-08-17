@@ -15,7 +15,7 @@ map_project(x, ...)
 A [mapgl::mapboxgl()] object.
 }
 \description{
-Map project
+Create a map to display the project.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}

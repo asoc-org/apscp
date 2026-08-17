@@ -30,6 +30,7 @@ applications.
 }
 \seealso{
 Other solver:
+\code{\link[=mapper_sync]{mapper_sync()}},
 \code{\link[=solver]{solver()}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},
 \code{\link[=solver_reset]{solver_reset()}},

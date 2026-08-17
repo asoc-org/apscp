@@ -46,10 +46,10 @@ A \`shiny.tag\` with sidebar-specific HTML classes
 
 Other sidebar:
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
-[`close_sidebar()`](https://asoc-org.github.io/apscp/reference/close_sidebar.md),
-[`disable_sidebar()`](https://asoc-org.github.io/apscp/reference/disable_sidebar.md),
-[`enable_sidebar()`](https://asoc-org.github.io/apscp/reference/enable_sidebar.md),
-[`open_sidebar()`](https://asoc-org.github.io/apscp/reference/open_sidebar.md),
+[`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md),
+[`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md),
+[`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md),
+[`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md),
 [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)
 
 ## Examples

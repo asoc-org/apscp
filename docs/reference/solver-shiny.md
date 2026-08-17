@@ -39,6 +39,7 @@ renderSolver(expr, env = parent.frame(), quoted = FALSE)
 ## See also
 
 Other solver:
+[`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md),
 [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md),
 [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md),
 [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md),

@@ -54,3 +54,55 @@ mapper_add_solution <- function(
     )
   )
 }
+
+#' Synchronize mapper
+#'
+#' Synchronize active layers between a [mapper()] object and its associated
+#' [mapgl::mapboxglOutput()] object.
+#'
+#' @inheritParams mapper_add_solution
+#' @inheritParams mapper
+#'
+#' @param data `list` with data.
+#'
+#' @details
+#' This function is specifically used to add layers to the map that
+#' are not active.
+#'
+#' @family solver
+#'
+#' @examples
+#' # TODO
+#'
+#' @export
+mapper_sync <- function(
+  id, map, project, data,
+  session = shiny::getDefaultReactiveDomain()
+) {
+  # assert valid arguments
+  assertthat::assert_that(
+    assertthat::is.string(id),
+    assertthat::noNA(id),
+    inherits(map, "mapboxgl_proxy"),
+    inherits(project, "Project")
+  )
+  # get project element
+  x <- get_project_element(project, data)
+  # add layer to map
+  mapgl_add_layer(
+    map = map,
+    x = x,
+    visibility = "visible",
+    before_id = NULL
+  )
+  # add layer to widget
+  session$sendCustomMessage(
+    "mapper:addLayer",
+    list(
+      id = id,
+      value = serialize_object(x),
+      visible = TRUE,
+      endPosition = TRUE
+    )
+  )
+}

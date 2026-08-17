@@ -1,11 +1,11 @@
-# Enable sidebar
+# Open sidebar
 
-Enable a sidebar.
+Open a sidebar.
 
 ## Usage
 
 ``` r
-enable_sidebar(id, pane_id, session = shiny::getDefaultReactiveDomain())
+sidebar_open(id, pane_id, session = shiny::getDefaultReactiveDomain())
 ```
 
 ## Arguments
@@ -27,8 +27,8 @@ enable_sidebar(id, pane_id, session = shiny::getDefaultReactiveDomain())
 
 Other sidebar:
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
-[`close_sidebar()`](https://asoc-org.github.io/apscp/reference/close_sidebar.md),
-[`disable_sidebar()`](https://asoc-org.github.io/apscp/reference/disable_sidebar.md),
-[`open_sidebar()`](https://asoc-org.github.io/apscp/reference/open_sidebar.md),
+[`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md),
+[`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md),
+[`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md),
 [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md),
 [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)

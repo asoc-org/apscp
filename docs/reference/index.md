@@ -68,13 +68,13 @@ Functions for custom widgets.
 
 - [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md)
   : Add sidebar control
-- [`close_sidebar()`](https://asoc-org.github.io/apscp/reference/close_sidebar.md)
+- [`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md)
   : Close sidebar
-- [`disable_sidebar()`](https://asoc-org.github.io/apscp/reference/disable_sidebar.md)
+- [`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md)
   : Disable sidebar
-- [`enable_sidebar()`](https://asoc-org.github.io/apscp/reference/enable_sidebar.md)
+- [`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md)
   : Enable sidebar
-- [`open_sidebar()`](https://asoc-org.github.io/apscp/reference/open_sidebar.md)
+- [`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md)
   : Open sidebar
 - [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
   : Create a sidebar pane
@@ -87,6 +87,8 @@ Functions for custom widgets.
   Mapper
 - [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
   : Add solution to map
+- [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
+  : Synchronize mapper
 - [`solverOutput()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
   [`renderSolver()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
   : Shiny bindings for solver
