@@ -57,7 +57,7 @@ export class FeatureSettings {
     }
     // create parameters for select menu
     let features = [];
-    let themes = new Set;
+    let themes = new Set();
     for (let i = 0; i < project.features.length; ++i) {
       features.push({
         value: project.features[i].id,

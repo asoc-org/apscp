@@ -32,10 +32,10 @@ A \`shiny.tag\` with individual sidebar panes
 
 Other sidebar:
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
-[`close_sidebar()`](https://asoc-org.github.io/apscp/reference/close_sidebar.md),
-[`disable_sidebar()`](https://asoc-org.github.io/apscp/reference/disable_sidebar.md),
-[`enable_sidebar()`](https://asoc-org.github.io/apscp/reference/enable_sidebar.md),
-[`open_sidebar()`](https://asoc-org.github.io/apscp/reference/open_sidebar.md),
+[`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md),
+[`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md),
+[`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md),
+[`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md),
 [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
 
 ## Examples
@@ -49,31 +49,30 @@ library(shiny)
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> ℹ Loading apscp
 #> ! Skipping missing files:
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/aaa.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_config.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_server.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_startup.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/app_ui.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/internal.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Dataset.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Layer.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Cost.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Feature.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Legend.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Lock.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Project.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Provenance.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Solution.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Theme.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/class_Tile.R,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/fct_mapgl.R, …,
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/widget_solver_ui.R, and
-#>   /tmp/RtmpLixpkf/temp_libpath7049a65be4b07/apscp/R/zzz.R
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/aaa.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/app_config.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/app_server.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/app_startup.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/app_ui.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/internal.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Dataset.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Layer.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Cost.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Feature.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Legend.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Lock.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Project.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Provenance.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Solution.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Theme.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/class_Tile.R,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/fct_mapgl.R, …,
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/widget_solver_ui.R, and
+#>   /tmp/Rtmp3u3u9I/temp_libpath79a158fb436a/apscp/R/zzz.R
 #> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.default’ were declared in NAMESPACE but not found
 #> Warning: Objects listed as exports, but not present in namespace:
 #> • Dataset
 #> • add_sidebar_control
-#> • close_sidebar
 #> • color_palette
 #> • create_dataset
 #> • create_legend
@@ -82,8 +81,6 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • create_solution_legend
 #> • create_tile
 #> • deserialize_object
-#> • disable_sidebar
-#> • enable_sidebar
 #> • get_paint_parameters
 #> • has_mapbox_token
 #> • is_relative_path
@@ -98,6 +95,7 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • mapper
 #> • mapperOutput
 #> • mapper_add_solution
+#> • mapper_sync
 #> • new_categorical_legend
 #> • new_continuous_legend
 #> • new_cost
@@ -110,7 +108,6 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • new_solution
 #> • new_theme
 #> • new_tile
-#> • open_sidebar
 #> • prioritization
 #> • read_builtin_project
 #> • read_dataset
@@ -120,6 +117,10 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • renderSolver
 #> • run_app
 #> • serialize_object
+#> • sidebar_close
+#> • sidebar_disable
+#> • sidebar_enable
+#> • sidebar_open
 #> • sidebar_pane
 #> • sidebar_tabs
 #> • simulate_binary_legend

@@ -1,11 +1,11 @@
-# Close sidebar
+# Disable sidebar
 
-Close a sidebar.
+Disable a sidebar.
 
 ## Usage
 
 ``` r
-close_sidebar(id, session = shiny::getDefaultReactiveDomain())
+sidebar_disable(id, pane_id, session = shiny::getDefaultReactiveDomain())
 ```
 
 ## Arguments
@@ -13,6 +13,10 @@ close_sidebar(id, session = shiny::getDefaultReactiveDomain())
 - id:
 
   \`character\` value with identifier for sidebar.
+
+- pane_id:
+
+  \`character\` value with identifier for sidebar pane.
 
 - session:
 
@@ -23,8 +27,8 @@ close_sidebar(id, session = shiny::getDefaultReactiveDomain())
 
 Other sidebar:
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
-[`disable_sidebar()`](https://asoc-org.github.io/apscp/reference/disable_sidebar.md),
-[`enable_sidebar()`](https://asoc-org.github.io/apscp/reference/enable_sidebar.md),
-[`open_sidebar()`](https://asoc-org.github.io/apscp/reference/open_sidebar.md),
+[`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md),
+[`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md),
+[`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md),
 [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md),
 [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)

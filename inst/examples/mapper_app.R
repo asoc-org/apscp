@@ -12,15 +12,15 @@ tile_server_start(sim_data)
 .Last <- function() {tile_server_stop()}
 
 # define user interface for Shiny application
-ui <- fluidPage(
+ui <- bslib::page_fluid(
   tags$head(tags$style(".btn-default {display: block;}")),
   h4("Mapp Demo"),
   splitLayout(
-    cellWidths = c("20%", "80%"),
+    cellWidths = c("380px", "80%"),
     tagList(
       h3("Mapper"),
       htmltools::tags$div(
-        mapperOutput("mapper", height = "100%", width = "300px"),
+        mapperOutput("mapper", height = "100%", width = "100%"),
         style = "height: 500px; overflow-y: auto;"
       ),
       htmltools::tags$br(),
@@ -46,6 +46,15 @@ server <- function(input, output, session) {
   # initialize mapper object
   output$mapper <- renderMapper({
     mapper(map_id = "map", project = sim_data)
+  })
+
+  # define behavior to synchronize components
+  observeEvent(input$mapper_sync, {
+    req(input$mapper_sync)
+    mapper_sync(
+      "mapper", map = mapboxgl_proxy("map"), project = sim_data,
+      data = input$mapper_sync
+    )
   })
 
   # add new solution

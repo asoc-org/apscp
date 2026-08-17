@@ -1,6 +1,8 @@
 /** Import dependencies */
 // node modules
 import {Sortable} from "sortablejs";
+import "tom-select/dist/css/tom-select.bootstrap5.css";
+import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // functions to create elements
 import {createMenuItem} from "./create-menu-item.js";
 // styling
@@ -46,6 +48,12 @@ export class Mapper {
   _menu;
 
   /**
+   * HTML Element that contains the select input.
+   * @type {HTMLElement}
+   */
+  _select;
+
+  /**
   * Initialize Mapper object with menu, map, and project data.
   * @param {string} element - HTML element for navigation menu.
   * @param {string} mapId - HTML element identifier for the mapgl map.
@@ -60,11 +68,11 @@ export class Mapper {
     // initialize fields
     this._maxLayers = maxLayers || 15;
     this._menu = element.querySelector(".mapper-menu");
+    this._select = element.querySelector(".mapper-select");
     this._map = document.getElementById(mapId);
 
     // define temporary variables
     let i, j, el;
-
     // add menu items
     // note that this code assumes that the this._map has been
     // initialized with layers that have the visible property set to true,
@@ -123,6 +131,106 @@ export class Mapper {
         this.moveLayerOnMap(event.item.getAttribute("data-id"), beforeId);
       }
     });
+    // prepare options for select menu
+    let selectOptions = Array(
+      project.features.length +
+      project.costs.length +
+      project.locks.length +
+      project.solutions.length
+    );
+    let groups = new Set();
+    let k = 0;
+    for (i = 0; i < project.features.length; ++i) {
+      // add select option
+      selectOptions[k] = {
+        value: project.features[i].id,
+        name: project.features[i].name,
+        group:
+          project.features[i]
+          .themes
+          .map(y => `Features (${y.zone}: ${y.name})`)
+          .sort(),
+        sort: `1-${project.features[i].name}`
+      };
+      ++k;
+      // add group
+      for (j = 0; j < project.features[i].themes.length; ++j) {
+        groups.add(
+          `Features (${project.features[i].themes[j].zone}: ` +
+          `${project.features[i].themes[j].name})`
+        );
+      }
+    };
+    for (i = 0; i < project.locks.length; ++i) {
+      selectOptions[k] = {
+        value: project.locks[i].id,
+        name: project.locks[i].name,
+        group: "Locks",
+        sort: `2-${project.locks[i].name}`
+      };
+      ++k;
+    };
+    for (i = 0; i < project.costs.length; ++i) {
+      selectOptions[k] = {
+        value: project.costs[i].id,
+        name: project.costs[i].name,
+        group: "Costs",
+        sort: `3-${project.costs[i].name}`
+      };
+      ++k;
+    };
+    for (i = 0; i < project.solutions.length; ++i) {
+      selectOptions[k] = {
+        value: project.solutions[i].id,
+        name: project.solutions[i].name,
+        group: "Solutions",
+        sort: `4-${project.solutions[i].name}`
+      };
+      ++k;
+    };
+    groups.add("Locks");
+    groups.add("Costs");
+    groups.add("Solutions");
+    // initialize select menu
+    new TomSelect(this._select, {
+      options: selectOptions,
+      items: [...this._activeLayerIds],
+      create: false,
+      dropdownParent: "body",
+      labelField: "name",
+      searchField: ["name"],
+      maxOptions: null,
+      // sortField: "sort",
+      closeAfterSelect: false,
+      optgroups: Array.from(groups).map(x => {return {value: x}}),
+      optgroupField: "group",
+      plugins: {
+        checkbox_options: {}
+      },
+      render: {
+        optgroup_header: function(data, escape) {
+          return '<div class="optgroup-header">' +
+            escape(data.value) +
+            '</div>';
+        }
+      },
+      onItemAdd: (value) => {
+        if (this._activeLayerIds.has(value)) {
+          this.showLayerOnMenu(value);
+        } else {
+          if (HTMLWidgets.shinyMode) {
+            Shiny.setInputValue(
+              `${element.id}_sync`,
+              value,
+              {priority: "event"}
+            );
+          }
+        }
+      },
+      onItemRemove: (value) => {
+        this.hideLayerOnMenu(value, true, false);
+      }
+    });
   }
 
   /**
@@ -152,9 +260,11 @@ export class Mapper {
   * @param {string} layerId - HTML identifier for layer.
   * @param {boolean} updateMap - Should the map also be updated to reflect
   * these changes to the menu?
+  * @param {boolean} updateSelect - Should the select also be updated to reflect
+  * these changes to the menu?
   * @return {void}
   */
-  hideLayerOnMenu(layerId, updateMap = true) {
+  hideLayerOnMenu(layerId, updateMap = true, updateSelect = true) {
     // find element for layer's menu item
     let el = this._menu.querySelector(`[data-id="${layerId}"]`);
     // update menu
@@ -167,6 +277,12 @@ export class Mapper {
     // if needed, update map
     if (updateMap === true) {
       this.hideLayerOnMap(layerId);
+    }
+    // if needed, update select
+    if (updateSelect === true) {
+      this._select.tomselect.setValue(
+        this._select.tomselect.items.filter(x => x !== layerId)
+      );
     }
   }
 

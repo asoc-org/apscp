@@ -74,6 +74,7 @@ runApp(system.file("examples", "solver_app.R", package = "apscp"))
 }
 \seealso{
 Other solver:
+\code{\link[=mapper_sync]{mapper_sync()}},
 \code{\link{solver-shiny}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},
 \code{\link[=solver_reset]{solver_reset()}},

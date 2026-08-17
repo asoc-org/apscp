@@ -22,6 +22,7 @@ disabling the stop button.
 }
 \seealso{
 Other solver:
+\code{\link[=mapper_sync]{mapper_sync()}},
 \code{\link[=solver]{solver()}},
 \code{\link{solver-shiny}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},

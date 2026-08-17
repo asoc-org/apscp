@@ -12,8 +12,9 @@
   --inactive: #B8B8B8;
   --border: black;
   --symbol-border: #D3D3D3;
+  --fill-background: #D3D3D3;
   --ghost: #C8EBFB;
-  padding-right: 3px;
+  margin: 5px;
 }
 
 /* cursor styling */
@@ -27,16 +28,35 @@
   opacity: 0.2;
 }
 
+/* Select input
+   ========================================================================== */
+
+.mapper .mapper-select {
+  margin-bottom: 3px
+}
+
+/* hide selected options */
+.mapper .mapper-select .ts-control .item {
+  display: none;
+}
+
+/* Menu
+   ========================================================================== */
+.mapper .mapper-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 /* Menu item
    ========================================================================== */
 
 /* menu item containers */
 .mapper .mapper-menu-item  {
-  width: 90%;
+  width: 100%;
+  background-color: white;
   border: 1px var(--border) solid;
   border-radius: 5px 5px 5px 5px;
-  margin-bottom: 8px;
-  margin-left: 17px;
 }
 
 /* header */

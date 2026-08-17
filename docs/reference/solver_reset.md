@@ -28,6 +28,7 @@ disabling the stop button.
 ## See also
 
 Other solver:
+[`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md),
 [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md),
 [`solver-shiny`](https://asoc-org.github.io/apscp/reference/solver-shiny.md),
 [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md),

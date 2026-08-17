@@ -182,6 +182,8 @@ read_builtin_project <- function() {
 
 #' Map project
 #'
+#' Create a map to display the project.
+#'
 #' @param x [new_project()] object.
 #'
 #' @param ... arguments passed to [mapgl::mapboxgl()].
@@ -258,4 +260,40 @@ map_project <- function(x, ...) {
 
   # return object
   m
+}
+
+#' Get project element
+#'
+#' Get a [new_feature()], [new_cost()], [new_lock()], or [new_solution()]
+#' object from a project.
+#'
+#' @return An object.
+#'
+#' @noRd
+get_project_element <- function(project, id) {
+  # assert valid object
+  assertthat::assert_that(
+    inherits(project, "Project"),
+    assertthat::is.string(id),
+    assertthat::noNA(id)
+  )
+  # search for object
+  i <- which(vapply(project$features, `[[`, character(1), "id") == id)
+  if (identical(length(i), 1L)) {
+    return(project$features[[i]])
+  }
+  i <- which(vapply(project$costs, `[[`, character(1), "id") == id)
+  if (identical(length(i), 1L)) {
+    return(project$costs[[i]])
+  }
+  i <- which(vapply(project$locks, `[[`, character(1), "id") == id)
+  if (identical(length(i), 1L)) {
+    return(project$locks[[i]])
+  }
+  i <- which(vapply(project$solutions, `[[`, character(1), "id") == id)
+  if (identical(length(i), 1L)) {
+    return(project$solutions[[i]])
+  }
+  # if couldn't find element, then return error
+  cli::cli_abort(paste0("Couldn't find element `", id, "` in project."))
 }

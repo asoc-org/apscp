@@ -182,7 +182,7 @@ simulate_project <- function() {
       dataset = dataset,
       tile = tile,
       column = "camps",
-      visible = TRUE,
+      visible = FALSE,
       legend = create_legend(
         d, "camps",
         palette = "Reds",
