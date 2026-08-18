@@ -1,0 +1,10 @@
+/* ==========================================================================
+   Control style
+   ========================================================================== */
+
+/* overall container */
+.solver .solver-control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}

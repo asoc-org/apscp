@@ -4,10 +4,11 @@ import Sortable from "sortablejs/modular/sortable.core.esm.js";
 // classes to create components
 import {LockSetting} from "./lock-setting-class.js";
 // styling
-import "./css/settings.css";
+import "./css/solver-control.css";
+import "./css/solver-settings.css";
 
-/** Class representing the settings for multiple locks. */
-export class LockSettings {
+/** Class representing the control for multiple locks. */
+export class LockControl {
 
   // private fields
 
@@ -54,12 +55,18 @@ export class LockSettings {
   appendTo(element, id) {
     // create container
     let el = document.createElement("el");
-    el.classList.add("lock-settings", "settings");
-    element.appendChild(el);
+    el.classList.add("lock-control", "solver-control");
+    // create settings element
+    let menuElement = document.createElement("el");
+    menuElement.classList.add(
+      "lock-settings", "solver-settings", "well", "well-sm"
+    );
     // append elements for lock settings
-    this._settings.forEach(x => x.appendTo(el));
+    this._settings.forEach(x => x.appendTo(menuElement));
+    el.appendChild(menuElement);
+    element.appendChild(el);
     // initialize sortable class on lock settings
-    Sortable.create(el, {
+    Sortable.create(menuElement, {
       handle: ".handle",
       animation: 150,
       dataIdAttr: "data-zone",

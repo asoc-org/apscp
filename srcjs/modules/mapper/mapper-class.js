@@ -4,7 +4,8 @@ import {Sortable} from "sortablejs";
 import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // functions to create elements
-import {createMenuItem} from "./create-menu-item.js";
+import {createMenuItem} from "./mapper-scaffold.js";
+import {layerSelectOption} from "./layer-select-option.js";
 // styling
 import "./css/style.css";
 
@@ -16,14 +17,14 @@ export class Mapper {
   /**
    * Map of layers that are hidden on menu. Note that these layers
    * are active and have been added to the map, but are not shown on the menu.
-   * @type {WeakMap<object>}
+   * @type {Map<object>}
    */
   _hiddenLayers = new Map();
 
   /**
    * Set that contains identifiers for the layers that are active and have been
    * added to the map. Note that this includes hidden layers.
-   * @type {WeakSet<string>}
+   * @type {Set<string>}
    */
   _activeLayerIds = new Set();
 
@@ -72,7 +73,7 @@ export class Mapper {
     this._map = document.getElementById(mapId);
 
     // define temporary variables
-    let i, j, el;
+    let i, j, el, k;
     // add menu items
     // note that this code assumes that the this._map has been
     // initialized with layers that have the visible property set to true,
@@ -84,36 +85,36 @@ export class Mapper {
       );
       if (project.features[i].layer.visible === true) {
         this._menu.appendChild(el);
-        this._activeLayerIds.add(el.id);
+        this._activeLayerIds.add(el.dataset.id);
       } else {
-        this._hiddenLayers.set(el.id, el);
+        this._hiddenLayers.set(el.dataset.id, el);
       }
     }
     for (i = 0; i < project.costs.length; i++) {
       el = createMenuItem(project.costs[i], this);
       if (project.costs[i].layer.visible === true) {
         this._menu.appendChild(el);
-        this._activeLayerIds.add(el.id);
+        this._activeLayerIds.add(el.dataset.id);
       } else {
-        this._hiddenLayers.set(el.id, el);
+        this._hiddenLayers.set(el.dataset.id, el);
       }
     }
     for (i = 0; i < project.locks.length; i++) {
       el = createMenuItem(project.locks[i], this);
       if (project.locks[i].layer.visible === true) {
         this._menu.appendChild(el);
-        this._activeLayerIds.add(el.id);
+        this._activeLayerIds.add(el.dataset.id);
       } else {
-        this._hiddenLayers.set(el.id, el);
+        this._hiddenLayers.set(el.dataset.id, el);
       }
     }
     for (i = 0; i < project.solutions.length; i++) {
       el = createMenuItem(project.solutions[i], this);
       if (project.solutions[i].layer.visible === true) {
         this._menu.appendChild(el);
-        this._activeLayerIds.add(project.solutions[i].id);
+        this._activeLayerIds.add(el.dataset.id);
       } else {
-        this._hiddenLayers.set(el.id, el);
+        this._hiddenLayers.set(el.dataset.id, el);
       }
     }
     // enable sorting in menu
@@ -139,53 +140,24 @@ export class Mapper {
       project.solutions.length
     );
     let groups = new Set();
-    let k = 0;
+    k = 0;
     for (i = 0; i < project.features.length; ++i) {
-      // add select option
-      selectOptions[k] = {
-        value: project.features[i].id,
-        name: project.features[i].name,
-        group:
-          project.features[i]
-          .themes
-          .map(y => `Features (${y.zone}: ${y.name})`)
-          .sort(),
-        sort: `1-${project.features[i].name}`
-      };
-      ++k;
-      // add group
-      for (j = 0; j < project.features[i].themes.length; ++j) {
-        groups.add(
-          `Features (${project.features[i].themes[j].zone}: ` +
-          `${project.features[i].themes[j].name})`
-        );
+      selectOptions[k] = layerSelectOption(project.features[i]);
+      for (j = 0; j < selectOptions[k].group.length; ++j) {
+        groups.add(selectOptions[k].group[i]);
       }
+      ++k;
     };
     for (i = 0; i < project.locks.length; ++i) {
-      selectOptions[k] = {
-        value: project.locks[i].id,
-        name: project.locks[i].name,
-        group: "Locks",
-        sort: `2-${project.locks[i].name}`
-      };
+      selectOptions[k] = layerSelectOption(project.locks[i]);
       ++k;
     };
     for (i = 0; i < project.costs.length; ++i) {
-      selectOptions[k] = {
-        value: project.costs[i].id,
-        name: project.costs[i].name,
-        group: "Costs",
-        sort: `3-${project.costs[i].name}`
-      };
+      selectOptions[k] = layerSelectOption(project.costs[i]);
       ++k;
     };
     for (i = 0; i < project.solutions.length; ++i) {
-      selectOptions[k] = {
-        value: project.solutions[i].id,
-        name: project.solutions[i].name,
-        group: "Solutions",
-        sort: `4-${project.solutions[i].name}`
-      };
+      selectOptions[k] = layerSelectOption(project.solutions[i]);
       ++k;
     };
     groups.add("Locks");
@@ -217,6 +189,7 @@ export class Mapper {
       onItemAdd: (value) => {
         if (this._activeLayerIds.has(value)) {
           this.showLayerOnMenu(value);
+          this.moveLayerOnMap(value);
         } else {
           if (HTMLWidgets.shinyMode) {
             Shiny.setInputValue(
@@ -228,7 +201,7 @@ export class Mapper {
         }
       },
       onItemRemove: (value) => {
-        this.hideLayerOnMenu(value, true, false);
+        this.hideLayerOnMenu(value, true);
       }
     });
   }
@@ -242,15 +215,19 @@ export class Mapper {
   */
   addLayer(layer) {
     // create menu item
-    let el = createMenuItem(layer, this)
+    let el = createMenuItem(layer, this);
     // add menu item to hidden menu items
-    this._hiddenLayers.set(el.id, el);
-    // add to active layers
-    this._activeLayerIds.add(layer.id);
+    this._hiddenLayers.set(el.dataset.id, el);
+    // set layer as active
+    this._activeLayerIds.add(el.dataset.id);
+    // add layer to menu
+    this.showLayerOnMenu(el.dataset.id, true, false);
+    // add menu item to select
+    this._select.tomselect.addOption(layerSelectOption(layer));
+    this._select.tomselect.addItem(layer.id, true);
     // if number of active layers exceeds limit, then remove oldest layer
-    if (this._activeLayerIds.size > this.maxLayers) {
-      let removeId = this._activeLayerIds.values().next().value();
-      this.hideLayerFromMenu(removeId);
+    if (this._activeLayerIds.size > this._maxLayers) {
+      let removeId = this._activeLayerIds.values().next().value;
       this.removeLayerFromMap(removeId);
     }
   }
@@ -260,11 +237,9 @@ export class Mapper {
   * @param {string} layerId - HTML identifier for layer.
   * @param {boolean} updateMap - Should the map also be updated to reflect
   * these changes to the menu?
-  * @param {boolean} updateSelect - Should the select also be updated to reflect
-  * these changes to the menu?
   * @return {void}
   */
-  hideLayerOnMenu(layerId, updateMap = true, updateSelect = true) {
+  hideLayerOnMenu(layerId, updateMap = true) {
     // find element for layer's menu item
     let el = this._menu.querySelector(`[data-id="${layerId}"]`);
     // update menu
@@ -272,17 +247,11 @@ export class Mapper {
       // remove element from menu
       el.remove();
       // add menu item to hidden menu items
-      this._hiddenLayers.set(el.id, el);
+      this._hiddenLayers.set(el.dataset.id, el);
     }
     // if needed, update map
     if (updateMap === true) {
       this.hideLayerOnMap(layerId);
-    }
-    // if needed, update select
-    if (updateSelect === true) {
-      this._select.tomselect.setValue(
-        this._select.tomselect.items.filter(x => x !== layerId)
-      );
     }
   }
 
@@ -290,15 +259,11 @@ export class Mapper {
   * Show layer on menu.
   * @param {string} layerId - HTML identifier for layer.
   * @param {boolean} showLegend - Should the legend be shown on the menu?
-  * @param {boolean} endPosition - Should the layer be added to the
-  * beginning or the end of the menu?
   * @param {boolean} updateMap - Should the map also be updated to reflect
   * these changes to the menu?
   * @return {void}
   */
-  showLayerOnMenu(
-    layerId, showLegend = true, endPosition = true, updateMap = true
-  ) {
+  showLayerOnMenu(layerId, showLegend = true, updateMap = true) {
     // find element for layer's menu item
     let el = this._hiddenLayers.get(layerId);
     // find menu item checkbox for showing map and set accordingly
@@ -310,15 +275,11 @@ export class Mapper {
       legendCheckbox.checked = true;
     }
     // if needed, show layer on map
-    if (updateMap === true ) {
+    if (updateMap === true) {
       this.showLayerOnMap(layerId);
     }
     // add layer to menu
-    if (endPosition === true) {
-      this._menu.appendChild(el);
-    } else {
-      this._menu.prepend(el);
-    }
+    this._menu.prepend(el);
   }
 
   /**
@@ -335,14 +296,25 @@ export class Mapper {
 
   /**
   * Hide layer on map.
-  * @param {string} layerId - HTML identifier for layer.
+  * @param {string} layerId - HTML identifier for layer.;
+  * @param {boolean} updateCheckbox - Should the checkbox on the menu
+  * be updated to show the layer is hidden on map?
   * @return {void}
   */
-  hideLayerOnMap(layerId) {
+  hideLayerOnMap(layerId, updateCheckbox = true) {
     // set layer visibility on map
     this._map.map.setLayoutProperty(
       "lyr-" + layerId, "visibility", "none"
     );
+    // set checkbox to be unchecked
+    if (updateCheckbox === true) {
+      let el = this._menu.querySelector(
+        `[data-id="${layerId}"] .layer-checkbox`
+      );
+      if (el) {
+        el.checked = false
+      }
+    }
   }
 
   /**
@@ -370,7 +342,7 @@ export class Mapper {
   */
   removeLayerFromMap(layerId) {
     // remove layer from menu
-    this.hideLayerFromMenu(layerId);
+    this._select.tomselect.removeItem(layerId);
     // remove layer from set of active layers
     this._activeLayerIds.delete(layerId);
     // remove layer from map

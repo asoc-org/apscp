@@ -36,9 +36,7 @@ HTMLWidgets.widget({
         // add layer to mapper
         handle.addLayer(params.value);
         // since R code is used to update the map, so updateMap = false
-        handle.showLayerOnMenu(
-          params.value.id, true, params.endPosition, false
-        );
+        handle.showLayerOnMenu(params.value.id, true, false);
       },
 
     };

@@ -117,25 +117,27 @@ simulate_project <- function() {
   )
 
   # create cost
-  cost <- new_cost(
-    name = "Tourism revenue",
-    weight = sample(
-      seq(
-        from = get_golem_config("prioritization_cost_weights")[1],
-        to = get_golem_config("prioritization_cost_weights")[2],
-        by = get_golem_config("prioritization_cost_weights")[3]
+  costs <- list(
+    new_cost(
+      name = paste0("Tourism revenue"),
+      weight = sample(
+        seq(
+          from = get_golem_config("prioritization_cost_weights")[1],
+          to = get_golem_config("prioritization_cost_weights")[2],
+          by = get_golem_config("prioritization_cost_weights")[3]
+        ),
+        1L
       ),
-      1L
-    ),
-    zone = "Tourism",
-    layer = new_layer(
-      dataset = dataset,
-      tile = tile,
-      column = "cost",
-      visible = TRUE,
-      legend = create_legend(d, "cost", units = "USD"),
-      provenance = provenance,
-      total = dataset$get_column_total("cost")
+      zone = "Tourism",
+      layer = new_layer(
+        dataset = dataset,
+        tile = tile,
+        column = "cost",
+        visible = TRUE,
+        legend = create_legend(d, "cost", units = "USD"),
+        provenance = provenance,
+        total = dataset$get_column_total("cost")
+      )
     )
   )
 
@@ -250,7 +252,7 @@ simulate_project <- function() {
     zones = c("Biodiversity", "Tourism", "Scientific"),
     dataset = dataset,
     tiles = list(tile),
-    costs = list(cost),
+    costs = costs,
     locks = list(lock1, lock2),
     features = features,
     solutions = list(solution)
@@ -412,18 +414,11 @@ simulate_prioritization_settings <- function(project) {
     })
   )
 
-  # create reference point settings
-  zone_settings <- data.frame(
-    zone = project$zones,
-    weight = rep(1, length(project$zones))
-  )
-
   # return result
   list(
     features = feature_settings,
     locks = lock_settings,
-    costs = cost_settings,
-    zones = zone_settings
+    costs = cost_settings
   )
 }
 

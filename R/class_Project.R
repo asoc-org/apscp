@@ -242,7 +242,7 @@ Project <- R6::R6Class(
       # assert arguments are valid
       assertthat::assert_that(inherits(x, "Solution"))
       # add solution to project
-      self$solutions[[length(self$solutions)]] <- x
+      self$solutions[[length(self$solutions) + 1]] <- x
       # add tile
       self$add_tile(x$layer$tile)
       # return TRUE

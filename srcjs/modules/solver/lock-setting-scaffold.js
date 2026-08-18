@@ -14,7 +14,7 @@ import {createSwitches} from "../utils/element.js";
 export function scaffoldLockSetting(zone, locks, priority) {
   // create container
   let el = document.createElement("div");
-  el.classList.add("lock-setting", "setting");
+  el.classList.add("lock-setting", "solver-setting");
   el.style.backgroundColor = `var(--zone-${zone}-secondary)`;
   // set data zone attribute
   el.setAttribute("data-zone", zone);

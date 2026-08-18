@@ -7,7 +7,7 @@ import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 import {scaffoldLockSetting} from "./lock-setting-scaffold.js";
 import {createProvenance} from "../utils/element.js";
 // styling
-import "./css/setting.css"
+import "./css/solver-setting.css"
 import "./css/lock-setting.css"
 
 /** Class representing the setting for a single lock. */

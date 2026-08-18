@@ -6,11 +6,12 @@ import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // classes to create components
 import {FeatureSetting} from "./feature-setting-class.js";
 // styling
-import "./css/feature-settings.css";
-import "./css/settings.css";
+import "./css/solver-control.css";
+import "./css/solver-settings.css";
+import "./css/feature-control.css";
 
-/** Class representing the settings for multiple features. */
-export class FeatureSettings {
+/** Class representing the control for multiple features. */
+export class FeatureControl {
 
   // private fields
 
@@ -83,10 +84,12 @@ export class FeatureSettings {
   appendTo(element) {
     // create container
     let el = document.createElement("div");
-    el.classList.add("feature-settings", "settings");
+    el.classList.add("feature-control", "solver-control");
     // create menu element
     let menuElement = document.createElement("div");
-    menuElement.classList.add("feature-menu");
+    menuElement.classList.add(
+      "feature-settings", "solver-settings", "well", "well-sm"
+    );
     // create feature setting objects and add them to the menu
     this._settings.forEach(x => x.appendTo(menuElement));
     // create select menu

@@ -10,8 +10,9 @@ import {createProvenance} from "../utils/element.js";
 import {createSwitches} from "../utils/element.js";
 import {addTooltip} from "../utils/element.js";
 // styling
-import "./css/setting.css";
+import "./css/solver-setting.css";
 import "./css/feature-setting.css";
+import "./css/nouislider.css";
 // utility functions
 import {order} from "../utils/math.js";
 import {convertTargetsToSliderValues} from "../utils/math.js";

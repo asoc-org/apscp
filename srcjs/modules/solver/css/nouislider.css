@@ -1,0 +1,39 @@
+/* ==========================================================================
+   noUiSlider styles
+   ========================================================================== */
+
+/* Main container
+   ========================================================================== */
+
+.solver .noUi-target {
+  width: 100%;
+  z-index: 2;
+}
+
+.solver .noUi-connect {
+  background: var(--slider-primary);
+}
+
+.solver .noUi-horizontal {
+  height: 10px;
+}
+
+/* Handle
+   ========================================================================== */
+
+.solver .noUi-horizontal .noUi-handle {
+  box-shadow: 0 3px 6px -3px #BBB;
+  width: 14px;
+  height: 20px;
+  right: -7px;
+}
+
+.solver .noUi-handle:before,
+.solver .noUi-handle:after {
+  height: 6px;
+  left: 4px;
+}
+
+.solver .noUi-handle:after {
+  left: 7px;
+}

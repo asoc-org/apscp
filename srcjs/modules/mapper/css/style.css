@@ -2,10 +2,8 @@
    Mapper style
    ========================================================================== */
 
-/* Main container    ========================================================================== */
-
-/* overall widget */
-.mapper .mapper-container {
+/* define CSS variables */
+.mapper {
   --active: #073b4c;
   --icon: #0d1321;
   --sub-icon: #0d1321;
@@ -14,7 +12,17 @@
   --symbol-border: #D3D3D3;
   --fill-background: #D3D3D3;
   --ghost: #C8EBFB;
+  --max-height: 100vh;
+  --space-sm: 5px;
+}
+
+/* Main container    ========================================================================== */
+
+/* overall widget */
+.mapper .mapper-container {
   margin: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 /* cursor styling */
@@ -28,11 +36,17 @@
   opacity: 0.2;
 }
 
+/* Override Bootstrap styles ========================================================================== */
+
+.mapper .well-sm {
+  padding: var(--space-sm);
+}
+
 /* Select input
    ========================================================================== */
 
 .mapper .mapper-select {
-  margin-bottom: 3px
+  margin-bottom: var(--space-sm);
 }
 
 /* hide selected options */
@@ -43,9 +57,13 @@
 /* Menu
    ========================================================================== */
 .mapper .mapper-menu {
+  height: calc(var(--max-height) - 250px);
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--space-sm);
+  overflow-y: auto;
+  scrollbar-gutter: stable;
+  box-shadow: inset 0 0 2px 0.5px rgba(0, 0, 0, 0.06);
 }
 
 /* Menu item
@@ -56,17 +74,16 @@
   width: 100%;
   background-color: white;
   border: 1px var(--border) solid;
-  border-radius: 5px 5px 5px 5px;
+  border-radius: var(--space-sm);
+  padding: 0 var(--space-sm) 0 var(--space-sm);
 }
 
 /* header */
 .mapper .mapper-menu-item .header {
   display: flex;
   align-items: flex-start;
-  gap: 3px;
-  font-size: 14px;
-  padding-top: 5px;
-  padding-left: 5px;
+  gap: var(--space-sm);
+  font-size: 16px;
   padding-bottom: 0px;
   margin-bottom: 0px;
 }

@@ -15,12 +15,11 @@ sim_data$features[[3]]$zone_helds <- c(0, 0, 1)
 ui <- bslib::page_fluid(
   h4("Mapp Demo"),
   splitLayout(
-    cellWidths = c("380px", "80%"),
+    cellWidths = c("395px", "80%"),
     tagList(
       h3("Solver"),
       htmltools::tags$div(
-        solverOutput("solver", height = "100%", width = "100%"),
-        style = "height: 800px; width:overflow-y: auto;"
+        solverOutput("solver", height = "100%", width = "100%")
       )
     ),
     tagList(

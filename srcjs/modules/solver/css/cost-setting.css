@@ -32,34 +32,3 @@
   position: relative;
   margin-right: 8px;
 }
-
-/* noUiSlider */
-.cost-setting .noUi-target {
-  width: 100%;
-  z-index: 2;
-}
-
-.cost-setting .noUi-connect {
-  background: var(--slider-primary);
-}
-
-.cost-setting .noUi-horizontal {
-  height: 10px;
-}
-
-.cost-setting .noUi-horizontal .noUi-handle {
-  box-shadow: 0 3px 6px -3px #BBB;
-  width: 14px;
-  height: 20px;
-  right: -7px;
-}
-
-.cost-setting .noUi-handle:before,
-.cost-setting .noUi-handle:after {
-  height: 6px;
-  left: 4px;
-}
-
-.cost-setting .cost-body .noUi-handle:after {
-  left: 7px;
-}

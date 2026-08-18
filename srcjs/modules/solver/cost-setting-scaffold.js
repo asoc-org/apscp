@@ -18,7 +18,7 @@ import {addTooltip} from "../utils/element.js";
 export function scaffoldCostSetting(cost, zones, costWeightChoices) {
   // create element
   let el = document.createElement("div");
-  el.classList.add("cost-setting", "setting");
+  el.classList.add("cost-setting", "solver-setting");
   // set data id attribute for feature id
   el.setAttribute("data-id", cost.id);
   // create feature setting header

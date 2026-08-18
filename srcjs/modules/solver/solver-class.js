@@ -1,8 +1,8 @@
 /** Import dependencies */
 // classes to create components
-import {FeatureSettings} from "./feature-settings-class.js";
-import {LockSettings} from "./lock-settings-class.js";
-import {CostSettings} from "./cost-settings-class.js";
+import {FeatureControl} from "./feature-control-class.js";
+import {LockControl} from "./lock-control-class.js";
+import {CostControl} from "./cost-control-class.js";
 // styling
 import "./css/style.css";
 
@@ -34,28 +34,28 @@ export class Solver {
   _nameInput;
 
   /**
-   * Objective settings object.
+   * Objective control object.
    * @type {Object}
    */
-  _objectiveSettings;
+  _objectiveControl;
 
   /**
-   * Feature settings object.
+   * Feature control object.
    * @type {Object}
    */
-  _featureSettings;
+  _featureControl;
 
   /**
-   * Lock settings object.
+   * Lock control object.
    * @type {Object}
    */
-  _lockSettings;
+  _lockControl;
 
   /**
-   * Cost settings object.
+   * Cost control object.
    * @type {Object}
    */
-  _costSettings;
+  _costControl;
 
   /**
   * Construct a new Solver object.
@@ -100,25 +100,25 @@ export class Solver {
     }
 
     // initialize objective settings
-    // this._objectiveSettings = new ObjectiveSettings(project);
-    // this._objectiveSettings.appendTo(element.querySelector(".features-panel"));
+    // this._objectiveControl = new ObjectiveControl(project);
+    // this._objectiveControl.appendTo(element.querySelector(".features-panel"));
 
     // initialize feature settings
-    this._featureSettings = new FeatureSettings(
+    this._featureControl = new FeatureControl(
       project, featureTargetChoices, featureWeightChoices
     );
-    this._featureSettings.appendTo(element.querySelector(".features-panel"));
+    this._featureControl.appendTo(element.querySelector(".features-panel"));
 
     // initialize lock settings
-    this._lockSettings = new LockSettings(project)
-    this._lockSettings.appendTo(
+    this._lockControl = new LockControl(project)
+    this._lockControl.appendTo(
       element.querySelector(".locks-panel"),
       element.id
     );
 
     // initialize cost settings
-    this._costSettings = new CostSettings(project, costWeightChoices);
-    this._costSettings.appendTo(element.querySelector(".costs-panel"));
+    this._costControl = new CostControl(project, costWeightChoices);
+    this._costControl.appendTo(element.querySelector(".costs-panel"));
 
     // initialize footer
     this._startButton = element.querySelector(`#${element.id}_start_button`);
@@ -141,7 +141,7 @@ export class Solver {
       if (HTMLWidgets.shinyMode) {
         Shiny.setInputValue(
           `${element.id}_settings:apscp.JsDataFrameList`,
-          this.getSettings(),
+          this.getControl(),
           {priority: "event"}
         );
       }
@@ -181,20 +181,18 @@ export class Solver {
   * @return {void}
   */
   sync(data) {
-    this._featureSettings.sync(data);
+    this._featureControl.sync(data);
   }
 
   /**
   * Get settings for generating a solution.
   * @return {Object}
   */
-  getSettings() {
+  getControl() {
     return {
-      objectives: {id: 1, zone: "PLACEHOLDER"},
-      // objectives: this._objectiveSettings.getSettings(),
-      features: this._featureSettings.getSettings(),
-      locks: this._lockSettings.getSettings(),
-      costs: this._costSettings.getSettings()
+      features: this._featureControl.getSettings(),
+      locks: this._lockControl.getSettings(),
+      costs: this._costControl.getSettings()
     };
   }
 

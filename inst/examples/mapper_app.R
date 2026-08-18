@@ -7,6 +7,8 @@ library(mapgl)
 # simulate project data
 sim_data <- simulate_project()
 
+print(sim_data$solutions[[1]]$id)
+
 # start tile server
 tile_server_start(sim_data)
 .Last <- function() {tile_server_stop()}
@@ -16,19 +18,18 @@ ui <- bslib::page_fluid(
   tags$head(tags$style(".btn-default {display: block;}")),
   h4("Mapp Demo"),
   splitLayout(
-    cellWidths = c("380px", "80%"),
+    cellWidths = c("395px", "80%"),
     tagList(
       h3("Mapper"),
       htmltools::tags$div(
-        mapperOutput("mapper", height = "100%", width = "100%"),
-        style = "height: 500px; overflow-y: auto;"
-      ),
-      htmltools::tags$br(),
-      htmltools::tags$br(),
-      htmltools::tags$br(),
-      actionButton("new_solution", "Add new random solution"),
+        mapperOutput("mapper", height = "100%", width = "100%")
+      )
     ),
-    mapboxglOutput("map" , height = "700px")
+    tagList(
+      actionButton("new_solution", "Add new random solution"),
+      htmltools::tags$br(),
+      mapboxglOutput("map" , height = "700px")
+    )
   )
 )
 

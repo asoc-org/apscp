@@ -35,8 +35,7 @@ export function createMenuItem(x, mapper, themes = undefined) {
   let handleElement = el.querySelector(".handle");
 
   // set layer id
-  el.id = x.id;
-  el.setAttribute("data-id", el.id);
+  el.setAttribute("data-id", x.id);
 
   // create name label
   nameElement.appendChild(createNameLabel(x));
@@ -67,14 +66,13 @@ export function createMenuItem(x, mapper, themes = undefined) {
     if (this.checked) {
       mapper.showLayerOnMap(x.id);
     } else {
-      mapper.hideLayerOnMap(x.id);
+      mapper.hideLayerOnMap(x.id, false);
     }
   });
 
   // set listener for button to drop layer
   removeLayerFromMapButton.addEventListener("click", function () {
-    mapper.hideLayerOnMap(x.id);
-    mapper.hideLayerOnMenu(x.id);
+    mapper._select.tomselect.removeItem(x.id);
   });
 
   // return element

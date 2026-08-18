@@ -116,12 +116,6 @@ prioritization <- function(
       settings$costs,
       c("id", "name", "zone", "weight")
     ),
-    ## zones settings
-    is.data.frame(settings$zones),
-    assertthat::has_name(
-      settings$zones,
-      c("zone", "weight")
-    ),
     ## gap
     assertthat::is.number(gap),
     ## verbose

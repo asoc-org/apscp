@@ -26,20 +26,6 @@ solver_html <- function(id, style, class, ...) {
       bslib::navset_tab(
         id = paste0(id, "-settings-tabset"),
         selected = "features-panel",
-        # define panel for multi-objective settings
-        bslib::nav_panel(
-          id = paste0(id, "-objectives-panel"),
-          value = "objectives-panel",
-          class = "objectives-panel",
-          title = htmltools::tags$div(
-            `data-toggle` = "tooltip",
-            `data-placement` = "top",
-            `data-container` = "body",
-            `data-trigger` = "hover",
-            title = "Settings for objectives",
-            fontawesome::fa_i("scale-balanced")
-          )
-        ),
         # define panel for features settings
         bslib::nav_panel(
           id = paste0(id, "-features-panel"),

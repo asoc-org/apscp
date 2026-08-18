@@ -5,7 +5,8 @@ import HoverSelect from "../hoverselect/hoverselect.js";
 // functions to create elements
 import {scaffoldCostSetting} from "./cost-setting-scaffold.js";
 // styling
-import "./css/setting.css";
+import "./css/nouislider.css";
+import "./css/solver-setting.css";
 import "./css/cost-setting.css";
 
 /** Class representing the setting for a single cost. */

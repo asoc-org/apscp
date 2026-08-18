@@ -26,7 +26,7 @@ export function scaffoldFeatureSetting(
 ) {
   // create element
   let el = document.createElement("div");
-  el.classList.add("feature-setting", "setting", "hidden-setting");
+  el.classList.add("feature-setting", "solver-setting", "hidden-setting");
   // set data id attribute for feature id
   el.setAttribute("data-id", feature.id);
   // create feature setting header

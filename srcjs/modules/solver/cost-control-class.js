@@ -2,10 +2,11 @@
 // classes to create components
 import {CostSetting} from "./cost-setting-class.js";
 // styling
-import "./css/settings.css";
+import "./css/solver-control.css";
+import "./css/solver-settings.css";
 
-/** Class representing the settings for multiple cost. */
-export class CostSettings {
+/** Class representing the control for multiple costs. */
+export class CostControl {
 
   // private fields
 
@@ -40,10 +41,12 @@ export class CostSettings {
   appendTo(element) {
     // create container
     let el = document.createElement("el");
-    el.classList.add("cost-settings", "settings");
+    el.classList.add("cost-control", "solver-control");
     // create menu element
     let menuElement = document.createElement("div");
-    menuElement.classList.add("cost-menu");
+    menuElement.classList.add(
+      "cost-settings", "solver-settings", "well", "well-sm"
+    );
     // create cost objects and add them to the menu
     for (let i = 0; i < this._settings.length; ++i) {
       this._settings[i].appendTo(menuElement);

@@ -2,10 +2,8 @@
    Solver style
    ========================================================================== */
 
-/* Main container style
-   ========================================================================== */
-
-.solver .solver-container {
+/* define CSS variables */
+.solver {
   --icon: #0d1321;
   --disabled: #B8B8B8;
   --border: #0d1321;
@@ -14,21 +12,30 @@
   --slider-primary: #073b4c;
   --switch-primary: #073b4c;
   --switch-secondary: color-mix(in srgb, var(--switch-primary), white 30%) !important;
+  --space-sm: 5px;
+  --max-height: 100vh;
+}
+
+
+/* Main container
+   ========================================================================== */
+
+.solver .solver-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
 }
 
-.solver .solver-container .tab-pane{
-  margin-left: 3px;
-  margin-left: 3px;
+/* Override Bootstrap styles ========================================================================== */
+
+.solver .tab-pane {
+  margin: var(--space-sm) var(--space-sm) 0 var(--space-sm);
 }
 
-.solver .solver-container button:disabled {
-  cursor: not-allowed;
+.solver .well-sm {
+  padding: var(--space-sm);
 }
 
-/* Footer style
+/* Footer
    ========================================================================== */
 
 /* footer container */
@@ -37,8 +44,8 @@
   flex-direction: row;
   align-items: center;
   left: 20px;
-  gap: 3px;
-  margin: auto 3px 3px 3px;
+  gap: var(--space-sm);
+  margin: var(--space-sm);
 }
 
 /* footer name text input */
@@ -67,4 +74,11 @@
   padding-right: 6px;
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
+}
+
+/* Disabled elements
+   ========================================================================== */
+
+.solver button:disabled {
+  cursor: not-allowed;
 }

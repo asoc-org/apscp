@@ -7,7 +7,7 @@ import "./css/continuous-legend.css";
 
 /**
  * Create a categorical legend.
- * @param {Object} x - Object with items to display in legend.
+ * @param {object} x - Object with items to display in legend.
  * @param {Array<number>} x.values - Set of values denoting the numeric
  * values for each legend item. Note that these values are not shown
  * in the legend.
@@ -65,7 +65,7 @@ export function createCategoricalLegend(x) {
 
 /**
  * Create a continuous legend.
- * @param {Object} x - Object with items to display in legend.
+ * @param {object} x - Object with items to display in legend.
  * @param {Array<number>} x.values - Set of values that define increments
  * for the color bar.
  * @param {Array<string>} x.colors - Set of values that denote a color for each

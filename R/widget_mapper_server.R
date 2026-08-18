@@ -49,8 +49,7 @@ mapper_add_solution <- function(
     list(
       id = id,
       value = serialize_object(solution),
-      visible = visible,
-      endPosition = FALSE
+      visible = visible
     )
   )
 }
@@ -101,8 +100,7 @@ mapper_sync <- function(
     list(
       id = id,
       value = serialize_object(x),
-      visible = TRUE,
-      endPosition = TRUE
+      visible = TRUE
     )
   )
 }
