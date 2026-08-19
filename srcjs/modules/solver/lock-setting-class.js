@@ -66,11 +66,11 @@ export class LockSetting {
   _cache = {};
 
   /**
-  * Construct a new LockSetting object.
-  * @param {string} zone - Zone name.
-  * @param {Array<Object>} locks - Array of lock objects.
-  * @param {number} priority - Priority value.
-  * @return {void}
+   * Construct a new LockSetting object.
+   * @param {string} zone - Zone name.
+   * @param {Array<Object>} locks - Array of lock objects.
+   * @param {number} priority - Priority value.
+   * @return {void}
   */
   constructor(zone, locks, priority) {
     // initialize public fields
@@ -90,10 +90,10 @@ export class LockSetting {
   }
 
   /**
-  * Append the HTML element for the class to another HTML element.
-  * @param {HTMLElement} element - HTML element.
-  * @return {void}
-  */
+   * Create and append a HTML element for this object to another HTML element.
+   * @param {HTMLElement} element - HTML element.
+   * @return {void}
+   */
   appendTo(element) {
     // append to element
     element.appendChild(this.element);
@@ -154,50 +154,50 @@ export class LockSetting {
   }
 
   /**
-  * Set priority value.
-  * @param {number} value - New priority value.
-  * @return {void}
-  */
+   * Set priority value.
+   * @param {number} value - New priority value.
+   * @return {void}
+   */
   setPriorityValue(value) {
     this.priority = value;
   }
 
   /**
-  * Get identifiers for selected locks.
-  * @return {Array<string>}
-  */
+   * Get identifiers for selected locks.
+   * @return {Array<string>}
+   */
   getLockIds() {
     return this._select.getValue();
   }
 
   /**
-  * Get names for selected locks.
-  * @return {Array<string>}
-  */
+   * Get names for selected locks.
+   * @return {Array<string>}
+   */
   getLockNames() {
     return this.getLockIds().map(x => this._locks.get(x).name);
   }
 
   /**
-  * Get columns for selected locks.
-  * @return {Array<string>}
-  */
+   * Get columns for selected locks.
+   * @return {Array<string>}
+   */
   getLockColumns() {
     return this.getLockIds().map(x => this._locks.get(x).layer.column);
   }
 
   /**
-  * Get zones for selected locks.
-  * @return {Array<string>}
-  */
+   * Get zones for selected locks.
+   * @return {Array<string>}
+   */
   getLockZones() {
     return this.getLockIds().map(x => this.zone);
   }
 
   /**
-  * Get priority values for selected locks.
-  * @return {Array<number>}
-  */
+   * Get priority values for selected locks.
+   * @return {Array<number>}
+   */
   getLockPriorityValues() {
     return this.getLockIds().map(x => this.priority);
   }

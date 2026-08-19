@@ -21,7 +21,7 @@ export class MapSidebar {
    * Initialize a new sidebar object.
    * @param {string} element - HTML element.
    * @param {string} height - Height for sidebar (e.g., `"400px"`).
-   * @param {Object} options - Options for customizing the sidebar.
+   * @param {object} options - Options for customizing the sidebar.
    * @param {string} options.position - Position for sidebar. Acceptable
    * values include `"top-left"` and `"top-right"`.
    * @return {void}
@@ -87,8 +87,8 @@ export class MapSidebar {
 
   /**
    * Add and display a sidebar to a Mapboxgl map.
-   * @param {Object} map - Mapboxgl Map object.
-   * @return {Object} Sidebar object.
+   * @param {object} map - Mapboxgl Map object.
+   * @return {object} Sidebar object.
    */
   onAdd(map) {
     // declare temporary variables

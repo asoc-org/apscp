@@ -18,8 +18,8 @@ export class CostControl {
 
   /**
   * Construct a new CostSettings object.
-  * @param {Object} project - Object with various types of objects.
-  * @param {Array<Object>} project.costs - Array of feature objects.
+  * @param {object} project - Object with various types of objects.
+  * @param {Array<object>} project.costs - Array of feature objects.
   * @param {Array<number>} costWeightChoices - Array of numbers used to
   * define the potential values for setting cost weights.
   * @return {void}
@@ -34,10 +34,10 @@ export class CostControl {
   }
 
   /**
-  * Append the HTML element for the class to another HTML element.
-  * @param {HTMLElement} element - HTML element.
-  * @return {void}
-  */
+   * Create and append a HTML element for this object to another HTML element.
+   * @param {HTMLElement} element - HTML element.
+   * @return {void}
+   */
   appendTo(element) {
     // create container
     let el = document.createElement("el");
@@ -57,9 +57,9 @@ export class CostControl {
   }
 
   /**
-  * Get settings for generating a solution.
-  * @return {Object}
-  */
+   * Get settings for generating a solution.
+   * @return {object}
+   */
   getSettings() {
     return {
       id: this._settings.map(x => x.id),

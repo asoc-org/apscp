@@ -30,7 +30,7 @@ server_solve <- quote({
     # add solution to mapper
     mapper_add_solution(
       id = "mapper",
-      map = mapboxgl_proxy("map"),
+      map = mapgl::mapboxgl_proxy("map"),
       solution = new_sol,
       visible = TRUE
     )

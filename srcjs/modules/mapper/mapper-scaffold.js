@@ -6,14 +6,14 @@ import {createNameLabel} from "../utils/element.js";
 
 /**
  * Create a new menu item.
- * @param {Object} x - Object with menu item information.
+ * @param {object} x - Object with menu item information.
  * @param {string} x.id - HTML element identifier for the menu item.
  * @param {string} x.name - Name for the menu item.
- * @param {Object} x.layer - {@link Layer} object.
+ * @param {object} x.layer - {@link Layer} object.
  * @param {String} x.class - Class for layer. Available options include
  * `"Feature"`, `"Cost"`, `"Lock"`, and `"Solution"`.
- * @param {Object} mapper - {@link Mapper} object.
- * @param {Array<Object>} themes - Themes to which the menu item belongs.
+ * @param {object} mapper - {@link Mapper} object.
+ * @param {Array<object>} themes - Themes to which the menu item belongs.
  * Note that this is the names of the themes for feature layers.
  * @return
  */

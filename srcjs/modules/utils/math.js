@@ -1,18 +1,18 @@
 /**
-* Round number to a specified number of digits.
-* @param {Number} x - Number that should be rounded.
-* @param {Number} digits - Number of digits to consider for rounding.
-* @return {Number}
-*/
+ * Round number to a specified number of digits.
+ * @param {Number} x - Number that should be rounded.
+ * @param {Number} digits - Number of digits to consider for rounding.
+ * @return {Number}
+ */
 export function roundToDigits(x, digits) {
   return +(Math.round(x + `e+${digits}`)  + `e-${digits}`);
 }
 
 /**
-* Automatically round number for display.
-* @param {Number} x - Number that should be rounded.
-* @return {Number}
-*/
+ * Automatically round number for display.
+ * @param {number} x - Number that should be rounded.
+ * @return {number}
+ */
 export function autoRound(x) {
   // initialize output
   let out = x;
@@ -36,10 +36,10 @@ export function autoRound(x) {
 }
 
 /**
-* Identify the ascending order of elements in an array.
-* @param {Array<number>} x - Array of numbers
-* @return {Array<Number>}
-*/
+ * Identify the ascending order of elements in an array.
+ * @param {Array<number>} x - Array of numbers
+ * @return {Array<Number>}
+ */
 export function order(x) {
   return x
     .map((value, index) => ({ value, index }))
@@ -48,11 +48,11 @@ export function order(x) {
 }
 
 /**
-* Replace NaN with another value.
-* @param {number} x - Value.
-* @param {number} y - New value if x is NaN.
-* @return {Number}
-*/
+ * Replace NaN with another value.
+ * @param {number} x - Value.
+ * @param {number} y - New value if x is NaN.
+ * @return {number}
+ */
 export function replaceNaN(x, y) {
   return Number.isNaN(x) ? y : x;
 }

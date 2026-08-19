@@ -5,7 +5,8 @@ import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // functions to create elements
 import {createMenuItem} from "./mapper-scaffold.js";
-import {layerSelectOption} from "./layer-select-option.js";
+import {projectSelectOptions} from "../utils/projectSelectOptions.js";
+import {selectOption} from "../utils/projectSelectOptions.js";
 // styling
 import "./css/style.css";
 
@@ -55,23 +56,22 @@ export class Mapper {
   _select;
 
   /**
-  * Initialize Mapper object with menu, map, and project data.
-  * @param {string} element - HTML element for navigation menu.
-  * @param {string} mapId - HTML element identifier for the mapgl map.
-  * @param {Object} project - Object with various types of objects.
-  * @param {Array<Object>} project.features - Array of feature objects.
-  * @param {Array<Object>} project.costs - Array of cost objects.
-  * @param {Array<Object>} project.lock - Array of lock objects.
-  * @param {number} maxLayers - Maximum number of active layers permitted.
-  * @return {void}
-  */
+   * Initialize Mapper object with menu, map, and project data.
+   * @param {string} element - HTML element for navigation menu.
+   * @param {string} mapId - HTML element identifier for the mapgl map.
+   * @param {Object} project - Object with various types of objects.
+   * @param {Array<object>} project.features - Array of feature objects.
+   * @param {Array<object>} project.costs - Array of cost objects.
+   * @param {Array<object>} project.lock - Array of lock objects.
+   * @param {number} maxLayers - Maximum number of active layers permitted.
+   * @return {void}
+   */
   initialize(element, mapId, project, maxLayers) {
     // initialize fields
     this._maxLayers = maxLayers || 15;
     this._menu = element.querySelector(".mapper-menu");
     this._select = element.querySelector(".mapper-select");
     this._map = document.getElementById(mapId);
-
     // define temporary variables
     let i, j, el, k;
     // add menu items
@@ -117,7 +117,7 @@ export class Mapper {
         this._hiddenLayers.set(el.dataset.id, el);
       }
     }
-    // enable sorting in menu
+    // initialize sorting behavior
     new Sortable(this._menu, {
       handle: ".handle",
       animation: 150,
@@ -132,46 +132,10 @@ export class Mapper {
         this.moveLayerOnMap(event.item.getAttribute("data-id"), beforeId);
       }
     });
-    // prepare options for select menu
-    let selectOptions = Array(
-      project.features.length +
-      project.costs.length +
-      project.locks.length +
-      project.solutions.length
-    );
-    let groups = new Set();
-    k = 0;
-    for (i = 0; i < project.features.length; ++i) {
-      selectOptions[k] = layerSelectOption(project.features[i]);
-      for (j = 0; j < selectOptions[i].group.length; ++j) {
-        groups.add(selectOptions[i].group[j]);
-      }
-      ++k;
-    };
-    for (i = 0; i < project.locks.length; ++i) {
-      selectOptions[k] = layerSelectOption(project.locks[i]);
-      ++k;
-    };
-    for (i = 0; i < project.costs.length; ++i) {
-      selectOptions[k] = layerSelectOption(project.costs[i]);
-      ++k;
-    };
-    for (i = 0; i < project.solutions.length; ++i) {
-      selectOptions[k] = layerSelectOption(project.solutions[i]);
-      ++k;
-    };
-    groups.add("Locks");
-    groups.add("Costs");
-    groups.add("Solutions");
-
-    console.log("selectOptions");
-    console.log(selectOptions);
-    console.log("groups");
-    console.log(groups);
-
     // initialize select menu
+    let selectOptions = projectSelectOptions(project);
     new TomSelect(this._select, {
-      options: selectOptions,
+      options: selectOptions.options,
       items: [...this._activeLayerIds],
       create: false,
       dropdownParent: "body",
@@ -180,7 +144,7 @@ export class Mapper {
       maxOptions: null,
       sortField: "sort",
       closeAfterSelect: false,
-      optgroups: Array.from(groups).map(x => {return {value: x}}),
+      optgroups: selectOptions.optgroups,
       optgroupField: "group",
       plugins: {
         checkbox_options: {}
@@ -211,12 +175,12 @@ export class Mapper {
   }
 
   /**
-  * Add a layer to the Mapper object. Note that if adding this new layer
-  * would exceed the maximum number of permitted active layers, then
-  * the oldest active layer will be removed automatically.
-  * @param {Object} layer - Object that is a lock or a solution.
-  * @return {void}
-  */
+   * Add a layer to the Mapper object. Note that if adding this new layer
+   * would exceed the maximum number of permitted active layers, then
+   * the oldest active layer will be removed automatically.
+   * @param {Object} layer - Object that is a lock or a solution.
+   * @return {void}
+   */
   addLayer(layer) {
     // create menu item
     let el = createMenuItem(layer, this);
@@ -227,7 +191,7 @@ export class Mapper {
     // add layer to menu
     this.showLayerOnMenu(el.dataset.id, true, false);
     // add menu item to select
-    this._select.tomselect.addOption(layerSelectOption(layer));
+    this._select.tomselect.addOption(selectOption(layer));
     this._select.tomselect.addItem(layer.id, true);
     // if number of active layers exceeds limit, then remove oldest layer
     if (this._activeLayerIds.size > this._maxLayers) {
@@ -237,12 +201,12 @@ export class Mapper {
   }
 
   /**
-  * Hide layer on menu.
-  * @param {string} layerId - HTML identifier for layer.
-  * @param {boolean} updateMap - Should the map also be updated to reflect
-  * these changes to the menu?
-  * @return {void}
-  */
+   * Hide layer on menu.
+   * @param {string} layerId - HTML identifier for layer.
+   * @param {boolean} updateMap - Should the map also be updated to reflect
+   * these changes to the menu?
+   * @return {void}
+   */
   hideLayerOnMenu(layerId, updateMap = true) {
     // find element for layer's menu item
     let el = this._menu.querySelector(`[data-id="${layerId}"]`);
@@ -260,13 +224,13 @@ export class Mapper {
   }
 
   /**
-  * Show layer on menu.
-  * @param {string} layerId - HTML identifier for layer.
-  * @param {boolean} showLegend - Should the legend be shown on the menu?
-  * @param {boolean} updateMap - Should the map also be updated to reflect
-  * these changes to the menu?
-  * @return {void}
-  */
+   * Show layer on menu.
+   * @param {string} layerId - HTML identifier for layer.
+   * @param {boolean} showLegend - Should the legend be shown on the menu?
+   * @param {boolean} updateMap - Should the map also be updated to reflect
+   * these changes to the menu?
+   * @return {void}
+   */
   showLayerOnMenu(layerId, showLegend = true, updateMap = true) {
     // find element for layer's menu item
     let el = this._hiddenLayers.get(layerId);
@@ -287,10 +251,10 @@ export class Mapper {
   }
 
   /**
-  * Show layer on map.
-  * @param {string} layerId - HTML identifier for layer.
-  * @return {void}
-  */
+   * Show layer on map.
+   * @param {string} layerId - HTML identifier for layer.
+   * @return {void}
+   */
   showLayerOnMap(layerId) {
     // set layer visibility on map
     this._map.map.setLayoutProperty(
@@ -322,14 +286,14 @@ export class Mapper {
   }
 
   /**
-  * Move layer on map.
-  * @param {string} layerId - HTML identifier for layer to update.
-  * @param {string} beforeId - HTML identifier for the layer that should be
-  * `layerId` should be inserted before (in other words, `layerId` will appear
-  * under `beforeId`). If `beforeId = undefined`, then the layer is moved to
-  * the very top.
-  * @return {void}
-  */
+   * Move layer on map.
+   * @param {string} layerId - HTML identifier for layer to update.
+   * @param {string} beforeId - HTML identifier for the layer that should be
+   * `layerId` should be inserted before (in other words, `layerId` will appear
+   * under `beforeId`). If `beforeId = undefined`, then the layer is moved to
+   * the very top.
+   * @return {void}
+   */
   moveLayerOnMap(layerId, beforeId) {
     // move layer on map
     if (typeof(beforeId) === "string") {
@@ -340,10 +304,10 @@ export class Mapper {
   }
 
   /**
-  * Remove layer on map.
-  * @param {string} layerId - HTML identifier for layer.
-  * @return {void}
-  */
+   * Remove layer on map.
+   * @param {string} layerId - HTML identifier for layer.
+   * @return {void}
+   */
   removeLayerFromMap(layerId) {
     // remove layer from menu
     this._select.tomselect.removeItem(layerId);
@@ -354,10 +318,10 @@ export class Mapper {
   }
 
   /**
-  * Does the map have a particular layer active?
-  * @param {string} layerId - HTML identifier for layer.
-  * @return {void}
-  */
+   * Does the map have a particular layer active?
+   * @param {string} layerId - HTML identifier for layer.
+   * @return {void}
+   */
   hasLayerActive(layerId) {
     this._activeLayerIds.has(layer_id);
   }

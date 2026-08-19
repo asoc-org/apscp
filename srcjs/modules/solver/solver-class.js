@@ -11,7 +11,7 @@ export class Solver {
 
   /**
    * Project data.
-   * @type {Object}
+   * @type {object}
    */
   _project;
 
@@ -35,50 +35,50 @@ export class Solver {
 
   /**
    * Objective control object.
-   * @type {Object}
+   * @type {object}
    */
   _objectiveControl;
 
   /**
    * Feature control object.
-   * @type {Object}
+   * @type {object}
    */
   _featureControl;
 
   /**
    * Lock control object.
-   * @type {Object}
+   * @type {object}
    */
   _lockControl;
 
   /**
    * Cost control object.
-   * @type {Object}
+   * @type {object}
    */
   _costControl;
 
   /**
-  * Construct a new Solver object.
-  * @return {void}
-  */
+   * Construct a new Solver object.
+   * @return {void}
+   */
   constructor() {}
 
   /**
-  * Initialize Solver with HTML identifier and project data.
-  * @param {HTMLElement} element - HTML element.
-  * @param {Object} project - Object with various types of objects.
-  * @param {Array<Object>} project.features - Array of feature objects.
-  * @param {Array<Object>} project.costs - Array of cost objects.
-  * @param {Array<Object>} project.lock - Array of lock objects.
-  * @param {Array<number>} featureTargetChoices - Array of numbers used to
-  * define the potential values for setting feature targets.
-  * @param {Array<number>} featureWeightChoices - Array of numbers used to
-  * define the potential values for setting feature weights.
-  * @param {Array<number>} costWeightChoices - Array of numbers used to
-  * define the potential values for setting cost weights.
-  * @param {Array<string>} zoneColors - Array of colors for zones.
-  * @return {void}
-  */
+   * Initialize Solver with HTML identifier and project data.
+   * @param {HTMLElement} element - HTML element.
+   * @param {object} project - Object with various types of objects.
+   * @param {Array<object>} project.features - Array of feature objects.
+   * @param {Array<object>} project.costs - Array of cost objects.
+   * @param {Array<object>} project.lock - Array of lock objects.
+   * @param {Array<number>} featureTargetChoices - Array of numbers used to
+   * define the potential values for setting feature targets.
+   * @param {Array<number>} featureWeightChoices - Array of numbers used to
+   * define the potential values for setting feature weights.
+   * @param {Array<number>} costWeightChoices - Array of numbers used to
+   * define the potential values for setting cost weights.
+   * @param {Array<string>} zoneColors - Array of colors for zones.
+   * @return {void}
+   */
   initialize(
     element, project,
     featureTargetChoices, featureWeightChoices, costWeightChoices,
@@ -98,10 +98,6 @@ export class Solver {
         `color-mix(in srgb, ${zoneColors[i]}, white 50%)`
       );
     }
-
-    // initialize objective settings
-    // this._objectiveControl = new ObjectiveControl(project);
-    // this._objectiveControl.appendTo(element.querySelector(".features-panel"));
 
     // initialize feature settings
     this._featureControl = new FeatureControl(
@@ -151,18 +147,18 @@ export class Solver {
   }
 
   /**
-  * Add a lock to the Solver object.
-  * @param {Object} lock - Object that is a lock.
-  * @return {void}
-  */
+   * Add a lock to the Solver object.
+   * @param {object} lock - Object that is a lock.
+   * @return {void}
+   */
   addLock(lock) {
     // TODO
   }
 
   /**
-  * Reset so that solver can be used to generate a new solution.
-  * @return {void}
-  */
+   * Reset so that solver can be used to generate a new solution.
+   * @return {void}
+   */
   reset() {
     this._nameInput.value = "";
     this._startButton.setAttribute("disabled", "");
@@ -174,20 +170,20 @@ export class Solver {
   }
 
   /**
-  * Synchronize solver. This method is used to update the
-  * feature status bars to reflect changes to the lock settings.
-  * @param {object} data - Data frame with new status bar values.
-  * @param {object} data.id - Feature identifier.
-  * @return {void}
-  */
+   * Synchronize solver. This method is used to update the
+   * feature status bars to reflect changes to the lock settings.
+   * @param {object} data - Data frame with new status bar values.
+   * @param {object} data.id - Feature identifier.
+   * @return {void}
+   */
   sync(data) {
     this._featureControl.sync(data);
   }
 
   /**
-  * Get settings for generating a solution.
-  * @return {Object}
-  */
+   * Get settings for generating a solution.
+   * @return {object}
+   */
   getControl() {
     return {
       name: this._nameInput.value,

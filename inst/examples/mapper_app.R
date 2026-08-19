@@ -7,8 +7,6 @@ library(mapgl)
 # simulate project data
 sim_data <- simulate_project()
 
-print(sim_data$solutions[[1]]$id)
-
 # start tile server
 tile_server_start(sim_data)
 .Last <- function() {tile_server_stop()}

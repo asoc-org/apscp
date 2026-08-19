@@ -109,6 +109,7 @@ Collate:
     'package.R'
     'run_app.R'
     'server_initialize.R'
+    'server_logging.R'
     'server_solve.R'
     'utils_as.R'
     'utils_color_palette.R'

@@ -7,14 +7,10 @@
 app_startup <- function() {
   # set seed for reproducibility
   set.seed(200)
-  library(shiny)
-  library(htmltools)
-  library(mapgl)
 
-  # print initial memory usage
-  if (isTRUE(get_golem_config("monitor"))) {
-    cli::cli_rule()
-    cli::cli_text("Initial memory used: ", format(lobstr::mem_used(), "mb"))
+  # store initial memory usage
+  if (requireNamespace("lobstr", quietly = TRUE)) {
+    options(apscp.initial_memory_used = format(lobstr::mem_used(), "mb"))
   }
 
   # assert web service tokens are defined
@@ -41,9 +37,10 @@ app_startup <- function() {
     }
   }
   ## set future strategy
-  options(future.wait.timeout = get_golem_config("worker_time_out"))
-  ## implement strategy
-  golem::print_dev(paste("plan strategy:", strategy))
+  options(
+    future.plan = strategy,
+    future.wait.timeout = get_golem_config("worker_time_out")
+  )
   assertthat::assert_that(
     strategy %in% c("sequential", "cluster", "multicore", "multisession"),
     msg = "not a valid strategy"
@@ -52,8 +49,17 @@ app_startup <- function() {
 
   # if needed, initialize tile server
   if (is.null(get_golem_config("tile_server_dir"))) {
-    tile_server_start(read_builtin_project())
-    .Last <- function() {tile_server_stop()}
+    ## if logging, then display details
+    if (get_golem_config("logging")) {
+      cli::cli_h3("Tile server")
+    }
+    ## initialize tile server
+    tile_server_start(
+      read_builtin_project(),
+      verbose = get_golem_config("logging")
+    )
+    ## kill tile server on session end
+    assign(".Last", function() {tile_server_stop()}, .GlobalEnv)
   }
 
 }

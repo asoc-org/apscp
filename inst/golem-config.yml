@@ -14,8 +14,8 @@ default:
   ## verbosity
   verbose: false
 
-  ## monitor memory usage
-  monitor: false
+  ## logging
+  logging: false
 
   ## define options for generating different solutions
   prioritization_feature_weights:
@@ -75,6 +75,6 @@ prod:
 # development configuration
 dev:
   golem_wd: !expr here::here()
-  monitor: true
+  logging: true
   verbose: true
   solver_gap: 0.3
