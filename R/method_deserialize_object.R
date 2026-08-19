@@ -67,7 +67,14 @@ deserialize_object <- function(x, dataset = NULL) {
     x$costs <- lapply(x$costs, deserialize_object, dataset = dataset)
   }
   if (assertthat::has_name(x, "tiles")) {
-    x$tiles <- lapply(x$tiles, deserialize_object)
+    # if needed for importing data, manually append working directory
+    x$tiles <- lapply(x$tiles, function(x) {
+      x <- deserialize_object(x)
+      if (isTRUE(getOption("apscp.project.io"))) {
+        x$path <- file.path(getwd(), x$path)
+      }
+      x
+    })
   }
   if (assertthat::has_name(x, "features")) {
     x$features <- lapply(x$features, deserialize_object, dataset = dataset)

@@ -4,9 +4,6 @@ default:
   golem_version: 0.0.0.9000
   app_prod: no
 
-  ## file name for project data
-  project_filename: "antarctic-peninsula.yml"
-
   ## future plan strategy
   ### if "auto", then:
   ###   if on Shiny apps (per R_CONFIG_ACTIVE variable): "multicore"
@@ -17,8 +14,8 @@ default:
   ## verbosity
   verbose: false
 
-  ## monitor memory usage
-  monitor: false
+  ## logging
+  logging: false
 
   ## define options for generating different solutions
   prioritization_feature_weights:
@@ -34,6 +31,11 @@ default:
     - 1.0 # maximum value
     - 0.25 # step value
 
+  ## map details
+  map_style: "satellite"
+  map_min_zoom: 0
+  map_max_zoom: 10
+
   ## solver details
   solver_gap: 0.01 # optimality gap, e.g., 0.01 = 1%
   solver_time_limit: 300 # in seconds
@@ -45,8 +47,8 @@ default:
   worker_time_out: 7200 # two hours
 
   ## tile server details
-  tile_server_url: "http://localhost:8080/"
-  tile_server_port: 8080
+  tile_server_url: "http://localhost:8085/"
+  tile_server_port: 8085
   tile_server_dir: null
   tile_max_zoom: 8
 
@@ -73,4 +75,6 @@ prod:
 # development configuration
 dev:
   golem_wd: !expr here::here()
-  monitor: true
+  logging: true
+  verbose: true
+  solver_gap: 0.3

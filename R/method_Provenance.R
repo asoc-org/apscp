@@ -15,7 +15,7 @@ tool_generated_provenance <- function() {
   structure(
     list(
       name = "User generated",
-      icon = icon,
+      icon = "user",
       color = "black",
       description = "Generated with the tool"
     ),

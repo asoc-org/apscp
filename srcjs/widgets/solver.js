@@ -1,3 +1,4 @@
+/** Import dependencies */
 import {Solver} from "../modules/solver/solver-class.js";
 
 HTMLWidgets.widget({
@@ -18,13 +19,13 @@ HTMLWidgets.widget({
           // attach the widget to the DOM
           let el = document.getElementById(elementId);
           el.widget = this;
-          // initialize solver
+          // initialize widget
           handle.initialize(
             el, opts.project,
             opts.featureTargetChoices,
             opts.featureWeightChoices,
             opts.costWeightChoices,
-            opts.zoneColors,
+            opts.zoneColors
           );
         }
       },

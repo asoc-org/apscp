@@ -193,7 +193,12 @@ test_that("read_project/write_project", {
   )
 })
 
-test_that("read_builtin_dataset", {
+test_that("read_builtin_project", {
+  # create object
+  x <- read_builtin_project()
   # run tests
-  expect_r6_class(read_builtin_project(), "Project")
+  expect_r6_class(x, "Project")
+  expect_true(
+    all(file.exists(vapply(x$tiles, `[[`, character(1), "path")))
+  )
 })

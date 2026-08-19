@@ -215,13 +215,15 @@ map_project <- function(x, ...) {
   assertthat::assert_that(inherits(x, "Project"))
 
   # define map parameters
-  bounds = x$get_bbox(native = FALSE, expand = 0.1)
-  maxBounds = as.vector(x$get_bbox(native = FALSE, expand = 0.25))
+  bounds = as.vector(x$get_bbox(native = FALSE, expand = 0.5))
+  maxBounds = as.vector(x$get_bbox(native = FALSE, expand = 1))
 
   # initialize map
   m <- mapgl::mapboxgl(
     bounds = bounds,
     maxBounds = list(maxBounds[1:2], maxBounds[3:4]),
+    projection = "lambertConformalConic",
+    parallels = c(bounds[2], bounds[4]),
     ...
   )
 

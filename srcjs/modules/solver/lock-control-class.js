@@ -25,11 +25,11 @@ export class LockControl {
   _settings = new Map();
 
   /**
-  * Construct a new LockSettings object.
-  * @param {Object} project - Object with various types of objects.
-  * @param {Array<Object>} project.locks- Array of lock objects.
-  * @return {void}
-  */
+   * Construct a new LockSettings object.
+   * @param {object} project - Object with various types of objects.
+   * @param {Array<object>} project.locks- Array of lock objects.
+   * @return {void}
+   */
   constructor(project) {
     // initialize fields
     this._zones = project.zones;
@@ -47,11 +47,12 @@ export class LockControl {
   }
 
   /**
-  * Append the HTML element for the class to another HTML element.
-  * @param {HTMLElement} element - HTML element.
-  * @param {string} id - Identifier for HTML element to register Shiny bindings.
-  * @return {void}
-  */
+   * Create and append a HTML element for this object to another HTML element.
+   * @param {HTMLElement} element - HTML element.
+   * @param {string} id - Identifier for HTML element to register Shiny
+   * bindings.
+   * @return {void}
+   */
   appendTo(element, id) {
     // create container
     let el = document.createElement("el");
@@ -104,9 +105,9 @@ export class LockControl {
   }
 
   /**
-  * Get settings for generating a solution.
-  * @return {Object}
-  */
+   * Get settings for generating a solution.
+   * @return {object}
+   */
   getSettings() {
     return {
       id:

@@ -44,17 +44,17 @@ export default class StatusBar {
   _end_cap;
 
   /**
-  * Construct a new StatusBar object.
-  * @param {HTMLElement} element - HTML element for slider.
-  * @param {object} options - options settings.
-  * @param {Array<number>} options.values - Values to display.
-  * @param {Array<string>} options.colors - Colors for bar values.
-  * @param {NodeList<HTMLElement>} options.labels - HTML elements for
-  * for labels. Note that there must be an element for each slider handle.
-  * @param {function} options.format - Function for formatting labels.
-  * This must have parameters for `labels` and `values`.
-  * @return {void}
-  */
+   * Construct a new StatusBar object.
+   * @param {HTMLElement} element - HTML element for slider.
+   * @param {object} options - options settings.
+   * @param {Array<number>} options.values - Values to display.
+   * @param {Array<string>} options.colors - Colors for bar values.
+   * @param {NodeList<HTMLElement>} options.labels - HTML elements for
+   * for labels. Note that there must be an element for each slider handle.
+   * @param {function} options.format - Function for formatting labels.
+   * This must have parameters for `labels` and `values`.
+   * @return {void}
+   */
   constructor(element, options) {
     // set public fields
     this.element = element;
@@ -91,10 +91,10 @@ export default class StatusBar {
   }
 
   /**
-  * Set values.
-  * @param {Array<number>} values - Values to display.
-  * @return {void}
-  */
+   * Set values.
+   * @param {Array<number>} values - Values to display.
+   * @return {void}
+   */
   set(values) {
     // preliminary calculations
     let o = order(values);

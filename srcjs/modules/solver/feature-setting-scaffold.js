@@ -7,9 +7,9 @@ import {addTooltip} from "../utils/element.js";
 
 /**
  * Scaffold a feature setting element
- * @param {Object} feature - Feature object.
+ * @param {object} feature - Feature object.
  * @param {string} feature.name - Feature object.
- * @param {Object} feature.layer - Layer object.
+ * @param {object} feature.layer - Layer object.
  * @param {Array<number>} feature.zone_targets - Initial target values.
  * @param {Array<number>} feature.zone_weights - Initial weights values.
  * @param {Array<Object>} feature.themes - Array of theme object.s
@@ -41,7 +41,7 @@ export function scaffoldFeatureSetting(
 
 /**
  * Create a header component for a feature setting
- * @param {Object} feature - Feature object.
+ * @param {object} feature - Feature object.
  * @param {string} feature.name - Feature object.
  * @param {string} feature.id - Unique identifier for feature.
  * @param {Array<string>} zones - Array of zone names.
@@ -73,7 +73,7 @@ function featureSettingHeader(feature, zones) {
 
 /**
  * Create a statuses component for a feature setting
- * @param {Object} feature - Feature object.
+ * @param {object} feature - Feature object.
  * @param {string} feature.name - Feature object.
  * @param {string} feature.id - Unique identifier for feature.
  * @param {Array<string>} zones - Array of zone names.
@@ -145,7 +145,7 @@ function featureSettingStatuses(feature, zones, choices) {
 
 /**
  * Create a targets component for a feature setting
- * @param {Object} feature - Feature object.
+ * @param {object} feature - Feature object.
  * @param {string} feature.name - Feature object.
  * @param {string} feature.id - Unique identifier for feature.
  * @param {Array<string>} zones - Array of zone names.

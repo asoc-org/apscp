@@ -1,4 +1,17 @@
-html, body {
+/* overall page styling */
+html,
+body,
+.bslib-page-fill {
   margin: 0;
   padding: 0;
+}
+
+/* padding for mapper widget */
+.mapper {
+  padding-left: 5px;
+}
+
+/* max height for tom select menus */
+.ts-dropdown-content {
+  max-height: min(80vh, 500px);
 }

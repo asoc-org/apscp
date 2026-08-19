@@ -12,6 +12,10 @@
 #' is recommended to add other map controls to a different
 #' `position` to avoid overlaps.
 #'
+#' @param selected `character` value denoting the identifier for the
+#' sidebar pane to have open by default. Defaults to `NULL`
+#' such that the side bar is closed.
+#'
 #' @inheritParams mapgl::add_control
 #'
 #' @return An updated [mapgl::mapboxgl()] object.
@@ -30,7 +34,8 @@ add_sidebar_control <- function(
   map,
   id,
   position = "top-right",
-  height = "100%"
+  height = "100%",
+  selected = NULL
 ) {
   # add control to map
   map |>
@@ -40,7 +45,10 @@ add_sidebar_control <- function(
         "{Shiny.mapglSidebarInitialize(",
         "el, data.id, data.height, data.options)}"
       ),
-      data = list(id = id, height = height, options = list(position = position))
+      data = list(
+        id = id, height = height,
+        options = list(position = position, selected = selected)
+      )
     )
 }
 

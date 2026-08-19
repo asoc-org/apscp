@@ -5,6 +5,8 @@ import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // classes to create components
 import {FeatureSetting} from "./feature-setting-class.js";
+// utility functions
+import {projectSelectOptions} from "../utils/projectSelectOptions.js";
 // styling
 import "./css/solver-control.css";
 import "./css/solver-settings.css";
@@ -34,15 +36,15 @@ export class FeatureControl {
   _cache;
 
   /**
-  * Construct a new FeatureSettings object.
-  * @param {Object} project - Object with various types of objects.
-  * @param {Array<Object>} project.features - Array of feature objects.
-  * @param {Array<number>} featureTargetChoices - Array of numbers used to
-  * define the potential values for setting feature targets.
-  * @param {Array<number>} featureWeightChoices - Array of numbers used to
-  * define the potential values for setting feature weights.
-  * @return {void}
-  */
+   * Construct a new FeatureSettings object.
+   * @param {object} project - Object with various types of objects.
+   * @param {Array<Object>} project.features - Array of feature objects.
+   * @param {Array<number>} featureTargetChoices - Array of numbers used to
+   * define the potential values for setting feature targets.
+   * @param {Array<number>} featureWeightChoices - Array of numbers used to
+   * define the potential values for setting feature weights.
+   * @return {void}
+   */
   constructor(project, featureTargetChoices, featureWeightChoices) {
     // initialize fields
     this._zones = project.zones;
@@ -56,31 +58,15 @@ export class FeatureControl {
         )
       );
     }
-    // create parameters for select menu
-    let features = [];
-    let themes = new Set();
-    for (let i = 0; i < project.features.length; ++i) {
-      features.push({
-        value: project.features[i].id,
-        name: project.features[i].name,
-        zone: project.features[i].themes.map(x => x.zone)
-      });
-      for (let j = 0; j < project.features[i].themes.length; ++j) {
-        themes.add(project.features[i].themes[j].zone);
-      }
-    }
-    // cache parameters for select menu
-    this._cache = {
-      options: features,
-      optgroups: Array.from(themes).map(x => {return {value: x}})
-    };
+    // cache options for select menu
+    this._cache = projectSelectOptions(project, true, false, false, false);
   }
 
   /**
-  * Append the HTML element for the class to another HTML element.
-  * @param {HTMLElement} element - HTML element.
-  * @return {void}
-  */
+   * Create and append a HTML element for this object to another HTML element.
+   * @param {HTMLElement} element - HTML element.
+   * @return {void}
+   */
   appendTo(element) {
     // create container
     let el = document.createElement("div");
@@ -111,15 +97,13 @@ export class FeatureControl {
       sortField: "name",
       closeAfterSelect: false,
       optgroups: this._cache.optgroups,
-      optgroupField: "zone",
+      optgroupField: "group",
       plugins: {
         checkbox_options: {}
       },
       render: {
         optgroup_header: function(data, escape) {
-          return '<div class="optgroup-header">' +
-            escape(data.value + " zone") +
-            '</div>';
+          return `<div class="optgroup-header">${escape(data.value)}</div>`;
         }
       },
       onItemAdd: (value) => {
@@ -140,12 +124,12 @@ export class FeatureControl {
   }
 
   /**
-  * Synchronize settings. This method is used to update the
-  * feature status bars to reflect changes to the lock settings.
-  * @param {object} data - Data frame with new status bar values.
-  * @param {object} data.id - Feature identifier.
-  * @param {object} data.[*] - Value for each feature in each zone.
-  * @return {void}
+   * Synchronize settings. This method is used to update the
+   * feature status bars to reflect changes to the lock settings.
+   * @param {object} data - Data frame with new status bar values.
+   * @param {object} data.id - Feature identifier.
+   * @param {object} data.[*] - Value for each feature in each zone.
+   * @return {void}
   */
   sync(data) {
     for (let i = 0; i < data.id.length; ++i) {
@@ -156,9 +140,9 @@ export class FeatureControl {
   }
 
   /**
-  * Get settings for generating a solution.
-  * @return {Object}
-  */
+   * Get settings for generating a solution.
+   * @return {object}
+   */
   getSettings() {
     let settings = [...this._settings.values()];
     return {

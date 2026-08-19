@@ -73,17 +73,17 @@ export class CostSetting {
   _switch;
 
   /**
-  * Construct a new CostSetting object.
- * @param {Object} cost - Cost object.
- * @param {string} cost.id - Unique identifier.
- * @param {string} cost.name - Name.
- * @param {string} cost.weight - Weight value.
- * @param {string} cost.layer.column - Column with data.
- * @param {Array<string>} zones - Array of zone names.
- * @param {Array<number>} costWeightChoices - Array of numbers used to
- * define the potential values for setting cost weights.
-  * @return {void}
-  */
+   * Construct a new CostSetting object.
+   * @param {object} cost - Cost object.
+   * @param {string} cost.id - Unique identifier.
+   * @param {string} cost.name - Name.
+   * @param {string} cost.weight - Weight value.
+   * @param {string} cost.layer.column - Column with data.
+   * @param {Array<string>} zones - Array of zone names.
+   * @param {Array<number>} costWeightChoices - Array of numbers used to
+   * define the potential values for setting cost weights.
+   * @return {void}
+   */
   constructor(cost, zones, costWeightChoices) {
     // initialize public fields
     this.id = cost.id;
@@ -132,10 +132,10 @@ export class CostSetting {
   }
 
   /**
-  * Append the HTML element for the class to another HTML element.
-  * @param {HTMLElement} element - HTML element.
-  * @return {void}
-  */
+   * Create and append a HTML element for this object to another HTML element.
+   * @param {HTMLElement} element - HTML element.
+   * @return {void}
+   */
   appendTo(element) {
     // set event handler for toggle
     this._switch.addEventListener("change", (event) => {

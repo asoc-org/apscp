@@ -9,5 +9,5 @@
 
 /* manually adjust height to account for select input */
 .feature-control .feature-settings {
-  height: calc(var(--max-height) - 250px);
+  height: calc(var(--max-height) - 230px);
 }

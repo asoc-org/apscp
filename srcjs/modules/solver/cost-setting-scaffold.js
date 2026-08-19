@@ -7,7 +7,7 @@ import {addTooltip} from "../utils/element.js";
 
 /**
  * Create a cost setting.
- * @param {Object} cost - Cost object.
+ * @param {object} cost - Cost object.
  * @param {string} cost.name - Feature name.
  * @param {string} cost.zone - Zone name.
  * @param {number} cost.weight - Weight value.
@@ -31,7 +31,7 @@ export function scaffoldCostSetting(cost, zones, costWeightChoices) {
 
 /**
  * Create a header component for a cost setting.
- * @param {Object} cost - Cost object.
+ * @param {object} cost - Cost object.
  * @param {string} cost.name - Feature name.
  * @param {string} cost.zone - Zone name.
  * @param {number} cost.weight - Weight value.
@@ -58,7 +58,7 @@ function costSettingHeader(cost, zones) {
 
 /**
  * Create a body component for a cost setting.
- * @param {Object} cost - Cost object.
+ * @param {object} cost - Cost object.
  * @param {string} cost.name - Feature name.
  * @param {string} cost.zone - Zone name.
  * @param {number} cost.weight - Weight value.

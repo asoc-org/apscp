@@ -123,7 +123,16 @@ Defaults to `"Unknown"`.}
   Get centroid.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Project$get_centroid()}
+    \preformatted{Project$get_centroid(native = TRUE)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{native}}{`logical` value indicating if the bounding box should
+be in (`TRUE`) the native coordinate reference system or (`FALSE`)
+re-projected to longitude/latitude?}
+    }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{

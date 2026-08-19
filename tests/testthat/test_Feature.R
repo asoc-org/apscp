@@ -11,7 +11,7 @@ test_that("new_feature", {
     details = "extra info"
   )
   t1 <- new_theme("charismatic species", "Tourism")
-  t2 <- new_theme("vertebrate species", "Biodiversity")
+  t2 <- new_theme("vertebrate species", NULL)
   x <- new_feature(
     name = "feature",
     layer = l,

@@ -220,21 +220,6 @@ features <-
   {metadata[metadata$class == "feature", , drop = FALSE]} %>%
   split(~ name) %>%
   lapply(function(x) {
-    # find themes
-    theme_data <- metadata[
-      metadata$class == "feature" & metadata$theme == x$theme, ,
-      drop = FALSE
-    ]
-    theme_names <- c("Biodiversity", "Scientific", "Tourism")[
-      which(
-        c(
-          max(theme_data$biodiversity_target, na.rm = TRUE),
-          max(theme_data$scientific_target, na.rm = TRUE),
-          max(theme_data$tourism_target, na.rm = TRUE)
-        ) > 1e-5
-      )
-    ]
-    theme_names <- c(theme_names, x$theme)
     # return feature
     new_feature(
       name = x$name,
@@ -248,7 +233,7 @@ features <-
         0,
         0
       ),
-      themes = lapply(theme_names, new_theme, name = x$theme),
+      themes = list(new_theme(name = x$theme, zone = NULL)),
       layer = new_layer(
         dataset = dataset,
         column = x$name,

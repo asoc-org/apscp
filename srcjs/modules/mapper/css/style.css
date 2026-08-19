@@ -14,13 +14,16 @@
   --ghost: #C8EBFB;
   --max-height: 100vh;
   --space-sm: 5px;
+  font: unset;
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
 }
 
 /* Main container    ========================================================================== */
 
 /* overall widget */
 .mapper .mapper-container {
-  margin: 5px;
   display: flex;
   flex-direction: column;
 }
@@ -57,7 +60,7 @@
 /* Menu
    ========================================================================== */
 .mapper .mapper-menu {
-  height: calc(var(--max-height) - 250px);
+  height: calc(var(--max-height) - 145px);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);

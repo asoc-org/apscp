@@ -1,7 +1,7 @@
 #' The application User-Interface
 #'
 #' @param request Internal parameter for `{shiny}`.
-#'     DO NOT REMOVE.
+#'
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
@@ -10,7 +10,31 @@ app_ui <- function(request) {
     golem_add_external_resources(),
 
     # app content
-    shiny::fillPage(
+    bslib::page_fillable(
+
+      ## sidebars
+      htmltools::tagList(
+        ## left side bar
+        sidebar_tabs(
+          id = "left_sidebar",
+          list(shiny::icon("layer-group")),
+          sidebar_pane(
+            title = "Table of contents",
+            id = "navigation_panel", icon = NULL,
+            mapperOutput("mapper", height = "100%", width = "100%")
+          )
+        ),
+        ## right side bar
+        sidebar_tabs(
+          id = "right_sidebar",
+          list(shiny::icon("rocket")),
+          sidebar_pane(
+            title = "Generate solution",
+            id = "settings_panel", icon = NULL,
+            solverOutput("solver", height = "100%", width = "100%")
+          )
+        )
+      ),
 
       ## start up screen
       shinybusy::busy_start_up(
@@ -23,10 +47,9 @@ app_ui <- function(request) {
 
       ## mapgl map
       mapgl::mapboxglOutput("map", width = "100vw", height = "100vh")
-
     )
-
   )
+
 }
 
 #' Add external Resources to the Application
@@ -38,18 +61,13 @@ app_ui <- function(request) {
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
 golem_add_external_resources <- function() {
-  add_resource_path(
-    "www",
-    app_sys("app/www")
-  )
-
+  add_resource_path("www", app_sys("app/www"))
   tags$head(
     favicon(),
     bundle_resources(
       path = app_sys("app/www"),
       app_title = "apscp"
-    )
-    # Add here other external resources
-    # for example, you can add shinyalert::useShinyalert()
+    ),
+    sidebar_deps()
   )
 }

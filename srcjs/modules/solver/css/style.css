@@ -14,8 +14,10 @@
   --switch-secondary: color-mix(in srgb, var(--switch-primary), white 30%) !important;
   --space-sm: 5px;
   --max-height: 100vh;
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
 }
-
 
 /* Main container
    ========================================================================== */

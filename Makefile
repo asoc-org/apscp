@@ -92,11 +92,11 @@ quicksite:
 
 # commands to launch app
 ## launch local version using system libraries
-debug_renv:
-	$(R) -e "options(golem.app.prod = FALSE); golem::run_dev()"
+debug_renv: bundle_dev
+	export GOLEM_CONFIG_ACTIVE="dev" && $(R) -e "options(golem.app.prod = FALSE); golem::run_dev()"
 
-debug:
-	$(R) -e "options(golem.app.prod = FALSE, quick = TRUE); golem::run_dev()"
+debug: bundle_dev
+	export GOLEM_CONFIG_ACTIVE="dev" && $(R) -e "options(golem.app.prod = FALSE, quick = TRUE); golem::run_dev()"
 
 ## launch local version inside Docker container
 demo:

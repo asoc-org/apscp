@@ -17,7 +17,7 @@ export function addTooltip(element, text) {
 
 /**
  * Create a provenance.
- * @param {Object} x - Object with properties for customization.
+ * @param {object} x - Object with properties for customization.
  * @param {string} x.description - Text to display in tool tip.
  * @param {string} x.icon - Name of Font Awesome icon.
  * @param {string} x.color - Color for icon.
@@ -37,7 +37,7 @@ export function createProvenance(x) {
 
 /**
  * Create a name label.
- * @param {Object} x - Object with properties for customization.
+ * @param {object} x - Object with properties for customization.
  * @param {string} x.description - Text to display in tool tip.
  * @param {string} x.icon - Name of Font Awesome icon.
  * @param {string} x.color - Color for icon.

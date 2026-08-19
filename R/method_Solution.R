@@ -103,7 +103,7 @@ create_optimized_solution <- function(
     assertthat::noNA(name),
     ## id
     assertthat::is.string(id),
-    assertthat::noNA(id),
+    assertthat::noNA(id)
   )
 
   # generate prioritization
@@ -117,7 +117,7 @@ create_optimized_solution <- function(
 
   # add solution to dataset
   column <- make_unique_column_name(name, project$dataset$get_column_names())
-  project$dataset$set_column_value(column, sol$solution)
+  project$dataset$set_column_data(column, sol$solution)
 
   # return new solution object
   new_solution(
@@ -132,7 +132,7 @@ create_optimized_solution <- function(
       legend = create_solution_legend(project),
       provenance = tool_generated_provenance(),
       total = sum(sol$solution),
-      details = NULL,
+      details = NULL
     ),
     id = id
   )

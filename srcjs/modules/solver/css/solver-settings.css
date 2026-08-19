@@ -4,7 +4,7 @@
 
 /* overall container style */
 .solver .solver-settings {
-  height: calc(var(--max-height) - 250px + 38px + var(--space-sm));
+  height: calc(var(--max-height) - 230px + 38px + var(--space-sm));
   width: 100%;
   display: flex;
   flex-direction: column;

@@ -92,20 +92,20 @@ export class FeatureSetting {
   _sliderStep;
 
   /**
-  * Construct a new FeatureSetting object.
- * @param {Object} feature - Feature object.
- * @param {string} feature.id - Unique identifier.
- * @param {string} feature.name - Name.
- * @param {string} feature.layer.column - Column with data.
- * @param {Array<number>} feature.zone_targets - Initial target values.
- * @param {Array<number>} feature.zone_weights - Initial weights values.
- * @param {Array<string>} zones - Array of zone names.
- * @param {Array<number>} featureTargetChoices - Array of numbers used to
- * define the potential values for setting feature targets.
- * @param {Array<number>} featureWeightChoices - Array of numbers used to
- * define the potential values for setting feature weights.
-  * @return {void}
-  */
+   * Construct a new FeatureSetting object.
+   * @param {object} feature - Feature object.
+   * @param {string} feature.id - Unique identifier.
+   * @param {string} feature.name - Name.
+   * @param {string} feature.layer.column - Column with data.
+   * @param {Array<number>} feature.zone_targets - Initial target values.
+   * @param {Array<number>} feature.zone_weights - Initial weights values.
+   * @param {Array<string>} zones - Array of zone names.
+   * @param {Array<number>} featureTargetChoices - Array of numbers used to
+   * define the potential values for setting feature targets.
+   * @param {Array<number>} featureWeightChoices - Array of numbers used to
+   * define the potential values for setting feature weights.
+   * @return {void}
+   */
   constructor(
     feature, zones, featureTargetChoices, featureWeightChoices
   ) {
@@ -210,10 +210,10 @@ export class FeatureSetting {
   }
 
   /**
-  * Append the HTML element for the class to another HTML element.
-  * @param {HTMLElement} element - HTML element.
-  * @return {void}
-  */
+   * Create and append a HTML element for this object to another HTML element.
+   * @param {HTMLElement} element - HTML element.
+   * @return {void}
+   */
   appendTo(element) {
     // append to element
     element.appendChild(this.element);
@@ -236,49 +236,49 @@ export class FeatureSetting {
   };
 
   /**
-  * Set amount held for each feature.
-  * @param {Array<number>} - New held values.
-  * @return {void}
-  */
+   * Set amount held for each feature.
+   * @param {Array<number>} - New held values.
+   * @return {void}
+   */
   setHeldStatus(values) {
     this._status.statusBar.set(values);
   }
 
   /**
-  * Increment the target for a zone.
-  * @param {string} zone - Zone name.
-  * @return {void}
-  */
+   * Increment the target for a zone.
+   * @param {string} zone - Zone name.
+   * @return {void}
+   */
   incrementZoneTarget(zone) {
     let i = this._zones.indexOf(zone);
     // TODO
   }
 
   /**
-  * Decrement the target for a zone.
-  * @param {string} zone - Zone name.
-  * @return {void}
-  */
+   * Decrement the target for a zone.
+   * @param {string} zone - Zone name.
+   * @return {void}
+   */
   decrementZoneTarget(zone) {
     let i = this._zones.indexOf(zone);
     // TODO
   }
 
   /**
-  * Increment the weight for a zone.
-  * @param {string} zone - Zone name.
-  * @return {void}
-  */
+   * Increment the weight for a zone.
+   * @param {string} zone - Zone name.
+   * @return {void}
+   */
   incrementZoneWeight(zone) {
     let i = this._zones.indexOf(zone);
     // TODO
   }
 
   /**
-  * Decrement the weight for a zone.
-  * @param {string} zone - Zone name.
-  * @return {void}
-  */
+   * Decrement the weight for a zone.
+   * @param {string} zone - Zone name.
+   * @return {void}
+   */
   decrementZoneWeight(zone) {
     let i = this._zones.indexOf(zone);
     // TODO

@@ -1,3 +1,4 @@
+/** Import dependencies */
 import {Mapper} from "../modules/mapper/mapper-class.js";
 
 HTMLWidgets.widget({
@@ -18,7 +19,7 @@ HTMLWidgets.widget({
           // attach the widget to the DOM
           let el = document.getElementById(elementId);
           el.widget = this;
-          // initialize map manager
+          // initialize widget
           handle.initialize(el, opts.mapId, opts.project, opts.maxLayers);
         }
       },
@@ -33,7 +34,7 @@ HTMLWidgets.widget({
       addLayer: function(params) {
         // specify visibility
         params.value.layer.visible = params.visible;
-        // add layer to mapper
+        // add layer to widget
         handle.addLayer(params.value);
         // since R code is used to update the map, so updateMap = false
         handle.showLayerOnMenu(params.value.id, true, false);

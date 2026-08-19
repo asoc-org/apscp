@@ -78,7 +78,7 @@ export function createCategoricalLegend(x) {
  * Note that this must have the same length as {@link x.breaks}.
  * @param {string} x.units - Units for the legend items.
  * @return {HTMLElement}
-*/
+ */
 export function createContinuousLegend(x) {
   // initialize legend
   let el = document.createElement("div");

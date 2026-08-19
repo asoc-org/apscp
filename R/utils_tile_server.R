@@ -53,9 +53,7 @@ tile_server_start <- function(x, verbose = TRUE) {
   )
 
   # launch tile server process
-  suppressMessages(
-    freestiler::serve_tiles(dir, port = port)
-  )
+  suppressMessages(freestiler::serve_tiles(dir, port = port))
 
   # display message
   if (isTRUE(verbose)) {

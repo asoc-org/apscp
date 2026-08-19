@@ -52,25 +52,25 @@ export default class HoverSelect {
   _onClick;
 
   /**
-  * Construct a new HoverSelect object.
-  * @param {HTMLElement} element - Element to create hover select.
-  * @param {object} options - Configuration settings.
-  * @param {Array<object>} options.options - Array of select options.
-  * @param {Array<string>} options.options.value - Value for option.
-  * @param {Array<string>} options.options.text - Text for option.
-  * @param {Array<string>} options.options.color - Color for option.
-  * @param {string} options.selected - Value for default selected option.
-  * @param {object} options.disabledOption - Option to display when
-  * disabled.
-  * @param {string} options.disabledOption.value - Value when disabled.
-  * @param {string} options.disabledOption.text - Text to display when
-  * disabled.
-  * @param {string} options.disabledOption.color - Color to display when
-  * disabled.
-  * @param {function} options.onClick - Function to define click event
-  * behavior.
-  * @return {void}
-  */
+   * Construct a new HoverSelect object.
+   * @param {HTMLElement} element - Element to create hover select.
+   * @param {object} options - Configuration settings.
+   * @param {Array<object>} options.options - Array of select options.
+   * @param {Array<string>} options.options.value - Value for option.
+   * @param {Array<string>} options.options.text - Text for option.
+   * @param {Array<string>} options.options.color - Color for option.
+   * @param {string} options.selected - Value for default selected option.
+   * @param {object} options.disabledOption - Option to display when
+   * disabled.
+   * @param {string} options.disabledOption.value - Value when disabled.
+   * @param {string} options.disabledOption.text - Text to display when
+   * disabled.
+   * @param {string} options.disabledOption.color - Color to display when
+   * disabled.
+   * @param {function} options.onClick - Function to define click event
+   * behavior.
+   * @return {void}
+   */
   constructor(element, options) {
     // initialize public field
     this.element = element;
