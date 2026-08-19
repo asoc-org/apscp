@@ -116,7 +116,9 @@ server <- function(input, output, session) {
   # map
   output$map <- renderMapboxgl({
     mapboxgl() |>
-      add_sidebar_control(id = "leftsidebar", position = "top-left") |>
+      add_sidebar_control(
+        id = "leftsidebar", position = "top-left", selected = "profile_id"
+      ) |>
       add_sidebar_control(id = "rightsidebar", position = "top-right") |>
       fit_bounds(pts_data) |>
       add_circle_layer(id = "pts", source = pts_data, circle_color = "blue")
@@ -183,4 +185,4 @@ server <- function(input, output, session) {
 }
 
 # launch Shiny application
-runApp(shinyApp(ui, server), launch.browser = TRUE)
+runApp(shinyApp(ui, server), launch.browser = TRUE, port = 8092)

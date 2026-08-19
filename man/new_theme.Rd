@@ -4,14 +4,15 @@
 \alias{new_theme}
 \title{New theme}
 \usage{
-new_theme(name, zone)
+new_theme(name, zone = NULL)
 }
 \arguments{
 \item{name}{`character` value with name.}
 
 \item{zone}{`character` name of zone associated with the theme.
 Note that `zone` should match one of the zone names associated with
-the [new_project()] to which this theme belongs.}
+the [new_project()] to which this theme belongs. Defaults to `NULL`
+such that the theme is not associated with any particular zone.}
 }
 \value{
 A `Theme` object.

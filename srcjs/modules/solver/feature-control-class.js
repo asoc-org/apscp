@@ -5,6 +5,8 @@ import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // classes to create components
 import {FeatureSetting} from "./feature-setting-class.js";
+// utility functions
+import {themeGroupName} from "../utils/misc.js";
 // styling
 import "./css/solver-control.css";
 import "./css/solver-settings.css";
@@ -58,21 +60,21 @@ export class FeatureControl {
     }
     // create parameters for select menu
     let features = [];
-    let themes = new Set();
+    let groups = new Set();
     for (let i = 0; i < project.features.length; ++i) {
       features.push({
         value: project.features[i].id,
         name: project.features[i].name,
-        zone: project.features[i].themes.map(x => x.zone)
+        group: project.features[i].themes.map(x => themeGroupName(x))
       });
-      for (let j = 0; j < project.features[i].themes.length; ++j) {
-        themes.add(project.features[i].themes[j].zone);
+      for (let j = 0; j < features[i].group.length; ++j) {
+        groups.add(features[i].group[j]);
       }
     }
     // cache parameters for select menu
     this._cache = {
       options: features,
-      optgroups: Array.from(themes).map(x => {return {value: x}})
+      optgroups: Array.from(groups).map(x => {return {value: x}})
     };
   }
 
@@ -111,15 +113,13 @@ export class FeatureControl {
       sortField: "name",
       closeAfterSelect: false,
       optgroups: this._cache.optgroups,
-      optgroupField: "zone",
+      optgroupField: "group",
       plugins: {
         checkbox_options: {}
       },
       render: {
         optgroup_header: function(data, escape) {
-          return '<div class="optgroup-header">' +
-            escape(data.value + " zone") +
-            '</div>';
+          return `<div class="optgroup-header">${escape(data.value)}</div>`;
         }
       },
       onItemAdd: (value) => {

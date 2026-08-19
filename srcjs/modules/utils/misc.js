@@ -37,3 +37,18 @@ export function toArray(object) {
   }
   return [object];
 }
+
+/**
+* Group name for theme object.
+* @param {object} object - Theme object.
+* @param {string} object.name - Name of theme.
+* @param {string} object.zone - Zone associated with the theme.
+* @return {Array<object>}
+*/
+export function themeGroupName(object) {
+  if (typeof(object.zone) === "string") {
+    return `${object.zone}: ${object.name}`;
+  } else {
+    return object.name;
+  }
+}

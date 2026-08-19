@@ -190,6 +190,7 @@ export class Solver {
   */
   getControl() {
     return {
+      name: this._nameInput.value,
       features: this._featureControl.getSettings(),
       locks: this._lockControl.getSettings(),
       costs: this._costControl.getSettings()

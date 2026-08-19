@@ -88,7 +88,7 @@ mapgl_source_url <- function(x) {
   assertthat::assert_that(
     inherits(x, "ProjectComponent") || inherits(x, "Tile")
   )
-  # if neededd, extact tile
+  # if needed, extract tile
   if (!inherits(x, "Tile")) {
     x <- x$layer$tile
   }

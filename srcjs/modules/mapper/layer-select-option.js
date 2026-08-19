@@ -1,3 +1,7 @@
+/** Import dependencies */
+// utility functions
+import {themeGroupName} from "../utils/misc.js";
+
 /**
  * Create a select option for an object.
  * @param {object} x - Object.
@@ -17,7 +21,7 @@ export function layerSelectOption(x) {
     // if object has themes, then add groups based on them
     out.group =
       x.themes
-      .map(y => `${group} (${y.zone}: ${y.name})`)
+      .map(y => `${group}: ${themeGroupName(y)}`)
       .sort()
   } else {
     // otherwise, then add group based on class name

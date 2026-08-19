@@ -57,4 +57,4 @@ server <- function(input, output, session) {
 }
 
 # launch Shiny application
-runApp(shinyApp(ui, server), launch.browser = TRUE)
+runApp(shinyApp(ui, server), launch.browser = TRUE, port = 8091)

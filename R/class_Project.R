@@ -146,9 +146,12 @@ Project <- R6::R6Class(
 
     #' @description
     #' Get centroid.
+    #' @param native `logical` value indicating if the bounding box should
+    #' be in (`TRUE`) the native coordinate reference system or (`FALSE`)
+    #' re-projected to longitude/latitude?
     #' @return A `numeric` vector with two values.
-    get_centroid = function() {
-      bb <- self$dataset$get_bbox()
+    get_centroid = function(native = TRUE) {
+      bb <- self$get_bbox(native = native)
       c((bb[[1]] + bb[[3]]) * 0.5, (bb[[2]] + bb[[4]]) * 0.5)
     },
 

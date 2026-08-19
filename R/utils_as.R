@@ -51,5 +51,13 @@ as.list.JsDataFrameList <- function(x, ...) {
   # assert valid object
   assertthat::assert_that(is.list(x))
   # return result
-  stats::setNames(lapply(x, as.data.frame.JsDataFrame), names(x))
+  stats::setNames(
+    lapply(x, function(y) {
+      if (is.list(y)) {
+        return(as.data.frame.JsDataFrame(y))
+      }
+      y
+    }),
+    names(x)
+  )
 }

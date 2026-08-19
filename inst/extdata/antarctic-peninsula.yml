@@ -13,7 +13,7 @@ tiles:
   class: Tile
 costs:
 - name: Tourism vessel landings
-  id: 9657cd5d-a690-4416-810e-539a50d888a5
+  id: e44cd00f-0212-49cd-a19f-538868c8b5cd
   zone: Tourism
   weight: 1.0
   layer:
@@ -61,7 +61,7 @@ costs:
     class: Layer
   class: Cost
 - name: Tourism visitor landings
-  id: 65fd6bf5-f850-498e-97eb-9eba93101edd
+  id: f4fa68fd-6d4f-412f-9268-7124fe539982
   zone: Tourism
   weight: 1.0
   layer:
@@ -110,7 +110,7 @@ costs:
   class: Cost
 features:
 - name: Adélie penguins
-  id: 4961762d-4603-4977-aab4-cbd668c4ef09
+  id: 037ec045-7e7f-41bb-b758-b90a0207d21d
   zone_targets:
   - 0.6
   - 0.1
@@ -168,17 +168,11 @@ features:
     class: Layer
   themes:
   - name: Penguins
-    zone: Biodiversity
-    class: Theme
-  - name: Penguins
-    zone: Scientific
-    class: Theme
-  - name: Penguins
-    zone: Penguins
+    zone: ~
     class: Theme
   class: Feature
 - name: Antarctic fur seals
-  id: 599da4d4-d483-4e2d-a1d9-ad413653942a
+  id: e55cfd0d-0d8b-4f93-b2ea-7f1c219fa7ec
   zone_targets:
   - 0.3
   - 0.1
@@ -238,17 +232,11 @@ features:
     class: Layer
   themes:
   - name: Seals
-    zone: Biodiversity
-    class: Theme
-  - name: Seals
-    zone: Scientific
-    class: Theme
-  - name: Seals
-    zone: Seals
+    zone: ~
     class: Theme
   class: Feature
 - name: Antarctic shag
-  id: 04fee30f-70b8-476d-aa5b-9f7086908833
+  id: e0985e03-db18-45b8-9674-c467b9cbbe33
   zone_targets:
   - 0.6
   - 0.1
@@ -287,20 +275,11 @@ features:
     class: Layer
   themes:
   - name: Seabirds
-    zone: Biodiversity
-    class: Theme
-  - name: Seabirds
-    zone: Scientific
-    class: Theme
-  - name: Seabirds
-    zone: Tourism
-    class: Theme
-  - name: Seabirds
-    zone: Seabirds
+    zone: ~
     class: Theme
   class: Feature
 - name: Antarctic terns
-  id: 8100f1fa-b0a6-4a91-8c8e-ec9ce27475ba
+  id: 61dcbeb2-d0c1-4dc1-927f-45872ada4d44
   zone_targets:
   - 0.6
   - 0.0
@@ -339,20 +318,11 @@ features:
     class: Layer
   themes:
   - name: Seabirds
-    zone: Biodiversity
-    class: Theme
-  - name: Seabirds
-    zone: Scientific
-    class: Theme
-  - name: Seabirds
-    zone: Tourism
-    class: Theme
-  - name: Seabirds
-    zone: Seabirds
+    zone: ~
     class: Theme
   class: Feature
 - name: Biological soil crust microbes
-  id: bb05fbeb-0c4a-447e-b231-dc329955f1c4
+  id: 8b515449-82a0-4c4e-9e27-72ec70799566
   zone_targets:
   - 0.7
   - 0.1
@@ -414,20 +384,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Chinstrap penguins
-  id: d48d7d4f-8790-4003-ad10-88bdc60772db
+  id: a0f82314-c191-4561-b432-87259337ba46
   zone_targets:
   - 0.6
   - 0.1
@@ -489,17 +450,11 @@ features:
     class: Layer
   themes:
   - name: Penguins
-    zone: Biodiversity
-    class: Theme
-  - name: Penguins
-    zone: Scientific
-    class: Theme
-  - name: Penguins
-    zone: Penguins
+    zone: ~
     class: Theme
   class: Feature
 - name: Continental landing site
-  id: a770ee69-e708-4963-abdb-9ee48c2eaf50
+  id: e0ccbe74-561d-4516-b90d-ee65051cb7d3
   zone_targets:
   - 0.0
   - 0.0
@@ -538,20 +493,11 @@ features:
     class: Layer
   themes:
   - name: Geographic
-    zone: Biodiversity
-    class: Theme
-  - name: Geographic
-    zone: Scientific
-    class: Theme
-  - name: Geographic
-    zone: Tourism
-    class: Theme
-  - name: Geographic
-    zone: Geographic
+    zone: ~
     class: Theme
   class: Feature
 - name: Crevasses
-  id: d9488f2a-af59-43e8-84e8-ccb4a16efa32
+  id: d0ff0490-7f37-4f31-bdec-d91d96c2e962
   zone_targets:
   - 0.1
   - 0.1
@@ -609,20 +555,11 @@ features:
     class: Layer
   themes:
   - name: Ice
-    zone: Biodiversity
-    class: Theme
-  - name: Ice
-    zone: Scientific
-    class: Theme
-  - name: Ice
-    zone: Tourism
-    class: Theme
-  - name: Ice
-    zone: Ice
+    zone: ~
     class: Theme
   class: Feature
 - name: Dry soil microbes
-  id: aa40f202-a91a-48ff-9393-35d6c480aff9
+  id: a8847854-ad54-4a1b-a799-9fe0e9a9597b
   zone_targets:
   - 0.8
   - 0.1
@@ -682,20 +619,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Elephant seals
-  id: 16e429c8-9bec-48ba-b89a-f94bd6d8735a
+  id: 992de35d-3e4b-4bd9-84d4-2ed3b6ae706c
   zone_targets:
   - 0.6
   - 0.1
@@ -755,17 +683,11 @@ features:
     class: Layer
   themes:
   - name: Seals
-    zone: Biodiversity
-    class: Theme
-  - name: Seals
-    zone: Scientific
-    class: Theme
-  - name: Seals
-    zone: Seals
+    zone: ~
     class: Theme
   class: Feature
 - name: Emperor penguins
-  id: fc8247cc-cd37-4d1d-8012-fda6486234ff
+  id: 184ea02f-ffc3-433b-94d6-2752c57545dd
   zone_targets:
   - 0.6
   - 0.0
@@ -804,17 +726,11 @@ features:
     class: Layer
   themes:
   - name: Penguins
-    zone: Biodiversity
-    class: Theme
-  - name: Penguins
-    zone: Scientific
-    class: Theme
-  - name: Penguins
-    zone: Penguins
+    zone: ~
     class: Theme
   class: Feature
 - name: Entomobryomorpha springtails
-  id: 85db0eed-1728-47c2-b631-bb1fe6c996ab
+  id: 22609596-37c3-4b46-ba87-d9f7174058b8
   zone_targets:
   - 0.2
   - 0.1
@@ -876,17 +792,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Fast ice / shelf ice
-  id: da7941fa-954e-49ca-8ae1-f1f7fcaf7007
+  id: e1a76a5f-f565-476b-bd92-63517e63e45d
   zone_targets:
   - 0.2
   - 0.4
@@ -944,20 +854,11 @@ features:
     class: Layer
   themes:
   - name: Ice
-    zone: Biodiversity
-    class: Theme
-  - name: Ice
-    zone: Scientific
-    class: Theme
-  - name: Ice
-    zone: Tourism
-    class: Theme
-  - name: Ice
-    zone: Ice
+    zone: ~
     class: Theme
   class: Feature
 - name: Fossil bearing rocks
-  id: c9637f0f-7837-45ec-bfc2-ec494aad044c
+  id: d832aec5-4569-4f0d-bed4-08376d651e0f
   zone_targets:
   - 0.1
   - 0.1
@@ -1015,17 +916,11 @@ features:
     class: Layer
   themes:
   - name: Outstanding geological
-    zone: Biodiversity
-    class: Theme
-  - name: Outstanding geological
-    zone: Scientific
-    class: Theme
-  - name: Outstanding geological
-    zone: Outstanding geological
+    zone: ~
     class: Theme
   class: Feature
 - name: Fresh water
-  id: 5f9f5692-3b3d-4f8c-98f9-ac8646eb535a
+  id: 7ed7a6f9-0d98-469d-81f3-abbf8639c68f
   zone_targets:
   - 0.1
   - 0.1
@@ -1064,17 +959,11 @@ features:
     class: Layer
   themes:
   - name: Habitats
-    zone: Biodiversity
-    class: Theme
-  - name: Habitats
-    zone: Scientific
-    class: Theme
-  - name: Habitats
-    zone: Habitats
+    zone: ~
     class: Theme
   class: Feature
 - name: Freshwater copepods
-  id: c264eb20-a5cd-4f53-b59d-34dd6b2f69b2
+  id: db68bd4e-56a3-46fd-8282-dfa536708e39
   zone_targets:
   - 0.3
   - 0.2
@@ -1132,17 +1021,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: General invertebrates
-  id: 0565c828-31ff-4c33-affd-0d14d811551b
+  id: 3d356906-559f-458d-9e16-73648cd21b9d
   zone_targets:
   - 0.0
   - 0.0
@@ -1181,17 +1064,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Gentoo penguins
-  id: 73f551a9-0ae0-4df5-984b-0c5b564b2800
+  id: 7394a72c-8b14-41ae-9378-1b4047593f00
   zone_targets:
   - 0.4
   - 0.1
@@ -1253,17 +1130,11 @@ features:
     class: Layer
   themes:
   - name: Penguins
-    zone: Biodiversity
-    class: Theme
-  - name: Penguins
-    zone: Scientific
-    class: Theme
-  - name: Penguins
-    zone: Penguins
+    zone: ~
     class: Theme
   class: Feature
 - name: Geological processes
-  id: 8206efc7-46aa-4d3c-8af9-63c4a70e2344
+  id: 48a0a03e-a7fa-4503-9d00-200a29669535
   zone_targets:
   - 0.3
   - 0.1
@@ -1320,17 +1191,11 @@ features:
     class: Layer
   themes:
   - name: Outstanding geological
-    zone: Biodiversity
-    class: Theme
-  - name: Outstanding geological
-    zone: Scientific
-    class: Theme
-  - name: Outstanding geological
-    zone: Outstanding geological
+    zone: ~
     class: Theme
   class: Feature
 - name: Geotermal/volcanic sites
-  id: 79a79682-5922-4bbe-8d04-2fc09f3963cb
+  id: 401f6dd5-1d4a-4081-bc59-c338fc791d2d
   zone_targets:
   - 0.6
   - 0.0
@@ -1369,17 +1234,11 @@ features:
     class: Layer
   themes:
   - name: Habitats
-    zone: Biodiversity
-    class: Theme
-  - name: Habitats
-    zone: Scientific
-    class: Theme
-  - name: Habitats
-    zone: Habitats
+    zone: ~
     class: Theme
   class: Feature
 - name: Glaciers
-  id: 006ba8c4-4f3e-4d65-9671-986c0c887ffb
+  id: 804bcb76-5f13-4838-bb32-fa6c1a6f8ff4
   zone_targets:
   - 0.2
   - 0.1
@@ -1437,20 +1296,11 @@ features:
     class: Layer
   themes:
   - name: Ice
-    zone: Biodiversity
-    class: Theme
-  - name: Ice
-    zone: Scientific
-    class: Theme
-  - name: Ice
-    zone: Tourism
-    class: Theme
-  - name: Ice
-    zone: Ice
+    zone: ~
     class: Theme
   class: Feature
 - name: Historic monuments
-  id: f8226d7b-7a1b-4e1e-8999-aed8150ead42
+  id: ecb99e77-53d3-488e-9009-c1e6e80ea34c
   zone_targets:
   - 0.0
   - 0.5
@@ -1489,17 +1339,11 @@ features:
     class: Layer
   themes:
   - name: Historic
-    zone: Scientific
-    class: Theme
-  - name: Historic
-    zone: Tourism
-    class: Theme
-  - name: Historic
-    zone: Historic
+    zone: ~
     class: Theme
   class: Feature
 - name: Ice shelf
-  id: 1847c058-0413-4a63-93f8-c9f7c3769eb1
+  id: 066415b7-e3e4-4d5a-a76e-a6672055adc9
   zone_targets:
   - 0.0
   - 0.1
@@ -1538,20 +1382,11 @@ features:
     class: Layer
   themes:
   - name: Ice
-    zone: Biodiversity
-    class: Theme
-  - name: Ice
-    zone: Scientific
-    class: Theme
-  - name: Ice
-    zone: Tourism
-    class: Theme
-  - name: Ice
-    zone: Ice
+    zone: ~
     class: Theme
   class: Feature
 - name: Intertidal mites
-  id: af863039-abe7-4d7b-8844-f39bc3342ad6
+  id: 54826d9c-3d63-46c0-ad53-cd79d6dc769b
   zone_targets:
   - 0.3
   - 0.1
@@ -1611,17 +1446,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Intertidal oligochaetes
-  id: 11def44e-8dd3-4ae6-b050-5d2162aa7e1c
+  id: 1dd6fec9-f700-4487-931e-173c486c3a26
   zone_targets:
   - 0.2
   - 0.1
@@ -1679,17 +1508,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Intertidal springtails
-  id: 974288c2-16f6-42f6-9fc5-d13b9e018c78
+  id: 9f3e9891-541b-45c7-8533-04f03cb5e379
   zone_targets:
   - 0.2
   - 0.3
@@ -1747,17 +1570,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Invasive species
-  id: edff498e-80d9-4200-8d57-eec7d9d301e5
+  id: 68b57ad0-60e7-46a4-894c-6bd9f8ae7fd7
   zone_targets:
   - 0.0
   - 0.1
@@ -1797,17 +1614,11 @@ features:
     class: Layer
   themes:
   - name: Habitats
-    zone: Biodiversity
-    class: Theme
-  - name: Habitats
-    zone: Scientific
-    class: Theme
-  - name: Habitats
-    zone: Habitats
+    zone: ~
     class: Theme
   class: Feature
 - name: King penguins
-  id: d737d9ed-c522-4d31-8678-986be319f66e
+  id: 2ccb6a2a-ac55-41fd-87ef-9ad509298014
   zone_targets:
   - 0.9
   - 0.1
@@ -1867,17 +1678,11 @@ features:
     class: Layer
   themes:
   - name: Penguins
-    zone: Biodiversity
-    class: Theme
-  - name: Penguins
-    zone: Scientific
-    class: Theme
-  - name: Penguins
-    zone: Penguins
+    zone: ~
     class: Theme
   class: Feature
 - name: Leafy liverworts
-  id: 2c753875-8460-4983-9104-135522841724
+  id: 1b307fcb-c7bf-4d98-80e5-23831d03aed8
   zone_targets:
   - 0.2
   - 0.1
@@ -1935,20 +1740,11 @@ features:
     class: Layer
   themes:
   - name: Vegetation
-    zone: Biodiversity
-    class: Theme
-  - name: Vegetation
-    zone: Scientific
-    class: Theme
-  - name: Vegetation
-    zone: Tourism
-    class: Theme
-  - name: Vegetation
-    zone: Vegetation
+    zone: ~
     class: Theme
   class: Feature
 - name: Lithic microbes
-  id: 6fdfdb57-aedc-4a2f-bd19-67ad4b9a48de
+  id: 8e232de5-ac5a-4db7-9da6-c9c5651a5e85
   zone_targets:
   - 0.6
   - 0.1
@@ -2009,20 +1805,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Macaroni penguins
-  id: d7e1c78f-fe78-427c-a6ce-df77e97a4a06
+  id: 19ae2414-82ed-454f-9c00-5e70bd30adeb
   zone_targets:
   - 0.7
   - 0.1
@@ -2080,17 +1867,11 @@ features:
     class: Layer
   themes:
   - name: Penguins
-    zone: Biodiversity
-    class: Theme
-  - name: Penguins
-    zone: Scientific
-    class: Theme
-  - name: Penguins
-    zone: Penguins
+    zone: ~
     class: Theme
   class: Feature
 - name: Mesic mosses
-  id: 45b9579b-de5e-4b2a-82d0-366db143ff13
+  id: a40c6f06-7ae5-44f7-bf1f-80dedbcc8319
   zone_targets:
   - 0.1
   - 0.1
@@ -2148,20 +1929,11 @@ features:
     class: Layer
   themes:
   - name: Vegetation
-    zone: Biodiversity
-    class: Theme
-  - name: Vegetation
-    zone: Scientific
-    class: Theme
-  - name: Vegetation
-    zone: Tourism
-    class: Theme
-  - name: Vegetation
-    zone: Vegetation
+    zone: ~
     class: Theme
   class: Feature
 - name: Meteorites
-  id: 32a668c4-e3d4-4567-8e4b-09755d2f1f19
+  id: d2fbf31f-7bba-4381-9136-2a882ba60d36
   zone_targets:
   - 0.4
   - 0.1
@@ -2219,17 +1991,11 @@ features:
     class: Layer
   themes:
   - name: Outstanding geological
-    zone: Biodiversity
-    class: Theme
-  - name: Outstanding geological
-    zone: Scientific
-    class: Theme
-  - name: Outstanding geological
-    zone: Outstanding geological
+    zone: ~
     class: Theme
   class: Feature
 - name: Microbial mats
-  id: 559f19c2-dcc6-4fcc-957c-9412f757fd7c
+  id: a87d1e20-3ff8-4b15-b22d-74d9daedfb00
   zone_targets:
   - 0.4
   - 0.1
@@ -2289,20 +2055,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Minerals and crystals
-  id: 110ec2a6-5fcc-4a14-9cab-07365234aa41
+  id: fe906818-7ba0-4e72-8468-d710c3531ff9
   zone_targets:
   - 0.6
   - 0.1
@@ -2362,17 +2119,11 @@ features:
     class: Layer
   themes:
   - name: Outstanding geological
-    zone: Biodiversity
-    class: Theme
-  - name: Outstanding geological
-    zone: Scientific
-    class: Theme
-  - name: Outstanding geological
-    zone: Outstanding geological
+    zone: ~
     class: Theme
   class: Feature
 - name: Monitoring sites
-  id: 8d6558e3-738a-49c6-a6dc-d82b7f1f1934
+  id: 6df03a44-84ee-42c7-b6d3-7769bb6019ee
   zone_targets:
   - 0.0
   - 0.1
@@ -2411,17 +2162,11 @@ features:
     class: Layer
   themes:
   - name: Science
-    zone: Scientific
-    class: Theme
-  - name: Science
-    zone: Tourism
-    class: Theme
-  - name: Science
-    zone: Science
+    zone: ~
     class: Theme
   class: Feature
 - name: Moss-associated microfauna
-  id: 62ff0245-9282-4ea8-81d9-1ebee2d763de
+  id: cc9a99e6-1bfa-4fd3-8639-edf6bb4914ed
   zone_targets:
   - 0.2
   - 0.1
@@ -2479,17 +2224,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Other seabird colonies
-  id: a492ea25-1533-4bc4-83cf-f3826916dfca
+  id: dcd9f0eb-646d-48ad-a549-1e5c44b1e5de
   zone_targets:
   - 0.0
   - 0.0
@@ -2528,20 +2267,11 @@ features:
     class: Layer
   themes:
   - name: Seabirds
-    zone: Biodiversity
-    class: Theme
-  - name: Seabirds
-    zone: Scientific
-    class: Theme
-  - name: Seabirds
-    zone: Tourism
-    class: Theme
-  - name: Seabirds
-    zone: Seabirds
+    zone: ~
     class: Theme
   class: Feature
 - name: Penguin rookery-associated nematodes
-  id: 615c3bb0-15db-41a7-9690-3c96cad31e26
+  id: 04caea1c-4ea5-432a-a5b3-79648fe92b47
   zone_targets:
   - 0.2
   - 0.1
@@ -2597,17 +2327,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Plankton
-  id: 2b1e75ba-3d20-42f4-b6e0-d0e5012f9865
+  id: 865ceb8f-0e6b-45c5-ac24-b1a7d5ccad21
   zone_targets:
   - 0.8
   - 0.1
@@ -2665,20 +2389,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Poduromorpha springtails
-  id: 5e8e2c9e-5558-4a67-a35d-57a4bfb7742d
+  id: 6181e954-1c19-4403-a00d-1a1f59dc317d
   zone_targets:
   - 0.3
   - 0.5
@@ -2738,17 +2453,11 @@ features:
     class: Layer
   themes:
   - name: Invertebrates
-    zone: Biodiversity
-    class: Theme
-  - name: Invertebrates
-    zone: Scientific
-    class: Theme
-  - name: Invertebrates
-    zone: Invertebrates
+    zone: ~
     class: Theme
   class: Feature
 - name: Potential expansion zones
-  id: 487362c3-101a-41b2-8ccb-06957307b9c4
+  id: a23804fb-f6d7-4c13-bce0-ea1bb29011c5
   zone_targets:
   - 0.3
   - 0.1
@@ -2808,20 +2517,11 @@ features:
     class: Layer
   themes:
   - name: Geographic
-    zone: Biodiversity
-    class: Theme
-  - name: Geographic
-    zone: Scientific
-    class: Theme
-  - name: Geographic
-    zone: Tourism
-    class: Theme
-  - name: Geographic
-    zone: Geographic
+    zone: ~
     class: Theme
   class: Feature
 - name: Procellariids
-  id: 0a598387-087a-4bce-ad5d-4ba6b1865a83
+  id: dc141197-ada5-4090-bf79-01e2ebb3a815
   zone_targets:
   - 0.6
   - 0.0
@@ -2861,20 +2561,11 @@ features:
     class: Layer
   themes:
   - name: Seabirds
-    zone: Biodiversity
-    class: Theme
-  - name: Seabirds
-    zone: Scientific
-    class: Theme
-  - name: Seabirds
-    zone: Tourism
-    class: Theme
-  - name: Seabirds
-    zone: Seabirds
+    zone: ~
     class: Theme
   class: Feature
 - name: Research stations
-  id: 97428588-c04d-486f-a7af-af2200ea3f73
+  id: c554cc97-ec84-45bb-8b71-09d1fe536a3e
   zone_targets:
   - 0.0
   - 0.3
@@ -2913,17 +2604,11 @@ features:
     class: Layer
   themes:
   - name: Science
-    zone: Scientific
-    class: Theme
-  - name: Science
-    zone: Tourism
-    class: Theme
-  - name: Science
-    zone: Science
+    zone: ~
     class: Theme
   class: Feature
 - name: Scientific field camps
-  id: 1678f704-41b6-4477-8988-04760e078cc5
+  id: b699b762-103e-4f0d-baae-94c4d229482a
   zone_targets:
   - 0.0
   - 0.0
@@ -2962,17 +2647,11 @@ features:
     class: Layer
   themes:
   - name: Science
-    zone: Scientific
-    class: Theme
-  - name: Science
-    zone: Tourism
-    class: Theme
-  - name: Science
-    zone: Science
+    zone: ~
     class: Theme
   class: Feature
 - name: Sites past the Antarctic circle
-  id: c5d7ae55-c502-4c8c-ae56-2a3a7c3f0ea7
+  id: 0eca5bc4-a217-4166-b1b4-a61f9e218a89
   zone_targets:
   - 0.0
   - 0.0
@@ -3011,20 +2690,11 @@ features:
     class: Layer
   themes:
   - name: Geographic
-    zone: Biodiversity
-    class: Theme
-  - name: Geographic
-    zone: Scientific
-    class: Theme
-  - name: Geographic
-    zone: Tourism
-    class: Theme
-  - name: Geographic
-    zone: Geographic
+    zone: ~
     class: Theme
   class: Feature
 - name: Snow algae
-  id: aeedcd5b-c11d-4b16-bd16-cc1bc0e359d5
+  id: 1757ddfa-6c64-4bd2-8d11-089f03c544e6
   zone_targets:
   - 0.6
   - 0.1
@@ -3082,20 +2752,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Snow algae 2
-  id: 4abac353-fd66-45c3-bb44-f9852a371a12
+  id: 470cbe0a-c569-4439-abe6-8b9e30fe50b6
   zone_targets:
   - 0.3
   - 0.1
@@ -3134,20 +2795,11 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 - name: Thalloid liverworts
-  id: 2e99278f-5add-410c-8b78-baea30388edf
+  id: 52e77f88-2200-4453-925e-398d87f8b009
   zone_targets:
   - 0.5
   - 0.1
@@ -3205,20 +2857,11 @@ features:
     class: Layer
   themes:
   - name: Vegetation
-    zone: Biodiversity
-    class: Theme
-  - name: Vegetation
-    zone: Scientific
-    class: Theme
-  - name: Vegetation
-    zone: Tourism
-    class: Theme
-  - name: Vegetation
-    zone: Vegetation
+    zone: ~
     class: Theme
   class: Feature
 - name: Truly aquatic mosses
-  id: 2400ad78-e4b2-4350-bfb0-f95a5f0339a7
+  id: 51a52018-529a-4fa2-aa45-3dfbc061c582
   zone_targets:
   - 0.2
   - 0.1
@@ -3276,20 +2919,11 @@ features:
     class: Layer
   themes:
   - name: Vegetation
-    zone: Biodiversity
-    class: Theme
-  - name: Vegetation
-    zone: Scientific
-    class: Theme
-  - name: Vegetation
-    zone: Tourism
-    class: Theme
-  - name: Vegetation
-    zone: Vegetation
+    zone: ~
     class: Theme
   class: Feature
 - name: Vegetation
-  id: 6af3c334-4b80-45ba-a14d-6fc5d6306125
+  id: 1e8d9ddf-f5e6-4d5e-bb09-f46b467b50bb
   zone_targets:
   - 0.0
   - 0.0
@@ -3328,20 +2962,11 @@ features:
     class: Layer
   themes:
   - name: Vegetation
-    zone: Biodiversity
-    class: Theme
-  - name: Vegetation
-    zone: Scientific
-    class: Theme
-  - name: Vegetation
-    zone: Tourism
-    class: Theme
-  - name: Vegetation
-    zone: Vegetation
+    zone: ~
     class: Theme
   class: Feature
 - name: Weddell seals
-  id: c6df2b33-2df4-4880-bf8b-375df67260a7
+  id: d8c543ff-9796-4538-8fe8-e408a86976eb
   zone_targets:
   - 0.1
   - 0.1
@@ -3399,17 +3024,11 @@ features:
     class: Layer
   themes:
   - name: Seals
-    zone: Biodiversity
-    class: Theme
-  - name: Seals
-    zone: Scientific
-    class: Theme
-  - name: Seals
-    zone: Seals
+    zone: ~
     class: Theme
   class: Feature
 - name: Wet soil microbes
-  id: fcbf4250-4cfa-43ca-a944-f810b3822346
+  id: 33c5876a-d279-4689-b3ab-bc2397afff36
   zone_targets:
   - 0.5
   - 0.1
@@ -3467,21 +3086,12 @@ features:
     class: Layer
   themes:
   - name: Microbes
-    zone: Biodiversity
-    class: Theme
-  - name: Microbes
-    zone: Scientific
-    class: Theme
-  - name: Microbes
-    zone: Tourism
-    class: Theme
-  - name: Microbes
-    zone: Microbes
+    zone: ~
     class: Theme
   class: Feature
 locks:
 - name: ASPA
-  id: 0a52a2f7-deb7-463e-ae6f-f12fe4098bc1
+  id: 15d7aac2-db18-4580-84b6-6f75c288ce10
   zone: Biodiversity
   layer:
     column: ASPA
@@ -3509,7 +3119,7 @@ locks:
     class: Layer
   class: Lock
 - name: Inviolate sites
-  id: 4c725727-04d0-433b-90e2-4745fa264d00
+  id: 176f0cc7-9760-4017-995e-8250fc66d7c3
   zone: Biodiversity
   layer:
     column: Inviolate sites

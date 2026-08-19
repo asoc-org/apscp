@@ -10,10 +10,18 @@ import {MapSidebar} from "./class.js"
  * @param {Object} options - Options for customizing the sidebar.
  * @param {string} options.position - Position for sidebar. Acceptable
  * values include `"top-left"` and `"top-right"`.
+ * @param {string} options.selected - HTML identifier for the sidebar pane
+ * to have open by default.
  * @return {void}
  */
 Shiny.mapglSidebarInitialize = function(el, id, height, options) {
-  el.map.addControl(new MapSidebar(id, height, options), options.position);
+  let w = new MapSidebar(document.getElementById(id), height, options);
+  el.map.addControl(w, options.position);
+  if (typeof(options.selected) === "string") {
+    Shiny.initializedPromise.then(() => {
+      setTimeout(() => {w.open(options.selected)}, 1000);
+    });
+  }
 }
 
 /**
@@ -24,8 +32,10 @@ Shiny.mapglSidebarInitialize = function(el, id, height, options) {
  * @return {void}
  */
 Shiny.addCustomMessageHandler("sidebar:open", function(message) {
-  var el = document.getElementById(message.id);
+  let el = document.getElementById(message.id);
   if (el) {
+    console.log("message.pane_id");
+    console.log(message.pane_id);
     el.widget.open(message.pane_id);
   }
 })
@@ -37,7 +47,7 @@ Shiny.addCustomMessageHandler("sidebar:open", function(message) {
  * @return {void}
  */
 Shiny.addCustomMessageHandler("sidebar:close", function(message) {
-  var el = document.getElementById(message.id);
+  let el = document.getElementById(message.id);
   if (el) {
     el.widget.close();
   }
@@ -51,7 +61,7 @@ Shiny.addCustomMessageHandler("sidebar:close", function(message) {
  * @return {void}
  */
 Shiny.addCustomMessageHandler("sidebar:enable", function(message) {
-  var el = document.getElementById(message.id);
+  let el = document.getElementById(message.id);
   if (el) {
     el.widget.enable(message.pane_id);
   }
@@ -65,7 +75,7 @@ Shiny.addCustomMessageHandler("sidebar:enable", function(message) {
  * @return {void}
  */
 Shiny.addCustomMessageHandler("sidebar:disable", function(message) {
-  var el = document.getElementById(message.id);
+  let el = document.getElementById(message.id);
   if (el) {
     el.widget.disable(message.pane_id);
   }

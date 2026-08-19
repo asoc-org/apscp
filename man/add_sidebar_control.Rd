@@ -4,7 +4,13 @@
 \alias{add_sidebar_control}
 \title{Add sidebar control}
 \usage{
-add_sidebar_control(map, id, position = "top-right", height = "100\%")
+add_sidebar_control(
+  map,
+  id,
+  position = "top-right",
+  height = "100\%",
+  selected = NULL
+)
 }
 \arguments{
 \item{map}{[mapgl::mapboxgl()] object.}
@@ -19,6 +25,10 @@ in CSS units. For example, acceptable values include `"100%"`, `"30vh"`, or
 or `"400px"`. Note that if `height` is a percentage value, then it
 is recommended to add other map controls to a different
 `position` to avoid overlaps.}
+
+\item{selected}{`character` value denoting the identifier for the
+sidebar pane to have open by default. Defaults to `NULL`
+such that the side bar is closed.}
 }
 \value{
 An updated [mapgl::mapboxgl()] object.

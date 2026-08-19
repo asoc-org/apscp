@@ -143,8 +143,8 @@ export class Mapper {
     k = 0;
     for (i = 0; i < project.features.length; ++i) {
       selectOptions[k] = layerSelectOption(project.features[i]);
-      for (j = 0; j < selectOptions[k].group.length; ++j) {
-        groups.add(selectOptions[k].group[i]);
+      for (j = 0; j < selectOptions[i].group.length; ++j) {
+        groups.add(selectOptions[i].group[j]);
       }
       ++k;
     };
@@ -163,6 +163,12 @@ export class Mapper {
     groups.add("Locks");
     groups.add("Costs");
     groups.add("Solutions");
+
+    console.log("selectOptions");
+    console.log(selectOptions);
+    console.log("groups");
+    console.log(groups);
+
     // initialize select menu
     new TomSelect(this._select, {
       options: selectOptions,
@@ -172,7 +178,7 @@ export class Mapper {
       labelField: "name",
       searchField: ["name"],
       maxOptions: null,
-      // sortField: "sort",
+      sortField: "sort",
       closeAfterSelect: false,
       optgroups: Array.from(groups).map(x => {return {value: x}}),
       optgroupField: "group",
@@ -181,9 +187,7 @@ export class Mapper {
       },
       render: {
         optgroup_header: function(data, escape) {
-          return '<div class="optgroup-header">' +
-            escape(data.value) +
-            '</div>';
+          return `<div class="optgroup-header">${escape(data.value)}</div>`;
         }
       },
       onItemAdd: (value) => {

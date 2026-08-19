@@ -135,9 +135,12 @@ prioritization <- function(
     settings$features$target > 1e-4 & settings$features$weight > 1e-4, ,
     drop = FALSE
   ]
-
-  # initialize vector of zone names for each problem
+  ## zone names
   prob_zones <- project$zones
+  ## planning unit data
+  pu_data <- sf::st_drop_geometry(project$dataset$pu_data)
+  pu_data$id <- seq_len(nrow(pu_data))
+  pu_data[["_zeros"]] <- 0
 
   # build list of problems based on meeting target shortfalls
   prob <- lapply(project$zones, function(x) {
@@ -153,18 +156,14 @@ prioritization <- function(
     zones$zone_names <- project$zones
     zones$feature_names <- zone_settings$column
     zones <- do.call(prioritizr::zones, zones)
-    ## prepare planning unit data
-    pu_data <- sf::st_drop_geometry(project$dataset$pu_data)
-    pu_data$id <- seq_len(nrow(pu_data))
-    pu_data[["_zeros"]] <- 0
     ## prepare zone settings for prioritizr input
     zone_settings$feature <- zone_settings$column
     zone_settings$sense <- ">="
     zone_settings$type <- "absolute"
-    ## convert targets to aboslute values
+    ## convert targets to absolute values
     zone_settings$target <- unname(
       zone_settings$target *
-      colSums(pu_data)[zone_settings$column]
+      colSums(pu_data[, zone_settings$column, drop = FALSE], na.rm = TRUE)
     )
     ## return problem
     suppressWarnings(prioritizr::problem(
@@ -196,9 +195,8 @@ prioritization <- function(
     zones$feature_names <- "_zeros"
     zones <- do.call(prioritizr::zones, zones)
     ## prepare cost values
-    pu_data <- data.frame(id = seq_len(project$dataset$get_n_pu()))
-    pu_data[["_zeros"]] <- 0
-    pu_data$cost <- project$dataset$get_column_data(settings$costs$column[[i]])
+    curr_pu_data <- pu_data[, c("id", "_zeros"), drop = FALSE]
+    curr_pu_data$cost <- pu_data[[settings$costs$column[[i]]]]
     ## prepare cost columns
     cost <- rep("cost", length(project$zones))
     cost[match(settings$costs$zone[[i]], project$zones)] <- "_zeros"
@@ -206,7 +204,7 @@ prioritization <- function(
     prob[[length(prob) + 1]] <-
       ## return problem
       suppressWarnings(prioritizr::problem(
-        x = pu_data,
+        x = curr_pu_data,
         features = zones,
         cost = cost
       )) |>
