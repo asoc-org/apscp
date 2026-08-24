@@ -11,8 +11,22 @@ NULL
 #'
 #' @export
 read_sf_data <- function(path) {
+  # assert argument is valid
+  assertthat::assert_that(
+    assertthat::is.string(path),
+    endsWith(path, ".gpkg.zip")
+  )
+
+  # create temporary directory
+  td <- tempfile()
+  dir.create(td, showWarnings = FALSE, recursive = TRUE)
+  on.exit(unlink(td, recursive = TRUE, force = TRUE), add = TRUE, after = TRUE)
+
+  # extract to temporary directory
+  utils::unzip(path, exdir = td)
+
   # import data
-  sf::read_sf(path)
+  sf::read_sf(file.path(td, tools::file_path_sans_ext(basename(path))))
 }
 
 #' Write sf data to zip file

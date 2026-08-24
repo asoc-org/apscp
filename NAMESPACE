@@ -105,11 +105,13 @@ export(write_sf_data)
 import(promises)
 import(shiny)
 importFrom(R6,R6Class)
-importFrom(golem,activate_js)
-importFrom(golem,add_resource_path)
-importFrom(golem,bundle_resources)
-importFrom(golem,favicon)
-importFrom(golem,with_golem_options)
+importFrom(golem,
+  activate_js,
+  add_resource_path,
+  bundle_resources,
+  favicon,
+  with_golem_options
+)
 importFrom(promises,promise)
 importFrom(rcbc,cbc_solve)
 importFrom(shiny,shinyApp)

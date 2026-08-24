@@ -98,6 +98,10 @@ debug_renv: bundle_dev
 debug: bundle_dev
 	export GOLEM_CONFIG_ACTIVE="dev" && $(R) -e "options(golem.app.prod = FALSE, quick = TRUE); golem::run_dev()"
 
+## launch Posit Cloud
+deploy_posit:
+	$(R) --slave -e "source('dev/deploy_posit_cloud.R')"
+
 ## launch local version inside Docker container
 demo:
 	docker-compose up --build -d
@@ -124,15 +128,21 @@ reset:
 	docker rmi -f $(docker images -aq)
 
 # renv commands
+## activate profiles
+renv_dev:
+	$(R) --slave -e "renv::activate(profile = 'dev')"
+renv_default:
+	$(R) --slave -e "renv::activate(profile = 'default')"
+
 ## snapshot R package dependencies
-snapshot:
-	R -e "renv::snapshot(dev = TRUE)"
+renv_snapshot:
+	$(R) -e "renv::snapshot(type = 'explicit')"
 
 # usethis commands
 ## update standalone files
 update-standalone:
-	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_class.R')"
-	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_vector.R')"
-	R --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-as_Matrix.R')"
+	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_class.R')"
+	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_vector.R')"
+	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-as_Matrix.R')"
 
-.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy demo demo-kill image debug snapshot vigns R init init_dev bundle example_sidebar example_mapper
+.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy_posit demo demo-kill image debug snapshot vigns R init init_dev bundle example_sidebar example_mapper

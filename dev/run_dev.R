@@ -18,8 +18,11 @@ if (
   !identical(getOption("quick"), TRUE) &&
   identical(.Platform$OS.type, "unix")
 ) {
-   renv::install(".", upgrade = "never", force = TRUE)
+  renv::install(".", upgrade = "never", force = TRUE)
 }
 
 # Run the application
-run_app(options = list(launch.browser = TRUE))
+run_app(
+  project = read_builtin_project(),
+  options = list(launch.browser = TRUE)
+)

@@ -92,7 +92,10 @@ mapgl_source_url <- function(x) {
   if (!inherits(x, "Tile")) {
     x <- x$layer$tile
   }
-  paste0(get_golem_config("tile_server_url"), sanitize_text(basename(x$path)))
+  paste0(
+    get_golem_config("tile_server_url"), "/",
+    sanitize_text(basename(x$path))
+  )
 }
 
 #' Get \pkg{mapgl} source identifier
@@ -238,6 +241,10 @@ mapgl_add_source <- function(map, x) {
     inherits(map, c("mapboxgl", "mapboxgl_proxy")),
     inherits(x, "Tile")
   )
+
+  print("mapgl url")
+  print(mapgl_source_url(x))
+
   # return updated map
   mapgl::add_pmtiles_source(
     map,

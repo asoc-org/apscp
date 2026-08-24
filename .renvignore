@@ -1,0 +1,8 @@
+node_modules
+srcjs
+vignettes
+docs
+doc
+Meta
+inst/doc
+*.Rmd

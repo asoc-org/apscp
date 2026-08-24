@@ -48,14 +48,17 @@ app_startup <- function() {
   suppressWarnings(future::plan(strategy, workers = 2))
 
   # if needed, initialize tile server
-  if (is.null(get_golem_config("tile_server_dir"))) {
+  if (
+    is.null(get_golem_config("tile_server_dir")) &&
+    isTRUE(startsWith(get_golem_config("tile_server_url"), "http://localhost"))
+  ) {
     ## if logging, then display details
     if (get_golem_config("logging")) {
       cli::cli_h3("Tile server")
     }
     ## initialize tile server
     tile_server_start(
-      read_builtin_project(),
+      golem::get_golem_options("project"),
       verbose = get_golem_config("logging")
     )
     ## kill tile server on session end

@@ -45,6 +45,9 @@ Meta/*
 /doc/
 /Meta/
 
+# renv files
+renv/profile
+
 # shinyapps.io
 rsconnect
 ^rsconnect
@@ -52,4 +55,6 @@ rsconnect
 # R profile files
 *.Rhistory
 .Rproj.user/
+
+# js files
 node_modules

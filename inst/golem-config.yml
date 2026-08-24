@@ -37,7 +37,7 @@ default:
   map_max_zoom: 10
 
   ## solver details
-  solver_gap: 0.01 # optimality gap, e.g., 0.01 = 1%
+  solver_gap: 0.1 # optimality gap, e.g., 0.01 = 1%
   solver_time_limit: 300 # in seconds
   solver_gurobi_server: null
 
@@ -47,7 +47,7 @@ default:
   worker_time_out: 7200 # two hours
 
   ## tile server details
-  tile_server_url: "http://localhost:8085/"
+  tile_server_url: "http://localhost:8085"
   tile_server_port: 8085
   tile_server_dir: null
   tile_max_zoom: 8
@@ -66,15 +66,19 @@ default:
     - "#999999"
     - "#e41a1c"
 
-# production configuration:
+# development configuration
+dev:
+  logging: true
+  verbose: true
+  solver_gap: 0.3
+
+# production configuration
 prod:
   app_prod: yes
   tile_server_dir: tiles
   solver_gurobi_server: "localhost:61000"
 
-# development configuration
-dev:
-  golem_wd: !expr here::here()
+# Posit Cloud configuration
+posit_cloud:
+  app_prod: yes
   logging: true
-  verbose: true
-  solver_gap: 0.3

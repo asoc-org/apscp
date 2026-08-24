@@ -49,3 +49,5 @@ logs
 ^webpack\.prod\.js$
 ^webpack\.common\.js$
 ^.Renviron$
+^\.rscignore$
+^app.R$

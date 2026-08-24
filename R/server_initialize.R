@@ -18,7 +18,7 @@ server_initialize <- quote({
   app_data <- list2env(
     list(
       ## objects
-      project = read_builtin_project(),
+      project = golem::get_golem_options("project"),
       ## state variables
       new_solution_id = NULL,
       task = NULL,
