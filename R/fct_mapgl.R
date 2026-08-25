@@ -241,10 +241,6 @@ mapgl_add_source <- function(map, x) {
     inherits(map, c("mapboxgl", "mapboxgl_proxy")),
     inherits(x, "Tile")
   )
-
-  print("mapgl url")
-  print(mapgl_source_url(x))
-
   # return updated map
   mapgl::add_pmtiles_source(
     map,

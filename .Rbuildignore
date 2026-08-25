@@ -51,3 +51,4 @@ logs
 ^.Renviron$
 ^\.rscignore$
 ^app.R$
+^R/_disable_autoload\.R$

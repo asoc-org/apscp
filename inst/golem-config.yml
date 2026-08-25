@@ -75,10 +75,7 @@ dev:
 # production configuration
 prod:
   app_prod: yes
-  tile_server_dir: tiles
+  tile_server_url: "http://mapotron.org/tiles"
+  tile_server_port: 8085
+  tile_server_dir: "/home/shiny/tiles"
   solver_gurobi_server: "localhost:61000"
-
-# Posit Cloud configuration
-posit_cloud:
-  app_prod: yes
-  logging: true

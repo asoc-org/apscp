@@ -109,6 +109,9 @@ demo:
 demo-kill:
 	docker-compose down
 
+demo-enter:
+	 docker exec -it $$(docker ps -q --filter ancestor=jhansonasoc/asoc | head -n 1) /bin/bash
+
 ## launch released version inside Docker container
 launch:
 	docker run -dp 3838:3838 --name apscp -it asoc-org/apscp
@@ -119,8 +122,8 @@ launch-kill:
 # Docker commands
 ## create local image and push to docker
 image:
-	docker build -t asoc-org/apscp:latest .
-	docker push asoc-org/apscp:latest
+	docker build -t jhansonasoc/apscp:latest .
+	docker push jhansonasoc/apscp:latest
 
 ## delete all local containers and images
 reset:

@@ -4,6 +4,8 @@
 renv/library
 renv/local
 renv/staging
+renv/profiles
+renv/profile
 Dockerfile
 docker-compose.yml
 inst/log

@@ -79,7 +79,6 @@ Config/renv/profiles/dev/remotes:
     prioritizr/prioritizr,
     JohnCoene/packer
 Collate:
-    '_disable_autoload.R'
     'aaa.R'
     'app_config.R'
     'app_server.R'
