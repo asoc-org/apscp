@@ -4,10 +4,12 @@ services:
       context: .
       dockerfile: Dockerfile
       target: shiny
-    image: jhansonasoc/asoc
+    image: jhansonasoc/apscp
     ports:
       - "3838:3838"
     environment:
       - MAPBOX_PUBLIC_TOKEN
+      - R_CONFIG_ACTIVE
     volumes:
-      - "${PATH_TO_GUROBI_LICENSE}:/opt/gurobi/gurobi.lic:ro"
+      - "${GUROBI_LICENSE_PATH}:/opt/gurobi/gurobi.lic:ro"
+      - "./inst/tiles:/home/shiny/tiles"

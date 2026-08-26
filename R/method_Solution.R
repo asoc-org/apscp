@@ -48,7 +48,10 @@ create_solution <- function(
     tile <- create_tile(
       x = dataset$get_spatial_column_data(column),
       source_layer = "layer",
-      path = tempfile(fileext = ".pmtiles"),
+      path = tempfile(
+        tmpdir = get_golem_config("tile_server_dir"),
+        fileext = ".pmtiles"
+      ),
       max_zoom = get_golem_config("tile_max_zoom"),
       verbose = FALSE
     )
@@ -126,6 +129,10 @@ create_optimized_solution <- function(
       dataset = project$dataset,
       tile = create_tile(
         project$dataset$get_spatial_column_data(column),
+        path = tempfile(
+          tmpdir = get_golem_config("tile_server_dir"),
+          fileext = ".pmtiles"
+        ),
         verbose = FALSE
       ),
       column = column,

@@ -18,7 +18,7 @@ all: install-dev man readme test check spellcheck
 
 ## initialize dependencies
 init_dev:
-	export PROILE="dev" && $(R) CMD BATCH --no-restore --no-save inst/scripts/init.R
+	export PROFILE="dev" && $(R) CMD BATCH --no-restore --no-save inst/scripts/init.R
 	rm -rf init.Rout
 
 init:
@@ -98,19 +98,18 @@ debug_renv: bundle_dev
 debug: bundle_dev
 	export GOLEM_CONFIG_ACTIVE="dev" && $(R) -e "options(golem.app.prod = FALSE, quick = TRUE); golem::run_dev()"
 
-## launch Posit Cloud
-deploy_posit:
-	$(R) --slave -e "source('dev/deploy_posit_cloud.R')"
-
 ## launch local version inside Docker container
 demo:
-	docker-compose up --build -d
+	chmod -R 777 inst/tiles
+	nohup npx -y http-server ./inst/tiles --cors -c-1 -p8085 > /dev/null 2>&1 &
+	docker-compose -f docker-compose.yml --env-file .env up --build
 
 demo-kill:
+	-pkill -f http-server || true
 	docker-compose down
 
 demo-enter:
-	 docker exec -it $$(docker ps -q --filter ancestor=jhansonasoc/asoc | head -n 1) /bin/bash
+	 docker exec -it $$(docker ps -q --filter ancestor=jhansonasoc/apscp | head -n 1) /bin/bash
 
 ## launch released version inside Docker container
 launch:
@@ -121,7 +120,7 @@ launch-kill:
 
 # Docker commands
 ## create local image and push to docker
-image:
+image: bundle
 	docker build -t jhansonasoc/apscp:latest .
 	docker push jhansonasoc/apscp:latest
 

@@ -5,6 +5,13 @@
 #'
 #' @noRd
 app_startup <- function() {
+
+  # display golem configuration
+  if (get_golem_config("logging")) {
+    cli::cli_h3("Configuration")
+    cli::cli_text("R_CONFIG_ACTIVE: ", get_golem_config("R_CONFIG_ACTIVE"))
+  }
+
   # set seed for reproducibility
   set.seed(200)
 
@@ -47,22 +54,26 @@ app_startup <- function() {
   )
   suppressWarnings(future::plan(strategy, workers = 2))
 
-  # if needed, initialize tile server
-  if (
-    is.null(get_golem_config("tile_server_dir")) &&
-    isTRUE(startsWith(get_golem_config("tile_server_url"), "http://localhost"))
-  ) {
-    ## if logging, then display details
+  if (identical(get_golem_config("tile_server_mode"), "internal")) {
+    ## if needed, initialize tile server internally
+    ### if logging, then display details
     if (get_golem_config("logging")) {
       cli::cli_h3("Tile server")
     }
-    ## initialize tile server
+    ### initialize tile server
     tile_server_start(
       golem::get_golem_options("project"),
       verbose = get_golem_config("logging")
     )
     ## kill tile server on session end
     assign(".Last", function() {tile_server_stop()}, .GlobalEnv)
+  } else if (identical(get_golem_config("tile_server_mode"), "external")) {
+    ## otherwise, make tile files available for external tile server
+    ### if logging, then display details
+    if (get_golem_config("logging")) {
+      cli::cli_h3("Tile directory")
+      cli::cli_text("directory: ", get_golem_config("tile_server_dir"))
+    }
   }
 
 }

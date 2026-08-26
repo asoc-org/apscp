@@ -1,4 +1,4 @@
-# Run application 
+# Run application
 ## set application production mode
 if (is.null(getOption("golem.app.prod"))) {
   options("golem.app.prod" = TRUE)

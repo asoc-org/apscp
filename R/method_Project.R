@@ -58,14 +58,28 @@ read_project <- function(path) {
   # set dataset paths to NULL because they are not a parameter of new_project
   l$dataset_paths <- NULL
 
-  # return object
+  # if needed, create tile directory
+  dir.create(
+    get_golem_config("tile_server_dir"),
+    showWarnings = FALSE, recursive = TRUE
+  )
 
+  # copy the tile files to the tile directory
+  withr::with_dir(
+    dirname(path),
+    file.copy(
+      basename(vapply(l$tiles, `[[`, "path", 1)),
+      get_golem_config("tile_server_dir")
+    )
+  )
+
+  # return object
   ## note we set global option so that the directory name for tile paths
   ## is specified based on the directory name where the YAML file is found
   withr::with_options(
     list("apscp.project.io" = TRUE),
     withr::with_dir(
-      dirname(path),
+      get_golem_config("tile_server_dir"),
       deserialize_object(l, d)
     )
   )

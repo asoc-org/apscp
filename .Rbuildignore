@@ -52,3 +52,4 @@ logs
 ^\.rscignore$
 ^app.R$
 ^R/_disable_autoload\.R$
+inst/tiles/*.pmtiles

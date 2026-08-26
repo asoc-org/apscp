@@ -12,6 +12,7 @@ data-raw/*.pdf
 data-raw/29092346/*
 data-raw/29092346/*/*
 data-raw/29092346/*/*/*
+inst/tiles/*.pmtiles
 
 # temporary files
 tests/testthat/tiles/*.pmtiles
