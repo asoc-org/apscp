@@ -19,7 +19,6 @@ A [Dataset] object.
 Create a [Dataset] object from a [st::sf()] object.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # simulate spatial data
 sim_data <- simulate_spatial_data()
 
@@ -28,7 +27,7 @@ x <- create_dataset_from_sf(sim_data)
 
 # preview object
 print(x)
-\dontshow{\}) # examplesIf}
+
 }
 \seealso{
 Other method:
