@@ -65,14 +65,14 @@ x <- new_lock(
   layer = new_layer(
     column = "locked_in",
     total = 500,
-    dataset = create_dataset(sim_data),
-    tile = create_tile(sim_data),
+    dataset = create_dataset_from_sf(sim_data),
+    tile = create_tile_from_sf(sim_data),
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),
     details = "extra info"
   )
 )
-#> Error in new_lock(name = "lock", zone = "scientific", layer = new_layer(column = "locked_in",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_binary_legend(), provenance = simulate_provenance(),     details = "extra info")): could not find function "new_lock"
+#> Error in new_lock(name = "lock", zone = "scientific", layer = new_layer(column = "locked_in",     total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_binary_legend(),     provenance = simulate_provenance(), details = "extra info")): could not find function "new_lock"
 
 # preview object
 print(x)

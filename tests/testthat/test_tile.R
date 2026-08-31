@@ -31,12 +31,28 @@ test_that("deserialize_object", {
   expect_equal(x, y)
 })
 
-test_that("create_tile", {
+test_that("create_tile_from_sf", {
   # create object
-  s <- simulate_spatial_data()
+  d <- simulate_spatial_data()
   path <- tempfile(fileext = ".pmtiles")
-  x <- create_tile(
-    s, source_layer = "x", path = path, max_zoom = 5, verbose = FALSE
+  x <- create_tile_from_sf(
+    d, source_layer = "x", path = path, max_zoom = 5, verbose = FALSE
+  )
+  # run tests
+  expect_s3_class(x, "Tile")
+  expect_equal(x$source_layer, "x")
+  expect_equal(x$path, path)
+  expect_true(file.exists(path))
+  expect_equal(x$max_zoom, 5)
+})
+
+test_that("create_tile_from_dataset", {
+  # create object
+  d <- create_dataset_from_sf(simulate_spatial_data())
+  path <- tempfile(fileext = ".pmtiles")
+  x <- create_tile_from_dataset(
+    d, column = "solution",
+    source_layer = "x", path = path, max_zoom = 5, verbose = FALSE
   )
   # run tests
   expect_s3_class(x, "Tile")

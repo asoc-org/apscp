@@ -23,6 +23,24 @@ NULL
 #'
 #' @family method
 #'
+#' @examples
+#' # create data
+#' d <- simulate_spatial_data()
+#'
+#' # create solution
+#' x <- new_solution(
+#'   name = "solution",
+#'   layer = new_layer(
+#'     dataset = create_dataset_from_sf(d),
+#'     tile = create_tile_from_sf(d, verbose = FALSE),
+#'     column = "solution",
+#'     legend = simulate_solution_legend(),
+#'     provenance = simulate_provenance(),
+#'     total = 500,
+#'     details = "extra info"
+#'   )
+#' )
+#'
 #' @export
 create_solution <- function(
   name, dataset, column, legend, provenance,
@@ -45,8 +63,9 @@ create_solution <- function(
 
   # if needed, create tile
   if (is.null(tile)) {
-    tile <- create_tile(
-      x = dataset$get_spatial_column_data(column),
+    tile <- create_tile_from_dataset(
+      x = dataset,
+      column = column,
       source_layer = "layer",
       path = tempfile(
         tmpdir = get_golem_config("tile_server_dir"),
@@ -87,7 +106,15 @@ create_solution <- function(
 #' @family method
 #'
 #' @examples
-#' # TODO
+#' # simulate data
+#' p <- simulate_project()
+#' s <- simulate_prioritization_settings(p)
+#'
+#' # generate solution
+#' x <- prioritization(p, s, solver = "cbc", gap = 0.1)
+#'
+#' # print solution
+#' print(x)
 #'
 #' @export
 create_optimized_solution <- function(
@@ -127,8 +154,9 @@ create_optimized_solution <- function(
     name = name,
     layer = new_layer(
       dataset = project$dataset,
-      tile = create_tile(
-        project$dataset$get_spatial_column_data(column),
+      tile = create_tile_from_dataset(
+        x = project$dataset,
+        column = column,
         path = tempfile(
           tmpdir = get_golem_config("tile_server_dir"),
           fileext = ".pmtiles"

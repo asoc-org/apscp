@@ -5,7 +5,7 @@ test_that("new_provenance", {
    description = "Data is global."
   )
   # run tests
-  expect_is(x, "Provenance")
+  expect_s3_class(x, "Provenance")
   expect_equal(x$name, "Global")
   expect_equal(x$icon, "globe")
   expect_equal(x$color, "#123456")

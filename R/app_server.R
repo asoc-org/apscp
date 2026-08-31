@@ -7,12 +7,12 @@
 app_server <- function(input, output, session) {
 
   # initialization events
-  eval(server_initialize)
+  eval(app_server_initialize)
 
   # solve events
-  eval(server_solve)
+  eval(app_server_solve)
 
   # logging events
-  eval(server_logging)
+  eval(app_server_logging)
 
 }

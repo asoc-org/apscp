@@ -1,11 +1,11 @@
-# Create dataset
+# Create dataset from sf object.
 
 Create a \[Dataset\] object from a \[st::sf()\] object.
 
 ## Usage
 
 ``` r
-create_dataset(x)
+create_dataset_from_sf(x, boundary_data = NULL)
 ```
 
 ## Arguments
@@ -13,6 +13,11 @@ create_dataset(x)
 - x:
 
   \[sf::st_sf()\] object.
+
+- boundary_data:
+
+  \[Matrix::sparseMatrix()\] object with boundary data. Defaults to
+  \`NULL\` such that the boundary data are calculated automatically.
 
 ## Value
 
@@ -25,7 +30,8 @@ Other method:
 [`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
-[`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md),
+[`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md),
+[`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
@@ -37,7 +43,7 @@ if (FALSE) { # interactive()
 sim_data <- simulate_spatial_data()
 
 # create object
-x <- create_dataset(sim_data)
+x <- create_dataset_from_sf(sim_data)
 
 # preview object
 print(x)

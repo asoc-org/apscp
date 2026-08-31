@@ -28,7 +28,7 @@ corresponds to 10%) and the sum of these values should not exceed
 a value of 1.}
 
 \item{zone_weights}{`numeric` vector with initial weight values
-for acheiving the tagrgets for each zone associated with the project.
+for achieving the targets for each zone associated with the project.
 Each of these values should range
 between 0 and 1. Note that the sum of these values does not
 have any constraints (unlike `zone_targets`).}
@@ -65,8 +65,8 @@ x <- new_feature(
   layer = new_layer(
     column = "feat_1",
     total = 500,
-    dataset = create_dataset(sim_data),
-    tile = create_tile(sim_data),
+    dataset = create_dataset_from_sf(sim_data),
+    tile = create_tile_from_sf(sim_data),
     legend = simulate_continuous_legend(),
     provenance = simulate_provenance(),
     details = "extra info"

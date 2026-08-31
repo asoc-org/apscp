@@ -16,7 +16,8 @@ read_dataset(pu_path, boundary_path)
 
 - boundary_path:
 
-  \`character\` file path for boundary data.
+  \`character\` file path for boundary data. If the dataset does not
+  have boundary data, then use \`boundary_path = NULL\`.
 
 ## Value
 
@@ -37,12 +38,12 @@ Other io:
 ``` r
 # specify file paths
 pu_path <- system.file(
- "extdata", "antarctic-peninsula_pu.gpkg.zip",
- package = "apscp"
+  "extdata", "antarctic-peninsula_pu.gpkg.zip",
+  package = "apscp"
 )
 bd_path <- system.file(
-  "extdata", "antarctic-peninsula_bd.csv.gz",
- package = "apscp"
+  "extdata", "antarctic-peninsula_bd.rds",
+  package = "apscp"
 )
 
 # import data

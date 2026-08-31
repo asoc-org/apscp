@@ -1,8 +1,8 @@
 test_that("new_project", {
   # create data
   s <- simulate_spatial_data()
-  w <- create_dataset(s)
-  g <- create_tile(s)
+  w <- create_dataset_from_sf(s)
+  g <- create_tile_from_sf(s)
   # create bbox
   bb <- sf::st_bbox(c(0, 1, 0, 1),  crs = sf::st_crs(4326))
   # create cost
@@ -75,6 +75,7 @@ test_that("new_project", {
   # create project
   x <- new_project(
     zones = c("Biodiversity", "Tourism", "Scientific"),
+    bbox = bb,
     dataset = w,
     tiles = list(g),
     costs = list(cost),
@@ -175,7 +176,7 @@ test_that("read_project/write_project", {
   file <- tools::file_path_sans_ext(basename(path))
   yml_file <- paste0(file, ".yml")
   pu_file <- paste0(file, "_pu.gpkg.zip")
-  bd_file <- paste0(file, "_bd.csv.gz")
+  bd_file <- paste0(file, "_bd.rds")
   pm_file <- basename(x$tiles[[1]]$path)
   ## file were saved
   expect_true(file.exists(file.path(td, yml_file)))

@@ -21,13 +21,29 @@ Other class:
 
 ## Public fields
 
-- `pu_data`:
+- `pu_path`:
 
-  \[sf::st_sf()\] object.
+  \`character\` file path.
+
+- `pu_db_con`:
+
+  \[DBI::dbConnect()\] database connection object.
+
+- `pu_db_table`:
+
+  \`character\` object.
+
+- `boundary_path`:
+
+  \`character \` file path.
 
 - `boundary_data`:
 
   \[Matrix::sparseMatrix()\] object.
+
+- `n_pu`:
+
+  \`integer\` value.
 
 ## Methods
 
@@ -37,13 +53,15 @@ Other class:
 
 - [`Dataset$get_n_pu()`](#method-Dataset-get_n_pu)
 
-- [`Dataset$get_bbox()`](#method-Dataset-get_bbox)
+- [`Dataset$get_boundary_data()`](#method-Dataset-get_boundary_data)
 
 - [`Dataset$get_column_names()`](#method-Dataset-get_column_names)
 
-- [`Dataset$get_column_data()`](#method-Dataset-get_column_data)
+- [`Dataset$get_dataframe()`](#method-Dataset-get_dataframe)
 
-- [`Dataset$get_spatial_column_data()`](#method-Dataset-get_spatial_column_data)
+- [`Dataset$get_sf()`](#method-Dataset-get_sf)
+
+- [`Dataset$get_column_data()`](#method-Dataset-get_column_data)
 
 - [`Dataset$get_column_total()`](#method-Dataset-get_column_total)
 
@@ -65,17 +83,17 @@ Create a \`Dataset\` object.
 
 #### Usage
 
-    Dataset$new(pu_data, boundary_data)
+    Dataset$new(pu_path, boundary_path)
 
 #### Arguments
 
-- `pu_data`:
+- `pu_path`:
 
-  \[tibble::tibble()\] object.
+  \`character \` file path.
 
-- `boundary_data`:
+- `boundary_path`:
 
-  \[Matrix::sparseMatrix()\] object.
+  \`character\` file path.
 
 #### Returns
 
@@ -97,17 +115,17 @@ An \`integer\` value.
 
 ------------------------------------------------------------------------
 
-### `Dataset$get_bbox()`
+### `Dataset$get_boundary_data()`
 
-Get bounding box.
+Get boundary data.
 
 #### Usage
 
-    Dataset$get_bbox()
+    Dataset$get_boundary_data()
 
 #### Returns
 
-An \[sf::st_bbox()\] object.
+A \[Matrix::sparseMatrix()\] object.
 
 ------------------------------------------------------------------------
 
@@ -125,6 +143,48 @@ A \`character\` vector.
 
 ------------------------------------------------------------------------
 
+### `Dataset$get_dataframe()`
+
+Get \`data.frame\` with data.
+
+#### Usage
+
+    Dataset$get_dataframe(column = NULL)
+
+#### Arguments
+
+- `column`:
+
+  \`character\` vector. Defaults to \`NULL\` such that all columns are
+  returned.
+
+#### Returns
+
+A \`data.frame\` object.
+
+------------------------------------------------------------------------
+
+### `Dataset$get_sf()`
+
+Get \[sf::st_sf()\] object with data.
+
+#### Usage
+
+    Dataset$get_sf(column = NULL)
+
+#### Arguments
+
+- `column`:
+
+  \`character\` vector. Defaults to \`NULL\` such that all columns are
+  returned.
+
+#### Returns
+
+A \[sf::st_st()\] object.
+
+------------------------------------------------------------------------
+
 ### `Dataset$get_column_data()`
 
 Get column data.
@@ -137,31 +197,11 @@ Get column data.
 
 - `column`:
 
-  \`character\` or \`integer\` value.
+  \`character\` value.
 
 #### Returns
 
-A \`numeric\` vector.
-
-------------------------------------------------------------------------
-
-### `Dataset$get_spatial_column_data()`
-
-Get column data.
-
-#### Usage
-
-    Dataset$get_spatial_column_data(column)
-
-#### Arguments
-
-- `column`:
-
-  \`character\` or \`integer\` value.
-
-#### Returns
-
-A \`numeric\` vector.
+A vector.
 
 ------------------------------------------------------------------------
 
@@ -233,7 +273,7 @@ by selected planning units.
 
 - `column`:
 
-  \`character\` or \`integer\` vector.
+  \`character\` vector of column names.
 
 - `status`:
 

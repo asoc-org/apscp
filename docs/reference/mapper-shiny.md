@@ -40,4 +40,5 @@ renderMapper(expr, env = parent.frame(), quoted = FALSE)
 
 Other mapper:
 [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md),
-[`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
+[`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md),
+[`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)

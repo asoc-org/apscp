@@ -35,8 +35,8 @@ new_feature(
 
 - zone_weights:
 
-  \`numeric\` vector with initial weight values for acheiving the
-  tagrgets for each zone associated with the project. Each of these
+  \`numeric\` vector with initial weight values for achieving the
+  targets for each zone associated with the project. Each of these
   values should range between 0 and 1. Note that the sum of these values
   does not have any constraints (unlike \`zone_targets\`).
 
@@ -94,14 +94,14 @@ x <- new_feature(
   layer = new_layer(
     column = "feat_1",
     total = 500,
-    dataset = create_dataset(sim_data),
-    tile = create_tile(sim_data),
+    dataset = create_dataset_from_sf(sim_data),
+    tile = create_tile_from_sf(sim_data),
     legend = simulate_continuous_legend(),
     provenance = simulate_provenance(),
     details = "extra info"
   )
 )
-#> Error in new_feature(name = "species 1", zone_targets = c(0.1, 0.2, 0.3),     zone_weights = c(0.5, 1, 0.7), zone_helds = c(0.2, 0.3, 0.1),     themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),     layer = new_layer(column = "feat_1", total = 500, dataset = create_dataset(sim_data),         tile = create_tile(sim_data), legend = simulate_continuous_legend(),         provenance = simulate_provenance(), details = "extra info")): could not find function "new_feature"
+#> Error in new_feature(name = "species 1", zone_targets = c(0.1, 0.2, 0.3),     zone_weights = c(0.5, 1, 0.7), zone_helds = c(0.2, 0.3, 0.1),     themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),     layer = new_layer(column = "feat_1", total = 500, dataset = create_dataset_from_sf(sim_data),         tile = create_tile_from_sf(sim_data), legend = simulate_continuous_legend(),         provenance = simulate_provenance(), details = "extra info")): could not find function "new_feature"
 
 # preview object
 print(x)

@@ -27,6 +27,8 @@ Other class:
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
+    \item{\code{bbox}}{[sf::st_crs()] object.}
+
     \item{\code{dataset}}{[new_dataset()] object.}
 
     \item{\code{tiles}}{`list` of [new_tile()] objects.}
@@ -75,6 +77,7 @@ to create the project.}
     \if{html}{\out{<div class="r">}}
     \preformatted{Project$new(
   zones,
+  bbox,
   dataset,
   tiles,
   features,
@@ -92,6 +95,7 @@ to create the project.}
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{zones}}{`character` vector of zone names.}
+      \item{\code{bbox}}{[sf::st_bbox()] object.}
       \item{\code{dataset}}{[new_dataset()] object.}
       \item{\code{tiles}}{`list` of [new_tile()] objects.}
       \item{\code{features}}{`list` of [new_feature()] objects.}

@@ -4,13 +4,12 @@
 \alias{new_dataset}
 \title{New dataset}
 \usage{
-new_dataset(pu_data, boundary_data)
+new_dataset(pu_path, boundary_path)
 }
 \arguments{
-\item{pu_data}{[sf::st_sf()] object with planning unit data.}
+\item{pu_path}{`character` file path.}
 
-\item{boundary_data}{[Matrix::sparseMatrix()] object with boundary
-matrix data.}
+\item{boundary_path}{`character` file path.}
 }
 \value{
 A [Dataset] object.
@@ -22,30 +21,34 @@ Create a new [Dataset] object.
 # simulate spatial data
 sim_data <- simulate_spatial_data()
 
-# manually prepare planning unit data
-pu_data <- sim_data
+# save spatial data to temporary file
+sim_path1 <- tempfile(fileext = ".gpkg")
+sf::write_sf(sim_data, sim_path1)
 
 # manually prepare boundary data
+sim_path2 <- tempfile(fileext = ".rds")
 bd_data <- prioritizr::boundary_matrix(sim_data)
+write_matrix(bd_data, sim_path2)
 
 # create object
-x <- new_dataset(pu_data, bd_data)
+x <- new_dataset(sim_path1, sim_path2)
 
 # preview object
 print(x)
 
 }
 \seealso{
-See [create_dataset()] to automatically convert a [sf::st_sf()] object
-to a [new_dataset()] object.
+See [create_dataset_from_sf()] to automatically convert a [sf::st_sf()]
+object to a [new_dataset()] object.
 
 Other method:
-\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_optimized_solution]{create_optimized_solution()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }
 \concept{method}

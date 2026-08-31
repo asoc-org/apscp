@@ -124,17 +124,20 @@ for (i in names(raster_data)) {
   vector_data[[i]] <- raster_data[[i]][idx][[1]]
 }
 
+## add in _index column
+vector_data[["_index"]] <- seq_len(nrow(vector_data))
+
 ## create boundary_data
 boundary_data <- prioritizr::boundary_matrix(pu_data)
 boundary_data <- boundary_data[idx, idx]
 
 # Main processing
 ## create dataset
-dataset <- new_dataset(vector_data, boundary_data)
+dataset <- create_dataset_from_sf(vector_data, boundary_data)
 
 ## create tile
 td <- tempdir()
-tile <- create_tile(
+tile <- create_tile_from_sf(
   vector_data[, setdiff(names(vector_data), "_index"), drop = FALSE],
   path = file.path(td, "antarctic-peninsula.pmtiles"),
   max_zoom = max_zoom
@@ -262,6 +265,7 @@ features <-
 ## create project
 project <- new_project(
   zones = c("Biodiversity", "Scientific", "Tourism"),
+  bbox = sf::st_bbox(vector_data),
   dataset = dataset,
   tiles = list(tile),
   features = features,

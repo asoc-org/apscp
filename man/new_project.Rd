@@ -6,6 +6,7 @@
 \usage{
 new_project(
   zones,
+  bbox,
   dataset,
   tiles,
   costs,
@@ -20,6 +21,8 @@ new_project(
 }
 \arguments{
 \item{zones}{`character` vector of zone names.}
+
+\item{bbox}{[sf::st_bbox()] object.}
 
 \item{dataset}{[new_dataset()] object.}
 
@@ -57,8 +60,8 @@ Create a new project object.
 sim_data <- simulate_spatial_data()
 
 # prepare data
-dataset <- create_dataset(sim_data)
-tile <- create_tile(sim_data)
+dataset <- create_dataset_from_sf(sim_data)
+tile <- create_tile_from_sf(sim_data)
 
 # create cost
 cost <- new_cost(
@@ -129,6 +132,7 @@ features <- list(
 # create project
 x <- new_project(
   zones = c("Biodiversity", "Tourism", "Science"),
+  bbox = sf::st_bbox(sim_data),
   dataset = dataset,
   tiles = list(tile),
   costs = list(cost),

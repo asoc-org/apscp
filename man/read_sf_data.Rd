@@ -21,6 +21,8 @@ Other misc:
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_relative_path]{is_relative_path()}},
+\code{\link[=read_matrix]{read_matrix()}},
+\code{\link[=write_matrix]{write_matrix()}},
 \code{\link[=write_sf_data]{write_sf_data()}}
 }
 \concept{misc}

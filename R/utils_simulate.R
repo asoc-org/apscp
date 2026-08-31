@@ -75,6 +75,9 @@ simulate_spatial_data <- function() {
   d$aspas[d$aspas < 0.99] <- NA_real_
   d$camps[d$camps < 0.99] <- NA_real_
 
+  # add _index column
+  d[["_index"]] <- seq_len(nrow(d))
+
   # return result
   d
 }
@@ -100,11 +103,11 @@ simulate_project <- function() {
   d <- simulate_spatial_data()
 
   # create dataset
-  dataset <- create_dataset(d)
+  dataset <- create_dataset_from_sf(d)
 
   # create tile
   td <- tempdir()
-  tile <- create_tile(
+  tile <- create_tile_from_sf(
     d,
     path = tempfile(tmpdir = td, fileext = ".pmtiles"),
     max_zoom = 8, verbose = FALSE
@@ -136,7 +139,7 @@ simulate_project <- function() {
         visible = TRUE,
         legend = create_legend(d, "cost", units = "USD"),
         provenance = provenance,
-        total = dataset$get_column_total("cost")
+        total = unname(dataset$get_column_total("cost"))
       )
     )
   )
@@ -155,7 +158,7 @@ simulate_project <- function() {
         units = "categorical"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("solution")
+      total = unname(dataset$get_column_total("solution"))
     )
   )
 
@@ -174,7 +177,7 @@ simulate_project <- function() {
         units = "presence-only"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("aspas")
+      total = unname(dataset$get_column_total("aspas"))
     )
   )
   lock2 <- new_lock(
@@ -191,7 +194,7 @@ simulate_project <- function() {
         units = "presence/absence"
       ),
       provenance = provenance,
-      total = dataset$get_column_total("camps"),
+      total = unname(dataset$get_column_total("camps")),
       details = "These sites include castles, monuments, and churches."
     )
   )
@@ -242,7 +245,7 @@ simulate_project <- function() {
           units = "suitability"
         ),
         provenance = provenance,
-        total = dataset$get_column_total(paste0("feat_", i))
+        total = unname(dataset$get_column_total(paste0("feat_", i)))
       )
     )
   })
@@ -250,6 +253,7 @@ simulate_project <- function() {
   # return project
   new_project(
     zones = c("Biodiversity", "Tourism", "Scientific"),
+    bbox = sf::st_bbox(d),
     dataset = dataset,
     tiles = list(tile),
     costs = costs,
@@ -427,7 +431,7 @@ simulate_prioritization_settings <- function(project) {
 #' Simulate a set of zone target values for a feature.
 #'
 #' @param x `numeric` vector with options for targets.
-#' Note that `x` must range betweeen 0 and 1.
+#' Note that `x` must range between 0 and 1.
 #'
 #' @param n `integer` number of zones.
 #'
@@ -435,7 +439,7 @@ simulate_prioritization_settings <- function(project) {
 #'
 #' @return A `numeric` vector with a value for each zone.
 #'
-#' @export
+#' @noRd
 simulate_feature_zone_targets <- function(x, n) {
   # assert valid arguments
   assertthat::assert_that(

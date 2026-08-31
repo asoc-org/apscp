@@ -7,6 +7,7 @@ Create a new project object.
 ``` r
 new_project(
   zones,
+  bbox,
   dataset,
   tiles,
   costs,
@@ -25,6 +26,10 @@ new_project(
 - zones:
 
   \`character\` vector of zone names.
+
+- bbox:
+
+  \[sf::st_bbox()\] object.
 
 - dataset:
 
@@ -95,10 +100,10 @@ sim_data <- simulate_spatial_data()
 #> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # prepare data
-dataset <- create_dataset(sim_data)
-#> Error in create_dataset(sim_data): could not find function "create_dataset"
-tile <- create_tile(sim_data)
-#> Error in create_tile(sim_data): could not find function "create_tile"
+dataset <- create_dataset_from_sf(sim_data)
+#> Error in create_dataset_from_sf(sim_data): could not find function "create_dataset_from_sf"
+tile <- create_tile_from_sf(sim_data)
+#> Error in create_tile_from_sf(sim_data): could not find function "create_tile_from_sf"
 
 # create cost
 cost <- new_cost(
@@ -172,13 +177,14 @@ features <- list(
 # create project
 x <- new_project(
   zones = c("Biodiversity", "Tourism", "Science"),
+  bbox = sf::st_bbox(sim_data),
   dataset = dataset,
   tiles = list(tile),
   costs = list(cost),
   locks = list(lock),
   features = features
 )
-#> Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     dataset = dataset, tiles = list(tile), costs = list(cost),     locks = list(lock), features = features): could not find function "new_project"
+#> Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     bbox = sf::st_bbox(sim_data), dataset = dataset, tiles = list(tile),     costs = list(cost), locks = list(lock), features = features): could not find function "new_project"
 
 # preview object
 print(x)

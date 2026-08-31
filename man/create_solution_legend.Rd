@@ -18,13 +18,25 @@ Create a legend for solutions generated with the tool.
 \details{
 Note that colors for zones are specified in the golem configuration file.
 }
+\examples{
+# simulate project
+p <- simulate_project()
+
+# create solution legend
+x <- create_solution_legend(p)
+
+# print legend
+print(x)
+
+}
 \seealso{
 Other method:
-\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_optimized_solution]{create_optimized_solution()}},
 \code{\link[=create_solution]{create_solution()}},
-\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }

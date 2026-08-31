@@ -126,7 +126,7 @@ write_project <- function(x, path) {
   # define file paths for datasets
   path_no_ext <- tools::file_path_sans_ext(path)
   pu_path <- paste0(path_no_ext, "_pu.gpkg.zip")
-  boundary_path <- paste0(path_no_ext, "_bd.csv.gz")
+  boundary_path <- paste0(path_no_ext, "_bd.rds")
 
   # save dataset
   write_dataset(x$dataset, pu_path, boundary_path)

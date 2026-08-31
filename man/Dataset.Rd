@@ -25,9 +25,17 @@ Other class:
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
-    \item{\code{pu_data}}{[sf::st_sf()] object.}
+    \item{\code{pu_path}}{`character` file path.}
+
+    \item{\code{pu_db_con}}{[DBI::dbConnect()] database connection object.}
+
+    \item{\code{pu_db_table}}{`character` object.}
+
+    \item{\code{boundary_path}}{`character ` file path.}
 
     \item{\code{boundary_data}}{[Matrix::sparseMatrix()] object.}
+
+    \item{\code{n_pu}}{`integer` value.}
   }
   \if{html}{\out{</div>}}
 }
@@ -36,10 +44,11 @@ Other class:
   \itemize{
     \item \href{#method-Dataset-initialize}{\code{Dataset$new()}}
     \item \href{#method-Dataset-get_n_pu}{\code{Dataset$get_n_pu()}}
-    \item \href{#method-Dataset-get_bbox}{\code{Dataset$get_bbox()}}
+    \item \href{#method-Dataset-get_boundary_data}{\code{Dataset$get_boundary_data()}}
     \item \href{#method-Dataset-get_column_names}{\code{Dataset$get_column_names()}}
+    \item \href{#method-Dataset-get_dataframe}{\code{Dataset$get_dataframe()}}
+    \item \href{#method-Dataset-get_sf}{\code{Dataset$get_sf()}}
     \item \href{#method-Dataset-get_column_data}{\code{Dataset$get_column_data()}}
-    \item \href{#method-Dataset-get_spatial_column_data}{\code{Dataset$get_spatial_column_data()}}
     \item \href{#method-Dataset-get_column_total}{\code{Dataset$get_column_total()}}
     \item \href{#method-Dataset-get_pu_status}{\code{Dataset$get_pu_status()}}
     \item \href{#method-Dataset-get_column_held}{\code{Dataset$get_column_held()}}
@@ -55,14 +64,14 @@ Other class:
   Create a `Dataset` object.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$new(pu_data, boundary_data)}
+    \preformatted{Dataset$new(pu_path, boundary_path)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{pu_data}}{[tibble::tibble()] object.}
-      \item{\code{boundary_data}}{[Matrix::sparseMatrix()] object.}
+      \item{\code{pu_path}}{`character ` file path.}
+      \item{\code{boundary_path}}{`character` file path.}
     }
     \if{html}{\out{</div>}}
   }
@@ -87,17 +96,17 @@ Other class:
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_bbox"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_bbox}{}}}
-\subsection{\code{Dataset$get_bbox()}}{
-  Get bounding box.
+\if{html}{\out{<a id="method-Dataset-get_boundary_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_boundary_data}{}}}
+\subsection{\code{Dataset$get_boundary_data()}}{
+  Get boundary data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_bbox()}
+    \preformatted{Dataset$get_boundary_data()}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    An [sf::st_bbox()] object.
+    A [Matrix::sparseMatrix()] object.
   }
 }
 
@@ -117,6 +126,52 @@ Other class:
 }
 
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_dataframe"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_dataframe}{}}}
+\subsection{\code{Dataset$get_dataframe()}}{
+  Get `data.frame` with data.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_dataframe(column = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{`character` vector. Defaults to `NULL` such that
+all columns are returned.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A `data.frame` object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_sf"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_sf}{}}}
+\subsection{\code{Dataset$get_sf()}}{
+  Get [sf::st_sf()] object with data.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_sf(column = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{`character` vector. Defaults to `NULL` such that
+all columns are returned.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A [sf::st_st()] object.
+  }
+}
+
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Dataset-get_column_data"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-get_column_data}{}}}
 \subsection{\code{Dataset$get_column_data()}}{
@@ -129,34 +184,12 @@ Other class:
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` or `integer` value.}
+      \item{\code{column}}{`character` value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `numeric` vector.
-  }
-}
-
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_spatial_column_data"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_spatial_column_data}{}}}
-\subsection{\code{Dataset$get_spatial_column_data()}}{
-  Get column data.
-  \subsection{Usage}{
-    \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_spatial_column_data(column)}
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Arguments}{
-    \if{html}{\out{<div class="arguments">}}
-    \describe{
-      \item{\code{column}}{`character` or `integer` value.}
-    }
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Returns}{
-    A `numeric` vector.
+    A vector.
   }
 }
 
@@ -231,7 +264,7 @@ held by selected planning units.
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` or `integer` vector.}
+      \item{\code{column}}{`character` vector of column names.}
       \item{\code{status}}{`numeric` vector with binary values for each
 planning unit.}
     }

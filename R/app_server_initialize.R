@@ -11,7 +11,7 @@
 #' ```
 #'
 #' @noRd
-server_initialize <- quote({
+app_server_initialize <- quote({
   # define application data
   ## note that we use an environment here because they are mutable objects and
   ## so we don't have to worry about using the super-assignment operator

@@ -85,14 +85,14 @@ sim_data <- simulate_spatial_data()
 x <- new_layer(
   column = "feat_1",
   total = 500,
-  dataset = create_dataset(sim_data),
-  tile = create_tile(sim_data),
+  dataset = create_dataset_from_sf(sim_data),
+  tile = create_tile_from_sf(sim_data),
   legend = simulate_continuous_legend(),
   provenance = simulate_provenance(),
   visible = TRUE,
   details = "extra info"
 )
-#> Error in new_layer(column = "feat_1", total = 500, dataset = create_dataset(sim_data),     tile = create_tile(sim_data), legend = simulate_continuous_legend(),     provenance = simulate_provenance(), visible = TRUE, details = "extra info"): could not find function "new_layer"
+#> Error in new_layer(column = "feat_1", total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_continuous_legend(),     provenance = simulate_provenance(), visible = TRUE, details = "extra info"): could not find function "new_layer"
 
 # preview object
 print(x)

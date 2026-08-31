@@ -15,7 +15,6 @@ Simulate a legend for continuous data.
 \seealso{
 Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
-\code{\link[=simulate_feature_zone_targets]{simulate_feature_zone_targets()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},
 \code{\link[=simulate_prioritization_settings]{simulate_prioritization_settings()}},
 \code{\link[=simulate_project]{simulate_project()}},

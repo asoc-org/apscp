@@ -11,7 +11,7 @@
 #' ```
 #'
 #' @noRd
-server_logging <- quote({
+app_server_logging <- quote({
 
   # log memory usage
   if (

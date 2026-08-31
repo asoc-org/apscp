@@ -11,79 +11,155 @@ NULL
 Dataset <- R6::R6Class(
   "Dataset",
   public = list(
-    #' @field pu_data [sf::st_sf()] object.
-    pu_data = NULL,
+    #' @field pu_path `character` file path.
+    pu_path = NULL,
+
+    #' @field pu_db_con [DBI::dbConnect()] database connection object.
+    pu_db_con = NULL,
+
+    #' @field pu_db_table `character` object.
+    pu_db_table = NULL,
+
+    #' @field boundary_path `character ` file path.
+    boundary_path = NULL,
 
     #' @field boundary_data [Matrix::sparseMatrix()] object.
     boundary_data = NULL,
 
+    #' @field n_pu `integer` value.
+    n_pu = NULL,
+
     #' @description
     #' Create a `Dataset` object.
-    #' @param pu_data [tibble::tibble()] object.
-    #' @param boundary_data [Matrix::sparseMatrix()] object.
+    #' @param pu_path `character ` file path.
+    #' @param boundary_path `character` file path.
     #' @return A new `Dataset` object.
-    initialize = function(pu_data, boundary_data) {
-      # assert that arguments a re valid
+    initialize = function(pu_path, boundary_path) {
+      # assert that arguments are valid
       assertthat::assert_that(
-        ## pu_data
-        is.data.frame(pu_data),
-        inherits(pu_data, "sf"),
-        ## boundary_data
-        inherits(boundary_data, "dsCMatrix"),
-        identical(ncol(boundary_data), nrow(pu_data))
+        ## pu_path
+        assertthat::is.string(pu_path),
+        assertthat::noNA(pu_path),
+        ## boundary_path
+        assertthat::is.string(boundary_path),
+        assertthat::noNA(boundary_path)
       )
-      # set fields
-      self$pu_data <- pu_data
-      self$boundary_data <- boundary_data
+      # set boundary field
+      self$boundary_path <- boundary_path
+      # set database fields
+      self$pu_path <- pu_path
+      self$pu_db_con <- DBI::dbConnect(RSQLite::SQLite(), dbname = pu_path)
+      pu_table <- DBI::dbListTables(self$pu_db_con)
+      pu_table <- pu_table[!startsWith(pu_table, "gpkg_")]
+      pu_table <- pu_table[!startsWith(pu_table, "rtree_")]
+      pu_table <- pu_table[!startsWith(pu_table, "sqlite_")]
+      assertthat::assert_that(assertthat::is.string(pu_table))
+      self$pu_db_table <- pu_table
+      # enable spatial extension for database connection
+      DBI::dbExecute(self$pu_db_con, "SELECT load_extension('mod_spatialite');")
+      # store additional fields
+      self$n_pu <- DBI::dbGetQuery(
+        self$pu_db_con,
+        paste0("SELECT COUNT(*) FROM \"", self$pu_db_table, "\"")
+      )[[1]]
+      # additional validation
+      assertthat::assert_that(
+        "_index" %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table),
+        msg = "`pu_path` must have a column called \"_index\"."
+      )
     },
 
     #' @description
     #' Get number of planning units.
     #' @return An `integer` value.
     get_n_pu = function() {
-      nrow(self$pu_data)
+      self$n_pu
     },
 
     #' @description
-    #' Get bounding box.
-    #' @return An [sf::st_bbox()] object.
-    get_bbox = function() {
-      sf::st_bbox(self$pu_data)
+    #' Get boundary data.
+    #' @return A [Matrix::sparseMatrix()] object.
+    get_boundary_data = function() {
+      # if needed, load boundary data
+      if (is.null(self$boundary_data)) {
+        # import data
+        self$boundary_data <- read_matrix(self$boundary_path)
+        # validate data
+        assertthat::assert_that(
+          identical(ncol(self$boundary_data), self$n_pu),
+          msg =
+            "`pu_path` must have the same number of rows as `boundary_path`."
+        )
+      }
+      # return boundary data
+      self$boundary_data
     },
 
     #' @description
     #' Get column names.
     #' @return A `character` vector.
     get_column_names = function() {
-      names(self$pu_data)
+      DBI::dbListFields(self$pu_db_con, self$pu_db_table)
+    },
+
+    #' @description
+    #' Get `data.frame` with data.
+    #' @param column `character` vector. Defaults to `NULL` such that
+    #' all columns are returned.
+    #' @return A `data.frame` object.
+    get_dataframe = function(column = NULL) {
+      # assert arguments are valid
+      if (!is.null(column)) {
+        assertthat::assert_that(
+          self$has_column(column),
+          msg = paste0("Dataset does not have column \"", column, "\".")
+        )
+      }
+      # if column is NULL, then override with column names
+      if (is.null(column)) {
+        column <- setdiff(self$get_column_names(), c("fid", "geom", "geometry"))
+      }
+      column <- paste(paste0("\"", column, "\""), collapse = ",")
+      # return values
+      DBI::dbGetQuery(
+        self$pu_db_con,
+        paste0("SELECT ", column, " FROM ", self$pu_db_table)
+      )
+    },
+
+    #' @description
+    #' Get [sf::st_sf()] object with data.
+    #' @param column `character` vector. Defaults to `NULL` such that
+    #' all columns are returned.
+    #' @return A [sf::st_st()] object.
+    get_sf = function(column = NULL) {
+      # if column is NULL, return full dataset
+      if (is.null(column)) return(sf::read_sf(self$pu_path))
+      # assert arguments are valid
+      assertthat::assert_that(
+        is.character(column),
+        assertthat::noNA(column)
+      )
+      # import data and return specified column(s)
+      sf::read_sf(
+        self$pu_path,
+        query = paste0(
+          "SELECT ",
+          paste(paste0("\"", column, "\""), collapse = ","),
+          ",\"geom\" FROM ", self$pu_db_table
+        )
+      )
     },
 
     #' @description
     #' Get column data.
-    #' @param column `character` or `integer` value.
-    #' @return A `numeric` vector.
+    #' @param column `character` value.
+    #' @return A vector.
     get_column_data = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(
-        self$has_column(column),
-        msg = paste0("Dataset does not have column \"", column, "\".")
-      )
-      # return values
-      self$pu_data[[column]]
-    },
-
-    #' @description
-    #' Get column data.
-    #' @param column `character` or `integer` value.
-    #' @return A `numeric` vector.
-    get_spatial_column_data = function(column) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        self$has_column(column),
-        msg = paste0("Dataset does not have column \"", column, "\".")
-      )
-      # return values
-      self$pu_data[, column, drop = FALSE]
+      assertthat::assert_that(assertthat::is.string(column))
+      # return vector
+      self$get_dataframe(column)[[1]]
     },
 
     #' @description
@@ -94,7 +170,7 @@ Dataset <- R6::R6Class(
       # assert arguments are valid
       assertthat::assert_that(self$has_column(column))
       # return sum of values
-      sum(self$pu_data[[column]], na.rm = TRUE)
+      colSums(self$get_dataframe(column), na.rm = TRUE)
     },
 
     #' @description
@@ -132,13 +208,13 @@ Dataset <- R6::R6Class(
         identical(length(allocation), 0L) ||
         !zone %in% names(allocation)
       ) {
-        return(rep(0, nrow(self$pu_data)))
+        return(rep(0, self$get_n_pu()))
       }
       # create vector with binary values indicating if planning unit is assigned
       # the zone based on the data in the allocation columns
-      out <- numeric(nrow(self$pu_data))
+      out <- numeric(self$get_n_pu())
       for (i in seq(length(allocation), 1L)) {
-        idx <- which(self$pu_data[[allocation[[i]]]] > 1e-5)
+        idx <- which(self$get_column_data(allocation[[i]]) > 1e-5)
         out[idx] <- as.numeric(identical(names(allocation)[[i]], zone))
       }
       # return output
@@ -148,7 +224,7 @@ Dataset <- R6::R6Class(
     #' @description
     #' Get proportion of values in a column that would be considered to by
     #' held by selected planning units.
-    #' @param column `character` or `integer` vector.
+    #' @param column `character` vector of column names.
     #' @param status `numeric` vector with binary values for each
     #' planning unit.
     #' @return A `numeric` value.
@@ -158,10 +234,10 @@ Dataset <- R6::R6Class(
         length(column) > 0,
         self$has_column(column),
         is.numeric(status),
-        identical(length(status), nrow(self$pu_data))
+        identical(length(status), self$get_n_pu())
       )
       # run calculations
-      m <- as.matrix(sf::st_drop_geometry(self$pu_data)[, column, drop = FALSE])
+      m <- as.matrix(self$get_dataframe(column))
       total <- colSums(m, na.rm = TRUE)
       held <- colSums(
         m * matrix(status, ncol = length(column), nrow = nrow(m)),
@@ -177,7 +253,7 @@ Dataset <- R6::R6Class(
     #' @return A `logical` value.
     has_column = function(column) {
       (length(column) > 0) &&
-        assertthat::has_name(self$pu_data, column)
+        all(column %in% self$get_column_names())
     },
 
     #' @description
@@ -190,12 +266,65 @@ Dataset <- R6::R6Class(
       assertthat::assert_that(
         assertthat::is.string(column),
         assertthat::noNA(column),
-        length(values) == nrow(self$pu_data)
+        identical(length(values), self$get_n_pu())
       )
-      # insert new column with values
-      self$pu_data[[column]] <- values
+      # if needed, remove existing column from database
+      if (column %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table)) {
+        DBI::dbExecute(
+          self$pu_db_con,
+          paste0("ALTER TABLE ", self$pu_db_table, " DROP COLUMN ", column, ";")
+        )
+      }
+      # add new column to table
+      if (is.double(values)) {
+        column_type <- "REAL"
+      } else if (is.integer(values)) {
+        column_type <- "INTEGER"
+      } else if (is.character(values)) {
+        column_type <- "VARCHAR(255)"
+      } else {
+        stop("`values` must be a numeric or character vector.")
+      }
+      DBI::dbExecute(
+        self$pu_db_con,
+        paste0(
+          "ALTER TABLE \"", self$pu_db_table, "\" ADD COLUMN \"",
+          column, "\" ", column_type, ";"
+        )
+      )
+      # create temporary table in database with values
+      DBI::dbWriteTable(
+        self$pu_db_con,
+        "temp_updates",
+        tibble::tibble(value = values, `_index` = seq_along(values)),
+        temporary = TRUE, overwrite = TRUE
+      )
+      # clean up the temporary table
+      on.exit(
+        DBI::dbRemoveTable(self$pu_db_con, "temp_updates"),
+        add = TRUE, after = TRUE
+      )
+      # update main table in database
+      DBI::dbExecute(
+        self$pu_db_con,
+        paste0(
+          "UPDATE \"", self$pu_db_table,
+          "\" SET \"", column, "\" = (",
+          " SELECT \"value\" FROM \"temp_updates\"",
+          " WHERE \"temp_updates\".\"_index\" = \"", self$pu_db_table,
+          "\".\"_index\" ) ",
+          "WHERE EXISTS ( SELECT 1 FROM \"temp_updates\"",
+          " WHERE \"temp_updates\".\"_index\" = \"",
+          self$pu_db_table, "\".\"_index\" );"
+        )
+      )
       # return self
       invisible(self)
+    }
+  ),
+  private = list(
+    finalize = function() {
+      DBI::dbDisconnect(self$pu_db_con)
     }
   )
 )
@@ -204,16 +333,15 @@ Dataset <- R6::R6Class(
 #'
 #' Create a new [Dataset] object.
 #'
-#' @param pu_data [sf::st_sf()] object with planning unit data.
+#' @param pu_path `character` file path.
 #'
-#' @param boundary_data [Matrix::sparseMatrix()] object with boundary
-#' matrix data.
+#' @param boundary_path `character` file path.
 #'
 #' @return A [Dataset] object.
 #'
 #' @seealso
-#' See [create_dataset()] to automatically convert a [sf::st_sf()] object
-#' to a [new_dataset()] object.
+#' See [create_dataset_from_sf()] to automatically convert a [sf::st_sf()]
+#' object to a [new_dataset()] object.
 #'
 #' @family method
 #'
@@ -221,23 +349,23 @@ Dataset <- R6::R6Class(
 #' # simulate spatial data
 #' sim_data <- simulate_spatial_data()
 #'
-#' # manually prepare planning unit data
-#' pu_data <- sim_data
+#' # save spatial data to temporary file
+#' sim_path1 <- tempfile(fileext = ".gpkg")
+#' sf::write_sf(sim_data, sim_path1)
 #'
 #' # manually prepare boundary data
+#' sim_path2 <- tempfile(fileext = ".rds")
 #' bd_data <- prioritizr::boundary_matrix(sim_data)
+#' write_matrix(bd_data, sim_path2)
 #'
 #' # create object
-#' x <- new_dataset(pu_data, bd_data)
+#' x <- new_dataset(sim_path1, sim_path2)
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-new_dataset <- function(pu_data, boundary_data) {
+new_dataset <- function(pu_path, boundary_path) {
   # create new dataset
-  Dataset$new(
-    pu_data = pu_data,
-    boundary_data = boundary_data
-  )
+  Dataset$new(pu_path = pu_path, boundary_path = boundary_path)
 }

@@ -39,13 +39,33 @@ A `Solution` object.
 \description{
 Create a [new_solution()] object.
 }
+\examples{
+# create data
+d <- simulate_spatial_data()
+
+# create solution
+x <- new_solution(
+  name = "solution",
+  layer = new_layer(
+    dataset = create_dataset_from_sf(d),
+    tile = create_tile_from_sf(d, verbose = FALSE),
+    column = "solution",
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance(),
+    total = 500,
+    details = "extra info"
+  )
+)
+
+}
 \seealso{
 Other method:
-\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_optimized_solution]{create_optimized_solution()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }

@@ -2,8 +2,8 @@ test_that("new_lock", {
   # create object
   s <- simulate_spatial_data()
   l <- new_layer(
-    dataset = create_dataset(s),
-    tile = create_tile(s, verbose = FALSE),
+    dataset = create_dataset_from_sf(s),
+    tile = create_tile_from_sf(s, verbose = FALSE),
     column = "aspas",
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),
@@ -21,8 +21,8 @@ test_that("serialize_object", {
   # create object
   s <- simulate_spatial_data()
   l <- new_layer(
-    dataset = create_dataset(s),
-    tile = create_tile(s, verbose = FALSE),
+    dataset = create_dataset_from_sf(s),
+    tile = create_tile_from_sf(s, verbose = FALSE),
     column = "aspas",
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),
@@ -43,10 +43,10 @@ test_that("serialize_object", {
 test_that("deserialize_object", {
   # create object
   s <- simulate_spatial_data()
-  w <- create_dataset(s)
+  w <- create_dataset_from_sf(s)
   l <- new_layer(
     dataset = w,
-    tile = create_tile(s, verbose = FALSE),
+    tile = create_tile_from_sf(s, verbose = FALSE),
     column = "aspas",
     legend = simulate_binary_legend(),
     provenance = simulate_provenance(),

@@ -44,11 +44,12 @@ print(x)
 }
 \seealso{
 Other method:
-\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_optimized_solution]{create_optimized_solution()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }

@@ -66,15 +66,32 @@
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other method:
-<code><a href="create_dataset.html">create_dataset()</a></code>,
+<code><a href="create_dataset_from_sf.html">create_dataset_from_sf()</a></code>,
 <code><a href="create_legend.html">create_legend()</a></code>,
 <code><a href="create_optimized_solution.html">create_optimized_solution()</a></code>,
 <code><a href="create_solution.html">create_solution()</a></code>,
-<code><a href="create_tile.html">create_tile()</a></code>,
+<code><a href="create_tile_from_dataset.html">create_tile_from_dataset()</a></code>,
+<code><a href="create_tile_from_sf.html">create_tile_from_sf()</a></code>,
 <code><a href="new_dataset.html">new_dataset()</a></code>,
 <code><a href="tool_generated_provenance.html">tool_generated_provenance()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># simulate project</span></span></span>
+<span class="r-in"><span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_project.html">simulate_project</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_project():</span> could not find function "simulate_project"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create solution legend</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">create_solution_legend</span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_solution_legend(p):</span> could not find function "create_solution_legend"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># print legend</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'x' not found</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

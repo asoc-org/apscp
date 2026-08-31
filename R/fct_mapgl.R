@@ -44,8 +44,8 @@ has_mapbox_token <- function() {
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
-#'     dataset = create_dataset(sim_data),
-#'     tile = create_tile(sim_data),
+#'     dataset = create_dataset_from_sf(sim_data),
+#'     tile = create_tile_from_sf(sim_data),
 #'     legend = simulate_continuous_legend(),
 #'     provenance = simulate_provenance(),
 #'     details = "extra info"
@@ -77,7 +77,7 @@ mapgl_layer_id <- function(x) {
 #' sim_data <- simulate_spatial_data()
 #'
 #' # create object
-#' x <- create_tile(sim_data)
+#' x <- create_tile_from_sf(sim_data)
 #'
 #' # get layer identifier
 #' mapgl_source_url(x)
@@ -117,7 +117,7 @@ mapgl_source_url <- function(x) {
 #' sim_data <- simulate_spatial_data()
 #'
 #' # create object
-#' x <- create_tile(sim_data)
+#' x <- create_tile_from_sf(sim_data)
 #'
 #' # get source identifier
 #' mapgl_source_id(x)
@@ -162,8 +162,8 @@ mapgl_source_id <- function(x) {
 #'   layer = new_layer(
 #'     column = "feat_1",
 #'     total = 500,
-#'     dataset = create_dataset(sim_data),
-#'     tile = create_tile(sim_data),
+#'     dataset = create_dataset_from_sf(sim_data),
+#'     tile = create_tile_from_sf(sim_data),
 #'     legend = simulate_continuous_legend(),
 #'     provenance = simulate_provenance(),
 #'     details = "extra info"
@@ -204,8 +204,8 @@ mapgl_source_layer_id <- function(x) {
 #' sim_data <- simulate_spatial_data()
 #'
 #' # create objects
-#' dataset <- create_dataset(sim_data)
-#' tile <- create_tile(sim_data)
+#' dataset <- create_dataset_from_sf(sim_data)
+#' tile <- create_tile_from_sf(sim_data)
 #' cost <- new_cost(
 #'   name = "cost",
 #'   zone = "Science",

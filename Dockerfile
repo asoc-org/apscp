@@ -16,6 +16,7 @@ RUN apt-get update \
     gdal-bin \
     libglpk-dev \
     libabsl-dev \
+    libsqlite3-mod-spatialite \
     libcurl4-gnutls-dev \
     libssl-dev \
     libudunits2-dev \

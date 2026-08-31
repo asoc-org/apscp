@@ -45,8 +45,8 @@ Functions and definitions for new classes.
   : New theme
 - [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
   : New tile
-- [`create_dataset()`](https://asoc-org.github.io/apscp/reference/create_dataset.md)
-  : Create dataset
+- [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md)
+  : Create dataset from sf object.
 - [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
   : Create a new legend
 - [`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md)
@@ -55,8 +55,10 @@ Functions and definitions for new classes.
   : Create solution
 - [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
   : Create solution legend
-- [`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md)
-  : Create tile
+- [`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md)
+  : Create tile from dataset.
+- [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md)
+  : Create tile from \`sf\` data.
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
   : New dataset
 - [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
@@ -177,8 +179,6 @@ Functions for simulating data.
   : Simulate binary legend
 - [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md)
   : Simulate continuous legend
-- [`simulate_feature_zone_targets()`](https://asoc-org.github.io/apscp/reference/simulate_feature_zone_targets.md)
-  : Simulate targets
 - [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
   : Simulate PMtiles file
 - [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md)
@@ -202,8 +202,12 @@ Functions for simulating data.
   : Color palette
 - [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
   : Is relative path?
+- [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
+  : Read matrix
 - [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
   : Read sf data from zip file
+- [`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
+  : Write matrix
 - [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
   : Write sf data to zip file
 - [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)

@@ -1,8 +1,8 @@
 test_that("new_layer", {
   # create object
   s <- simulate_spatial_data()
-  w <- create_dataset(s)
-  r <- create_tile(s, verbose = FALSE)
+  w <- create_dataset_from_sf(s)
+  r <- create_tile_from_sf(s, verbose = FALSE)
   l <- simulate_continuous_legend()
   p <- simulate_provenance()
   x <- new_layer(
@@ -29,8 +29,8 @@ test_that("new_layer", {
 test_that("serialize_object", {
   # create object
   s <- simulate_spatial_data()
-  w <- create_dataset(s)
-  r <- create_tile(s, verbose = FALSE)
+  w <- create_dataset_from_sf(s)
+  r <- create_tile_from_sf(s, verbose = FALSE)
   l <- simulate_continuous_legend()
   p <- simulate_provenance()
   d <- new_layer(
@@ -57,8 +57,8 @@ test_that("serialize_object", {
 test_that("deserialize_object", {
   # create object
   s <- simulate_spatial_data()
-  w <- create_dataset(s)
-  r <- create_tile(s, verbose = FALSE)
+  w <- create_dataset_from_sf(s)
+  r <- create_tile_from_sf(s, verbose = FALSE)
   l <- simulate_continuous_legend()
   p <- simulate_provenance()
   x <- new_layer(

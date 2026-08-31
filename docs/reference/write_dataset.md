@@ -20,7 +20,8 @@ write_dataset(x, pu_path, boundary_path)
 
 - boundary_path:
 
-  \`character\` file path for boundary data.
+  \`character\` file path for boundary data. If the dataset does not
+  have boundary data, then use \`boundary_path = NULL\`.
 
 ## Value
 
@@ -44,8 +45,8 @@ sim_data <- simulate_spatial_data()
 #> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
-dataset <- create_dataset(sim_data)
-#> Error in create_dataset(sim_data): could not find function "create_dataset"
+dataset <- create_dataset_from_sf(sim_data)
+#> Error in create_dataset_from_sf(sim_data): could not find function "create_dataset_from_sf"
 
 # define file paths for saving data
 pu_path <- tempfile(fileext = ".gpkg.zip")

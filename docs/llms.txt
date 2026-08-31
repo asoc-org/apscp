@@ -1,12 +1,10 @@
 # apscp: Decision Support Tool for the Antarctic Peninsula
 
-[![lifecycle](https://img.shields.io/badge/Lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![R-CMD-check-Ubuntu](https://img.shields.io/github/actions/workflow/status/jeffreyhanson/apscp/R-CMD-check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/jeffreyhanson/apscp/actions)
-[![R-CMD-check-Windows](https://img.shields.io/github/actions/workflow/status/jeffreyhanson/apscp/R-CMD-check-windows.yaml?branch=master&label=Windows)](https://github.com/jeffreyhanson/apscp/actions)
-[![Docker
-Status](https://img.shields.io/docker/cloud/build/naturecons/wheretowork?label=Docker%20build)](https://hub.docker.com/r/naturecons/wheretowork)
+[![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![R-CMD-check-Ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/R-CMD-check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
+[![R-CMD-check-Windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/R-CMD-check-windows.yaml?branch=master&label=Windows)](https://github.com/asoc-org/apscp/actions)
 [![Coverage
-Status](https://codecov.io/github/jeffreyhanson/apscp/coverage.svg?branch=master)](https://codecov.io/github/jeffreyhanson/apscp?branch=master)
+Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=master)](https://codecov.io/github/asoc-org/apscp?branch=master)
 
 Interactive decision support tool to navigate management options for the
 Antarctic Peninsula. The tool identifies priority areas for implementing
@@ -29,48 +27,126 @@ TODO.
 
 ## Installation
 
-TODO.
+The application is available as an online service provided by the
+[Antarctic and Southern Ocean Coalition](https://todo.com). If you need
+to run the application on your own computer, then you can run it using
+the [R statistical computing environment](https://www.r-project.org/),
+[Docker](https://www.docker.com/), or [Docker
+Compose](https://docs.docker.com/compose/).
+
+### Using R
+
+To use this method, you will need to install the [R statistical
+computing environment](https://www.r-project.org/). After completing the
+installation, you can install the application using the following R
+code:
+
+``` r
+if (!require(remotes)) install.packages("remotes")
+remotes::install_github("asoc-org/asoc")
+```
+
+You can then use the following R code to start the application and open
+it in your web browser:
+
+``` r
+asoc::run_app()
+```
+
+### Using Docker
+
+To use this method, you will need to install [Docker
+Engine](https://www.docker.com/) ([see here for
+instructions](https://docs.docker.com/get-docker/)). After completing
+this step, you can install the application from the [DockerHub
+repository](https://hub.docker.com/repository/docker/jhansocasoc/apscp).
+Specifically, please use the following system command:
+
+``` bash
+docker run -dp 3838:3838 --name apscp -it jhansonasoc/apscp:latest
+```
+
+You can then view the application by opening the following link in
+[Google Chrome](https://www.google.com/chrome/):
+<http://localhost:3838>. After you have finished using the application,
+you can terminate it using the following system command. **Note that if
+you don’t terminate the application once you are finished using it, then
+it will continue running in the background.**
+
+``` bash
+docker rm -f apscp
+```
+
+### Using Docker Compose
+
+To use this method, you will need to install [Docker
+Engine](https://www.docker.com/) ([see here for
+instructions](https://docs.docker.com/get-docker/)) and Docker Compose
+([see here for instructions](https://docs.docker.com/compose/install/)).
+After installing both programs, you can install the application by
+[cloning this
+repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository)
+and then using the following system commands:
+
+``` bash
+docker-compose pull
+docker-compose up -d
+```
+
+You can then view the application by opening the following link in
+[Google Chrome](https://www.google.com/chrome/):
+<http://localhost:3838>. After you have finished using the application,
+you can terminate it using the following system command. **Note that if
+you don’t terminate the application once you are finished using it, then
+it will continue running in the background.**
+
+``` bash
+docker-compose down
+```
 
 ## Contributing
 
-The application is a [Shiny web
-application](https://mastering-shiny.org/) developed using the [R
+The application is a [*Shiny* web
+application](https://mastering-shiny.org/) developed with the [R
 statistical computing environment](https://www.r-project.org/).
-Specifically, it uses the [*golem*
-framework](https://thinkr-open.github.io/golem/). This means that the
-application is effectively an [R package](https://r-pkgs.org/) that
-contains code for defining and launching the application ([see here for
-more details](https://engineering-shiny.org/)). The R code files
-(located in the `./R` directory) are organized using the following
-naming conventions:
+Specifically, it follows the [*golem*
+framework](https://thinkr-open.github.io/golem/) for application
+development, [*packer* framework](https://github.com/johncoene/packer)
+for JavaScript code and dependency management, [*htmlwidgets*
+package](https://www.htmlwidgets.org/) for interfacing with JavaScript
+widgets, and [*renv* package](https://rstudio.github.io/renv/index.html)
+for R package dependency management. This means that the application is
+effectively an [R package](https://r-pkgs.org/) that contains code for
+defining and launching the application ([see here for more
+details](https://engineering-shiny.org/)). The R code files (located in
+the `./R` directory) are organized according to the following naming
+conventions:
 
-- `app_*`: Defines the web application:
+- `app_`: Defines the web application:
   - `app_config.R`: Imports configuration settings.
-  - `app_global.R`: Initializes the application. It performs a similar
+  - `app_startup.R`: Initializes the application. It performs a similar
     to the `global.R` file in typical Shiny applications.
+  - `app_ui.R`: Defines the user interface for the application. It
+    performs a similar role to the `ui.R` file in typical Shiny
+    applications.
   - `app_server.R`: Defines the (back-end) server-side logic for the
     application. It performs a similar role to the `server.R` file in
     typical Shiny applications.
-  - `app_ui.R`: Defines the (font-end) user interface for the
-    application. It performs a similar role to the `ui.R` file in
-    typical Shiny applications.
-- `server_*`: Defines components used to assemble the server-side logic
-  for the application.
-- `ui_`\*: Defines functions used to create user interface elements.
-- `class_*`: Defines [*R6* object classes](https://r6.r-lib.org/) for
-  managing data. used in the back-end of the application.
-- `fct_*`: Defines functions for analysis and data manipulation.
-- `widget_*`: Defines custom [*htmlwidgets*
-  widgets](https://www.htmlwidgets.org/) for user interface used by the
-  application.
-- `utils_*`: Defines utility functions.
+  - `app_server_*.R`: Defines components used to assemble the
+    server-side logic for the application.
+- `class_`: Defines S3 and R6 object classes for managing data.
+- `method_`: Defines S3 methods for managing data.
+- `fct_`: Defines functions for analysis and data manipulation.
+- `widget_`: Defines custom [*htmlwidgets*
+  widgets](https://www.htmlwidgets.org/).
+- `utils_`: Defines utility functions.
 
 ## Getting help
 
 Thank you for checking out this application. If you encounter any
 software defects (e.g. application crashes, unexpected behavior, or
 spelling mistakes), please feel free to post them on the [issue
-tracker](https://github.com/jeffreyhanson/apscp/issues).
+tracker](https://github.com/asoc-org/apscp/issues).
 
 # Package index
 
@@ -119,8 +195,8 @@ Functions and definitions for new classes.
   : New theme
 - [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
   : New tile
-- [`create_dataset()`](https://asoc-org.github.io/apscp/reference/create_dataset.md)
-  : Create dataset
+- [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md)
+  : Create dataset from sf object.
 - [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
   : Create a new legend
 - [`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md)
@@ -129,8 +205,10 @@ Functions and definitions for new classes.
   : Create solution
 - [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
   : Create solution legend
-- [`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md)
-  : Create tile
+- [`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md)
+  : Create tile from dataset.
+- [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md)
+  : Create tile from \`sf\` data.
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
   : New dataset
 - [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
@@ -251,8 +329,6 @@ Functions for simulating data.
   : Simulate binary legend
 - [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md)
   : Simulate continuous legend
-- [`simulate_feature_zone_targets()`](https://asoc-org.github.io/apscp/reference/simulate_feature_zone_targets.md)
-  : Simulate targets
 - [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
   : Simulate PMtiles file
 - [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md)
@@ -276,8 +352,12 @@ Functions for simulating data.
   : Color palette
 - [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
   : Is relative path?
+- [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
+  : Read matrix
 - [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
   : Read sf data from zip file
+- [`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
+  : Write matrix
 - [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
   : Write sf data to zip file
 - [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)

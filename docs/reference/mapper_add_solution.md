@@ -42,4 +42,5 @@ mapper_add_solution(
 
 Other mapper:
 [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md),
-[`mapper-shiny`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+[`mapper-shiny`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md),
+[`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)

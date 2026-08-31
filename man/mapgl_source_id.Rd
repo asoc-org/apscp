@@ -24,7 +24,7 @@ This corresponds to the `source` parameter of [mapgl::add_fill_layer()].
 sim_data <- simulate_spatial_data()
 
 # create object
-x <- create_tile(sim_data)
+x <- create_tile_from_sf(sim_data)
 
 # get source identifier
 mapgl_source_id(x)

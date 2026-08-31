@@ -25,7 +25,6 @@ bars based on which locks are selected for each zone.
 }
 \seealso{
 Other solver:
-\code{\link[=mapper_sync]{mapper_sync()}},
 \code{\link[=solver]{solver()}},
 \code{\link{solver-shiny}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},

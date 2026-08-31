@@ -12,6 +12,7 @@
 \alias{serialize_object.Cost}
 \alias{serialize_object.Solution}
 \alias{serialize_object.Theme}
+\alias{serialize_object.bbox}
 \alias{serialize_object.Project}
 \title{Serialize object}
 \usage{
@@ -36,6 +37,8 @@ serialize_object(x)
 \method{serialize_object}{Solution}(x)
 
 \method{serialize_object}{Theme}(x)
+
+\method{serialize_object}{bbox}(x)
 
 \method{serialize_object}{Project}(x)
 }

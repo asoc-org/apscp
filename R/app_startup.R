@@ -55,12 +55,11 @@ app_startup <- function() {
   suppressWarnings(future::plan(strategy, workers = 2))
 
   if (identical(get_golem_config("tile_server_mode"), "internal")) {
-    ## if needed, initialize tile server internally
-    ### if logging, then display details
+    ## if logging, then display details
     if (get_golem_config("logging")) {
       cli::cli_h3("Tile server")
     }
-    ### initialize tile server
+    ## initialize tile server
     tile_server_start(
       golem::get_golem_options("project"),
       verbose = get_golem_config("logging")
@@ -69,7 +68,7 @@ app_startup <- function() {
     assign(".Last", function() {tile_server_stop()}, .GlobalEnv)
   } else if (identical(get_golem_config("tile_server_mode"), "external")) {
     ## otherwise, make tile files available for external tile server
-    ### if logging, then display details
+    ## if logging, then display details
     if (get_golem_config("logging")) {
       cli::cli_h3("Tile directory")
       cli::cli_text("directory: ", get_golem_config("tile_server_dir"))

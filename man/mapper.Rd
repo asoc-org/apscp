@@ -48,6 +48,7 @@ runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 \seealso{
 Other mapper:
 \code{\link{mapper-shiny}},
-\code{\link[=mapper_add_solution]{mapper_add_solution()}}
+\code{\link[=mapper_add_solution]{mapper_add_solution()}},
+\code{\link[=mapper_sync]{mapper_sync()}}
 }
 \concept{mapper}

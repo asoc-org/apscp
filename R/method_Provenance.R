@@ -10,6 +10,13 @@ NULL
 #'
 #' @family method
 #'
+#' @examples
+#' # create object
+#' x <- tool_generated_provenance()
+#'
+#' # print object
+#' print(x)
+#'
 #' @export
 tool_generated_provenance <- function() {
   structure(

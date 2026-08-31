@@ -60,16 +60,29 @@ A \[new_solution()\] object.
 ## See also
 
 Other method:
-[`create_dataset()`](https://asoc-org.github.io/apscp/reference/create_dataset.md),
+[`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
-[`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md),
+[`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md),
+[`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
 
 ``` r
-# TODO
+# simulate data
+p <- simulate_project()
+#> Error in simulate_project(): could not find function "simulate_project"
+s <- simulate_prioritization_settings(p)
+#> Error in simulate_prioritization_settings(p): could not find function "simulate_prioritization_settings"
+
+# generate solution
+x <- prioritization(p, s, solver = "cbc", gap = 0.1)
+#> Error in prioritization(p, s, solver = "cbc", gap = 0.1): could not find function "prioritization"
+
+# print solution
+print(x)
+#> Error: object 'x' not found
 ```

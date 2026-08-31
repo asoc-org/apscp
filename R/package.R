@@ -55,5 +55,7 @@ utils::globalVariables(
 #' @importFrom R6 R6Class
 #' @importFrom promises promise
 #' @importFrom tibble as_tibble
+#' @importFrom DBI dbConnect
+#' @importFrom RSQLite SQLite
 #' @export
 NULL

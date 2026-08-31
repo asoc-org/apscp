@@ -13,12 +13,13 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/color_palette.html</loc></url>
-<url><loc>https://asoc-org.github.io/apscp/reference/create_dataset.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_legend.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_optimized_solution.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_solution.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_solution_legend.html</loc></url>
-<url><loc>https://asoc-org.github.io/apscp/reference/create_tile.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/create_tile_from_sf.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/deserialize_object.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/get_paint_parameters.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/has_mapbox_token.html</loc></url>
@@ -51,6 +52,7 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/prioritization.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/read_builtin_project.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/read_dataset.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/read_matrix.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/read_project.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/read_sf_data.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/run_app.html</loc></url>
@@ -63,7 +65,6 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/sidebar_tabs.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_binary_legend.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.html</loc></url>
-<url><loc>https://asoc-org.github.io/apscp/reference/simulate_feature_zone_targets.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_project.html</loc></url>
@@ -81,6 +82,7 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/tile_server_stop.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/tool_generated_provenance.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/write_dataset.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/write_matrix.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/write_project.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/write_sf_data.html</loc></url>
 </urlset>

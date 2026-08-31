@@ -32,16 +32,10 @@ Synchronize active layers between a [mapper()] object and its associated
 This function is specifically used to add layers to the map that
 are not active.
 }
-\examples{
-# TODO
-
-}
 \seealso{
-Other solver:
-\code{\link[=solver]{solver()}},
-\code{\link{solver-shiny}},
-\code{\link[=solver_add_lock]{solver_add_lock()}},
-\code{\link[=solver_reset]{solver_reset()}},
-\code{\link[=solver_sync]{solver_sync()}}
+Other mapper:
+\code{\link[=mapper]{mapper()}},
+\code{\link{mapper-shiny}},
+\code{\link[=mapper_add_solution]{mapper_add_solution()}}
 }
-\concept{solver}
+\concept{mapper}

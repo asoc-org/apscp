@@ -22,6 +22,10 @@ Other class:
 
 ## Public fields
 
+- `bbox`:
+
+  \[sf::st_crs()\] object.
+
 - `dataset`:
 
   \[new_dataset()\] object.
@@ -98,6 +102,7 @@ Create a \`Project\` object.
 
     Project$new(
       zones,
+      bbox,
       dataset,
       tiles,
       features,
@@ -115,6 +120,10 @@ Create a \`Project\` object.
 - `zones`:
 
   \`character\` vector of zone names.
+
+- `bbox`:
+
+  \[sf::st_bbox()\] object.
 
 - `dataset`:
 
@@ -169,7 +178,15 @@ Get centroid.
 
 #### Usage
 
-    Project$get_centroid()
+    Project$get_centroid(native = TRUE)
+
+#### Arguments
+
+- `native`:
+
+  \`logical\` value indicating if the bounding box should be in
+  (\`TRUE\`) the native coordinate reference system or (\`FALSE\`)
+  re-projected to longitude/latitude?
 
 #### Returns
 

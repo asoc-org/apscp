@@ -37,6 +37,9 @@ serialize_object(x)
 # S3 method for class 'Theme'
 serialize_object(x)
 
+# S3 method for class 'bbox'
+serialize_object(x)
+
 # S3 method for class 'Project'
 serialize_object(x)
 ```

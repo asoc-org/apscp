@@ -19,6 +19,8 @@ NULL
 #'
 #' @return An object.
 #'
+#' @inherit serialize_object examples
+#'
 #' @export
 deserialize_object <- function(x, dataset = NULL) {
   # assert valid arguments
@@ -95,10 +97,14 @@ deserialize_object <- function(x, dataset = NULL) {
   # return object
   switch(
     x_class,
-    bbox = sf::st_bbox(
-      c(xmin = x$xmin, ymin = x$ymin, xmax = x$xmax, ymax = x$ymax),
-      crs = sf::st_crs(x$crs)
-    ),
+    bbox = {
+      b <- sf::st_bbox(
+        c(xmin = x$xmin, ymin = x$ymin, xmax = x$xmax, ymax = x$ymax),
+        crs = sf::st_crs(x$wkt)
+      )
+      sf::st_crs(b)$input <- x$input
+      b
+    },
     Provenance = do.call(new_provenance, x),
     Tile = do.call(new_tile, x),
     CategoricalLegend = do.call(new_categorical_legend, x),

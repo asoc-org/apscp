@@ -5,7 +5,7 @@ Create a new theme object.
 ## Usage
 
 ``` r
-new_theme(name, zone)
+new_theme(name, zone = NULL)
 ```
 
 ## Arguments
@@ -18,7 +18,8 @@ new_theme(name, zone)
 
   \`character\` name of zone associated with the theme. Note that
   \`zone\` should match one of the zone names associated with the
-  \[new_project()\] to which this theme belongs.
+  \[new_project()\] to which this theme belongs. Defaults to \`NULL\`
+  such that the theme is not associated with any particular zone.
 
 ## Value
 

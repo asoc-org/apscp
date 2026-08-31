@@ -53,8 +53,8 @@ if (FALSE) { # interactive()
 sim_data <- simulate_spatial_data()
 
 # create objects
-dataset <- create_dataset(sim_data)
-tile <- create_tile(sim_data)
+dataset <- create_dataset_from_sf(sim_data)
+tile <- create_tile_from_sf(sim_data)
 cost <- new_cost(
   name = "cost",
   zone = "Science",

@@ -46,6 +46,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_project</span><span class="op">(</span></span>
 <span>  <span class="va">zones</span>,</span>
+<span>  <span class="va">bbox</span>,</span>
 <span>  <span class="va">dataset</span>,</span>
 <span>  <span class="va">tiles</span>,</span>
 <span>  <span class="va">costs</span>,</span>
@@ -65,6 +66,10 @@
 
 <dl><dt id="arg-zones">zones<a class="anchor" aria-label="anchor" href="#arg-zones"></a></dt>
 <dd><p>`character` vector of zone names.</p></dd>
+
+
+<dt id="arg-bbox">bbox<a class="anchor" aria-label="anchor" href="#arg-bbox"></a></dt>
+<dd><p>[sf::st_bbox()] object.</p></dd>
 
 
 <dt id="arg-dataset">dataset<a class="anchor" aria-label="anchor" href="#arg-dataset"></a></dt>
@@ -140,10 +145,10 @@ Defaults to `NULL`, such that the current package version is used.</p></dd>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_spatial_data():</span> could not find function "simulate_spatial_data"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># prepare data</span></span></span>
-<span class="r-in"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset.html">create_dataset</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_dataset(sim_data):</span> could not find function "create_dataset"</span>
-<span class="r-in"><span><span class="va">tile</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_tile.html">create_tile</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_tile(sim_data):</span> could not find function "create_tile"</span>
+<span class="r-in"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset_from_sf.html">create_dataset_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_dataset_from_sf(sim_data):</span> could not find function "create_dataset_from_sf"</span>
+<span class="r-in"><span><span class="va">tile</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_tile_from_sf.html">create_tile_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_tile_from_sf(sim_data):</span> could not find function "create_tile_from_sf"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create cost</span></span></span>
 <span class="r-in"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_cost.html">new_cost</a></span><span class="op">(</span></span></span>
@@ -217,13 +222,14 @@ Defaults to `NULL`, such that the current package version is used.</p></dd>
 <span class="r-in"><span><span class="co"># create project</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_project</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  zones <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Biodiversity"</span>, <span class="st">"Tourism"</span>, <span class="st">"Science"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  bbox <span class="op">=</span> <span class="fu">sf</span><span class="fu">::</span><span class="fu"><a href="https://r-spatial.github.io/sf/reference/st_bbox.html" class="external-link">st_bbox</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
 <span class="r-in"><span>  tiles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">tile</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  costs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">cost</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  locks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">lock</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  features <span class="op">=</span> <span class="va">features</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     dataset = dataset, tiles = list(tile), costs = list(cost),     locks = list(lock), features = features):</span> could not find function "new_project"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     bbox = sf::st_bbox(sim_data), dataset = dataset, tiles = list(tile),     costs = list(cost), locks = list(lock), features = features):</span> could not find function "new_project"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

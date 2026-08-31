@@ -1,7 +1,7 @@
 #' @include internal.R
 NULL
 
-#' Create tile
+#' Create tile from `sf` data.
 #'
 #' Create a [new_tile()] object from a [sf::st_sf()] object.
 #'
@@ -28,13 +28,13 @@ NULL
 #' sim_data <- simulate_spatial_data()
 #'
 #' # create tile from spatial data
-#' x <- create_tile(sim_data)
+#' x <- create_tile_from_sf(sim_data)
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-create_tile <- function(
+create_tile_from_sf <- function(
   x,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
@@ -59,6 +59,8 @@ create_tile <- function(
     assertthat::is.flag(verbose),
     assertthat::noNA(verbose)
   )
+  # if needed, create directory to store pmtiles
+  dir.create(dirname(path), showWarnings = FALSE, recursive = TRUE)
   # generate tiles
   freestiler::freestile(
     x,
@@ -73,5 +75,72 @@ create_tile <- function(
     path = path,
     source_layer = source_layer,
     max_zoom = max_zoom
+  )
+}
+
+#' Create tile from dataset.
+#'
+#' Create a [new_tile()] object from a [new_dataset() object.
+#'
+#' @inheritParams create_tile_from_sf
+#'
+#' @param x [new_dataset()] object.
+#'
+#' @param column `character` value with column name.
+#'
+#' @return A [new_tile()] object.
+#'
+#' @family method
+#'
+#' @examples
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # create tile from spatial data
+#' x <- create_tile_from_dataset(
+#'   create_dataset_from_sf(sim_data),
+#'   column = "solution"
+#' )
+#'
+#' # preview object
+#' print(x)
+#'
+#' @export
+create_tile_from_dataset <- function(
+  x,
+  column,
+  source_layer = "layer",
+  path = tempfile(fileext = ".pmtiles"),
+  max_zoom = 8,
+  verbose = FALSE
+) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    ## x
+    inherits(x, "Dataset"),
+    ## column
+    assertthat::is.string(column),
+    assertthat::noNA(column),
+    ## source_layer
+    assertthat::is.string(source_layer),
+    assertthat::noNA(source_layer),
+    ## path
+    assertthat::is.string(path),
+    assertthat::noNA(path),
+    endsWith(path, ".pmtiles"),
+    ## max_zoom
+    assertthat::is.number(max_zoom),
+    assertthat::noNA(max_zoom),
+    ## verbose
+    assertthat::is.flag(verbose),
+    assertthat::noNA(verbose)
+  )
+  # create tiles
+  create_tile_from_sf(
+    x = x$get_sf(column),
+    path = path,
+    source_layer = source_layer,
+    max_zoom = max_zoom,
+    verbose = verbose
   )
 }

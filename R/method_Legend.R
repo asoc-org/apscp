@@ -164,6 +164,16 @@ create_legend <- function(
 #'
 #' @return A [new_categorical_legend()] object.
 #'
+#' @examples
+#' # simulate project
+#' p <- simulate_project()
+#'
+#' # create solution legend
+#' x <- create_solution_legend(p)
+#'
+#' # print legend
+#' print(x)
+#'
 #' @export
 create_solution_legend <- function(project) {
   # assert argument is valid

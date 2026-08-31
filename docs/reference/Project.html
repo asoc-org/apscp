@@ -62,7 +62,11 @@
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
-    <p></p><div class="r6-fields"><dl><dt><code>dataset</code></dt>
+    <p></p><div class="r6-fields"><dl><dt><code>bbox</code></dt>
+<dd><p>[sf::st_crs()] object.</p></dd>
+
+
+    <dt><code>dataset</code></dt>
 <dd><p>[new_dataset()] object.</p></dd>
 
 
@@ -129,6 +133,7 @@ to create the project.</p></dd>
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Project.html">Project</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  <span class="va">zones</span>,</span>
+<span>  <span class="va">bbox</span>,</span>
 <span>  <span class="va">dataset</span>,</span>
 <span>  <span class="va">tiles</span>,</span>
 <span>  <span class="va">features</span>,</span>
@@ -144,6 +149,9 @@ to create the project.</p></dd>
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>zones</code></dt>
 <dd><p>`character` vector of zone names.</p></dd>
+
+      <dt><code>bbox</code></dt>
+<dd><p>[sf::st_bbox()] object.</p></dd>
 
       <dt><code>dataset</code></dt>
 <dd><p>[new_dataset()] object.</p></dd>
@@ -194,7 +202,16 @@ Defaults to `"Unknown"`.</p></dd>
 <h3 id="project-get-centroid-"><code>Project$get_centroid()</code><a class="anchor" aria-label="anchor" href="#project-get-centroid-"></a></h3>
 <p>Get centroid.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_centroid</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_centroid</span><span class="op">(</span>native <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>native</code></dt>
+<dd><p>`logical` value indicating if the bounding box should
+be in (`TRUE`) the native coordinate reference system or (`FALSE`)
+re-projected to longitude/latitude?</p></dd>
+
+
+</dl><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
 <p>A `numeric` vector with two values.</p>
@@ -208,7 +225,7 @@ Defaults to `"Unknown"`.</p></dd>
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_bbox</span><span class="op">(</span>native <span class="op">=</span> <span class="cn">TRUE</span>, expand <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>native</code></dt>
 <dd><p>`logical` value indicating if the bounding box should
 be in (`TRUE`) the native coordinate reference system or (`FALSE`)
@@ -234,7 +251,7 @@ box by 10 percent. Defaults to 0.</p></dd>
 <h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_solution</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>`character` value.</p></dd>
 
@@ -253,7 +270,7 @@ box by 10 percent. Defaults to 0.</p></dd>
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_lock</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
 <dd><p>`character` value.</p></dd>
 
@@ -272,7 +289,7 @@ box by 10 percent. Defaults to 0.</p></dd>
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_solution</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>[new_solution()] object.</p></dd>
 
@@ -291,7 +308,7 @@ box by 10 percent. Defaults to 0.</p></dd>
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_lock</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>[new_lock()] object.</p></dd>
 
@@ -310,7 +327,7 @@ box by 10 percent. Defaults to 0.</p></dd>
 <h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_tile</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p>[new_tile()] object.</p></dd>
 
@@ -329,7 +346,7 @@ box by 10 percent. Defaults to 0.</p></dd>
 <h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

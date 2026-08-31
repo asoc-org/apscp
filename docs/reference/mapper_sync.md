@@ -25,6 +25,10 @@ mapper_sync(
 
   \[mapgl::mapboxgl_proxy()\] object.
 
+- project:
+
+  \[new_project()\] object.
+
 - data:
 
   \`list\` with data.
@@ -41,9 +45,7 @@ active.
 
 ## See also
 
-Other solver:
-[`solver()`](https://asoc-org.github.io/apscp/reference/solver.md),
-[`solver-shiny`](https://asoc-org.github.io/apscp/reference/solver-shiny.md),
-[`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md),
-[`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md),
-[`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
+Other mapper:
+[`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md),
+[`mapper-shiny`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md),
+[`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)

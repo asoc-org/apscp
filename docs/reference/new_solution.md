@@ -56,14 +56,14 @@ x <- new_solution(
   layer = new_layer(
     column = "solution",
     total = 500,
-    dataset = create_dataset(sim_data),
-    tile = create_tile(sim_data),
+    dataset = create_dataset_from_sf(sim_data),
+    tile = create_tile_from_sf(sim_data),
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
     details = "extra info"
   )
 )
-#> Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset(sim_data), tile = create_tile(sim_data),     legend = simulate_solution_legend(), provenance = simulate_provenance(),     details = "extra info")): could not find function "new_solution"
+#> Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_solution_legend(),     provenance = simulate_provenance(), details = "extra info")): could not find function "new_solution"
 
 # preview object
 print(x)

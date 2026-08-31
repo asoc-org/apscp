@@ -68,10 +68,7 @@ mapper_add_solution <- function(
 #' This function is specifically used to add layers to the map that
 #' are not active.
 #'
-#' @family solver
-#'
-#' @examples
-#' # TODO
+#' @family mapper
 #'
 #' @export
 mapper_sync <- function(

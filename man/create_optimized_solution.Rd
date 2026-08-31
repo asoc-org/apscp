@@ -43,16 +43,25 @@ A [new_solution()] object.
 Create a new solution based on spatial prioritization techniques.
 }
 \examples{
-# TODO
+# simulate data
+p <- simulate_project()
+s <- simulate_prioritization_settings(p)
+
+# generate solution
+x <- prioritization(p, s, solver = "cbc", gap = 0.1)
+
+# print solution
+print(x)
 
 }
 \seealso{
 Other method:
-\code{\link[=create_dataset]{create_dataset()}},
+\code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile]{create_tile()}},
+\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }

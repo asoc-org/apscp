@@ -44,8 +44,8 @@ sim_data <- simulate_spatial_data()
 #> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
-x <- create_tile(sim_data)
-#> Error in create_tile(sim_data): could not find function "create_tile"
+x <- create_tile_from_sf(sim_data)
+#> Error in create_tile_from_sf(sim_data): could not find function "create_tile_from_sf"
 
 # get layer identifier
 mapgl_source_url(x)

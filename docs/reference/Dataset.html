@@ -61,12 +61,28 @@
     </div>
     <div class="section level2">
     <h2 id="public-fields">Public fields<a class="anchor" aria-label="anchor" href="#public-fields"></a></h2>
-    <p></p><div class="r6-fields"><dl><dt><code>pu_data</code></dt>
-<dd><p>[sf::st_sf()] object.</p></dd>
+    <p></p><div class="r6-fields"><dl><dt><code>pu_path</code></dt>
+<dd><p>`character` file path.</p></dd>
+
+
+    <dt><code>pu_db_con</code></dt>
+<dd><p>[DBI::dbConnect()] database connection object.</p></dd>
+
+
+    <dt><code>pu_db_table</code></dt>
+<dd><p>`character` object.</p></dd>
+
+
+    <dt><code>boundary_path</code></dt>
+<dd><p>`character ` file path.</p></dd>
 
 
     <dt><code>boundary_data</code></dt>
 <dd><p>[Matrix::sparseMatrix()] object.</p></dd>
+
+
+    <dt><code>n_pu</code></dt>
+<dd><p>`integer` value.</p></dd>
 
 
 </dl><p></p></div>
@@ -78,10 +94,11 @@
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 <p></p><ul><li><p><a href="#method-Dataset-initialize"><code>Dataset$new()</code></a></p></li>
 <li><p><a href="#method-Dataset-get_n_pu"><code>Dataset$get_n_pu()</code></a></p></li>
-<li><p><a href="#method-Dataset-get_bbox"><code>Dataset$get_bbox()</code></a></p></li>
+<li><p><a href="#method-Dataset-get_boundary_data"><code>Dataset$get_boundary_data()</code></a></p></li>
 <li><p><a href="#method-Dataset-get_column_names"><code>Dataset$get_column_names()</code></a></p></li>
+<li><p><a href="#method-Dataset-get_dataframe"><code>Dataset$get_dataframe()</code></a></p></li>
+<li><p><a href="#method-Dataset-get_sf"><code>Dataset$get_sf()</code></a></p></li>
 <li><p><a href="#method-Dataset-get_column_data"><code>Dataset$get_column_data()</code></a></p></li>
-<li><p><a href="#method-Dataset-get_spatial_column_data"><code>Dataset$get_spatial_column_data()</code></a></p></li>
 <li><p><a href="#method-Dataset-get_column_total"><code>Dataset$get_column_total()</code></a></p></li>
 <li><p><a href="#method-Dataset-get_pu_status"><code>Dataset$get_pu_status()</code></a></p></li>
 <li><p><a href="#method-Dataset-get_column_held"><code>Dataset$get_column_held()</code></a></p></li>
@@ -92,14 +109,14 @@
 <h3 id="dataset-new-"><code>Dataset$new()</code><a class="anchor" aria-label="anchor" href="#dataset-new-"></a></h3>
 <p>Create a `Dataset` object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">pu_data</span>, <span class="va">boundary_data</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">pu_path</span>, <span class="va">boundary_path</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>pu_data</code></dt>
-<dd><p>[tibble::tibble()] object.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>pu_path</code></dt>
+<dd><p>`character ` file path.</p></dd>
 
-      <dt><code>boundary_data</code></dt>
-<dd><p>[Matrix::sparseMatrix()] object.</p></dd>
+      <dt><code>boundary_path</code></dt>
+<dd><p>`character` file path.</p></dd>
 
 
 </dl><p></p></div>
@@ -122,14 +139,14 @@
 
 </div>
 
-<p></p><hr><a id="method-Dataset-get_bbox"></a><div class="section">
-<h3 id="dataset-get-bbox-"><code>Dataset$get_bbox()</code><a class="anchor" aria-label="anchor" href="#dataset-get-bbox-"></a></h3>
-<p>Get bounding box.</p><div class="section">
+<p></p><hr><a id="method-Dataset-get_boundary_data"></a><div class="section">
+<h3 id="dataset-get-boundary-data-"><code>Dataset$get_boundary_data()</code><a class="anchor" aria-label="anchor" href="#dataset-get-boundary-data-"></a></h3>
+<p>Get boundary data.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_bbox</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_boundary_data</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>An [sf::st_bbox()] object.</p>
+<p>A [Matrix::sparseMatrix()] object.</p>
 </div>
 
 </div>
@@ -146,40 +163,61 @@
 
 </div>
 
-<p></p><hr><a id="method-Dataset-get_column_data"></a><div class="section">
-<h3 id="dataset-get-column-data-"><code>Dataset$get_column_data()</code><a class="anchor" aria-label="anchor" href="#dataset-get-column-data-"></a></h3>
-<p>Get column data.</p><div class="section">
+<p></p><hr><a id="method-Dataset-get_dataframe"></a><div class="section">
+<h3 id="dataset-get-dataframe-"><code>Dataset$get_dataframe()</code><a class="anchor" aria-label="anchor" href="#dataset-get-dataframe-"></a></h3>
+<p>Get `data.frame` with data.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_column_data</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_dataframe</span><span class="op">(</span>column <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column</code></dt>
-<dd><p>`character` or `integer` value.</p></dd>
+<dd><p>`character` vector. Defaults to `NULL` such that
+all columns are returned.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A `numeric` vector.</p>
+<p>A `data.frame` object.</p>
 </div>
 
 </div>
 
-<p></p><hr><a id="method-Dataset-get_spatial_column_data"></a><div class="section">
-<h3 id="dataset-get-spatial-column-data-"><code>Dataset$get_spatial_column_data()</code><a class="anchor" aria-label="anchor" href="#dataset-get-spatial-column-data-"></a></h3>
-<p>Get column data.</p><div class="section">
+<p></p><hr><a id="method-Dataset-get_sf"></a><div class="section">
+<h3 id="dataset-get-sf-"><code>Dataset$get_sf()</code><a class="anchor" aria-label="anchor" href="#dataset-get-sf-"></a></h3>
+<p>Get [sf::st_sf()] object with data.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_spatial_column_data</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_sf</span><span class="op">(</span>column <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column</code></dt>
-<dd><p>`character` or `integer` value.</p></dd>
+<dd><p>`character` vector. Defaults to `NULL` such that
+all columns are returned.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A `numeric` vector.</p>
+<p>A [sf::st_st()] object.</p>
+</div>
+
+</div>
+
+<p></p><hr><a id="method-Dataset-get_column_data"></a><div class="section">
+<h3 id="dataset-get-column-data-"><code>Dataset$get_column_data()</code><a class="anchor" aria-label="anchor" href="#dataset-get-column-data-"></a></h3>
+<p>Get column data.</p><div class="section">
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_column_data</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>column</code></dt>
+<dd><p>`character` value.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
+<p>A vector.</p>
 </div>
 
 </div>
@@ -187,17 +225,17 @@
 <p></p><hr><a id="method-Dataset-get_column_total"></a><div class="section">
 <h3 id="dataset-get-column-total-"><code>Dataset$get_column_total()</code><a class="anchor" aria-label="anchor" href="#dataset-get-column-total-"></a></h3>
 <p>Get total (sum) of values in a column.</p><div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_column_total</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column</code></dt>
 <dd><p>`character` or `integer` value.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
+<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
 <p>A `character` vector of layer names.</p>
 </div>
 
@@ -207,10 +245,10 @@
 <h3 id="dataset-get-pu-status-"><code>Dataset$get_pu_status()</code><a class="anchor" aria-label="anchor" href="#dataset-get-pu-status-"></a></h3>
 <p>Identify which planning units would be associated with a zone
 depending on columns used to allocate them.</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_pu_status</span><span class="op">(</span><span class="va">zone</span>, <span class="va">allocation</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>zone</code></dt>
 <dd><p>`character` value with name of zone.</p></dd>
 
@@ -230,7 +268,7 @@ with the Biodiversity zone.</p></dd>
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
 <p>A `numeric` vector with binary values indicating if each
 planning unit is allocated to the `zone`.</p>
 </div>
@@ -241,12 +279,12 @@ planning unit is allocated to the `zone`.</p>
 <h3 id="dataset-get-column-held-"><code>Dataset$get_column_held()</code><a class="anchor" aria-label="anchor" href="#dataset-get-column-held-"></a></h3>
 <p>Get proportion of values in a column that would be considered to by
 held by selected planning units.</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">get_column_held</span><span class="op">(</span><span class="va">column</span>, <span class="va">status</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column</code></dt>
-<dd><p>`character` or `integer` vector.</p></dd>
+<dd><p>`character` vector of column names.</p></dd>
 
       <dt><code>status</code></dt>
 <dd><p>`numeric` vector with binary values for each
@@ -255,7 +293,7 @@ planning unit.</p></dd>
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
+<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
 <p>A `numeric` value.</p>
 </div>
 
@@ -264,17 +302,17 @@ planning unit.</p></dd>
 <p></p><hr><a id="method-Dataset-has_column"></a><div class="section">
 <h3 id="dataset-has-column-"><code>Dataset$has_column()</code><a class="anchor" aria-label="anchor" href="#dataset-has-column-"></a></h3>
 <p>Check if the dataset has a column or columns.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">has_column</span><span class="op">(</span><span class="va">column</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column</code></dt>
 <dd><p>`character vector.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
+<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
 <p>A `logical` value.</p>
 </div>
 
@@ -283,10 +321,10 @@ planning unit.</p></dd>
 <p></p><hr><a id="method-Dataset-set_column_data"></a><div class="section">
 <h3 id="dataset-set-column-data-"><code>Dataset$set_column_data()</code><a class="anchor" aria-label="anchor" href="#dataset-set-column-data-"></a></h3>
 <p>Set column data.</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">set_column_data</span><span class="op">(</span><span class="va">column</span>, <span class="va">values</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>column</code></dt>
 <dd><p>`character` value.</p></dd>
 
@@ -296,7 +334,7 @@ planning unit.</p></dd>
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
+<h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
 <p>An invisible `TRUE` indicating success.</p>
 </div>
 
@@ -305,10 +343,10 @@ planning unit.</p></dd>
 <p></p><hr><a id="method-Dataset-clone"></a><div class="section">
 <h3 id="dataset-clone-"><code>Dataset$clone()</code><a class="anchor" aria-label="anchor" href="#dataset-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Dataset</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

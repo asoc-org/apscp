@@ -188,6 +188,21 @@ serialize_object.Theme <- function(x) {
 }
 
 #' @rdname serialize_object
+#' @method serialize_object bbox
+#' @export
+serialize_object.bbox <- function(x) {
+  list(
+    input = sf::st_crs(x)$input,
+    wkt = sf::st_crs(x)$wkt,
+    xmin = x$xmin[[1]],
+    ymin = x$ymin[[1]],
+    xmax = x$xmax[[1]],
+    ymax = x$ymax[[1]],
+    class = "bbox"
+  )
+}
+
+#' @rdname serialize_object
 #' @method serialize_object Project
 #' @export
 serialize_object.Project <- function(x) {
@@ -197,6 +212,7 @@ serialize_object.Project <- function(x) {
     author_name = x$author_name,
     author_email = x$author_email,
     zones = x$zones,
+    bbox = serialize_object.bbox(x$bbox),
     tiles = lapply(x$tiles, function(y) serialize_object.Tile(y)),
     costs = lapply(x$costs, function(y) serialize_object.Cost(y)),
     features = lapply(x$features, function(y) serialize_object.Feature(y)),

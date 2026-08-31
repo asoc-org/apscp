@@ -23,7 +23,7 @@ This corresponds to the `url` parameter of [mapgl::add_pmtiles_source()].
 sim_data <- simulate_spatial_data()
 
 # create object
-x <- create_tile(sim_data)
+x <- create_tile_from_sf(sim_data)
 
 # get layer identifier
 mapgl_source_url(x)

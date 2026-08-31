@@ -11,7 +11,8 @@ write_dataset(x, pu_path, boundary_path)
 
 \item{pu_path}{`character` file path for planning unit data.}
 
-\item{boundary_path}{`character` file path for boundary data.}
+\item{boundary_path}{`character` file path for boundary data.
+If the dataset does not have boundary data, then use `boundary_path = NULL`.}
 }
 \value{
 An invisible `TRUE` indicating success.
@@ -24,7 +25,7 @@ Write a [Dataset] object.
 sim_data <- simulate_spatial_data()
 
 # create object
-dataset <- create_dataset(sim_data)
+dataset <- create_dataset_from_sf(sim_data)
 
 # define file paths for saving data
 pu_path <- tempfile(fileext = ".gpkg.zip")

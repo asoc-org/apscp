@@ -11,6 +11,9 @@ NULL
 Project <- R6::R6Class(
   "Project",
   public = list(
+    #' @field bbox [sf::st_crs()] object.
+    bbox = NULL,
+
     #' @field dataset [new_dataset()] object.
     dataset = NULL,
 
@@ -47,9 +50,10 @@ Project <- R6::R6Class(
 
     #' @description
     #' Create a `Project` object.
+    #' @param zones `character` vector of zone names.
+    #' @param bbox [sf::st_bbox()] object.
     #' @param dataset [new_dataset()] object.
     #' @param tiles `list` of [new_tile()] objects.
-    #' @param zones `character` vector of zone names.
     #' @param features `list` of [new_feature()] objects.
     #' @param locks `list` of [new_lock()] objects.
     #' @param costs `list` of [new_cost()] objects.
@@ -66,7 +70,7 @@ Project <- R6::R6Class(
     #' Defaults to `"Unknown"`.
     #' @return A new `Project` object.
     initialize = function(
-      zones, dataset, tiles,
+      zones, bbox, dataset, tiles,
       features, locks, costs, solutions = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown",
       version = "Unknown"
@@ -82,6 +86,8 @@ Project <- R6::R6Class(
         is.character(zones),
         assertthat::noNA(zones),
         no_duplicates(zones),
+        ## bbox
+        inherits(bbox, "bbox"),
         ## name
         assertthat::is.string(name),
         assertthat::noNA(name),
@@ -132,6 +138,7 @@ Project <- R6::R6Class(
 
       # assign fields
       self$dataset <- dataset
+      self$bbox <- bbox
       self$tiles <- tiles
       self$zones <- zones
       self$features <- features
@@ -173,7 +180,7 @@ Project <- R6::R6Class(
         assertthat::noNA(expand)
       )
       # expand bounding box
-      bb <- self$dataset$get_bbox()
+      bb <- self$bbox
       x_buffer <- expand * (bb$xmax - bb$xmin)
       y_buffer <- expand * (bb$ymax - bb$ymin)
       b <- c(
@@ -290,6 +297,8 @@ Project <- R6::R6Class(
 #'
 #' @param zones `character` vector of zone names.
 #'
+#' @param bbox [sf::st_bbox()] object.
+#'
 #' @param dataset [new_dataset()] object.
 #'
 #' @param tiles `list` of [new_tile()] objects.
@@ -324,8 +333,8 @@ Project <- R6::R6Class(
 #' sim_data <- simulate_spatial_data()
 #'
 #' # prepare data
-#' dataset <- create_dataset(sim_data)
-#' tile <- create_tile(sim_data)
+#' dataset <- create_dataset_from_sf(sim_data)
+#' tile <- create_tile_from_sf(sim_data)
 #'
 #' # create cost
 #' cost <- new_cost(
@@ -396,6 +405,7 @@ Project <- R6::R6Class(
 #' # create project
 #' x <- new_project(
 #'   zones = c("Biodiversity", "Tourism", "Science"),
+#'   bbox = sf::st_bbox(sim_data),
 #'   dataset = dataset,
 #'   tiles = list(tile),
 #'   costs = list(cost),
@@ -409,6 +419,7 @@ Project <- R6::R6Class(
 #' @export
 new_project <- function(
   zones,
+  bbox,
   dataset,
   tiles,
   costs,
@@ -436,6 +447,7 @@ new_project <- function(
     name = name,
     author_name = author_name,
     author_email = author_email,
-    version = version
+    version = version,
+    bbox = bbox
   )
 }

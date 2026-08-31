@@ -11,7 +11,7 @@
 #' ```
 #'
 #' @noRd
-server_solve <- quote({
+app_server_solve <- quote({
   # display solver settings in text box
   observeEvent(input$solver_settings, {
     # define inputs

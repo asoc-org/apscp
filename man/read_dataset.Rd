@@ -9,7 +9,8 @@ read_dataset(pu_path, boundary_path)
 \arguments{
 \item{pu_path}{`character` file path for planning unit data.}
 
-\item{boundary_path}{`character` file path for boundary data.}
+\item{boundary_path}{`character` file path for boundary data.
+If the dataset does not have boundary data, then use `boundary_path = NULL`.}
 }
 \value{
 A [Dataset] object.
@@ -20,12 +21,12 @@ Import a [Dataset] object.
 \examples{
 # specify file paths
 pu_path <- system.file(
- "extdata", "antarctic-peninsula_pu.gpkg.zip",
- package = "apscp"
+  "extdata", "antarctic-peninsula_pu.gpkg.zip",
+  package = "apscp"
 )
 bd_path <- system.file(
-  "extdata", "antarctic-peninsula_bd.csv.gz",
- package = "apscp"
+  "extdata", "antarctic-peninsula_bd.rds",
+  package = "apscp"
 )
 
 # import data

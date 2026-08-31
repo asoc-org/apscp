@@ -5,18 +5,18 @@ Create a new \[Dataset\] object.
 ## Usage
 
 ``` r
-new_dataset(pu_data, boundary_data)
+new_dataset(pu_path, boundary_path)
 ```
 
 ## Arguments
 
-- pu_data:
+- pu_path:
 
-  \[sf::st_sf()\] object with planning unit data.
+  \`character\` file path.
 
-- boundary_data:
+- boundary_path:
 
-  \[Matrix::sparseMatrix()\] object with boundary matrix data.
+  \`character\` file path.
 
 ## Value
 
@@ -24,16 +24,17 @@ A \[Dataset\] object.
 
 ## See also
 
-See \[create_dataset()\] to automatically convert a \[sf::st_sf()\]
-object to a \[new_dataset()\] object.
+See \[create_dataset_from_sf()\] to automatically convert a
+\[sf::st_sf()\] object to a \[new_dataset()\] object.
 
 Other method:
-[`create_dataset()`](https://asoc-org.github.io/apscp/reference/create_dataset.md),
+[`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
-[`create_tile()`](https://asoc-org.github.io/apscp/reference/create_tile.md),
+[`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md),
+[`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -43,19 +44,23 @@ Other method:
 sim_data <- simulate_spatial_data()
 #> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
-# manually prepare planning unit data
-pu_data <- sim_data
+# save spatial data to temporary file
+sim_path1 <- tempfile(fileext = ".gpkg")
+sf::write_sf(sim_data, sim_path1)
 #> Error: object 'sim_data' not found
 
 # manually prepare boundary data
+sim_path2 <- tempfile(fileext = ".rds")
 bd_data <- prioritizr::boundary_matrix(sim_data)
 #> Error in prioritizr::boundary_matrix(sim_data): ℹ In argument to `x`.
 #> Caused by error:
 #> ! object 'sim_data' not found
+write_matrix(bd_data, sim_path2)
+#> Error in write_matrix(bd_data, sim_path2): could not find function "write_matrix"
 
 # create object
-x <- new_dataset(pu_data, bd_data)
-#> Error in new_dataset(pu_data, bd_data): could not find function "new_dataset"
+x <- new_dataset(sim_path1, sim_path2)
+#> Error in new_dataset(sim_path1, sim_path2): could not find function "new_dataset"
 
 # preview object
 print(x)

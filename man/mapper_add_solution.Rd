@@ -31,6 +31,7 @@ Add a [new_solution()] to a Mapper widget.
 \seealso{
 Other mapper:
 \code{\link[=mapper]{mapper()}},
-\code{\link{mapper-shiny}}
+\code{\link{mapper-shiny}},
+\code{\link[=mapper_sync]{mapper_sync()}}
 }
 \concept{mapper}

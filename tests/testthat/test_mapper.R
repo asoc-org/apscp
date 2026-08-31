@@ -8,7 +8,7 @@ test_that("mapper", {
   expect_equal(x$x$project, serialize_object(d))
 })
 
-test_that("built-in dataset", {
+test_that("builtin dataset", {
   # create object
   d <- read_builtin_project()
   x <- mapper(map_id = "map", project = d)
