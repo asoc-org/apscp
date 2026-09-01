@@ -66,26 +66,26 @@ library(shiny)
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> ℹ Loading apscp
 #> ! Skipping missing files:
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/aaa.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_config.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_server.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_server_initialize.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_server_logging.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_server_solve.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_startup.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/app_ui.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/internal.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Dataset.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Layer.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Cost.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Feature.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Legend.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Lock.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Project.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Provenance.R,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/class_Solution.R, …,
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/widget_solver_ui.R, and
-#>   /tmp/RtmpoiQ6QR/temp_libpathcbdd8e8a83e/apscp/R/zzz.R
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/aaa.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_config.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_server.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_server_initialize.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_server_logging.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_server_solve.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_startup.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/app_ui.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/internal.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Dataset.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Layer.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Cost.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Feature.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Legend.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Lock.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Project.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Provenance.R,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/class_Solution.R, …,
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/widget_solver_ui.R, and
+#>   /tmp/RtmpFsyBNz/temp_libpath2557750bb309b/apscp/R/zzz.R
 #> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.bbox’, ‘serialize_object.default’ were declared in NAMESPACE but not found
 #> Warning: Objects listed as exports, but not present in namespace:
 #> • Dataset
@@ -93,8 +93,8 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> • color_palette
 #> • create_dataset_from_sf
 #> • create_legend
-#> • create_optimized_solution
 #> • create_solution
+#> • create_solution_from_prioritization
 #> • create_solution_legend
 #> • create_tile_from_dataset
 #> • create_tile_from_sf

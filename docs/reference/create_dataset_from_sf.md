@@ -27,8 +27,8 @@ A \[Dataset\] object.
 
 Other method:
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
-[`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
+[`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
 [`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
@@ -38,14 +38,15 @@ Other method:
 ## Examples
 
 ``` r
-if (FALSE) { # interactive()
 # simulate spatial data
 sim_data <- simulate_spatial_data()
+#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- create_dataset_from_sf(sim_data)
+#> Error in create_dataset_from_sf(sim_data): could not find function "create_dataset_from_sf"
 
 # preview object
 print(x)
-}
+#> Error: object 'x' not found
 ```

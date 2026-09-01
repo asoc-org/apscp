@@ -32,28 +32,15 @@ app_startup <- function() {
   options(future.globals.maxSize = 4000 * 1024^2) # 4GB
 
   # initialize asynchronous processing
-  ## identify strategy
-  strategy <- get_golem_config("strategy")
-  if (identical(strategy, "auto")) {
-    if (identical(Sys.getenv("R_CONFIG_ACTIVE"), "shinyapps")) {
-      strategy <- "multicore"
-    } else if (identical(.Platform$OS.type, "unix")) {
-      strategy <- "multicore"
-    } else {
-      strategy <- "multisession"
-    }
-  }
-  ## set future strategy
-  options(
-    future.plan = strategy,
-    future.wait.timeout = get_golem_config("worker_time_out")
+  mirai::daemons(
+    get_golem_config("n_workers"),
+    url = mirai::local_url(),
+    remote = mirai::remote_config(
+      command = "Rscript", rscript = "", args = c("", ".", "--mirai")
+    )
   )
-  assertthat::assert_that(
-    strategy %in% c("sequential", "cluster", "multicore", "multisession"),
-    msg = "not a valid strategy"
-  )
-  suppressWarnings(future::plan(strategy, workers = 2))
 
+  # initialize tile server
   if (identical(get_golem_config("tile_server_mode"), "internal")) {
     ## if logging, then display details
     if (get_golem_config("logging")) {
@@ -74,5 +61,15 @@ app_startup <- function() {
       cli::cli_text("directory: ", get_golem_config("tile_server_dir"))
     }
   }
+
+  # define behavior for when shiny stops
+  shiny::onStop(function() {
+    # stop asynchronous workers
+    mirai::daemons(0)
+    # if needed, stop tile server
+    if (identical(get_golem_config("tile_server_mode"), "internal")) {
+      tile_server_stop()
+    }
+  })
 
 }

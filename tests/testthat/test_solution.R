@@ -77,3 +77,29 @@ test_that("create_solution", {
   expect_equal(x$layer$column, "solv")
   expect_true(file.exists(x$layer$tile$path))
 })
+
+test_that("create_solution_from_prioritization", {
+  skip_if_not_installed("rcbc")
+  # simulate data
+  p <- simulate_project()
+  s <- simulate_prioritization_settings(p)
+  # set all targets and weights to be equal
+  s$features$target <- 0.01
+  s$features$weight <- 1
+  # ensure no active costs
+  s$costs$zones <- NA
+  # generate prioritization
+  d <- prioritization(p, s)
+  # create object
+  x <- create_solution_from_prioritization(
+    name = "sol",
+    prioritization = d,
+    project = p,
+    column = "solv",
+  )
+  # run tests
+  expect_s3_class(x, "Solution")
+  expect_equal(x$name, "sol")
+  expect_equal(x$layer$column, "solv")
+  expect_true(file.exists(x$layer$tile$path))
+})

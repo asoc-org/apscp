@@ -1,17 +1,15 @@
-# Create optimized solution
+# Create solution from prioritization
 
-Create a new solution based on spatial prioritization techniques.
+Create a new solution based on spatial prioritization.
 
 ## Usage
 
 ``` r
-create_optimized_solution(
+create_solution_from_prioritization(
   name,
+  prioritization,
   project,
-  settings,
-  gap = 0.1,
-  solver = "cbc",
-  verbose = FALSE,
+  column = NULL,
   id = uuid::UUIDgenerate()
 )
 ```
@@ -22,31 +20,18 @@ create_optimized_solution(
 
   \`character\` value with the name.
 
+- prioritization:
+
+  \`list\` object generated with \[prioritization()\].
+
 - project:
 
-  \[new_project()\] object. These data are used to specify the
-  underlying data for generating the solution.
+  \[new_project()\] object to which \`prioritization \`should be added.
 
-- settings:
+- column:
 
-  \`list\` object with settings for generating a solution. See Settings
-  format section for further details.
-
-- gap:
-
-  \`numeric\` value denoting optimality gap. Defaults to 0.1 (10% from
-  optimality).
-
-- solver:
-
-  \`character\` value indicating the name of the software used for
-  optimization. Acceptable values include \`"gurobi"\` or \`"cbc"\`.
-  Defaults to \`"cbc"\`.
-
-- verbose:
-
-  \`logical\` value indicating if information should be displayed during
-  optimization process. Defaults to \`FALSE\`.
+  \`character\` value with column name used to store \`prioritization\`
+  in the dataset that underpins \`project\`.
 
 - id:
 
@@ -77,10 +62,16 @@ p <- simulate_project()
 #> Error in simulate_project(): could not find function "simulate_project"
 s <- simulate_prioritization_settings(p)
 #> Error in simulate_prioritization_settings(p): could not find function "simulate_prioritization_settings"
+d <- prioritization(p, s, solver = "cbc", gap = 0.1)
+#> Error in prioritization(p, s, solver = "cbc", gap = 0.1): could not find function "prioritization"
 
 # generate solution
-x <- prioritization(p, s, solver = "cbc", gap = 0.1)
-#> Error in prioritization(p, s, solver = "cbc", gap = 0.1): could not find function "prioritization"
+x <- create_solution_from_prioritization(
+  name = "sol",
+  prioritization = d,
+  project = p
+)
+#> Error in create_solution_from_prioritization(name = "sol", prioritization = d,     project = p): could not find function "create_solution_from_prioritization"
 
 # print solution
 print(x)

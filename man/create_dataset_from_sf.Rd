@@ -19,7 +19,6 @@ A [Dataset] object.
 Create a [Dataset] object from a [st::sf()] object.
 }
 \examples{
-\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # simulate spatial data
 sim_data <- simulate_spatial_data()
 
@@ -28,13 +27,13 @@ x <- create_dataset_from_sf(sim_data)
 
 # preview object
 print(x)
-\dontshow{\}) # examplesIf}
+
 }
 \seealso{
 Other method:
 \code{\link[=create_legend]{create_legend()}},
-\code{\link[=create_optimized_solution]{create_optimized_solution()}},
 \code{\link[=create_solution]{create_solution()}},
+\code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
 \code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},

@@ -20,8 +20,7 @@ app_server_initialize <- quote({
       ## objects
       project = golem::get_golem_options("project"),
       ## state variables
-      new_solution_id = NULL,
-      task = NULL,
+      task_id = NULL,
       ## cache
       cache = cachem::cache_mem()
     )

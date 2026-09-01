@@ -68,8 +68,8 @@ Defaults to `NULL` such that the boundary data are calculated automatically.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other method:
 <code><a href="create_legend.html">create_legend()</a></code>,
-<code><a href="create_optimized_solution.html">create_optimized_solution()</a></code>,
 <code><a href="create_solution.html">create_solution()</a></code>,
+<code><a href="create_solution_from_prioritization.html">create_solution_from_prioritization()</a></code>,
 <code><a href="create_solution_legend.html">create_solution_legend()</a></code>,
 <code><a href="create_tile_from_dataset.html">create_tile_from_dataset()</a></code>,
 <code><a href="create_tile_from_sf.html">create_tile_from_sf()</a></code>,
@@ -79,16 +79,18 @@ Defaults to `NULL` such that the boundary data are calculated automatically.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="co"># simulate spatial data</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># simulate spatial data</span></span></span>
 <span class="r-in"><span><span class="va">sim_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_spatial_data.html">simulate_spatial_data</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_spatial_data():</span> could not find function "simulate_spatial_data"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create object</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">create_dataset_from_sf</span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_dataset_from_sf(sim_data):</span> could not find function "create_dataset_from_sf"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'x' not found</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -10,6 +10,7 @@ NULL
 #' @export
 Dataset <- R6::R6Class(
   "Dataset",
+
   public = list(
     #' @field pu_path `character` file path.
     pu_path = NULL,
@@ -46,17 +47,17 @@ Dataset <- R6::R6Class(
       )
       # set boundary field
       self$boundary_path <- boundary_path
-      # set database fields
       self$pu_path <- pu_path
-      self$pu_db_con <- DBI::dbConnect(RSQLite::SQLite(), dbname = pu_path)
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # set database fields
       pu_table <- DBI::dbListTables(self$pu_db_con)
       pu_table <- pu_table[!startsWith(pu_table, "gpkg_")]
       pu_table <- pu_table[!startsWith(pu_table, "rtree_")]
       pu_table <- pu_table[!startsWith(pu_table, "sqlite_")]
       assertthat::assert_that(assertthat::is.string(pu_table))
       self$pu_db_table <- pu_table
-      # enable spatial extension for database connection
-      DBI::dbExecute(self$pu_db_con, "SELECT load_extension('mod_spatialite');")
       # store additional fields
       self$n_pu <- DBI::dbGetQuery(
         self$pu_db_con,
@@ -99,6 +100,10 @@ Dataset <- R6::R6Class(
     #' Get column names.
     #' @return A `character` vector.
     get_column_names = function() {
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # list database fields
       DBI::dbListFields(self$pu_db_con, self$pu_db_table)
     },
 
@@ -120,6 +125,9 @@ Dataset <- R6::R6Class(
         column <- setdiff(self$get_column_names(), c("fid", "geom", "geometry"))
       }
       column <- paste(paste0("\"", column, "\""), collapse = ",")
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
       # return values
       DBI::dbGetQuery(
         self$pu_db_con,
@@ -210,11 +218,13 @@ Dataset <- R6::R6Class(
       ) {
         return(rep(0, self$get_n_pu()))
       }
+      # get data frame with allocations
+      pu_data <- self$get_dataframe(unique(allocation))
       # create vector with binary values indicating if planning unit is assigned
       # the zone based on the data in the allocation columns
       out <- numeric(self$get_n_pu())
       for (i in seq(length(allocation), 1L)) {
-        idx <- which(self$get_column_data(allocation[[i]]) > 1e-5)
+        idx <- which(pu_data[[allocation[[i]]]] > 1e-5)
         out[idx] <- as.numeric(identical(names(allocation)[[i]], zone))
       }
       # return output
@@ -268,64 +278,121 @@ Dataset <- R6::R6Class(
         assertthat::noNA(column),
         identical(length(values), self$get_n_pu())
       )
-      # if needed, remove existing column from database
-      if (column %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table)) {
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # execute the follow commands as a single database transaction
+      DBI::dbWithTransaction(self$pu_db_con, {
+
+        # if needed, remove existing column from database
+        if (column %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table)) {
+          DBI::dbExecute(
+            self$pu_db_con,
+            paste0("ALTER TABLE ", self$pu_db_table, " DROP COLUMN ", column, ";")
+          )
+        }
+        # add new column to table
+        if (is.double(values)) {
+          column_type <- "REAL"
+        } else if (is.integer(values)) {
+          column_type <- "INTEGER"
+        } else if (is.character(values)) {
+          column_type <- "VARCHAR(255)"
+        } else {
+          stop("`values` must be a numeric or character vector.")
+        }
         DBI::dbExecute(
           self$pu_db_con,
-          paste0("ALTER TABLE ", self$pu_db_table, " DROP COLUMN ", column, ";")
+          paste0(
+            "ALTER TABLE \"", self$pu_db_table, "\" ADD COLUMN \"",
+            column, "\" ", column_type, ";"
+          )
         )
-      }
-      # add new column to table
-      if (is.double(values)) {
-        column_type <- "REAL"
-      } else if (is.integer(values)) {
-        column_type <- "INTEGER"
-      } else if (is.character(values)) {
-        column_type <- "VARCHAR(255)"
-      } else {
-        stop("`values` must be a numeric or character vector.")
-      }
-      DBI::dbExecute(
-        self$pu_db_con,
-        paste0(
-          "ALTER TABLE \"", self$pu_db_table, "\" ADD COLUMN \"",
-          column, "\" ", column_type, ";"
+        # create temporary table in database with values
+        DBI::dbWriteTable(
+          self$pu_db_con,
+          "temp_updates",
+          tibble::tibble(value = values, `_index` = seq_along(values)),
+          temporary = TRUE, overwrite = TRUE
         )
-      )
-      # create temporary table in database with values
-      DBI::dbWriteTable(
-        self$pu_db_con,
-        "temp_updates",
-        tibble::tibble(value = values, `_index` = seq_along(values)),
-        temporary = TRUE, overwrite = TRUE
-      )
-      # clean up the temporary table
-      on.exit(
-        DBI::dbRemoveTable(self$pu_db_con, "temp_updates"),
-        add = TRUE, after = TRUE
-      )
-      # update main table in database
-      DBI::dbExecute(
-        self$pu_db_con,
-        paste0(
-          "UPDATE \"", self$pu_db_table,
-          "\" SET \"", column, "\" = (",
-          " SELECT \"value\" FROM \"temp_updates\"",
-          " WHERE \"temp_updates\".\"_index\" = \"", self$pu_db_table,
-          "\".\"_index\" ) ",
-          "WHERE EXISTS ( SELECT 1 FROM \"temp_updates\"",
-          " WHERE \"temp_updates\".\"_index\" = \"",
-          self$pu_db_table, "\".\"_index\" );"
+        # create database index for pu table
+        existing_index <- DBI::dbGetQuery(
+          self$pu_db_con,
+          paste0("PRAGMA index_list(\"", self$pu_db_table, "\");")
         )
-      )
+        if (!"pu_idx" %in% existing_index$name) {
+          DBI::dbExecute(
+            self$pu_db_con,
+            paste0(
+             "CREATE INDEX \"pu_idx\" ON \"", self$pu_db_table,"\"(\"_index\");"
+            )
+          )
+        }
+        # create index for temporary table
+        DBI::dbExecute(
+          self$pu_db_con,
+          paste0(
+           "CREATE INDEX \"temp_idx\" ON \"temp_updates\"(\"_index\");"
+          )
+        )
+        # update main table in database
+        DBI::dbExecute(
+          self$pu_db_con,
+          paste0(
+            "UPDATE \"", self$pu_db_table,
+            "\" SET \"", column, "\" = (",
+            " SELECT \"value\" FROM \"temp_updates\"",
+            " WHERE \"temp_updates\".\"_index\" = \"", self$pu_db_table,
+            "\".\"_index\" ) ",
+            "WHERE EXISTS ( SELECT 1 FROM \"temp_updates\"",
+            " WHERE \"temp_updates\".\"_index\" = \"",
+            self$pu_db_table, "\".\"_index\" );"
+          )
+        )
+        # clean up temporary table and index
+        DBI::dbRemoveTable(self$pu_db_con, "temp_updates")
+        DBI::dbExecute(
+          self$pu_db_con,
+          paste0("DROP INDEX IF EXISTS \"temp_idx\";")
+        )
+      })
       # return self
       invisible(self)
     }
   ),
+
   private = list(
+
+    open_db_con = function() {
+      # if connection is not already initialized, then initialize it
+      if (is.null(self$pu_db_con)) {
+        # initialize connection
+        self$pu_db_con <- DBI::dbConnect(
+          RSQLite::SQLite(),
+          dbname = self$pu_path
+        )
+        # enable spatial extension for database connection
+        DBI::dbExecute(
+          self$pu_db_con,
+          "SELECT load_extension('mod_spatialite');"
+        )
+      }
+      invisible(NULL)
+    },
+
+    close_db_con = function() {
+      # if connection is already initialized, then close it
+      if (!is.null(self$pu_db_con)) {
+        DBI::dbDisconnect(self$pu_db_con)
+        self$pu_db_con <- NULL
+      }
+      invisible(NULL)
+    },
+
     finalize = function() {
-      DBI::dbDisconnect(self$pu_db_con)
+      private$close_db_con()
     }
+
   )
 )
 
