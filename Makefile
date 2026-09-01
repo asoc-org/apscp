@@ -100,7 +100,7 @@ debug: bundle_dev
 
 ## launch local version inside Docker container
 demo:
-	chmod -R 777 inst/tiles
+	sudo chmod -R 777 inst/tiles
 	nohup npx -y http-server ./inst/tiles --cors -c-1 -p8085 > /dev/null 2>&1 &
 	docker-compose -f docker-compose.yml --env-file .env up --build
 
@@ -110,13 +110,6 @@ demo-kill:
 
 demo-enter:
 	 docker exec -it $$(docker ps -q --filter ancestor=jhansonasoc/apscp | head -n 1) /bin/bash
-
-## launch released version inside Docker container
-launch:
-	docker run -dp 3838:3838 --name apscp -it asoc-org/apscp
-
-launch-kill:
-	docker rm --force apscp
 
 # Docker commands
 ## create local image and push to docker
