@@ -49,10 +49,10 @@ Functions and definitions for new classes.
   : Create dataset from sf object.
 - [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
   : Create a new legend
-- [`create_optimized_solution()`](https://asoc-org.github.io/apscp/reference/create_optimized_solution.md)
-  : Create optimized solution
 - [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md)
   : Create solution
+- [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md)
+  : Create solution from prioritization
 - [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
   : Create solution legend
 - [`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md)

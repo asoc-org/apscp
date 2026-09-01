@@ -60,9 +60,10 @@ NULL
 #'
 #' }
 #'
-#' @return A `list` with a `solution` element that contains a `numeric` vector
-#' with values indicating the zone for each planning unit, and a `results`
-#' element that contains supplementary information.
+#' @return A `Prioritization` class object. This is a `list` with a `status`
+#' element that contains a `numeric` vector
+#' with values indicating the zone for each planning unit, and a `metrics`
+#' element that contains performance metrics.
 #'
 #' @family optimization
 #'
@@ -210,7 +211,7 @@ prioritization <- function(
         cost = cost
       )) |>
       prioritizr::add_min_penalties_objective(budget = NULL) |>
-      prioritizr::add_cost_penalties(rep(1, length(project$zones))) %>%
+      prioritizr::add_cost_penalties(rep(1, length(project$zones))) |>
       prioritizr::add_binary_decisions()
   }}
 
@@ -272,9 +273,12 @@ prioritization <- function(
   raw_sol <- raw_sol[, paste0("solution_1_", project$zones),  drop = FALSE]
 
   # return formatted solution
-  list(
-    solution = prioritizr::category_vector(raw_sol),
-    results = NULL
+  structure(
+    list(
+      status = prioritizr::category_vector(raw_sol),
+      metrics = NULL
+    ),
+    class = "Prioritization"
   )
 }
 

@@ -17,14 +17,11 @@ app_server_solve <- quote({
   task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, verbose) {
       mirai::mirai({
-        print("here1.5")
         list(
           id = id,
           name = name,
-          libs = .libPaths(),
           result = try(
-            apscp::create_optimized_solution(
-              name = name,
+            apscp::prioritization(
               project = project,
               settings = settings,
               gap = gap,
@@ -75,12 +72,11 @@ app_server_solve <- quote({
       return()
     }
     # create id for solution
-    app_data$task_id <- uuid::UUIDgenerate()
-    print("app_data$task_id")
-    print(app_data$task_id)
+    id <- uuid::UUIDgenerate()
+    app_data$task_id <- id
     # create asynchronous task
     task$invoke(
-      id = app_data$task_id,
+      id = id,
       name = input$solver_settings$name,
       project = app_data$project,
       settings = input$solver_settings,
@@ -93,16 +89,13 @@ app_server_solve <- quote({
   # define observer for task result,
   # this is triggered when the asynchronous task has completed
   shiny::observe({
-    print("here2")
     # obtain task result
     result <- task$result()
-    print("result")
-    print(result)
     # if result has different identifier than expected, then exit observer
     if (
       is.null(result) ||
-      is.null(app_data$new_solution_id) ||
       is.null(result$id) ||
+      is.null(app_data$task_id) ||
       !identical(result$id, app_data$task_id)
     ) {
       return()
@@ -127,13 +120,20 @@ app_server_solve <- quote({
       )
       return()
     }
+    # create solution
+    sol <- create_solution_from_prioritization(
+      id = result$id,
+      name = result$name,
+      project = app_data$project,
+      prioritization = result$result
+    )
     # add solution to project
-    app_data$project$add_solution(result$result)
+    app_data$project$add_solution(sol)
     # add solution to mapper
     mapper_add_solution(
       id = "mapper",
       map = mapgl::mapboxgl_proxy("map"),
-      solution = result$result,
+      solution = sol,
       visible = TRUE
     )
     # reset solver status so its ready to generate a new solution

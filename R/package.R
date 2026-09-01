@@ -1,6 +1,3 @@
-#' @import promises
-NULL
-
 #' apscp: Decision Support Tool for the Antarctic Peninsula
 #'
 #' Interactive decision support tool to navigate management options for the
@@ -53,9 +50,9 @@ utils::globalVariables(
 #' @importFrom rcbc cbc_solve
 #' @importFrom withr with_dir
 #' @importFrom R6 R6Class
-#' @importFrom promises promise
 #' @importFrom tibble as_tibble
 #' @importFrom DBI dbConnect
 #' @importFrom RSQLite SQLite
+#' @importFrom shinyalert shinyalert
 #' @export
 NULL

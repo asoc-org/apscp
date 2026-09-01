@@ -24,9 +24,10 @@ Defaults to `"cbc"`.}
 displayed during optimization process. Defaults to `FALSE`.}
 }
 \value{
-A `list` with a `solution` element that contains a `numeric` vector
-with values indicating the zone for each planning unit, and a `results`
-element that contains supplementary information.
+A `Prioritization` class object. This is a `list` with a `status`
+element that contains a `numeric` vector
+with values indicating the zone for each planning unit, and a `metrics`
+element that contains performance metrics.
 }
 \description{
 Generate a prioritization using multi-objective optimization techniques.

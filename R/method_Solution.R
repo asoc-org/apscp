@@ -94,12 +94,19 @@ create_solution <- function(
   )
 }
 
-#' Create optimized solution
+#' Create solution from prioritization
 #'
-#' Create a new solution based on spatial prioritization techniques.
+#' Create a new solution based on spatial prioritization.
 #'
 #' @inheritParams new_solution
-#' @inheritParams prioritization
+#'
+#' @param project [new_project()] object to which `prioritization `should be
+#' added.
+#'
+#' @param column `character` value with column name used to store
+#' `prioritization` in the dataset that underpins `project`.
+#'
+#' @param prioritization `list` object generated with [prioritization()].
 #'
 #' @return A [new_solution()] object.
 #'
@@ -109,21 +116,24 @@ create_solution <- function(
 #' # simulate data
 #' p <- simulate_project()
 #' s <- simulate_prioritization_settings(p)
+#' d <- prioritization(p, s, solver = "cbc", gap = 0.1)
 #'
 #' # generate solution
-#' x <- prioritization(p, s, solver = "cbc", gap = 0.1)
+#' x <- create_solution_from_prioritization(
+#'   name = "sol",
+#'   prioritization = d,
+#'   project = p
+#' )
 #'
 #' # print solution
 #' print(x)
 #'
 #' @export
-create_optimized_solution <- function(
+create_solution_from_prioritization <- function(
   name,
+  prioritization,
   project,
-  settings,
-  gap = 0.1,
-  solver = "cbc",
-  verbose = FALSE,
+  column = NULL,
   id = uuid::UUIDgenerate()
 ) {
   # assert that arguments are valid
@@ -133,21 +143,31 @@ create_optimized_solution <- function(
     assertthat::noNA(name),
     ## id
     assertthat::is.string(id),
-    assertthat::noNA(id)
+    assertthat::noNA(id),
+    ## prioritization
+    inherits(prioritization, "Prioritization")
   )
 
-  # generate prioritization
-  sol <- prioritization(
-    project = project,
-    settings = settings,
-    gap = gap,
-    solver = solver,
-    verbose = verbose
-  )
+  # process column name
+  if (is.null(column)) {
+    # add solution to dataset
+    column <- make_unique_column_name(
+      paste0("sol-", uuid::UUIDgenerate()),
+      project$dataset$get_column_names()
+    )
+  } else {
+    assertthat::assert_that(
+      assertthat::is.string(column),
+      assertthat::noNA(column)
+    )
+    assertthat::assert_that(
+      !project$dataset$has_column(column),
+      msg = "`project$dataset` already has a column with this column name."
+    )
+  }
 
-  # add solution to dataset
-  column <- make_unique_column_name(name, project$dataset$get_column_names())
-  project$dataset$set_column_data(column, sol$solution)
+  # store column in dataset
+  project$dataset$set_column_data(column, prioritization$status)
 
   # return new solution object
   new_solution(
@@ -166,7 +186,7 @@ create_optimized_solution <- function(
       column = column,
       legend = create_solution_legend(project),
       provenance = tool_generated_provenance(),
-      total = sum(sol$solution),
+      total = sum(prioritization$status > 0, na.rm = TRUE),
       details = NULL
     ),
     id = id
