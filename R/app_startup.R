@@ -7,7 +7,7 @@
 app_startup <- function() {
 
   # display golem configuration
-  if (get_golem_config("logging")) {
+  if (isTRUE(get_golem_config("logging"))) {
     cli::cli_h3("Configuration")
     cli::cli_text(
       "R_CONFIG_ACTIVE: \"",
@@ -71,7 +71,7 @@ app_startup <- function() {
   # initialize tile server
   if (identical(get_golem_config("tile_server_mode"), "internal")) {
     ## if logging, then display details
-    if (get_golem_config("logging")) {
+    if (isTRUE(get_golem_config("logging"))) {
       cli::cli_h3("Tile server")
     }
     ## initialize tile server
@@ -84,7 +84,7 @@ app_startup <- function() {
   } else if (identical(get_golem_config("tile_server_mode"), "external")) {
     ## otherwise, make tile files available for external tile server
     ## if logging, then display details
-    if (get_golem_config("logging")) {
+    if (isTRUE(get_golem_config("logging"))) {
       cli::cli_h3("Tile directory")
       cli::cli_text("directory: ", get_golem_config("tile_server_dir"))
     }
@@ -100,4 +100,8 @@ app_startup <- function() {
     }
   })
 
+  # if logging, then display header for Shiny
+  if (isTRUE(get_golem_config("logging"))) {
+    cli::cli_h3("Shiny application")
+  }
 }
