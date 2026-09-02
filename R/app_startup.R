@@ -9,7 +9,31 @@ app_startup <- function() {
   # display golem configuration
   if (get_golem_config("logging")) {
     cli::cli_h3("Configuration")
-    cli::cli_text("R_CONFIG_ACTIVE: ", Sys.getenv("R_CONFIG_ACTIVE"))
+    cli::cli_text(
+      "R_CONFIG_ACTIVE: \"",
+      Sys.getenv("R_CONFIG_ACTIVE"),
+      "\""
+    )
+    cli::cli_text(
+      "SHINYPROXY_BACKEND: \"",
+      Sys.getenv("SHINYPROXY_BACKEND"),
+      "\""
+    )
+    cli::cli_text(
+      "MAPBOX_PUBLIC_TOKEN: \"",
+      Sys.getenv("MAPBOX_PUBLIC_TOKEN"),
+      "\""
+    )
+    cli::cli_text(
+      "SHARED_DIRECTORY: \"",
+      Sys.getenv("R_CONFIG_ACTIVE"),
+      "\""
+    )
+    cli::cli_text(
+      "TILE_SERVER_URL: \"",
+      Sys.getenv("R_CONFIG_ACTIVE"),
+      "\""
+    )
   }
 
   # set seed for reproducibility
