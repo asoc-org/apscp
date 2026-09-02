@@ -38,8 +38,8 @@ app_server_logging <- quote({
             format(lobstr::obj_size(app_data), "mb")
           ),
           "*" = paste0(
-            "Processing strategy:    ",
-            getOption("future.plan")
+            "Number workers:    ",
+            get_golem_config("n_workers")
           )
         )
       )

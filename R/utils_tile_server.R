@@ -11,8 +11,10 @@
 #'
 #' @details
 #' The tile server directory is specified based on
-#' `get_golem_config("tile_server_dir")`, and the port number is based on
-#' `get_golem_config("tile_server_port")`.
+#' `get_golem_config("tile_server_dir")`. The port number is based on
+#' `get_golem_config("tile_server_url")` where the text after the
+#' last colon is assumed to be the port number
+#' (e.g., the port number in `http://localhost:8085` is assumed to be 8085).
 #'
 #' @family tile_server
 #'
@@ -45,11 +47,13 @@ tile_server_start <- function(x, verbose = TRUE) {
   }
 
   # obtain port for tile server
-  port <- get_golem_config("tile_server_port")
+  port <- strsplit(get_golem_config("tile_server_url"), ":", fixed = TRUE)
+  port <- as.numeric(port[[1]][length(port[[1]])])
   assertthat::assert_that(
     assertthat::is.count(port),
     assertthat::noNA(port),
-    msg = "Golem config has invalid `tile_server_port` parameter."
+    port > 0,
+    msg = "Golem config `tile_server_url` does not specify a port."
   )
 
   # launch tile server process

@@ -100,7 +100,8 @@ debug: bundle_dev
 
 ## launch local version inside Docker container
 demo:
-	sudo chmod -R 777 inst/tiles
+	rm -rf inst/tiles/*.pmtiles
+	chmod -R 777 inst/tiles
 	nohup npx -y http-server ./inst/tiles --cors -c-1 -p8085 > /dev/null 2>&1 &
 	docker-compose -f docker-compose.yml --env-file .env up --build
 

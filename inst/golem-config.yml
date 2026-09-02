@@ -46,7 +46,6 @@ default:
   ## tile server details
   tile_server_mode: "internal"
   tile_server_url: "http://localhost:8085"
-  tile_server_port: 8085
   tile_server_dir: !expr file.path(tempdir(), "tiles")
   tile_max_zoom: 8
 
@@ -65,7 +64,7 @@ default:
     - "#e41a1c"
 
 # development configuration
-# this is intended for running locally outside of a docker environment
+## this is intended for running locally outside of a docker environment
 dev:
   logging: true
   verbose: true
@@ -78,18 +77,15 @@ demo:
   logging: true
   verbose: true
   tile_server_mode: "external"
-  tile_server_url: "http://localhost:8085"
-  tile_server_port: 8085
+  tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
   solver_gurobi_server: "localhost:61000"
-  solver_gap: 0.3
 
 # production configuration
 ## this is intended for running within the launcher on prod mode
 prod:
   app_prod: yes
   tile_server_mode: "external"
-  tile_server_url: "http://mapotron.org/tiles"
-  tile_server_port: 8085
+  tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
   solver_gurobi_server: "localhost:61000"

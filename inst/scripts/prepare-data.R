@@ -28,8 +28,12 @@ dir.create(td, showWarnings = FALSE, recursive = TRUE)
 unzip(data_path, exdir = td)
 
 ## load data
-metadata <- vroom::vroom(metadata_path)
-target_data <- vroom::vroom(paste0(td, "/", target_path))
+metadata <- tibble::as_tibble(
+  read.table(metadata_path, header = TRUE, sep = ",")
+)
+target_data <- tibble::as_tibble(
+  paste0(td, "/", target_path)
+)
 
 ## prepare metadata
 ### validation

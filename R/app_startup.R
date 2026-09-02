@@ -9,7 +9,7 @@ app_startup <- function() {
   # display golem configuration
   if (get_golem_config("logging")) {
     cli::cli_h3("Configuration")
-    cli::cli_text("R_CONFIG_ACTIVE: ", get_golem_config("R_CONFIG_ACTIVE"))
+    cli::cli_text("R_CONFIG_ACTIVE: ", Sys.getenv("R_CONFIG_ACTIVE"))
   }
 
   # set seed for reproducibility
@@ -29,7 +29,6 @@ app_startup <- function() {
 
   # initialize file and variable size limits
   options(shiny.maxRequestSize = 4000 * 1024^2) # 4GB
-  options(future.globals.maxSize = 4000 * 1024^2) # 4GB
 
   # initialize asynchronous processing
   mirai::daemons(

@@ -94,6 +94,10 @@ The application is a [_Shiny_ web application](https://mastering-shiny.org/) dev
 * `widget_`:  Defines custom [_htmlwidgets_ widgets](https://www.htmlwidgets.org/).
 * `utils_`: Defines utility functions.
 
+## Acknowledgments
+
+This project is supported and led by the [Antarctic and Southern Ocean Coalition (ASOC)](https://www.asoc.org/). We are grateful to [Dr. Jasmine Lee](https://research.monash.edu/en/persons/jasmine-lee/) for contributing data and expertise to this project. We also appreciate the [International Association of Antarctica Tour Operators (IAATO)](https://iaato.org/) and [Scientific Committee on Antarctic Research (SCAR)](https://scar.org/) for sponsoring research that underpins this project.
+
 ## Getting help
 
 Thank you for checking out this application. If you encounter any software defects (e.g. application crashes, unexpected behavior, or spelling mistakes), please feel free to post them on the [issue tracker](https://github.com/asoc-org/apscp/issues).
