@@ -26,12 +26,12 @@ app_startup <- function() {
     )
     cli::cli_text(
       "SHARED_DIRECTORY: \"",
-      Sys.getenv("R_CONFIG_ACTIVE"),
+      Sys.getenv("SHARED_DIRECTORY"),
       "\""
     )
     cli::cli_text(
       "TILE_SERVER_URL: \"",
-      Sys.getenv("R_CONFIG_ACTIVE"),
+      Sys.getenv("TILE_SERVER_URL"),
       "\""
     )
     cli::cli_text(
