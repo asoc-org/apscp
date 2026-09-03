@@ -9,6 +9,9 @@ app_server <- function(input, output, session) {
   # initialization events
   eval(app_server_initialize)
 
+  # session events
+  eval(app_server_session)
+
   # solve events
   eval(app_server_solve)
 

@@ -85,6 +85,7 @@ Collate:
     'app_server.R'
     'app_server_initialize.R'
     'app_server_logging.R'
+    'app_server_session.R'
     'app_server_solve.R'
     'app_startup.R'
     'app_ui.R'

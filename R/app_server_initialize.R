@@ -7,7 +7,7 @@
 #' Within the [app_server] function, it should be called like this:
 #'
 #' ```
-#' eval(server_initialize_app)
+#' eval(app_server_initialize_app)
 #' ```
 #'
 #' @noRd
@@ -21,6 +21,7 @@ app_server_initialize <- quote({
       project = golem::get_golem_options("project"),
       ## state variables
       task_id = NULL,
+      session_files = character(0),
       ## cache
       cache = cachem::cache_mem()
     )

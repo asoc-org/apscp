@@ -7,7 +7,7 @@
 #' Within the [app_server] function, it should be called like this:
 #'
 #' ```
-#' eval(server_logging)
+#' eval(app_server_logging)
 #' ```
 #'
 #' @noRd
