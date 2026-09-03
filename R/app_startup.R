@@ -39,6 +39,11 @@ app_startup <- function() {
       Sys.getenv("GUROBI_LICENSE_PATH"),
       "\""
     )
+    cli::cli_text(
+      "NUMBER_WORKERS: \"",
+      Sys.getenv("NUMBER_WORKERS"),
+      "\""
+    )
   }
 
   # set seed for reproducibility

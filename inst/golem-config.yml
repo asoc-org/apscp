@@ -79,6 +79,7 @@ demo:
   tile_server_mode: "external"
   tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
+  n_workers: !expr Sys.getenv("NUMBER_WORKERS")
   solver_gurobi_server: "localhost:61000"
 
 # production configuration
@@ -88,4 +89,5 @@ prod:
   tile_server_mode: "external"
   tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
+  n_workers: !expr Sys.getenv("NUMBER_WORKERS")
   solver_gurobi_server: "localhost:61000"

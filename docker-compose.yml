@@ -11,6 +11,7 @@ services:
       - R_CONFIG_ACTIVE
       - MAPBOX_PUBLIC_TOKEN
       - TILE_SERVER_URL
+      - NUMBER_WORKERS
     volumes:
       - "${GUROBI_LICENSE_PATH}:/opt/gurobi/gurobi.lic:ro"
       - "./inst/tiles:/home/shiny/tiles"
