@@ -16,7 +16,7 @@ app_server_solution <- quote({
   # define task for generating solutions
   task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, verbose) {
-      # mirai::mirai({
+    mirai::mirai({
         list(
           id = id,
           name = name,
@@ -31,7 +31,7 @@ app_server_solution <- quote({
             silent = !isTRUE(verbose)
           )
         )
-      # }, environment())
+      }, environment())
     }
   ) |> bslib::bind_task_button("solver_start_button")
 
