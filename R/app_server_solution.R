@@ -1,22 +1,22 @@
 #' Sever function: solve
 #'
-#' Set behavior for generating a solution
+#' Set behavior for generating a solution.
 #'
 #' @details
 #' This object is designed to be used within [app_server] function.
 #' Within the [app_server] function, it should be called like this:
 #'
 #' ```
-#' eval(app_server_solve)
+#' eval(app_server_solution)
 #' ```
 #'
 #' @noRd
-app_server_solve <- quote({
+app_server_solution <- quote({
 
   # define task for generating solutions
   task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, verbose) {
-      mirai::mirai({
+      # mirai::mirai({
         list(
           id = id,
           name = name,
@@ -28,10 +28,10 @@ app_server_solve <- quote({
               solver = solver,
               verbose = verbose
             ),
-            silent = TRUE
+            silent = !isTRUE(verbose)
           )
         )
-      }, environment())
+      # }, environment())
     }
   ) |> bslib::bind_task_button("solver_start_button")
 
@@ -81,7 +81,7 @@ app_server_solve <- quote({
       project = app_data$project,
       settings = input$solver_settings,
       gap = get_golem_config("solver_gap"),
-      solver = "cbc",
+      solver = get_golem_config("solver_name"),
       verbose = get_golem_config("verbose")
     )
   })

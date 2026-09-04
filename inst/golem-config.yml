@@ -36,7 +36,7 @@ default:
   ## solver details
   solver_gap: 0.1 # optimality gap, e.g., 0.01 = 1%
   solver_time_limit: 300 # in seconds
-  solver_gurobi_server: null
+  solver_name: "cbc"
 
   ## time out (seconds) for worker processes
   ## i.e. maximum time that worker process should remain active after
@@ -80,7 +80,8 @@ demo:
   tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
   n_workers: !expr Sys.getenv("NUMBER_WORKERS")
-  solver_gurobi_server: "localhost:61000"
+  solver_name: "gurobi"
+  solver_gurobi_server: "http://compute:61000"
 
 # production configuration
 ## this is intended for running within the launcher on prod mode
@@ -90,4 +91,5 @@ prod:
   tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
   n_workers: !expr Sys.getenv("NUMBER_WORKERS")
-  solver_gurobi_server: "localhost:61000"
+  solver_name: "gurobi"
+  solver_gurobi_server: "http://compute:61000"

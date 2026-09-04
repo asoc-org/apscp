@@ -38,6 +38,10 @@ app_server_logging <- quote({
             format(lobstr::obj_size(app_data), "mb")
           ),
           "*" = paste0(
+            "Solver:    ",
+            get_golem_config("solver_name")
+          ),
+          "*" = paste0(
             "Number workers:    ",
             get_golem_config("n_workers")
           )

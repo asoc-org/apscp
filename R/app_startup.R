@@ -54,13 +54,6 @@ app_startup <- function() {
     options(apscp.initial_memory_used = format(lobstr::mem_used(), "mb"))
   }
 
-  # assert web service tokens are defined
-  ## mapbox token found
-  assertthat::assert_that(
-    nzchar(Sys.getenv("MAPBOX_PUBLIC_TOKEN")),
-    msg = "MAPBOX_PUBLIC_TOKEN not defined as an environmental variable."
-  )
-
   # initialize file and variable size limits
   options(shiny.maxRequestSize = 4000 * 1024^2) # 4GB
 

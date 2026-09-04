@@ -241,7 +241,9 @@ prioritization <- function(
   # add solver
   if (identical(solver, "cbc")) {
     ## add solver
-    prob <- prioritizr::add_cbc_solver(prob, gap = gap, verbose = verbose)
+    prob <- prioritizr::add_cbc_solver(
+      prob, gap = gap, verbose = verbose, threads = 1
+    )
   } else {
     # nocov start
     ## if needed, specify control
@@ -251,7 +253,8 @@ prioritization <- function(
     }
     ## add solver
     prob <- prioritizr::add_gurobi_solver(
-      prob, gap = gap, verbose = verbose, control = control
+      prob, gap = gap, verbose = verbose, control = control,
+      presolve = 1, threads = 1
     )
     # nocov end
   }

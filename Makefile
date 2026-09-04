@@ -134,6 +134,11 @@ renv_default:
 renv_snapshot:
 	$(R) -e "renv::snapshot(type = 'explicit')"
 
+## install gurobi and dependencies
+renv_gurobi:
+	$(R) --slave -e "renv::install('slam')"
+	$(R) --slave -e 'install.packages(dir(paste0(Sys.getenv("GUROBI_HOME"), "/R"), "^.*\\.tar\\.gz", full.names = TRUE), repos = NULL)'
+
 # usethis commands
 ## update standalone files
 update-standalone:

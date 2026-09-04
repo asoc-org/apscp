@@ -12,8 +12,12 @@ app_server <- function(input, output, session) {
   # session events
   eval(app_server_session)
 
-  # solve events
-  eval(app_server_solve)
+  # map and mapp events
+  eval(app_server_mapper)
+
+  # solver events
+  eval(app_server_solver)
+  eval(app_server_solution)
 
   # logging events
   eval(app_server_logging)

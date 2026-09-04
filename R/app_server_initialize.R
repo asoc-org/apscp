@@ -7,7 +7,7 @@
 #' Within the [app_server] function, it should be called like this:
 #'
 #' ```
-#' eval(app_server_initialize_app)
+#' eval(app_server_initialize)
 #' ```
 #'
 #' @noRd
@@ -27,53 +27,22 @@ app_server_initialize <- quote({
     )
   )
 
-  # initialize map
-  output$map <- mapgl::renderMapboxgl({
-    {app_data$project} |>
-      map_project(
-        style = mapgl::mapbox_style(get_golem_config("map_style")),
-        width = "100%",
-        height = "100%",
-        minZoom = get_golem_config("map_min_zoom"),
-        maxZoom = get_golem_config("map_max_zoom")
-      ) |>
-      add_sidebar_control(
-        id = "left_sidebar",
-        position = "top-left",
-        selected = "navigation_panel"
-      ) |>
-      add_sidebar_control(
-        id = "right_sidebar",
-        position = "top-right",
-        selected = "settings_panel"
-      )
-  })
-
-  # initialize mapper
-  output$mapper <- renderMapper({
-    mapper(map_id = "map", project = app_data$project)
-  })
-  observeEvent(input$mapper_sync, {
-    req(input$mapper_sync)
-    mapper_sync(
-      "mapper",
-      map = mapgl::mapboxgl_proxy("map"),
-      project = app_data$project,
-      data = input$mapper_sync
+  # assert valid tokens and dependencies
+  ## mapbox token
+  assertthat::assert_that(
+    nzchar(Sys.getenv("MAPBOX_PUBLIC_TOKEN")),
+    msg = "MAPBOX_PUBLIC_TOKEN not defined as an environmental variable."
+  )
+  # if needed, assert Gurobi dependencies available
+  if (identical(get_golem_config("solver_name"), "gurobi")) {
+    assertthat::assert_that(
+      requireNamespace("slam", quietly = TRUE),
+      msg = "The `slam` package must be installed."
     )
-  })
-
-  # initial solver
-  output$solver <- renderSolver({
-    solver(project = app_data$project)
-  })
-  observeEvent(input$solver_sync, {
-    req(input$solver_sync)
-    solver_sync(
-      "solver",
-      project = app_data$project,
-      data = input$solver_sync
+    assertthat::assert_that(
+      requireNamespace("gurobi", quietly = TRUE),
+      msg = "The `gurobi` package must be installed."
     )
-  })
+  }
 
 })

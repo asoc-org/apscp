@@ -55,6 +55,7 @@ Imports:
     shinyalert (>= 3.1.0),
     mirai (>= 2.7.2)
 Suggests:
+    slam (>= 0.1-56),
     gurobi (>= 13.0-2),
     testthat (>= 3.3.2),
     knitr (>= 1.48),
@@ -85,8 +86,10 @@ Collate:
     'app_server.R'
     'app_server_initialize.R'
     'app_server_logging.R'
+    'app_server_mapper.R'
     'app_server_session.R'
-    'app_server_solve.R'
+    'app_server_solution.R'
+    'app_server_solver.R'
     'app_startup.R'
     'app_ui.R'
     'internal.R'

@@ -14,6 +14,7 @@ RUN apt-get update \
     cmake \
     curl \
     gdal-bin \
+    libuv1-dev \
     libglpk-dev \
     libabsl-dev \
     libsqlite3-mod-spatialite \
@@ -37,7 +38,7 @@ RUN apt-get update \
   && rm -rf /srv/shiny-server
 
 ## install gurobi
-ENV GRB_VERSION 13.0.2
+ENV GRB_VERSION 13.0.3
 ENV GRB_SHORT_VERSION 13.0
 ENV GUROBI_HOME /opt/gurobi/linux64
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
@@ -54,6 +55,7 @@ COPY renv /renv/renv
 RUN cd /renv \
   && Rscript -e 'install.packages(c("renv", "remotes"))' \
   && Rscript -e 'options(renv.config.pak.enabled=TRUE);renv::restore()' \
+  && Rscript -e 'install.packages("slam", repos = "https://cloud.r-project.org")' \
   && Rscript -e 'install.packages(dir(paste0(Sys.getenv("GUROBI_HOME"), "/R"), "^.*\\.tar\\.gz", full.names = TRUE), repos = NULL)'
 
 ## install app
