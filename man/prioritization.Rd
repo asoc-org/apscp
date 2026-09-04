@@ -4,7 +4,14 @@
 \alias{prioritization}
 \title{Generate a prioritization}
 \usage{
-prioritization(project, settings, gap = 0.1, solver = "cbc", verbose = FALSE)
+prioritization(
+  project,
+  settings,
+  gap = 0.1,
+  solver = "cbc",
+  time_limit = 500,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{project}{[new_project()] object. These data are used to specify
@@ -19,6 +26,9 @@ Defaults to 0.1 (10\% from optimality).}
 \item{solver}{`character` value indicating the name of the software
 used for optimization. Acceptable values include `"gurobi"` or `"cbc"`.
 Defaults to `"cbc"`.}
+
+\item{time_limit}{`numeric` value indicating the number of seconds
+permitted for running optimization. Defaults to 500.}
 
 \item{verbose}{`logical` value indicating if information should be
 displayed during optimization process. Defaults to `FALSE`.}

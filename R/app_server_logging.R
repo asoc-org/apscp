@@ -40,10 +40,6 @@ app_server_logging <- quote({
           "*" = paste0(
             "Solver:    ",
             get_golem_config("solver_name")
-          ),
-          "*" = paste0(
-            "Number workers:    ",
-            get_golem_config("n_workers")
           )
         )
       )

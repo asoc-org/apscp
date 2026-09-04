@@ -18,6 +18,9 @@ NULL
 #' used for optimization. Acceptable values include `"gurobi"` or `"cbc"`.
 #' Defaults to `"cbc"`.
 #'
+#' @param time_limit `numeric` value indicating the number of seconds
+#' permitted for running optimization. Defaults to 500.
+#'
 #' @param verbose `logical` value indicating if information should be
 #' displayed during optimization process. Defaults to `FALSE`.
 #'
@@ -87,6 +90,7 @@ prioritization <- function(
   settings,
   gap = 0.1,
   solver = "cbc",
+  time_limit = 500,
   verbose = FALSE
 ) {
   # assert that arguments are valid
@@ -121,6 +125,9 @@ prioritization <- function(
     assertthat::is.number(gap),
     ## verbose
     assertthat::is.flag(verbose),
+    ## time_limit
+    assertthat::is.count(time_limit),
+    assertthat::noNA(time_limit),
     ## solver
     assertthat::is.string(solver),
     assertthat::noNA(solver),
@@ -240,21 +247,19 @@ prioritization <- function(
 
   # add solver
   if (identical(solver, "cbc")) {
-    ## add solver
     prob <- prioritizr::add_cbc_solver(
-      prob, gap = gap, verbose = verbose, threads = 1
+      prob, threads = 1,
+      gap = gap, verbose = verbose, time_limit = time_limit
     )
   } else {
     # nocov start
-    ## if needed, specify control
     control <- NULL
     if (!is.null(get_golem_config("solver_gurobi_server"))) {
       control <- list(ComputeServer = get_golem_config("solver_gurobi_server"))
     }
-    ## add solver
     prob <- prioritizr::add_gurobi_solver(
-      prob, gap = gap, verbose = verbose, control = control,
-      presolve = 1, threads = 1
+      prob, control = control, presolve = 1, threads = 1,
+      gap = gap, verbose = verbose, time_limit = time_limit
     )
     # nocov end
   }

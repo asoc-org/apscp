@@ -9,40 +9,49 @@ app_startup <- function() {
   # display golem configuration
   if (isTRUE(get_golem_config("logging"))) {
     cli::cli_h3("Configuration")
-    cli::cli_text(
-      "R_CONFIG_ACTIVE: \"",
-      Sys.getenv("R_CONFIG_ACTIVE"),
-      "\""
-    )
-    cli::cli_text(
-      "SHINYPROXY_BACKEND: \"",
-      Sys.getenv("SHINYPROXY_BACKEND"),
-      "\""
-    )
-    cli::cli_text(
-      "MAPBOX_PUBLIC_TOKEN: \"",
-      Sys.getenv("MAPBOX_PUBLIC_TOKEN"),
-      "\""
-    )
-    cli::cli_text(
-      "SHARED_DIRECTORY: \"",
-      Sys.getenv("SHARED_DIRECTORY"),
-      "\""
-    )
-    cli::cli_text(
-      "TILE_SERVER_URL: \"",
-      Sys.getenv("TILE_SERVER_URL"),
-      "\""
-    )
-    cli::cli_text(
-      "GUROBI_LICENSE_PATH: \"",
-      Sys.getenv("GUROBI_LICENSE_PATH"),
-      "\""
-    )
-    cli::cli_text(
-      "NUMBER_WORKERS: \"",
-      Sys.getenv("NUMBER_WORKERS"),
-      "\""
+    cli::cli_bullets(
+      c(
+        "*" = paste0(
+          "R_CONFIG_ACTIVE: \"",
+          Sys.getenv("R_CONFIG_ACTIVE"),
+          "\""
+        ),
+        "*" = paste0(
+          "SHINYPROXY_BACKEND: \"",
+          Sys.getenv("SHINYPROXY_BACKEND"),
+          "\""
+        ),
+        "*" = paste0(
+          "MAPBOX_PUBLIC_TOKEN: \"",
+          Sys.getenv("MAPBOX_PUBLIC_TOKEN"),
+          "\""
+        ),
+        "*" = paste0(
+          "SHARED_DIRECTORY: \"",
+          Sys.getenv("SHARED_DIRECTORY"),
+          "\""
+        ),
+        "*" = paste0(
+          "TILE_SERVER_URL: \"",
+          Sys.getenv("TILE_SERVER_URL"),
+          "\""
+        ),
+        "*" = paste0(
+          "NUMBER_WORKERS: \"",
+          Sys.getenv("NUMBER_WORKERS"),
+          "\""
+        ),
+        "*" = paste0(
+          "SOLVER_NAME: \"",
+          Sys.getenv("SOLVER_NAME"),
+          "\""
+        ),
+        "*" = paste0(
+          "GUROBI_LICENSE_PATH: \"",
+          Sys.getenv("GUROBI_LICENSE_PATH"),
+          "\""
+        )
+      )
     )
   }
 
