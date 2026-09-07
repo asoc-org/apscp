@@ -5,7 +5,15 @@ Generate a prioritization using multi-objective optimization techniques.
 ## Usage
 
 ``` r
-prioritization(project, settings, gap = 0.1, solver = "cbc", verbose = FALSE)
+prioritization(
+  project,
+  settings,
+  gap = 0.1,
+  solver = "cbc",
+  time_limit = 500,
+  gurobi_server = NULL,
+  verbose = FALSE
+)
 ```
 
 ## Arguments
@@ -30,6 +38,16 @@ prioritization(project, settings, gap = 0.1, solver = "cbc", verbose = FALSE)
   \`character\` value indicating the name of the software used for
   optimization. Acceptable values include \`"gurobi"\` or \`"cbc"\`.
   Defaults to \`"cbc"\`.
+
+- time_limit:
+
+  \`numeric\` value indicating the number of seconds permitted for
+  running optimization. Defaults to 500.
+
+- gurobi_server:
+
+  \`character\` value providing the HTTP address for the Gurobi compute
+  server. Defaults to \`NULL\` such that no compute server is used.
 
 - verbose:
 

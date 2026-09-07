@@ -132,7 +132,7 @@ renv_default:
 
 ## snapshot R package dependencies
 renv_snapshot:
-	$(R) -e "renv::snapshot(type = 'explicit')"
+	$(R) -e "renv::snapshot()"
 
 ## install gurobi and dependencies
 renv_gurobi:

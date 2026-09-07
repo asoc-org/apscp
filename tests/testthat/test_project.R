@@ -1,4 +1,6 @@
 test_that("new_project", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create data
   s <- simulate_spatial_data()
   w <- create_dataset_from_sf(s)
@@ -99,6 +101,8 @@ test_that("new_project", {
 })
 
 test_that("methods", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   x <- simulate_project()
   # create dummy data
@@ -116,7 +120,9 @@ test_that("methods", {
 })
 
 test_that("map_project", {
+  # define skips
   skip_if_missing_mapbox_token()
+  skip_if_sim_deps_not_installed()
   # create object
   x <- simulate_project()
   tile_server_start(x)
@@ -127,6 +133,8 @@ test_that("map_project", {
 })
 
 test_that("simulate_project", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   x <- simulate_project()
   # run tests
@@ -134,6 +142,8 @@ test_that("simulate_project", {
 })
 
 test_that("serialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- simulate_project()
   x <- serialize_object(d)
@@ -155,6 +165,7 @@ test_that("serialize_object", {
 })
 
 test_that("deserialize_object", {
+  skip_if_sim_deps_not_installed()
   # create object
   x <- simulate_project()
   y <- deserialize_object(serialize_object(x), dataset = x$dataset)
@@ -163,6 +174,8 @@ test_that("deserialize_object", {
 })
 
 test_that("read_project/write_project", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create objects
   x <- simulate_project()
   td <- tempfile()

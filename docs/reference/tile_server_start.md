@@ -26,8 +26,10 @@ An invisible \`TRUE\` indicating success.
 ## Details
 
 The tile server directory is specified based on
-\`get_golem_config("tile_server_dir")\`, and the port number is based on
-\`get_golem_config("tile_server_port")\`.
+\`get_golem_config("tile_server_dir")\`. The port number is based on
+\`get_golem_config("tile_server_url")\` where the text after the last
+colon is assumed to be the port number (e.g., the port number in
+\`http://localhost:8085\` is assumed to be 8085).
 
 ## See also
 

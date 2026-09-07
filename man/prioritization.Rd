@@ -10,6 +10,7 @@ prioritization(
   gap = 0.1,
   solver = "cbc",
   time_limit = 500,
+  gurobi_server = NULL,
   verbose = FALSE
 )
 }
@@ -29,6 +30,10 @@ Defaults to `"cbc"`.}
 
 \item{time_limit}{`numeric` value indicating the number of seconds
 permitted for running optimization. Defaults to 500.}
+
+\item{gurobi_server}{`character` value providing the HTTP address
+for the Gurobi compute server. Defaults to `NULL` such that no compute
+server is used.}
 
 \item{verbose}{`logical` value indicating if information should be
 displayed during optimization process. Defaults to `FALSE`.}

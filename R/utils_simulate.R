@@ -17,6 +17,11 @@ NULL
 #' print(d)
 #' @export
 simulate_spatial_data <- function() {
+  # assert dependencies available
+  assertthat::assert_that(
+    is_installed("prioritizr"),
+    is_installed("terra")
+  )
   # obtain planning unit data
   pu <- prioritizr::get_sim_pu_raster()
   fts <- prioritizr::get_sim_features()

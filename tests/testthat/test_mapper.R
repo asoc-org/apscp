@@ -1,4 +1,6 @@
 test_that("mapper", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- simulate_project()
   x <- mapper(map_id = "map", project = d)
@@ -9,6 +11,8 @@ test_that("mapper", {
 })
 
 test_that("builtin dataset", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- read_builtin_project()
   x <- mapper(map_id = "map", project = d)

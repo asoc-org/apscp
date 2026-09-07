@@ -24,6 +24,10 @@ NULL
 #' @param verbose `logical` value indicating if information should be
 #' displayed during optimization process. Defaults to `FALSE`.
 #'
+#' @param gurobi_server `character` value providing the HTTP address
+#' for the Gurobi compute server. Defaults to `NULL` such that no compute
+#' server is used.
+#'
 #' @section Settings format:
 #' The argument to `settings` must be a `list` with the following elements.
 #' \describe{
@@ -91,10 +95,13 @@ prioritization <- function(
   gap = 0.1,
   solver = "cbc",
   time_limit = 500,
+  gurobi_server = NULL,
   verbose = FALSE
 ) {
   # assert that arguments are valid
   assertthat::assert_that(
+    ## dependencies
+    is_installed("prioritizr"),
     ## project
     inherits(project, "Project"),
     ## settings
@@ -133,6 +140,12 @@ prioritization <- function(
     assertthat::noNA(solver),
     solver %in% c("cbc", "gurobi")
   )
+  if (!is.null(gurobi_server)) {
+    ## gurobi_server
+    assertthat::assert_that(
+      assertthat::is.string(gurobi_server)
+    )
+  }
 
   # preliminary data processing
   ## cost settings
@@ -253,9 +266,9 @@ prioritization <- function(
     )
   } else {
     # nocov start
-    control <- NULL
-    if (!is.null(get_golem_config("solver_gurobi_server"))) {
-      control <- list(ComputeServer = get_golem_config("solver_gurobi_server"))
+    control <- list()
+    if (!is.null(gurobi_server)) {
+      control$ComputeServer <- gurobi_server
     }
     prob <- prioritizr::add_gurobi_solver(
       prob, control = control, presolve = 1, threads = 1,
@@ -278,13 +291,20 @@ prioritization <- function(
 
   # solve problem
   raw_sol <- solve(prob, run_checks = FALSE, force = TRUE)
-  raw_sol <- raw_sol[, paste0("solution_1_", project$zones),  drop = FALSE]
+
+  # prepare status
+  status <- prioritizr::category_vector(
+    raw_sol[, paste0("solution_1_", project$zones),  drop = FALSE]
+ )
+
+  # prepare metrics
+  obj_value <- attr(raw_sol, "objective")
 
   # return formatted solution
   structure(
     list(
-      status = prioritizr::category_vector(raw_sol),
-      metrics = NULL
+      status = status,
+      metrics = list(obj_value)
     ),
     class = "Prioritization"
   )

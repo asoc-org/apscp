@@ -1,4 +1,6 @@
 test_that("new_cost", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   s <- simulate_spatial_data()
   l <- new_layer(
@@ -20,6 +22,8 @@ test_that("new_cost", {
 })
 
 test_that("serialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   s <- simulate_spatial_data()
   l <- new_layer(
@@ -44,6 +48,8 @@ test_that("serialize_object", {
 })
 
 test_that("deserialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   s <- simulate_spatial_data()
   w <- create_dataset_from_sf(s)

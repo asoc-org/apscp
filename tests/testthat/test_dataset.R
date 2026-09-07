@@ -1,4 +1,6 @@
 test_that("new_dataset", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- simulate_spatial_data()
   f1 <- tempfile(fileext = ".gpkg")
@@ -18,6 +20,8 @@ test_that("create_dataset_from_sf", {
 })
 
 test_that("methods", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- simulate_spatial_data()
   x <- create_dataset_from_sf(d)
@@ -103,6 +107,8 @@ test_that("methods", {
 })
 
 test_that("read_dataset/write_dataset", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   x <- create_dataset_from_sf(simulate_spatial_data())
   path1 <- tempfile(fileext = ".gpkg.zip")

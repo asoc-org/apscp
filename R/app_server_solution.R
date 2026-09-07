@@ -15,23 +15,36 @@ app_server_solution <- quote({
 
   # define task for generating solutions
   task <- ExtendedTask$new(
-    function(id, name, project, settings, gap, solver, verbose) {
-    mirai::mirai({
-        list(
-          id = id,
-          name = name,
-          result = try(
-            apscp::prioritization(
-              project = project,
-              settings = settings,
-              gap = gap,
-              solver = solver,
-              verbose = verbose
-            ),
-            silent = !isTRUE(verbose)
+    function(id, name, project, settings, gap, solver, gurobi_server, verbose) {
+      mirai::mirai(
+        {
+          list(
+            id = id,
+            name = name,
+            result = try(
+              prioritization(
+                project = project,
+                settings = settings,
+                gap = gap,
+                solver = solver,
+                gurobi_server = gurobi_server,
+                verbose = verbose
+              ),
+              silent = !isTRUE(verbose)
+            )
           )
+        },
+        .args = list(
+          "id" = id,
+          "name" = name,
+          "project" = project,
+          "settings" = settings,
+          "gap" = gap,
+          "solver" = solver,
+          "gurobi_server" = gurobi_server,
+          "verbose" = verbose
         )
-      }, environment())
+      )
     }
   ) |> bslib::bind_task_button("solver_start_button")
 
@@ -82,6 +95,7 @@ app_server_solution <- quote({
       settings = input$solver_settings,
       gap = get_golem_config("solver_gap"),
       solver = get_golem_config("solver_name"),
+      gurobi_server = get_golem_config("solver_gurobi_server"),
       verbose = get_golem_config("verbose")
     )
   })

@@ -218,3 +218,7 @@ Functions for simulating data.
   : Start tile server
 - [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)
   : Stop tile server
+- [`mirai_async_start()`](https://asoc-org.github.io/apscp/reference/mirai_async_start.md)
+  : Setup asynchronous processing with mirai
+- [`mirai_async_stop()`](https://asoc-org.github.io/apscp/reference/mirai_async_stop.md)
+  : Stop asynchronous processing

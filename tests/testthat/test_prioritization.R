@@ -1,5 +1,7 @@
 test_that("basic", {
+  # define skips
   skip_if_not_installed("rcbc")
+  skip_if_not_installed("prioritizr")
   # simulate data
   p <- simulate_project()
   s <- withr::with_seed(500, simulate_prioritization_settings(p))
@@ -19,7 +21,9 @@ test_that("basic", {
 })
 
 test_that("active costs", {
+  # define skips
   skip_if_not_installed("rcbc")
+  skip_if_not_installed("prioritizr")
   # simulate data
   p <- simulate_project()
   s <- withr::with_seed(500, simulate_prioritization_settings(p))
@@ -42,7 +46,9 @@ test_that("active costs", {
 })
 
 test_that("active locks", {
+  # define skips
   skip_if_not_installed("rcbc")
+  skip_if_not_installed("prioritizr")
   # simulate data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
@@ -67,8 +73,10 @@ test_that("active locks", {
 })
 
 test_that("both solvers work", {
+  # define skips
   skip_if_not_installed("rcbc")
   skip_if_not_installed("gurobi")
+  skip_if_not_installed("prioritizr")
   # simulate data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
@@ -78,5 +86,31 @@ test_that("both solvers work", {
   # run tests
   expect_s3_class(x, "Prioritization")
   expect_s3_class(y, "Prioritization")
-  expect_equal(x$status, y$status)
+  expect_equal(
+    x$metrics$obj_value,
+    y$metrics$obj_value,
+    tolerance = 1e-4
+  )
+})
+
+test_that("asynchronous", {
+  # define skips
+  skip_if_not_installed("rcbc")
+  skip_if_not_installed("prioritizr")
+  # simulate data
+  p <- simulate_project()
+  s <- withr::with_seed(500, simulate_prioritization_settings(p))
+  # set all targets and weights to be equal
+  s$features$target <- 0.3
+  s$features$weight <- 1
+  # ensure no active costs or locks
+  s$locks <- s$locks[FALSE, , drop = FALSE]
+  s$costs$zones <- NA
+  # setup asynchronous processing
+  mirai_async_start()
+  on.exit(mirai_async_stop(), add = TRUE)
+  # generate solution
+  x <- mirai::mirai(prioritization(p, s), .args = list(p = p, s = s))[]
+  # run tests
+  expect_s3_class(x, "Prioritization")
 })

@@ -92,6 +92,10 @@ NULL
 color_palette <- function(x, n = NULL) {
   # assert arguments are valid
   assertthat::assert_that(
+    ## dependencies
+    is_installed("RColorBrewer"),
+    is_installed("viridisLite"),
+    ## x
     assertthat::is.string(x),
     assertthat::noNA(x)
   )

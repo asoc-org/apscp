@@ -31,17 +31,13 @@ Imports:
     shiny (>= 1.13.0),
     mapgl (>= 0.4.6),
     sf (>= 1.1-1),
-    terra (>= 1.8-93),
     uuid (>= 1.2-2),
     labeling (>= 0.4.3),
-    RColorBrewer (>= 1.1-3),
-    viridisLite (>= 0.4.3),
     assertthat (>= 0.2.0),
     cli (>= 3.6.0),
     rlang (>= 1.1.0),
     yaml (>= 2.3.12),
     htmlwidgets (>= 1.6.4),
-    prioritizr (>= 9.0.0.0),
     rcbc (>= 0.1.0.9003),
     shinybusy (>= 0.3.3),
     withr (>= 3.0.3),
@@ -57,6 +53,10 @@ Imports:
 Suggests:
     slam (>= 0.1-56),
     gurobi (>= 13.0-2),
+    terra (>= 1.8-93),
+    prioritizr (>= 9.0.0.0),
+    RColorBrewer (>= 1.1-3),
+    viridisLite (>= 0.4.3),
     testthat (>= 3.3.2),
     knitr (>= 1.48),
     rmarkdown (>= 2.28),
@@ -122,8 +122,10 @@ Collate:
     'package.R'
     'run_app.R'
     'utils_as.R'
+    'utils_assertions.R'
     'utils_color_palette.R'
     'utils_matrix.R'
+    'utils_mirai.R'
     'utils_sf.R'
     'utils_simulate.R'
     'utils_tile_server.R'

@@ -22,13 +22,3 @@ if (interactive()) {
 if (file.exists("/usr/bin/google-chrome")) {
   options(browser = "/usr/bin/google-chrome")
 }
-
-# if running asynchronous worker on developer environment
-# then load package
-if (
-  isTRUE(requireNamespace("mirai", quietly = TRUE)) &&
-  isTRUE("--mirai" %in% commandArgs(trailingOnly = TRUE)) &&
-  file.exists("DESCRIPTION")
-) {
-  pkgload::load_all(".", attach = TRUE, attach_testthat = FALSE)
-}

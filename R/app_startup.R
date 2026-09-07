@@ -63,16 +63,13 @@ app_startup <- function() {
     options(apscp.initial_memory_used = format(lobstr::mem_used(), "mb"))
   }
 
-  # initialize file and variable size limits
+  # set Shiny file and variable size limits
   options(shiny.maxRequestSize = 4000 * 1024^2) # 4GB
 
-  # initialize asynchronous processing
-  mirai::daemons(
-    get_golem_config("n_workers"),
-    url = mirai::local_url(),
-    remote = mirai::remote_config(
-      command = "Rscript", rscript = "", args = c("", ".", "--mirai")
-    )
+  # setup asynchronous processing
+  mirai_async_start(
+    n = get_golem_config("n_workers"),
+    verbose = get_golem_config("verbose")
   )
 
   # initialize tile server
@@ -100,7 +97,7 @@ app_startup <- function() {
   # define behavior for when shiny stops
   shiny::onStop(function() {
     # stop asynchronous workers
-    mirai::daemons(0)
+    mirai_async_stop()
     # if needed, stop tile server
     if (identical(get_golem_config("tile_server_mode"), "internal")) {
       tile_server_stop()

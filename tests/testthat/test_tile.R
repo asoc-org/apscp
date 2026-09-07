@@ -1,4 +1,6 @@
 test_that("new_tile", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   p <- simulate_pmtiles_file()
   x <- new_tile(source_layer = "data-src", path = p, max_zoom = 5)
@@ -10,6 +12,8 @@ test_that("new_tile", {
 })
 
 test_that("serialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   p <- simulate_pmtiles_file()
   d <- new_tile(source_layer = "data-src", path = p, max_zoom = 5)
@@ -23,6 +27,8 @@ test_that("serialize_object", {
 })
 
 test_that("deserialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   p <- simulate_pmtiles_file()
   x <- new_tile(source_layer = "data-src", path = p, max_zoom = 5)
@@ -32,6 +38,8 @@ test_that("deserialize_object", {
 })
 
 test_that("create_tile_from_sf", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- simulate_spatial_data()
   path <- tempfile(fileext = ".pmtiles")
@@ -47,6 +55,8 @@ test_that("create_tile_from_sf", {
 })
 
 test_that("create_tile_from_dataset", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   d <- create_dataset_from_sf(simulate_spatial_data())
   path <- tempfile(fileext = ".pmtiles")

@@ -79,7 +79,7 @@ demo:
   tile_server_mode: "external"
   tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
-  n_workers: !expr Sys.getenv("NUMBER_WORKERS")
+  n_workers: !expr as.numeric(Sys.getenv("NUMBER_WORKERS"))
   solver_name: !expr Sys.getenv("SOLVER_NAME")
   solver_gurobi_server: "http://compute:61000"
 
@@ -90,6 +90,6 @@ prod:
   tile_server_mode: "external"
   tile_server_url: !expr Sys.getenv("TILE_SERVER_URL")
   tile_server_dir: !expr path.expand("~/tiles")
-  n_workers: !expr Sys.getenv("NUMBER_WORKERS")
+  n_workers: !expr as.numeric(Sys.getenv("NUMBER_WORKERS"))
   solver_name: !expr Sys.getenv("SOLVER_NAME")
   solver_gurobi_server: "http://compute:61000"

@@ -1,4 +1,6 @@
 test_that("solver", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object,
   d <- simulate_project()
   x <- solver(project = d)

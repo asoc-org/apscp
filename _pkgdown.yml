@@ -68,3 +68,4 @@ reference:
     contents:
       - has_concept("misc")
       - has_concept("tile_server")
+      - has_concept("mirai")

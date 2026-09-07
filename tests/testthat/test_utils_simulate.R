@@ -1,34 +1,48 @@
 test_that("simulate_spatial_data", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # run tests
   expect_s3_class(simulate_spatial_data(), "sf")
 })
 
 test_that("simulate_project", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # run tests
   expect_s3_class(simulate_project(), "Project")
 })
 
 test_that("simulate_continuous_legend", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # run tests
   expect_s3_class(simulate_continuous_legend(), "ContinuousLegend")
 })
 
 test_that("simulate_solution_legend", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # run tests
   expect_s3_class(simulate_solution_legend(), "CategoricalLegend")
 })
 
 test_that("simulate_binary_legend", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # run tests
   expect_s3_class(simulate_binary_legend(), "CategoricalLegend")
 })
 
 test_that("simulate_provenance", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # run tests
   expect_s3_class(simulate_provenance(), "Provenance")
 })
 
 test_that("simulate_pmtiles_file", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   x <- simulate_pmtiles_file()
   # run tests
@@ -38,6 +52,8 @@ test_that("simulate_pmtiles_file", {
 })
 
 test_that("simulate_prioritization_settings", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   p <- simulate_project()
   x <- simulate_prioritization_settings(p)

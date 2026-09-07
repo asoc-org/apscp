@@ -1,4 +1,6 @@
 test_that("new_solution", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   s <- simulate_spatial_data()
   l <- new_layer(
@@ -18,6 +20,8 @@ test_that("new_solution", {
 })
 
 test_that("serialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   s <- simulate_spatial_data()
   l <- new_layer(
@@ -40,6 +44,8 @@ test_that("serialize_object", {
 })
 
 test_that("deserialize_object", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # create object
   s <- simulate_spatial_data()
   w <- create_dataset_from_sf(s)
@@ -59,6 +65,8 @@ test_that("deserialize_object", {
 })
 
 test_that("create_solution", {
+  # define skips
+  skip_if_sim_deps_not_installed()
   # prepare data
   p <- simulate_project()
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
@@ -79,6 +87,9 @@ test_that("create_solution", {
 })
 
 test_that("create_solution_from_prioritization", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  skip_if_not_installed("prioritizr")
   skip_if_not_installed("rcbc")
   # simulate data
   p <- simulate_project()
