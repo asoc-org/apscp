@@ -87,7 +87,8 @@ EXPOSE 3838
 ENV R_SHINY_PORT=3838
 ENV R_SHINY_HOST=0.0.0.0
 RUN env | grep R_SHINY_PORT > /home/shiny/.Renviron && \
-    env | grep R_SHINY_HOST >> /home/shiny/.Renviron
+    env | grep R_SHINY_HOST >> /home/shiny/.Renviron && \
+    echo "R_DEFAULT_PACKAGES='utils,stats,methods'" >> /home/shiny/.Renviron
 
 ## setup shiny application
 RUN mkdir /home/shiny/app
