@@ -29,10 +29,10 @@ unzip(data_path, exdir = td)
 
 ## load data
 metadata <- tibble::as_tibble(
-  read.table(metadata_path, header = TRUE, sep = ",")
+  read.csv(metadata_path, header = TRUE, sep = ",")
 )
 target_data <- tibble::as_tibble(
-  paste0(td, "/", target_path)
+  read.csv(paste0(td, "/", target_path), header = TRUE, sep = ",")
 )
 
 ## prepare metadata
@@ -126,6 +126,11 @@ vector_data <- sf::st_as_sf(
 )
 for (i in names(raster_data)) {
   vector_data[[i]] <- raster_data[[i]][idx][[1]]
+  ## set 0s to NA values
+  if (any(vector_data[[i]] > 0)) {
+    idx2 <- which(vector_data[[i]] == 0)
+    vector_data[[i]][idx2] <- NA_real_
+  }
 }
 
 ## add in _index column
