@@ -112,6 +112,19 @@ assertthat::assert_that(
 pu_data <- raster_data[[metadata$name[metadata$class == "pu"]]]
 raster_data <- terra::mask(raster_data, mask = pu_data)
 
+## set 0s to NA values
+for (n in metadata$name[metadata$class != "pu"]) {
+  raster_data[[n]][raster_data[[n]] == 0] <- NA_real_
+}
+
+## mask data to remove planning units with missing values in all cells
+mask_data <- raster_data[[metadata$name[metadata$class != "pu"]]]
+mask_data <- terra::allNA(mask_data)
+pu_data[mask_data > 0] <- NA_real_
+
+## mask raster data by planning units
+raster_data <- terra::mask(raster_data, mask = pu_data)
+
 ### set 0s to NA values for layers with presence units
 for (l in metadata$name[metadata$units == "presence"]) {
   raster_data[[l]] <- terra::ifel(raster_data[[l]] == 1, 1, NA_real_)
@@ -126,11 +139,6 @@ vector_data <- sf::st_as_sf(
 )
 for (i in names(raster_data)) {
   vector_data[[i]] <- raster_data[[i]][idx][[1]]
-  ## set 0s to NA values
-  if (any(vector_data[[i]] > 0)) {
-    idx2 <- which(vector_data[[i]] == 0)
-    vector_data[[i]][idx2] <- NA_real_
-  }
 }
 
 ## add in _index column
