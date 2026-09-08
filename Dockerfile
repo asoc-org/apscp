@@ -14,6 +14,7 @@ RUN apt-get update \
     cmake \
     curl \
     gdal-bin \
+    htop \
     libuv1-dev \
     libglpk-dev \
     libabsl-dev \
