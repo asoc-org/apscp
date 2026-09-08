@@ -219,6 +219,7 @@ prioritization <- function(
     ## prepare cost values
     curr_pu_data <- pu_data[, c("id", "_zeros"), drop = FALSE]
     curr_pu_data$cost <- pu_data[[settings$costs$column[[i]]]]
+    curr_pu_data$cost[is.na(curr_pu_data$cost)] <- 0
     ## prepare cost columns
     cost <- rep("cost", length(project$zones))
     cost[match(settings$costs$zone[[i]], project$zones)] <- "_zeros"
