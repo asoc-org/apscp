@@ -43,7 +43,11 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
   )
   worker_funs$function_names <- function_names
   # initialize workers
-  mirai::daemons(n, output = TRUE)
+  if (isTRUE(verbose)) {
+    mirai::daemons(n, output = TRUE)
+  } else {
+    mirai::daemons(n)
+  }
   # load dependencies on workers
   do.call(
     mirai::everywhere,
