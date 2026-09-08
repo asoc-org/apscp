@@ -114,9 +114,16 @@ demo-enter:
 
 # Docker commands
 ## create local image and push to docker
+
+## create latest image
 image: bundle
 	docker build -t jhansonasoc/apscp:latest .
 	docker push jhansonasoc/apscp:latest
+
+## create dev image
+image-dev: bundle
+	docker build -t jhansonasoc/apscp:dev .
+	docker push jhansonasoc/apscp:dev
 
 ## delete all local containers and images
 reset:
