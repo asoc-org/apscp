@@ -240,8 +240,7 @@ map_project <- function(x, ...) {
   )
 
   # add underlay for planning region
-  m <-
-   mapgl::add_fill_layer(
+  m <- mapgl::add_fill_layer(
     m,
     id = "bbox",
     source = sf::st_as_sf(sf::st_as_sfc(x$get_bbox(native = FALSE))),
