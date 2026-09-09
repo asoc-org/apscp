@@ -228,17 +228,25 @@ map_project <- function(x, ...) {
   # assert valid arguments
   assertthat::assert_that(inherits(x, "Project"))
 
-  # define map parameters
-  bounds = as.vector(x$get_bbox(native = FALSE, expand = 0.5))
-  maxBounds = as.vector(x$get_bbox(native = FALSE, expand = 1))
-
   # initialize map
+  bounds <- x$get_bbox(native = FALSE)
   m <- mapgl::mapboxgl(
-    bounds = bounds,
-    maxBounds = list(maxBounds[1:2], maxBounds[3:4]),
+    center = x$get_centroid(native = FALSE),
+    bearing = x$bearing,
+    zoom = x$zoom,
     projection = "lambertConformalConic",
     parallels = c(bounds[2], bounds[4]),
     ...
+  )
+
+  # add underlay for planning region
+  m <-
+   mapgl::add_fill_layer(
+    m,
+    id = "bbox",
+    source = sf::st_as_sf(sf::st_as_sfc(x$get_bbox(native = FALSE))),
+    fill_color = "#bdbdbd",
+    fill_opacity = 0.2
   )
 
   # add tiles

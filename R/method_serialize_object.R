@@ -213,6 +213,8 @@ serialize_object.Project <- function(x) {
     author_email = x$author_email,
     zones = x$zones,
     bbox = serialize_object.bbox(x$bbox),
+    bearing = x$bearing,
+    zoom = x$zoom,
     tiles = lapply(x$tiles, function(y) serialize_object.Tile(y)),
     costs = lapply(x$costs, function(y) serialize_object.Cost(y)),
     features = lapply(x$features, function(y) serialize_object.Feature(y)),

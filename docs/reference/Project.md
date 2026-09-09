@@ -26,6 +26,14 @@ Other class:
 
   \[sf::st_crs()\] object.
 
+- `bearing`:
+
+  \`numeric\` value denoting the initial rotation for the map.
+
+- `zoom`:
+
+  \`numeric\` value denoting the initial zoom for the map.
+
 - `dataset`:
 
   \[new_dataset()\] object.
@@ -112,7 +120,9 @@ Create a \`Project\` object.
       name = "Project",
       author_name = "Unknown",
       author_email = "Unknown",
-      version = "Unknown"
+      version = "Unknown",
+      bearing = 0,
+      zoom = 0
     )
 
 #### Arguments
@@ -165,6 +175,14 @@ Create a \`Project\` object.
 
   \`character\` value with package version used to create the project.
   Defaults to \`"Unknown"\`.
+
+- `bearing`:
+
+  \`numeric\` value denoting the map rotation. Defaults to 0.
+
+- `zoom`:
+
+  \`numeric\` value denoting the initial zoom for the map.
 
 #### Returns
 

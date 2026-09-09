@@ -17,7 +17,9 @@ new_project(
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
-  version = NULL
+  version = NULL,
+  bearing = 0,
+  zoom = 0
 )
 ```
 
@@ -71,6 +73,14 @@ new_project(
 
   \`character\` version of package used to create the project. Defaults
   to \`NULL\`, such that the current package version is used.
+
+- bearing:
+
+  \`numeric\` value denoting the initial map rotation. Defaults to 0.
+
+- zoom:
+
+  \`numeric\` value denoting the initial map zoom. Defaults to 0.
 
 ## Value
 

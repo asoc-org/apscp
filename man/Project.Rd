@@ -29,6 +29,10 @@ Other class:
   \describe{
     \item{\code{bbox}}{[sf::st_crs()] object.}
 
+    \item{\code{bearing}}{`numeric` value denoting the initial rotation for the map.}
+
+    \item{\code{zoom}}{`numeric` value denoting the initial zoom for the map.}
+
     \item{\code{dataset}}{[new_dataset()] object.}
 
     \item{\code{tiles}}{`list` of [new_tile()] objects.}
@@ -87,7 +91,9 @@ to create the project.}
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
-  version = "Unknown"
+  version = "Unknown",
+  bearing = 0,
+  zoom = 0
 )}
     \if{html}{\out{</div>}}
   }
@@ -112,6 +118,9 @@ Defaults to `"Unknown"`.}
       \item{\code{version}}{`character` value with package version used
 to create the project.
 Defaults to `"Unknown"`.}
+      \item{\code{bearing}}{`numeric` value denoting the map rotation.
+Defaults to 0.}
+      \item{\code{zoom}}{`numeric` value denoting the initial zoom for the map.}
     }
     \if{html}{\out{</div>}}
   }

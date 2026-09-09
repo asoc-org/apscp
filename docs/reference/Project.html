@@ -66,6 +66,14 @@
 <dd><p>[sf::st_crs()] object.</p></dd>
 
 
+    <dt><code>bearing</code></dt>
+<dd><p>`numeric` value denoting the initial rotation for the map.</p></dd>
+
+
+    <dt><code>zoom</code></dt>
+<dd><p>`numeric` value denoting the initial zoom for the map.</p></dd>
+
+
     <dt><code>dataset</code></dt>
 <dd><p>[new_dataset()] object.</p></dd>
 
@@ -143,7 +151,9 @@ to create the project.</p></dd>
 <span>  name <span class="op">=</span> <span class="st">"Project"</span>,</span>
 <span>  author_name <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
 <span>  author_email <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
-<span>  version <span class="op">=</span> <span class="st">"Unknown"</span></span>
+<span>  version <span class="op">=</span> <span class="st">"Unknown"</span>,</span>
+<span>  bearing <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  zoom <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
@@ -188,6 +198,13 @@ Defaults to `"Unknown"`.</p></dd>
 <dd><p>`character` value with package version used
 to create the project.
 Defaults to `"Unknown"`.</p></dd>
+
+      <dt><code>bearing</code></dt>
+<dd><p>`numeric` value denoting the map rotation.
+Defaults to 0.</p></dd>
+
+      <dt><code>zoom</code></dt>
+<dd><p>`numeric` value denoting the initial zoom for the map.</p></dd>
 
 
 </dl><p></p></div>

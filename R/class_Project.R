@@ -14,6 +14,12 @@ Project <- R6::R6Class(
     #' @field bbox [sf::st_crs()] object.
     bbox = NULL,
 
+    #' @field bearing `numeric` value denoting the initial rotation for the map.
+    bearing = NULL,
+
+    #' @field zoom `numeric` value denoting the initial zoom for the map.
+    zoom = NULL,
+
     #' @field dataset [new_dataset()] object.
     dataset = NULL,
 
@@ -68,12 +74,14 @@ Project <- R6::R6Class(
     #' @param version `character` value with package version used
     #' to create the project.
     #' Defaults to `"Unknown"`.
+    #' @param bearing `numeric` value denoting the map rotation.
+    #' Defaults to 0.
     #' @return A new `Project` object.
     initialize = function(
       zones, bbox, dataset, tiles,
       features, locks, costs, solutions = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown",
-      version = "Unknown"
+      version = "Unknown", bearing = 0, zoom = 0
     ) {
       # assert arguments are valid
       assertthat::assert_that(
@@ -88,6 +96,12 @@ Project <- R6::R6Class(
         no_duplicates(zones),
         ## bbox
         inherits(bbox, "bbox"),
+        ## bearing
+        assertthat::is.number(bearing),
+        assertthat::noNA(bearing),
+        ## zoom
+        assertthat::is.number(zoom),
+        assertthat::noNA(zoom),
         ## name
         assertthat::is.string(name),
         assertthat::noNA(name),
@@ -149,6 +163,8 @@ Project <- R6::R6Class(
       self$author_name <- author_name
       self$author_email <- author_email
       self$version <- version
+      self$bearing <- bearing
+      self$zoom <- zoom
     },
 
     #' @description
@@ -158,8 +174,21 @@ Project <- R6::R6Class(
     #' re-projected to longitude/latitude?
     #' @return A `numeric` vector with two values.
     get_centroid = function(native = TRUE) {
-      bb <- self$get_bbox(native = native)
-      c((bb[[1]] + bb[[3]]) * 0.5, (bb[[2]] + bb[[4]]) * 0.5)
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.flag(native),
+        assertthat::noNA(native)
+      )
+      # calculate centroid in native coordinate system
+      bb <- self$bbox
+      pt <- unname(c((bb$xmin + bb$xmax) * 0.5, (bb$ymin + bb$ymax) * 0.5))
+      # if native = TRUE, return centroid in native coordinate system
+      if (isTRUE(native)) return(pt)
+      # otherwise, reproject the point
+      pt <- sf::st_sfc(sf::st_point(pt), crs = sf::st_crs(bb))
+      pt <- sf::st_transform(pt, 4326)
+      # return the point
+      as.numeric(pt[[1]])
     },
 
     #' @description
@@ -179,34 +208,32 @@ Project <- R6::R6Class(
         assertthat::is.number(expand),
         assertthat::noNA(expand)
       )
-      # expand bounding box
+      # get bbox
       bb <- self$bbox
-      x_buffer <- expand * (bb$xmax - bb$xmin)
-      y_buffer <- expand * (bb$ymax - bb$ymin)
+      # if not native, then reproject it
+      if (!isTRUE(native)) {
+        bb <- sf::st_bbox(sf::st_transform(sf::st_as_sfc(bb), 4326))
+      }
+      # expand bbox
+      x_buffer <- expand * abs(bb$xmax - bb$xmin)
+      y_buffer <- expand * abs(bb$ymax - bb$ymin)
       b <- c(
         xmin = unname(bb$xmin - x_buffer),
         ymin = unname(bb$ymin - y_buffer),
         xmax = unname(bb$xmax + x_buffer),
         ymax = unname(bb$ymax + y_buffer)
       )
-      # if not native, then convert to WGS1984
+      # if not native, then clamp it to ensure valid coordinates
       if (!isTRUE(native)) {
-        # reproject coordinates
-        b <- sf::st_bbox(b, crs = sf::st_crs(bb))
-        b <- sf::st_bbox(sf::st_transform(sf::st_as_sfc(b), 4326))
-        # ensure valid coordinates
         b <- c(
-          xmin = max(b$xmin, -180, na.rm = TRUE),
-          ymin = max(b$ymin, -90, na.rm = TRUE),
-          xmax = min(b$xmax, 180, na.rm = TRUE),
-          ymax = min(b$ymax, 90, na.rm = TRUE)
+          xmin = max(b[["xmin"]], -180, na.rm = TRUE),
+          ymin = max(b[["ymin"]], -90, na.rm = TRUE),
+          xmax = min(b[["xmax"]], 180, na.rm = TRUE),
+          ymax = min(b[["ymax"]], 90, na.rm = TRUE)
         )
-        crs <- sf::st_crs(4326)
-      } else {
-        crs <- sf::st_crs(bb)
       }
       # return result
-      sf::st_bbox(b, crs = crs)
+      sf::st_bbox(b, crs = sf::st_crs(bb))
     },
 
 
@@ -324,6 +351,12 @@ Project <- R6::R6Class(
 #' @param version `character` version of package used to create the project.
 #' Defaults to `NULL`, such that the current package version is used.
 #'
+#' @param bearing `numeric` value denoting the initial map rotation.
+#' Defaults to 0.
+#'
+#' @param zoom `numeric` value denoting the initial map zoom.
+#' Defaults to 0.
+#'
 #' @return A new `Project` object.
 #'
 #' @family class
@@ -429,7 +462,9 @@ new_project <- function(
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
-  version = NULL
+  version = NULL,
+  bearing = 0,
+  zoom = 0
 ) {
   # if needed, set version based on current version
   if (is.null(version)) {
@@ -448,6 +483,8 @@ new_project <- function(
     author_name = author_name,
     author_email = author_email,
     version = version,
-    bbox = bbox
+    bbox = bbox,
+    bearing = bearing,
+    zoom = zoom
   )
 }

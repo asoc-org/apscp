@@ -288,7 +288,9 @@ Dataset <- R6::R6Class(
         if (column %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table)) {
           DBI::dbExecute(
             self$pu_db_con,
-            paste0("ALTER TABLE ", self$pu_db_table, " DROP COLUMN ", column, ";")
+            paste0(
+              "ALTER TABLE ", self$pu_db_table, " DROP COLUMN ", column, ";"
+            )
           )
         }
         # add new column to table

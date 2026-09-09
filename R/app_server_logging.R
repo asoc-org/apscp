@@ -21,6 +21,12 @@ app_server_logging <- quote({
     memory_logging <- shiny::observe({
       # run after application initialized
       shiny::invalidateLater(5000)
+      # calculate memory usage
+      main_mem <- lobstr::mem_used()
+      worker_mem <- structure(
+        sum(unlist(mirai::everywhere({lobstr::mem_used()})[])),
+        class = "lobstr_bytes"
+      )
       # display statistics
       cli::cli_h3("Application statistics")
       cli::cli_bullets(
@@ -31,7 +37,11 @@ app_server_logging <- quote({
           ),
           "*" = paste0(
             "Total memory:   ",
-            format(lobstr::mem_used(), "mb")
+            format(main_mem, "mb")
+          ),
+          "*" = paste0(
+            "Worker memory:    ",
+            format(worker_mem, "mb")
           ),
           "*" = paste0(
             "Data size:    ",

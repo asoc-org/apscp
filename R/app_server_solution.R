@@ -90,7 +90,9 @@ app_server_solution <- quote({
       return()
     }
     # create id for solution and set as task id
-    id <- digest::digest(input$solver_settings)
+    id <- digest::digest(
+      input$solver_settings[names(input$solver_settings) != "name"]
+    )
     app_data$task_id <- id
     # create asynchronous task
     task$invoke(

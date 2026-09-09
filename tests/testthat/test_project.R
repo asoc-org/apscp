@@ -77,6 +77,8 @@ test_that("new_project", {
   # create project
   x <- new_project(
     zones = c("Biodiversity", "Tourism", "Scientific"),
+    bearing = 50,
+    zoom = 1,
     bbox = bb,
     dataset = w,
     tiles = list(g),
@@ -97,7 +99,8 @@ test_that("new_project", {
   expect_equal(x$solutions, list())
   expect_equal(x$name, "Project 1")
   expect_equal(x$author_name, "Greg")
-  expect_equal(x$author_email, "greg@gmail.com")
+  expect_equal(x$bearing, 50)
+  expect_equal(x$zoom, 1)
 })
 
 test_that("methods", {
@@ -117,12 +120,31 @@ test_that("methods", {
   ## add new lock
   x$add_lock(new_lock)
   expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock"))
+  ## get_bbox
+  bb1 <- x$get_bbox(native = TRUE, expand = 1)
+  bb2 <- x$get_bbox(native = FALSE, expand = 1)
+  expect_type(bb1, "double")
+  expect_length(bb1, 4)
+  expect_type(bb2, "double")
+  expect_length(bb2, 4)
+  ## get_centroid
+  ct1 <- x$get_centroid(native = TRUE)
+  ct2 <- x$get_centroid(native = FALSE)
+  expect_type(ct1, "double")
+  expect_length(ct1, 2)
+  expect_type(ct2, "double")
+  expect_length(ct2, 2)
 })
 
 test_that("map_project", {
   # define skips
   skip_if_missing_mapbox_token()
   skip_if_sim_deps_not_installed()
+  # if needed, create tile server directory
+  dir.create(
+    get_golem_config("tile_server_dir"),
+    showWarnings = FALSE, recursive = TRUE
+  )
   # create object
   x <- simulate_project()
   tile_server_start(x)

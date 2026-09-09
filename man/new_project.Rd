@@ -16,7 +16,9 @@ new_project(
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
-  version = NULL
+  version = NULL,
+  bearing = 0,
+  zoom = 0
 )
 }
 \arguments{
@@ -48,6 +50,12 @@ Defaults to `"Unknown"`.}
 
 \item{version}{`character` version of package used to create the project.
 Defaults to `NULL`, such that the current package version is used.}
+
+\item{bearing}{`numeric` value denoting the initial map rotation.
+Defaults to 0.}
+
+\item{zoom}{`numeric` value denoting the initial map zoom.
+Defaults to 0.}
 }
 \value{
 A new `Project` object.

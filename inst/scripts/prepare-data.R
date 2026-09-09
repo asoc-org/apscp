@@ -283,6 +283,8 @@ features <-
 project <- new_project(
   zones = c("Biodiversity", "Scientific", "Tourism"),
   bbox = sf::st_bbox(vector_data),
+  bearing = 101,
+  zoom = 2,
   dataset = dataset,
   tiles = list(tile),
   features = features,
