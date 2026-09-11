@@ -112,15 +112,13 @@ solver_html <- function(id, style, class, ...) {
           `data-container` = "body",
           `data-trigger` = "hover",
           title = "Stop optimizing",
-          bslib::input_task_button(
-            id = paste0(id, "_stop_button"),
+          shiny::actionButton(
+            inputId = paste0(id, "_stop_button"),
             disabled = NA,
-            class = "stop-button",
-            label = "",
-            label_busy = "",
+            class = c("btn-danger", "stop-button"),
+            label = NULL,
             icon = fontawesome::fa_i("ban"),
-            type = "danger",
-            auto_reset = FALSE
+            type = "danger"
           )
         )
       )

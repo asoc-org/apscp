@@ -70,6 +70,15 @@
   width: 60px;
 }
 
+.solver .solver-footer .start-button:not(:disabled):hover {
+  background-color: var(--bs-btn-hover-bg) !important;
+}
+
+/* footer stop button */
+.solver .solver-footer .stop-button:not(:disabled):hover {
+  background-color: #b02a37 !important;
+}
+
 /* footer buttons */
 .solver .solver-footer button {
   padding-left: 6px;

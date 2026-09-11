@@ -21,7 +21,7 @@ app_server_solution <- quote({
         return(list(id = id, name = name, result = app_data$cache$get(id)))
       }
       # otherwise, generate prioritization with optimization...
-      mirai::mirai(
+      app_data$task_mirai <- mirai::mirai(
         {
           list(
             id = id,
@@ -50,6 +50,8 @@ app_server_solution <- quote({
           "verbose" = verbose
         )
       )
+      # return task
+      app_data$task_mirai
     }
   ) |> bslib::bind_task_button("solver_start_button")
 
@@ -111,9 +113,10 @@ app_server_solution <- quote({
   # this is triggered when the asynchronous task has completed
   shiny::observe({
     # obtain task result
-    result <- task$result()
+    result <- try(task$result(), silent = TRUE)
     # if result has different identifier than expected, then exit observer
     if (
+      inherits(result, "try-error") ||
       is.null(result) ||
       is.null(result$id) ||
       is.null(app_data$task_id) ||
@@ -161,7 +164,24 @@ app_server_solution <- quote({
       solution = sol,
       visible = TRUE
     )
-    # reset solver status so its ready to generate a new solution
+    # reset state
+    app_data$task_mirai <- NULL
+    app_data$task_id <- NULL
+    # reset solver status
     solver_reset("solver")
   })
+
+  # define stop button behavior
+  observeEvent(input$solver_stop_button, {
+    # define inputs
+    req(app_data$task_mirai)
+    # abort processing
+    mirai::stop_mirai(app_data$task_mirai)
+    # reset state
+    app_data$task_mirai <- NULL
+    app_data$task_id <- NULL
+    # reset solver status
+    solver_reset("solver")
+  })
+
 })

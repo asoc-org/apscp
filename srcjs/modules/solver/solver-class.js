@@ -121,6 +121,9 @@ export class Solver {
     this._stopButton = element.querySelector(`#${element.id}_stop_button`);
     this._nameInput = element.querySelector(`#${element.id}_name`);
 
+    // disable stop button
+    this._stopButton.setAttribute("disabled", "");
+
     // set event handler for name input
     this._nameInput.addEventListener("input", (event) => {
       // if input is empty, ensure that start button is disabled
@@ -162,11 +165,8 @@ export class Solver {
   reset() {
     this._nameInput.value = "";
     this._startButton.setAttribute("disabled", "");
+    setTimeout(() => {this._startButton.setAttribute("disabled", "")}, 500);
     this._stopButton.setAttribute("disabled", "");
-    this._startButton.setAttribute("data-state", "ready");
-    this._startButton.children[0].setAttribute("case", "ready");
-    this._stopButton.setAttribute("data-state", "ready");
-    this._stopButton.children[0].setAttribute("case", "ready");
   }
 
   /**
