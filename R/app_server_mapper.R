@@ -32,7 +32,20 @@ app_server_mapper <- quote({
         id = "right_sidebar",
         position = "top-right",
         selected = "settings_panel"
+      ) |>
+      add_show_layers_control(
+        position = "top",
+        mapper_id = "mapper"
+      ) |>
+      add_hide_layers_control(
+        position = "top",
+        mapper_id = "mapper"
+      ) |>
+      add_remove_layers_control(
+        position = "top",
+        mapper_id = "mapper"
       )
+
   })
 
   # initialize mapper

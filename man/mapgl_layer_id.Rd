@@ -45,6 +45,9 @@ mapgl_layer_id(x)
 }
 \seealso{
 Other mapping:
+\code{\link[=add_hide_layers_control]{add_hide_layers_control()}},
+\code{\link[=add_remove_layers_control]{add_remove_layers_control()}},
+\code{\link[=add_show_layers_control]{add_show_layers_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},
 \code{\link[=map_project]{map_project()}},

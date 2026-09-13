@@ -104,6 +104,7 @@ Collate:
     'class_Solution.R'
     'class_Theme.R'
     'class_Tile.R'
+    'fct_add_control.R'
     'fct_mapgl.R'
     'fct_prioritization.R'
     'import-standalone-as_Matrix.R'

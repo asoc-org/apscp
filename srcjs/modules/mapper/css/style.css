@@ -57,25 +57,10 @@
   display: none;
 }
 
-/* Control buttons
-   ========================================================================== */
-
-.mapper .mapper-control {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  margin-bottom: var(--space-sm);
-}
-
-.mapper .mapper-control button {
-  width: 2.5rem;
-}
-
-
 /* Menu
    ========================================================================== */
 .mapper .mapper-menu {
-  height: calc(var(--max-height) - 145px - 36px);
+  height: calc(var(--max-height) - 145px);
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);

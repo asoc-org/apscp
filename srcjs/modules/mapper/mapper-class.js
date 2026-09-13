@@ -117,60 +117,6 @@ export class Mapper {
         this._hiddenLayers.set(el.dataset.id, el);
       }
     }
-    // button to show all layers
-    element
-      .querySelector(".layers-show-button")
-      .addEventListener("click", () => {
-        this._menu
-        .querySelectorAll(".mapper-menu-item")
-        .forEach((x) => {
-          this.showLayerOnMap(x.getAttribute("data-id"));
-          x.querySelector(".layer-checkbox").checked = true;
-        });
-      });
-    // button to hide all layers
-    element
-      .querySelector(".layers-hide-button")
-      .addEventListener("click", () => {
-        this._menu
-        .querySelectorAll(".mapper-menu-item")
-        .forEach((x) => {
-          this.hideLayerOnMap(x.getAttribute("data-id"));
-          x.querySelector(".layer-checkbox").checked = false;
-        });
-      });
-    // button to show legends for all layers
-    element
-      .querySelector(".legends-show-button")
-      .addEventListener("click", () => {
-        this._menu
-        .querySelectorAll(".mapper-menu-item")
-        .forEach((x) => {
-          x.querySelector(".legend-checkbox").checked = true;
-          x.querySelector(".legend-container").style.display = "block";
-        });
-      });
-    // button to hide legends for all layers
-    element
-      .querySelector(".legends-hide-button")
-      .addEventListener("click", () => {
-        this._menu
-        .querySelectorAll(".mapper-menu-item")
-        .forEach((x) => {
-          x.querySelector(".legend-checkbox").checked = false;
-          x.querySelector(".legend-container").style.display = "none";
-        });
-      });
-    // button to remove all layers
-    element
-      .querySelector(".layers-remove-button")
-      .addEventListener("click", () => {
-        this._menu
-        .querySelectorAll(".mapper-menu-item")
-        .forEach((x) => {
-          this.removeLayerFromMap(x.getAttribute("data-id"));
-        })
-      });
     // initialize sorting behavior
     new Sortable(this._menu, {
       handle: ".handle",
@@ -379,5 +325,43 @@ export class Mapper {
   hasLayerActive(layerId) {
     this._activeLayerIds.has(layer_id);
   }
+
+  /**
+   * Show all menu layers on map.
+   * @return {void}
+   */
+   showAllMenuLayersOnMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.showLayerOnMap(x.getAttribute("data-id"));
+        x.querySelector(".layer-checkbox").checked = true;
+      });
+   }
+
+  /**
+   * Hide all menu layers on map.
+   * @return {void}
+   */
+   hideAllMenuLayersOnMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.hideLayerOnMap(x.getAttribute("data-id"));
+        x.querySelector(".layer-checkbox").checked = false;
+      });
+   }
+
+  /**
+   * Remove all layers from the menu and the map.
+   * @return {void}
+   */
+   removeAllLayersFromMenuAndMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.removeLayerFromMap(x.getAttribute("data-id"));
+      })
+   }
 
 }
