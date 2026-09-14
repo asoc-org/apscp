@@ -128,6 +128,7 @@ export default class HoverSelect {
   disable() {
     this._previous = this._value;
     this._setSelectedOption(this._disabledOption);
+    this.element.setAttribute("disabled", "");
   }
 
   /**
