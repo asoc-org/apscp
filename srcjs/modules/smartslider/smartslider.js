@@ -31,6 +31,18 @@ export default class SmartSlider {
   _previous;
 
   /**
+   * Slider range.
+   * @type {Array<number>}
+   */
+  _range;
+
+  /**
+   * Slider step.
+   * @type {Array<number>}
+   */
+  _step;
+
+  /**
   * Construct a new SmartSlider object.
   * @param {HTMLElement} element - HTML element for slider.
   * @param {object} sliderOptions - Configuration settings for noUiSlider.
@@ -48,6 +60,8 @@ export default class SmartSlider {
     this._initial = toArray(this.noUiSlider.get(true));
     this._previous = this._initial.slice();
     this._labels = labelOptions.labels;
+    this._range = sliderOptions.range;
+    this._step = sliderOptions.step;
     this._formatter = labelOptions.format || ((labels, values) => {});
     // attach this object to the element
     element.smartSlider = this;
@@ -124,6 +138,28 @@ export default class SmartSlider {
    */
   resetHandle(index) {
     this.noUiSlider.setHandle(index, this._initial[index]);
+  }
+
+  /**
+   * Increment handle for widget.
+   * @param {number} index - Index for handle.
+   * @return {void}
+   */
+  incrementHandle(index) {
+    let v = Math.min(this.noUiSlider.get(true) + this._step, this._range[1]);
+    this._previous[index] = v;
+    this.noUiSlider.setHandle(index, v);
+  }
+
+  /**
+   * Decrement handle for widget.
+   * @param {number} index - Index for handle.
+   * @return {void}
+   */
+  decrementHandle(index) {
+    let v = Math.max(this.noUiSlider.get(true) - this._step, this._range[0]);
+    this._previous[index] = v;
+    this.noUiSlider.setHandle(index, v);
   }
 
 }

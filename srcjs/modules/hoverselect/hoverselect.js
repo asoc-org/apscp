@@ -138,6 +138,34 @@ export default class HoverSelect {
     this._setSelectedOption(this._getOption(this._initial));
   }
 
+  /**
+   * Set value to be next option.
+   * @return {void}
+   */
+  increment() {
+    // extract values
+    let values = Array.from(this._options.keys());
+    let i = values.findIndex(this._value);
+    // if selected option cannot be incremented, then exit early
+    if (i == (values.length - 1)) return;
+    // otherwise, set option based on next value
+    this.set(values[i + 1]);
+  }
+
+  /**
+   * Set value to be previous option.
+   * @return {void}
+   */
+  decrement() {
+    // extract values
+    let values = Array.from(this._options.keys());
+    let i = values.findIndex(this._value);
+    // if selected option cannot be decremented, then exit early
+    if (i == 0) return;
+    // otherwise, set option based on next value
+    this.set(values[i - 1]);
+  }
+
   // private methods
 
   /**

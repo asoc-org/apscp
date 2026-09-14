@@ -199,11 +199,9 @@ export class FeatureSetting {
     for (let i = 0; i < zones.length; ++i) {
       this._switches[i].addEventListener("change", (event) => {
         if (event.target.checked) {
-          this._slider.smartSlider.enableHandle(i);
-          this._selects[i].hoverSelect.enable();
+          this.switchOnZone(i);
         } else {
-          this._slider.smartSlider.disableHandle(i);
-          this._selects[i].hoverSelect.disable();
+          this.switchOffZone(i);
         }
       });
     }
@@ -221,7 +219,7 @@ export class FeatureSetting {
 
   /**
    * Target values for each zone.
-   * @type {number}
+   * @type {Array<number>}
    */
   get targets() {
     return convertSliderValuesToTargets(this._slider.smartSlider.get());
@@ -229,7 +227,7 @@ export class FeatureSetting {
 
   /**
    * Weight values for each zone.
-   * @type {number}
+   * @type {Array<number>}
    */
   get weights() {
     return Array.from(this._selects, x => Number(x.hoverSelect.get()));
@@ -245,43 +243,59 @@ export class FeatureSetting {
   }
 
   /**
-   * Increment the target for a zone.
-   * @param {string} zone - Zone name.
+   * Switch on zone.
+   * @param {integer} index - Zone index.
    * @return {void}
    */
-  incrementZoneTarget(zone) {
-    let i = this._zones.indexOf(zone);
-    // TODO
+  switchOnZone(zone) {
+    this._slider.smartSlider.enableHandle(i);
+    this._selects[i].hoverSelect.enable();
+  }
+
+  /**
+   * Switch off zone.
+   * @param {integer} index - Zone index.
+   * @return {void}
+   */
+  switchOffZone(index) {
+    this._slider.smartSlider.disableHandle(i);
+    this._selects[i].hoverSelect.disable();
+  }
+
+  /**
+   * Increment the target for a zone.
+   * @param {integer} index - Zone index.
+   * @return {void}
+   */
+  incZoneTarget(index) {
+    this._slider.smartSlider.incrementHandle(index);
   }
 
   /**
    * Decrement the target for a zone.
-   * @param {string} zone - Zone name.
+   * @param {integer} index - Zone index.
    * @return {void}
    */
-  decrementZoneTarget(zone) {
-    let i = this._zones.indexOf(zone);
-    // TODO
+  decZoneTarget(index) {
+    this._slider.smartSlider.decrementHandle(index);
   }
 
   /**
    * Increment the weight for a zone.
-   * @param {string} zone - Zone name.
+   * @param {integer} index - Zone index.
    * @return {void}
    */
-  incrementZoneWeight(zone) {
-    let i = this._zones.indexOf(zone);
-    // TODO
+  incZoneWeight(index) {
+    this._selects[i].hoverselect.increment();
   }
 
   /**
    * Decrement the weight for a zone.
-   * @param {string} zone - Zone name.
+   * @param {integer} index - Zone index.
    * @return {void}
    */
-  decrementZoneWeight(zone) {
-    let i = this._zones.indexOf(zone);
-    // TODO
+  decZoneWeight(index) {
+    this._selects[i].hoverselect.decrement();
   }
 
 }

@@ -11,3 +11,10 @@
 .feature-control .feature-settings {
   height: calc(var(--max-height) - 230px);
 }
+
+/* style buttons for controlling multple features */
+.feature-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
