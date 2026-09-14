@@ -18,6 +18,9 @@
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 /* Main container    ========================================================================== */
@@ -26,6 +29,8 @@
 .mapper .mapper-container {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 0;
 }
 
 /* cursor styling */
@@ -60,9 +65,9 @@
 /* Menu
    ========================================================================== */
 .mapper .mapper-menu {
-  height: calc(var(--max-height) - 145px);
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: var(--space-sm);
   overflow-y: auto;
   scrollbar-gutter: stable;

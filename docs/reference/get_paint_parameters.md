@@ -29,6 +29,9 @@ This function is designed for use with \[mapgl::add_fill_layer()\].
 ## See also
 
 Other mapping:
+[`add_hide_layers_control()`](https://asoc-org.github.io/apscp/reference/add_hide_layers_control.md),
+[`add_remove_layers_control()`](https://asoc-org.github.io/apscp/reference/add_remove_layers_control.md),
+[`add_show_layers_control()`](https://asoc-org.github.io/apscp/reference/add_show_layers_control.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
 [`map_project()`](https://asoc-org.github.io/apscp/reference/map_project.md),
 [`mapgl_add_layer()`](https://asoc-org.github.io/apscp/reference/mapgl_add_layer.md),

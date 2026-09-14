@@ -17,6 +17,9 @@
   font-family: var(--bs-body-font-family);
   font-size: var(--bs-body-font-size);
   font-weight: var(--bs-body-font-weight);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
 }
 
 /* Main container
@@ -25,16 +28,25 @@
 .solver .solver-container {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
-/* Override Bootstrap styles ========================================================================== */
-
-.solver .tab-pane {
-  margin: var(--space-sm) var(--space-sm) 0 var(--space-sm);
+/* Tabset
+   ========================================================================== */
+.solver .tabbable,
+.solver .tabbable .tab-content,
+.solver .tabbable .tab-content .tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }
 
-.solver .well-sm {
-  padding: var(--space-sm);
+/* Controls
+   ========================================================================== */
+.solver .solver-control {
+  height: 100%
 }
 
 /* Footer
@@ -92,4 +104,14 @@
 
 .solver button:disabled {
   cursor: not-allowed;
+}
+
+/* Override Bootstrap styles ========================================================================== */
+
+.solver .tab-pane {
+  margin: var(--space-sm) var(--space-sm) 0 var(--space-sm);
+}
+
+.solver .well-sm {
+  padding: var(--space-sm);
 }

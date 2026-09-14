@@ -247,9 +247,10 @@ export class FeatureSetting {
    * @param {integer} index - Zone index.
    * @return {void}
    */
-  switchOnZone(zone) {
-    this._slider.smartSlider.enableHandle(i);
-    this._selects[i].hoverSelect.enable();
+  switchOnZone(index) {
+    this._slider.smartSlider.enableHandle(index);
+    this._selects[index].hoverSelect.enable();
+    this._switches[index].checked = true;
   }
 
   /**
@@ -258,44 +259,9 @@ export class FeatureSetting {
    * @return {void}
    */
   switchOffZone(index) {
-    this._slider.smartSlider.disableHandle(i);
-    this._selects[i].hoverSelect.disable();
-  }
-
-  /**
-   * Increment the target for a zone.
-   * @param {integer} index - Zone index.
-   * @return {void}
-   */
-  incZoneTarget(index) {
-    this._slider.smartSlider.incrementHandle(index);
-  }
-
-  /**
-   * Decrement the target for a zone.
-   * @param {integer} index - Zone index.
-   * @return {void}
-   */
-  decZoneTarget(index) {
-    this._slider.smartSlider.decrementHandle(index);
-  }
-
-  /**
-   * Increment the weight for a zone.
-   * @param {integer} index - Zone index.
-   * @return {void}
-   */
-  incZoneWeight(index) {
-    this._selects[i].hoverselect.increment();
-  }
-
-  /**
-   * Decrement the weight for a zone.
-   * @param {integer} index - Zone index.
-   * @return {void}
-   */
-  decZoneWeight(index) {
-    this._selects[i].hoverselect.decrement();
+    this._slider.smartSlider.disableHandle(index);
+    this._selects[index].hoverSelect.disable();
+    this._switches[index].checked = false;
   }
 
 }

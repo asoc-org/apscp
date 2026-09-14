@@ -1,12 +1,11 @@
 /** Import dependencies */
-// classes to create components
-import HoverSelect from "../hoverselect/hoverselect.js";
 // Tom Select module
 import "./css/tom-select.css";
 import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // classes to create components
 import {FeatureSetting} from "./feature-setting-class.js";
+import {createButtonGroups} from "../utils/element.js";
 // utility functions
 import {projectSelectOptions} from "../utils/projectSelectOptions.js";
 import {toArray} from "../utils/misc.js";
@@ -69,6 +68,18 @@ export class FeatureControl {
     }
     // cache options for select menu
     this._cache = projectSelectOptions(project, true, false, false, false);
+    // set starting options
+    this._cache.items = Array();
+    for (let i = 0; i < project.features.length; ++i) {
+      for (let j = 0; j < project.features[i].themes.length; ++j) {
+        if (
+          project.features[i].themes[j].name ===
+          this._cache.optgroups[0].value
+        ) {
+          this._cache.items.push(project.features[i].id);
+        }
+      }
+    }
   }
 
   /**
@@ -86,53 +97,23 @@ export class FeatureControl {
       "feature-settings", "solver-settings", "well", "well-sm"
     );
     // create buttons to adjust set settings for multiple features
-    let buttonsElement = document.createElement("div");
-    // create hover select for zones
-    let zoneSelect = document.createElement("div");
-    new HoverSelect(zoneSelect, {
-      selected: "0",
-      options: this._zones.map((x, i) => {
-        return {
-          value: String(i),
-          text: x,
-          color: `var(--zone-${x}-primary`
-        }
-      })
-    });
-    // button to increment targets
-    let incTargetButton = document.createElement("button");
-    incTargetButton.classList.add("feature-button-inc-target", "btn", "btn-sm");
-    incTargetButton.innerText = "+T";
-    incTargetButton.addEventListener("click", () => {
-      this.incZoneTargetForFeaturesInMenu(Number(zoneSelect.hoverSelect.get()));
-    });
-    // button to decrement targets
-    let decTargetButton = document.createElement("button");
-    decTargetButton.classList.add("feature-button-dec-target", "btn", "btn-sm");
-    decTargetButton.innerText = "-T";
-    decTargetButton.addEventListener("click", () => {
-      this.decZoneTargetForFeaturesInMenu(Number(zoneSelect.hoverSelect.get()));
-    });
-    // button to increment weights
-    let incWeightButton = document.createElement("button");
-    incWeightButton.classList.add("feature-button-inc-weight", "btn", "btn-sm");
-    incWeightButton.innerText = "+W";
-    incWeightButton.addEventListener("click", () => {
-      this.incZoneWeightForFeaturesInMenu(Number(zoneSelect.hoverSelect.get()));
-    });
-    // button to decrement weights
-    let decWeightButton = document.createElement("button");
-    decWeightButton.classList.add("feature-button-inc-weight", "btn", "btn-sm");
-    decWeightButton.innerText = "-W";
-    decWeightButton.addEventListener("click", () => {
-      this.decZoneWeightForFeaturesInMenu(Number(zoneSelect.hoverSelect.get()));
-    });
-    // add select and buttons to container
-    buttonsElement.appendChild(zoneSelect);
-    buttonsElement.appendChild(incTargetButton);
-    buttonsElement.appendChild(decTargetButton);
-    buttonsElement.appendChild(incWeightButton);
-    buttonsElement.appendChild(decWeightButton);
+    let buttonsElement = createButtonGroups(
+      this._zones,
+      ["On", "Off"],
+      this._zones.map((x) => `var(--zone-${x}-primary)`)
+    );
+    buttonsElement
+      .querySelectorAll("button")
+      .forEach((x) => {
+        x.addEventListener("click", () => {
+          let index = Number(x.getAttribute("data-group-index"));
+          if (x.getAttribute("data-label") === "On") {
+            this.switchOnZoneForFeaturesInMenu(index);
+          } else {
+            this.switchOffZoneForFeaturesInMenu(index);
+          }
+        });
+      });
     // create feature setting objects and add them to the menu
     this._settings.forEach(x => x.appendTo(menuElement));
     // create select menu
@@ -146,6 +127,7 @@ export class FeatureControl {
     element.appendChild(el);
     // initialize select menu
     new TomSelect(this._select, {
+      items:  this._cache.items,
       options: this._cache.options,
       create: false,
       dropdownParent: "body",
@@ -163,6 +145,14 @@ export class FeatureControl {
         optgroup_header: function(data, escape) {
           return `<div class="optgroup-header">${escape(data.value)}</div>`;
         }
+      },
+      onInitialize: () => {
+        this._cache.items.forEach((value) => {
+          let x = this._settings.get(value);
+          if (x) {
+            x.element.style.display = "block";
+          }
+        });
       },
       onItemAdd: (value) => {
         let x = this._settings.get(value);
@@ -215,48 +205,6 @@ export class FeatureControl {
   switchOffZoneForFeaturesInMenu(index) {
     this.getFeaturesInMenu()
     .forEach((x) => this._settings.get(x).switchOffZone(index));
-  }
-
-  /**
-   * Increment targets for all features that are displayed in the menu.
-   * @param {integer} index - Zone index.
-   * @return {void}
-  */
-  incZoneTargetForFeaturesInMenu(index) {
-    this.getFeaturesInMenu()
-    .forEach((x) => {
-      this._settings.get(x).incZoneTarget(index)
-    });
-  }
-
-  /**
-   * Decrement targets for all features that are displayed in the menu.
-   * @param {integer} index - Zone index.
-   * @return {void}
-  */
-  decZoneTargetForFeaturesInMenu(index) {
-    this.getFeaturesInMenu()
-    .forEach((x) => this._settings.get(x).decZoneTarget(index));
-  }
-
-  /**
-   * Increment weights for all features that are displayed in the menu.
-   * @param {integer} index - Zone index.
-   * @return {void}
-  */
-  incZoneWeightForFeaturesInMenu(index) {
-    this.getFeaturesInMenu()
-    .forEach((x) => this._settings.get(x).incZoneWeight(index));
-  }
-
-  /**
-   * Decrement weights for all features that are displayed in the menu.
-   * @param {integer} index - Zone index.
-   * @return {void}
-  */
-  decZoneWeightForFeaturesInMenu(index) {
-    this.getFeaturesInMenu()
-    .forEach((x) => this._settings.get(x).decZoneWeight(index));
   }
 
   /**

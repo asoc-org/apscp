@@ -114,6 +114,15 @@ Functions for optimization.
 
 Functions for mapping.
 
+- [`add_hide_layers_control()`](https://asoc-org.github.io/apscp/reference/add_hide_layers_control.md)
+  : Add hide layers control
+
+- [`add_remove_layers_control()`](https://asoc-org.github.io/apscp/reference/add_remove_layers_control.md)
+  : Remove layers control
+
+- [`add_show_layers_control()`](https://asoc-org.github.io/apscp/reference/add_show_layers_control.md)
+  : Add show layers control
+
 - [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md)
   : Get paint parameters
 

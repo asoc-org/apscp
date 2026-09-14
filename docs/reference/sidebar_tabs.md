@@ -49,29 +49,32 @@ library(shiny)
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 #> ℹ Loading apscp
 #> ! Skipping missing files:
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/aaa.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_config.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server_initialize.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server_logging.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server_mapper.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server_session.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server_solution.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_server_solver.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_startup.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/app_ui.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/internal.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/class_Dataset.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/class_Layer.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/class_Cost.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/class_Feature.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/class_Legend.R,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/class_Lock.R, …,
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/widget_solver_ui.R, and
-#>   /tmp/RtmpLxMqlj/temp_libpath84382419e6e1d/apscp/R/zzz.R
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/aaa.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_config.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server_initialize.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server_logging.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server_mapper.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server_session.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server_solution.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_server_solver.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_startup.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/app_ui.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/internal.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/class_Dataset.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/class_Layer.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/class_Cost.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/class_Feature.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/class_Legend.R,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/class_Lock.R, …,
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/widget_solver_ui.R, and
+#>   /tmp/RtmpWsKzqa/temp_libpathca36e388da9f7/apscp/R/zzz.R
 #> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.bbox’, ‘serialize_object.default’ were declared in NAMESPACE but not found
 #> Warning: Objects listed as exports, but not present in namespace:
 #> • Dataset
+#> • add_hide_layers_control
+#> • add_remove_layers_control
+#> • add_show_layers_control
 #> • add_sidebar_control
 #> • color_palette
 #> • create_dataset_from_sf

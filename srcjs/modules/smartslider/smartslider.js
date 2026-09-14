@@ -140,26 +140,4 @@ export default class SmartSlider {
     this.noUiSlider.setHandle(index, this._initial[index]);
   }
 
-  /**
-   * Increment handle for widget.
-   * @param {number} index - Index for handle.
-   * @return {void}
-   */
-  incrementHandle(index) {
-    let v = Math.min(this.noUiSlider.get(true) + this._step, this._range[1]);
-    this._previous[index] = v;
-    this.noUiSlider.setHandle(index, v);
-  }
-
-  /**
-   * Decrement handle for widget.
-   * @param {number} index - Index for handle.
-   * @return {void}
-   */
-  decrementHandle(index) {
-    let v = Math.max(this.noUiSlider.get(true) - this._step, this._range[0]);
-    this._previous[index] = v;
-    this.noUiSlider.setHandle(index, v);
-  }
-
 }

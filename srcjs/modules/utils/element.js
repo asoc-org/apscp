@@ -123,3 +123,48 @@ export function createSwitches(n = 1, checked = true) {
   // return element
   return el;
 }
+
+/**
+ * Create button group
+ * @param {string} groupLabel - Label for each button group.
+ * @param {string} buttonLabels - Label for each of the buttons.
+ * @param {string} groupColors - Colors for group labels.
+ * @return {HTMLElement}
+ */
+export function createButtonGroups(groupLabels, buttonLabels, groupColors) {
+  // create container
+  let el = document.createElement("div");
+  el.classList.add("button-groups", "border", "rounded");
+  // add each group
+  for (let i = 0; i < groupLabels.length; ++i) {
+    // create row container
+    let row = document.createElement("div");
+    row.classList.add("form-group", "row");
+    // create label
+    let label = document.createElement("label");
+    label.innerText = groupLabels[i] + ":";
+    label.classList.add(
+      "col-sm", "col-form-label", "col-form-label-sm", "fw-bold"
+    );
+    label.style.color = groupColors[i];
+    // create button group
+    let group = document.createElement("div");
+    group.classList.add("col-sm", "btn-group", "btn-group-sm");
+    // add buttons to container
+    for (let j = 0; j < buttonLabels.length; ++j) {
+      let btn = document.createElement("button");
+      btn.classList.add("btn", "btn-sm", "btn-light");
+      btn.setAttribute("data-group-index", i);
+      btn.setAttribute("data-group-label", groupLabels[i]);
+      btn.setAttribute("data-label", buttonLabels[j]);
+      btn.innerText = buttonLabels[j];
+      group.appendChild(btn);
+    }
+    // add to row cont
+    row.appendChild(label);
+    row.appendChild(group);
+    el.appendChild(row);
+  }
+  // return element;
+  return el;
+}
