@@ -103,9 +103,6 @@ test_that("asynchronous", {
   # set all targets and weights to be equal
   s$features$target <- 0.3
   s$features$weight <- 1
-  # ensure no active costs or locks
-  s$locks <- s$locks[FALSE, , drop = FALSE]
-  s$costs$zones <- NA
   # setup asynchronous processing
   mirai_async_start()
   on.exit(mirai_async_stop(), add = TRUE)
