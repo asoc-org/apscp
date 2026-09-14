@@ -15,3 +15,43 @@ body,
 .ts-dropdown-content {
   max-height: min(80vh, 500px);
 }
+
+/* place map control buttons in top center of screen */
+.mapboxgl .mapboxgl-ctrl-top {
+  display: flex;
+  flex-direction: row;
+  gap: 2.5rem;
+  justify-content: center;
+}
+
+/* make map control buttons horizontal */
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl-group {
+  display: flex;
+}
+
+/* standardize button sizes */
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl button {
+  width: 2.25rem;
+  align-items: center;
+}
+
+/* set order for control buttons */
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl:has(.mapboxgl-ctrl-zoom-in) {
+  order: 1;
+}
+
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl:has(.mapboxgl-ctrl-reset) {
+  order: 2;
+}
+
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl:has(.mapboxgl-ctrl-show-layers) {
+  order: 3;
+}
+
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl:has(.mapboxgl-ctrl-hide-layers) {
+  order: 4;
+}
+
+.mapboxgl .mapboxgl-ctrl-top .mapboxgl-ctrl:has(.mapboxgl-ctrl-remove-layers) {
+  order: 5;
+}

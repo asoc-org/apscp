@@ -326,4 +326,42 @@ export class Mapper {
     this._activeLayerIds.has(layer_id);
   }
 
+  /**
+   * Show all menu layers on map.
+   * @return {void}
+   */
+   showAllMenuLayersOnMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.showLayerOnMap(x.getAttribute("data-id"));
+        x.querySelector(".layer-checkbox").checked = true;
+      });
+   }
+
+  /**
+   * Hide all menu layers on map.
+   * @return {void}
+   */
+   hideAllMenuLayersOnMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.hideLayerOnMap(x.getAttribute("data-id"));
+        x.querySelector(".layer-checkbox").checked = false;
+      });
+   }
+
+  /**
+   * Remove all layers from the menu and the map.
+   * @return {void}
+   */
+   removeAllLayersFromMenuAndMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.removeLayerFromMap(x.getAttribute("data-id"));
+      })
+   }
+
 }
