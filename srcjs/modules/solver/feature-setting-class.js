@@ -56,6 +56,12 @@ export class FeatureSetting {
   _zones;
 
   /**
+   * Title element.
+   * @type {HTMLElement}
+   */
+  _title;
+
+  /**
    * Slider element.
    * @type {HTMLElement}
    */
@@ -75,9 +81,9 @@ export class FeatureSetting {
 
   /**
    * List of switch elements.
-   * @type {NodeList<HTMLElement>}
+   * @type {Array<HTMLElement>}
    */
-  _selects;
+  _switches;
 
   /**
    * Slider range.
@@ -126,7 +132,8 @@ export class FeatureSetting {
     // initialize private HTML fields
     this._slider = this.element.querySelector(".target-slider");
     this._status = this.element.querySelector(".status-bar");
-    this._switches = this.element.querySelectorAll(".switch");
+    this._title = this.element.querySelector(".name-label");
+    this._switches = Array.from(this.element.querySelectorAll(".switch"));
     this._selects = this.element.querySelectorAll(".weight-status");
     // initialize slider widget
     new SmartSlider(
@@ -251,6 +258,7 @@ export class FeatureSetting {
     this._slider.smartSlider.enableHandle(index);
     this._selects[index].hoverSelect.enable();
     this._switches[index].checked = true;
+    this._title.removeAttribute("disabled");
   }
 
   /**
@@ -262,6 +270,9 @@ export class FeatureSetting {
     this._slider.smartSlider.disableHandle(index);
     this._selects[index].hoverSelect.disable();
     this._switches[index].checked = false;
+    if (this._switches.every((x) => !x.checked)) {
+      this._title.setAttribute("disabled", "");
+    }
   }
 
 }
