@@ -35,7 +35,7 @@ add_show_layers_control <- function(map, mapper_id, position = "top-left") {
         title = "Show all layers on map.",
         htmltools::tags$button(
           class = c(
-            "layers-show-button",
+            "mapboxgl-ctrl-show-layers", "mapboxgl-ctrl-icon",
             "btn", "btn-sm", "btn-light"
           ),
           onclick = paste0(
@@ -87,7 +87,7 @@ add_hide_layers_control <- function(map, mapper_id, position = "top-left") {
         title = "Hide all layers on map.",
         htmltools::tags$button(
           class = c(
-            "layers-hide-button",
+            "mapboxgl-ctrl-hide-layers", "mapboxgl-ctrl-icon",
             "btn", "btn-sm", "btn-light"
           ),
           onclick = paste0(
@@ -139,7 +139,7 @@ add_remove_layers_control <- function(map, mapper_id, position = "top-left") {
         title = "Remove all layers from map.",
         htmltools::tags$button(
           class = c(
-            "layers-remove-button",
+            "mapboxgl-ctrl-remove-layers", "mapboxgl-ctrl-icon",
             "btn", "btn-sm", "btn-light"
           ),
           onclick = paste0(
