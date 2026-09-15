@@ -16,6 +16,16 @@ body,
   max-height: min(80vh, 500px);
 }
 
+
+/* tom select option group headers */
+.ts-dropdown .optgroup-header span {
+  font-size: 1rem;
+}
+
+.ts-dropdown .optgroup-header input {
+  margin-right: 0.5rem;
+}
+
 /* place map control buttons in top center of screen */
 .mapboxgl .mapboxgl-ctrl-top {
   display: flex;

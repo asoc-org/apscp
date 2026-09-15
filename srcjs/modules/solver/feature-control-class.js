@@ -127,7 +127,7 @@ export class FeatureControl {
     element.appendChild(el);
     // initialize select menu
     new TomSelect(this._select, {
-      items:  this._cache.items,
+      items: this._cache.items,
       options: this._cache.options,
       create: false,
       dropdownParent: "body",
@@ -143,14 +143,51 @@ export class FeatureControl {
       },
       render: {
         optgroup_header: function(data, escape) {
-          return `<div class="optgroup-header">${escape(data.value)}</div>`;
+          // determine if all options for group are checked
+          const groupOptions =
+            Object.values(this.options)
+            .filter(x => x.group.includes(data.value));
+          const values = this.getValue().split(",");
+          const allChecked =
+            groupOptions.length > 0 &&
+            groupOptions.every(x => values.includes(x.value));
+          // return HTML for header
+          return "" +
+            "<div class=\"optgroup-header\" " +
+            `data-group="${escape(data.value)}">` +
+            "<input type=\"checkbox\" class=\"tomselect-checkbox\"" +
+            `${allChecked ? "checked" : ""}>` +
+            `<span>${escape(data.value)}</span></div>`;
         }
       },
-      onInitialize: () => {
-        this._cache.items.forEach((value) => {
-          let x = this._settings.get(value);
-          if (x) {
-            x.element.style.display = "block";
+      onInitialize: function() {
+        // event listeners for checkboxes in option group headers
+        this.dropdown.addEventListener("click", (e) => {
+          if (
+            e.target &&
+            e.target.parentNode.classList.contains("optgroup-header")
+          ) {
+            // define variables
+            let group = e.target.parentNode.getAttribute("data-group");
+            let checkbox = e.target.parentNode.children[0];
+            // if clicked on text label, then alter checkbox
+            if (!e.target.classList.contains("tomselect-checkbox")) {
+              checkbox.checked = !checkbox.checked;
+            }
+            // determine if items should be added or removed
+            let isChecked = checkbox.checked;
+            // add or remove items
+            for (const id in this.options) {
+              if (this.options[id].group.includes(group)) {
+                if (isChecked) {
+                  this.addItem(this.options[id].value);
+                } else {
+                  this.removeItem(this.options[id].value);
+                }
+              }
+            }
+            // keep the dropdown open after clicking the group checkbox
+            e.stopPropagation();
           }
         });
       },
@@ -165,6 +202,13 @@ export class FeatureControl {
         if (x) {
           x.element.style.display = "none";
         }
+      }
+    });
+    // make selected options visible on menu
+    this._cache.items.forEach((value) => {
+      let x = this._settings.get(value);
+      if (x) {
+        x.element.style.display = "block";
       }
     });
     // free memory
