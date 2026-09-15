@@ -46,6 +46,8 @@ runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
 }
 \seealso{
 Other sidebar:
+\code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
+\code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},
 \code{\link[=sidebar_close]{sidebar_close()}},
 \code{\link[=sidebar_disable]{sidebar_disable()}},
 \code{\link[=sidebar_enable]{sidebar_enable()}},

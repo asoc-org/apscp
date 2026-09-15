@@ -120,3 +120,19 @@ test_that("sidebar_tabs", {
   expect_equal(as.character(xpanes[[1]]), as.character(s1))
   expect_equal(as.character(xpanes[[2]]), as.character(s2))
 })
+
+test_that("acknowledgments_sidebar_pane", {
+  # create object
+  x <- acknowledgments_sidebar_pane(id = "pane1")
+  # run tests
+  expect_s3_class(x, "shiny.tag")
+  expect_equal(x$attribs$id, "pane1")
+})
+
+test_that("contact_sidebar_pane", {
+  # create object
+  x <- contact_sidebar_pane(id = "pane1")
+  # run tests
+ expect_s3_class(x, "shiny.tag")
+ expect_equal(x$attribs$id, "pane1")
+})

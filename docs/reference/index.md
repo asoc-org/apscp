@@ -68,8 +68,12 @@ Functions and definitions for new classes.
 
 Functions for custom widgets.
 
+- [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md)
+  : Acknowledgments sidebar pane
 - [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md)
   : Add sidebar control
+- [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md)
+  : Contact sidebar pane
 - [`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md)
   : Close sidebar
 - [`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md)

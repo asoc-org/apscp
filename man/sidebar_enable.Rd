@@ -19,7 +19,9 @@ Enable a sidebar.
 }
 \seealso{
 Other sidebar:
+\code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
+\code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},
 \code{\link[=sidebar_close]{sidebar_close()}},
 \code{\link[=sidebar_disable]{sidebar_disable()}},
 \code{\link[=sidebar_open]{sidebar_open()}},

@@ -16,7 +16,6 @@ body,
   max-height: min(80vh, 500px);
 }
 
-
 /* tom select option group headers */
 .ts-dropdown .optgroup-header span {
   font-size: 1rem;

@@ -82,7 +82,7 @@ add_sidebar_control <- function(
 sidebar_pane <- function(
   title = "Sidebar Title",
   id = NULL,
-  icon = icon("caret-right"),
+  icon = shiny::icon("caret-right"),
   ...
 ) {
   if (is.null(id)) {

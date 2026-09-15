@@ -22,7 +22,9 @@ sidebar_close(id, session = shiny::getDefaultReactiveDomain())
 ## See also
 
 Other sidebar:
+[`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md),
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
+[`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md),
 [`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md),
 [`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md),
 [`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md),

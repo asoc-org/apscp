@@ -24,15 +24,17 @@ w = 3.0
 ow = "400"
 ```
 
-Interactive decision support tool to navigate management options for the Antarctic Peninsula. The tool identifies priority areas for implementing policies for conservation, tourism, and scientific research. To achieve this, it leverages previously published data ([Lee et al. 2024](https://doi.org/10.1007/s13280-024-02009-4)) and multi-objective optimization techniques through the [_prioritizr_ package](https://prioritizr.net) ([Hanson et al. 2025](https://doi.org/10.1111/cobi.14376)). Although default parameters are specified based on stakeholder surveys, users can calibrate weights and representation targets to fine tune optimization procedures according to their own preferences. Optimization procedures can be performed with the 'Gurobi' (<https://www.gurobi.com/>) or 'CBC' (via the 'rcbc' package, <https://github.com/dirkschumacher/rcbc>) exact algorithm solvers.
+Interactive decision support tool to navigate management options for the Antarctic Peninsula. The tool identifies priority areas for implementing policies for conservation, tourism, and scientific research. To achieve this, it leverages previously published data ([Lee et al. 2024](https://doi.org/10.1007/s13280-024-02009-4)) and multi-objective optimization techniques through the [_prioritizr_ package](https://prioritizr.net) ([Hanson et al. 2025](https://doi.org/10.1111/cobi.14376)). Although default parameters are specified based on stakeholder surveys, users can calibrate weights and representation targets to fine tune optimization procedures according to their own preferences. Optimization procedures can be performed with the _Gurobi_ (<https://www.gurobi.com/>) or _CBC_ (via the _rcbc_ package, <https://github.com/dirkschumacher/rcbc>) exact algorithm solvers.
 
 ## Usage
 
-TODO.
+The application is available online. Please note that you must use [Google Chrome](https://www.google.com/chrome/) for it to work.
+
+<table><tr><td><img class="screenshot" src="man/figures/screenshot.png" align="center" width="100%"/></td></tr></table>
 
 ## Installation
 
-The application is available as an online service provided by the [Antarctic and Southern Ocean Coalition](https://todo.com). If you need to run the application on your own computer, then you can run it using the [R statistical computing environment](https://www.r-project.org/), [Docker](https://www.docker.com/), or [Docker Compose](https://docs.docker.com/compose/).
+The application is available as an online service provided by the [Antarctic and Southern Ocean Coalition](https://www.asoc.org/). If you need to run the application on your own computer, then you can run it using the [R statistical computing environment](https://www.r-project.org/), [Docker](https://www.docker.com/), or [Docker Compose](https://docs.docker.com/compose/).
 
 ### Using R
 
@@ -57,7 +59,7 @@ To use this method, you will need to install [Docker Engine](https://www.docker.
 docker run -dp 3838:3838 --name apscp -it jhansonasoc/apscp:latest
 ```
 
-You can then view the application by opening the following link in [Google Chrome](https://www.google.com/chrome/): http://localhost:3838. After you have finished using the application, you can terminate it using the following system command. **Note that if you don't terminate the application once you are finished using it, then it will continue running in the background.**
+You can then view the application by opening the following link in [Google Chrome](https://www.google.com/chrome/): `http://localhost:3838`. After you have finished using the application, you can terminate it using the following system command. **Note that if you don't terminate the application once you are finished using it, then it will continue running in the background.**
 
 ```{bash, eval = FALSE}
 docker rm -f apscp
@@ -72,7 +74,7 @@ docker-compose pull
 docker-compose up -d
 ```
 
-You can then view the application by opening the following link in [Google Chrome](https://www.google.com/chrome/): http://localhost:3838. After you have finished using the application, you can terminate it using the following system command. **Note that if you don't terminate the application once you are finished using it, then it will continue running in the background.**
+You can then view the application by opening the following link in [Google Chrome](https://www.google.com/chrome/): `http://localhost:3838`. After you have finished using the application, you can terminate it using the following system command. **Note that if you don't terminate the application once you are finished using it, then it will continue running in the background.**
 
 ```{bash, eval = FALSE}
 docker-compose down
@@ -96,7 +98,13 @@ The application is a [_Shiny_ web application](https://mastering-shiny.org/) dev
 
 ## Acknowledgments
 
-This project is supported and led by the [Antarctic and Southern Ocean Coalition (ASOC)](https://www.asoc.org/). We are grateful to [Dr. Jasmine Lee](https://research.monash.edu/en/persons/jasmine-lee/) for contributing data and expertise to this project. We also appreciate the [International Association of Antarctica Tour Operators (IAATO)](https://iaato.org/) and [Scientific Committee on Antarctic Research (SCAR)](https://scar.org/) for sponsoring research that underpins this project.
+```{r, results = "asis"}
+cat(
+  readLines(
+    system.file("app", "text", "acknowledgments.md", package = "apscp")
+  )
+)
+```
 
 ## Getting help
 

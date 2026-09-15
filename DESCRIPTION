@@ -49,6 +49,7 @@ Imports:
     lobstr (>= 1.2.1),
     RSQLite (>= 3.53.3),
     shinyalert (>= 3.1.0),
+    markdown (>= 2.0),
     mirai (>= 2.7.2)
 Suggests:
     slam (>= 0.1-56),
@@ -59,7 +60,6 @@ Suggests:
     viridisLite (>= 0.4.3),
     testthat (>= 3.3.2),
     knitr (>= 1.48),
-    rmarkdown (>= 2.28),
 Config/renv/profiles/dev/dependencies:
     devtools (>= 2.5.2),
     roxygen2 (>= 8.0.0),
@@ -122,6 +122,8 @@ Collate:
     'method_serialize_object.R'
     'package.R'
     'run_app.R'
+    'ui_acknowledgments_sidebar_pane.R'
+    'ui_contact_sidebar_pane.R'
     'utils_as.R'
     'utils_assertions.R'
     'utils_color_palette.R'

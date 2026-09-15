@@ -7,7 +7,7 @@
 sidebar_pane(
   title = "Sidebar Title",
   id = NULL,
-  icon = icon("caret-right"),
+  icon = shiny::icon("caret-right"),
   ...
 )
 }
@@ -42,7 +42,9 @@ sidebar_pane(id = "id", icon = icon("cars"), tags$div())
 }
 \seealso{
 Other sidebar:
+\code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
+\code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},
 \code{\link[=sidebar_close]{sidebar_close()}},
 \code{\link[=sidebar_disable]{sidebar_disable()}},
 \code{\link[=sidebar_enable]{sidebar_enable()}},

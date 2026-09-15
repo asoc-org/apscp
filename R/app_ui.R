@@ -17,12 +17,19 @@ app_ui <- function(request) {
         ## left side bar
         sidebar_tabs(
           id = "left_sidebar",
-          list(shiny::icon("layer-group")),
+          list(
+            shiny::icon("layer-group"),
+            shiny::icon("envelope"),
+            shiny::icon("heart")
+          ),
           sidebar_pane(
             title = "Table of contents",
-            id = "navigation_panel", icon = NULL,
+            id = "navigation_panel",
+            icon = NULL,
             mapperOutput("mapper", height = "100%", width = "100%")
-          )
+          ),
+          contact_sidebar_pane(id = "contact_pane", icon = NULL),
+          acknowledgments_sidebar_pane(id = "acknowledgments_pane", icon = NULL)
         ),
         ## right side bar
         sidebar_tabs(
@@ -30,7 +37,8 @@ app_ui <- function(request) {
           list(shiny::icon("rocket")),
           sidebar_pane(
             title = "Generate solution",
-            id = "settings_panel", icon = NULL,
+            id = "settings_panel",
+            icon = NULL,
             solverOutput("solver", height = "100%", width = "100%")
           )
         )
