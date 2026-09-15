@@ -8,6 +8,7 @@ sidebar_pane(
   title = "Sidebar Title",
   id = NULL,
   icon = shiny::icon("caret-right"),
+  tooltip = NULL,
   ...
 )
 }
@@ -19,6 +20,10 @@ sidebar_pane(
 \item{icon}{An [icon()] object for the sidebar pane. This icon
 is used to create a button for closing the pane. If `NULL`, then
 no icon is added for the pane.}
+
+\item{tooltip}{A `character` value with text to display in a tooltip
+when hovering over the button to open the sidebar.
+Defaults to `NULL` such that no tooltip is displayed.}
 
 \item{...}{List of elements to include in the pane}
 }

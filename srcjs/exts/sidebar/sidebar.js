@@ -15,8 +15,11 @@ import {MapSidebar} from "./class.js"
  * @return {void}
  */
 Shiny.mapglSidebarInitialize = function(el, id, height, options) {
+  // initialize widget
   let w = new MapSidebar(document.getElementById(id), height, options);
+  // add to map
   el.map.addControl(w, options.position);
+  // open selected sidebar
   if (typeof(options.selected) === "string") {
     Shiny.initializedPromise.then(() => {
       setTimeout(() => {w.open(options.selected)}, 1000);

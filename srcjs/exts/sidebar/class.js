@@ -1,6 +1,7 @@
 /** Import dependencies */
 // styling
 import "./css/style.css";
+import {addTooltip} from "../../modules/utils/element.js";
 
 /** Class representing a map sidebar. */
 export class MapSidebar {
@@ -98,6 +99,14 @@ export class MapSidebar {
     // add css class sidebar-map to map
     if (!map._container.classList.contains("sidebar-map")) {
       map._container.classList.add("sidebar-map");
+    }
+    // if needed, add tooltips for each pane
+    for (let i = 0; i < this._tabs.length; ++i) {
+      let sub = this._tabs[i].querySelector("a");
+      let tooltip = this._panes[i].getAttribute("data-tooltip");
+      if (typeof(tooltip) === "string") {
+        addTooltip(sub, tooltip)
+      }
     }
     // if height is a percentage, then modify control position container
     if (this._height.endsWith("%")) {

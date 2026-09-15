@@ -28,6 +28,7 @@ acknowledgments_sidebar_pane <- function(id, icon = shiny::icon("heart")) {
     title = "Acknowledgments",
     id = id,
     icon = icon,
+    tooltip = "Open sidebar with acknowledgments.",
     htmltools::tags$div(
       style = "padding: 5px",
       ## acknowledgments

@@ -61,6 +61,10 @@ add_sidebar_control <- function(
 #' is used to create a button for closing the pane. If `NULL`, then
 #' no icon is added for the pane.
 #'
+#' @param tooltip A `character` value with text to display in a tooltip
+#' when hovering over the button to open the sidebar.
+#' Defaults to `NULL` such that no tooltip is displayed.
+#'
 #' @param ... List of elements to include in the pane
 #'
 #' @family sidebar
@@ -83,6 +87,7 @@ sidebar_pane <- function(
   title = "Sidebar Title",
   id = NULL,
   icon = shiny::icon("caret-right"),
+  tooltip = NULL,
   ...
 ) {
   if (is.null(id)) {
@@ -100,9 +105,13 @@ sidebar_pane <- function(
     )
   }
   htmltools::tags$div(
-    class = "mapsidebar-pane", id = id, h,
+    class = "mapsidebar-pane",
+    id = id,
+    `data-tooltip` = tooltip,
+    h,
     htmltools::tags$div(
       class = "mapsidebar-pane-content",
+
       ...
     )
   )

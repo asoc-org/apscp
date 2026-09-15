@@ -40,7 +40,10 @@ ui <- fluidPage(
         id = "rightsidebar",
         list(icon("hat-wizard"), icon("table")),
         sidebar_pane(
-          title = "Style", id = "style_id", icon = NULL,
+          title = "Style",
+          id = "style_id",
+          icon = NULL,
+          tooltip = NULL,
           tagList(
             selectInput(
               "col", "Color of points:",
@@ -57,8 +60,10 @@ ui <- fluidPage(
           )
         ),
         sidebar_pane(
-          title = "Table", id = "table_id",
+          title = "Table",
+          id = "table_id",
           icon = icon("table", verify_fa = FALSE),
+          tooltip = NULL,
           tagList(
             tableOutput("data2")
           )
@@ -68,7 +73,10 @@ ui <- fluidPage(
         id = "leftsidebar",
         list(icon("car"), icon("user"), icon("envelope")),
         sidebar_pane(
-          title = "Home", id = "home_id", icon = icon("home"),
+          title = "Home",
+          id = "home_id",
+          icon = icon("home"),
+          tooltip = NULL,
           tagList(
             sliderInput(
               "obs", "Number of observations:",
@@ -78,7 +86,10 @@ ui <- fluidPage(
           )
         ),
         sidebar_pane(
-          title = "Profile", id = "profile_id", icon = icon("wrench"),
+          title = "Profile",
+          id = "profile_id",
+          icon = icon("wrench"),
+          tooltip = NULL,
           tagList(
             textInput("caption", "Caption", "Data Summary"),
             selectInput(
@@ -95,8 +106,10 @@ ui <- fluidPage(
           )
         ),
         sidebar_pane(
-          title = "Messages", id = "messages_id",
+          title = "Messages",
+          id = "messages_id",
           icon = NULL,
+          tooltip = NULL,
           tagList(
             checkboxGroupInput(
               "variable", "Variables to show:",

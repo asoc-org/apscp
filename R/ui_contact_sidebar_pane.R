@@ -28,6 +28,7 @@ contact_sidebar_pane <- function(id, icon = shiny::icon("envelope")) {
     title = "Contact",
     id = id,
     icon = icon,
+    tooltip = "Open sidebar with contact information.",
     htmltools::tags$div(
       style = "padding: 5px",
       ## contact

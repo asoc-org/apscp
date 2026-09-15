@@ -26,6 +26,7 @@ app_ui <- function(request) {
             title = "Table of contents",
             id = "navigation_panel",
             icon = NULL,
+            tooltip = "Open sidebar with map layers.",
             mapperOutput("mapper", height = "100%", width = "100%")
           ),
           contact_sidebar_pane(id = "contact_pane", icon = NULL),
@@ -39,6 +40,7 @@ app_ui <- function(request) {
             title = "Generate solution",
             id = "settings_panel",
             icon = NULL,
+            tooltip = "Open sidebar to solution settings.",
             solverOutput("solver", height = "100%", width = "100%")
           )
         )
