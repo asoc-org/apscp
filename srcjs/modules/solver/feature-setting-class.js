@@ -13,6 +13,7 @@ import {addTooltip} from "../utils/element.js";
 import "./css/solver-setting.css";
 import "./css/feature-setting.css";
 import "./css/nouislider.css";
+import "../utils/css/style.css";
 // utility functions
 import {order} from "../utils/math.js";
 import {convertTargetsToSliderValues} from "../utils/math.js";

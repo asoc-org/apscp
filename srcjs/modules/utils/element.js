@@ -126,44 +126,42 @@ export function createSwitches(n = 1, checked = true) {
 
 /**
  * Create button group
- * @param {string} groupLabel - Label for each button group.
- * @param {string} buttonLabels - Label for each of the buttons.
- * @param {string} groupColors - Colors for group labels.
+ * @param {Array<string>} groupLabels - Label for each button group.
+ * @param {Array<string>} buttonLabels - Label for each of the buttons.
+ * @param {Array<string>} groupColors - Colors for group labels.
+ * @param {Array<Array<string>>} tooltipLabels - Labels for tooltips.
  * @return {HTMLElement}
  */
-export function createButtonGroups(groupLabels, buttonLabels, groupColors) {
+export function createButtonGroups(
+  groupLabels, buttonLabels, groupColors, tooltipLabels
+) {
   // create container
   let el = document.createElement("div");
   el.classList.add("button-groups", "border", "rounded");
   // add each group
   for (let i = 0; i < groupLabels.length; ++i) {
-    // create row container
-    let row = document.createElement("div");
-    row.classList.add("form-group", "row");
-    // create label
-    let label = document.createElement("label");
-    label.innerText = groupLabels[i] + ":";
-    label.classList.add(
-      "col-sm", "col-form-label", "col-form-label-sm", "fw-bold"
-    );
-    label.style.color = groupColors[i];
     // create button group
     let group = document.createElement("div");
-    group.classList.add("col-sm", "btn-group", "btn-group-sm");
+    group.classList.add("btn-group");
     // add buttons to container
     for (let j = 0; j < buttonLabels.length; ++j) {
+      // create button text
+      let span = document.createElement("span");
+      span.innerText = buttonLabels[j];
+      // create button
       let btn = document.createElement("button");
-      btn.classList.add("btn", "btn-sm", "btn-light");
+      btn.classList.add("btn", "btn-sm");
       btn.setAttribute("data-group-index", i);
       btn.setAttribute("data-group-label", groupLabels[i]);
       btn.setAttribute("data-label", buttonLabels[j]);
-      btn.innerText = buttonLabels[j];
+      btn.style.backgroundColor = groupColors[i];
+      addTooltip(btn, tooltipLabels[i][j]);
+      // append elements
+      btn.appendChild(span);
       group.appendChild(btn);
     }
-    // add to row cont
-    row.appendChild(label);
-    row.appendChild(group);
-    el.appendChild(row);
+    // add to group to container
+    el.appendChild(group);
   }
   // return element;
   return el;

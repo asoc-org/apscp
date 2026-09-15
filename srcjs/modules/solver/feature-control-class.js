@@ -100,7 +100,12 @@ export class FeatureControl {
     let buttonsElement = createButtonGroups(
       this._zones,
       ["On", "Off"],
-      this._zones.map((x) => `var(--zone-${x}-primary)`)
+      this._zones.map((x) => `var(--zone-${x}-primary)`),
+      this._zones.map(
+        (x) => {return ["on", "off"].map(
+          (y) => {return `Toggle ${y} all settings for the ${x} zone.`}
+        )}
+      )
     );
     buttonsElement
       .querySelectorAll("button")
