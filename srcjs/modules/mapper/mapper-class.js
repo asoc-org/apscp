@@ -5,8 +5,10 @@ import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // functions to create elements
 import {createMenuItem} from "./mapper-scaffold.js";
+import {addPopup} from "./add-popup.js";
 import {projectSelectOptions} from "../utils/projectSelectOptions.js";
 import {selectOption} from "../utils/projectSelectOptions.js";
+import {projectMetadata} from "../utils/projectMetadata.js";
 // styling
 import "./css/style.css";
 
@@ -217,6 +219,8 @@ export class Mapper {
         this.hideLayerOnMenu(value, true);
       }
     });
+    // add popup to map
+    addPopup(this._map, projectMetadata(project));
   }
 
   /**

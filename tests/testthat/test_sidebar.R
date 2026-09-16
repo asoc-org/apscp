@@ -9,7 +9,10 @@ test_that("add_sidebar_control", {
 test_that("sidebar_pane (with icon)", {
   # create object
   x <- sidebar_pane(
-    title = "home", id = "home_id", icon = shiny::icon("home"),
+    title = "home",
+    id = "home_id",
+    icon = shiny::icon("home"),
+    tooltip = NULL,
     shiny::tagList(shiny::h3("content"))
   )
   # run tests
@@ -42,7 +45,10 @@ test_that("sidebar_pane (with icon)", {
 test_that("sidebar_pane (without icon)", {
   # create object
   x <- sidebar_pane(
-    title = "home", id = "home_id", icon = NULL,
+    title = "home",
+    id = "home_id",
+    icon = NULL,
+    tooltip = NULL,
     shiny::tagList(shiny::h3("content"))
   )
   # run tests
@@ -75,7 +81,10 @@ test_that("sidebar_pane (without icon)", {
 test_that("sidebar_tabs", {
   # create object
   s1 <- sidebar_pane(
-    title = "home", id = "home_id", icon = shiny::icon("home"),
+    title = "home",
+    id = "home_id",
+    icon = shiny::icon("home"),
+    tooltip = NULL,
     shiny::tagList(shiny::h3("content"))
   )
   s2 <- sidebar_pane(
