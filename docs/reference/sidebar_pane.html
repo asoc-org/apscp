@@ -48,6 +48,7 @@
 <span>  title <span class="op">=</span> <span class="st">"Sidebar Title"</span>,</span>
 <span>  id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  icon <span class="op">=</span> <span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/icon.html" class="external-link">icon</a></span><span class="op">(</span><span class="st">"caret-right"</span><span class="op">)</span>,</span>
+<span>  tooltip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -68,6 +69,12 @@
 <dd><p>An [icon()] object for the sidebar pane. This icon
 is used to create a button for closing the pane. If `NULL`, then
 no icon is added for the pane.</p></dd>
+
+
+<dt id="arg-tooltip">tooltip<a class="anchor" aria-label="anchor" href="#arg-tooltip"></a></dt>
+<dd><p>A `character` value with text to display in a tooltip
+when hovering over the button to open the sidebar.
+Defaults to `NULL` such that no tooltip is displayed.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>

@@ -173,6 +173,6 @@ export function createLegend(x) {
   } else if (x.class === "CategoricalLegend") {
     return createCategoricalLegend(x);
   } else {
-    console.log("createLegend(): `x` not a recognized value.");
+    console.error("createLegend(): `x` not a recognized value.");
   }
 }

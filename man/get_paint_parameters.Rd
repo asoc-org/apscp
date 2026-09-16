@@ -34,9 +34,7 @@ print(x)
 }
 \seealso{
 Other mapping:
-\code{\link[=add_hide_layers_control]{add_hide_layers_control()}},
-\code{\link[=add_remove_layers_control]{add_remove_layers_control()}},
-\code{\link[=add_show_layers_control]{add_show_layers_control()}},
+\code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},
 \code{\link[=map_project]{map_project()}},
 \code{\link[=mapgl_add_layer]{mapgl_add_layer()}},

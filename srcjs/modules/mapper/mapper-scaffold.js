@@ -27,7 +27,7 @@ export function createMenuItem(x, mapper, themes = undefined) {
 
   // find components of container element
   let showLegendCheckbox = el.querySelector(".legend-checkbox");
-  let showLayerCheckbox = el.querySelector(".layer-checkbox");
+  let showLayerTristate = el.querySelector(".layer-tristate");
   let removeLayerFromMapButton = el.querySelector(".layer-button");
   let legendElement = el.querySelector(".legend-container");
   let nameElement = el.querySelector(".name-container");
@@ -41,7 +41,7 @@ export function createMenuItem(x, mapper, themes = undefined) {
   nameElement.appendChild(createNameLabel(x));
 
   // set layer checkbox status
-  showLayerCheckbox.checked = x.layer.visible;
+  showLayerTristate.value = "show";
 
   // set legend checkbox
   showLegendCheckbox.checked = true;
@@ -62,11 +62,23 @@ export function createMenuItem(x, mapper, themes = undefined) {
   });
 
   // set listener for button to hide layer
-  showLayerCheckbox.addEventListener("change", function () {
-    if (this.checked) {
-      mapper.showLayerOnMap(x.id);
-    } else {
-      mapper.hideLayerOnMap(x.id, false);
+  showLayerTristate.addEventListener("click", function () {
+    switch (this.value) {
+      case "show":
+        this.value = "hide";
+        mapper.hideLayerOnMap(x.id);
+        break;
+      case "hide":
+        this.value = "highlight";
+        mapper.highlightLayerOnMap(x.id);
+        break;
+      case "highlight":
+        this.value = "show";
+        mapper.showLayerOnMap(x.id);
+        break;
+      default:
+        this.value = "show";
+        mapper.showLayerOnMap(x.id);
     }
   });
 

@@ -151,17 +151,18 @@ mapper_menu_item_header_scaffold <- function(type) {
       htmltools::tags$i(class = "far fa-plus-square unchecked")
     ),
     htmltools::tags$label(
-      class = "layer-checkbox-container",
+      class = "layer-tristate-container",
       `data-toggle` = "tooltip",
       `data-placement` = "top",
       `data-container` = "body",
-      title = "Show/hide on map",
+      title = "Show/hide/highlight on map",
       htmltools::tags$input(
-        class = "layer-checkbox",
-        type = "checkbox"
+        class = "layer-tristate",
+        type = "button"
       ),
-      htmltools::tags$i(class = "fa fa-eye checked"),
-      htmltools::tags$i(class = "fa fa-eye-slash unchecked")
+      htmltools::tags$i(class = "fa fa-eye show"),
+      htmltools::tags$i(class = "fa fa-eye-slash hide"),
+      htmltools::tags$i(class = "fa fa-eye highlight"),
     ),
     htmltools::tags$button(
       class = "layer-button",

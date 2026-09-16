@@ -96,33 +96,31 @@ library(shiny)
 runApp(system.file("examples", "solver_app.R", package = "apscp"))
 #> ℹ Loading apscp
 #> ! Skipping missing files:
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/aaa.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_config.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server_initialize.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server_logging.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server_mapper.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server_session.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server_solution.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_server_solver.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_startup.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/app_ui.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/internal.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/class_Dataset.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/class_Layer.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/class_Cost.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/class_Feature.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/class_Legend.R,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/class_Lock.R, …,
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/widget_solver_ui.R, and
-#>   /tmp/Rtmpq6gFHU/temp_libpathde1adf2be83f/apscp/R/zzz.R
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/aaa.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_config.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server_initialize.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server_logging.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server_mapper.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server_session.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server_solution.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_server_solver.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_startup.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/app_ui.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/internal.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/class_Dataset.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/class_Layer.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/class_Cost.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/class_Feature.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/class_Legend.R,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/class_Lock.R, …,
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/widget_solver_ui.R, and
+#>   /tmp/RtmpQeE5Lc/temp_libpathf34635e44803b/apscp/R/zzz.R
 #> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.bbox’, ‘serialize_object.default’ were declared in NAMESPACE but not found
 #> Warning: Objects listed as exports, but not present in namespace:
 #> • Dataset
 #> • acknowledgments_sidebar_pane
-#> • add_hide_layers_control
-#> • add_remove_layers_control
-#> • add_show_layers_control
+#> • add_layer_visibility_control
 #> • add_sidebar_control
 #> • color_palette
 #> • contact_sidebar_pane

@@ -18,6 +18,12 @@ export class Mapper {
   // private fields
 
   /**
+   * Project metadata for layers.
+   * @type {Map<string,string>}
+   */
+  _metadata;
+
+  /**
    * Map of layers that are hidden on menu. Note that these layers
    * are active and have been added to the map, but are not shown on the menu.
    * @type {Map<object>}
@@ -74,6 +80,7 @@ export class Mapper {
     this._menu = element.querySelector(".mapper-menu");
     this._select = element.querySelector(".mapper-select");
     this._map = document.getElementById(mapId);
+    this._metadata = projectMetadata(project);
     // define temporary variables
     let i, j, el, k;
     // add menu items
@@ -220,7 +227,7 @@ export class Mapper {
       }
     });
     // add popup to map
-    addPopup(this._map, projectMetadata(project));
+    addPopup(this._map, this._metadata);
   }
 
   /**
@@ -284,8 +291,8 @@ export class Mapper {
     // find element for layer's menu item
     let el = this._hiddenLayers.get(layerId);
     // find menu item checkbox for showing map and set accordingly
-    let layerCheckbox = el.querySelector(".layer-checkbox");
-    layerCheckbox.checked = true;
+    let layerTristate = el.querySelector(".layer-tristate");
+    layerTristate.value = "show";
     // find menu item checkbox for showing legend and set accordingly
     let legendCheckbox = el.querySelector(".legend-checkbox");
     if (showLegend === true) {
@@ -309,29 +316,48 @@ export class Mapper {
     this._map.map.setLayoutProperty(
       "lyr-" + layerId, "visibility", "visible"
     );
+    // remove highlight
+    this._map.map.setPaintProperty(
+      "lyr-" + layerId, "fill-outline-color", undefined
+    );
   }
 
   /**
   * Hide layer on map.
   * @param {string} layerId - HTML identifier for layer.;
-  * @param {boolean} updateCheckbox - Should the checkbox on the menu
-  * be updated to show the layer is hidden on map?
   * @return {void}
   */
-  hideLayerOnMap(layerId, updateCheckbox = true) {
+  hideLayerOnMap(layerId) {
     // set layer visibility on map
     this._map.map.setLayoutProperty(
       "lyr-" + layerId, "visibility", "none"
     );
-    // set checkbox to be unchecked
-    if (updateCheckbox === true) {
-      let el = this._menu.querySelector(
-        `[data-id="${layerId}"] .layer-checkbox`
-      );
-      if (el) {
-        el.checked = false
-      }
-    }
+    // remove highlight
+    this._map.map.setPaintProperty(
+      "lyr-" + layerId, "fill-outline-color", undefined
+    );
+  }
+
+  /**
+  * Highlight layer on map.
+  * @param {string} layerId - HTML identifier for layer.;
+  * @return {void}
+  */
+  highlightLayerOnMap(layerId) {
+    // set layer visibility on map
+    this._map.map.setLayoutProperty(
+      "lyr-" + layerId, "visibility", "visible"
+    );
+    // add highlight
+    this._map.map.setPaintProperty(
+      "lyr-" + layerId, "fill-outline-color",
+      [
+        "case",
+        ["==", ["get", this._metadata.get("lyr-" + layerId)], null],
+        "transparent",
+        "#FFFF00"
+      ]
+    );
   }
 
   /**
@@ -384,7 +410,7 @@ export class Mapper {
       .querySelectorAll(".mapper-menu-item")
       .forEach((x) => {
         this.showLayerOnMap(x.getAttribute("data-id"));
-        x.querySelector(".layer-checkbox").checked = true;
+        x.querySelector(".layer-tristate").value = "show";
       });
    }
 
@@ -397,7 +423,20 @@ export class Mapper {
       .querySelectorAll(".mapper-menu-item")
       .forEach((x) => {
         this.hideLayerOnMap(x.getAttribute("data-id"));
-        x.querySelector(".layer-checkbox").checked = false;
+        x.querySelector(".layer-tristate").value = "hide";
+      });
+   }
+
+  /**
+   * Highlight all menu layers on map.
+   * @return {void}
+   */
+   highlightAllMenuLayersOnMap() {
+    this._menu
+      .querySelectorAll(".mapper-menu-item")
+      .forEach((x) => {
+        this.highlightLayerOnMap(x.getAttribute("data-id"));
+        x.querySelector(".layer-tristate").value = "highlight";
       });
    }
 

@@ -152,27 +152,42 @@
   display: none;
 }
 
-/* layer checkbox */
-.mapper .layer-checkbox-container {
+/* layer tristate */
+.mapper .layer-tristate-container {
   cursor: pointer;
 }
 
-.mapper .layer-checkbox-container input[type="checkbox"],
-.mapper .layer-checkbox-container .checked {
+.mapper .layer-tristate-container input[type="button"],
+.mapper .layer-tristate-container .show,
+.mapper .layer-tristate-container .hide,
+.mapper .layer-tristate-container .highlight {
   display: none;
+}
+
+.mapper .layer-tristate-container .show {
   color: black;
 }
 
-.mapper .layer-checkbox-container .unchecked {
+.mapper .layer-tristate-container .hide {
   color: red;
 }
 
-.mapper .layer-checkbox-container input[type="checkbox"]:checked ~ .checked
+.mapper .layer-tristate-container .highlight {
+  color: black;
+  text-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 20px yellow;
+}
+
+.mapper .layer-tristate-container input[type="button"][value="show"] ~ .show
 {
   display: inline-block;
 }
 
-.mapper .layer-checkbox-container input[type="checkbox"]:checked ~ .unchecked
+.mapper .layer-tristate-container input[type="button"][value="hide"] ~ .hide
 {
-  display: none;
+  display: inline-block;
+}
+
+.mapper .layer-tristate-container input[type="button"][value="highlight"] ~ .highlight
+{
+  display: inline-block;
 }

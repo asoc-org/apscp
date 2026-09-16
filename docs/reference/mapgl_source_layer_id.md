@@ -27,9 +27,7 @@ This corresponds to the \`source_layer\` parameter of
 ## See also
 
 Other mapping:
-[`add_hide_layers_control()`](https://asoc-org.github.io/apscp/reference/add_hide_layers_control.md),
-[`add_remove_layers_control()`](https://asoc-org.github.io/apscp/reference/add_remove_layers_control.md),
-[`add_show_layers_control()`](https://asoc-org.github.io/apscp/reference/add_show_layers_control.md),
+[`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
 [`map_project()`](https://asoc-org.github.io/apscp/reference/map_project.md),

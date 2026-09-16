@@ -33,15 +33,7 @@ app_server_mapper <- quote({
         position = "top-right",
         selected = "settings_panel"
       ) |>
-      add_show_layers_control(
-        position = "top",
-        mapper_id = "mapper"
-      ) |>
-      add_remove_layers_control(
-        position = "top",
-        mapper_id = "mapper"
-      ) |>
-      add_hide_layers_control(
+      add_layer_visibility_control(
         position = "top",
         mapper_id = "mapper"
       ) |>

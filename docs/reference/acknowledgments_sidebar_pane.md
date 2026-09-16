@@ -41,7 +41,7 @@ Other sidebar:
 ``` r
 # create object
 acknowledgments_sidebar_pane("pane_id")
-#> <div class="mapsidebar-pane" id="pane_id">
+#> <div class="mapsidebar-pane" id="pane_id" data-tooltip="Open sidebar with acknowledgments.">
 #>   <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
 #>     Acknowledgments
 #>     <span class="mapsidebar-close">
