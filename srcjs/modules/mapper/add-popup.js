@@ -1,6 +1,8 @@
 /** Import dependencies */
 // styling
 import "./css/popup.css"
+// helper functions
+import {getVisibleLayerDataAtPoint} from "../utils/mapboxgl.js";
 
 /**
  * Add listener for popup to map.
@@ -11,29 +13,14 @@ import "./css/popup.css"
 export function addPopup(el, projectMetadata) {
   // define listener for click on map to display popup
   el.map.on("click", (e) => {
-    // find layers that are underneath the selected click and are visible
-    const layers =
-      el.map
-      .queryRenderedFeatures(e.point)
-      .filter((x) => {
-        return (x.layer.layout.visibility === "visible") &&
-          (x.layer.id !== "bbox");
-      });
-    // prepare layer data
-    const layerData = new Map();
-    layers.forEach((x) => {
-      const name = projectMetadata.get(x.layer.id);
-      const value = layers[0].properties[name];
-      if (value !== undefined) {
-        layerData.set(name, value);
-      }
-    })
+    // obtain data for visible layers that are underneath the mouse
+    const data = getVisibleLayerDataAtPoint(el, projectMetadata, e.point);
     // if any layer data to show, then display popup
-    if (layerData.size > 0) {
+    if (data.size > 0) {
       // add popup
       new mapboxgl.Popup({closeButton: false})
         .setLngLat(e.lngLat)
-        .setDOMContent(createPopup(layerData))
+        .setDOMContent(createPopup(data))
         .addTo(el.map);
     }
   });

@@ -6,6 +6,7 @@ import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // functions to create elements
 import {createMenuItem} from "./mapper-scaffold.js";
 import {addPopup} from "./add-popup.js";
+import {addMouseEvents} from "./add-mouse-events.js";
 import {projectSelectOptions} from "../utils/projectSelectOptions.js";
 import {selectOption} from "../utils/projectSelectOptions.js";
 import {projectMetadata} from "../utils/projectMetadata.js";
@@ -228,6 +229,8 @@ export class Mapper {
     });
     // add popup to map
     addPopup(this._map, this._metadata);
+    // add mouse events to map
+    addMouseEvents(this._map);
   }
 
   /**
