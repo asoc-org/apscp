@@ -7,7 +7,22 @@ NULL
 #'
 #' @return A [sf::st_sf()] object.
 #'
-#' @family misc
+#' @family io
+#'
+#' @examples
+#' # specify file path to import data
+#' path <- system.file(
+#'   "extdata", "antarctic-peninsula_pu.gpkg.zip", package = "apscp"
+#' )
+#'
+#' # read data
+#' x <- read_sf_data(path)
+#'
+#' # create file path to export data
+#' path2 <- tempfile(fileext = ".gpkg.zip")
+#'
+#' # write data
+#' write_sf_data(x, path2)
 #'
 #' @export
 read_sf_data <- function(path) {
@@ -37,7 +52,9 @@ read_sf_data <- function(path) {
 #'
 #' @return An invisible `TRUE`.
 #'
-#' @family misc
+#' @family io
+#'
+#' @inherit read_sf_data examples
 #'
 #' @export
 write_sf_data <- function(x, path) {

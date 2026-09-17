@@ -49,6 +49,9 @@ default:
   tile_server_dir: !expr file.path(tempdir(), "tiles")
   tile_max_zoom: 8
 
+  ## tile processing details
+  tile_engine: "r"
+
   ## define color palette used for zones in solutions
   ### note that if more colors are defined than zones, then only
   ### the first set of color values are used
@@ -82,6 +85,7 @@ demo:
   n_workers: !expr as.numeric(Sys.getenv("NUMBER_WORKERS"))
   solver_name: !expr Sys.getenv("SOLVER_NAME")
   solver_gurobi_server: "http://compute:61000"
+  tile_engine: "python"
 
 # production configuration
 ## this is intended for running within the launcher on prod mode
@@ -93,3 +97,4 @@ prod:
   n_workers: !expr as.numeric(Sys.getenv("NUMBER_WORKERS"))
   solver_name: !expr Sys.getenv("SOLVER_NAME")
   solver_gurobi_server: "http://compute:61000"
+  tile_engine: "python"

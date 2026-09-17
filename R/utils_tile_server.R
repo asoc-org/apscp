@@ -18,6 +18,22 @@
 #'
 #' @family tile_server
 #'
+#' @examplesIf interactive()
+#' # simulate tile
+#' project <- simulate_project()
+#'
+#' # display the tile server directory
+#' print(tile_server_dir())
+#'
+#' # start tile server
+#' tile_server_start()
+#'
+#' # add tile to tile server directory
+#' tile_server_add_tile(project$tiles[[1]])
+#'
+#' # stop tile server
+#' tile_server_stop()
+#'
 #' @export
 tile_server_start <- function(x, verbose = TRUE) {
   # assert valid arguments
@@ -84,6 +100,8 @@ tile_server_start <- function(x, verbose = TRUE) {
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
+#' @inherit tile_server_start examples
+#'
 #' @export
 tile_server_add_tile <- function(x) {
   # assert argument is valid
@@ -123,6 +141,8 @@ tile_server_add_tile <- function(x) {
 #'
 #' @family tile_server
 #'
+#' @inherit tile_server_start examples
+#'
 #' @export
 tile_server_stop <- function() {
   freestiler::stop_server()
@@ -136,6 +156,8 @@ tile_server_stop <- function() {
 #' @return A `character` value.
 #'
 #' @family tile_server
+#'
+#' @inherit tile_server_start examples
 #'
 #' @export
 tile_server_dir <- function() {

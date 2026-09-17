@@ -74,7 +74,7 @@ test_that("create_solution", {
   # create object
   x <- create_solution(
     name = "sol",
-    dataset = p$dataset,
+    project = p,
     column = "solv",
     provenance = simulate_provenance(),
     legend = simulate_solution_legend()

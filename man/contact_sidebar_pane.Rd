@@ -21,7 +21,7 @@ Create a sidebar pane for displaying contact information.
 }
 \examples{
 # create object
-contact_sidebar_pane("pane_id")
+x <- contact_sidebar_pane("pane_id")
 
 }
 \seealso{

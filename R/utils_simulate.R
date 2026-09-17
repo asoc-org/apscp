@@ -276,6 +276,10 @@ simulate_project <- function() {
 #'
 #' @family simulation
 #'
+#' @examples
+#' # simulate legend
+#' simulate_continuous_legend()
+#'
 #' @export
 simulate_continuous_legend <- function() {
   new_continuous_legend(
@@ -295,6 +299,10 @@ simulate_continuous_legend <- function() {
 #'
 #' @family simulation
 #'
+#' @examples
+#' # simulate legend
+#' simulate_solution_legend()
+#'
 #' @export
 simulate_solution_legend <- function() {
   new_categorical_legend(
@@ -312,6 +320,10 @@ simulate_solution_legend <- function() {
 #' @return A [new_categorical_legend()] object.
 #'
 #' @family simulation
+#'
+#' @examples
+#' # simulate legend
+#' simulate_binary_legend()
 #'
 #' @export
 simulate_binary_legend <- function() {
@@ -331,6 +343,10 @@ simulate_binary_legend <- function() {
 #'
 #' @family simulation
 #'
+#' @examples
+#' # simulate provenance
+#' simulate_provenance()
+#'
 #' @export
 simulate_provenance <- function() {
   new_provenance(
@@ -348,6 +364,10 @@ simulate_provenance <- function() {
 #' @return A `character` value with the file path.
 #'
 #' @family simulation
+#'
+#' @examples
+#' # simulate PMTiles file
+#' simulate_pmtiles_file()
 #'
 #' @export
 simulate_pmtiles_file <- function() {
@@ -371,6 +391,16 @@ simulate_pmtiles_file <- function() {
 #' A `list` with the following elements:
 #' `feature_settings`, `lock_in_setting`, `lock_out_settings`,
 #' and `cost_settings`.
+#'
+#' @examples
+#' # simulate project
+#' x <- simulate_project()
+#'
+#' # simulate prioritization settings
+#' s <- simulate_prioritization_settings(x)
+#'
+#' # print settings
+#' print(s)
 #'
 #' @export
 simulate_prioritization_settings <- function(project) {

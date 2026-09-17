@@ -55,8 +55,10 @@ Functions and definitions for new classes.
   : Create solution from prioritization
 - [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
   : Create solution legend
-- [`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md)
-  : Create tile from dataset.
+- [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md)
+  : Create tile from file
+- [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md)
+  : Create tile from project.
 - [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md)
   : Create tile from \`sf\` data.
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
@@ -171,12 +173,16 @@ Functions for reading and writing from disk and memory.
   : Read dataset
 - [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md)
   : Read project
+- [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
+  : Read sf data from zip file
 - [`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md)
   : Serialize object
 - [`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md)
   : Write dataset
 - [`write_project()`](https://asoc-org.github.io/apscp/reference/write_project.md)
   : Write project
+- [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
+  : Write sf data to zip file
 
 ## Simulation
 
@@ -207,16 +213,16 @@ Functions for simulating data.
   : Convert \`JsDataFrameList\` object to list object.
 - [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
   : Color palette
+- [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md)
+  : Is package installed?
+- [`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md)
+  : Is the freestiler Python library installed?
 - [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
   : Is relative path?
 - [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
   : Read matrix
-- [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
-  : Read sf data from zip file
 - [`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
   : Write matrix
-- [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
-  : Write sf data to zip file
 - [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)
   : Add a tile to tile server
 - [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md)

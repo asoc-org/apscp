@@ -7,7 +7,7 @@ Create a \[new_solution()\] object.
 ``` r
 create_solution(
   name,
-  dataset,
+  project,
   column,
   legend,
   provenance,
@@ -22,14 +22,14 @@ create_solution(
 
   \`character\` value with name.
 
-- dataset:
+- project:
 
-  \[new_dataset() object that has a column with the solution.
+  \[new_project()\] object that has a column with the solution.
 
 - column:
 
-  \`character\` value with column name in \`dataset\` that has the
-  values.
+  \`character\` value with column name in \`project\$dataset\` that has
+  the values.
 
 - legend:
 
@@ -60,7 +60,8 @@ Other method:
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
-[`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md),
+[`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
+[`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
@@ -69,21 +70,16 @@ Other method:
 
 ``` r
 # create data
-d <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
+project <- simulate_project()
+#> Error in simulate_project(): could not find function "simulate_project"
 
 # create solution
-x <- new_solution(
-  name = "solution",
-  layer = new_layer(
-    dataset = create_dataset_from_sf(d),
-    tile = create_tile_from_sf(d, verbose = FALSE),
-    column = "solution",
-    legend = simulate_solution_legend(),
-    provenance = simulate_provenance(),
-    total = 500,
-    details = "extra info"
-  )
+x <- create_solution(
+  name = "user solution",
+  project = project,
+  column = "solution",
+  legend = simulate_solution_legend(),
+  provenance = simulate_provenance()
 )
-#> Error in new_solution(name = "solution", layer = new_layer(dataset = create_dataset_from_sf(d),     tile = create_tile_from_sf(d, verbose = FALSE), column = "solution",     legend = simulate_solution_legend(), provenance = simulate_provenance(),     total = 500, details = "extra info")): could not find function "new_solution"
+#> Error in create_solution(name = "user solution", project = project, column = "solution",     legend = simulate_solution_legend(), provenance = simulate_provenance()): could not find function "create_solution"
 ```

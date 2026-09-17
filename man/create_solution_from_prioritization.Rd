@@ -55,7 +55,8 @@ Other method:
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_file]{create_tile_from_file()}},
+\code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}

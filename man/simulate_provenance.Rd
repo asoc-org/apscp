@@ -12,6 +12,11 @@ A [new_provenance()] object.
 \description{
 Simulate a provenance information.
 }
+\examples{
+# simulate provenance
+simulate_provenance()
+
+}
 \seealso{
 Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},

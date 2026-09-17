@@ -16,6 +16,9 @@ Determine if a Mapbox token is defined?
 # see if a Mapbox token is defined?
 has_mapbox_token()
 
+# print if Mapbox token is available
+has_mapbox_token()
+
 }
 \seealso{
 Other mapping:

@@ -12,6 +12,18 @@ An invisible `TRUE` indicating success.
 \description{
 Stop daemons for asynchronous processing with the \pkg{mirai} package.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# start asynchronous processing
+mirai_async_start()
+
+# run calculation with asynchronous processing
+result <- mirai::mirai({1 + 2})[]
+
+# stop asynchronous processing
+mirai_async_stop()
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 Other mirai:
 \code{\link[=mirai_async_start]{mirai_async_start()}}

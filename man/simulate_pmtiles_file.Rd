@@ -12,6 +12,11 @@ A `character` value with the file path.
 \description{
 Simulate a PMtiles file by creating a dummy file on disk.
 }
+\examples{
+# simulate PMTiles file
+simulate_pmtiles_file()
+
+}
 \seealso{
 Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},

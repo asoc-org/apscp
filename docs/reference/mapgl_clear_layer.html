@@ -79,6 +79,49 @@
 <code><a href="mapgl_source_url.html">mapgl_source_url()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="co"># simulate spatial data</span></span></span>
+<span class="r-in"><span><span class="va">sim_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_spatial_data.html">simulate_spatial_data</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create objects</span></span></span>
+<span class="r-in"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset_from_sf.html">create_dataset_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">tile</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_tile_from_sf.html">create_tile_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_cost.html">new_cost</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  name <span class="op">=</span> <span class="st">"cost"</span>,</span></span>
+<span class="r-in"><span>  zone <span class="op">=</span> <span class="st">"Science"</span>,</span></span>
+<span class="r-in"><span>  weight <span class="op">=</span> <span class="fl">0.1</span>,</span></span>
+<span class="r-in"><span>  layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    column <span class="op">=</span> <span class="st">"feat_1"</span>,</span></span>
+<span class="r-in"><span>    total <span class="op">=</span> <span class="fl">500</span>,</span></span>
+<span class="r-in"><span>    dataset <span class="op">=</span> <span class="va">dataset</span>,</span></span>
+<span class="r-in"><span>    tile <span class="op">=</span> <span class="va">tile</span>,</span></span>
+<span class="r-in"><span>    legend <span class="op">=</span> <span class="fu"><a href="simulate_continuous_legend.html">simulate_continuous_legend</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    details <span class="op">=</span> <span class="st">"extra info"</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># create mapbox map</span></span></span>
+<span class="r-in"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">mapgl</span><span class="fu">::</span><span class="fu"><a href="https://walker-data.com/mapgl/reference/mapboxgl.html" class="external-link">mapboxgl</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add source for tile object</span></span></span>
+<span class="r-in"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="mapgl_add_source.html">mapgl_add_source</a></span><span class="op">(</span><span class="va">map</span>, <span class="va">tile</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add layer for cost object</span></span></span>
+<span class="r-in"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="mapgl_add_layer.html">mapgl_add_layer</a></span><span class="op">(</span><span class="va">map</span>, <span class="va">cost</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># clear layer for cost object</span></span></span>
+<span class="r-in"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">mapgl_clear_layer</span><span class="op">(</span><span class="va">map</span>, <span class="va">cost</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># display map</span></span></span>
+<span class="r-in"><span><span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

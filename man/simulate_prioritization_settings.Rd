@@ -17,6 +17,17 @@ and `cost_settings`.
 \description{
 Simulate settings for generating a [prioritization()].
 }
+\examples{
+# simulate project
+x <- simulate_project()
+
+# simulate prioritization settings
+s <- simulate_prioritization_settings(x)
+
+# print settings
+print(s)
+
+}
 \seealso{
 Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},

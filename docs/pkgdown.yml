@@ -1,10 +1,10 @@
 pandoc: '3.3'
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   apscp: apscp.html
   optimization: optimization.html
-last_built: 2026-09-01T02:50Z
+last_built: 2026-09-17T20:17Z
 urls:
   reference: https://asoc-org.github.io/apscp/reference
   article: https://asoc-org.github.io/apscp/articles

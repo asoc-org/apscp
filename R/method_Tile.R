@@ -78,27 +78,31 @@ create_tile_from_sf <- function(
   )
 }
 
-#' Create tile from dataset.
+#' Create tile from project.
 #'
-#' Create a [new_tile()] object from a [new_dataset() object.
+#' Create a [new_tile()] object from a [new_project() object.
 #'
 #' @inheritParams create_tile_from_sf
 #'
-#' @param x [new_dataset()] object.
+#' @param x [new_project()] object.
 #'
 #' @param column `character` value with column name.
 #'
-#' @return A [new_tile()] object.
+#' @param engine `character` value denoting the engine for processing the
+#' the tiles. Available options include `"r"` or `"python"`.
+#' Defaults to `get_golem_config("tile_engine")`.
+#'
+#' @inherit create_tile_from_sf return
 #'
 #' @family method
 #'
 #' @examples
-#' # simulate spatial data
-#' sim_data <- simulate_spatial_data()
+#' # simulate project
+#' sim_project <- simulate_project()
 #'
-#' # create tile from spatial data
-#' x <- create_tile_from_dataset(
-#'   create_dataset_from_sf(sim_data),
+#' # create tile
+#' x <- create_tile_from_project(
+#'   sim_project,
 #'   column = "solution"
 #' )
 #'
@@ -106,7 +110,100 @@ create_tile_from_sf <- function(
 #' print(x)
 #'
 #' @export
-create_tile_from_dataset <- function(
+create_tile_from_project <- function(
+  x,
+  column,
+  source_layer = "layer",
+  path = tempfile(fileext = ".pmtiles"),
+  max_zoom = 8,
+  engine = get_golem_config("tile_engine"),
+  verbose = FALSE
+) {
+  # assert arguments are valid
+  assertthat::assert_that(
+    ## x
+    inherits(x, "Project"),
+    ## column
+    assertthat::is.string(column),
+    assertthat::noNA(column),
+    ## source_layer
+    assertthat::is.string(source_layer),
+    assertthat::noNA(source_layer),
+    ## path
+    assertthat::is.string(path),
+    assertthat::noNA(path),
+    endsWith(path, ".pmtiles"),
+    ## max_zoom
+    assertthat::is.number(max_zoom),
+    assertthat::noNA(max_zoom),
+    ## engine
+    assertthat::is.string(engine),
+    assertthat::noNA(engine),
+    engine %in% c("r", "python"),
+    ## verbose
+    assertthat::is.flag(verbose),
+    assertthat::noNA(verbose)
+  )
+  # create tiles
+  if (identical(engine, "r")) {
+    out <- create_tile_from_sf(
+      x = x$dataset$get_sf(column),
+      path = path,
+      source_layer = source_layer,
+      max_zoom = max_zoom,
+      verbose = verbose
+    )
+  } else {
+    assertthat::assert_that(
+      isTRUE(sf::st_is_longlat(sf::st_crs(x$bbox))),
+      msg = "Project `x` must have 4326 coordinate system."
+    )
+    out <- create_tile_from_file(
+      x = x$dataset$pu_path,
+      column = column,
+      path = path,
+      source_layer = source_layer,
+      max_zoom = max_zoom,
+      verbose = verbose
+    )
+  }
+  # return result
+  out
+}
+
+#' Create tile from file
+#'
+#' Create a [new_tile()] object from a file.
+#'
+#' @param x `character` value denoting the file path.
+#'
+#' @inheritParams create_tile_from_project
+#'
+#' @inherit create_tile_from_sf return
+#'
+#' @family method
+#'
+#' @examplesIf FALSE
+#' # simulate spatial data
+#' sim_data <- simulate_spatial_data()
+#'
+#' # project data to EPSG:4326
+#' sim_data <- sf::st_transform(sim_data, 4326)
+#'
+#' # save data to disk
+#' path <- tempfile(fileext = ".gpkg")
+#'
+#' # create tile
+#' x <- create_tile_from_file(
+#'   path,
+#'   column = "solution"
+#' )
+#'
+#' # preview object
+#' print(x)
+#'
+#' @export
+create_tile_from_file <- function(
   x,
   column,
   source_layer = "layer",
@@ -117,7 +214,8 @@ create_tile_from_dataset <- function(
   # assert arguments are valid
   assertthat::assert_that(
     ## x
-    inherits(x, "Dataset"),
+    assertthat::is.string(x),
+    assertthat::noNA(x),
     ## column
     assertthat::is.string(column),
     assertthat::noNA(column),
@@ -133,14 +231,39 @@ create_tile_from_dataset <- function(
     assertthat::noNA(max_zoom),
     ## verbose
     assertthat::is.flag(verbose),
-    assertthat::noNA(verbose)
+    assertthat::noNA(verbose),
+    ## dependencies
+    is_python_freestiler_installed()
   )
-  # create tiles
-  create_tile_from_sf(
-    x = x$get_sf(column),
+  # call python script
+  system(
+    paste0(
+      "python3 \"",
+      system.file("scripts", "make-tiles.py", package = "apscp"),
+      "\" \"",
+      x,
+      "\" \"",
+      path,
+      "\" \"",
+      column,
+      "\" \"",
+      max_zoom,
+      "\" \"",
+      source_layer,
+      "\" \"",
+      as.numeric(verbose),
+      "\""
+    )
+  )
+  # verify tile generation worked
+  assertthat::assert_that(
+    file.exists(path),
+    msg = "Failed to generate tiles!"
+  )
+  # return object
+  new_tile(
     path = path,
     source_layer = source_layer,
-    max_zoom = max_zoom,
-    verbose = verbose
+    max_zoom = max_zoom
   )
 }

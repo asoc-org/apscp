@@ -12,6 +12,16 @@
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
+#' @examplesIf interactive()
+#' # start asynchronous processing
+#' mirai_async_start()
+#'
+#' # run calculation with asynchronous processing
+#' result <- mirai::mirai({1 + 2})[]
+#'
+#' # stop asynchronous processing
+#' mirai_async_stop()
+#'
 #' @export
 mirai_async_start <- function(n = 2, verbose = TRUE) {
   # assert valid arguments
@@ -78,6 +88,8 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
 #' @return An invisible `TRUE` indicating success.
 #'
 #' @family mirai
+#'
+#' @inherit mirai_async_start examples
 #'
 #' @export
 mirai_async_stop <- function() {

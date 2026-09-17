@@ -28,7 +28,8 @@ Other method:
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_file]{create_tile_from_file()}},
+\code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}}
 }

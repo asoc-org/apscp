@@ -32,4 +32,8 @@ Other mapping:
 # see if a Mapbox token is defined?
 has_mapbox_token()
 #> Error in has_mapbox_token(): could not find function "has_mapbox_token"
+
+# print if Mapbox token is available
+has_mapbox_token()
+#> Error in has_mapbox_token(): could not find function "has_mapbox_token"
 ```

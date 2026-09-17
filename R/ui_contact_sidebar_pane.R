@@ -13,7 +13,7 @@ NULL
 #'
 #' @examples
 #' # create object
-#' contact_sidebar_pane("pane_id")
+#' x <- contact_sidebar_pane("pane_id")
 #'
 #' @export
 contact_sidebar_pane <- function(id, icon = shiny::icon("envelope")) {

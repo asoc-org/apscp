@@ -71,6 +71,9 @@ map <- mapgl_add_source(map, tile)
 # add layer for cost object
 map <- mapgl_add_layer(map, cost)
 
+# clear layer for cost object
+map <- mapgl_clear_layer(map, cost)
+
 # display map
 # \dontrun{
 print(map)

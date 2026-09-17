@@ -22,3 +22,11 @@ Other simulation:
 [`simulate_provenance()`](https://asoc-org.github.io/apscp/reference/simulate_provenance.md),
 [`simulate_solution_legend()`](https://asoc-org.github.io/apscp/reference/simulate_solution_legend.md),
 [`simulate_spatial_data()`](https://asoc-org.github.io/apscp/reference/simulate_spatial_data.md)
+
+## Examples
+
+``` r
+# simulate legend
+simulate_binary_legend()
+#> Error in simulate_binary_legend(): could not find function "simulate_binary_legend"
+```

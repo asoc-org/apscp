@@ -13,6 +13,10 @@ NULL
 #'
 #' @family mapping
 #'
+#' @examples
+#' # print if Mapbox token is available
+#' has_mapbox_token()
+#'
 #' @export
 has_mapbox_token <- function() {
   nzchar(Sys.getenv("MAPBOX_PUBLIC_TOKEN"))
@@ -230,6 +234,9 @@ mapgl_source_layer_id <- function(x) {
 #' # add layer for cost object
 #' map <- mapgl_add_layer(map, cost)
 #'
+#' # clear layer for cost object
+#' map <- mapgl_clear_layer(map, cost)
+#'
 #' # display map
 #' \dontrun{
 #' print(map)
@@ -332,6 +339,8 @@ mapgl_add_layer <- function(
 #'
 #' @details
 #' Layers are cleared with [mapgl::clear_layer()].
+#'
+#' @inherit mapgl_add_source examples
 #'
 #' @family mapping
 #'

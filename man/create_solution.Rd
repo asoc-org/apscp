@@ -6,7 +6,7 @@
 \usage{
 create_solution(
   name,
-  dataset,
+  project,
   column,
   legend,
   provenance,
@@ -17,9 +17,9 @@ create_solution(
 \arguments{
 \item{name}{`character` value with name.}
 
-\item{dataset}{[new_dataset() object that has a column with the solution.}
+\item{project}{[new_project()] object that has a column with the solution.}
 
-\item{column}{`character` value with column name in `dataset` that
+\item{column}{`character` value with column name in `project$dataset` that
 has the values.}
 
 \item{legend}{[new_categorical_legend()] or [new_continuous _legend()]
@@ -41,20 +41,15 @@ Create a [new_solution()] object.
 }
 \examples{
 # create data
-d <- simulate_spatial_data()
+project <- simulate_project()
 
 # create solution
-x <- new_solution(
-  name = "solution",
-  layer = new_layer(
-    dataset = create_dataset_from_sf(d),
-    tile = create_tile_from_sf(d, verbose = FALSE),
-    column = "solution",
-    legend = simulate_solution_legend(),
-    provenance = simulate_provenance(),
-    total = 500,
-    details = "extra info"
-  )
+x <- create_solution(
+  name = "user solution",
+  project = project,
+  column = "solution",
+  legend = simulate_solution_legend(),
+  provenance = simulate_provenance()
 )
 
 }
@@ -64,7 +59,8 @@ Other method:
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
-\code{\link[=create_tile_from_dataset]{create_tile_from_dataset()}},
+\code{\link[=create_tile_from_file]{create_tile_from_file()}},
+\code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}

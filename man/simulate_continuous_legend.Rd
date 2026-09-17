@@ -12,6 +12,11 @@ A [new_continuous_legend()] object.
 \description{
 Simulate a legend for continuous data.
 }
+\examples{
+# simulate legend
+simulate_continuous_legend()
+
+}
 \seealso{
 Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},

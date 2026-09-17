@@ -55,7 +55,7 @@ test:
 
 ## test examples
 examples:
-	$(R) --slave -e "devtools::run_examples();warnings()"  >> examples.log
+	$(R) --slave -e "devtools::run_examples();warnings()" > examples.log 2>&1
 	rm -f Rplots.pdf
 
 example_sidebar: bundle_dev

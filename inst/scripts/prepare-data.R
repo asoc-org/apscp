@@ -144,6 +144,9 @@ for (i in names(raster_data)) {
 ## add in _index column
 vector_data[["_index"]] <- seq_len(nrow(vector_data))
 
+## reproject data
+vector_data <- sf::st_transform(vector_data, 4326)
+
 ## create boundary_data
 boundary_data <- prioritizr::boundary_matrix(pu_data)
 boundary_data <- boundary_data[idx, idx]

@@ -12,6 +12,11 @@ A [new_categorical_legend()] object.
 \description{
 Simulate a legend for binary data.
 }
+\examples{
+# simulate legend
+simulate_binary_legend()
+
+}
 \seealso{
 Other simulation:
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},

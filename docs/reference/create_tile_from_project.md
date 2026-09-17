@@ -1,16 +1,17 @@
-# Create tile from dataset.
+# Create tile from project.
 
-Create a \[new_tile()\] object from a \[new_dataset() object.
+Create a \[new_tile()\] object from a \[new_project() object.
 
 ## Usage
 
 ``` r
-create_tile_from_dataset(
+create_tile_from_project(
   x,
   column,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
+  engine = get_golem_config("tile_engine"),
   verbose = FALSE
 )
 ```
@@ -19,7 +20,7 @@ create_tile_from_dataset(
 
 - x:
 
-  \[new_dataset()\] object.
+  \[new_project()\] object.
 
 - column:
 
@@ -40,6 +41,12 @@ create_tile_from_dataset(
 
   \`integer\` value with maximum zoom level. Defaults to 8.
 
+- engine:
+
+  \`character\` value denoting the engine for processing the the tiles.
+  Available options include \`"r"\` or \`"python"\`. Defaults to
+  \`get_golem_config("tile_engine")\`.
+
 - verbose:
 
   \`logical\` value indicating if information about tile creation should
@@ -57,6 +64,7 @@ Other method:
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
+[`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
@@ -64,16 +72,16 @@ Other method:
 ## Examples
 
 ``` r
-# simulate spatial data
-sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
+# simulate project
+sim_project <- simulate_project()
+#> Error in simulate_project(): could not find function "simulate_project"
 
-# create tile from spatial data
-x <- create_tile_from_dataset(
-  create_dataset_from_sf(sim_data),
+# create tile
+x <- create_tile_from_project(
+  sim_project,
   column = "solution"
 )
-#> Error in create_tile_from_dataset(create_dataset_from_sf(sim_data), column = "solution"): could not find function "create_tile_from_dataset"
+#> Error in create_tile_from_project(sim_project, column = "solution"): could not find function "create_tile_from_project"
 
 # preview object
 print(x)

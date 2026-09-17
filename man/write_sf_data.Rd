@@ -17,14 +17,31 @@ An invisible `TRUE`.
 \description{
 Write sf data to zip file
 }
-\seealso{
-Other misc:
-\code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
-\code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
-\code{\link[=color_palette]{color_palette()}},
-\code{\link[=is_relative_path]{is_relative_path()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=read_sf_data]{read_sf_data()}},
-\code{\link[=write_matrix]{write_matrix()}}
+\examples{
+# specify file path to import data
+path <- system.file(
+  "extdata", "antarctic-peninsula_pu.gpkg.zip", package = "apscp"
+)
+
+# read data
+x <- read_sf_data(path)
+
+# create file path to export data
+path2 <- tempfile(fileext = ".gpkg.zip")
+
+# write data
+write_sf_data(x, path2)
+
 }
-\concept{misc}
+\seealso{
+Other io:
+\code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_builtin_project]{read_builtin_project()}},
+\code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_project]{read_project()}},
+\code{\link[=read_sf_data]{read_sf_data()}},
+\code{\link[=serialize_object]{serialize_object()}},
+\code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_project]{write_project()}}
+}
+\concept{io}

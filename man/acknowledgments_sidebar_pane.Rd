@@ -21,7 +21,7 @@ Create a sidebar pane for displaying acknowledgments.
 }
 \examples{
 # create object
-acknowledgments_sidebar_pane("pane_id")
+x <- acknowledgments_sidebar_pane("pane_id")
 
 }
 \seealso{

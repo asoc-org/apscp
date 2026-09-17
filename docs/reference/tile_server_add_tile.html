@@ -68,6 +68,26 @@
 <code><a href="tile_server_stop.html">tile_server_stop()</a></code></p></div>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="co"># simulate tile</span></span></span>
+<span class="r-in"><span><span class="va">project</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_project.html">simulate_project</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># display the tile server directory</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="tile_server_dir.html">tile_server_dir</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># start tile server</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tile_server_start.html">tile_server_start</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># add tile to tile server directory</span></span></span>
+<span class="r-in"><span><span class="fu">tile_server_add_tile</span><span class="op">(</span><span class="va">project</span><span class="op">$</span><span class="va">tiles</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># stop tile server</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tile_server_stop.html">tile_server_stop</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

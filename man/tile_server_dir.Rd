@@ -12,6 +12,24 @@ A `character` value.
 \description{
 Get the tile server directory.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# simulate tile
+project <- simulate_project()
+
+# display the tile server directory
+print(tile_server_dir())
+
+# start tile server
+tile_server_start()
+
+# add tile to tile server directory
+tile_server_add_tile(project$tiles[[1]])
+
+# stop tile server
+tile_server_stop()
+\dontshow{\}) # examplesIf}
+}
 \seealso{
 Other tile_server:
 \code{\link[=tile_server_add_tile]{tile_server_add_tile()}},

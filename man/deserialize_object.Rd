@@ -51,8 +51,10 @@ Other io:
 \code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
 \code{\link[=read_project]{read_project()}},
+\code{\link[=read_sf_data]{read_sf_data()}},
 \code{\link[=serialize_object]{serialize_object()}},
 \code{\link[=write_dataset]{write_dataset()}},
-\code{\link[=write_project]{write_project()}}
+\code{\link[=write_project]{write_project()}},
+\code{\link[=write_sf_data]{write_sf_data()}}
 }
 \concept{io}

@@ -54,15 +54,36 @@ test_that("create_tile_from_sf", {
   expect_equal(x$max_zoom, 5)
 })
 
-test_that("create_tile_from_dataset", {
+test_that("create_tile_from_project", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
-  d <- create_dataset_from_sf(simulate_spatial_data())
+  d <- simulate_project()
   path <- tempfile(fileext = ".pmtiles")
-  x <- create_tile_from_dataset(
+  x <- create_tile_from_project(
     d, column = "solution",
     source_layer = "x", path = path, max_zoom = 5, verbose = FALSE
+  )
+  # run tests
+  expect_s3_class(x, "Tile")
+  expect_equal(x$source_layer, "x")
+  expect_equal(x$path, path)
+  expect_true(file.exists(path))
+  expect_equal(x$max_zoom, 5)
+})
+
+test_that("create_tile_from_file", {
+  skip_if_python_freestiler_not_installed()
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  d <- sf::st_transform(simulate_spatial_data(), 4326)
+  path1 <- tempfile(fileext = ".gpkg")
+  sf::write_sf(d, path1)
+  path2 <- tempfile(fileext = ".pmtiles")
+  x <- create_tile_from_file(
+    path1, column = "solution",
+    source_layer = "x", path = path2, max_zoom = 5, verbose = FALSE
   )
   # run tests
   expect_s3_class(x, "Tile")

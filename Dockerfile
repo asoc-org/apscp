@@ -15,6 +15,7 @@ RUN apt-get update \
     curl \
     gdal-bin \
     htop \
+    pip \
     libuv1-dev \
     libglpk-dev \
     libabsl-dev \
@@ -48,6 +49,9 @@ RUN wget -v https://packages.gurobi.com/${GRB_SHORT_VERSION}/gurobi${GRB_VERSION
   && rm -f gurobi${GRB_VERSION}_linux64.tar.gz \
   && mv -f gurobi* /opt/gurobi \
   && rm -rf gurobi/linux64/docs
+
+## install python packages
+RUN pip install --break-system-packages --no-cache-dir freestiler
 
 ## install R packages
 RUN mkdir /renv

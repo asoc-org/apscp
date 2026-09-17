@@ -27,3 +27,18 @@ An invisible \`TRUE\` indicating success.
 
 Other mirai:
 [`mirai_async_stop()`](https://asoc-org.github.io/apscp/reference/mirai_async_stop.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# start asynchronous processing
+mirai_async_start()
+
+# run calculation with asynchronous processing
+result <- mirai::mirai({1 + 2})[]
+
+# stop asynchronous processing
+mirai_async_stop()
+}
+```

@@ -30,7 +30,8 @@ Other method:
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
-[`create_tile_from_dataset()`](https://asoc-org.github.io/apscp/reference/create_tile_from_dataset.md),
+[`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
+[`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)

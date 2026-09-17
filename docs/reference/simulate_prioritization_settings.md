@@ -29,3 +29,19 @@ Other simulation:
 [`simulate_provenance()`](https://asoc-org.github.io/apscp/reference/simulate_provenance.md),
 [`simulate_solution_legend()`](https://asoc-org.github.io/apscp/reference/simulate_solution_legend.md),
 [`simulate_spatial_data()`](https://asoc-org.github.io/apscp/reference/simulate_spatial_data.md)
+
+## Examples
+
+``` r
+# simulate project
+x <- simulate_project()
+#> Error in simulate_project(): could not find function "simulate_project"
+
+# simulate prioritization settings
+s <- simulate_prioritization_settings(x)
+#> Error in simulate_prioritization_settings(x): could not find function "simulate_prioritization_settings"
+
+# print settings
+print(s)
+#> Error: object 's' not found
+```

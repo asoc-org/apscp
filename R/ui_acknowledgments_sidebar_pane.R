@@ -13,7 +13,7 @@ NULL
 #'
 #' @examples
 #' # create object
-#' acknowledgments_sidebar_pane("pane_id")
+#' x <- acknowledgments_sidebar_pane("pane_id")
 #'
 #' @export
 acknowledgments_sidebar_pane <- function(id, icon = shiny::icon("heart")) {

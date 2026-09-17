@@ -7,48 +7,39 @@ zones:
 - Scientific
 - Tourism
 bbox:
-  input: Polar_Stereographic
+  input: EPSG:4326
   wkt: |-
-    PROJCRS["Polar_Stereographic",
-        BASEGEOGCRS["WGS 84",
-            DATUM["World Geodetic System 1984",
-                ELLIPSOID["WGS 84",6378137,298.257223563,
-                    LENGTHUNIT["metre",1]]],
-            PRIMEM["Greenwich",0,
-                ANGLEUNIT["degree",0.0174532925199433]],
-            ID["EPSG",4326]],
-        CONVERSION["Polar Stereographic (variant B)",
-            METHOD["Polar Stereographic (variant B)",
-                ID["EPSG",9829]],
-            PARAMETER["Latitude of standard parallel",-71,
-                ANGLEUNIT["degree",0.0174532925199433],
-                ID["EPSG",8832]],
-            PARAMETER["Longitude of origin",0,
-                ANGLEUNIT["degree",0.0174532925199433],
-                ID["EPSG",8833]],
-            PARAMETER["False easting",0,
-                LENGTHUNIT["metre",1],
-                ID["EPSG",8806]],
-            PARAMETER["False northing",0,
-                LENGTHUNIT["metre",1],
-                ID["EPSG",8807]]],
-        CS[Cartesian,2],
-            AXIS["(E)",north,
-                MERIDIAN[90,
-                    ANGLEUNIT["degree",0.0174532925199433,
-                        ID["EPSG",9122]]],
-                ORDER[1],
+    GEOGCRS["WGS 84",
+        ENSEMBLE["World Geodetic System 1984 ensemble",
+            MEMBER["World Geodetic System 1984 (Transit)"],
+            MEMBER["World Geodetic System 1984 (G730)"],
+            MEMBER["World Geodetic System 1984 (G873)"],
+            MEMBER["World Geodetic System 1984 (G1150)"],
+            MEMBER["World Geodetic System 1984 (G1674)"],
+            MEMBER["World Geodetic System 1984 (G1762)"],
+            MEMBER["World Geodetic System 1984 (G2139)"],
+            MEMBER["World Geodetic System 1984 (G2296)"],
+            ELLIPSOID["WGS 84",6378137,298.257223563,
                 LENGTHUNIT["metre",1]],
-            AXIS["(N)",north,
-                MERIDIAN[0,
-                    ANGLEUNIT["degree",0.0174532925199433,
-                        ID["EPSG",9122]]],
+            ENSEMBLEACCURACY[2.0]],
+        PRIMEM["Greenwich",0,
+            ANGLEUNIT["degree",0.0174532925199433]],
+        CS[ellipsoidal,2],
+            AXIS["geodetic latitude (Lat)",north,
+                ORDER[1],
+                ANGLEUNIT["degree",0.0174532925199433]],
+            AXIS["geodetic longitude (Lon)",east,
                 ORDER[2],
-                LENGTHUNIT["metre",1]]]
-  xmin: -2662500.0
-  ymin: 550500.0
-  xmax: -1667500.0
-  ymax: 2324500.0
+                ANGLEUNIT["degree",0.0174532925199433]],
+        USAGE[
+            SCOPE["Horizontal component of 3D system."],
+            AREA["World."],
+            BBOX[-90,-180,90,180]],
+        ID["EPSG",4326]]
+  xmin: -75.4165505
+  ymin: -73.2404735
+  xmax: -44.3891674
+  ymax: -60.3476308
   class: bbox
 bearing: 101.0
 zoom: 2.0
@@ -59,7 +50,7 @@ tiles:
   class: Tile
 costs:
 - name: Tourism vessel landings
-  id: 61ea546f-3c7e-479b-8734-beb3e4245fd9
+  id: be560247-fea1-42ef-a19c-269e90b6c039
   zone: Tourism
   weight: 1.0
   layer:
@@ -107,7 +98,7 @@ costs:
     class: Layer
   class: Cost
 - name: Tourism visitor landings
-  id: 1b557b81-997a-4ae5-a23a-1c2db3fcf628
+  id: c442c0df-fa18-45ba-b093-28155ff62c89
   zone: Tourism
   weight: 1.0
   layer:
@@ -156,7 +147,7 @@ costs:
   class: Cost
 features:
 - name: Adélie penguins
-  id: 48915720-a873-4f74-9bcc-9160baa80cee
+  id: 9564de2c-6382-4629-bb06-0decc8d0825b
   zone_targets:
   - 0.6
   - 0.1
@@ -218,7 +209,7 @@ features:
     class: Theme
   class: Feature
 - name: Antarctic fur seals
-  id: 0b5b15df-c2db-4103-9c50-bab4a1e4fe49
+  id: 4246aa79-92cd-48b7-ba28-b7b4f0c6c2e1
   zone_targets:
   - 0.3
   - 0.1
@@ -278,7 +269,7 @@ features:
     class: Theme
   class: Feature
 - name: Antarctic shag
-  id: 4958d71a-d978-48e3-bb64-d0876a8f0017
+  id: add8a3bb-4ffc-42fd-807c-84245a6d5d9d
   zone_targets:
   - 0.6
   - 0.1
@@ -321,7 +312,7 @@ features:
     class: Theme
   class: Feature
 - name: Antarctic terns
-  id: e8beba26-ca0b-4c1e-9ccb-411613131ec4
+  id: 04a7a0cf-ec1d-4e16-bdf1-e41350db3a8a
   zone_targets:
   - 0.6
   - 0.0
@@ -364,7 +355,7 @@ features:
     class: Theme
   class: Feature
 - name: Biological soil crust microbes
-  id: 863d5a4f-b5b8-4faf-9648-bba05d0a5cb9
+  id: 557c6452-a746-4f69-9c28-a517218a19c3
   zone_targets:
   - 0.7
   - 0.1
@@ -428,7 +419,7 @@ features:
     class: Theme
   class: Feature
 - name: Chinstrap penguins
-  id: dd846dfc-c18c-4bd6-aa14-8c5a580d57f9
+  id: 739a45d6-5977-416b-8f7b-25b360018a9a
   zone_targets:
   - 0.6
   - 0.1
@@ -492,7 +483,7 @@ features:
     class: Theme
   class: Feature
 - name: Continental landing site
-  id: 4e12cf5b-5f99-41b9-99dc-428c5ac6ce7e
+  id: 17ca4be2-7f34-474f-9789-9eb6ffd87332
   zone_targets:
   - 0.0
   - 0.0
@@ -535,7 +526,7 @@ features:
     class: Theme
   class: Feature
 - name: Crevasses
-  id: 5bd8f3cc-46eb-400e-b8e4-76d3c8d5cee9
+  id: c6f41b03-599c-4403-9973-e840b69b0865
   zone_targets:
   - 0.1
   - 0.1
@@ -597,7 +588,7 @@ features:
     class: Theme
   class: Feature
 - name: Dry soil microbes
-  id: d6ecc28d-12d2-41d5-a4e5-3d6ecafdc211
+  id: 405178c6-d6c7-4d78-8aaf-936d5af19388
   zone_targets:
   - 0.8
   - 0.1
@@ -657,7 +648,7 @@ features:
     class: Theme
   class: Feature
 - name: Elephant seals
-  id: 0caf7590-2228-4770-8436-2d1b5a154dd5
+  id: eda589db-535c-46bd-914a-fecc6375f25b
   zone_targets:
   - 0.6
   - 0.1
@@ -717,7 +708,7 @@ features:
     class: Theme
   class: Feature
 - name: Emperor penguins
-  id: caeac3a0-cf79-41bf-82e9-cd02394cec20
+  id: 023189eb-3d22-44c3-b522-712b65f11288
   zone_targets:
   - 0.6
   - 0.0
@@ -760,7 +751,7 @@ features:
     class: Theme
   class: Feature
 - name: Entomobryomorpha springtails
-  id: 92e8f00a-1a95-48a7-893c-bd998dd287c1
+  id: 6ae4f8c8-d804-46b0-9344-e50c168c7611
   zone_targets:
   - 0.2
   - 0.1
@@ -826,7 +817,7 @@ features:
     class: Theme
   class: Feature
 - name: Fast ice / shelf ice
-  id: 0dabf26a-832d-47d9-bd2c-7e9861d0b0c7
+  id: b5c85661-ea59-492f-ac86-f3a98a92acc2
   zone_targets:
   - 0.2
   - 0.4
@@ -890,7 +881,7 @@ features:
     class: Theme
   class: Feature
 - name: Fossil bearing rocks
-  id: d340770e-87f1-4a07-a6be-087689c43f3f
+  id: d140fe28-6b5f-4767-8b12-66ebcf00af0c
   zone_targets:
   - 0.1
   - 0.1
@@ -952,7 +943,7 @@ features:
     class: Theme
   class: Feature
 - name: Fresh water
-  id: 6b56cac2-7d58-4bd5-abcc-9e4c9a75f876
+  id: e8850366-00ce-4182-91ac-5b32241a357a
   zone_targets:
   - 0.1
   - 0.1
@@ -995,7 +986,7 @@ features:
     class: Theme
   class: Feature
 - name: Freshwater copepods
-  id: 5a5d1028-1acb-448f-976e-87dc84b19e19
+  id: 13b98b6f-ebcf-49f7-bcee-b9eee5a9a215
   zone_targets:
   - 0.3
   - 0.2
@@ -1059,7 +1050,7 @@ features:
     class: Theme
   class: Feature
 - name: General invertebrates
-  id: 3e56ce8a-d735-45a2-a344-b37c876f87ed
+  id: 911c23bd-40c2-4161-ac87-93e2795ab71f
   zone_targets:
   - 0.0
   - 0.0
@@ -1102,7 +1093,7 @@ features:
     class: Theme
   class: Feature
 - name: Gentoo penguins
-  id: 27017259-d0ed-4071-b6c2-ea640db2a9de
+  id: ec5df18f-db44-442e-8b77-adf9265e04b0
   zone_targets:
   - 0.4
   - 0.1
@@ -1168,7 +1159,7 @@ features:
     class: Theme
   class: Feature
 - name: Geological processes
-  id: a1635691-bf83-4a79-96af-52d72ffcbdf4
+  id: 78f9f0e8-641a-48cf-a7b3-1118458f96a0
   zone_targets:
   - 0.3
   - 0.1
@@ -1229,7 +1220,7 @@ features:
     class: Theme
   class: Feature
 - name: Geotermal/volcanic sites
-  id: e5a090e1-7f8e-4212-80dd-ace4af89bb9e
+  id: a0d3836d-e2af-427c-945f-a1f0221b1d0a
   zone_targets:
   - 0.6
   - 0.0
@@ -1272,7 +1263,7 @@ features:
     class: Theme
   class: Feature
 - name: Glaciers
-  id: bdc746ca-f291-4c00-bcaa-f90262118f4b
+  id: fd008fb7-447e-494e-97bb-8fc988087eab
   zone_targets:
   - 0.2
   - 0.1
@@ -1334,7 +1325,7 @@ features:
     class: Theme
   class: Feature
 - name: Historic monuments
-  id: daa7a27b-f059-4690-a507-f6f8842764b4
+  id: dcaea144-a8f6-4ab0-b1fb-4e064516eb35
   zone_targets:
   - 0.0
   - 0.5
@@ -1377,7 +1368,7 @@ features:
     class: Theme
   class: Feature
 - name: Ice shelf
-  id: 74312bbb-7b17-45f1-a695-f172ed732326
+  id: e763ac1f-ed3b-4d77-bdb4-64047a4bb52a
   zone_targets:
   - 0.0
   - 0.1
@@ -1420,7 +1411,7 @@ features:
     class: Theme
   class: Feature
 - name: Intertidal mites
-  id: e15ad4c4-08c6-4412-afe0-9fec72644aa9
+  id: 6a08eab1-e995-4a9f-a24b-ab70ac3a5561
   zone_targets:
   - 0.3
   - 0.1
@@ -1480,7 +1471,7 @@ features:
     class: Theme
   class: Feature
 - name: Intertidal oligochaetes
-  id: a87880e8-04c0-487c-b08c-841f64ad1429
+  id: 6b6b9c36-2695-4b9a-bf42-3048e6c763f5
   zone_targets:
   - 0.2
   - 0.1
@@ -1542,7 +1533,7 @@ features:
     class: Theme
   class: Feature
 - name: Intertidal springtails
-  id: dd0b13fa-1d25-4bf7-b9b3-08b808228ee1
+  id: c86d2665-288b-46a4-a9ed-2b4c43f62a3e
   zone_targets:
   - 0.2
   - 0.3
@@ -1604,7 +1595,7 @@ features:
     class: Theme
   class: Feature
 - name: Invasive species
-  id: d6bcf165-10ef-4fce-ae2b-3d43f17f94ea
+  id: 0c94ecfd-136f-437f-88a9-f7dfa44063f5
   zone_targets:
   - 0.0
   - 0.1
@@ -1648,7 +1639,7 @@ features:
     class: Theme
   class: Feature
 - name: King penguins
-  id: 5984432d-ffd2-4f47-922b-174bedfa441c
+  id: e5324341-4b97-4192-9243-e44cec79b577
   zone_targets:
   - 0.9
   - 0.1
@@ -1708,7 +1699,7 @@ features:
     class: Theme
   class: Feature
 - name: Leafy liverworts
-  id: bc65d085-b63e-46a7-8c64-df2ba83fc8aa
+  id: 0cebd9fb-8710-402b-9107-903c070a8f4c
   zone_targets:
   - 0.2
   - 0.1
@@ -1770,7 +1761,7 @@ features:
     class: Theme
   class: Feature
 - name: Lithic microbes
-  id: 01058bf6-7b7a-4e16-9d41-97cc80e459b5
+  id: dcafcc5c-6b76-41a2-bced-d73da0243d80
   zone_targets:
   - 0.6
   - 0.1
@@ -1833,7 +1824,7 @@ features:
     class: Theme
   class: Feature
 - name: Macaroni penguins
-  id: d8813183-2faf-4b6b-a684-e6bc783d4442
+  id: f9de27ad-f6a0-49c5-9d44-a2d42bc2e11d
   zone_targets:
   - 0.7
   - 0.1
@@ -1897,7 +1888,7 @@ features:
     class: Theme
   class: Feature
 - name: Mesic mosses
-  id: 1f5b04ed-3f7a-4635-9726-ed4b8df69b66
+  id: 78b2f2f1-962c-43db-b5d5-6791691d5734
   zone_targets:
   - 0.1
   - 0.1
@@ -1959,7 +1950,7 @@ features:
     class: Theme
   class: Feature
 - name: Meteorites
-  id: 33b92741-7cbb-4c3b-b9e4-61eb39214aa9
+  id: e6fdf266-1fc6-49a0-bff5-6ff8fe163046
   zone_targets:
   - 0.4
   - 0.1
@@ -2021,7 +2012,7 @@ features:
     class: Theme
   class: Feature
 - name: Microbial mats
-  id: 7db0868a-cc87-479a-a4f0-3b8c598b56bb
+  id: 9ce1600d-406d-409b-80d0-2cf052157767
   zone_targets:
   - 0.4
   - 0.1
@@ -2081,7 +2072,7 @@ features:
     class: Theme
   class: Feature
 - name: Minerals and crystals
-  id: 47e2fb50-c52a-4f8c-a741-8d233722ae24
+  id: 7e39e1c9-c86e-45a4-9d23-aeea85b40567
   zone_targets:
   - 0.6
   - 0.1
@@ -2141,7 +2132,7 @@ features:
     class: Theme
   class: Feature
 - name: Monitoring sites
-  id: 1c9a3ec3-7ef4-4453-8ed7-575b4848137d
+  id: 704d10d8-9c30-4b30-9004-089ecd38a0bc
   zone_targets:
   - 0.0
   - 0.1
@@ -2184,7 +2175,7 @@ features:
     class: Theme
   class: Feature
 - name: Moss-associated microfauna
-  id: fa25f59d-cf3d-4a51-b24e-817ff01f10f3
+  id: 46e454ac-664b-4b82-8bce-b25bdc8ab543
   zone_targets:
   - 0.2
   - 0.1
@@ -2246,7 +2237,7 @@ features:
     class: Theme
   class: Feature
 - name: Other seabird colonies
-  id: abfedc5e-e9f8-4910-95a9-1e68d02701c4
+  id: 2163a16e-0a2d-4374-8a5d-063fcec879d3
   zone_targets:
   - 0.0
   - 0.0
@@ -2289,7 +2280,7 @@ features:
     class: Theme
   class: Feature
 - name: Penguin rookery-associated nematodes
-  id: 7ba9087a-9a16-415d-9049-825d4cd836d0
+  id: 2abddf5d-e930-4441-a2b4-9364045ddd3f
   zone_targets:
   - 0.2
   - 0.1
@@ -2349,7 +2340,7 @@ features:
     class: Theme
   class: Feature
 - name: Plankton
-  id: 65af49d7-6d62-4943-b023-b4a4af722e83
+  id: 06fd5884-ea33-4016-8ac4-4b245a00d5a9
   zone_targets:
   - 0.8
   - 0.1
@@ -2411,7 +2402,7 @@ features:
     class: Theme
   class: Feature
 - name: Poduromorpha springtails
-  id: 1f830657-f871-4457-9365-4566cfe19d6f
+  id: 9687474d-dc40-4fd5-904d-be9ddd65744f
   zone_targets:
   - 0.3
   - 0.5
@@ -2471,7 +2462,7 @@ features:
     class: Theme
   class: Feature
 - name: Potential expansion zones
-  id: dd19842c-c0db-48c5-81b8-9bf60954498f
+  id: a36f238a-da52-4e48-82d2-e7364cb2b6fc
   zone_targets:
   - 0.3
   - 0.1
@@ -2531,7 +2522,7 @@ features:
     class: Theme
   class: Feature
 - name: Procellariids
-  id: f517924a-24a9-4dda-808b-e93a103dfcc3
+  id: 5a406fa7-adf7-4864-9696-ddc6611682a8
   zone_targets:
   - 0.6
   - 0.0
@@ -2575,7 +2566,7 @@ features:
     class: Theme
   class: Feature
 - name: Research stations
-  id: 5dd23a8e-71d7-45d3-ba70-efbedb9c8485
+  id: df041367-0c22-4500-b02a-f9b0f05e244e
   zone_targets:
   - 0.0
   - 0.3
@@ -2618,7 +2609,7 @@ features:
     class: Theme
   class: Feature
 - name: Scientific field camps
-  id: 348124b0-3267-40e3-9ef5-e250aa494cf7
+  id: 80822af2-7535-4666-b246-85d89b8a85b2
   zone_targets:
   - 0.0
   - 0.0
@@ -2661,7 +2652,7 @@ features:
     class: Theme
   class: Feature
 - name: Sites past the Antarctic circle
-  id: 7ddd69b8-af5c-48d4-b384-dc99f850c33c
+  id: 922b98eb-8e67-43ab-8d00-bc84bac8d31d
   zone_targets:
   - 0.0
   - 0.0
@@ -2704,7 +2695,7 @@ features:
     class: Theme
   class: Feature
 - name: Snow algae
-  id: 4336ebdd-909d-4249-94e2-6c761e0b06e5
+  id: da06b2d8-142f-4953-a261-b17237ac3411
   zone_targets:
   - 0.6
   - 0.1
@@ -2766,7 +2757,7 @@ features:
     class: Theme
   class: Feature
 - name: Snow algae 2
-  id: d72019b2-5fba-4991-9a5d-6d81e3a49f9b
+  id: 64c0f1a3-916d-4be6-bac7-8b4179605282
   zone_targets:
   - 0.3
   - 0.1
@@ -2809,7 +2800,7 @@ features:
     class: Theme
   class: Feature
 - name: Thalloid liverworts
-  id: b74a84e6-fc2a-4be0-8b3f-5b6bb89a10bf
+  id: ba386279-cb37-4baa-8e85-ccb575ba5fb0
   zone_targets:
   - 0.5
   - 0.1
@@ -2871,7 +2862,7 @@ features:
     class: Theme
   class: Feature
 - name: Truly aquatic mosses
-  id: ed784f6f-24cb-4e64-8afe-eecedaba3cb6
+  id: a8fb4d20-30c6-41d3-92f9-05f358a55527
   zone_targets:
   - 0.2
   - 0.1
@@ -2933,7 +2924,7 @@ features:
     class: Theme
   class: Feature
 - name: Vegetation
-  id: 12cdce11-4ba4-4a5f-b4c1-b5e5eaac4cee
+  id: 93eb526f-2a60-4004-9554-c9e84ff0a0cd
   zone_targets:
   - 0.0
   - 0.0
@@ -2976,7 +2967,7 @@ features:
     class: Theme
   class: Feature
 - name: Weddell seals
-  id: 5e0ac404-1911-4db1-94c2-0bb196fe1233
+  id: 368f4833-fb67-4cf7-bdd8-e567a0899beb
   zone_targets:
   - 0.1
   - 0.1
@@ -3040,7 +3031,7 @@ features:
     class: Theme
   class: Feature
 - name: Wet soil microbes
-  id: e68e3dde-cb24-4517-b297-6a917d6f70c6
+  id: 40a7590c-a815-4e15-b7ad-abb53b9cda3c
   zone_targets:
   - 0.5
   - 0.1
@@ -3105,7 +3096,7 @@ features:
   class: Feature
 locks:
 - name: ASPA
-  id: 7a90eb98-6f0d-4d67-bc7d-10c635d79796
+  id: ab4f3c07-bb59-4d5e-8049-0eb64438ea98
   zone: Biodiversity
   layer:
     column: ASPA
@@ -3133,7 +3124,7 @@ locks:
     class: Layer
   class: Lock
 - name: Inviolate sites
-  id: 0e759c11-e98e-4841-9265-43fd864610ed
+  id: 0853fce4-d594-467c-bd5a-9b51b6d7863b
   zone: Biodiversity
   layer:
     column: Inviolate sites

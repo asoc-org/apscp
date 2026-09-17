@@ -54,5 +54,6 @@ utils::globalVariables(
 #' @importFrom DBI dbConnect
 #' @importFrom RSQLite SQLite
 #' @importFrom shinyalert shinyalert
+#' @importFrom markdown markdownToHTML
 #' @export
 NULL

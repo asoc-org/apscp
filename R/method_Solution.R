@@ -7,9 +7,9 @@ NULL
 #'
 #' @param name `character` value with name.
 #'
-#' @param dataset [new_dataset() object that has a column with the solution.
+#' @param project [new_project()] object that has a column with the solution.
 #'
-#' @param column `character` value with column name in `dataset` that
+#' @param column `character` value with column name in `project$dataset` that
 #' has the values.
 #'
 #' @param tile [new_tile()] object tile information for the solution.
@@ -25,36 +25,31 @@ NULL
 #'
 #' @examples
 #' # create data
-#' d <- simulate_spatial_data()
+#' project <- simulate_project()
 #'
 #' # create solution
-#' x <- new_solution(
-#'   name = "solution",
-#'   layer = new_layer(
-#'     dataset = create_dataset_from_sf(d),
-#'     tile = create_tile_from_sf(d, verbose = FALSE),
-#'     column = "solution",
-#'     legend = simulate_solution_legend(),
-#'     provenance = simulate_provenance(),
-#'     total = 500,
-#'     details = "extra info"
-#'   )
+#' x <- create_solution(
+#'   name = "user solution",
+#'   project = project,
+#'   column = "solution",
+#'   legend = simulate_solution_legend(),
+#'   provenance = simulate_provenance()
 #' )
 #'
 #' @export
 create_solution <- function(
-  name, dataset, column, legend, provenance,
+  name, project, column, legend, provenance,
   tile = NULL, id = uuid::UUIDgenerate()
 ) {
   # assert valid arguments
   assertthat::assert_that(
     ## name
     assertthat::is.string(name),
-    ## dataset
-    inherits(dataset, "Dataset"),
+    ## project
+    inherits(project, "Project"),
     ## column_name
     assertthat::is.string(column),
-    dataset$has_column(column),
+    project$dataset$has_column(column),
     ## legend
     inherits(legend, "Legend"),
     ## id
@@ -63,8 +58,8 @@ create_solution <- function(
 
   # if needed, create tile
   if (is.null(tile)) {
-    tile <- create_tile_from_dataset(
-      x = dataset,
+    tile <- create_tile_from_project(
+      x = project,
       column = column,
       source_layer = "layer",
       path = tempfile(
@@ -82,9 +77,9 @@ create_solution <- function(
     name = name,
     id = id,
     layer = new_layer(
-      dataset = dataset,
+      dataset = project$dataset,
       column = column,
-      total = dataset$get_column_total(column),
+      total = project$dataset$get_column_total(column),
       legend = legend,
       provenance = provenance,
       tile = tile,
@@ -174,14 +169,14 @@ create_solution_from_prioritization <- function(
     name = name,
     layer = new_layer(
       dataset = project$dataset,
-      tile = create_tile_from_dataset(
-        x = project$dataset,
+      tile = create_tile_from_project(
+        x = project,
         column = column,
         path = tempfile(
           tmpdir = get_golem_config("tile_server_dir"),
           fileext = ".pmtiles"
         ),
-        verbose = FALSE
+        verbose = get_golem_config("verbose")
       ),
       column = column,
       legend = create_solution_legend(project),

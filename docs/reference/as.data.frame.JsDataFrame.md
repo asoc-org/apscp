@@ -28,8 +28,8 @@ A \`data.frame\` object.
 Other misc:
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md),
+[`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
+[`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md),
 [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md),
 [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md),
-[`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md),
-[`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md),
-[`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
+[`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)

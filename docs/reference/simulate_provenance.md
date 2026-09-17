@@ -22,3 +22,11 @@ Other simulation:
 [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md),
 [`simulate_solution_legend()`](https://asoc-org.github.io/apscp/reference/simulate_solution_legend.md),
 [`simulate_spatial_data()`](https://asoc-org.github.io/apscp/reference/simulate_spatial_data.md)
+
+## Examples
+
+``` r
+# simulate provenance
+simulate_provenance()
+#> Error in simulate_provenance(): could not find function "simulate_provenance"
+```

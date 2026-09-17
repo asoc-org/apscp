@@ -15,14 +15,31 @@ A [sf::st_sf()] object.
 \description{
 Read sf data from zip file
 }
+\examples{
+# specify file path to import data
+path <- system.file(
+  "extdata", "antarctic-peninsula_pu.gpkg.zip", package = "apscp"
+)
+
+# read data
+x <- read_sf_data(path)
+
+# create file path to export data
+path2 <- tempfile(fileext = ".gpkg.zip")
+
+# write data
+write_sf_data(x, path2)
+
+}
 \seealso{
-Other misc:
-\code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
-\code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
-\code{\link[=color_palette]{color_palette()}},
-\code{\link[=is_relative_path]{is_relative_path()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=write_matrix]{write_matrix()}},
+Other io:
+\code{\link[=deserialize_object]{deserialize_object()}},
+\code{\link[=read_builtin_project]{read_builtin_project()}},
+\code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_project]{read_project()}},
+\code{\link[=serialize_object]{serialize_object()}},
+\code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_project]{write_project()}},
 \code{\link[=write_sf_data]{write_sf_data()}}
 }
-\concept{misc}
+\concept{io}
