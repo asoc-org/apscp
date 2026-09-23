@@ -35,7 +35,9 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
   function_names <- c(
     "is_installed",
     "convert_lock_settings_to_allocation",
-    "prioritization"
+    "solve_prioritization",
+    "eval_prioritization",
+    "calc_repr_metrics"
   )
   # create list with desired functions,
   ## note that we manually override the environment for each function

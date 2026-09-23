@@ -11,6 +11,8 @@ create_solution(
   column,
   legend,
   provenance,
+  settings,
+  metrics,
   tile = NULL,
   id = uuid::UUIDgenerate()
 )
@@ -38,6 +40,14 @@ create_solution(
 - provenance:
 
   \[new_provenance()\] object.
+
+- settings:
+
+  \`list\` of settings used to generate the solution.
+
+- metrics:
+
+  \`list\` with evaluation metrics for the solution.
 
 - tile:
 
@@ -79,7 +89,9 @@ x <- create_solution(
   project = project,
   column = "solution",
   legend = simulate_solution_legend(),
-  provenance = simulate_provenance()
+  provenance = simulate_provenance(),
+  settings = simulate_prioritization_settings(project),
+  metrics = simulate_prioritization_metrics(project)
 )
-#> Error in create_solution(name = "user solution", project = project, column = "solution",     legend = simulate_solution_legend(), provenance = simulate_provenance()): could not find function "create_solution"
+#> Error in create_solution(name = "user solution", project = project, column = "solution",     legend = simulate_solution_legend(), provenance = simulate_provenance(),     settings = simulate_prioritization_settings(project), metrics = simulate_prioritization_metrics(project)): could not find function "create_solution"
 ```

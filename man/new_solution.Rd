@@ -4,13 +4,17 @@
 \alias{new_solution}
 \title{New solution}
 \usage{
-new_solution(name, layer, id = uuid::UUIDgenerate())
+new_solution(name, layer, settings, metrics, id = uuid::UUIDgenerate())
 }
 \arguments{
 \item{name}{`character` value with the name.}
 
 \item{layer}{[new_layer()] object used to store information for
 visualization.}
+
+\item{settings}{`list` of settings used to generate the solution.}
+
+\item{metrics}{`list` with evaluation metrics for the solution.}
 
 \item{id}{`character` value with unique identifier.
 Defaults to a random identifier ([uuid::UUIDgenerate()]).}
@@ -23,7 +27,7 @@ Create a new solution object.
 }
 \examples{
 # simulate spatial data
-sim_data <- simulate_spatial_data()
+sim_project <- simulate_project()
 
 # create object
 x <- new_solution(
@@ -31,12 +35,14 @@ x <- new_solution(
   layer = new_layer(
     column = "solution",
     total = 500,
-    dataset = create_dataset_from_sf(sim_data),
-    tile = create_tile_from_sf(sim_data),
+    dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),
+    tile = create_tile_from_sf(sim_project$dataset$get_sf()),
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
     details = "extra info"
-  )
+  ),
+  settings = simulate_prioritization_settings(sim_project),
+  metrics = simulate_prioritization_metrics(sim_project)
 )
 
 # preview object

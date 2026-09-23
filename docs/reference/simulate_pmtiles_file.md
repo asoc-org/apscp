@@ -12,11 +12,17 @@ simulate_pmtiles_file()
 
 A \`character\` value with the file path.
 
+## Details
+
+Note that simulation functions are intended to help faciliate package
+testing and should not be used for any research purposes.
+
 ## See also
 
 Other simulation:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
+[`simulate_prioritization_metrics()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_metrics.md),
 [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md),
 [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md),
 [`simulate_provenance()`](https://asoc-org.github.io/apscp/reference/simulate_provenance.md),

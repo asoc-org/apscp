@@ -1,4 +1,4 @@
-#' @include internal.R fct_prioritization.R
+#' @include internal.R fct_solve_prioritization.R
 NULL
 
 #' Create solution
@@ -14,6 +14,10 @@ NULL
 #'
 #' @param tile [new_tile()] object tile information for the solution.
 #' Defaults to `NULL` such that a [new_tile()] object is automatically created.
+#'
+#' @param settings `list` of settings used to generate the solution.
+#'
+#' @param metrics `list` with evaluation metrics for the solution.
 #'
 #' @inheritParams new_feature
 #'
@@ -33,12 +37,14 @@ NULL
 #'   project = project,
 #'   column = "solution",
 #'   legend = simulate_solution_legend(),
-#'   provenance = simulate_provenance()
+#'   provenance = simulate_provenance(),
+#'   settings = simulate_prioritization_settings(project),
+#'   metrics = simulate_prioritization_metrics(project)
 #' )
 #'
 #' @export
 create_solution <- function(
-  name, project, column, legend, provenance,
+  name, project, column, legend, provenance, settings, metrics,
   tile = NULL, id = uuid::UUIDgenerate()
 ) {
   # assert valid arguments
@@ -52,6 +58,12 @@ create_solution <- function(
     project$dataset$has_column(column),
     ## legend
     inherits(legend, "Legend"),
+    ## provenance
+    inherits(provenance, "Provenance"),
+    ## settings
+    is.list(settings),
+    ## metrics
+    is.list(metrics),
     ## id
     assertthat::is.string(id)
   )
@@ -75,6 +87,8 @@ create_solution <- function(
   # return new solution
   new_solution(
     name = name,
+    settings = settings,
+    metrics = metrics,
     id = id,
     layer = new_layer(
       dataset = project$dataset,
@@ -94,6 +108,7 @@ create_solution <- function(
 #' Create a new solution based on spatial prioritization.
 #'
 #' @inheritParams new_solution
+#' @inheritParams solve_prioritization
 #'
 #' @param project [new_project()] object to which `prioritization `should be
 #' added.
@@ -101,7 +116,13 @@ create_solution <- function(
 #' @param column `character` value with column name used to store
 #' `prioritization` in the dataset that underpins `project`.
 #'
-#' @param prioritization `list` object generated with [prioritization()].
+#' @param prioritization `numeric` vector with a value for each planning
+#' unit to indicate zone allocations.
+#'
+#' @param metrics `list` with evaluation metrics for prioritization.
+#' Defaults to `NULL` such that the metrics are calculated automatically.
+#'
+#' @inheritSection solve_prioritization Settings format
 #'
 #' @return A [new_solution()] object.
 #'
@@ -111,13 +132,14 @@ create_solution <- function(
 #' # simulate data
 #' p <- simulate_project()
 #' s <- simulate_prioritization_settings(p)
-#' d <- prioritization(p, s, solver = "cbc", gap = 0.1)
+#' d <- solve_prioritization(p, s, solver = "cbc", gap = 0.1)
 #'
 #' # generate solution
 #' x <- create_solution_from_prioritization(
 #'   name = "sol",
+#'   project = p,
 #'   prioritization = d,
-#'   project = p
+#'   settings = s
 #' )
 #'
 #' # print solution
@@ -126,9 +148,11 @@ create_solution <- function(
 #' @export
 create_solution_from_prioritization <- function(
   name,
-  prioritization,
   project,
+  prioritization,
+  settings,
   column = NULL,
+  metrics = NULL,
   id = uuid::UUIDgenerate()
 ) {
   # assert that arguments are valid
@@ -140,7 +164,9 @@ create_solution_from_prioritization <- function(
     assertthat::is.string(id),
     assertthat::noNA(id),
     ## prioritization
-    inherits(prioritization, "Prioritization")
+    is.numeric(prioritization),
+    identical(length(prioritization), project$dataset$get_n_pu()),
+    max(prioritization) <= length(project$zones)
   )
 
   # process column name
@@ -161,8 +187,15 @@ create_solution_from_prioritization <- function(
     )
   }
 
+  # process metrics
+  if (!is.null(metrics)) {
+    assertthat::assert_that(is.list(metrics))
+  } else {
+    metrics <- eval_prioritization(project, prioritization)
+  }
+
   # store column in dataset
-  project$dataset$set_column_data(column, prioritization$status)
+  project$dataset$set_column_data(column, prioritization)
 
   # return new solution object
   new_solution(
@@ -181,9 +214,11 @@ create_solution_from_prioritization <- function(
       column = column,
       legend = create_solution_legend(project),
       provenance = tool_generated_provenance(),
-      total = sum(prioritization$status > 0, na.rm = TRUE),
+      total = sum(prioritization, na.rm = TRUE),
       details = NULL
     ),
+    settings = settings,
+    metrics = metrics,
     id = id
   )
 }

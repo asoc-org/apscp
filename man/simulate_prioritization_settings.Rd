@@ -11,11 +11,14 @@ simulate_prioritization_settings(project)
 }
 \value{
 A `list` with the following elements:
-`feature_settings`, `lock_in_setting`, `lock_out_settings`,
-and `cost_settings`.
+`"features"`, `"locks"`, and `"costs"`.
 }
 \description{
-Simulate settings for generating a [prioritization()].
+Simulate settings for [solve_prioritization()].
+}
+\details{
+Note that simulation functions are intended to help faciliate
+package testing and should not be used for any research purposes.
 }
 \examples{
 # simulate project
@@ -33,6 +36,7 @@ Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},
+\code{\link[=simulate_prioritization_metrics]{simulate_prioritization_metrics()}},
 \code{\link[=simulate_project]{simulate_project()}},
 \code{\link[=simulate_provenance]{simulate_provenance()}},
 \code{\link[=simulate_solution_legend]{simulate_solution_legend()}},

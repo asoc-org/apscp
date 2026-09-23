@@ -1,4 +1,4 @@
-#' @include internal.R
+#' @include internal.R fct_eval_prioritization.R
 NULL
 
 #' Generate a prioritization
@@ -67,29 +67,27 @@ NULL
 #'
 #' }
 #'
-#' @return A `Prioritization` class object. This is a `list` with a `status`
-#' element that contains a `numeric` vector
-#' with values indicating the zone for each planning unit, and a `metrics`
-#' element that contains performance metrics.
+#' @return
+#' A `numeric` vector with values indicating the zone for each planning unit.
 #'
 #' @family optimization
 #'
 #' @examples
 #' # simulate data
 #' project <- simulate_project()
-#' solver_settings <- simulate_prioritization_settings(project)
+#' settings <- simulate_prioritization_settings(project)
 #'
 #' # preview settings
-#' print(solver_settings)
+#' print(settings)
 #'
 #' # generate solution
-#' sol <- prioritization(project, solver_settings)
+#' sol <- solve_prioritization(project, settings)
 #'
 #' # preview solution
 #' print(sol)
 #'
 #' @export
-prioritization <- function(
+solve_prioritization <- function(
   project,
   settings,
   gap = 0.1,
@@ -148,11 +146,12 @@ prioritization <- function(
   }
 
   # preliminary data processing
-  ## cost settings
-  settings$costs$zone[nchar(settings$costs$zone) == 0L] <- NA_character_
-  settings$costs <- settings$costs[!is.na(settings$costs$zone), , drop = FALSE]
-  ## feature settings
-  settings$feature <- settings$feature[
+  ## costs settings
+  costs_settings <- settings$costs
+  costs_settings$zone[nchar(costs_settings$zone) == 0L] <- NA_character_
+  costs_settings <- costs_settings[!is.na(costs_settings$zone), , drop = FALSE]
+  ## features settings
+  features_settings <- settings$features[
     settings$features$target > 1e-4 & settings$features$weight > 1e-4, ,
     drop = FALSE
   ]
@@ -168,12 +167,11 @@ prioritization <- function(
   prob <- lapply(project$zones, function(x) {
     ## extract settings for zone
     zone_settings <-
-      settings$features[settings$features$zone == x, , drop = FALSE]
+      features_settings[features_settings$zone == x, , drop = FALSE]
     ## if no features, then skip
     if (identical(nrow(zone_settings), 0L)) return(NULL)
     ## prepare zones object
-    zones <-
-      list(rep("_zeros", nrow(zone_settings)))[rep(1, length(project$zones))]
+    zones <- list(zone_settings$column)[rep(1, length(project$zones))]
     zones[[match(x, project$zones)]] <- zone_settings$column
     zones$zone_names <- project$zones
     zones$feature_names <- zone_settings$column
@@ -210,7 +208,7 @@ prioritization <- function(
   prob <- prob[!skipped_zones]
 
   # add in extra problems based on cost layers
-  {for (i in seq_len(nrow(settings$costs))) {
+  {for (i in seq_len(nrow(costs_settings))) {
     ## prepare zones object
     zones <- list("_zeros")[rep(1, length(project$zones))]
     zones$zone_names <- project$zones
@@ -218,11 +216,11 @@ prioritization <- function(
     zones <- do.call(prioritizr::zones, zones)
     ## prepare cost values
     curr_pu_data <- pu_data[, c("id", "_zeros"), drop = FALSE]
-    curr_pu_data$cost <- pu_data[[settings$costs$column[[i]]]]
+    curr_pu_data$cost <- pu_data[[costs_settings$column[[i]]]]
     curr_pu_data$cost[is.na(curr_pu_data$cost)] <- 0
     ## prepare cost columns
     cost <- rep("cost", length(project$zones))
-    cost[match(settings$costs$zone[[i]], project$zones)] <- "_zeros"
+    cost[match(costs_settings$zone[[i]], project$zones)] <- "_zeros"
     ## add problem with cost
     prob[[length(prob) + 1]] <-
       ## return problem
@@ -280,7 +278,7 @@ prioritization <- function(
 
   # add multi-objective approach
   ## initialize weights
-  moo_zones <- c(prob_zones, settings$costs$zone)
+  moo_zones <- c(prob_zones, costs_settings$zone)
   moo_freq <- as.data.frame(table(moo_zones))
   moo_weights <- 1 / moo_freq[[2]][match(moo_zones, moo_freq[[1]])]
   ## add approach
@@ -293,22 +291,15 @@ prioritization <- function(
   # solve problem
   raw_sol <- solve(prob, run_checks = FALSE, force = TRUE)
 
-  # prepare status
-  status <- prioritizr::category_vector(
-    raw_sol[, paste0("solution_1_", project$zones),  drop = FALSE]
- )
-
-  # prepare metrics
-  obj_value <- attr(raw_sol, "objective")
-
   # return formatted solution
-  structure(
-    list(
-      status = status,
-      metrics = list(obj_value)
+  out <- structure(
+    prioritizr::category_vector(
+      raw_sol[, paste0("solution_1_", project$zones),  drop = FALSE]
     ),
     class = "Prioritization"
   )
+  attr(out, "obj_value") <- attr(raw_sol, "objective")
+  out
 }
 
 #' Convert lock settings to zone allocation

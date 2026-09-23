@@ -7,13 +7,15 @@ NULL
 #'
 #' @inheritParams new_feature
 #'
+#' @inheritParams create_solution
+#'
 #' @return A `Solution` object.
 #'
 #' @family class
 #'
 #' @examples
 #' # simulate spatial data
-#' sim_data <- simulate_spatial_data()
+#' sim_project <- simulate_project()
 #'
 #' # create object
 #' x <- new_solution(
@@ -21,19 +23,23 @@ NULL
 #'   layer = new_layer(
 #'     column = "solution",
 #'     total = 500,
-#'     dataset = create_dataset_from_sf(sim_data),
-#'     tile = create_tile_from_sf(sim_data),
+#'     dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),
+#'     tile = create_tile_from_sf(sim_project$dataset$get_sf()),
 #'     legend = simulate_solution_legend(),
 #'     provenance = simulate_provenance(),
 #'     details = "extra info"
-#'   )
+#'   ),
+#'   settings = simulate_prioritization_settings(sim_project),
+#'   metrics = simulate_prioritization_metrics(sim_project)
 #' )
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-new_solution <- function(name, layer, id = uuid::UUIDgenerate()) {
+new_solution <- function(
+  name, layer, settings, metrics, id = uuid::UUIDgenerate()
+) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
@@ -41,13 +47,23 @@ new_solution <- function(name, layer, id = uuid::UUIDgenerate()) {
     assertthat::noNA(name),
     ## layer
     inherits(layer, "Layer"),
+    ## settings
+    is.list(settings),
+    ## metrics
+    is.list(metrics),
     ## id
     assertthat::is.string(id),
     assertthat::noNA(id)
   )
   # return object
   structure(
-    list(name = name, id = id, layer = layer),
+    list(
+      name = name,
+      id = id,
+      settings = settings,
+      metrics = metrics,
+      layer = layer
+    ),
     class = c("Solution", "ProjectComponent")
   )
 }

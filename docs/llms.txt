@@ -302,7 +302,9 @@ Functions for custom widgets.
 
 Functions for optimization.
 
-- [`prioritization()`](https://asoc-org.github.io/apscp/reference/prioritization.md)
+- [`eval_prioritization()`](https://asoc-org.github.io/apscp/reference/eval_prioritization.md)
+  : Evaluate a prioritization
+- [`solve_prioritization()`](https://asoc-org.github.io/apscp/reference/solve_prioritization.md)
   : Generate a prioritization
 
 ## Mapping
@@ -383,6 +385,8 @@ Functions for simulating data.
   : Simulate continuous legend
 - [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
   : Simulate PMtiles file
+- [`simulate_prioritization_metrics()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_metrics.md)
+  : Simulate prioritization metrics
 - [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md)
   : Simulate prioritization settings
 - [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md)

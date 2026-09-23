@@ -44,7 +44,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_solution</span><span class="op">(</span><span class="va">name</span>, <span class="va">layer</span>, id <span class="op">=</span> <span class="fu">uuid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/uuid/man/UUIDgenerate.html" class="external-link">UUIDgenerate</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">new_solution</span><span class="op">(</span><span class="va">name</span>, <span class="va">layer</span>, <span class="va">settings</span>, <span class="va">metrics</span>, id <span class="op">=</span> <span class="fu">uuid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/uuid/man/UUIDgenerate.html" class="external-link">UUIDgenerate</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -58,6 +58,14 @@
 <dt id="arg-layer">layer<a class="anchor" aria-label="anchor" href="#arg-layer"></a></dt>
 <dd><p>[new_layer()] object used to store information for
 visualization.</p></dd>
+
+
+<dt id="arg-settings">settings<a class="anchor" aria-label="anchor" href="#arg-settings"></a></dt>
+<dd><p>`list` of settings used to generate the solution.</p></dd>
+
+
+<dt id="arg-metrics">metrics<a class="anchor" aria-label="anchor" href="#arg-metrics"></a></dt>
+<dd><p>`list` with evaluation metrics for the solution.</p></dd>
 
 
 <dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
@@ -89,8 +97,8 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># simulate spatial data</span></span></span>
-<span class="r-in"><span><span class="va">sim_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_spatial_data.html">simulate_spatial_data</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_spatial_data():</span> could not find function "simulate_spatial_data"</span>
+<span class="r-in"><span><span class="va">sim_project</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_project.html">simulate_project</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_project():</span> could not find function "simulate_project"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create object</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_solution</span><span class="op">(</span></span></span>
@@ -98,14 +106,16 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
 <span class="r-in"><span>  layer <span class="op">=</span> <span class="fu"><a href="new_layer.html">new_layer</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    column <span class="op">=</span> <span class="st">"solution"</span>,</span></span>
 <span class="r-in"><span>    total <span class="op">=</span> <span class="fl">500</span>,</span></span>
-<span class="r-in"><span>    dataset <span class="op">=</span> <span class="fu"><a href="create_dataset_from_sf.html">create_dataset_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>    tile <span class="op">=</span> <span class="fu"><a href="create_tile_from_sf.html">create_tile_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    dataset <span class="op">=</span> <span class="fu"><a href="create_dataset_from_sf.html">create_dataset_from_sf</a></span><span class="op">(</span><span class="va">sim_project</span><span class="op">$</span><span class="va">dataset</span><span class="op">$</span><span class="fu">get_sf</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    tile <span class="op">=</span> <span class="fu"><a href="create_tile_from_sf.html">create_tile_from_sf</a></span><span class="op">(</span><span class="va">sim_project</span><span class="op">$</span><span class="va">dataset</span><span class="op">$</span><span class="fu">get_sf</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    legend <span class="op">=</span> <span class="fu"><a href="simulate_solution_legend.html">simulate_solution_legend</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    details <span class="op">=</span> <span class="st">"extra info"</span></span></span>
-<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  settings <span class="op">=</span> <span class="fu"><a href="simulate_prioritization_settings.html">simulate_prioritization_settings</a></span><span class="op">(</span><span class="va">sim_project</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="simulate_prioritization_metrics.html">simulate_prioritization_metrics</a></span><span class="op">(</span><span class="va">sim_project</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_solution_legend(),     provenance = simulate_provenance(), details = "extra info")):</span> could not find function "new_solution"</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),     tile = create_tile_from_sf(sim_project$dataset$get_sf()),     legend = simulate_solution_legend(), provenance = simulate_provenance(),     details = "extra info"), settings = simulate_prioritization_settings(sim_project),     metrics = simulate_prioritization_metrics(sim_project)):</span> could not find function "new_solution"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>

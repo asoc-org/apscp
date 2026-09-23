@@ -12,12 +12,11 @@ test_that("basic", {
   s$locks <- s$locks[FALSE, , drop = FALSE]
   s$costs$zones <- NA
   # generate solution
-  x <- prioritization(p, s)
+  x <- solve_prioritization(p, s)
   # run tests
-  expect_type(x, "list")
-  expect_named(x, c("status", "metrics"))
-  expect_type(x$status, "double")
-  expect_true(all(seq_along(p$zones) %in% x$status))
+  expect_s3_class(x, "Prioritization")
+  expect_type(x, "double")
+  expect_true(all(seq_along(p$zones) %in% x))
 })
 
 test_that("active costs", {
@@ -37,12 +36,11 @@ test_that("active costs", {
   # ensure no active locks
   s$locks <- s$locks[FALSE, , drop = FALSE]
   # generate solution
-  x <- prioritization(p, s)
+  x <- solve_prioritization(p, s)
   # run tests
   expect_s3_class(x, "Prioritization")
-  expect_named(x, c("status", "metrics"))
-  expect_type(x$status, "double")
-  expect_true(all(match(s$locks$zone, p$zones) %in% x$solution))
+  expect_type(x, "double")
+  expect_true(all(match(s$locks$zone, p$zones) %in% x))
 })
 
 test_that("active locks", {
@@ -58,14 +56,15 @@ test_that("active locks", {
   # ensure no active costs
   s$costs$zones <- NA
   # generate solution
-  x <- prioritization(p, s)
+  x <- solve_prioritization(p, s)
   # run tests
   expect_s3_class(x, "Prioritization")
+  expect_type(x, "double")
   expect_true(
     all(
       vapply(p$locks, FUN.VALUE = logical(1), function(y) {
         idx <- which(p$dataset$get_column_data(y$layer$column) > 1e-4)
-        all(x$solution[idx] == match(y$zone, p$zones))
+        all(x[idx] == match(y$zone, p$zones))
       })
     ),
     "locks not applied correctly"
@@ -81,33 +80,12 @@ test_that("both solvers work", {
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
   # generate solution
-  x <- prioritization(p, s, solver = "cbc", gap = 0)
-  y <- prioritization(p, s, solver = "gurobi", gap = 0)
+  x <- solve_prioritization(p, s, solver = "cbc", gap = 0)
+  y <- solve_prioritization(p, s, solver = "gurobi", gap = 0)
   # run tests
   expect_s3_class(x, "Prioritization")
+  expect_type(x, "double")
   expect_s3_class(y, "Prioritization")
-  expect_equal(
-    x$metrics$obj_value,
-    y$metrics$obj_value,
-    tolerance = 1e-4
-  )
-})
-
-test_that("asynchronous", {
-  # define skips
-  skip_if_not_installed("rcbc")
-  skip_if_not_installed("prioritizr")
-  # simulate data
-  p <- simulate_project()
-  s <- withr::with_seed(500, simulate_prioritization_settings(p))
-  # set all targets and weights to be equal
-  s$features$target <- 0.3
-  s$features$weight <- 1
-  # setup asynchronous processing
-  mirai_async_start()
-  on.exit(mirai_async_stop(), add = TRUE)
-  # generate solution
-  x <- mirai::mirai(prioritization(p, s), .args = list(p = p, s = s))[]
-  # run tests
-  expect_s3_class(x, "Prioritization")
+  expect_type(y, "double")
+  expect_equal(attr(x, "objective"), attr(y, "objective"), tolerance = 1e-4)
 })

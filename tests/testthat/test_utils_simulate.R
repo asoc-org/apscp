@@ -78,3 +78,21 @@ test_that("simulate_prioritization_settings", {
   expect_type(x$costs$zone, "character")
   expect_type(x$costs$weight, "double")
 })
+
+test_that("simulate_prioritization_metrics", {
+  # create object
+  p <- simulate_project()
+  x <- simulate_prioritization_metrics(p)
+  # run tests
+  expect_type(x, "list")
+  expect_s3_class(x$summary, "data.frame")
+  expect_type(x$features, "list")
+  expect_s3_class(x$features$relative, "data.frame")
+  expect_s3_class(x$features$absolute, "data.frame")
+  expect_type(x$locks, "list")
+  expect_s3_class(x$locks$relative, "data.frame")
+  expect_s3_class(x$locks$absolute, "data.frame")
+  expect_type(x$costs, "list")
+  expect_s3_class(x$costs$relative, "data.frame")
+  expect_s3_class(x$costs$absolute, "data.frame")
+})

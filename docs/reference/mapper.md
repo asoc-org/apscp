@@ -65,26 +65,26 @@ library(shiny)
 runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 #> ℹ Loading apscp
 #> ! Skipping missing files:
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/aaa.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_config.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server_initialize.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server_logging.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server_mapper.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server_session.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server_solution.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_server_solver.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_startup.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/app_ui.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/internal.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/class_Dataset.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/class_Layer.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/class_Cost.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/class_Feature.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/class_Legend.R,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/class_Lock.R, …,
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/widget_solver_ui.R, and
-#>   /tmp/RtmpLFV1ms/temp_libpath124ec26193296e/apscp/R/zzz.R
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/aaa.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_config.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server_initialize.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server_logging.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server_mapper.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server_session.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server_solution.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_server_solver.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_startup.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/app_ui.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/internal.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/class_Dataset.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/class_Layer.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/class_Cost.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/class_Feature.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/class_Legend.R,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/class_Lock.R, …,
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/widget_solver_ui.R, and
+#>   /tmp/Rtmpsp9vFd/temp_libpath19216c38f5055e/apscp/R/zzz.R
 #> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.bbox’, ‘serialize_object.default’ were declared in NAMESPACE but not found
 #> Warning: Objects listed as exports, but not present in namespace:
 #> • Dataset
@@ -102,6 +102,7 @@ runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 #> • create_tile_from_project
 #> • create_tile_from_sf
 #> • deserialize_object
+#> • eval_prioritization
 #> • get_paint_parameters
 #> • has_mapbox_token
 #> • is_installed
@@ -133,7 +134,6 @@ runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 #> • new_solution
 #> • new_theme
 #> • new_tile
-#> • prioritization
 #> • read_builtin_project
 #> • read_dataset
 #> • read_matrix
@@ -152,11 +152,13 @@ runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 #> • simulate_binary_legend
 #> • simulate_continuous_legend
 #> • simulate_pmtiles_file
+#> • simulate_prioritization_metrics
 #> • simulate_prioritization_settings
 #> • simulate_project
 #> • simulate_provenance
 #> • simulate_solution_legend
 #> • simulate_spatial_data
+#> • solve_prioritization
 #> • solver
 #> • solverOutput
 #> • solver_add_lock

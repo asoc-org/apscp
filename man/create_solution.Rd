@@ -10,6 +10,8 @@ create_solution(
   column,
   legend,
   provenance,
+  settings,
+  metrics,
   tile = NULL,
   id = uuid::UUIDgenerate()
 )
@@ -26,6 +28,10 @@ has the values.}
 object.}
 
 \item{provenance}{[new_provenance()] object.}
+
+\item{settings}{`list` of settings used to generate the solution.}
+
+\item{metrics}{`list` with evaluation metrics for the solution.}
 
 \item{tile}{[new_tile()] object tile information for the solution.
 Defaults to `NULL` such that a [new_tile()] object is automatically created.}
@@ -49,7 +55,9 @@ x <- create_solution(
   project = project,
   column = "solution",
   legend = simulate_solution_legend(),
-  provenance = simulate_provenance()
+  provenance = simulate_provenance(),
+  settings = simulate_prioritization_settings(project),
+  metrics = simulate_prioritization_metrics(project)
 )
 
 }

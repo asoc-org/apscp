@@ -5,7 +5,7 @@ Create a new solution object.
 ## Usage
 
 ``` r
-new_solution(name, layer, id = uuid::UUIDgenerate())
+new_solution(name, layer, settings, metrics, id = uuid::UUIDgenerate())
 ```
 
 ## Arguments
@@ -17,6 +17,14 @@ new_solution(name, layer, id = uuid::UUIDgenerate())
 - layer:
 
   \[new_layer()\] object used to store information for visualization.
+
+- settings:
+
+  \`list\` of settings used to generate the solution.
+
+- metrics:
+
+  \`list\` with evaluation metrics for the solution.
 
 - id:
 
@@ -47,8 +55,8 @@ Other class:
 
 ``` r
 # simulate spatial data
-sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
+sim_project <- simulate_project()
+#> Error in simulate_project(): could not find function "simulate_project"
 
 # create object
 x <- new_solution(
@@ -56,14 +64,16 @@ x <- new_solution(
   layer = new_layer(
     column = "solution",
     total = 500,
-    dataset = create_dataset_from_sf(sim_data),
-    tile = create_tile_from_sf(sim_data),
+    dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),
+    tile = create_tile_from_sf(sim_project$dataset$get_sf()),
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
     details = "extra info"
-  )
+  ),
+  settings = simulate_prioritization_settings(sim_project),
+  metrics = simulate_prioritization_metrics(sim_project)
 )
-#> Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_solution_legend(),     provenance = simulate_provenance(), details = "extra info")): could not find function "new_solution"
+#> Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),     tile = create_tile_from_sf(sim_project$dataset$get_sf()),     legend = simulate_solution_legend(), provenance = simulate_provenance(),     details = "extra info"), settings = simulate_prioritization_settings(sim_project),     metrics = simulate_prioritization_metrics(sim_project)): could not find function "new_solution"
 
 # preview object
 print(x)

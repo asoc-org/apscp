@@ -7,9 +7,11 @@ Create a new solution based on spatial prioritization.
 ``` r
 create_solution_from_prioritization(
   name,
-  prioritization,
   project,
+  prioritization,
+  settings,
   column = NULL,
+  metrics = NULL,
   id = uuid::UUIDgenerate()
 )
 ```
@@ -20,18 +22,28 @@ create_solution_from_prioritization(
 
   \`character\` value with the name.
 
-- prioritization:
-
-  \`list\` object generated with \[prioritization()\].
-
 - project:
 
   \[new_project()\] object to which \`prioritization \`should be added.
+
+- prioritization:
+
+  \`numeric\` vector with a value for each planning unit to indicate
+  zone allocations.
+
+- settings:
+
+  \`list\` of settings used to generate the solution.
 
 - column:
 
   \`character\` value with column name used to store \`prioritization\`
   in the dataset that underpins \`project\`.
+
+- metrics:
+
+  \`list\` with evaluation metrics for prioritization. Defaults to
+  \`NULL\` such that the metrics are calculated automatically.
 
 - id:
 
@@ -41,6 +53,40 @@ create_solution_from_prioritization(
 ## Value
 
 A \[new_solution()\] object.
+
+## Settings format
+
+The argument to \`settings\` must be a \`list\` with the following
+elements.
+
+- features:
+
+  A \`data.frame\` with the theme and feature settings. These are used
+  to specify the targets and weights considered for the features during
+  optimization. Each row corresponds to a different feature, and it must
+  have the following columns: \`"id"\`, \`"name"\`, \`"column"\`,
+  \`"zone"\`, \`"target"\`, and \`"weight"\`. Note that target values
+  must be expressed as a proportion (i.e., value between zero and one).
+
+- locks:
+
+  A \`data.frame\` with the settings to specify which locks are used to
+  lock in planning units to a particular zone. Each row corresponds to a
+  different lock, and it must have the following columns: \`"id"\`,
+  \`"name"\`, \`"column"\`, and \`"zone"\`.
+
+- costs:
+
+  A \`data.frame\` with the cost settings. These are used to specify
+  which costs are considered for each zone. Each row corresponds to a
+  different cost, and it must have the following columns: \`"id"\`,
+  \`"name"\`, \`"zone"\`, and \`"weight"\`.
+
+- zones:
+
+  A \`data.frame\` with settings for the multi-objective optimization.
+  Each row corresponds to a different zone, and it must have the
+  following columns: \`"name"\` and \`"weight"\`.
 
 ## See also
 
@@ -63,16 +109,17 @@ p <- simulate_project()
 #> Error in simulate_project(): could not find function "simulate_project"
 s <- simulate_prioritization_settings(p)
 #> Error in simulate_prioritization_settings(p): could not find function "simulate_prioritization_settings"
-d <- prioritization(p, s, solver = "cbc", gap = 0.1)
-#> Error in prioritization(p, s, solver = "cbc", gap = 0.1): could not find function "prioritization"
+d <- solve_prioritization(p, s, solver = "cbc", gap = 0.1)
+#> Error in solve_prioritization(p, s, solver = "cbc", gap = 0.1): could not find function "solve_prioritization"
 
 # generate solution
 x <- create_solution_from_prioritization(
   name = "sol",
+  project = p,
   prioritization = d,
-  project = p
+  settings = s
 )
-#> Error in create_solution_from_prioritization(name = "sol", prioritization = d,     project = p): could not find function "create_solution_from_prioritization"
+#> Error in create_solution_from_prioritization(name = "sol", project = p,     prioritization = d, settings = s): could not find function "create_solution_from_prioritization"
 
 # print solution
 print(x)

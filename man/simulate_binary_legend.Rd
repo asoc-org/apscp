@@ -12,6 +12,10 @@ A [new_categorical_legend()] object.
 \description{
 Simulate a legend for binary data.
 }
+\details{
+Note that simulation functions are intended to help faciliate
+package testing and should not be used for any research purposes.
+}
 \examples{
 # simulate legend
 simulate_binary_legend()
@@ -21,6 +25,7 @@ simulate_binary_legend()
 Other simulation:
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},
+\code{\link[=simulate_prioritization_metrics]{simulate_prioritization_metrics()}},
 \code{\link[=simulate_prioritization_settings]{simulate_prioritization_settings()}},
 \code{\link[=simulate_project]{simulate_project()}},
 \code{\link[=simulate_provenance]{simulate_provenance()}},

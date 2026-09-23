@@ -23,20 +23,23 @@ app_server_solution <- quote({
       # otherwise, generate prioritization with optimization...
       app_data$task_mirai <- mirai::mirai(
         {
+          x <- try(
+            solve_prioritization(
+              project = project,
+              settings = settings,
+              gap = gap,
+              solver = solver,
+              gurobi_server = gurobi_server,
+              verbose = verbose
+            ),
+            silent = !isTRUE(verbose)
+          )
           list(
             id = id,
             name = name,
-            result = try(
-              prioritization(
-                project = project,
-                settings = settings,
-                gap = gap,
-                solver = solver,
-                gurobi_server = gurobi_server,
-                verbose = verbose
-              ),
-              silent = !isTRUE(verbose)
-            )
+            prioritization = x,
+            settings = settings,
+            metrics = try(eval_prioritization(project, x), silent = TRUE)
           )
         },
         .args = list(
@@ -125,7 +128,10 @@ app_server_solution <- quote({
       return()
     }
     # if result threw an error, then display error message and exit observer
-    if (inherits(result$result, "try-error")) {
+    if (
+      inherits(result$prioritization, "try-error") ||
+      inherits(result$metrics, "try-error")
+    ) {
       shinyalert::shinyalert(
         title = "Oops",
         text = paste(
@@ -151,7 +157,9 @@ app_server_solution <- quote({
       id = result$id,
       name = result$name,
       project = app_data$project,
-      prioritization = result$result
+      prioritization = result$prioritization,
+      settings = result$settings,
+      metrics = result$metrics
     )
     # add tile file to tracking for automatic clean up
     app_data$session_files <- c(app_data$session_files, sol$layer$tile$path)

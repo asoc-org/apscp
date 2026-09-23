@@ -172,6 +172,8 @@ serialize_object.Solution <- function(x) {
     name = x$name,
     id = x$id,
     layer = serialize_object.Layer(x$layer),
+    settings = x$settings,
+    metrics = x$metrics,
     class = "Solution"
   )
 }

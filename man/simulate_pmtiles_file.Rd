@@ -12,6 +12,10 @@ A `character` value with the file path.
 \description{
 Simulate a PMtiles file by creating a dummy file on disk.
 }
+\details{
+Note that simulation functions are intended to help faciliate
+package testing and should not be used for any research purposes.
+}
 \examples{
 # simulate PMTiles file
 simulate_pmtiles_file()
@@ -21,6 +25,7 @@ simulate_pmtiles_file()
 Other simulation:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
+\code{\link[=simulate_prioritization_metrics]{simulate_prioritization_metrics()}},
 \code{\link[=simulate_prioritization_settings]{simulate_prioritization_settings()}},
 \code{\link[=simulate_project]{simulate_project()}},
 \code{\link[=simulate_provenance]{simulate_provenance()}},
