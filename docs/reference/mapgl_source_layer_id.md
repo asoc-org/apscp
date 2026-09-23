@@ -43,7 +43,6 @@ Other mapping:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- new_cost(
@@ -60,9 +59,8 @@ x <- new_cost(
     details = "extra info"
   )
 )
-#> Error in new_cost(name = "cost", zone = "Science", weight = 0.1, layer = new_layer(column = "feat_1",     total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_continuous_legend(),     provenance = simulate_provenance(), details = "extra info")): could not find function "new_cost"
 
 # get layer identifier
 mapgl_source_layer_id(x)
-#> Error in mapgl_source_layer_id(x): could not find function "mapgl_source_layer_id"
+#> [1] "layer"
 ```

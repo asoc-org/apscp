@@ -34,5 +34,5 @@ Other misc:
 ``` r
 # print if base package is installed?
 is_installed("base")
-#> Error in is_installed("base"): could not find function "is_installed"
+#> [1] TRUE
 ```

@@ -45,14 +45,65 @@ Other mapping:
 ``` r
 # create object
 legend <- simulate_continuous_legend()
-#> Error in simulate_continuous_legend(): could not find function "simulate_continuous_legend"
 
 # obtain parameters for painting data stored in a column
 # called "values" based on the legend
 x <- get_paint_parameters(legend, "values")
-#> Error in get_paint_parameters(legend, "values"): could not find function "get_paint_parameters"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> $fill_color
+#> $fill_color[[1]]
+#> [1] "case"
+#> 
+#> $fill_color[[2]]
+#> $fill_color[[2]][[1]]
+#> [1] "=="
+#> 
+#> $fill_color[[2]][[2]]
+#> $fill_color[[2]][[2]][[1]]
+#> [1] "get"
+#> 
+#> $fill_color[[2]][[2]][[2]]
+#> [1] "values"
+#> 
+#> 
+#> $fill_color[[2]][[3]]
+#> NULL
+#> 
+#> 
+#> $fill_color[[3]]
+#> [1] "transparent"
+#> 
+#> $fill_color[[4]]
+#> $fill_color[[4]][[1]]
+#> [1] "interpolate"
+#> 
+#> $fill_color[[4]][[2]]
+#> $fill_color[[4]][[2]][[1]]
+#> [1] "linear"
+#> 
+#> 
+#> $fill_color[[4]][[3]]
+#> $fill_color[[4]][[3]][[1]]
+#> [1] "get"
+#> 
+#> $fill_color[[4]][[3]][[2]]
+#> [1] "values"
+#> 
+#> 
+#> $fill_color[[4]][[4]]
+#> [1] 0
+#> 
+#> $fill_color[[4]][[5]]
+#> [1] "#000000"
+#> 
+#> $fill_color[[4]][[6]]
+#> [1] 1
+#> 
+#> $fill_color[[4]][[7]]
+#> [1] "#DDDDDD"
+#> 
+#> 
+#> 
 ```

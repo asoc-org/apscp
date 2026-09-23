@@ -38,12 +38,12 @@ This widget is designed to be used in conjunction with an existing
 map within a Shiny web application.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 library(shiny)
 
 # run example app showing a mapper
 runApp(system.file("examples", "mapper_app.R", package = "apscp"))
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other mapper:

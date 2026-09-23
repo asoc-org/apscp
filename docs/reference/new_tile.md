@@ -53,9 +53,8 @@ writeLines("dummy", path)
 
 # create object
 x <- new_tile(source = "data-src", path = path, max_zoom = 5)
-#> Error in new_tile(source = "data-src", path = path, max_zoom = 5): could not find function "new_tile"
 
 # print object
 print(x)
-#> Error: object 'x' not found
+#> A <Tile> object.
 ```

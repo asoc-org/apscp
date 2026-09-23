@@ -45,9 +45,7 @@ Authors:
 ## Examples
 
 ``` r
-# \dontrun{
-if (interactive()) {
+if (FALSE) { # interactive()
 run_app()
 }
-# }
 ```

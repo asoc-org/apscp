@@ -62,13 +62,11 @@ Other method:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create tile from spatial data
 x <- create_tile_from_sf(sim_data)
-#> Error in create_tile_from_sf(sim_data): could not find function "create_tile_from_sf"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Tile> object.
 ```

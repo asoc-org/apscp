@@ -24,13 +24,11 @@
 #'
 #' @family mapper
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' library(shiny)
 #'
 #' # run example app showing a mapper
 #' runApp(system.file("examples", "mapper_app.R", package = "apscp"))
-#' }
 #' @export
 mapper <- function(
   project,

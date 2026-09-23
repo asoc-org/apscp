@@ -93,25 +93,29 @@ Other misc:
 ``` r
 # obtain 5 colors from the Greens palette
 color_palette("Greens", 5)
-#> Error in color_palette("Greens", 5): could not find function "color_palette"
+#> [1] "#EDF8E9" "#BAE4B3" "#74C476" "#31A354" "#006D2C"
 
 # obtain all colors from the Greens palette
 color_palette("Greens", NULL)
-#> Error in color_palette("Greens", NULL): could not find function "color_palette"
+#> [1] "#F7FCF5" "#E5F5E0" "#C7E9C0" "#A1D99B" "#74C476" "#41AB5D" "#238B45"
+#> [8] "#006D2C" "#00441B"
 
 # obtain 15 colors using the Set1 and Pastel1 palettes
 color_palette("Set1;Pastel1", 15)
-#> Error in color_palette("Set1;Pastel1", 15): could not find function "color_palette"
+#>  [1] "#E41A1C" "#377EB8" "#4DAF4A" "#984EA3" "#FF7F00" "#FFFF33" "#A65628"
+#>  [8] "#F781BF" "#999999" "#FBB4AE" "#B3CDE3" "#CCEBC5" "#DECBE4" "#FED9A6"
+#> [15] "#FFFFCC"
 
 # obtain all colors from the plasma palette
 color_palette("plasma", NULL)
-#> Error in color_palette("plasma", NULL): could not find function "color_palette"
+#> [1] "#0D0887FF" "#7E03A8FF" "#CC4678FF" "#F89441FF" "#F0F921FF"
 
 # obtain all colors from a random palette
 color_palette("random", NULL)
-#> Error in color_palette("random", NULL): could not find function "color_palette"
+#>  [1] "#67001F" "#B2182B" "#D6604D" "#F4A582" "#FDDBC7" "#F7F7F7" "#D1E5F0"
+#>  [8] "#92C5DE" "#4393C3" "#2166AC" "#053061"
 
 # obtain 5 colors from random palette(s)
 color_palette("random", 5)
-#> Error in color_palette("random", 5): could not find function "color_palette"
+#> [1] "#F0F9E8" "#BAE4BC" "#7BCCC4" "#43A2CA" "#0868AC"
 ```

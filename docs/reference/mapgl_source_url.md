@@ -42,13 +42,11 @@ Other mapping:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- create_tile_from_sf(sim_data)
-#> Error in create_tile_from_sf(sim_data): could not find function "create_tile_from_sf"
 
 # get layer identifier
 mapgl_source_url(x)
-#> Error in mapgl_source_url(x): could not find function "mapgl_source_url"
+#> [1] "http://localhost:8085/file197dff298c6612.pmtiles"
 ```

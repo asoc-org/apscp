@@ -289,16 +289,18 @@ solve_prioritization <- function(
   )
 
   # solve problem
-  raw_sol <- solve(prob, run_checks = FALSE, force = TRUE)
+  sol <- solve(prob, run_checks = FALSE, force = TRUE)
+  obj_value <- attr(sol, "objective")
 
-  # return formatted solution
-  out <- structure(
-    prioritizr::category_vector(
-      raw_sol[, paste0("solution_1_", project$zones),  drop = FALSE]
-    ),
-    class = "Prioritization"
+  # format solution
+  sol <- prioritizr::category_vector(
+    sol[, paste0("solution_1_", project$zones),  drop = FALSE]
   )
-  attr(out, "obj_value") <- attr(raw_sol, "objective")
+  sol[sol < 0.5] <- NA_real_
+
+  # return solution
+  out <- structure(sol, class = "Prioritization")
+  attr(out, "obj_value") <- obj_value
   out
 }
 

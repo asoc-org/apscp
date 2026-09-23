@@ -79,7 +79,6 @@ Other class:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- new_layer(
@@ -92,9 +91,8 @@ x <- new_layer(
   visible = TRUE,
   details = "extra info"
 )
-#> Error in new_layer(column = "feat_1", total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_continuous_legend(),     provenance = simulate_provenance(), visible = TRUE, details = "extra info"): could not find function "new_layer"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Layer> object.
 ```

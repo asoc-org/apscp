@@ -39,7 +39,7 @@ eval_prioritization <- function(project, prioritization) {
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), project$dataset$get_n_pu()),
-    max(prioritization) <= length(project$zones)
+    suppressWarnings(max(prioritization, na.rm = TRUE)) <= length(project$zones)
   )
 
   # prepare data for evaluation
@@ -71,7 +71,6 @@ eval_prioritization <- function(project, prioritization) {
     )
   )
 }
-
 
 #' Calculate representation metrics
 #'

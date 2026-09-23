@@ -41,13 +41,11 @@ Other method:
 ``` r
 # simulate project
 p <- simulate_project()
-#> Error in simulate_project(): could not find function "simulate_project"
 
 # create solution legend
 x <- create_solution_legend(p)
-#> Error in create_solution_legend(p): could not find function "create_solution_legend"
 
 # print legend
 print(x)
-#> Error: object 'x' not found
+#> A <CategoricalLegend> object.
 ```

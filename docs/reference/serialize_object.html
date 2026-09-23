@@ -119,28 +119,39 @@ reading and writing objects to disk.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create an object</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_categorical_legend.html">new_categorical_legend</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#000000"</span>, <span class="st">"#AAAAAA"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a",     "b")):</span> could not find function "new_categorical_legend"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'x' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A <span style="color: #0000BB;">&lt;CategoricalLegend&gt;</span> object.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># serialize object</span></span></span>
 <span class="r-in"><span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fu">serialize_object</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in serialize_object(x):</span> could not find function "serialize_object"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview serialized object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 's' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $values</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $labels</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a" "b"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $colors</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#000000" "#AAAAAA"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $units</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "CategoricalLegend"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># deserialize the serialized object</span></span></span>
 <span class="r-in"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="deserialize_object.html">deserialize_object</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in deserialize_object(s):</span> could not find function "deserialize_object"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview the deserialized object,</span></span></span>
 <span class="r-in"><span><span class="co"># we can see that it is identical to x (i.e., the original object)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'd' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A <span style="color: #0000BB;">&lt;CategoricalLegend&gt;</span> object.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

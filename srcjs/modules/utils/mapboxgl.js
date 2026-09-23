@@ -11,10 +11,13 @@ export function getVisibleLayerDataAtPoint(el, metadata, point) {
   // prepare layer data
   const data = new Map();
   layers.forEach((x) => {
-    const name = metadata.get(x.layer.id);
-    const value = layers[0].properties[name];
+    const layer = metadata.get(x.layer.id);
+    const value = x.properties[layer.column];
     if (value !== undefined) {
-      data.set(name, value);
+      data.set(
+        layer.name,
+        {value: value, class: layer.class}
+      );
     }
   });
   // return data

@@ -81,7 +81,6 @@ Other method:
 ``` r
 # create data
 project <- simulate_project()
-#> Error in simulate_project(): could not find function "simulate_project"
 
 # create solution
 x <- create_solution(
@@ -93,5 +92,4 @@ x <- create_solution(
   settings = simulate_prioritization_settings(project),
   metrics = simulate_prioritization_metrics(project)
 )
-#> Error in create_solution(name = "user solution", project = project, column = "solution",     legend = simulate_solution_legend(), provenance = simulate_provenance(),     settings = simulate_prioritization_settings(project), metrics = simulate_prioritization_metrics(project)): could not find function "create_solution"
 ```

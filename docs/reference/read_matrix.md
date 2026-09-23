@@ -49,14 +49,17 @@ path <- tempfile(fileext = ".rds")
 
 # write matrix
 write_matrix(x, path)
-#> Error in write_matrix(x, path): could not find function "write_matrix"
 
 # read matrix
 y <- read_matrix(path)
-#> Error in read_matrix(path): could not find function "read_matrix"
 
 # print imported matrix,
 # we can see that its the same as the original matrix
 print(y)
-#> Error: object 'y' not found
+#> 4 x 9 sparse Matrix of class "dgCMatrix"
+#>                           
+#> [1,] . . . . 10  .  .  . .
+#> [2,] . . . .  . 11  .  . .
+#> [3,] . . . .  .  . 12  . .
+#> [4,] . . . .  .  .  . 13 .
 ```

@@ -27,13 +27,9 @@
 #' @docType package
 #' @aliases apscp-package
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #  # launch application
-#' if (interactive()) {
 #' run_app()
-#' }
-#' }
 "_PACKAGE"
 
 # define global variables to pass package checks

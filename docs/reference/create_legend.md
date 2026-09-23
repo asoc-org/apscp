@@ -62,13 +62,11 @@ Other method:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
-#> Error in create_legend(sim_data, "cost", units = "USD", palette = "PuBu"): could not find function "create_legend"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <ContinuousLegend> object.
 ```

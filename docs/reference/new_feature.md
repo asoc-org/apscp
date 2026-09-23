@@ -82,7 +82,6 @@ Other class:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- new_feature(
@@ -101,9 +100,8 @@ x <- new_feature(
     details = "extra info"
   )
 )
-#> Error in new_feature(name = "species 1", zone_targets = c(0.1, 0.2, 0.3),     zone_weights = c(0.5, 1, 0.7), zone_helds = c(0.2, 0.3, 0.1),     themes = list(new_theme(zone = "Biodiversity", name = "Penguins")),     layer = new_layer(column = "feat_1", total = 500, dataset = create_dataset_from_sf(sim_data),         tile = create_tile_from_sf(sim_data), legend = simulate_continuous_legend(),         provenance = simulate_provenance(), details = "extra info")): could not find function "new_feature"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Feature> object.
 ```

@@ -29,9 +29,8 @@ Other io:
 ``` r
 # import project
 x <- read_builtin_project()
-#> Error in read_builtin_project(): could not find function "read_builtin_project"
 
 # preview project
 print(x)
-#> Error: object 'x' not found
+#> A <Project> object.
 ```

@@ -61,9 +61,8 @@ l <- new_categorical_legend(
   labels = c("a", "b"),
   units = "land-use types"
 )
-#> Error in new_categorical_legend(values = c(0, 1), colors = c("#000000",     "#AAAAAA"), labels = c("a", "b"), units = "land-use types"): could not find function "new_categorical_legend"
 
 # print object
 print(l)
-#> Error: object 'l' not found
+#> A <CategoricalLegend> object.
 ```

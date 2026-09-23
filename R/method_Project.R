@@ -220,9 +220,7 @@ read_builtin_project <- function() {
 #' map <- map_project(x)
 #'
 #' # display map
-#' \dontrun{
 #' print(map)
-#' }
 #' @export
 map_project <- function(x, ...) {
   # assert valid arguments

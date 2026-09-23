@@ -38,9 +38,8 @@ path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
 
 # import project
 x <- read_project(path)
-#> Error in read_project(path): could not find function "read_project"
 
 # preview project
 print(x)
-#> Error: object 'x' not found
+#> A <Project> object.
 ```

@@ -50,9 +50,32 @@ bd_path <- system.file(
 
 # import data
 x <- read_dataset(pu_path, bd_path)
-#> Error in read_dataset(pu_path, bd_path): could not find function "read_dataset"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> <Dataset>
+#>   Public:
+#>     boundary_data: NULL
+#>     boundary_path: /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/extdata ...
+#>     clone: function (deep = FALSE) 
+#>     get_boundary_data: function () 
+#>     get_column_data: function (column) 
+#>     get_column_held: function (column, status) 
+#>     get_column_names: function () 
+#>     get_column_total: function (column) 
+#>     get_dataframe: function (column = NULL) 
+#>     get_n_pu: function () 
+#>     get_pu_status: function (zone, allocation) 
+#>     get_sf: function (column = NULL) 
+#>     has_column: function (column) 
+#>     initialize: function (pu_path, boundary_path) 
+#>     n_pu: 48447
+#>     pu_db_con: NULL
+#>     pu_db_table: file116cb547f32dae
+#>     pu_path: /tmp/RtmpK0Ujtc/file197dff6a5610db/antarctic-peninsula_p ...
+#>     set_column_data: function (column, values) 
+#>   Private:
+#>     close_db_con: function () 
+#>     finalize: function () 
+#>     open_db_con: function () 
 ```

@@ -41,13 +41,35 @@ Other method:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- create_dataset_from_sf(sim_data)
-#> Error in create_dataset_from_sf(sim_data): could not find function "create_dataset_from_sf"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> <Dataset>
+#>   Public:
+#>     boundary_data: NULL
+#>     boundary_path: /tmp/RtmpK0Ujtc/file197dffc822882.rds
+#>     clone: function (deep = FALSE) 
+#>     get_boundary_data: function () 
+#>     get_column_data: function (column) 
+#>     get_column_held: function (column, status) 
+#>     get_column_names: function () 
+#>     get_column_total: function (column) 
+#>     get_dataframe: function (column = NULL) 
+#>     get_n_pu: function () 
+#>     get_pu_status: function (zone, allocation) 
+#>     get_sf: function (column = NULL) 
+#>     has_column: function (column) 
+#>     initialize: function (pu_path, boundary_path) 
+#>     n_pu: 90
+#>     pu_db_con: NULL
+#>     pu_db_table: file197dff39d87bd7
+#>     pu_path: /tmp/RtmpK0Ujtc/file197dff39d87bd7.gpkg
+#>     set_column_data: function (column, values) 
+#>   Private:
+#>     close_db_con: function () 
+#>     finalize: function () 
+#>     open_db_con: function () 
 ```

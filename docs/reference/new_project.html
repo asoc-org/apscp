@@ -154,13 +154,10 @@ Defaults to 0.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># simulate spatial data</span></span></span>
 <span class="r-in"><span><span class="va">sim_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_spatial_data.html">simulate_spatial_data</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_spatial_data():</span> could not find function "simulate_spatial_data"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># prepare data</span></span></span>
 <span class="r-in"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_dataset_from_sf.html">create_dataset_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_dataset_from_sf(sim_data):</span> could not find function "create_dataset_from_sf"</span>
 <span class="r-in"><span><span class="va">tile</span> <span class="op">&lt;-</span> <span class="fu"><a href="create_tile_from_sf.html">create_tile_from_sf</a></span><span class="op">(</span><span class="va">sim_data</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in create_tile_from_sf(sim_data):</span> could not find function "create_tile_from_sf"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create cost</span></span></span>
 <span class="r-in"><span><span class="va">cost</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_cost.html">new_cost</a></span><span class="op">(</span></span></span>
@@ -176,7 +173,6 @@ Defaults to 0.</p></dd>
 <span class="r-in"><span>    provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_cost(name = "cost", zone = "Science", weight = 0.1, layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_cost"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create lock</span></span></span>
 <span class="r-in"><span><span class="va">lock</span> <span class="op">&lt;-</span> <span class="fu"><a href="new_lock.html">new_lock</a></span><span class="op">(</span></span></span>
@@ -191,7 +187,6 @@ Defaults to 0.</p></dd>
 <span class="r-in"><span>    provenance <span class="op">=</span> <span class="fu"><a href="simulate_provenance.html">simulate_provenance</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_lock(name = "lock", zone = "Biodiversity", layer = new_layer(column = "locked_in",     total = 30, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_lock"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create features</span></span></span>
 <span class="r-in"><span><span class="va">features</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span></span>
@@ -229,7 +224,6 @@ Defaults to 0.</p></dd>
 <span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span>  <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_feature(name = "f1", zone_targets = c(0.1, 0.2, 0.5), zone_weights = c(0.2,     0.1, 0.3), zone_helds = c(0, 0.1, 0), themes = list(new_theme(zone = "Biodiversity",     name = "Penguins")), layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())):</span> could not find function "new_feature"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create project</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_project</span><span class="op">(</span></span></span>
@@ -241,11 +235,10 @@ Defaults to 0.</p></dd>
 <span class="r-in"><span>  locks <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">lock</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  features <span class="op">=</span> <span class="va">features</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     bbox = sf::st_bbox(sim_data), dataset = dataset, tiles = list(tile),     costs = list(cost), locks = list(lock), features = features):</span> could not find function "new_project"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'x' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A <span style="color: #0000BB;">&lt;Project&gt;</span> object.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

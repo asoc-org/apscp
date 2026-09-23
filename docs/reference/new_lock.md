@@ -56,7 +56,6 @@ Other class:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # create object
 x <- new_lock(
@@ -72,9 +71,8 @@ x <- new_lock(
     details = "extra info"
   )
 )
-#> Error in new_lock(name = "lock", zone = "scientific", layer = new_layer(column = "locked_in",     total = 500, dataset = create_dataset_from_sf(sim_data),     tile = create_tile_from_sf(sim_data), legend = simulate_binary_legend(),     provenance = simulate_provenance(), details = "extra info")): could not find function "new_lock"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Lock> object.
 ```

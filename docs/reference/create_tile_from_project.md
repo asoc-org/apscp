@@ -74,16 +74,14 @@ Other method:
 ``` r
 # simulate project
 sim_project <- simulate_project()
-#> Error in simulate_project(): could not find function "simulate_project"
 
 # create tile
 x <- create_tile_from_project(
   sim_project,
   column = "solution"
 )
-#> Error in create_tile_from_project(sim_project, column = "solution"): could not find function "create_tile_from_project"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Tile> object.
 ```

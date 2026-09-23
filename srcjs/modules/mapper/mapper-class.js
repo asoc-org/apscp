@@ -10,6 +10,7 @@ import {addMouseEvents} from "./add-mouse-events.js";
 import {projectSelectOptions} from "../utils/projectSelectOptions.js";
 import {selectOption} from "../utils/projectSelectOptions.js";
 import {projectMetadata} from "../utils/projectMetadata.js";
+import {getMetadata} from "../utils/projectMetadata.js";
 // styling
 import "./css/style.css";
 
@@ -228,7 +229,7 @@ export class Mapper {
       }
     });
     // add popup to map
-    addPopup(this._map, this._metadata);
+    addPopup(this._map, this._metadata, project.zones);
     // add mouse events to map
     addMouseEvents(this._map);
   }
@@ -241,6 +242,8 @@ export class Mapper {
    * @return {void}
    */
   addLayer(layer) {
+    // add layer to metadata
+    this._metadata.set("lyr-" + layer.id, getMetadata(layer));
     // create menu item
     let el = createMenuItem(layer, this);
     // add menu item to hidden menu items
@@ -356,7 +359,7 @@ export class Mapper {
       "lyr-" + layerId, "fill-outline-color",
       [
         "case",
-        ["==", ["get", this._metadata.get("lyr-" + layerId)], null],
+        ["==", ["get", this._metadata.get("lyr-" + layerId).column], null],
         "transparent",
         "#FFFF00"
       ]

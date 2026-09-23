@@ -21,11 +21,9 @@ procedures can be performed with the *Gurobi* (<https://www.gurobi.com/>) or
 exact algorithm solvers.
 }
 \examples{
-\dontrun{
-if (interactive()) {
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 run_app()
-}
-}
+\dontshow{\}) # examplesIf}
 }
 \references{
 Hanson JO, Schuster R, Strimas‐Mackey M, Morrell N, Edwards BPM, Arcese P,

@@ -2,6 +2,7 @@ test_that("numeric vector", {
   # simulate data
   p <- simulate_project()
   status <- sample.int(length(p$zones), p$dataset$get_n_pu(), replace = TRUE)
+  status[c(2, 4)] <- NA_real_
   # create object
   x <- eval_prioritization(p, status)
   # run tests

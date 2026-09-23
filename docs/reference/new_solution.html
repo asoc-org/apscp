@@ -98,7 +98,6 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># simulate spatial data</span></span></span>
 <span class="r-in"><span><span class="va">sim_project</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_project.html">simulate_project</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_project():</span> could not find function "simulate_project"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># create object</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">new_solution</span><span class="op">(</span></span></span>
@@ -115,11 +114,10 @@ Defaults to a random identifier ([uuid::UUIDgenerate()]).</p></dd>
 <span class="r-in"><span>  settings <span class="op">=</span> <span class="fu"><a href="simulate_prioritization_settings.html">simulate_prioritization_settings</a></span><span class="op">(</span><span class="va">sim_project</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  metrics <span class="op">=</span> <span class="fu"><a href="simulate_prioritization_metrics.html">simulate_prioritization_metrics</a></span><span class="op">(</span><span class="va">sim_project</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),     tile = create_tile_from_sf(sim_project$dataset$get_sf()),     legend = simulate_solution_legend(), provenance = simulate_provenance(),     details = "extra info"), settings = simulate_prioritization_settings(sim_project),     metrics = simulate_prioritization_metrics(sim_project)):</span> could not find function "new_solution"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'x' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> A <span style="color: #0000BB;">&lt;Solution&gt;</span> object.</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

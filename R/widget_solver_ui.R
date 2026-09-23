@@ -47,13 +47,11 @@
 #'
 #' @family solver
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' library(shiny)
 #'
 #' # run example app showing a solver
 #' runApp(system.file("examples", "solver_app.R", package = "apscp"))
-#' }
 #' @export
 solver <- function(
   project,

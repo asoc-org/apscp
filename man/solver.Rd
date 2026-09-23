@@ -65,12 +65,12 @@ This is sent when the stop button is clicked.
 }
 
 \examples{
-\dontrun{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 library(shiny)
 
 # run example app showing a solver
 runApp(system.file("examples", "solver_app.R", package = "apscp"))
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other solver:

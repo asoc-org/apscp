@@ -67,9 +67,8 @@ l <- new_continuous_legend(
   labels = c("Low", "Medium", "High"),
   units = "hectares"
 )
-#> Error in new_continuous_legend(values = c(0, 1), colors = c("#000000",     "#DDDDDD"), breaks = c(0.2, 0.5, 0.8), labels = c("Low",     "Medium", "High"), units = "hectares"): could not find function "new_continuous_legend"
 
 # print object
 print(l)
-#> Error: object 'l' not found
+#> A <ContinuousLegend> object.
 ```

@@ -56,7 +56,6 @@ Other class:
 ``` r
 # simulate spatial data
 sim_project <- simulate_project()
-#> Error in simulate_project(): could not find function "simulate_project"
 
 # create object
 x <- new_solution(
@@ -73,9 +72,8 @@ x <- new_solution(
   settings = simulate_prioritization_settings(sim_project),
   metrics = simulate_prioritization_metrics(sim_project)
 )
-#> Error in new_solution(name = "solution", layer = new_layer(column = "solution",     total = 500, dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),     tile = create_tile_from_sf(sim_project$dataset$get_sf()),     legend = simulate_solution_legend(), provenance = simulate_provenance(),     details = "extra info"), settings = simulate_prioritization_settings(sim_project),     metrics = simulate_prioritization_metrics(sim_project)): could not find function "new_solution"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Solution> object.
 ```

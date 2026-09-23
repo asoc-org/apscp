@@ -32,9 +32,7 @@ print(x)
 map <- map_project(x)
 
 # display map
-\dontrun{
 print(map)
-}
 \dontshow{\}) # examplesIf}
 }
 \seealso{

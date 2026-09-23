@@ -40,12 +40,10 @@ path <- system.file(
 
 # read data
 x <- read_sf_data(path)
-#> Error in read_sf_data(path): could not find function "read_sf_data"
 
 # create file path to export data
 path2 <- tempfile(fileext = ".gpkg.zip")
 
 # write data
 write_sf_data(x, path2)
-#> Error in write_sf_data(x, path2): could not find function "write_sf_data"
 ```

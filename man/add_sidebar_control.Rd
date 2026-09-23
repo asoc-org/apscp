@@ -37,12 +37,12 @@ An updated [mapgl::mapboxgl()] object.
 Add a sidebar control to a [mapgl::mapboxgl()] object.
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 library(shiny)
 
 # run example app showing a single sidebar
 runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
-}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 Other sidebar:

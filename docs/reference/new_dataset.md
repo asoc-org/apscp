@@ -43,27 +43,44 @@ Other method:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # save spatial data to temporary file
 sim_path1 <- tempfile(fileext = ".gpkg")
 sf::write_sf(sim_data, sim_path1)
-#> Error: object 'sim_data' not found
 
 # manually prepare boundary data
 sim_path2 <- tempfile(fileext = ".rds")
 bd_data <- prioritizr::boundary_matrix(sim_data)
-#> Error in prioritizr::boundary_matrix(sim_data): ℹ In argument to `x`.
-#> Caused by error:
-#> ! object 'sim_data' not found
 write_matrix(bd_data, sim_path2)
-#> Error in write_matrix(bd_data, sim_path2): could not find function "write_matrix"
 
 # create object
 x <- new_dataset(sim_path1, sim_path2)
-#> Error in new_dataset(sim_path1, sim_path2): could not find function "new_dataset"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> <Dataset>
+#>   Public:
+#>     boundary_data: NULL
+#>     boundary_path: /tmp/RtmpK0Ujtc/file197dff3719d7b3.rds
+#>     clone: function (deep = FALSE) 
+#>     get_boundary_data: function () 
+#>     get_column_data: function (column) 
+#>     get_column_held: function (column, status) 
+#>     get_column_names: function () 
+#>     get_column_total: function (column) 
+#>     get_dataframe: function (column = NULL) 
+#>     get_n_pu: function () 
+#>     get_pu_status: function (zone, allocation) 
+#>     get_sf: function (column = NULL) 
+#>     has_column: function (column) 
+#>     initialize: function (pu_path, boundary_path) 
+#>     n_pu: 90
+#>     pu_db_con: NULL
+#>     pu_db_table: file197dff1cef0627
+#>     pu_path: /tmp/RtmpK0Ujtc/file197dff1cef0627.gpkg
+#>     set_column_data: function (column, values) 
+#>   Private:
+#>     close_db_con: function () 
+#>     finalize: function () 
+#>     open_db_con: function () 
 ```

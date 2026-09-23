@@ -106,11 +106,8 @@ Other method:
 ``` r
 # simulate data
 p <- simulate_project()
-#> Error in simulate_project(): could not find function "simulate_project"
 s <- simulate_prioritization_settings(p)
-#> Error in simulate_prioritization_settings(p): could not find function "simulate_prioritization_settings"
 d <- solve_prioritization(p, s, solver = "cbc", gap = 0.1)
-#> Error in solve_prioritization(p, s, solver = "cbc", gap = 0.1): could not find function "solve_prioritization"
 
 # generate solution
 x <- create_solution_from_prioritization(
@@ -119,9 +116,8 @@ x <- create_solution_from_prioritization(
   prioritization = d,
   settings = s
 )
-#> Error in create_solution_from_prioritization(name = "sol", project = p,     prioritization = d, settings = s): could not find function "create_solution_from_prioritization"
 
 # print solution
 print(x)
-#> Error: object 'x' not found
+#> A <Solution> object.
 ```

@@ -41,5 +41,4 @@ Other sidebar:
 ``` r
 # create object
 x <- contact_sidebar_pane("pane_id")
-#> Error in contact_sidebar_pane("pane_id"): could not find function "contact_sidebar_pane"
 ```

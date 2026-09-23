@@ -79,26 +79,37 @@ Other io:
 ``` r
 # create an object
 x <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))
-#> Error in new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a",     "b")): could not find function "new_categorical_legend"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <CategoricalLegend> object.
 
 # serialize object
 s <- serialize_object(x)
-#> Error in serialize_object(x): could not find function "serialize_object"
 
 # preview serialized object
 print(s)
-#> Error: object 's' not found
+#> $values
+#> [1] 0 1
+#> 
+#> $labels
+#> [1] "a" "b"
+#> 
+#> $colors
+#> [1] "#000000" "#AAAAAA"
+#> 
+#> $units
+#> NULL
+#> 
+#> $class
+#> [1] "CategoricalLegend"
+#> 
 
 # deserialize the serialized object
 d <- deserialize_object(s)
-#> Error in deserialize_object(s): could not find function "deserialize_object"
 
 # preview the deserialized object,
 # we can see that it is identical to x (i.e., the original object)
 print(d)
-#> Error: object 'd' not found
+#> A <CategoricalLegend> object.
 ```

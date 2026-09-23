@@ -28,5 +28,5 @@ Other misc:
 ``` r
 # print if freestiler Python library is installed?
 is_python_freestiler_installed()
-#> Error in is_python_freestiler_installed(): could not find function "is_python_freestiler_installed"
+#> [1] FALSE
 ```

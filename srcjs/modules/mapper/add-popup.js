@@ -8,9 +8,10 @@ import {getVisibleLayerDataAtPoint} from "../utils/mapboxgl.js";
  * Add listener for popup to map.
  * @param {HTMLElement} map - HTML element for map.
  * @param {Map<string,string>} projectMetadata - Project metadata.
+ * @param {Array<string>} zones - Zone names.
  * @return {void}
  */
-export function addPopup(el, projectMetadata) {
+export function addPopup(el, projectMetadata, zones) {
   // define listener for click on map to display popup
   el.map.on("click", (e) => {
     // obtain data for visible layers that are underneath the mouse
@@ -20,7 +21,7 @@ export function addPopup(el, projectMetadata) {
       // add popup
       new mapboxgl.Popup({closeButton: false})
         .setLngLat(e.lngLat)
-        .setDOMContent(createPopup(data))
+        .setDOMContent(createPopup(data, zones))
         .addTo(el.map);
     }
   });
@@ -29,9 +30,10 @@ export function addPopup(el, projectMetadata) {
 /**
  * Create popup.
  * @param {Map<object>} data - Array of key pairs with popup information.
+ * @param {Array<string>} zones - Zone names.
  * @return {HTMLElement}
  */
-function createPopup(data) {
+function createPopup(data, zones) {
   // create element
   const el = document.createElement("div");
   el.classList.add("map-popup");
@@ -43,7 +45,11 @@ function createPopup(data) {
     label.innerText = key + ":";
     // create span
     let span = document.createElement("span");
-    span.innerText = value;
+    if (value.class === "Solution") {
+      span.innerText = zones[value.value - 1];
+    } else {
+      span.innerText = value.value;
+    }
     // append elements
     el.appendChild(label);
     el.appendChild(span);

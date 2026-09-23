@@ -107,13 +107,10 @@ Other class:
 ``` r
 # simulate spatial data
 sim_data <- simulate_spatial_data()
-#> Error in simulate_spatial_data(): could not find function "simulate_spatial_data"
 
 # prepare data
 dataset <- create_dataset_from_sf(sim_data)
-#> Error in create_dataset_from_sf(sim_data): could not find function "create_dataset_from_sf"
 tile <- create_tile_from_sf(sim_data)
-#> Error in create_tile_from_sf(sim_data): could not find function "create_tile_from_sf"
 
 # create cost
 cost <- new_cost(
@@ -129,7 +126,6 @@ cost <- new_cost(
     provenance = simulate_provenance()
   )
 )
-#> Error in new_cost(name = "cost", zone = "Science", weight = 0.1, layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_cost"
 
 # create lock
 lock <- new_lock(
@@ -144,7 +140,6 @@ lock <- new_lock(
     provenance = simulate_provenance()
   )
 )
-#> Error in new_lock(name = "lock", zone = "Biodiversity", layer = new_layer(column = "locked_in",     total = 30, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_lock"
 
 # create features
 features <- list(
@@ -182,7 +177,6 @@ features <- list(
     )
   )
 )
-#> Error in new_feature(name = "f1", zone_targets = c(0.1, 0.2, 0.5), zone_weights = c(0.2,     0.1, 0.3), zone_helds = c(0, 0.1, 0), themes = list(new_theme(zone = "Biodiversity",     name = "Penguins")), layer = new_layer(column = "feat_1",     total = 500, dataset = dataset, tile = tile, legend = simulate_continuous_legend(),     provenance = simulate_provenance())): could not find function "new_feature"
 
 # create project
 x <- new_project(
@@ -194,9 +188,8 @@ x <- new_project(
   locks = list(lock),
   features = features
 )
-#> Error in new_project(zones = c("Biodiversity", "Tourism", "Science"),     bbox = sf::st_bbox(sim_data), dataset = dataset, tiles = list(tile),     costs = list(cost), locks = list(lock), features = features): could not find function "new_project"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Project> object.
 ```

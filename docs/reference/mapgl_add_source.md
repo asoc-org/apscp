@@ -75,8 +75,6 @@ map <- mapgl_add_layer(map, cost)
 map <- mapgl_clear_layer(map, cost)
 
 # display map
-# \dontrun{
 print(map)
-# }
 }
 ```

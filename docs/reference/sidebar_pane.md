@@ -68,6 +68,15 @@ Other sidebar:
 library(shiny)
 library(htmltools)
 sidebar_pane(id = "id", icon = icon("cars"), tags$div())
-#> Error in sidebar_pane(id = "id", icon = icon("cars"), tags$div()): could not find function "sidebar_pane"
+#> The `name` provided ('cars') does not correspond to a known icon
+#> <div class="mapsidebar-pane" id="id">
+#>   <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
+#>     <div></div>
+#>     <span class="mapsidebar-close">
+#>       <i class="far fa-cars" role="presentation" aria-label="cars icon"></i>
+#>     </span>
+#>   </h3>
+#>   <div class="mapsidebar-pane-content"></div>
+#> </div>
 # }
 ```

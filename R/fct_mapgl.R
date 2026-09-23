@@ -238,9 +238,7 @@ mapgl_source_layer_id <- function(x) {
 #' map <- mapgl_clear_layer(map, cost)
 #'
 #' # display map
-#' \dontrun{
 #' print(map)
-#' }
 #' @export
 mapgl_add_source <- function(map, x) {
   # assert arguments are valid

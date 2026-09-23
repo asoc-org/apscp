@@ -54,9 +54,8 @@ x <- new_provenance(
   name = "Global", icon = "globe", color = "#123456",
   description = "Data is global."
 )
-#> Error in new_provenance(name = "Global", icon = "globe", color = "#123456",     description = "Data is global."): could not find function "new_provenance"
 
 # print object
 print(x)
-#> Error: object 'x' not found
+#> A <Provenance> object.
 ```

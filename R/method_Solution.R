@@ -166,7 +166,7 @@ create_solution_from_prioritization <- function(
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), project$dataset$get_n_pu()),
-    max(prioritization) <= length(project$zones)
+    suppressWarnings(max(prioritization, na.rm = TRUE)) <= length(project$zones)
   )
 
   # process column name

@@ -22,13 +22,11 @@
 #'
 #' @family sidebar
 #'
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' library(shiny)
 #'
 #' # run example app showing a single sidebar
 #' runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
-#' }
 #' @export
 add_sidebar_control <- function(
   map,

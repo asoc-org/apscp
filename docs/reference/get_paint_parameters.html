@@ -86,16 +86,67 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># create object</span></span></span>
 <span class="r-in"><span><span class="va">legend</span> <span class="op">&lt;-</span> <span class="fu"><a href="simulate_continuous_legend.html">simulate_continuous_legend</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in simulate_continuous_legend():</span> could not find function "simulate_continuous_legend"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># obtain parameters for painting data stored in a column</span></span></span>
 <span class="r-in"><span><span class="co"># called "values" based on the legend</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">get_paint_parameters</span><span class="op">(</span><span class="va">legend</span>, <span class="st">"values"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in get_paint_parameters(legend, "values"):</span> could not find function "get_paint_parameters"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'x' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "case"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[2]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "=="</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[2]][[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[2]][[2]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "get"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[2]][[2]][[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "values"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[2]][[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "transparent"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "interpolate"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[2]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "linear"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[3]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[3]][[1]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "get"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[3]][[2]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "values"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[4]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[5]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#000000"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[6]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $fill_color[[4]][[7]]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#DDDDDD"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

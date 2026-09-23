@@ -46,9 +46,8 @@ Other class:
 ``` r
 # crate a theme
 x <- new_theme(name = "Penguins", zone = "Biodiversity")
-#> Error in new_theme(name = "Penguins", zone = "Biodiversity"): could not find function "new_theme"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Theme> object.
 ```
