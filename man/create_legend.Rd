@@ -7,29 +7,28 @@
 create_legend(x, column, units = NULL, palette = "viridis", type = NULL)
 }
 \arguments{
-\item{x}{[sf::st_sf()] object.}
+\item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
 
-\item{column}{`character` value with name of column.}
+\item{column}{\code{character} value with name of column.}
 
-\item{units}{`character` value containing the units for the values in the
-underlying data. Defaults to a `NULL` value.}
+\item{units}{\code{character} value containing the units for the values in the
+underlying data. Defaults to a \code{NULL} value.}
 
-\item{palette}{`character` value with the color palette. In particular,
-`palette` can be the name of a color palette that is recognized by
-[color_palette()]. Alternatively, it can be a set of
+\item{palette}{\code{character} value with the color palette. In particular,
+\code{palette} can be the name of a color palette that is recognized by
+\code{\link[=color_palette]{color_palette()}}. Alternatively, it can be a set of
 hex color code delimited by semicolons
-(e.g., `palette = "#000000;#DDDDDD;#123456"`).}
+(e.g., \code{palette = "#000000;#DDDDDD;#123456"}).}
 
-\item{type}{`character` value indicating if legend should be `"continuous"`
-`"categorical"`, `"presence/absence"`, or `"presence".
-Defaults to `NULL`, such that
+\item{type}{\code{character} value indicating if legend should be \code{"continuous"}
+\code{"categorical"}, \code{"presence/absence"}, or \verb{"presence". Defaults to }NULL`, such that
 the legend type will be determined automatically.}
 }
 \value{
-A new [new_continuous_legend()] or [new_categorical_legend()] object.
+A new \code{\link[=new_continuous_legend]{new_continuous_legend()}} or \code{\link[=new_categorical_legend]{new_categorical_legend()}} object.
 }
 \description{
-Create a new legend automatically for a column in a [sf::st_sf()] object.
+Create a new legend automatically for a column in a \code{\link[sf:st_sf]{sf::st_sf()}} object.
 }
 \examples{
 # simulate spatial data
@@ -43,7 +42,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},

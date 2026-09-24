@@ -139,7 +139,7 @@ Dataset <- R6::R6Class(
     #' Get [sf::st_sf()] object with data.
     #' @param column `character` vector. Defaults to `NULL` such that
     #' all columns are returned.
-    #' @return A [sf::st_st()] object.
+    #' @return A [sf::st_sf()] object.
     get_sf = function(column = NULL) {
       # if column is NULL, return full dataset
       if (is.null(column)) return(sf::read_sf(self$pu_path))
@@ -400,13 +400,13 @@ Dataset <- R6::R6Class(
 
 #' New dataset
 #'
-#' Create a new [Dataset] object.
+#' Create a new [`Dataset`] object.
 #'
 #' @param pu_path `character` file path.
 #'
 #' @param boundary_path `character` file path.
 #'
-#' @return A [Dataset] object.
+#' @return A [`Dataset`] object.
 #'
 #' @seealso
 #' See [create_dataset_from_sf()] to automatically convert a [sf::st_sf()]

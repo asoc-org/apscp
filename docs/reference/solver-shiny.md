@@ -1,7 +1,8 @@
 # Shiny bindings for solver
 
-Output and render functions for using \[solver()\] within Shiny
-applications.
+Output and render functions for using
+[`solver()`](https://asoc-org.github.io/apscp/reference/solver.md)
+within Shiny applications.
 
 ## Usage
 
@@ -24,7 +25,8 @@ renderSolver(expr, env = parent.frame(), quoted = FALSE)
 
 - expr:
 
-  An expression that generates a \[solver()\].
+  An expression that generates a
+  [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md).
 
 - env:
 
@@ -38,8 +40,17 @@ renderSolver(expr, env = parent.frame(), quoted = FALSE)
 
 ## See also
 
-Other solver:
+Other functions for the solver widget:
 [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md),
 [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md),
 [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md),
 [`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# run example application showing a solver widget
+run_example_app("solver")
+}
+```

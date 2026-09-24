@@ -12,21 +12,26 @@ mapgl_source_id(x)
 
 - x:
 
-  \[new_tile()\], \[new_feature()\], \[new_cost()\], \[new_lock()\], or
-  \[new_solution()\] object.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
+  [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
+  [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
+  [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+  or
+  [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  object.
 
 ## Value
 
-A \`character\` value.
+A `character` value.
 
 ## Details
 
-This corresponds to the \`source\` parameter of
-\[mapgl::add_fill_layer()\].
+This corresponds to the `source` parameter of
+[`mapgl::add_fill_layer()`](https://walker-data.com/mapgl/reference/add_fill_layer.html).
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
@@ -49,5 +54,5 @@ x <- create_tile_from_sf(sim_data)
 
 # get source identifier
 mapgl_source_id(x)
-#> [1] "src-file197dff3e7466fc.pmtiles"
+#> [1] "src-file1bc3aa475138ae.pmtiles"
 ```

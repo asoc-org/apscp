@@ -12,11 +12,14 @@ create_solution_legend(project)
 
 - project:
 
-  \[new_project()\] object.
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object.
 
 ## Value
 
-A \[new_categorical_legend()\] object.
+A
+[`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
+object.
 
 ## Details
 
@@ -25,7 +28,7 @@ file.
 
 ## See also
 
-Other method:
+Other functions for calling class methods:
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),

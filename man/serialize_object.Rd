@@ -46,7 +46,7 @@ serialize_object(x)
 \item{x}{An object.}
 }
 \value{
-A `list` object.
+A \code{list} object.
 }
 \description{
 Serialize an object.
@@ -78,15 +78,17 @@ print(d)
 
 }
 \seealso{
-See [deserialize_object()] for the opposite of this function.
+See \code{\link[=deserialize_object]{deserialize_object()}} for the opposite of this function.
 
-Other io:
+Other functions for reading and writing data:
 \code{\link[=deserialize_object]{deserialize_object()}},
 \code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_matrix]{read_matrix()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=read_sf_data]{read_sf_data()}},
 \code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_matrix]{write_matrix()}},
 \code{\link[=write_project]{write_project()}},
 \code{\link[=write_sf_data]{write_sf_data()}}
 }

@@ -12,20 +12,23 @@ solver_sync(id, project, data, session = shiny::getDefaultReactiveDomain())
 
 - id:
 
-  \`character\` value with identifier for \[solver()\] object.
+  `character` value with identifier for
+  [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md)
+  object.
 
 - project:
 
-  \[project()\] object.
+  [`project()`](https://rspatial.github.io/terra/reference/project.html)
+  object.
 
 - data:
 
-  \`list\` with data.
+  `list` with data.
 
 - session:
 
-  The \`session\` object passed to function given to \`shinyServer\`
-  Default is \[shiny::getDefaultReactiveDomain()\].
+  `session` object passed to function given to `shinyServer`. Default is
+  [`shiny::getDefaultReactiveDomain()`](https://rdrr.io/pkg/shiny/man/domains.html).
 
 ## Details
 
@@ -34,8 +37,17 @@ bars based on which locks are selected for each zone.
 
 ## See also
 
-Other solver:
+Other functions for the solver widget:
 [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md),
 [`solver-shiny`](https://asoc-org.github.io/apscp/reference/solver-shiny.md),
 [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md),
 [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# run example application showing a solver widget
+run_example_app("solver")
+}
+```

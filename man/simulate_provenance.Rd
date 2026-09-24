@@ -7,7 +7,7 @@
 simulate_provenance()
 }
 \value{
-A [new_provenance()] object.
+A \code{\link[=new_provenance]{new_provenance()}} object.
 }
 \description{
 Simulate a provenance information.
@@ -22,7 +22,7 @@ simulate_provenance()
 
 }
 \seealso{
-Other simulation:
+Other functions for simulating data:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},

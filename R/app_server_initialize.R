@@ -3,8 +3,8 @@
 #' Set behavior for initializing the application.
 #'
 #' @details
-#' This object is designed to be used within [app_server] function.
-#' Within the [app_server] function, it should be called like this:
+#' This object is designed to be used within `app_server()` function.
+#' Within the `app_server()` function, it should be called like this:
 #'
 #' ```
 #' eval(app_server_initialize)

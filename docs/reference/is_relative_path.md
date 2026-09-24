@@ -12,19 +12,31 @@ is_relative_path(x)
 
 - x:
 
-  \`character\` value with file path.
+  `character` value with file path.
 
 ## Value
 
-A \`logical\` value.
+A `logical` value.
 
 ## See also
 
-Other misc:
+Other miscellaneous functions:
 [`as.data.frame.JsDataFrame()`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md),
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md),
 [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
-[`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md),
-[`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md),
-[`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
+[`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md)
+
+## Examples
+
+``` r
+# check if various paths are relative or not
+is_relative_path("/usr/home/data.txt")
+#> [1] FALSE
+is_relative_path("~/data.txt")
+#> [1] FALSE
+is_relative_path("C:/Users/root/data.txt")
+#> [1] TRUE
+is_relative_path("data.txt")
+#> [1] TRUE
+```

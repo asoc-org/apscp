@@ -1,6 +1,6 @@
 #' Read dataset
 #'
-#' Import a [Dataset] object.
+#' Import a [`Dataset`] object.
 #'
 #' @param pu_path `character` file path for planning unit data.
 #'
@@ -69,9 +69,9 @@ read_dataset <- function(pu_path, boundary_path) {
 
 #' Write dataset
 #'
-#' Write a [Dataset] object.
+#' Write a [`Dataset`] object.
 #'
-#' @param x [Dataset] object.
+#' @param x [`Dataset`] object.
 #'
 #' @inheritParams read_dataset
 #'
@@ -142,7 +142,7 @@ write_dataset <- function(x, pu_path, boundary_path) {
 
 #' Create dataset from sf object.
 #'
-#' Create a [Dataset] object from a [st::sf()] object.
+#' Create a [`Dataset`] object from a [sf::st_sf()] object.
 #'
 #' @param x [sf::st_sf()] object.
 #'

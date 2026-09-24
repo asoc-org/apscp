@@ -27,68 +27,80 @@ new_project(
 
 - zones:
 
-  \`character\` vector of zone names.
+  `character` vector of zone names.
 
 - bbox:
 
-  \[sf::st_bbox()\] object.
+  [`sf::st_bbox()`](https://r-spatial.github.io/sf/reference/st_bbox.html)
+  object.
 
 - dataset:
 
-  \[new_dataset()\] object.
+  [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
+  object.
 
 - tiles:
 
-  \`list\` of \[new_tile()\] objects.
+  `list` of
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+  objects.
 
 - costs:
 
-  \`list\` of \[new_cost()\] objects.
+  `list` of
+  [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md)
+  objects.
 
 - features:
 
-  \`list\` of \[new_features()\] objects.
+  `list` of
+  [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md)
+  objects.
 
 - locks:
 
-  \`list\` of \[new_locks()\] objects.
+  `list` of
+  [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md)
+  objects.
 
 - solutions:
 
-  \`list\` of \[new_solution()\] objects. Defaults to an empty list().
+  `list` of
+  [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  objects. Defaults to an empty list().
 
 - name:
 
-  \`character\` name of the project. Defaults to \`"Project"\`.
+  `character` name of the project. Defaults to `"Project"`.
 
 - author_name:
 
-  \`character\` name of the project author. Defaults to \`"Unknown"\`.
+  `character` name of the project author. Defaults to `"Unknown"`.
 
 - author_email:
 
-  \`character\` email of the project author. Defaults to \`"Unknown"\`.
+  `character` email of the project author. Defaults to `"Unknown"`.
 
 - version:
 
-  \`character\` version of package used to create the project. Defaults
-  to \`NULL\`, such that the current package version is used.
+  `character` version of package used to create the project. Defaults to
+  `NULL`, such that the current package version is used.
 
 - bearing:
 
-  \`numeric\` value denoting the initial map rotation. Defaults to 0.
+  `numeric` value denoting the initial map rotation. Defaults to 0.
 
 - zoom:
 
-  \`numeric\` value denoting the initial map zoom. Defaults to 0.
+  `numeric` value denoting the initial map zoom. Defaults to 0.
 
 ## Value
 
-A new \`Project\` object.
+A new `Project` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

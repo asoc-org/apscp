@@ -3,7 +3,7 @@ NULL
 
 #' Add solution to map
 #'
-#' Add a [new_solution()] to a Mapper widget.
+#' Add a [new_solution()] to a [mapper()] widget.
 #'
 #' @param id `character` value with identifier for [mapper()] object.
 #'
@@ -17,6 +17,8 @@ NULL
 #' @inheritParams sidebar_open
 #'
 #' @family mapper
+#'
+#' @inherit mapper examples
 #'
 #' @export
 mapper_add_solution <- function(
@@ -69,6 +71,8 @@ mapper_add_solution <- function(
 #' are not active.
 #'
 #' @family mapper
+#'
+#' @inherit mapper examples
 #'
 #' @export
 mapper_sync <- function(

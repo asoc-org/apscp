@@ -2,29 +2,27 @@
 % Please edit documentation in R/utils_as.R
 \name{as.data.frame.JsDataFrame}
 \alias{as.data.frame.JsDataFrame}
-\title{Convert `JsDataFrame` object to data.frame}
+\title{Convert \code{JsDataFrame} object to data.frame}
 \usage{
 \method{as.data.frame}{JsDataFrame}(x, ...)
 }
 \arguments{
-\item{x}{`list` object.}
+\item{x}{\code{list} object.}
 
 \item{...}{Not used.}
 }
 \value{
-A `data.frame` object.
+A \code{data.frame} object.
 }
 \description{
-Convert a JavaScript data frame object to a `data.frame` object.
+Convert a JavaScript data frame object to a \code{data.frame} object.
 }
 \seealso{
-Other misc:
+Other miscellaneous functions:
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_installed]{is_installed()}},
 \code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}},
-\code{\link[=is_relative_path]{is_relative_path()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=write_matrix]{write_matrix()}}
+\code{\link[=is_relative_path]{is_relative_path()}}
 }
 \concept{misc}

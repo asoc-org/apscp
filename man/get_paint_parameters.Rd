@@ -7,18 +7,18 @@
 get_paint_parameters(x, column)
 }
 \arguments{
-\item{x}{[new_continuous_legend()] or [new_categorical_legend()] object.}
+\item{x}{\code{\link[=new_continuous_legend]{new_continuous_legend()}} or \code{\link[=new_categorical_legend]{new_categorical_legend()}} object.}
 
-\item{column}{`character` value with source layer for painting.}
+\item{column}{\code{character} value with source layer for painting.}
 }
 \value{
-A named `list` object.
+A named \code{list} object.
 }
 \description{
-Get parameters for painting a [new_layer] object.
+Get parameters for painting a \link{new_layer} object.
 }
 \details{
-This function is designed for use with [mapgl::add_fill_layer()].
+This function is designed for use with \code{\link[mapgl:add_fill_layer]{mapgl::add_fill_layer()}}.
 }
 \examples{
 # create object
@@ -33,7 +33,7 @@ print(x)
 
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},
 \code{\link[=map_project]{map_project()}},

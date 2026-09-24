@@ -1,8 +1,9 @@
 # Mapper
 
-Constructs a widget for managing layers on a \[mapgl::mapboxgl()\] map.
-This widget is designed to be used in conjunction with an existing map
-within a Shiny web application.
+Constructs a widget for managing layers on a
+[`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html)
+map. This widget is designed to be used in conjunction with an existing
+map within a Shiny web application.
 
 ## Usage
 
@@ -21,36 +22,39 @@ mapper(
 
 - project:
 
-  \[new_project()\] object.
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object.
 
 - map_id:
 
-  \`character\` HTML identifier for \[mapgl::mapboxglOutput()\].
-  Defaults to \`NULL\` since these identifiers are not used by Shiny.
+  `character` HTML identifier for
+  [`mapgl::mapboxglOutput()`](https://walker-data.com/mapgl/reference/mapboxglOutput.html).
+  Defaults to `NULL` since these identifiers are not used by Shiny.
 
 - max_layers:
 
-  \`integer\` maximum number of layers to be active on the
-  \[mapgl::mapboxglOutput()\] at a single point in time. Defaults to 15.
+  `integer` maximum number of layers to be active on the
+  [`mapgl::mapboxglOutput()`](https://walker-data.com/mapgl/reference/mapboxglOutput.html)
+  at a single point in time. Defaults to 15.
 
 - width:
 
-  \`character\` width of the displayed widget. Defaults to \`NULL\` such
+  `character` width of the displayed widget. Defaults to `NULL` such
   that the widget is automatically sized.
 
 - height:
 
-  \`character\` width of the displayed widget. Defaults to \`NULL\` such
+  `character` width of the displayed widget. Defaults to `NULL` such
   that the widget is automatically sized.
 
 - id:
 
-  \`character\` HTML identifier for the widget. Defaults to \`NULL\`
-  since these identifiers are not used by Shiny.
+  `character` HTML identifier for the widget. Defaults to `NULL` since
+  these identifiers are not used by Shiny.
 
 ## See also
 
-Other mapper:
+Other functions for the mapper widget:
 [`mapper-shiny`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md),
 [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md),
 [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
@@ -59,9 +63,7 @@ Other mapper:
 
 ``` r
 if (FALSE) { # interactive()
-library(shiny)
-
-# run example app showing a mapper
-runApp(system.file("examples", "mapper_app.R", package = "apscp"))
+# run example app showing a mapper widget
+run_example_app("mapper")
 }
 ```

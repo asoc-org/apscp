@@ -12,20 +12,21 @@ mapgl_source_url(x)
 
 - x:
 
-  \[new_tile()\] object.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+  object.
 
 ## Value
 
-A \`character\` value.
+A `character` value.
 
 ## Details
 
-This corresponds to the \`url\` parameter of
-\[mapgl::add_pmtiles_source()\].
+This corresponds to the `url` parameter of
+[`mapgl::add_pmtiles_source()`](https://walker-data.com/mapgl/reference/add_pmtiles_source.html).
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
@@ -48,5 +49,5 @@ x <- create_tile_from_sf(sim_data)
 
 # get layer identifier
 mapgl_source_url(x)
-#> [1] "http://localhost:8085/file197dff298c6612.pmtiles"
+#> [1] "http://localhost:8085/file1bc3aa2c48a484.pmtiles"
 ```

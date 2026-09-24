@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Optimization • apscp</title>
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- katex math --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script><script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script><script src="../katex-auto.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -82,189 +83,141 @@ solvers, such as <em>Gurobi</em> or <em>HiGHS</em> <span class="citation">(Gurob
 <div class="section level2">
 <h2 id="problem-formulation">Problem formulation<a class="anchor" aria-label="anchor" href="#problem-formulation"></a>
 </h2>
-<p>To begin with, we will define the following terminology. Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Z</mi><annotation encoding="application/x-tex">Z</annotation></semantics></math>
-(indexed by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>)
-denote the set of management zones. In particular, the management zones
-represent the range of potential management options that are available.
-For convenience, here we let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">z=c</annotation></semantics></math>
-denote the conservation zone,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>s</mi></mrow><annotation encoding="application/x-tex">z=s</annotation></semantics></math>
-the scientific zone, and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>=</mo><mi>t</mi></mrow><annotation encoding="application/x-tex">z=t</annotation></semantics></math>
-the tourism zone. Also let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math>
-(indexed by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>i</mi><annotation encoding="application/x-tex">i</annotation></semantics></math>)
-denote the set of features considered for management. Although features
-often pertain to biodiversity elements (e.g., species, ecosystems), here
-we consider additional features that may also be relevant to scientific
-and tourism areas (e.g., geological sites, points of interest for
-tourism, existing scientific infrastructure). Additionally, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>J</mi><annotation encoding="application/x-tex">J</annotation></semantics></math>
-(indexed by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>)
-denote the set of planning units (e.g., areas available for management).
-Broadly speaking, the tool aims to help inform which planning units
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">j \in J</annotation></semantics></math>
-should be allocated to zones
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>∈</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">z \in Z</annotation></semantics></math>.</p>
+<p>To begin with, we will define the following terminology. Let <span class="math inline">Z</span> (indexed by <span class="math inline">z</span>) denote the set of management zones. In
+particular, the management zones represent the range of potential
+management options that are available. For convenience, here we let
+<span class="math inline">z=c</span> denote the conservation zone, <span class="math inline">z=s</span> the scientific zone, and <span class="math inline">z=t</span> the tourism zone. Also let <span class="math inline">I</span> (indexed by <span class="math inline">i</span>) denote the set of features considered for
+management. Although features often pertain to biodiversity elements
+(e.g., species, ecosystems), here we consider additional features that
+may also be relevant to scientific and tourism areas (e.g., geological
+sites, points of interest for tourism, existing scientific
+infrastructure). Additionally, let <span class="math inline">J</span>
+(indexed by <span class="math inline">j</span>) denote the set of
+planning units (e.g., areas available for management). Broadly speaking,
+the tool aims to help inform which planning units <span class="math inline">j \in J</span> should be allocated to zones <span class="math inline">z \in Z</span>.</p>
 <p>We define terminology to describe the spatial distribution of the
 features and stakeholder preferences for their representation. In
-particular, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">A_{ij}</annotation></semantics></math>
-indicate the amount of each feature
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math>
-(e.g., abundance of penguins, hectares of lichen, presence/absence of
-geological sites) that is present within each planning unit
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">j \in J</annotation></semantics></math>.
-Representation targets are used to specify the minimum amount of each
-feature that should ideally be held (covered) by planning units
-allocated to a particular zone (e.g., total abundance of penguins
-required in conservation areas, total abundance of penguins required in
-tourism areas, total hectares of lichen present in conservation areas,
-total number of geological sites for scientific areas). To quantify such
-targets, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">R_{iz}</annotation></semantics></math>
-denote the representation target for feature
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math>
-by management zone
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>∈</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">z \in Z</annotation></semantics></math>.
-Additionally, to quantify the relative importance for meeting a
-particular representation target, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>W</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">W_{iz}</annotation></semantics></math>
-denote a positive weight value for each feature
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math>
-and management zone
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>∈</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">z \in Z</annotation></semantics></math>.</p>
+particular, let <span class="math inline">A_{ij}</span> indicate the
+amount of each feature <span class="math inline">i \in I</span> (e.g.,
+abundance of penguins, hectares of lichen, presence/absence of
+geological sites) that is present within each planning unit <span class="math inline">j \in J</span>. Representation targets are used to
+specify the minimum amount of each feature that should ideally be held
+(covered) by planning units allocated to a particular zone (e.g., total
+abundance of penguins required in conservation areas, total abundance of
+penguins required in tourism areas, total hectares of lichen present in
+conservation areas, total number of geological sites for scientific
+areas). To quantify such targets, let <span class="math inline">R_{iz}</span> denote the representation target for
+feature <span class="math inline">i \in I</span> by management zone
+<span class="math inline">z \in Z</span>. Additionally, to quantify the
+relative importance for meeting a particular representation target, let
+<span class="math inline">W_{iz}</span> denote a positive weight value
+for each feature <span class="math inline">i \in I</span> and management
+zone <span class="math inline">z \in Z</span>.</p>
 <p>We define terminology to describe the location of existing management
 zones that cannot be altered. For example, it would be impractical to
 decommission infrastructure in existing scientific areas, or de-gazette
 existing protected areas (i.e., Antarctic Specially Protected Areas). To
-describe this, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">L_{jz}</annotation></semantics></math>
-indicate if planning unit
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">j \in J</annotation></semantics></math>
-is currently allocated to zone
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>∈</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">z \in Z</annotation></semantics></math>
-and must remain allocated to this zone during optimization. In other
-words, these
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">L_{jz}</annotation></semantics></math>
-variables will subsequently be used to “lock” planning units to a
-particular zone.</p>
+describe this, let <span class="math inline">L_{jz}</span> indicate if
+planning unit <span class="math inline">j \in J</span> is currently
+allocated to zone <span class="math inline">z \in Z</span> and must
+remain allocated to this zone during optimization. In other words, these
+<span class="math inline">L_{jz}</span> variables will subsequently be
+used to “lock” planning units to a particular zone.</p>
 <p>We define terminology to describe the negative impacts associated
 with implementing management zones. To describe the foregone economic
 opportunity associated with establishing conservation and scientific
-areas, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>j</mi></msub><annotation encoding="application/x-tex">n_j</annotation></semantics></math>
-denote the opportunity cost for planning
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.
-Since detailed site-level revenue data are not readily available across
-the entire Antarctic Peninsula, we parameterized
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>n</mi><mi>j</mi></msub><annotation encoding="application/x-tex">n_j</annotation></semantics></math>
-based on the average number of tourists that have visited planning unit
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-over a predefined period of time as a proxy. Additionally, let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mi>j</mi></msub><annotation encoding="application/x-tex">q_j</annotation></semantics></math>
-denote the level of impact that tourism operations have on local
-biodiversity present in planning unit
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>.
-Because the population viability analyses required to parameterize
-species-specific responses to tourism operations are not readily
-available for all species in the Antarctic Peninsula, we parameterized
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>q</mi><mi>j</mi></msub><annotation encoding="application/x-tex">q_j</annotation></semantics></math>
-based on the irreplaceability of the conservation features present in
-planning unit
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>j</mi><annotation encoding="application/x-tex">j</annotation></semantics></math>
-(eqn 1) <span class="citation">(i.e,. measured according to
-rarity-weighted richness; Williams et al., 1996)</span>. Thus we assume
-that planning units containing a greater number of species with
-localized distributions would be more negatively impacted by tourism
-impacts.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>q</mi><mi>j</mi></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></munder><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mfrac><mrow><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><mfrac><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mrow><mi>m</mi><mi>a</mi><msub><mi>x</mi><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow></mfrac><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo></mrow><mrow><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub></mrow></mfrac><mo>,</mo><mrow><mrow><mtext mathvariant="normal">if </mtext><mspace width="0.333em"></mspace></mrow><mrow><msub><mi>R</mi><mrow><mi>j</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>c</mi></mrow></msub><mo>&gt;</mo><mn>0</mn></mrow></mrow></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mn>0</mn><mo>,</mo><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+areas, let <span class="math inline">n_j</span> denote the opportunity
+cost for planning <span class="math inline">j</span>. Since detailed
+site-level revenue data are not readily available across the entire
+Antarctic Peninsula, we parameterized <span class="math inline">n_j</span> based on the average number of tourists
+that have visited planning unit <span class="math inline">j</span> over
+a predefined period of time as a proxy. Additionally, let <span class="math inline">q_j</span> denote the level of impact that tourism
+operations have on local biodiversity present in planning unit <span class="math inline">j</span>. Because the population viability analyses
+required to parameterize species-specific responses to tourism
+operations are not readily available for all species in the Antarctic
+Peninsula, we parameterized <span class="math inline">q_j</span> based
+on the irreplaceability of the conservation features present in planning
+unit <span class="math inline">j</span> (eqn 1) <span class="citation">(i.e,. measured according to rarity-weighted richness;
+Williams et al., 1996)</span>. Thus we assume that planning units
+containing a greater number of species with localized distributions
+would be more negatively impacted by tourism impacts.</p>
+<p><span class="math display">
 q_j = \sum_{j \in J} \begin{cases} \tag{eqn 1}
-\frac{\big( \frac{A_{ij}}{max_{i \in I} A_{ij}} \big)}{\sum_{i \in I} A_{ij}}, \text{if $R_{j,z=c} &gt; 0$} \\\\
+\frac{\big( \frac{A_{ij}}{max_{i \in I} A_{ij}} \big)}{\sum_{i \in I}
+A_{ij}}, \text{if $R_{j,z=c} &gt; 0$} \\\\
 0, \text{otherwise} \end{cases}
-</annotation></semantics></math></p>
-<p>We define the binary
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">X_{iz}</annotation></semantics></math>
-decision variables (eqn 2). Briefly, these variables represent the
-primary uncertainty in the decision making process. For a given
-solution, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>X</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">X_{iz}</annotation></semantics></math>
-variables indicate which planning units are allocated to each zone.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>X</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><mo>=</mo><mrow><mo stretchy="true" form="prefix">{</mo><mtable><mtr><mtd columnalign="left" style="text-align: left"><mn>1</mn><mo>,</mo><mrow><mrow><mtext mathvariant="normal">if planning unit </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> selected for zone </mtext><mspace width="0.333em"></mspace></mrow><mi>z</mi></mrow></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"></mtd></mtr><mtr><mtd columnalign="left" style="text-align: left"><mn>0</mn><mo>,</mo><mtext mathvariant="normal">otherwise</mtext></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">
+</span></p>
+<p>We define the binary <span class="math inline">X_{iz}</span> decision
+variables (eqn 2). Briefly, these variables represent the primary
+uncertainty in the decision making process. For a given solution, the
+<span class="math inline">X_{iz}</span> variables indicate which
+planning units are allocated to each zone.</p>
+<p><span class="math display">
 X_{iz} = \begin{cases} \tag{eqn 2}
 1, \text{if planning unit $i$ selected for zone $z$} \\\\
 0, \text{otherwise} \end{cases}
-</annotation></semantics></math></p>
-<p>We define the continuous
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">S_{iz}</annotation></semantics></math>
+</span></p>
+<p>We define the continuous <span class="math inline">S_{iz}</span>
 auxiliary variables (eqn 3). Briefly, these variables represent
 calculations based on the decision variables. For a given solution, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">S_{iz}</annotation></semantics></math>
-variables describes the percentage of the target for feature
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math>
-and zone
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo>∈</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">z \in Z</annotation></semantics></math>
-that remains unfulfilled by the solution (in other words, relative
-target shortfall). In other words, these variables describe how poorly
-the solution meets a given target.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><mo>=</mo><mrow><mrow><mtext mathvariant="normal">relative target shortfall for feature </mtext><mspace width="0.333em"></mspace></mrow><mi>i</mi><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> by zone </mtext><mspace width="0.333em"></mspace></mrow><mi>z</mi></mrow></mrow><annotation encoding="application/x-tex">
-S_{iz} = \text{relative target shortfall for feature $i$ by zone $z$} \tag{eqn 3}
-</annotation></semantics></math></p>
-<p>We define the continuous
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>c</mi></msub><annotation encoding="application/x-tex">\alpha_c</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\alpha_s</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>t</mi></msub><annotation encoding="application/x-tex">\alpha_t</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
-objective variables (eqn 4a–4e). Briefly, these variables represent the
-performance metrics that are maximized or minimized during optimization.
-For a given solution, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>c</mi></msub><annotation encoding="application/x-tex">\alpha_c</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\alpha_s</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>t</mi></msub><annotation encoding="application/x-tex">\alpha_t</annotation></semantics></math>
-variables measure the weighted sum of the relative target shortfalls for
-the conservation, scientific, and tourism zones (respectively).
-Additionally, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>
-variable measures the total opportunity costs associated with the
-planning units allocated to the conservation and scientific zones.
-Furthermore, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>
-variable measures the total impacts of tourism areas on
-biodiversity.</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>α</mi><mi>c</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mrow><mtext mathvariant="normal">overall representation target shortfalls for conservation areas (</mtext><mrow><mi>z</mi><mo>=</mo><mi>c</mi></mrow><mtext mathvariant="normal">)</mtext></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>α</mi><mi>s</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mrow><mtext mathvariant="normal">overall representation target shortfalls for scientific areas (</mtext><mrow><mi>z</mi><mo>=</mo><mi>s</mi></mrow><mtext mathvariant="normal">)</mtext></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>α</mi><mi>t</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mrow><mtext mathvariant="normal">overall representation target shortfalls for tourism areas (</mtext><mrow><mi>z</mi><mo>=</mo><mi>t</mi></mrow><mtext mathvariant="normal">)</mtext></mrow></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>β</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mtext mathvariant="normal">total opportunity cost of conservation and scientific areas</mtext></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mi>γ</mi></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mtext mathvariant="normal">total impacts of tourism areas on biodiversity</mtext></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<span class="math inline">S_{iz}</span> variables describes the
+percentage of the target for feature <span class="math inline">i \in
+I</span> and zone <span class="math inline">z \in Z</span> that remains
+unfulfilled by the solution (in other words, relative target shortfall).
+In other words, these variables describe how poorly the solution meets a
+given target.</p>
+<p><span class="math display">
+S_{iz} = \text{relative target shortfall for feature $i$ by zone $z$}
+\tag{eqn 3}
+</span></p>
+<p>We define the continuous <span class="math inline">\alpha_c</span>,
+<span class="math inline">\alpha_s</span>, <span class="math inline">\alpha_t</span>, <span class="math inline">\beta</span>, <span class="math inline">\gamma</span> objective variables (eqn 4a–4e).
+Briefly, these variables represent the performance metrics that are
+maximized or minimized during optimization. For a given solution, the
+<span class="math inline">\alpha_c</span>, <span class="math inline">\alpha_s</span>, and <span class="math inline">\alpha_t</span> variables measure the weighted sum
+of the relative target shortfalls for the conservation, scientific, and
+tourism zones (respectively). Additionally, the <span class="math inline">\beta</span> variable measures the total opportunity
+costs associated with the planning units allocated to the conservation
+and scientific zones. Furthermore, the <span class="math inline">\gamma</span> variable measures the total impacts of
+tourism areas on biodiversity.</p>
+<p><span class="math display">
 \begin{align*}
-\alpha_{c} &amp;= \text{overall representation target shortfalls for conservation areas ($z=c$)} \tag{eqn 4a} \\
-\alpha_{s} &amp;= \text{overall representation target shortfalls for scientific areas ($z=s$)} \tag{eqn 4b} \\
-\alpha_{t} &amp;= \text{overall representation target shortfalls for tourism areas ($z=t$)} \tag{eqn 4c} \\
-\beta &amp;= \text{total opportunity cost of conservation and scientific areas} \tag{eqn 4d} \\
-\gamma &amp;= \text{total impacts of tourism areas on biodiversity} \tag{eqn 4e}
+\alpha_{c} &amp;= \text{overall representation target shortfalls for
+conservation areas ($z=c$)} \tag{eqn 4a} \\
+\alpha_{s} &amp;= \text{overall representation target shortfalls for
+scientific areas ($z=s$)} \tag{eqn 4b} \\
+\alpha_{t} &amp;= \text{overall representation target shortfalls for
+tourism areas ($z=t$)} \tag{eqn 4c} \\
+\beta &amp;= \text{total opportunity cost of conservation and scientific
+areas} \tag{eqn 4d} \\
+\gamma &amp;= \text{total impacts of tourism areas on biodiversity}
+\tag{eqn 4e}
 \end{align*}
-</annotation></semantics></math></p>
+</span></p>
 <p>Based on the previous defined terminology, the optimization problem
 is formulated as the following multi-objective mixed integer programming
 problem (eqns 5a–5k).</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mtext mathvariant="normal">Minimize </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>α</mi><mi>c</mi></msub><mo>,</mo><msub><mi>α</mi><mi>s</mi></msub><mo>,</mo><msub><mi>α</mi><mi>t</mi></msub><mo>,</mo><mi>β</mi><mo>,</mo><mi>γ</mi></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mrow><mtext mathvariant="normal">Subject to </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>α</mi><mi>c</mi></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>W</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>c</mi></mrow></msub><mo>×</mo><mfrac><msub><mi>S</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>c</mi></mrow></msub><msub><mi>R</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>c</mi></mrow></msub></mfrac></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>α</mi><mi>s</mi></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>W</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>s</mi></mrow></msub><mo>×</mo><mfrac><msub><mi>S</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>s</mi></mrow></msub><msub><mi>R</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>s</mi></mrow></msub></mfrac></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>α</mi><mi>t</mi></msub><mo>=</mo><munder><mo>∑</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></munder><msub><mi>W</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>t</mi></mrow></msub><mo>×</mo><mfrac><msub><mi>S</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>t</mi></mrow></msub><msub><mi>R</mi><mrow><mi>i</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>t</mi></mrow></msub></mfrac></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mi>β</mi><mo>=</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></munder><msub><mi>n</mi><mi>j</mi></msub><mo>×</mo><msub><mi>X</mi><mrow><mi>j</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>t</mi></mrow></msub><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo><mo>+</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></munder><msub><mi>n</mi><mi>j</mi></msub><mo>×</mo><msub><mi>X</mi><mrow><mi>j</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>t</mi></mrow></msub><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mi>γ</mi><mo>=</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></munder><msub><mi>q</mi><mi>j</mi></msub><mo>×</mo><msub><mi>X</mi><mrow><mi>j</mi><mo>,</mo><mi>z</mi><mo>=</mo><mi>t</mi></mrow></msub></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><munder><mo>∑</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></munder><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo><mo>+</mo><mo minsize="1.2" maxsize="1.2" stretchy="false" form="prefix">(</mo><msub><mi>R</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><mo>×</mo><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><mo minsize="1.2" maxsize="1.2" stretchy="false" form="postfix">)</mo><mo>≥</mo><msub><mi>R</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub></mtd><mtd columnalign="right" style="text-align: right"><mo>∀</mo><mi>i</mi><mo>∈</mo><mi>i</mi><mo>,</mo><mi>z</mi><mo>∈</mo><mi>Z</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>X</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><mo>≥</mo><msub><mi>L</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub></mtd><mtd columnalign="right" style="text-align: right"><mo>∀</mo><mi>j</mi><mo>∈</mo><mi>J</mi><mo>,</mo><mi>z</mi><mo>∈</mo><mi>Z</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><munder><mo>∑</mo><mrow><mi>z</mi><mo>∈</mo><mi>Z</mi></mrow></munder><msub><mi>X</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><mo>≤</mo><mn>1</mn></mtd><mtd columnalign="right" style="text-align: right"><mo>∀</mo><mi>j</mi><mo>∈</mo><mi>J</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>X</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mtd><mtd columnalign="right" style="text-align: right"><mo>∀</mo><mi>j</mi><mo>∈</mo><mi>J</mi><mo>,</mo><mi>z</mi><mo>∈</mo><mi>Z</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><mo>∈</mo><mrow><mo stretchy="true" form="prefix">[</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="true" form="postfix">]</mo></mrow></mtd><mtd columnalign="right" style="text-align: right"><mo>∀</mo><mi>i</mi><mo>∈</mo><mi>i</mi><mo>,</mo><mi>z</mi><mo>∈</mo><mi>Z</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">
 \begin{align*}
-\text{Minimize } &amp; \alpha_c, \alpha_s, \alpha_t, \beta, \gamma &amp; \tag{eqn 5a} \\
-\text{Subject to } &amp; \alpha_c = \sum_{i \in I} W_{i,z=c} \times \frac{S_{i,z=c}}{R_{i,z=c}} &amp; \tag{eqn 5b} \\
-&amp; \alpha_s = \sum_{i \in I} W_{i,z=s} \times \frac{S_{i,z=s}}{R_{i,z=s}} &amp; \tag{eqn 5c} \\
-&amp; \alpha_t = \sum_{i \in I} W_{i,z=t} \times \frac{S_{i,z=t}}{R_{i,z=t}} &amp; \tag{eqn 5d} \\
-&amp; \beta = \big( \sum_{j \in J} n_j \times X_{j,z=t} \big) + \big( \sum_{j \in J} n_j \times X_{j,z=t} \big) &amp; \tag{eqn 5e} \\
+\text{Minimize } &amp; \alpha_c, \alpha_s, \alpha_t, \beta, \gamma &amp;
+\tag{eqn 5a} \\
+\text{Subject to } &amp; \alpha_c = \sum_{i \in I} W_{i,z=c} \times
+\frac{S_{i,z=c}}{R_{i,z=c}} &amp; \tag{eqn 5b} \\
+&amp; \alpha_s = \sum_{i \in I} W_{i,z=s} \times
+\frac{S_{i,z=s}}{R_{i,z=s}} &amp; \tag{eqn 5c} \\
+&amp; \alpha_t = \sum_{i \in I} W_{i,z=t} \times
+\frac{S_{i,z=t}}{R_{i,z=t}} &amp; \tag{eqn 5d} \\
+&amp; \beta = \big( \sum_{j \in J} n_j \times X_{j,z=t} \big) + \big(
+\sum_{j \in J} n_j \times X_{j,z=t} \big) &amp; \tag{eqn 5e} \\
 &amp; \gamma = \sum_{j \in J} q_j \times X_{j,z=t} &amp; \tag{eqn 5f} \\
-&amp; \big( \sum_{j \in J} A_{ij} \big) + \big( R_{iz} \times S_{iz} \big) \geq R_{iz} &amp; \forall i \in i, z \in Z \tag{eqn 5g} \\
+&amp; \big( \sum_{j \in J} A_{ij} \big) + \big( R_{iz} \times S_{iz}
+\big) \geq R_{iz} &amp; \forall i \in i, z \in Z \tag{eqn 5g} \\
 &amp; X_{jz} \geq L_{jz} &amp; \forall j \in J, z \in Z \tag{eqn 5h} \\
 &amp; \sum_{z \in Z} X_{jz} \leq 1 &amp; \forall j \in J \tag{eqn 5i} \\
 &amp; X_{jz} \in \{0, 1\} &amp; \forall j \in J, z \in Z \tag{eqn 5j} \\
 &amp; S_{iz} \in [0, 1] &amp; \forall i \in i, z \in Z \tag{eqn 5k} \\
 \end{align*}
-</annotation></semantics></math></p>
+</span></p>
 <p>Here (eqn 5a) objectives are defined to minimize overall
 representation target shortfalls for (i) conservation areas, (ii)
 scientific areas, and (iii) tourism areas, as well as minimize (iv)
@@ -272,36 +225,24 @@ total opportunity cost associated with conservation and scientific areas
 and (v) total impact of tourism areas on biodiversity (refer to the
 following section for details on how these objectives are optimized).
 Constraints (eqn 5b–5d) specify that the total representation target
-shortfall variables (i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>c</mi></msub><annotation encoding="application/x-tex">\alpha_{c}</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>s</mi></msub><annotation encoding="application/x-tex">\alpha_{s}</annotation></semantics></math>,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>α</mi><mi>t</mi></msub><annotation encoding="application/x-tex">\alpha_{t}</annotation></semantics></math>)
-are calculated as the weighted sum of the relative target shortfall
-variables (per
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">S_{iz}</annotation></semantics></math>)
-associated with each zone. Constraint (eqn 5e) ensures that the total
-opportunity cost associated with conservation and scientific areas
-variable (i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>β</mi><annotation encoding="application/x-tex">\beta</annotation></semantics></math>)
-is calculated based on the opportunity costs associated with planning
-units allocated to the conservation and scientific zones. In a similar
-manner, constraint (eqn 5f) ensures that the total impact of tourism
-areas variable (i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>γ</mi><annotation encoding="application/x-tex">\gamma</annotation></semantics></math>)
-is calculated based on the level of impact that tourism would have on
-planning units allocated to the tourism zone. Constraints (eqn 5g)
-express the relative target shortfall variables (i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>S</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">S_{iz}</annotation></semantics></math>)
-is calculated as the proportion of each target that remains remains
-unfulfilled <span class="citation">(similar to Jung et al.,
-2021)</span>. Constraints (eqn 5h) ensure that the existing management
-areas (per
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">L_{jz}</annotation></semantics></math>)
-are locked (in other words, cannot be altered) during optimization.
-Constraints (eqn 5i) ensure that each planning unit can only be
-allocated to, at most, a single zone. Finally, constraints specify that
-the (eqn 5j) decision variables are binary and (eqn 5k) auxiliary
-variable are continuous and bounded between zero and one.</p>
+shortfall variables (i.e., <span class="math inline">\alpha_{c}</span>,
+<span class="math inline">\alpha_{s}</span>, <span class="math inline">\alpha_{t}</span>) are calculated as the weighted
+sum of the relative target shortfall variables (per <span class="math inline">S_{iz}</span>) associated with each zone. Constraint
+(eqn 5e) ensures that the total opportunity cost associated with
+conservation and scientific areas variable (i.e., <span class="math inline">\beta</span>) is calculated based on the opportunity
+costs associated with planning units allocated to the conservation and
+scientific zones. In a similar manner, constraint (eqn 5f) ensures that
+the total impact of tourism areas variable (i.e., <span class="math inline">\gamma</span>) is calculated based on the level of
+impact that tourism would have on planning units allocated to the
+tourism zone. Constraints (eqn 5g) express the relative target shortfall
+variables (i.e., <span class="math inline">S_{iz}</span>) is calculated
+as the proportion of each target that remains remains unfulfilled <span class="citation">(similar to Jung et al., 2021)</span>. Constraints (eqn
+5h) ensure that the existing management areas (per <span class="math inline">L_{jz}</span>) are locked (in other words, cannot be
+altered) during optimization. Constraints (eqn 5i) ensure that each
+planning unit can only be allocated to, at most, a single zone. Finally,
+constraints specify that the (eqn 5j) decision variables are binary and
+(eqn 5k) auxiliary variable are continuous and bounded between zero and
+one.</p>
 </div>
 <div class="section level2">
 <h2 id="multi-objective-optimization-approach">Multi-objective optimization approach<a class="anchor" aria-label="anchor" href="#multi-objective-optimization-approach"></a>
@@ -323,68 +264,54 @@ ensuring that the weight parameters accurately reflect user preferences
 during optimization <span class="citation">(Das &amp; Dennis,
 1997)</span>.</p>
 <p>Here we define additional terminology to describe the multi-objective
-optimization approach. Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>O</mi><annotation encoding="application/x-tex">O</annotation></semantics></math>
-(indexed by
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>o</mi><annotation encoding="application/x-tex">o</annotation></semantics></math>)
-denote the set of objectives and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>o</mi></msub><annotation encoding="application/x-tex">v_o</annotation></semantics></math>
-denote the previously defined objective variables (i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>v</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><msub><mi>α</mi><mi>c</mi></msub><mo>,</mo><msub><mi>α</mi><mi>s</mi></msub><mo>,</mo><msub><mi>α</mi><mi>t</mi></msub><mo>,</mo><mi>β</mi><mo>,</mo><mi>γ</mi><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">v = \{ \alpha_c, \alpha_s, \alpha_t, \beta, \gamma \}</annotation></semantics></math>.
-Also let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>o</mi></msub><annotation encoding="application/x-tex">r_o</annotation></semantics></math>
-denote the reference point parameter,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>o</mi></msub><annotation encoding="application/x-tex">w_o</annotation></semantics></math>
-the weight parameter for each objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o \in O</annotation></semantics></math>,
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mi>o</mi></msub><annotation encoding="application/x-tex">s_o</annotation></semantics></math>
-denote the scaling factor each objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o \in O</annotation></semantics></math>.
-To calculate the scaling factors (eqn 6a), let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>u</mi><mi>o</mi></msub><annotation encoding="application/x-tex">u_o</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>o</mi></msub><annotation encoding="application/x-tex">d_o</annotation></semantics></math>
-denote the utopian and dystopian points for each objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o \in O</annotation></semantics></math>.
-These utopian and dystopian points, in turn, are precomputed by solving
-the optimization problems for each objective (separately) (eqns 6b and
+optimization approach. Let <span class="math inline">O</span> (indexed
+by <span class="math inline">o</span>) denote the set of objectives and
+<span class="math inline">v_o</span> denote the previously defined
+objective variables (i.e., <span class="math inline">v = \{ \alpha_c,
+\alpha_s, \alpha_t, \beta, \gamma \}</span>. Also let <span class="math inline">r_o</span> denote the reference point parameter,
+<span class="math inline">w_o</span> the weight parameter for each
+objective <span class="math inline">o \in O</span>, and <span class="math inline">s_o</span> denote the scaling factor each objective
+<span class="math inline">o \in O</span>. To calculate the scaling
+factors (eqn 6a), let <span class="math inline">u_o</span> and <span class="math inline">d_o</span> denote the utopian and dystopian points
+for each objective <span class="math inline">o \in O</span>. These
+utopian and dystopian points, in turn, are precomputed by solving the
+optimization problems for each objective (separately) (eqns 6b and
 6c).</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>s</mi><mi>o</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mfrac><mn>1</mn><mrow><mo stretchy="false" form="postfix">∥</mo><msub><mi>u</mi><mi>o</mi></msub><mo>−</mo><msub><mi>d</mi><mi>o</mi></msub><mo stretchy="false" form="postfix">∥</mo></mrow></mfrac></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>u</mi><mi>o</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mo>min</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>V</mi><mi>o</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right"><mtext mathvariant="normal">subject to (eqns 5b–5k)</mtext></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><msub><mi>d</mi><mi>o</mi></msub></mtd><mtd columnalign="left" style="text-align: left"><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>V</mi><mi>o</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mtd><mtd columnalign="right" style="text-align: right"><mtext mathvariant="normal">subject to (eqns 5b–5k)</mtext></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">
 \begin{align*}
 s_o &amp;= \frac{1}{\| u_o - d_o \|} &amp; \tag{eqn 6a} \\
-u_o &amp;= \min(V_o), &amp; \text{subject to (eqns 5b--5k)} \tag{eqn 6b} \\
-d_o &amp;= \max(V_o), &amp; \text{subject to (eqns 5b--5k)} \tag{eqn 6c} \\
+u_o &amp;= \min(V_o), &amp; \text{subject to (eqns 5b--5k)} \tag{eqn 6b}
+\\
+d_o &amp;= \max(V_o), &amp; \text{subject to (eqns 5b--5k)} \tag{eqn 6c}
+\\
 \end{align*}
-</annotation></semantics></math></p>
-<p>We define the continuous
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>o</mi></msub><annotation encoding="application/x-tex">\lambda_{o}</annotation></semantics></math>
+</span></p>
+<p>We define the continuous <span class="math inline">\lambda_{o}</span>
 auxiliary variables (eqn 7). Same as before, these variables represent
 calculations based on the decision variables. For a given solution, the
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>o</mi></msub><annotation encoding="application/x-tex">\lambda_{o}</annotation></semantics></math>
-variables describe the (weighted and normalized) shortfall in
-performance for how well the solution achieves each objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o \in O</annotation></semantics></math>.
-For example, a larger value means that the solution has poorer
+<span class="math inline">\lambda_{o}</span> variables describe the
+(weighted and normalized) shortfall in performance for how well the
+solution achieves each objective <span class="math inline">o \in
+O</span>. For example, a larger value means that the solution has poorer
 performance and a smaller value means better performance according to a
 particular objective (relative to the weight parameter and scaling
-factor for that objective, per
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>o</mi></msub><annotation encoding="application/x-tex">w_o</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mi>o</mi></msub><annotation encoding="application/x-tex">s_o</annotation></semantics></math>).</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>λ</mi><mi>o</mi></msub><mo>=</mo><mrow><mrow><mtext mathvariant="normal">performance shortfall for objective </mtext><mspace width="0.333em"></mspace></mrow><mi>o</mi></mrow></mrow><annotation encoding="application/x-tex">
+factor for that objective, per <span class="math inline">w_o</span> and
+<span class="math inline">s_o</span>).</p>
+<p><span class="math display">
 \lambda_{o} = \text{performance shortfall for objective $o$} \tag{eqn 7}
-</annotation></semantics></math></p>
+</span></p>
 <p>Given the previously defined terminology, the tool uses the following
 multi-objective optimization approach to accommodate multiple objectives
 (eqn 8).</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mtable><mtr><mtd columnalign="right" style="text-align: right"><mrow><mtext mathvariant="normal">Lexicographic minimize </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left"><munder><mo>max</mo><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow></munder><msub><mi>λ</mi><mi>o</mi></msub><mo>,</mo><munder><mo>∑</mo><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow></munder><msub><mi>λ</mi><mi>o</mi></msub></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"><mrow><mtext mathvariant="normal">Subject to </mtext><mspace width="0.333em"></mspace></mrow></mtd><mtd columnalign="left" style="text-align: left"><msub><mi>λ</mi><mi>o</mi></msub><mo>=</mo><msub><mi>w</mi><mi>o</mi></msub><mo>×</mo><msub><mi>s</mi><mi>o</mi></msub><mo>×</mo><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>v</mi><mi>o</mi></msub><mo>−</mo><msub><mi>r</mi><mi>o</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow></mtd><mtd columnalign="right" style="text-align: right"><mo>∀</mo><mi>o</mi><mo>∈</mo><mi>O</mi></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd><mtd columnalign="left" style="text-align: left"><mtext mathvariant="normal">(eqns 5b–5k)</mtext></mtd><mtd columnalign="right" style="text-align: right"></mtd></mtr><mtr><mtd columnalign="right" style="text-align: right"></mtd></mtr></mtable><annotation encoding="application/x-tex">
+<p><span class="math display">
 \begin{align*}
-\text{Lexicographic minimize } &amp; \max_{o \in O} \lambda_o, \sum_{o \in O} \lambda_o &amp; \tag{eqn 8a} \\
-\text{Subject to } &amp; \lambda_o = w_o \times s_o \times (v_o - r_o) &amp; \forall o \in O \tag{eqn 8b} \\
+\text{Lexicographic minimize } &amp; \max_{o \in O} \lambda_o, \sum_{o
+\in O} \lambda_o &amp; \tag{eqn 8a} \\
+\text{Subject to } &amp; \lambda_o = w_o \times s_o \times (v_o - r_o)
+&amp; \forall o \in O \tag{eqn 8b} \\
 &amp; \text{(eqns 5b--5k)} &amp; \\
 \end{align*}
-</annotation></semantics></math></p>
+</span></p>
 <p>Here (eqn 8a) the multi-objective optimization approach involves
 minimizing the largest performance shortfall variables among all
 objectives and, subsequently, minimizing the sum of the performance
@@ -399,19 +326,14 @@ numerical instability issues associated with tiny values that can
 degrade solver performance <span class="citation">(Klotz &amp; Newman,
 2013; López Jaimes et al., 2011)</span>. Constraint (eqn 8b) specifies
 that the performance shortfall variable for a given objective (i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>λ</mi><mi>o</mi></msub><annotation encoding="application/x-tex">\lambda_o</annotation></semantics></math>)
-is calculated based on the weight parameter (per
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>o</mi></msub><annotation encoding="application/x-tex">w_o</annotation></semantics></math>),
-scaling factor
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>s</mi><mi>o</mi></msub><annotation encoding="application/x-tex">s_o</annotation></semantics></math>),
-and difference between the reference point parameter (per
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>o</mi></msub><annotation encoding="application/x-tex">r_o</annotation></semantics></math>)
-and the objective value (per
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>o</mi></msub><annotation encoding="application/x-tex">v_o</annotation></semantics></math>)
-for that objective. Constraints (5b–5k) ensure that the objective values
-(i.e.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>v</mi><mi>o</mi></msub><annotation encoding="application/x-tex">v_o</annotation></semantics></math>)
-are calculated correctly.</p>
+<span class="math inline">\lambda_o</span>) is calculated based on the
+weight parameter (per <span class="math inline">w_o</span>), scaling
+factor (<span class="math inline">s_o</span>), and difference between
+the reference point parameter (per <span class="math inline">r_o</span>)
+and the objective value (per <span class="math inline">v_o</span>) for
+that objective. Constraints (5b–5k) ensure that the objective values
+(i.e., <span class="math inline">v_o</span>) are calculated
+correctly.</p>
 </div>
 <div class="section level2">
 <h2 id="tool-parameters">Tool parameters<a class="anchor" aria-label="anchor" href="#tool-parameters"></a>
@@ -420,47 +342,29 @@ are calculated correctly.</p>
 identifying priority areas and navigating trade-offs. Although the
 problem formulation and multi-objective optimization approach involve a
 large number of terms, many of these terms are parameterized based on
-underlying data <span class="citation">(e.g.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>A</mi><mrow><mi>i</mi><mi>j</mi></mrow></msub><annotation encoding="application/x-tex">A_{ij}</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mrow><mi>j</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">L_{jz}</annotation></semantics></math>
-are based on data from Lee et al., 2024)</span> or can be precomputed
-automatically based on preliminary analyses (e.g.,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>u</mi><mi>o</mi></msub><annotation encoding="application/x-tex">u_o</annotation></semantics></math>
-and
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>d</mi><mi>o</mi></msub><annotation encoding="application/x-tex">d_o</annotation></semantics></math>).
-To provide a positive user experience that will facilitate trade-off
-exploration, the tool has parameters for specifying terms that reflect
-stakeholder preferences. In particular, the tool has parameters for the
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>R</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">R_{iz}</annotation></semantics></math>)
-percentage of each feature
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math>
-that should be represented by areas allocated to zone
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>,
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>W</mi><mrow><mi>i</mi><mi>z</mi></mrow></msub><annotation encoding="application/x-tex">W_{iz}</annotation></semantics></math>)
-relative importance for representing each feature
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow><annotation encoding="application/x-tex">i \in I</annotation></semantics></math>
-by areas allocated to zone
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>z</mi><annotation encoding="application/x-tex">z</annotation></semantics></math>,
-and
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>w</mi><mi>o</mi></msub><annotation encoding="application/x-tex">w_o</annotation></semantics></math>)
-relative importance for achieving each objective
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>o</mi><mo>∈</mo><mi>O</mi></mrow><annotation encoding="application/x-tex">o \in O</annotation></semantics></math>.
-Note that the reference points
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>r</mi><mi>o</mi></msub><annotation encoding="application/x-tex">r_o</annotation></semantics></math>)
-will be set based on the precomputed utopian points
-(<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>u</mi><mi>o</mi></msub><annotation encoding="application/x-tex">u_o</annotation></semantics></math>)
-to reduce tool complexity. Additionally, since there are too many
-features and zones for users to set parameters for each feature and zone
-individually, the features are grouped together based on common themes
-(e.g., penguins, seabirds, habitat types, invertebrates, plants and
-mosses) and parameters can be used to alter representation target and
-weight values for entire groups of features. Note that these feature
-groups will be identified in consultation with experts and stakeholders.
-Because previous work has already elicited representation target values
-from stakeholders, the tool will provide options for systematically
-increasing or decreasing these target values (e.g., increase or decrease
-targets by 15%, 25%, or 50%).</p>
+underlying data <span class="citation">(e.g., <span class="math inline">A_{ij}</span> and <span class="math inline">L_{jz}</span> are based on data from Lee et al.,
+2024)</span> or can be precomputed automatically based on preliminary
+analyses (e.g., <span class="math inline">u_o</span> and <span class="math inline">d_o</span>). To provide a positive user experience
+that will facilitate trade-off exploration, the tool has parameters for
+specifying terms that reflect stakeholder preferences. In particular,
+the tool has parameters for the (<span class="math inline">R_{iz}</span>) percentage of each feature <span class="math inline">i \in I</span> that should be represented by areas
+allocated to zone <span class="math inline">z</span>, (<span class="math inline">W_{iz}</span>) relative importance for representing
+each feature <span class="math inline">i \in I</span> by areas allocated
+to zone <span class="math inline">z</span>, and (<span class="math inline">w_o</span>) relative importance for achieving each
+objective <span class="math inline">o \in O</span>. Note that the
+reference points (<span class="math inline">r_o</span>) will be set
+based on the precomputed utopian points (<span class="math inline">u_o</span>) to reduce tool complexity. Additionally,
+since there are too many features and zones for users to set parameters
+for each feature and zone individually, the features are grouped
+together based on common themes (e.g., penguins, seabirds, habitat
+types, invertebrates, plants and mosses) and parameters can be used to
+alter representation target and weight values for entire groups of
+features. Note that these feature groups will be identified in
+consultation with experts and stakeholders. Because previous work has
+already elicited representation target values from stakeholders, the
+tool will provide options for systematically increasing or decreasing
+these target values (e.g., increase or decrease targets by 15%, 25%, or
+50%).</p>
 </div>
 <div class="section level2 unnumbered">
 <h2 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

@@ -1,6 +1,8 @@
 # Create solution
 
-Create a \[new_solution()\] object.
+Create a
+[`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+object.
 
 ## Usage
 
@@ -22,50 +24,59 @@ create_solution(
 
 - name:
 
-  \`character\` value with name.
+  `character` value with name.
 
 - project:
 
-  \[new_project()\] object that has a column with the solution.
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object that has a column with the solution.
 
 - column:
 
-  \`character\` value with column name in \`project\$dataset\` that has
-  the values.
+  `character` value with column name in `project$dataset` that has the
+  values.
 
 - legend:
 
-  \[new_categorical_legend()\] or \[new_continuous \_legend()\] object.
+  [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
+  or
+  [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md)
+  object.
 
 - provenance:
 
-  \[new_provenance()\] object.
+  [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
+  object.
 
 - settings:
 
-  \`list\` of settings used to generate the solution.
+  `list` of settings used to generate the solution.
 
 - metrics:
 
-  \`list\` with evaluation metrics for the solution.
+  `list` with evaluation metrics for the solution.
 
 - tile:
 
-  \[new_tile()\] object tile information for the solution. Defaults to
-  \`NULL\` such that a \[new_tile()\] object is automatically created.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+  object tile information for the solution. Defaults to `NULL` such that
+  a
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+  object is automatically created.
 
 - id:
 
-  \`character\` value with unique identifier. Defaults to a random
-  identifier (\[uuid::UUIDgenerate()\]).
+  `character` value with unique identifier. Defaults to a random
+  identifier
+  ([`uuid::UUIDgenerate()`](https://rdrr.io/pkg/uuid/man/UUIDgenerate.html)).
 
 ## Value
 
-A \`Solution\` object.
+A `Solution` object.
 
 ## See also
 
-Other method:
+Other functions for calling class methods:
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
@@ -92,4 +103,8 @@ x <- create_solution(
   settings = simulate_prioritization_settings(project),
   metrics = simulate_prioritization_metrics(project)
 )
+
+# print solution
+print(x)
+#> A <Solution> object.
 ```

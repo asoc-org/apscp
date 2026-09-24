@@ -14,7 +14,7 @@ NULL
 #' as well as `"features"`, `"locks"`, and `"costs"` elements that contain
 #' data frames with metrics for the features, locks, and costs (respectively).
 #'
-#' @family optimization
+#' @family prioritization
 #'
 #' @examples
 #' # simulate data

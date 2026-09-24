@@ -10,7 +10,9 @@ simulate_solution_legend()
 
 ## Value
 
-A \[new_categorical_legend()\] object.
+A
+[`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
+object.
 
 ## Details
 
@@ -19,7 +21,7 @@ testing and should not be used for any research purposes.
 
 ## See also
 
-Other simulation:
+Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md),
@@ -34,5 +36,5 @@ Other simulation:
 ``` r
 # simulate legend
 simulate_solution_legend()
-#> Error in simulate_solution_legend(): could not find function "simulate_solution_legend"
+#> A <CategoricalLegend> object.
 ```

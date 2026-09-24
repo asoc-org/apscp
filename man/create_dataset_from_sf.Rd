@@ -7,16 +7,16 @@
 create_dataset_from_sf(x, boundary_data = NULL)
 }
 \arguments{
-\item{x}{[sf::st_sf()] object.}
+\item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
 
-\item{boundary_data}{[Matrix::sparseMatrix()] object with boundary data.
-Defaults to `NULL` such that the boundary data are calculated automatically.}
+\item{boundary_data}{\code{\link[Matrix:sparseMatrix]{Matrix::sparseMatrix()}} object with boundary data.
+Defaults to \code{NULL} such that the boundary data are calculated automatically.}
 }
 \value{
-A [Dataset] object.
+A \code{\link{Dataset}} object.
 }
 \description{
-Create a [Dataset] object from a [st::sf()] object.
+Create a \code{\link{Dataset}} object from a \code{\link[sf:st_sf]{sf::st_sf()}} object.
 }
 \examples{
 # simulate spatial data
@@ -30,7 +30,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},

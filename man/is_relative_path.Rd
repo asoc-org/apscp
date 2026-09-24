@@ -7,22 +7,28 @@
 is_relative_path(x)
 }
 \arguments{
-\item{x}{`character` value with file path.}
+\item{x}{\code{character} value with file path.}
 }
 \value{
-A `logical` value.
+A \code{logical} value.
 }
 \description{
 Check if a file path is relative or not.
 }
+\examples{
+# check if various paths are relative or not
+is_relative_path("/usr/home/data.txt")
+is_relative_path("~/data.txt")
+is_relative_path("C:/Users/root/data.txt")
+is_relative_path("data.txt")
+
+}
 \seealso{
-Other misc:
+Other miscellaneous functions:
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_installed]{is_installed()}},
-\code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=write_matrix]{write_matrix()}}
+\code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}}
 }
 \concept{misc}

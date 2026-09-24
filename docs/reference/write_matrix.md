@@ -1,6 +1,8 @@
 # Write matrix
 
-Write \[Matrix::sparseMatrix()\] object to disk.
+Write
+[`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
+object to disk.
 
 ## Usage
 
@@ -12,26 +14,30 @@ write_matrix(x, path)
 
 - x:
 
-  \[Matrix::sparseMatrix()\] object.
+  [`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
+  object.
 
 - path:
 
-  \`character\` file path.
+  `character` file path.
 
 ## Value
 
-An invisible \`TRUE\` indicating success.
+An invisible `TRUE` indicating success.
 
 ## See also
 
-Other misc:
-[`as.data.frame.JsDataFrame()`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md),
-[`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
-[`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md),
-[`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
-[`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md),
-[`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md),
-[`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
+Other functions for reading and writing data:
+[`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md),
+[`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md),
+[`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md),
+[`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md),
+[`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md),
+[`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md),
+[`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md),
+[`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md),
+[`write_project()`](https://asoc-org.github.io/apscp/reference/write_project.md),
+[`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
 
 ## Examples
 
@@ -53,14 +59,17 @@ path <- tempfile(fileext = ".rds")
 
 # write matrix
 write_matrix(x, path)
-#> Error in write_matrix(x, path): could not find function "write_matrix"
 
 # read matrix
 y <- read_matrix(path)
-#> Error in read_matrix(path): could not find function "read_matrix"
 
 # print imported matrix,
-# we can see that its the same as the original matrix
+# we can see that it's the same as the original matrix
 print(y)
-#> Error: object 'y' not found
+#> 4 x 9 sparse Matrix of class "dgCMatrix"
+#>                           
+#> [1,] . . . . 10  .  .  . .
+#> [2,] . . . .  . 11  .  . .
+#> [3,] . . . .  .  . 12  . .
+#> [4,] . . . .  .  .  . 13 .
 ```

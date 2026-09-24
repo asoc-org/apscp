@@ -15,67 +15,67 @@ create_solution_from_prioritization(
 )
 }
 \arguments{
-\item{name}{`character` value with the name.}
+\item{name}{\code{character} value with the name.}
 
-\item{project}{[new_project()] object to which `prioritization `should be
+\item{project}{\code{\link[=new_project]{new_project()}} object to which \code{prioritization }should be
 added.}
 
-\item{prioritization}{`numeric` vector with a value for each planning
+\item{prioritization}{\code{numeric} vector with a value for each planning
 unit to indicate zone allocations.}
 
-\item{settings}{`list` of settings used to generate the solution.}
+\item{settings}{\code{list} of settings used to generate the solution.}
 
-\item{column}{`character` value with column name used to store
-`prioritization` in the dataset that underpins `project`.}
+\item{column}{\code{character} value with column name used to store
+\code{prioritization} in the dataset that underpins \code{project}.}
 
-\item{metrics}{`list` with evaluation metrics for prioritization.
-Defaults to `NULL` such that the metrics are calculated automatically.}
+\item{metrics}{\code{list} with evaluation metrics for prioritization.
+Defaults to \code{NULL} such that the metrics are calculated automatically.}
 
-\item{id}{`character` value with unique identifier.
-Defaults to a random identifier ([uuid::UUIDgenerate()]).}
+\item{id}{\code{character} value with unique identifier.
+Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
 }
 \value{
-A [new_solution()] object.
+A \code{\link[=new_solution]{new_solution()}} object.
 }
 \description{
 Create a new solution based on spatial prioritization.
 }
 \section{Settings format}{
 
-The argument to `settings` must be a `list` with the following elements.
+The argument to \code{settings} must be a \code{list} with the following elements.
 \describe{
-\item{features}{
-A `data.frame` with the theme and feature settings.
+\item{\verb{"features}"}{
+A \code{data.frame} with the theme and feature settings.
 These are used to specify the targets and weights considered for the
 features during optimization. Each row corresponds to a different
 feature, and it must have the following columns:
-`"id"`, `"name"`, `"column"`, `"zone"`, `"target"`, and `"weight"`.
+\code{"id"}, \code{"name"}, \code{"column"}, \code{"zone"}, \code{"target"}, and \code{"weight"}.
 Note that target values must be expressed as a proportion (i.e.,
 value between zero and one).
 }
 
-\item{locks}{
-A `data.frame` with the settings to specify which
+\item{\code{"locks"}}{
+A \code{data.frame} with the settings to specify which
 locks are used to lock in planning units to a particular zone.
 Each row corresponds to a different lock, and it must have the following
 columns:
-`"id"`, `"name"`, `"column"`, and `"zone"`.
+\code{"id"}, \code{"name"}, \code{"column"}, and \code{"zone"}.
 }
 
-\item{costs}{
-A `data.frame` with the cost settings. These
+\item{\code{"costs"}}{
+A \code{data.frame} with the cost settings. These
 are used to specify which costs are considered for each zone.
 Each row corresponds to a different cost, and it must have the following
 columns:
-`"id"`, `"name"`, `"zone"`, and `"weight"`.
+\code{"id"}, \code{"name"}, \code{"zone"}, and \code{"weight"}.
 }
 
-\item{zones}{
-A `data.frame` with settings for the
+\item{\code{"zones"}}{
+A \code{data.frame} with settings for the
 multi-objective optimization.
 Each row corresponds to a different zone, and it must have the following
 columns:
-`"name"` and `"weight"`.
+\code{"name"} and \code{"weight"}.
 }
 
 }
@@ -100,7 +100,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},

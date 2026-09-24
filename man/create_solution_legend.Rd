@@ -7,10 +7,10 @@
 create_solution_legend(project)
 }
 \arguments{
-\item{project}{[new_project()] object.}
+\item{project}{\code{\link[=new_project]{new_project()}} object.}
 }
 \value{
-A [new_categorical_legend()] object.
+A \code{\link[=new_categorical_legend]{new_categorical_legend()}} object.
 }
 \description{
 Create a legend for solutions generated with the tool.
@@ -30,7 +30,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},

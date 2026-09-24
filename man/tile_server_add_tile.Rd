@@ -7,11 +7,11 @@
 tile_server_add_tile(x)
 }
 \arguments{
-\item{x}{[new_tile()], [new_solution()], [new_lock()], [new_cost()], or
-[new_feature()] object.}
+\item{x}{\code{\link[=new_tile]{new_tile()}}, \code{\link[=new_solution]{new_solution()}}, \code{\link[=new_lock]{new_lock()}}, \code{\link[=new_cost]{new_cost()}}, or
+\code{\link[=new_feature]{new_feature()}} object.}
 }
 \value{
-An invisible `TRUE` indicating success.
+An invisible \code{TRUE} indicating success.
 }
 \description{
 Add PMTile file to a tile server.
@@ -35,7 +35,7 @@ tile_server_stop()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other tile_server:
+Other functions for working with a tile server:
 \code{\link[=tile_server_dir]{tile_server_dir()}},
 \code{\link[=tile_server_start]{tile_server_start()}},
 \code{\link[=tile_server_stop]{tile_server_stop()}}

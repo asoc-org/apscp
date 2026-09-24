@@ -25,10 +25,9 @@
 #' @family mapper
 #'
 #' @examplesIf interactive()
-#' library(shiny)
+#' # run example app showing a mapper widget
+#' run_example_app("mapper")
 #'
-#' # run example app showing a mapper
-#' runApp(system.file("examples", "mapper_app.R", package = "apscp"))
 #' @export
 mapper <- function(
   project,
@@ -83,6 +82,8 @@ mapper <- function(
 #' @name mapper-shiny
 #'
 #' @family mapper
+#'
+#' @inherit mapper examples
 #'
 #' @export
 mapperOutput <- function(outputId, width = "100%", height = "400px"){

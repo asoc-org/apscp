@@ -7,18 +7,24 @@
 solver_add_lock(id, lock, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{id}{`character` value with identifier for [solver()] object.}
+\item{id}{\code{character} value with identifier for \code{\link[=solver]{solver()}} object.}
 
-\item{lock}{[new_lock()] object.}
+\item{lock}{\code{\link[=new_lock]{new_lock()}} object.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
-Add a [new_lock()] to a Solver widget.
+Add a \code{\link[=new_lock]{new_lock()}} to a \code{\link[=solver]{solver()}} widget.
+}
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example application showing a solver widget
+run_example_app("solver")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
-Other solver:
+Other functions for the solver widget:
 \code{\link[=solver]{solver()}},
 \code{\link{solver-shiny}},
 \code{\link[=solver_reset]{solver_reset()}},

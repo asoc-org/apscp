@@ -1,5 +1,5 @@
 # load packages
-devtools::load_all()
+library(apscp)
 library(sf)
 library(shiny)
 library(mapgl)
@@ -14,7 +14,7 @@ tile_server_start(sim_data)
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
   tags$head(tags$style(".btn-default {display: block;}")),
-  h4("Mapp Demo"),
+  h4("Mapper Demo"),
   splitLayout(
     cellWidths = c("395px", "80%"),
     tagList(
@@ -39,7 +39,8 @@ server <- function(input, output, session) {
 
   # initialize map
   output$map <- renderMapboxgl({
-    map_project(sim_data)
+    map_project(sim_data) #|>
+    #add_layer_visibility_control(position = "top", mapper_id = "mapper")
   })
 
   # initialize mapper object
@@ -51,7 +52,9 @@ server <- function(input, output, session) {
   observeEvent(input$mapper_sync, {
     req(input$mapper_sync)
     mapper_sync(
-      "mapper", map = mapboxgl_proxy("map"), project = sim_data,
+      "mapper",
+      map = mapboxgl_proxy("map"),
+      project = sim_data,
       data = input$mapper_sync
     )
   })
@@ -87,4 +90,4 @@ server <- function(input, output, session) {
 }
 
 # launch Shiny application
-runApp(shinyApp(ui, server), launch.browser = TRUE, port = 8093)
+shinyApp(ui, server)

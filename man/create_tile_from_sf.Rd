@@ -2,7 +2,7 @@
 % Please edit documentation in R/method_Tile.R
 \name{create_tile_from_sf}
 \alias{create_tile_from_sf}
-\title{Create tile from `sf` data.}
+\title{Create tile from \code{sf} data.}
 \usage{
 create_tile_from_sf(
   x,
@@ -13,25 +13,25 @@ create_tile_from_sf(
 )
 }
 \arguments{
-\item{x}{[sf::st_sf()] object.}
+\item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
 
-\item{source_layer}{`character` value with name for layer in PMTiles archive.
-Defaults to `"data-src"`.}
+\item{source_layer}{\code{character} value with name for layer in PMTiles archive.
+Defaults to \code{"data-src"}.}
 
-\item{path}{`character` value with file path for PMTiles archive.
-Note that `path` must have a `".pmtiles"` file extension.
+\item{path}{\code{character} value with file path for PMTiles archive.
+Note that \code{path} must have a \code{".pmtiles"} file extension.
 Defaults to a temporary file path.}
 
-\item{max_zoom}{`integer` value with maximum zoom level. Defaults to 8.}
+\item{max_zoom}{\code{integer} value with maximum zoom level. Defaults to 8.}
 
-\item{verbose}{`logical` value indicating if information about tile
-creation should be displayed? Defaults to `FALSE`.}
+\item{verbose}{\code{logical} value indicating if information about tile
+creation should be displayed? Defaults to \code{FALSE}.}
 }
 \value{
-A [new_tile()] object.
+A \code{\link[=new_tile]{new_tile()}} object.
 }
 \description{
-Create a [new_tile()] object from a [sf::st_sf()] object.
+Create a \code{\link[=new_tile]{new_tile()}} object from a \code{\link[sf:st_sf]{sf::st_sf()}} object.
 }
 \examples{
 # simulate spatial data
@@ -45,7 +45,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},

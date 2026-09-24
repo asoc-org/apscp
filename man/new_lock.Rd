@@ -7,21 +7,21 @@
 new_lock(name, layer, zone, id = uuid::UUIDgenerate())
 }
 \arguments{
-\item{name}{`character` value with the name.}
+\item{name}{\code{character} value with the name.}
 
-\item{layer}{[new_layer()] object used to store information for
+\item{layer}{\code{\link[=new_layer]{new_layer()}} object used to store information for
 visualization.}
 
-\item{zone}{`character` name of zone to which this lock pertains.
+\item{zone}{\code{character} name of zone to which this lock pertains.
 During optimization, planning units are forcibly allocated to this zone.
-Note that `zone` must have a value that corresponds to one of the zone
-names associated with the [new_project()] to which this object belongs.}
+Note that \code{zone} must have a value that corresponds to one of the zone
+names associated with the \code{\link[=new_project]{new_project()}} to which this object belongs.}
 
-\item{id}{`character` value with unique identifier.
-Defaults to a random identifier ([uuid::UUIDgenerate()]).}
+\item{id}{\code{character} value with unique identifier.
+Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
 }
 \value{
-A `Lock` object.
+A \code{Lock} object.
 }
 \description{
 Create a new lock object.
@@ -50,7 +50,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

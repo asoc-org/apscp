@@ -7,20 +7,20 @@
 new_solution(name, layer, settings, metrics, id = uuid::UUIDgenerate())
 }
 \arguments{
-\item{name}{`character` value with the name.}
+\item{name}{\code{character} value with the name.}
 
-\item{layer}{[new_layer()] object used to store information for
+\item{layer}{\code{\link[=new_layer]{new_layer()}} object used to store information for
 visualization.}
 
-\item{settings}{`list` of settings used to generate the solution.}
+\item{settings}{\code{list} of settings used to generate the solution.}
 
-\item{metrics}{`list` with evaluation metrics for the solution.}
+\item{metrics}{\code{list} with evaluation metrics for the solution.}
 
-\item{id}{`character` value with unique identifier.
-Defaults to a random identifier ([uuid::UUIDgenerate()]).}
+\item{id}{\code{character} value with unique identifier.
+Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
 }
 \value{
-A `Solution` object.
+A \code{Solution} object.
 }
 \description{
 Create a new solution object.
@@ -50,7 +50,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

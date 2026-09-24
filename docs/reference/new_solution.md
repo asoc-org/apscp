@@ -12,32 +12,34 @@ new_solution(name, layer, settings, metrics, id = uuid::UUIDgenerate())
 
 - name:
 
-  \`character\` value with the name.
+  `character` value with the name.
 
 - layer:
 
-  \[new_layer()\] object used to store information for visualization.
+  [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md)
+  object used to store information for visualization.
 
 - settings:
 
-  \`list\` of settings used to generate the solution.
+  `list` of settings used to generate the solution.
 
 - metrics:
 
-  \`list\` with evaluation metrics for the solution.
+  `list` with evaluation metrics for the solution.
 
 - id:
 
-  \`character\` value with unique identifier. Defaults to a random
-  identifier (\[uuid::UUIDgenerate()\]).
+  `character` value with unique identifier. Defaults to a random
+  identifier
+  ([`uuid::UUIDgenerate()`](https://rdrr.io/pkg/uuid/man/UUIDgenerate.html)).
 
 ## Value
 
-A \`Solution\` object.
+A `Solution` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

@@ -5,7 +5,7 @@ layers.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),
 [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md),
@@ -23,27 +23,29 @@ Other class:
 
 - `pu_path`:
 
-  \`character\` file path.
+  `character` file path.
 
 - `pu_db_con`:
 
-  \[DBI::dbConnect()\] database connection object.
+  [`DBI::dbConnect()`](https://dbi.r-dbi.org/reference/dbConnect.html)
+  database connection object.
 
 - `pu_db_table`:
 
-  \`character\` object.
+  `character` object.
 
 - `boundary_path`:
 
-  \`character \` file path.
+  `character ` file path.
 
 - `boundary_data`:
 
-  \[Matrix::sparseMatrix()\] object.
+  [`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
+  object.
 
 - `n_pu`:
 
-  \`integer\` value.
+  `integer` value.
 
 ## Methods
 
@@ -79,7 +81,7 @@ Other class:
 
 ### `Dataset$new()`
 
-Create a \`Dataset\` object.
+Create a `Dataset` object.
 
 #### Usage
 
@@ -89,15 +91,15 @@ Create a \`Dataset\` object.
 
 - `pu_path`:
 
-  \`character \` file path.
+  `character ` file path.
 
 - `boundary_path`:
 
-  \`character\` file path.
+  `character` file path.
 
 #### Returns
 
-A new \`Dataset\` object.
+A new `Dataset` object.
 
 ------------------------------------------------------------------------
 
@@ -111,7 +113,7 @@ Get number of planning units.
 
 #### Returns
 
-An \`integer\` value.
+An `integer` value.
 
 ------------------------------------------------------------------------
 
@@ -125,7 +127,9 @@ Get boundary data.
 
 #### Returns
 
-A \[Matrix::sparseMatrix()\] object.
+A
+[`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
+object.
 
 ------------------------------------------------------------------------
 
@@ -139,13 +143,13 @@ Get column names.
 
 #### Returns
 
-A \`character\` vector.
+A `character` vector.
 
 ------------------------------------------------------------------------
 
 ### `Dataset$get_dataframe()`
 
-Get \`data.frame\` with data.
+Get `data.frame` with data.
 
 #### Usage
 
@@ -155,18 +159,19 @@ Get \`data.frame\` with data.
 
 - `column`:
 
-  \`character\` vector. Defaults to \`NULL\` such that all columns are
+  `character` vector. Defaults to `NULL` such that all columns are
   returned.
 
 #### Returns
 
-A \`data.frame\` object.
+A `data.frame` object.
 
 ------------------------------------------------------------------------
 
 ### `Dataset$get_sf()`
 
-Get \[sf::st_sf()\] object with data.
+Get [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
+object with data.
 
 #### Usage
 
@@ -176,12 +181,13 @@ Get \[sf::st_sf()\] object with data.
 
 - `column`:
 
-  \`character\` vector. Defaults to \`NULL\` such that all columns are
+  `character` vector. Defaults to `NULL` such that all columns are
   returned.
 
 #### Returns
 
-A \[sf::st_st()\] object.
+A [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
+object.
 
 ------------------------------------------------------------------------
 
@@ -197,7 +203,7 @@ Get column data.
 
 - `column`:
 
-  \`character\` value.
+  `character` value.
 
 #### Returns
 
@@ -217,11 +223,11 @@ Get total (sum) of values in a column.
 
 - `column`:
 
-  \`character\` or \`integer\` value.
+  `character` or `integer` value.
 
 #### Returns
 
-A \`character\` vector of layer names.
+A `character` vector of layer names.
 
 ------------------------------------------------------------------------
 
@@ -238,25 +244,25 @@ on columns used to allocate them.
 
 - `zone`:
 
-  \`character\` value with name of zone.
+  `character` value with name of zone.
 
 - `allocation`:
 
-  Named \`character\` vector with column names indicating which planning
+  Named `character` vector with column names indicating which planning
   units should be allocated to each zone. Note that the names of
-  \`allocation\` indicate the zone names. Additionally, zones are
+  `allocation` indicate the zone names. Additionally, zones are
   allocated in order of decreasing priority. For example with
-  \`allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")\`,
+  `allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
   planning units are first assigned to the Scientific zone based on the
-  values in the \`"camps"\` column, and then to the Biodiversity zone
-  based on the values in the \`"aspas"\` column. If any planning unit
-  was previously assigned to the Scientific zone, then it is overridden
-  with the Biodiversity zone.
+  values in the `"camps"` column, and then to the Biodiversity zone
+  based on the values in the `"aspas"` column. If any planning unit was
+  previously assigned to the Scientific zone, then it is overridden with
+  the Biodiversity zone.
 
 #### Returns
 
-A \`numeric\` vector with binary values indicating if each planning unit
-is allocated to the \`zone\`.
+A `numeric` vector with binary values indicating if each planning unit
+is allocated to the `zone`.
 
 ------------------------------------------------------------------------
 
@@ -273,15 +279,15 @@ by selected planning units.
 
 - `column`:
 
-  \`character\` vector of column names.
+  `character` vector of column names.
 
 - `status`:
 
-  \`numeric\` vector with binary values for each planning unit.
+  `numeric` vector with binary values for each planning unit.
 
 #### Returns
 
-A \`numeric\` value.
+A `numeric` value.
 
 ------------------------------------------------------------------------
 
@@ -301,7 +307,7 @@ Check if the dataset has a column or columns.
 
 #### Returns
 
-A \`logical\` value.
+A `logical` value.
 
 ------------------------------------------------------------------------
 
@@ -317,15 +323,15 @@ Set column data.
 
 - `column`:
 
-  \`character\` value.
+  `character` value.
 
 - `values`:
 
-  \`numeric\` vector.
+  `numeric` vector.
 
 #### Returns
 
-An invisible \`TRUE\` indicating success.
+An invisible `TRUE` indicating success.
 
 ------------------------------------------------------------------------
 

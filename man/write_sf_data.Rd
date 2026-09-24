@@ -7,12 +7,12 @@
 write_sf_data(x, path)
 }
 \arguments{
-\item{x}{[sf::st_sf()] object.}
+\item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
 
-\item{path}{`character` file path.}
+\item{path}{\code{character} file path.}
 }
 \value{
-An invisible `TRUE`.
+An invisible \code{TRUE}.
 }
 \description{
 Write sf data to zip file
@@ -34,14 +34,16 @@ write_sf_data(x, path2)
 
 }
 \seealso{
-Other io:
+Other functions for reading and writing data:
 \code{\link[=deserialize_object]{deserialize_object()}},
 \code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_matrix]{read_matrix()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=read_sf_data]{read_sf_data()}},
 \code{\link[=serialize_object]{serialize_object()}},
 \code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_matrix]{write_matrix()}},
 \code{\link[=write_project]{write_project()}}
 }
 \concept{io}

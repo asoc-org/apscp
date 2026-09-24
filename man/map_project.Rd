@@ -7,12 +7,12 @@
 map_project(x, ...)
 }
 \arguments{
-\item{x}{[new_project()] object.}
+\item{x}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{...}{arguments passed to [mapgl::mapboxgl()].}
+\item{...}{arguments passed to \code{\link[mapgl:mapboxgl]{mapgl::mapboxgl()}}.}
 }
 \value{
-A [mapgl::mapboxgl()] object.
+A \code{\link[mapgl:mapboxgl]{mapgl::mapboxgl()}} object.
 }
 \description{
 Create a map to display the project.
@@ -36,7 +36,7 @@ print(map)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},

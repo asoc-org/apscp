@@ -2,38 +2,50 @@
 % Please edit documentation in R/widget_sidebar_ui.R
 \name{sidebar_tabs}
 \alias{sidebar_tabs}
-\title{Create a sidebar}
+\title{Sidebar with tabs}
 \usage{
 sidebar_tabs(id, icon_list = NULL, ...)
 }
 \arguments{
-\item{id}{`character` identifier for sidebar.}
+\item{id}{\code{character} identifier for sidebar.}
 
-\item{icon_list}{A list of [icon()] objects.
+\item{icon_list}{\code{list} of \code{\link[shiny:icon]{icon()}} objects.
 These icons are shown when the sidebar is collapsed.
-Not that the list is required and must match the amount of [sidebar_pane()]
-objects.}
+Not that the list is required and must match the amount of \code{\link[=sidebar_pane]{sidebar_pane()}}
+objects. Defaults to \code{NULL} such that no icons are included.}
 
-\item{...}{The individual [sidebar_pane()] objects.}
+\item{...}{The individual \code{\link[=sidebar_pane]{sidebar_pane()}} objects.}
 }
 \value{
-A `shiny.tag` with individual sidebar panes
+A \code{shiny.tag} object.
 }
 \description{
-Create a sidebar
+Create a sidebar with tabs.
 }
 \examples{
-\dontrun{
 # load packages
 library(shiny)
+library(htmltools)
 
-# run example app showing a single sidebar
-runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
-}
+# create sidebar panes
+p1 <- sidebar_pane(
+  id = "pane1", icon = icon("car"),
+  tags$div(tags$p("Text"))
+)
+p2 <- sidebar_pane(
+  id = "pane2", icon = icon("star"),
+  tags$div(actionButton(inputId = "button", label = "Click me!"))
+)
 
+# create sidebar with tabs
+sidebar_tabs(
+  id = "sidebar",
+  icon_list = list(icon("car"), icon("star")),
+  p1, p2
+)
 }
 \seealso{
-Other sidebar:
+Other functions for the sidebar widget:
 \code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
 \code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},

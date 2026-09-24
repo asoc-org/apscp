@@ -2,6 +2,7 @@ url: https://asoc-org.github.io/apscp/
 
 template:
   bootstrap: 5
+  math-rendering: katex
 
 navbar:
   structure:
@@ -19,11 +20,12 @@ reference:
     contents:
       - apscp
 
-  - title: Application
+  - title: Applications
     desc: >
-      Main function for the application.
+      Functions for launching applications.
     contents:
       - run_app
+      - run_example_app
 
   - title: Classes and methods
     desc: >
@@ -32,23 +34,15 @@ reference:
       - has_concept("class")
       - has_concept("method")
 
-  - title: Widgets
+  - title: Prioritization
     desc: >
-      Functions for custom widgets.
+      Functions for prioritization.
     contents:
-      - has_concept("sidebar")
-      - has_concept("mapper")
-      - has_concept("solver")
-
-  - title: Optimization
-    desc: >
-      Functions for optimization.
-    contents:
-      - has_concept("optimization")
+      - has_concept("prioritization")
 
   - title: Mapping
     desc: >
-      Functions for mapping.
+      Functions for creating maps.
     contents:
       - has_concept("mapping")
 
@@ -58,6 +52,36 @@ reference:
     contents:
       - has_concept("io")
 
+  - title: Sidebar widget
+    desc: >
+      Functions for sidebar widget.
+    contents:
+      - has_concept("sidebar")
+
+  - title: Mapper widget
+    desc: >
+      Functions for widget to control map.
+    contents:
+      - has_concept("mapper")
+
+  - title: Solver widget
+    desc: >
+      Functions for widget to control prioritization settings.
+    contents:
+      - has_concept("solver")
+
+  - title: Tile server
+    desc: >
+      Functions for creating a tile server.
+    contents:
+      - has_concept("tile_server")
+
+  - title: Asynchronous processing
+    desc: >
+      Functions for asynchronous processing
+    contents:
+      - has_concept("async")
+
   - title: Simulation
     desc: >
       Functions for simulating data.
@@ -65,7 +89,7 @@ reference:
       - has_concept("simulation")
 
   - title: Miscellaneous functions
+    desc: >
+      Functions with assorted uses.
     contents:
       - has_concept("misc")
-      - has_concept("tile_server")
-      - has_concept("mirai")

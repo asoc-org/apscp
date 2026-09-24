@@ -9,14 +9,14 @@ mapgl_clear_layer(map, x)
 \arguments{
 \item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
-[new_solution()] object.}
+\item{x}{\code{\link[=new_tile]{new_tile()}}, \code{\link[=new_feature]{new_feature()}}, \code{\link[=new_cost]{new_cost()}}, \code{\link[=new_lock]{new_lock()}}, or
+\code{\link[=new_solution]{new_solution()}} object.}
 }
 \description{
 Clear an object as a layer from a \pkg{mapgl} object.
 }
 \details{
-Layers are cleared with [mapgl::clear_layer()].
+Layers are cleared with \code{\link[mapgl:clear_layer]{mapgl::clear_layer()}}.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
@@ -58,7 +58,7 @@ print(map)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},

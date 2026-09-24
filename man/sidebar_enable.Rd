@@ -7,18 +7,18 @@
 sidebar_enable(id, pane_id, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{id}{`character` value with identifier for sidebar.}
+\item{id}{\code{character} value with identifier for sidebar.}
 
-\item{pane_id}{`character` value with identifier for sidebar pane.}
+\item{pane_id}{\code{character} value with identifier for sidebar pane.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
 Enable a sidebar.
 }
 \seealso{
-Other sidebar:
+Other functions for the sidebar widget:
 \code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
 \code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},

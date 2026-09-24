@@ -12,32 +12,33 @@ new_categorical_legend(values, colors, labels, units = NULL)
 
 - values:
 
-  \`numeric\` vector of values that are linked to the labels.
+  `numeric` vector of values that are linked to the labels.
 
 - colors:
 
-  \`character\` value with the name of the color palette (see
-  \[color_palette\]) or a set of colors delimited by a semi-colon symbol
-  (e.g. \`"#AABBCC;#0A0A0A;#28282B"\`). Note that \`colors\` must have a
-  value for each value in \`values\`.
+  `character` value with the name of the color palette (see
+  [color_palette](https://asoc-org.github.io/apscp/reference/color_palette.md))
+  or a set of colors delimited by a semi-colon symbol (e.g.
+  `"#AABBCC;#0A0A0A;#28282B"`). Note that `colors` must have a value for
+  each value in `values`.
 
 - labels:
 
-  \`character\` Labels to show in the legend. Note that \`labels\` must
-  have a value for each value in \`values\`.
+  `character` Labels to show in the legend. Note that `labels` must have
+  a value for each value in `values`.
 
 - units:
 
-  \`character\` value containing the units for the values in the
-  underlying data. Defaults to a \`NULL\` value.
+  `character` value containing the units for the values in the
+  underlying data. Defaults to a `NULL` value.
 
 ## Value
 
-A \`CategoricalLegend\` object.
+A `CategoricalLegend` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md),

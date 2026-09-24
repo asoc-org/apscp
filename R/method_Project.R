@@ -7,7 +7,7 @@ NULL
 #'
 #' @param path `character` file path for YAML metadata file.
 #'
-#' @return A [Project] object.
+#' @return A [`Project`] object.
 #'
 #' @family io
 #'
@@ -89,7 +89,7 @@ read_project <- function(path) {
 #'
 #' Export project data.
 #'
-#' @param x [Project] object.
+#' @param x [`Project`] object.
 #'
 #' @param path `character` file path for YAML metadata file.
 #'

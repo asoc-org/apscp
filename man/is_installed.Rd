@@ -7,10 +7,10 @@
 is_installed(x)
 }
 \arguments{
-\item{x}{`character` value.}
+\item{x}{\code{character} value.}
 }
 \value{
-A `logical` value.
+A \code{logical} value.
 }
 \description{
 Check if a package is installed.
@@ -21,13 +21,11 @@ is_installed("base")
 
 }
 \seealso{
-Other misc:
+Other miscellaneous functions:
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}},
-\code{\link[=is_relative_path]{is_relative_path()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=write_matrix]{write_matrix()}}
+\code{\link[=is_relative_path]{is_relative_path()}}
 }
 \concept{misc}

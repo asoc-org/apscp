@@ -1,7 +1,8 @@
 # Shiny bindings for mapper
 
-Output and render functions for using \[mapper()\] within Shiny
-applications.
+Output and render functions for using
+[`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md)
+within Shiny applications.
 
 ## Usage
 
@@ -24,7 +25,8 @@ renderMapper(expr, env = parent.frame(), quoted = FALSE)
 
 - expr:
 
-  An expression that generates a \[mapper()\].
+  An expression that generates a
+  [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md).
 
 - env:
 
@@ -38,7 +40,16 @@ renderMapper(expr, env = parent.frame(), quoted = FALSE)
 
 ## See also
 
-Other mapper:
+Other functions for the mapper widget:
 [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md),
 [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md),
 [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# run example app showing a mapper widget
+run_example_app("mapper")
+}
+```

@@ -16,8 +16,13 @@ mapgl_add_layer(map, x, visibility = "visible", before_id = NULL)
 
 - x:
 
-  \[new_tile()\], \[new_feature()\], \[new_cost()\], \[new_lock()\], or
-  \[new_solution()\] object.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
+  [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
+  [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
+  [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+  or
+  [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  object.
 
 - visibility:
 
@@ -30,11 +35,12 @@ mapgl_add_layer(map, x, visibility = "visible", before_id = NULL)
 
 ## Details
 
-Layers are added with \[mapgl::add_fill_layer()\].
+Layers are added with
+[`mapgl::add_fill_layer()`](https://walker-data.com/mapgl/reference/add_fill_layer.html).
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),

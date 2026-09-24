@@ -13,23 +13,29 @@ mapper_add_solution(
 )
 }
 \arguments{
-\item{id}{`character` value with identifier for [mapper()] object.}
+\item{id}{\code{character} value with identifier for \code{\link[=mapper]{mapper()}} object.}
 
-\item{map}{[mapgl::mapboxgl_proxy()] object.}
+\item{map}{\code{\link[mapgl:mapboxgl_proxy]{mapgl::mapboxgl_proxy()}} object.}
 
-\item{solution}{[new_solution()] object.}
+\item{solution}{\code{\link[=new_solution]{new_solution()}} object.}
 
-\item{visible}{`logical` value indicating if layer should be visible.
-Defaults to `TRUE`.}
+\item{visible}{\code{logical} value indicating if layer should be visible.
+Defaults to \code{TRUE}.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
-Add a [new_solution()] to a Mapper widget.
+Add a \code{\link[=new_solution]{new_solution()}} to a \code{\link[=mapper]{mapper()}} widget.
+}
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example app showing a mapper widget
+run_example_app("mapper")
+\dontshow{\}) # examplesIf}
 }
 \seealso{
-Other mapper:
+Other functions for the mapper widget:
 \code{\link[=mapper]{mapper()}},
 \code{\link{mapper-shiny}},
 \code{\link[=mapper_sync]{mapper_sync()}}

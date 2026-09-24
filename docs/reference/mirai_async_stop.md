@@ -10,11 +10,11 @@ mirai_async_stop()
 
 ## Value
 
-An invisible \`TRUE\` indicating success.
+An invisible `TRUE` indicating success.
 
 ## See also
 
-Other mirai:
+Other functions for asynchronous processing:
 [`mirai_async_start()`](https://asoc-org.github.io/apscp/reference/mirai_async_start.md)
 
 ## Examples

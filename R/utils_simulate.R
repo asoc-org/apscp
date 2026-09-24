@@ -5,7 +5,7 @@ NULL
 #'
 #' Simulate spatial data for conservation planning.
 #'
-#' @return A [sf::st_sf()] object.
+#' @return A [sf::st_sf()] odbject.
 #'
 #' @details
 #' Note that simulation functions are intended to help faciliate
@@ -95,7 +95,7 @@ simulate_spatial_data <- function() {
 #'
 #' Simulate a new project.
 #'
-#' @return A [Project] object.
+#' @return A [`Project`] object.
 #'
 #' @inherit simulate_spatial_data details
 #'
@@ -285,7 +285,7 @@ simulate_project <- function() {
 #'
 #' Simulate a legend for continuous data.
 #'
-#' @return A [new_continuous_legen[d()] object.
+#' @return A [new_continuous_legend()] object.
 #'
 #' @inherit simulate_spatial_data details
 #'

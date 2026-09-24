@@ -1,6 +1,6 @@
-# Create a sidebar
+# Sidebar with tabs
 
-Create a sidebar
+Create a sidebar with tabs.
 
 ## Usage
 
@@ -12,25 +12,29 @@ sidebar_tabs(id, icon_list = NULL, ...)
 
 - id:
 
-  \`character\` identifier for sidebar.
+  `character` identifier for sidebar.
 
 - icon_list:
 
-  A list of \[icon()\] objects. These icons are shown when the sidebar
-  is collapsed. Not that the list is required and must match the amount
-  of \[sidebar_pane()\] objects.
+  `list` of [`icon()`](https://rdrr.io/pkg/shiny/man/icon.html) objects.
+  These icons are shown when the sidebar is collapsed. Not that the list
+  is required and must match the amount of
+  [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
+  objects. Defaults to `NULL` such that no icons are included.
 
 - ...:
 
-  The individual \[sidebar_pane()\] objects.
+  The individual
+  [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
+  objects.
 
 ## Value
 
-A \`shiny.tag\` with individual sidebar panes
+A `shiny.tag` object.
 
 ## See also
 
-Other sidebar:
+Other functions for the sidebar widget:
 [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md),
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
 [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md),
@@ -43,123 +47,64 @@ Other sidebar:
 ## Examples
 
 ``` r
-# \dontrun{
 # load packages
 library(shiny)
+library(htmltools)
 
-# run example app showing a single sidebar
-runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
-#> ℹ Loading apscp
-#> ! Skipping missing files:
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/aaa.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_config.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server_initialize.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server_logging.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server_mapper.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server_session.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server_solution.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_server_solver.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_startup.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/app_ui.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/internal.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/class_Dataset.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/class_Layer.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/class_Cost.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/class_Feature.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/class_Legend.R,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/class_Lock.R, …,
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/widget_solver_ui.R, and
-#>   /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/R/zzz.R
-#> Warning: S3 methods ‘as.data.frame.JsDataFrame’, ‘as.list.JsDataFrameList’, ‘get_paint_parameters.CategoricalLegend’, ‘get_paint_parameters.ContinuousLegend’, ‘get_paint_parameters.default’, ‘print.CategoricalLegend’, ‘print.ContinuousLegend’, ‘print.Cost’, ‘print.Feature’, ‘print.Layer’, ‘print.Lock’, ‘print.Project’, ‘print.Provenance’, ‘print.Solution’, ‘print.Theme’, ‘print.Tile’, ‘serialize_object.CategoricalLegend’, ‘serialize_object.ContinuousLegend’, ‘serialize_object.Cost’, ‘serialize_object.Feature’, ‘serialize_object.Layer’, ‘serialize_object.Lock’, ‘serialize_object.Project’, ‘serialize_object.Provenance’, ‘serialize_object.Solution’, ‘serialize_object.Theme’, ‘serialize_object.Tile’, ‘serialize_object.bbox’, ‘serialize_object.default’ were declared in NAMESPACE but not found
-#> Warning: Objects listed as exports, but not present in namespace:
-#> • Dataset
-#> • acknowledgments_sidebar_pane
-#> • add_layer_visibility_control
-#> • add_sidebar_control
-#> • color_palette
-#> • contact_sidebar_pane
-#> • create_dataset_from_sf
-#> • create_legend
-#> • create_solution
-#> • create_solution_from_prioritization
-#> • create_solution_legend
-#> • create_tile_from_file
-#> • create_tile_from_project
-#> • create_tile_from_sf
-#> • deserialize_object
-#> • eval_prioritization
-#> • get_paint_parameters
-#> • has_mapbox_token
-#> • is_installed
-#> • is_python_freestiler_installed
-#> • is_relative_path
-#> • map_project
-#> • mapgl_add_layer
-#> • mapgl_add_source
-#> • mapgl_clear_layer
-#> • mapgl_layer_id
-#> • mapgl_source_id
-#> • mapgl_source_layer_id
-#> • mapgl_source_url
-#> • mapper
-#> • mapperOutput
-#> • mapper_add_solution
-#> • mapper_sync
-#> • mirai_async_start
-#> • mirai_async_stop
-#> • new_categorical_legend
-#> • new_continuous_legend
-#> • new_cost
-#> • new_dataset
-#> • new_feature
-#> • new_layer
-#> • new_lock
-#> • new_project
-#> • new_provenance
-#> • new_solution
-#> • new_theme
-#> • new_tile
-#> • read_builtin_project
-#> • read_dataset
-#> • read_matrix
-#> • read_project
-#> • read_sf_data
-#> • renderMapper
-#> • renderSolver
-#> • run_app
-#> • serialize_object
-#> • sidebar_close
-#> • sidebar_disable
-#> • sidebar_enable
-#> • sidebar_open
-#> • sidebar_pane
-#> • sidebar_tabs
-#> • simulate_binary_legend
-#> • simulate_continuous_legend
-#> • simulate_pmtiles_file
-#> • simulate_prioritization_metrics
-#> • simulate_prioritization_settings
-#> • simulate_project
-#> • simulate_provenance
-#> • simulate_solution_legend
-#> • simulate_spatial_data
-#> • solve_prioritization
-#> • solver
-#> • solverOutput
-#> • solver_add_lock
-#> • solver_reset
-#> • solver_sync
-#> • tile_server_add_tile
-#> • tile_server_dir
-#> • tile_server_start
-#> • tile_server_stop
-#> • tool_generated_provenance
-#> • write_dataset
-#> • write_matrix
-#> • write_project
-#> • write_sf_data
-#> Linking to GEOS 3.12.2, GDAL 3.9.3, PROJ 9.4.1; sf_use_s2() is TRUE
-#> Error in sidebar_deps(): could not find function "sidebar_deps"
-# }
+# create sidebar panes
+p1 <- sidebar_pane(
+  id = "pane1", icon = icon("car"),
+  tags$div(tags$p("Text"))
+)
+p2 <- sidebar_pane(
+  id = "pane2", icon = icon("star"),
+  tags$div(actionButton(inputId = "button", label = "Click me!"))
+)
+
+# create sidebar with tabs
+sidebar_tabs(
+  id = "sidebar",
+  icon_list = list(icon("car"), icon("star")),
+  p1, p2
+)
+#> <div id="sidebar" class="mapsidebar collapsed" style="display: none">
+#>   <div class="mapsidebar-tabs" style="display: none">
+#>     <ul role="tablist">
+#>       <li>
+#>         <a href="#pane1" role="tab">
+#>           <i class="fas fa-car" role="presentation" aria-label="car icon"></i>
+#>         </a>
+#>       </li>
+#>       <li>
+#>         <a href="#pane2" role="tab">
+#>           <i class="far fa-star" role="presentation" aria-label="star icon"></i>
+#>         </a>
+#>       </li>
+#>     </ul>
+#>   </div>
+#>   <div class="mapsidebar-content" style="display: none">
+#>     <div class="mapsidebar-pane" id="pane1">
+#>       <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
+#>         <div>
+#>           <p>Text</p>
+#>         </div>
+#>         <span class="mapsidebar-close">
+#>           <i class="fas fa-car" role="presentation" aria-label="car icon"></i>
+#>         </span>
+#>       </h3>
+#>       <div class="mapsidebar-pane-content"></div>
+#>     </div>
+#>     <div class="mapsidebar-pane" id="pane2">
+#>       <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
+#>         <div>
+#>           <button id="button" type="button" class="btn btn-default action-button"><span class="action-label">Click me!</span></button>
+#>         </div>
+#>         <span class="mapsidebar-close">
+#>           <i class="far fa-star" role="presentation" aria-label="star icon"></i>
+#>         </span>
+#>       </h3>
+#>       <div class="mapsidebar-pane-content"></div>
+#>     </div>
+#>   </div>
+#> </div>
 ```

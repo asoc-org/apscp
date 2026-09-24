@@ -72,6 +72,7 @@ Config/renv/profiles/dev/dependencies:
     usethis (>= 3.2.1),
     rsconnect (>= 1.10.1),
 Config/roxygen2/version: 8.1.0
+Config/roxygen2/markdown: TRUE
 Config/testthat/edition: 3
 Remotes:
     dirkschumacher/rcbc,
@@ -122,14 +123,16 @@ Collate:
     'method_serialize_object.R'
     'package.R'
     'run_app.R'
+    'run_example_app.R'
     'ui_acknowledgments_sidebar_pane.R'
     'ui_add_layer_visibility_control.R'
+    'ui_add_sidebar_control.R'
     'ui_contact_sidebar_pane.R'
     'utils_as.R'
     'utils_assertions.R'
+    'utils_async.R'
     'utils_color_palette.R'
     'utils_matrix.R'
-    'utils_mirai.R'
     'utils_sf.R'
     'utils_simulate.R'
     'utils_tile_server.R'

@@ -12,16 +12,21 @@ tile_server_add_tile(x)
 
 - x:
 
-  \[new_tile()\], \[new_solution()\], \[new_lock()\], \[new_cost()\], or
-  \[new_feature()\] object.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
+  [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
+  [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+  [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
+  or
+  [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md)
+  object.
 
 ## Value
 
-An invisible \`TRUE\` indicating success.
+An invisible `TRUE` indicating success.
 
 ## See also
 
-Other tile_server:
+Other functions for working with a tile server:
 [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md),
 [`tile_server_start()`](https://asoc-org.github.io/apscp/reference/tile_server_start.md),
 [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)

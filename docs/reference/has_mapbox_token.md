@@ -10,11 +10,11 @@ has_mapbox_token()
 
 ## Value
 
-A \`logical\` value.
+A `logical` value.
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`map_project()`](https://asoc-org.github.io/apscp/reference/map_project.md),
@@ -29,10 +29,6 @@ Other mapping:
 ## Examples
 
 ``` r
-# see if a Mapbox token is defined?
-has_mapbox_token()
-#> [1] TRUE
-
 # print if Mapbox token is available
 has_mapbox_token()
 #> [1] TRUE

@@ -15,71 +15,71 @@ solve_prioritization(
 )
 }
 \arguments{
-\item{project}{[new_project()] object. These data are used to specify
+\item{project}{\code{\link[=new_project]{new_project()}} object. These data are used to specify
 the underlying data for generating the solution.}
 
-\item{settings}{`list` object with settings for generating a solution.
+\item{settings}{\code{list} object with settings for generating a solution.
 See Settings format section for further details.}
 
-\item{gap}{`numeric` value denoting optimality gap.
+\item{gap}{\code{numeric} value denoting optimality gap.
 Defaults to 0.1 (10\% from optimality).}
 
-\item{solver}{`character` value indicating the name of the software
-used for optimization. Acceptable values include `"gurobi"` or `"cbc"`.
-Defaults to `"cbc"`.}
+\item{solver}{\code{character} value indicating the name of the software
+used for optimization. Acceptable values include \code{"gurobi"} or \code{"cbc"}.
+Defaults to \code{"cbc"}.}
 
-\item{time_limit}{`numeric` value indicating the number of seconds
+\item{time_limit}{\code{numeric} value indicating the number of seconds
 permitted for running optimization. Defaults to 500.}
 
-\item{gurobi_server}{`character` value providing the HTTP address
-for the Gurobi compute server. Defaults to `NULL` such that no compute
+\item{gurobi_server}{\code{character} value providing the HTTP address
+for the Gurobi compute server. Defaults to \code{NULL} such that no compute
 server is used.}
 
-\item{verbose}{`logical` value indicating if information should be
-displayed during optimization process. Defaults to `FALSE`.}
+\item{verbose}{\code{logical} value indicating if information should be
+displayed during optimization process. Defaults to \code{FALSE}.}
 }
 \value{
-A `numeric` vector with values indicating the zone for each planning unit.
+A \code{numeric} vector with values indicating the zone for each planning unit.
 }
 \description{
 Generate a prioritization using multi-objective optimization techniques.
 }
 \section{Settings format}{
 
-The argument to `settings` must be a `list` with the following elements.
+The argument to \code{settings} must be a \code{list} with the following elements.
 \describe{
-\item{features}{
-A `data.frame` with the theme and feature settings.
+\item{\verb{"features}"}{
+A \code{data.frame} with the theme and feature settings.
 These are used to specify the targets and weights considered for the
 features during optimization. Each row corresponds to a different
 feature, and it must have the following columns:
-`"id"`, `"name"`, `"column"`, `"zone"`, `"target"`, and `"weight"`.
+\code{"id"}, \code{"name"}, \code{"column"}, \code{"zone"}, \code{"target"}, and \code{"weight"}.
 Note that target values must be expressed as a proportion (i.e.,
 value between zero and one).
 }
 
-\item{locks}{
-A `data.frame` with the settings to specify which
+\item{\code{"locks"}}{
+A \code{data.frame} with the settings to specify which
 locks are used to lock in planning units to a particular zone.
 Each row corresponds to a different lock, and it must have the following
 columns:
-`"id"`, `"name"`, `"column"`, and `"zone"`.
+\code{"id"}, \code{"name"}, \code{"column"}, and \code{"zone"}.
 }
 
-\item{costs}{
-A `data.frame` with the cost settings. These
+\item{\code{"costs"}}{
+A \code{data.frame} with the cost settings. These
 are used to specify which costs are considered for each zone.
 Each row corresponds to a different cost, and it must have the following
 columns:
-`"id"`, `"name"`, `"zone"`, and `"weight"`.
+\code{"id"}, \code{"name"}, \code{"zone"}, and \code{"weight"}.
 }
 
-\item{zones}{
-A `data.frame` with settings for the
+\item{\code{"zones"}}{
+A \code{data.frame} with settings for the
 multi-objective optimization.
 Each row corresponds to a different zone, and it must have the following
 columns:
-`"name"` and `"weight"`.
+\code{"name"} and \code{"weight"}.
 }
 
 }
@@ -101,7 +101,7 @@ print(sol)
 
 }
 \seealso{
-Other optimization:
+Other functions for prioritization:
 \code{\link[=eval_prioritization]{eval_prioritization()}}
 }
-\concept{optimization}
+\concept{prioritization}

@@ -20,77 +20,80 @@ create_solution_from_prioritization(
 
 - name:
 
-  \`character\` value with the name.
+  `character` value with the name.
 
 - project:
 
-  \[new_project()\] object to which \`prioritization \`should be added.
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object to which `prioritization `should be added.
 
 - prioritization:
 
-  \`numeric\` vector with a value for each planning unit to indicate
-  zone allocations.
+  `numeric` vector with a value for each planning unit to indicate zone
+  allocations.
 
 - settings:
 
-  \`list\` of settings used to generate the solution.
+  `list` of settings used to generate the solution.
 
 - column:
 
-  \`character\` value with column name used to store \`prioritization\`
-  in the dataset that underpins \`project\`.
+  `character` value with column name used to store `prioritization` in
+  the dataset that underpins `project`.
 
 - metrics:
 
-  \`list\` with evaluation metrics for prioritization. Defaults to
-  \`NULL\` such that the metrics are calculated automatically.
+  `list` with evaluation metrics for prioritization. Defaults to `NULL`
+  such that the metrics are calculated automatically.
 
 - id:
 
-  \`character\` value with unique identifier. Defaults to a random
-  identifier (\[uuid::UUIDgenerate()\]).
+  `character` value with unique identifier. Defaults to a random
+  identifier
+  ([`uuid::UUIDgenerate()`](https://rdrr.io/pkg/uuid/man/UUIDgenerate.html)).
 
 ## Value
 
-A \[new_solution()\] object.
+A
+[`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+object.
 
 ## Settings format
 
-The argument to \`settings\` must be a \`list\` with the following
-elements.
+The argument to `settings` must be a `list` with the following elements.
 
-- features:
+- `"features`":
 
-  A \`data.frame\` with the theme and feature settings. These are used
-  to specify the targets and weights considered for the features during
+  A `data.frame` with the theme and feature settings. These are used to
+  specify the targets and weights considered for the features during
   optimization. Each row corresponds to a different feature, and it must
-  have the following columns: \`"id"\`, \`"name"\`, \`"column"\`,
-  \`"zone"\`, \`"target"\`, and \`"weight"\`. Note that target values
-  must be expressed as a proportion (i.e., value between zero and one).
+  have the following columns: `"id"`, `"name"`, `"column"`, `"zone"`,
+  `"target"`, and `"weight"`. Note that target values must be expressed
+  as a proportion (i.e., value between zero and one).
 
-- locks:
+- `"locks"`:
 
-  A \`data.frame\` with the settings to specify which locks are used to
+  A `data.frame` with the settings to specify which locks are used to
   lock in planning units to a particular zone. Each row corresponds to a
-  different lock, and it must have the following columns: \`"id"\`,
-  \`"name"\`, \`"column"\`, and \`"zone"\`.
+  different lock, and it must have the following columns: `"id"`,
+  `"name"`, `"column"`, and `"zone"`.
 
-- costs:
+- `"costs"`:
 
-  A \`data.frame\` with the cost settings. These are used to specify
-  which costs are considered for each zone. Each row corresponds to a
-  different cost, and it must have the following columns: \`"id"\`,
-  \`"name"\`, \`"zone"\`, and \`"weight"\`.
+  A `data.frame` with the cost settings. These are used to specify which
+  costs are considered for each zone. Each row corresponds to a
+  different cost, and it must have the following columns: `"id"`,
+  `"name"`, `"zone"`, and `"weight"`.
 
-- zones:
+- `"zones"`:
 
-  A \`data.frame\` with settings for the multi-objective optimization.
+  A `data.frame` with settings for the multi-objective optimization.
   Each row corresponds to a different zone, and it must have the
-  following columns: \`"name"\` and \`"weight"\`.
+  following columns: `"name"` and `"weight"`.
 
 ## See also
 
-Other method:
+Other functions for calling class methods:
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),

@@ -12,36 +12,39 @@ new_cost(name, layer, zone, weight, id = uuid::UUIDgenerate())
 
 - name:
 
-  \`character\` value with the name.
+  `character` value with the name.
 
 - layer:
 
-  \[new_layer()\] object used to store information for visualization.
+  [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md)
+  object used to store information for visualization.
 
 - zone:
 
-  \`character\` name of zone to which this cost pertains. During
+  `character` name of zone to which this cost pertains. During
   optimization, planning units that are not allocated to this zone
-  accrue a penalty based on these cost data. Note that \`zone\` must
-  have a value that corresponds to one of the zone names associated with
-  the \[new_project()\] to which this object belongs.
+  accrue a penalty based on these cost data. Note that `zone` must have
+  a value that corresponds to one of the zone names associated with the
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  to which this object belongs.
 
 - weight:
 
-  \`numeric\` value denoting the relative importance of the cost.
+  `numeric` value denoting the relative importance of the cost.
 
 - id:
 
-  \`character\` value with unique identifier. Defaults to a random
-  identifier (\[uuid::UUIDgenerate()\]).
+  `character` value with unique identifier. Defaults to a random
+  identifier
+  ([`uuid::UUIDgenerate()`](https://rdrr.io/pkg/uuid/man/UUIDgenerate.html)).
 
 ## Value
 
-A \`Cost\` object.
+A `Cost` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

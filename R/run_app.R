@@ -1,12 +1,16 @@
-#' Run the Shiny Application
+#' Run the Shiny application
+#'
+#' Run the Shiny application.
 #'
 #' @param ... arguments to pass to golem_opts.
 #' See `?golem::get_golem_options` for more details.
+#'
 #' @inheritParams shiny::shinyApp
 #'
-#' @export
 #' @importFrom shiny shinyApp
 #' @importFrom golem with_golem_options
+#' @inherit apscp examples
+#' @export
 run_app <- function(
   onStart = app_startup,
   options = list(),

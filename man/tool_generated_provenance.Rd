@@ -7,10 +7,10 @@
 tool_generated_provenance()
 }
 \value{
-A [new_provenance()] object
+A \code{\link[=new_provenance]{new_provenance()}} object
 }
 \description{
-Create a [new_provenance()] object that indicates data were generated with
+Create a \code{\link[=new_provenance]{new_provenance()}} object that indicates data were generated with
 the tool.
 }
 \examples{
@@ -22,7 +22,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},

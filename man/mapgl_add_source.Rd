@@ -9,14 +9,14 @@ mapgl_add_source(map, x)
 \arguments{
 \item{map}{A map object created by the \code{mapboxgl} or \code{maplibre} function.}
 
-\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
-[new_solution()] object.}
+\item{x}{\code{\link[=new_tile]{new_tile()}}, \code{\link[=new_feature]{new_feature()}}, \code{\link[=new_cost]{new_cost()}}, \code{\link[=new_lock]{new_lock()}}, or
+\code{\link[=new_solution]{new_solution()}} object.}
 }
 \description{
-Add a [new_tile()] object as a layer to a \pkg{mapgl} object.
+Add a \code{\link[=new_tile]{new_tile()}} object as a layer to a \pkg{mapgl} object.
 }
 \details{
-Sources are added with [mapgl::add_pmtiles_source()].
+Sources are added with \code{\link[mapgl:add_pmtiles_source]{mapgl::add_pmtiles_source()}}.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
@@ -58,7 +58,7 @@ print(map)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},

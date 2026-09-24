@@ -11,6 +11,9 @@ import {projectSelectOptions} from "../utils/projectSelectOptions.js";
 import {selectOption} from "../utils/projectSelectOptions.js";
 import {projectMetadata} from "../utils/projectMetadata.js";
 import {getMetadata} from "../utils/projectMetadata.js";
+// utility functions
+import {waitFor} from "../utils/misc.js";
+
 // styling
 import "./css/style.css";
 
@@ -228,10 +231,19 @@ export class Mapper {
         this.hideLayerOnMenu(value, true);
       }
     });
-    // add popup to map
-    addPopup(this._map, this._metadata, project.zones);
-    // add mouse events to map
-    addMouseEvents(this._map);
+    // add map events
+    // note that they must be called after the map has been defined
+    waitFor(
+      () => {
+        return this._map.map !== undefined;
+      }
+    ).then(
+      () => {
+        addPopup(this._map, this._metadata, project.zones)
+        addMouseEvents(this._map);
+        return;
+      }
+    );
   }
 
   /**

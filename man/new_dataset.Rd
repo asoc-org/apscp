@@ -7,15 +7,15 @@
 new_dataset(pu_path, boundary_path)
 }
 \arguments{
-\item{pu_path}{`character` file path.}
+\item{pu_path}{\code{character} file path.}
 
-\item{boundary_path}{`character` file path.}
+\item{boundary_path}{\code{character} file path.}
 }
 \value{
-A [Dataset] object.
+A \code{\link{Dataset}} object.
 }
 \description{
-Create a new [Dataset] object.
+Create a new \code{\link{Dataset}} object.
 }
 \examples{
 # simulate spatial data
@@ -38,10 +38,10 @@ print(x)
 
 }
 \seealso{
-See [create_dataset_from_sf()] to automatically convert a [sf::st_sf()]
-object to a [new_dataset()] object.
+See \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}} to automatically convert a \code{\link[sf:st_sf]{sf::st_sf()}}
+object to a \code{\link[=new_dataset]{new_dataset()}} object.
 
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},

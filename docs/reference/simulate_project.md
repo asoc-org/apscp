@@ -10,7 +10,8 @@ simulate_project()
 
 ## Value
 
-A \[Project\] object.
+A [`Project`](https://asoc-org.github.io/apscp/reference/Project.md)
+object.
 
 ## Details
 
@@ -19,7 +20,7 @@ testing and should not be used for any research purposes.
 
 ## See also
 
-Other simulation:
+Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md),
@@ -34,9 +35,8 @@ Other simulation:
 ``` r
 # create simulated project
 x <- simulate_project()
-#> Error in simulate_project(): could not find function "simulate_project"
 
 # preview object
 print(x)
-#> Error: object 'x' not found
+#> A <Project> object.
 ```

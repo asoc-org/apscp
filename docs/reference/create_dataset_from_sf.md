@@ -1,6 +1,10 @@
 # Create dataset from sf object.
 
-Create a \[Dataset\] object from a \[st::sf()\] object.
+Create a
+[`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md)
+object from a
+[`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
+object.
 
 ## Usage
 
@@ -12,20 +16,23 @@ create_dataset_from_sf(x, boundary_data = NULL)
 
 - x:
 
-  \[sf::st_sf()\] object.
+  [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
+  object.
 
 - boundary_data:
 
-  \[Matrix::sparseMatrix()\] object with boundary data. Defaults to
-  \`NULL\` such that the boundary data are calculated automatically.
+  [`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
+  object with boundary data. Defaults to `NULL` such that the boundary
+  data are calculated automatically.
 
 ## Value
 
-A \[Dataset\] object.
+A [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md)
+object.
 
 ## See also
 
-Other method:
+Other functions for calling class methods:
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
@@ -50,7 +57,7 @@ print(x)
 #> <Dataset>
 #>   Public:
 #>     boundary_data: NULL
-#>     boundary_path: /tmp/RtmpK0Ujtc/file197dffc822882.rds
+#>     boundary_path: /tmp/Rtmp0YbMia/file1bc3aa28428734.rds
 #>     clone: function (deep = FALSE) 
 #>     get_boundary_data: function () 
 #>     get_column_data: function (column) 
@@ -65,8 +72,8 @@ print(x)
 #>     initialize: function (pu_path, boundary_path) 
 #>     n_pu: 90
 #>     pu_db_con: NULL
-#>     pu_db_table: file197dff39d87bd7
-#>     pu_path: /tmp/RtmpK0Ujtc/file197dff39d87bd7.gpkg
+#>     pu_db_table: file1bc3aab5e8381
+#>     pu_path: /tmp/Rtmp0YbMia/file1bc3aab5e8381.gpkg
 #>     set_column_data: function (column, values) 
 #>   Private:
 #>     close_db_con: function () 

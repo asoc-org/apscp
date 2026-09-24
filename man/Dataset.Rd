@@ -7,7 +7,7 @@
 A dataset is used to store and access information about a set spatial layers.
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},
 \code{\link[=new_continuous_legend]{new_continuous_legend()}},
@@ -25,17 +25,17 @@ Other class:
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
-    \item{\code{pu_path}}{`character` file path.}
+    \item{\code{pu_path}}{\code{character} file path.}
 
-    \item{\code{pu_db_con}}{[DBI::dbConnect()] database connection object.}
+    \item{\code{pu_db_con}}{\code{\link[DBI:dbConnect]{DBI::dbConnect()}} database connection object.}
 
-    \item{\code{pu_db_table}}{`character` object.}
+    \item{\code{pu_db_table}}{\code{character} object.}
 
-    \item{\code{boundary_path}}{`character ` file path.}
+    \item{\code{boundary_path}}{\code{character } file path.}
 
-    \item{\code{boundary_data}}{[Matrix::sparseMatrix()] object.}
+    \item{\code{boundary_data}}{\code{\link[Matrix:sparseMatrix]{Matrix::sparseMatrix()}} object.}
 
-    \item{\code{n_pu}}{`integer` value.}
+    \item{\code{n_pu}}{\code{integer} value.}
   }
   \if{html}{\out{</div>}}
 }
@@ -61,7 +61,7 @@ Other class:
 \if{html}{\out{<a id="method-Dataset-initialize"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-initialize}{}}}
 \subsection{\code{Dataset$new()}}{
-  Create a `Dataset` object.
+  Create a \code{Dataset} object.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Dataset$new(pu_path, boundary_path)}
@@ -70,13 +70,13 @@ Other class:
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{pu_path}}{`character ` file path.}
-      \item{\code{boundary_path}}{`character` file path.}
+      \item{\code{pu_path}}{\code{character } file path.}
+      \item{\code{boundary_path}}{\code{character} file path.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A new `Dataset` object.
+    A new \code{Dataset} object.
   }
 }
 
@@ -91,7 +91,7 @@ Other class:
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    An `integer` value.
+    An \code{integer} value.
   }
 }
 
@@ -106,7 +106,7 @@ Other class:
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A [Matrix::sparseMatrix()] object.
+    A \code{\link[Matrix:sparseMatrix]{Matrix::sparseMatrix()}} object.
   }
 }
 
@@ -121,7 +121,7 @@ Other class:
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `character` vector.
+    A \code{character} vector.
   }
 }
 
@@ -129,7 +129,7 @@ Other class:
 \if{html}{\out{<a id="method-Dataset-get_dataframe"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-get_dataframe}{}}}
 \subsection{\code{Dataset$get_dataframe()}}{
-  Get `data.frame` with data.
+  Get \code{data.frame} with data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Dataset$get_dataframe(column = NULL)}
@@ -138,13 +138,13 @@ Other class:
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` vector. Defaults to `NULL` such that
+      \item{\code{column}}{\code{character} vector. Defaults to \code{NULL} such that
 all columns are returned.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `data.frame` object.
+    A \code{data.frame} object.
   }
 }
 
@@ -152,7 +152,7 @@ all columns are returned.}
 \if{html}{\out{<a id="method-Dataset-get_sf"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-get_sf}{}}}
 \subsection{\code{Dataset$get_sf()}}{
-  Get [sf::st_sf()] object with data.
+  Get \code{\link[sf:st_sf]{sf::st_sf()}} object with data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Dataset$get_sf(column = NULL)}
@@ -161,13 +161,13 @@ all columns are returned.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` vector. Defaults to `NULL` such that
+      \item{\code{column}}{\code{character} vector. Defaults to \code{NULL} such that
 all columns are returned.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A [sf::st_st()] object.
+    A \code{\link[sf:st_sf]{sf::st_sf()}} object.
   }
 }
 
@@ -184,7 +184,7 @@ all columns are returned.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` value.}
+      \item{\code{column}}{\code{character} value.}
     }
     \if{html}{\out{</div>}}
   }
@@ -206,12 +206,12 @@ all columns are returned.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` or `integer` value.}
+      \item{\code{column}}{\code{character} or \code{integer} value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `character` vector of layer names.
+    A \code{character} vector of layer names.
   }
 }
 
@@ -229,24 +229,24 @@ depending on columns used to allocate them.
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{zone}}{`character` value with name of zone.}
-      \item{\code{allocation}}{Named `character` vector with column names
+      \item{\code{zone}}{\code{character} value with name of zone.}
+      \item{\code{allocation}}{Named \code{character} vector with column names
 indicating which planning units should be allocated to each zone.
-Note that the names of `allocation` indicate the zone names.
+Note that the names of \code{allocation} indicate the zone names.
 Additionally, zones are allocated in order of decreasing priority. For
 example with
-`allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")`,
+\code{allocation = c("Biodiversity" = "aspas", "Scientific" = "camps")},
 planning units are first assigned to the Scientific zone based on
-the values in the `"camps"` column, and then to the Biodiversity zone
-based on the values in the `"aspas"` column. If  any planning unit
+the values in the \code{"camps"} column, and then to the Biodiversity zone
+based on the values in the \code{"aspas"} column. If  any planning unit
 was previously assigned to the Scientific zone,  then it is overridden
 with the Biodiversity zone.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `numeric` vector with binary values indicating if each
-planning unit is allocated to the `zone`.
+    A \code{numeric} vector with binary values indicating if each
+planning unit is allocated to the \code{zone}.
   }
 }
 
@@ -264,14 +264,14 @@ held by selected planning units.
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` vector of column names.}
-      \item{\code{status}}{`numeric` vector with binary values for each
+      \item{\code{column}}{\code{character} vector of column names.}
+      \item{\code{status}}{\code{numeric} vector with binary values for each
 planning unit.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `numeric` value.
+    A \code{numeric} value.
   }
 }
 
@@ -293,7 +293,7 @@ planning unit.}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `logical` value.
+    A \code{logical} value.
   }
 }
 
@@ -310,13 +310,13 @@ planning unit.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{`character` value.}
-      \item{\code{values}}{`numeric` vector.}
+      \item{\code{column}}{\code{character} value.}
+      \item{\code{values}}{\code{numeric} vector.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    An invisible `TRUE` indicating success.
+    An invisible \code{TRUE} indicating success.
   }
 }
 

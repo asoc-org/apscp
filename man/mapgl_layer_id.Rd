@@ -7,17 +7,17 @@
 mapgl_layer_id(x)
 }
 \arguments{
-\item{x}{[new_feature()], [new_cost()], [new_lock()], or [new_solution()]
+\item{x}{\code{\link[=new_feature]{new_feature()}}, \code{\link[=new_cost]{new_cost()}}, \code{\link[=new_lock]{new_lock()}}, or \code{\link[=new_solution]{new_solution()}}
 object.}
 }
 \value{
-A `character` value.
+A \code{character} value.
 }
 \description{
 Get the layer identifier for an object.
 }
 \details{
-This corresponds to the `id` parameter of [mapgl::add_fill_layer()].
+This corresponds to the \code{id} parameter of \code{\link[mapgl:add_fill_layer]{mapgl::add_fill_layer()}}.
 }
 \examples{
 # simulate spatial data
@@ -44,7 +44,7 @@ mapgl_layer_id(x)
 
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},

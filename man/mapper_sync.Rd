@@ -13,27 +13,33 @@ mapper_sync(
 )
 }
 \arguments{
-\item{id}{`character` value with identifier for [mapper()] object.}
+\item{id}{\code{character} value with identifier for \code{\link[=mapper]{mapper()}} object.}
 
-\item{map}{[mapgl::mapboxgl_proxy()] object.}
+\item{map}{\code{\link[mapgl:mapboxgl_proxy]{mapgl::mapboxgl_proxy()}} object.}
 
-\item{project}{[new_project()] object.}
+\item{project}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{data}{`list` with data.}
+\item{data}{\code{list} with data.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
-Synchronize active layers between a [mapper()] object and its associated
-[mapgl::mapboxglOutput()] object.
+Synchronize active layers between a \code{\link[=mapper]{mapper()}} object and its associated
+\code{\link[mapgl:mapboxglOutput]{mapgl::mapboxglOutput()}} object.
 }
 \details{
 This function is specifically used to add layers to the map that
 are not active.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example app showing a mapper widget
+run_example_app("mapper")
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other mapper:
+Other functions for the mapper widget:
 \code{\link[=mapper]{mapper()}},
 \code{\link{mapper-shiny}},
 \code{\link[=mapper_add_solution]{mapper_add_solution()}}

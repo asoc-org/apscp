@@ -7,17 +7,17 @@
 simulate_prioritization_metrics(project)
 }
 \arguments{
-\item{project}{[new_project()] object.}
+\item{project}{\code{\link[=new_project]{new_project()}} object.}
 }
 \value{
-A `list` with the following elements:
-(`"summary"`) a data frame, `"features"` a `list` with elements
-named `"relative"`, "`absolute`", and `"targets"`,
-`"locks"` a `list` with elements named `"relative"` and "`absolute`",
-and `"costs"` a `list` with elements named `"relative"` and "`absolute`".
+A \code{list} with the following elements:
+(\code{"summary"}) a data frame, \code{"features"} a \code{list} with elements
+named \code{"relative"}, "\code{absolute}", and \code{"targets"},
+\code{"locks"} a \code{list} with elements named \code{"relative"} and "\code{absolute}",
+and \code{"costs"} a \code{list} with elements named \code{"relative"} and "\code{absolute}".
 }
 \description{
-Simulate metrics for evaluating a [solve_prioritization()].
+Simulate metrics for evaluating a \code{\link[=solve_prioritization]{solve_prioritization()}}.
 }
 \details{
 Note that simulation functions are intended to help faciliate
@@ -35,7 +35,7 @@ print(s)
 
 }
 \seealso{
-Other simulation:
+Other functions for simulating data:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},

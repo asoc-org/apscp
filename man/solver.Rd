@@ -16,31 +16,31 @@ solver(
 )
 }
 \arguments{
-\item{project}{[new_project()] object.}
+\item{project}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{feature_targets}{`numeric` vector of values representing
+\item{feature_targets}{\code{numeric} vector of values representing
 different options for setting target values for features.
-Defaults to `get_golem_config("prioritization_feature_targets")`.}
+Defaults to \code{get_golem_config("prioritization_feature_targets")}.}
 
-\item{feature_weights}{`numeric` vector of values representing
+\item{feature_weights}{\code{numeric} vector of values representing
 different options for setting target weights for features.
-Defaults to `get_golem_config("prioritization_feature_weights")`.}
+Defaults to \code{get_golem_config("prioritization_feature_weights")}.}
 
-\item{cost_weights}{`numeric` vector of values representing
+\item{cost_weights}{\code{numeric} vector of values representing
 different  options for setting weights for costs.
-Defaults to `get_golem_config("prioritization_cost_weights")`.}
+Defaults to \code{get_golem_config("prioritization_cost_weights")}.}
 
-\item{zone_colors}{`character` vector of colors for each zone.
-Defaults to `get_golem_config("zone_colors")`.}
+\item{zone_colors}{\code{character} vector of colors for each zone.
+Defaults to \code{get_golem_config("zone_colors")}.}
 
-\item{width}{`character` width of the displayed widget.
-Defaults to `NULL` such that the widget is automatically sized.}
+\item{width}{\code{character} width of the displayed widget.
+Defaults to \code{NULL} such that the widget is automatically sized.}
 
-\item{height}{`character` width of the displayed widget.
-Defaults to `NULL` such that the widget is automatically sized.}
+\item{height}{\code{character} width of the displayed widget.
+Defaults to \code{NULL} such that the widget is automatically sized.}
 
-\item{id}{`character` HTML identifier for the widget.
-Defaults to `NULL` since these identifiers are not used by Shiny.}
+\item{id}{\code{character} HTML identifier for the widget.
+Defaults to \code{NULL} since these identifiers are not used by Shiny.}
 }
 \description{
 Constructs a widget for specifying solver settings to generate a solution.
@@ -53,8 +53,8 @@ The widget sends the following values to the server:
 \describe{
 \item{start}{
 This is sent when the "Solve!" button is clicked and
-it sends a `list` that contains the settings for generating a prioritization.
-See documentation for the `settings` parameter of [prioritization()]
+it sends a \code{list} that contains the settings for generating a prioritization.
+See documentation for the \code{settings} parameter of \code{\link[=solve_prioritization]{solve_prioritization()}}
 for further details on the format of this value.
 }
 
@@ -66,14 +66,12 @@ This is sent when the stop button is clicked.
 
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-library(shiny)
-
-# run example app showing a solver
-runApp(system.file("examples", "solver_app.R", package = "apscp"))
+# run example application showing a solver widget
+run_example_app("solver")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other solver:
+Other functions for the solver widget:
 \code{\link{solver-shiny}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},
 \code{\link[=solver_reset]{solver_reset()}},

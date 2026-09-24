@@ -7,18 +7,18 @@
 write_dataset(x, pu_path, boundary_path)
 }
 \arguments{
-\item{x}{[Dataset] object.}
+\item{x}{\code{\link{Dataset}} object.}
 
-\item{pu_path}{`character` file path for planning unit data.}
+\item{pu_path}{\code{character} file path for planning unit data.}
 
-\item{boundary_path}{`character` file path for boundary data.
-If the dataset does not have boundary data, then use `boundary_path = NULL`.}
+\item{boundary_path}{\code{character} file path for boundary data.
+If the dataset does not have boundary data, then use \code{boundary_path = NULL}.}
 }
 \value{
-An invisible `TRUE` indicating success.
+An invisible \code{TRUE} indicating success.
 }
 \description{
-Write a [Dataset] object.
+Write a \code{\link{Dataset}} object.
 }
 \examples{
 # simulate spatial data
@@ -36,13 +36,15 @@ write_dataset(dataset, pu_path, bd_path)
 
 }
 \seealso{
-Other io:
+Other functions for reading and writing data:
 \code{\link[=deserialize_object]{deserialize_object()}},
 \code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_matrix]{read_matrix()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=read_sf_data]{read_sf_data()}},
 \code{\link[=serialize_object]{serialize_object()}},
+\code{\link[=write_matrix]{write_matrix()}},
 \code{\link[=write_project]{write_project()}},
 \code{\link[=write_sf_data]{write_sf_data()}}
 }

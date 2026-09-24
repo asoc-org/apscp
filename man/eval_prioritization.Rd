@@ -7,16 +7,16 @@
 eval_prioritization(project, prioritization)
 }
 \arguments{
-\item{project}{[new_project()] object to which `prioritization `should be
+\item{project}{\code{\link[=new_project]{new_project()}} object to which \code{prioritization }should be
 added.}
 
-\item{prioritization}{`numeric` vector with a value for each planning
+\item{prioritization}{\code{numeric} vector with a value for each planning
 unit to indicate zone allocations.}
 }
 \value{
-A `list` object. This is a `list` with a
-`"summary"` element that contains a data frame with area-based metrics,
-as well as `"features"`, `"locks"`, and `"costs"` elements that contain
+A \code{list} object. This is a \code{list} with a
+\code{"summary"} element that contains a data frame with area-based metrics,
+as well as \code{"features"}, \code{"locks"}, and \code{"costs"} elements that contain
 data frames with metrics for the features, locks, and costs (respectively).
 }
 \description{
@@ -37,7 +37,7 @@ eval_prioritization(project, prioritization)
 
 }
 \seealso{
-Other optimization:
+Other functions for prioritization:
 \code{\link[=solve_prioritization]{solve_prioritization()}}
 }
-\concept{optimization}
+\concept{prioritization}

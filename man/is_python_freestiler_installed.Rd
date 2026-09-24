@@ -7,7 +7,7 @@
 is_python_freestiler_installed()
 }
 \value{
-A `logical` value.
+A \code{logical} value.
 }
 \description{
 Check if the freestiler Python library is installed?
@@ -18,13 +18,11 @@ is_python_freestiler_installed()
 
 }
 \seealso{
-Other misc:
+Other miscellaneous functions:
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_installed]{is_installed()}},
-\code{\link[=is_relative_path]{is_relative_path()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=write_matrix]{write_matrix()}}
+\code{\link[=is_relative_path]{is_relative_path()}}
 }
 \concept{misc}

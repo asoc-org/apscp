@@ -12,21 +12,24 @@ add_layer_visibility_control(map, mapper_id, position = "top-left")
 
 - map:
 
-  \[mapgl::mapboxgl()\] object.
+  [`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html)
+  object.
 
 - mapper_id:
 
-  \`character\` value with HTML identifier for \[mapper()\] object.
+  `character` value with HTML identifier for
+  [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md)
+  object.
 
 - position:
 
-  \`character\` value denoting the placement of the control the \`map\`
-  object. Available options include \`"top-left"\`, \`"top-right\`",
-  \`"bottom-left"\`, and \`"bottom-right"\`.
+  `character` value denoting the placement of the control the `map`
+  object. Available options include `"top-left"`, `"top-right`",
+  `"bottom-left"`, and `"bottom-right"`.
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
 [`map_project()`](https://asoc-org.github.io/apscp/reference/map_project.md),
@@ -37,3 +40,12 @@ Other mapping:
 [`mapgl_source_id()`](https://asoc-org.github.io/apscp/reference/mapgl_source_id.md),
 [`mapgl_source_layer_id()`](https://asoc-org.github.io/apscp/reference/mapgl_source_layer_id.md),
 [`mapgl_source_url()`](https://asoc-org.github.io/apscp/reference/mapgl_source_url.md)
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# run example app showing a mapper widget
+run_example_app("mapper")
+}
+```

@@ -10,7 +10,7 @@ simulate_pmtiles_file()
 
 ## Value
 
-A \`character\` value with the file path.
+A `character` value with the file path.
 
 ## Details
 
@@ -19,7 +19,7 @@ testing and should not be used for any research purposes.
 
 ## See also
 
-Other simulation:
+Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_prioritization_metrics()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_metrics.md),
@@ -34,5 +34,5 @@ Other simulation:
 ``` r
 # simulate PMTiles file
 simulate_pmtiles_file()
-#> Error in simulate_pmtiles_file(): could not find function "simulate_pmtiles_file"
+#> [1] "/tmp/Rtmp0YbMia/file1bc3aa3f32d0fa.pmtiles"
 ```

@@ -12,20 +12,25 @@ mapgl_layer_id(x)
 
 - x:
 
-  \[new_feature()\], \[new_cost()\], \[new_lock()\], or
-  \[new_solution()\] object.
+  [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
+  [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
+  [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+  or
+  [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  object.
 
 ## Value
 
-A \`character\` value.
+A `character` value.
 
 ## Details
 
-This corresponds to the \`id\` parameter of \[mapgl::add_fill_layer()\].
+This corresponds to the `id` parameter of
+[`mapgl::add_fill_layer()`](https://walker-data.com/mapgl/reference/add_fill_layer.html).
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
@@ -61,5 +66,5 @@ x <- new_cost(
 
 # get layer identifier
 mapgl_layer_id(x)
-#> [1] "lyr-5e03ff7d-8377-4357-90d7-cf7a5043f9d7"
+#> [1] "lyr-97da7b5b-3f13-41fc-8af2-fc55e7040917"
 ```

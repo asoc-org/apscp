@@ -20,50 +20,54 @@ new_feature(
 
 - name:
 
-  \`character\` value with the name.
+  `character` value with the name.
 
 - layer:
 
-  \[new_layer()\] object used to store information for visualization.
+  [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md)
+  object used to store information for visualization.
 
 - zone_targets:
 
-  \`numeric\` vector with initial target values for representing the
+  `numeric` vector with initial target values for representing the
   feature within each zone associated with the project. These value
   should be specified as a proportion of the features total distribution
-  (e.g., a value of 0.1 corresponds to 10 a value of 1.
+  (e.g., a value of 0.1 corresponds to 10%) and the sum of these values
+  should not exceed a value of 1.
 
 - zone_weights:
 
-  \`numeric\` vector with initial weight values for achieving the
-  targets for each zone associated with the project. Each of these
-  values should range between 0 and 1. Note that the sum of these values
-  does not have any constraints (unlike \`zone_targets\`).
+  `numeric` vector with initial weight values for achieving the targets
+  for each zone associated with the project. Each of these values should
+  range between 0 and 1. Note that the sum of these values does not have
+  any constraints (unlike `zone_targets`).
 
 - zone_helds:
 
-  \`numeric\` vector with the proportion of each feature's distribution
+  `numeric` vector with the proportion of each feature's distribution
   held within planning units that are locked in. Each of these values
   should range between 0 and 1. Note that the sum of these values does
-  not have any constraints (unlike \`zone_targets\`).
+  not have any constraints (unlike `zone_targets`).
 
 - themes:
 
-  \`list\` of \[new_theme()\] objects indicating the themes to which the
-  feature belongs.
+  `list` of
+  [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md)
+  objects indicating the themes to which the feature belongs.
 
 - id:
 
-  \`character\` value with unique identifier. Defaults to a random
-  identifier (\[uuid::UUIDgenerate()\]).
+  `character` value with unique identifier. Defaults to a random
+  identifier
+  ([`uuid::UUIDgenerate()`](https://rdrr.io/pkg/uuid/man/UUIDgenerate.html)).
 
 ## Value
 
-A \`Feature\` object.
+A `Feature` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

@@ -7,16 +7,16 @@
 new_tile(source_layer, path, max_zoom)
 }
 \arguments{
-\item{source_layer}{`character` value with name of layer source in the
+\item{source_layer}{\code{character} value with name of layer source in the
 archive file.}
 
-\item{path}{`character` value with file path for the archive file.
-Note that `file` must have a `".pmtiles"` file extension.}
+\item{path}{\code{character} value with file path for the archive file.
+Note that \code{file} must have a \code{".pmtiles"} file extension.}
 
-\item{max_zoom}{`integer` maximum zoom level for the archive.}
+\item{max_zoom}{\code{integer} maximum zoom level for the archive.}
 }
 \value{
-A `Tile` object.
+A \code{Tile} object.
 }
 \description{
 Create a new tile object to store information for rendering a layer from
@@ -35,7 +35,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

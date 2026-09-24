@@ -12,37 +12,37 @@ new_continuous_legend(values, colors, breaks, labels, units = NULL)
 
 - values:
 
-  \`numeric\` vector of values for creating the color bar.
+  `numeric` vector of values for creating the color bar.
 
 - colors:
 
-  \`character\` vector for creating the color bar. These colors should
-  be in hex format (e.g. \`"#AABBCC"\`) and are used to generate the
-  color bar. Note that \`values\` and \`colors\` must have the same
-  number of values.
+  `character` vector for creating the color bar. These colors should be
+  in hex format (e.g. `"#AABBCC"`) and are used to generate the color
+  bar. Note that `values` and `colors` must have the same number of
+  values.
 
 - breaks:
 
-  \`numeric\` vector of values for where labels should be shown on the
+  `numeric` vector of values for where labels should be shown on the
   color ramp.
 
 - labels:
 
-  \`character\` vector with label text. Note that \`labels\` and
-  \`breaks\` must have the same number of values.
+  `character` vector with label text. Note that `labels` and `breaks`
+  must have the same number of values.
 
 - units:
 
-  \`character\` value containing the units for the values in the
-  underlying data. Defaults to a \`NULL\` value.
+  `character` value containing the units for the values in the
+  underlying data. Defaults to a `NULL` value.
 
 ## Value
 
-A \`ContinuousLegend\` object.
+A `ContinuousLegend` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

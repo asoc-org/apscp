@@ -1,6 +1,8 @@
 # Get paint parameters
 
-Get parameters for painting a \[new_layer\] object.
+Get parameters for painting a
+[new_layer](https://asoc-org.github.io/apscp/reference/new_layer.md)
+object.
 
 ## Usage
 
@@ -12,23 +14,27 @@ get_paint_parameters(x, column)
 
 - x:
 
-  \[new_continuous_legend()\] or \[new_categorical_legend()\] object.
+  [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md)
+  or
+  [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
+  object.
 
 - column:
 
-  \`character\` value with source layer for painting.
+  `character` value with source layer for painting.
 
 ## Value
 
-A named \`list\` object.
+A named `list` object.
 
 ## Details
 
-This function is designed for use with \[mapgl::add_fill_layer()\].
+This function is designed for use with
+[`mapgl::add_fill_layer()`](https://walker-data.com/mapgl/reference/add_fill_layer.html).
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),
 [`map_project()`](https://asoc-org.github.io/apscp/reference/map_project.md),

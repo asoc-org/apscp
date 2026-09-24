@@ -7,16 +7,16 @@
 mapgl_source_url(x)
 }
 \arguments{
-\item{x}{[new_tile()] object.}
+\item{x}{\code{\link[=new_tile]{new_tile()}} object.}
 }
 \value{
-A `character` value.
+A \code{character} value.
 }
 \description{
 Get \pkg{mapgl} source URL.
 }
 \details{
-This corresponds to the `url` parameter of [mapgl::add_pmtiles_source()].
+This corresponds to the \code{url} parameter of \code{\link[mapgl:add_pmtiles_source]{mapgl::add_pmtiles_source()}}.
 }
 \examples{
 # simulate spatial data
@@ -30,7 +30,7 @@ mapgl_source_url(x)
 
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},

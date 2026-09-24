@@ -7,16 +7,19 @@
 color_palette(x, n = NULL)
 }
 \arguments{
-\item{x}{`character` name of the color palette
+\item{x}{\code{character} name of the color palette
 (see Details for available options).}
 
-\item{n}{`integer` number of colors required.
-A `NULL` argument can also be used to obtain a default number of colors.
-If a `NULL` argument is supplied and the palette has a limited number of
+\item{n}{\code{integer} number of colors required.
+A \code{NULL} argument can also be used to obtain a default number of colors.
+If a \code{NULL} argument is supplied and the palette has a limited number of
 colors, then the maximum number of colors is returned.
-Otherwise, if a `NULL` argument is supplied and the palette does not have
+Otherwise, if a \code{NULL} argument is supplied and the palette does not have
 a limited number of colors, then a 20 colors are returned.
-The default argument is `NULL`.}
+The default argument is \code{NULL}.}
+}
+\value{
+A \code{character} vector.
 }
 \description{
 Generate colors using the name of a color palette.
@@ -24,54 +27,56 @@ Generate colors using the name of a color palette.
 \details{
 This function can be used to generate colors using palettes provided by
 the \pkg{RColorBrewer} and \pkg{viridisLite} packages. If colors are
-from multiple palettes, they can be supplied as a single `character`
-object delimited by semicolon (`";"`) characters.
+from multiple palettes, they can be supplied as a single \code{character}
+object delimited by semicolon (\code{";"}) characters.
 
 Specifically, available palettes include:
-* `"viridis"` (see [viridisLite::viridis()])
-* `"magma"` (see [viridisLite::magma()])
-* `"plasma"` (see [viridisLite::plasma()])
-* `"inferno"` (see [viridisLite::inferno()])
-* `"cividis"` (see [viridisLite::cividis()])
-* `"mako"` (see [viridisLite::mako()])
-* `"rocket"` (see [viridisLite::rocket()])
-* `"turbo"` (see [viridisLite::turbo()])
-* `"BrBG`" (see [RColorBrewer::brewer.pal()])
-* `"PiYG`" (see [RColorBrewer::brewer.pal()])
-* `"PRGn`" (see [RColorBrewer::brewer.pal()])
-* `"PuOr`" (see [RColorBrewer::brewer.pal()])
-* `"RdBu`" (see [RColorBrewer::brewer.pal()])
-* `"RdGy`" (see [RColorBrewer::brewer.pal()])
-* `"RdYlBu`" (see [RColorBrewer::brewer.pal()])
-* `"RdYlGn`" (see [RColorBrewer::brewer.pal()])
-* `"Spectral`" (see [RColorBrewer::brewer.pal()])
-* `"Accent`" (see [RColorBrewer::brewer.pal()])
-* `"Dark2`" (see [RColorBrewer::brewer.pal()])
-* `"Paired`" (see [RColorBrewer::brewer.pal()])
-* `"Pastel1`" (see [RColorBrewer::brewer.pal()])
-* `"Pastel2`" (see [RColorBrewer::brewer.pal()])
-* `"Set1`" (see [RColorBrewer::brewer.pal()])
-* `"Set2`" (see [RColorBrewer::brewer.pal()])
-* `"Set3`" (see [RColorBrewer::brewer.pal()])
-* `"Blues`" (see [RColorBrewer::brewer.pal()])
-* `"BuGn`" (see [RColorBrewer::brewer.pal()])
-* `"BuPu`" (see [RColorBrewer::brewer.pal()])
-* `"GnBu`" (see [RColorBrewer::brewer.pal()])
-* `"Greens`" (see [RColorBrewer::brewer.pal()])
-* `"Greys`" (see [RColorBrewer::brewer.pal()])
-* `"Oranges`" (see [RColorBrewer::brewer.pal()])
-* `"OrRd`" (see [RColorBrewer::brewer.pal()])
-* `"PuBu`" (see [RColorBrewer::brewer.pal()])
-* `"PuBuGn`" (see [RColorBrewer::brewer.pal()])
-* `"PuRd`" (see [RColorBrewer::brewer.pal()])
-* `"Purples`" (see [RColorBrewer::brewer.pal()])
-* `"RdPu`" (see [RColorBrewer::brewer.pal()])
-* `"Reds`" (see [RColorBrewer::brewer.pal()])
-* `"YlGn`" (see [RColorBrewer::brewer.pal()])
-* `"YlGnBu`" (see [RColorBrewer::brewer.pal()])
-* `"YlOrBr`" (see [RColorBrewer::brewer.pal()])
-* `"YlOrRd`" (see [RColorBrewer::brewer.pal()])
-* `"random"` (the above palettes are randomly used to generate colors)
+\itemize{
+\item \code{"viridis"} (see \code{\link[viridisLite:viridis]{viridisLite::viridis()}})
+\item \code{"magma"} (see \code{\link[viridisLite:magma]{viridisLite::magma()}})
+\item \code{"plasma"} (see \code{\link[viridisLite:plasma]{viridisLite::plasma()}})
+\item \code{"inferno"} (see \code{\link[viridisLite:inferno]{viridisLite::inferno()}})
+\item \code{"cividis"} (see \code{\link[viridisLite:cividis]{viridisLite::cividis()}})
+\item \code{"mako"} (see \code{\link[viridisLite:mako]{viridisLite::mako()}})
+\item \code{"rocket"} (see \code{\link[viridisLite:rocket]{viridisLite::rocket()}})
+\item \code{"turbo"} (see \code{\link[viridisLite:turbo]{viridisLite::turbo()}})
+\item \verb{"BrBG}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"PiYG}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"PRGn}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"PuOr}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"RdBu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"RdGy}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"RdYlBu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"RdYlGn}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Spectral}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Accent}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Dark2}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Paired}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Pastel1}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Pastel2}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Set1}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Set2}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Set3}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Blues}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"BuGn}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"BuPu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"GnBu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Greens}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Greys}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Oranges}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"OrRd}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"PuBu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"PuBuGn}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"PuRd}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Purples}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"RdPu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"Reds}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"YlGn}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"YlGnBu}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"YlOrBr}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \verb{"YlOrRd}" (see \code{\link[RColorBrewer:brewer.pal]{RColorBrewer::brewer.pal()}})
+\item \code{"random"} (the above palettes are randomly used to generate colors)
+}
 }
 \examples{
 # obtain 5 colors from the Greens palette
@@ -93,13 +98,11 @@ color_palette("random", NULL)
 color_palette("random", 5)
 }
 \seealso{
-Other misc:
+Other miscellaneous functions:
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=is_installed]{is_installed()}},
 \code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}},
-\code{\link[=is_relative_path]{is_relative_path()}},
-\code{\link[=read_matrix]{read_matrix()}},
-\code{\link[=write_matrix]{write_matrix()}}
+\code{\link[=is_relative_path]{is_relative_path()}}
 }
 \concept{misc}

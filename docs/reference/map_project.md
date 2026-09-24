@@ -12,19 +12,23 @@ map_project(x, ...)
 
 - x:
 
-  \[new_project()\] object.
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object.
 
 - ...:
 
-  arguments passed to \[mapgl::mapboxgl()\].
+  arguments passed to
+  [`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html).
 
 ## Value
 
-A \[mapgl::mapboxgl()\] object.
+A
+[`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html)
+object.
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),

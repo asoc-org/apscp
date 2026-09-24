@@ -7,7 +7,7 @@
 tile_server_dir()
 }
 \value{
-A `character` value.
+A \code{character} value.
 }
 \description{
 Get the tile server directory.
@@ -31,7 +31,7 @@ tile_server_stop()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other tile_server:
+Other functions for working with a tile server:
 \code{\link[=tile_server_add_tile]{tile_server_add_tile()}},
 \code{\link[=tile_server_start]{tile_server_start()}},
 \code{\link[=tile_server_stop]{tile_server_stop()}}

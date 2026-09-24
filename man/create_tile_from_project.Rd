@@ -15,31 +15,31 @@ create_tile_from_project(
 )
 }
 \arguments{
-\item{x}{[new_project()] object.}
+\item{x}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{column}{`character` value with column name.}
+\item{column}{\code{character} value with column name.}
 
-\item{source_layer}{`character` value with name for layer in PMTiles archive.
-Defaults to `"data-src"`.}
+\item{source_layer}{\code{character} value with name for layer in PMTiles archive.
+Defaults to \code{"data-src"}.}
 
-\item{path}{`character` value with file path for PMTiles archive.
-Note that `path` must have a `".pmtiles"` file extension.
+\item{path}{\code{character} value with file path for PMTiles archive.
+Note that \code{path} must have a \code{".pmtiles"} file extension.
 Defaults to a temporary file path.}
 
-\item{max_zoom}{`integer` value with maximum zoom level. Defaults to 8.}
+\item{max_zoom}{\code{integer} value with maximum zoom level. Defaults to 8.}
 
-\item{engine}{`character` value denoting the engine for processing the
-the tiles. Available options include `"r"` or `"python"`.
-Defaults to `get_golem_config("tile_engine")`.}
+\item{engine}{\code{character} value denoting the engine for processing the
+the tiles. Available options include \code{"r"} or \code{"python"}.
+Defaults to \code{get_golem_config("tile_engine")}.}
 
-\item{verbose}{`logical` value indicating if information about tile
-creation should be displayed? Defaults to `FALSE`.}
+\item{verbose}{\code{logical} value indicating if information about tile
+creation should be displayed? Defaults to \code{FALSE}.}
 }
 \value{
-A [new_tile()] object.
+A \code{\link[=new_tile]{new_tile()}} object.
 }
 \description{
-Create a [new_tile()] object from a [new_project() object.
+Create a \code{\link[=new_tile]{new_tile()}} object from a [new_project() object.
 }
 \examples{
 # simulate project
@@ -56,7 +56,7 @@ print(x)
 
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution]{create_solution()}},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/widget_sidebar_ui.R
 \name{sidebar_pane}
 \alias{sidebar_pane}
-\title{Create a sidebar pane}
+\title{Sidebar pane}
 \usage{
 sidebar_pane(
   title = "Sidebar Title",
@@ -13,40 +13,41 @@ sidebar_pane(
 )
 }
 \arguments{
-\item{title}{A title for the sidebar pane}
+\item{title}{\code{character} value with a title for the sidebar pane.}
 
-\item{id}{An id for the sidebar pane.}
+\item{id}{\code{character} value denoting an identifier for the sidebar pane.}
 
-\item{icon}{An [icon()] object for the sidebar pane. This icon
-is used to create a button for closing the pane. If `NULL`, then
+\item{icon}{\code{\link[shiny:icon]{shiny::icon()}} object for the sidebar pane. This icon
+is used to create a button for closing the pane. If \code{NULL}, then
 no icon is added for the pane.}
 
-\item{tooltip}{A `character` value with text to display in a tooltip
+\item{tooltip}{\code{character} value with text to display in a tooltip
 when hovering over the button to open the sidebar.
-Defaults to `NULL` such that no tooltip is displayed.}
+Defaults to \code{NULL} such that no tooltip is displayed.}
 
-\item{...}{List of elements to include in the pane}
+\item{...}{List of elements to include in the pane.}
 }
 \value{
-A `shiny.tag` with sidebar-specific HTML classes
+A \code{shiny.tag} object.
 }
 \description{
-Create a sidebar pane
+Create a sidebar pane. This pane is designed to be used as an argument
+to \code{\link[=sidebar_tabs]{sidebar_tabs()}}.
 }
 \examples{
-\dontrun{
+# load packages
 library(shiny)
 library(htmltools)
-sidebar_pane(id = "id", icon = icon("cars"), tags$div())
-}
 
+# create sidebar pane
+sidebar_pane(id = "id", icon = icon("car"), tags$div())
 }
 \references{
 \url{https://github.com/Turbo87/sidebar-v2},
 \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
 }
 \seealso{
-Other sidebar:
+Other functions for the sidebar widget:
 \code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
 \code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},

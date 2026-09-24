@@ -7,14 +7,14 @@
 solver_sync(id, project, data, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{id}{`character` value with identifier for [solver()] object.}
+\item{id}{\code{character} value with identifier for \code{\link[=solver]{solver()}} object.}
 
-\item{project}{[project()] object.}
+\item{project}{\code{\link[terra:project]{project()}} object.}
 
-\item{data}{`list` with data.}
+\item{data}{\code{list} with data.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
 Update a solver to synchronize updates across different setting panels.
@@ -23,8 +23,14 @@ Update a solver to synchronize updates across different setting panels.
 This function is specifically used to update the feature held status
 bars based on which locks are selected for each zone.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example application showing a solver widget
+run_example_app("solver")
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other solver:
+Other functions for the solver widget:
 \code{\link[=solver]{solver()}},
 \code{\link{solver-shiny}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},

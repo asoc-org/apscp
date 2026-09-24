@@ -16,16 +16,22 @@ mapgl_clear_layer(map, x)
 
 - x:
 
-  \[new_tile()\], \[new_feature()\], \[new_cost()\], \[new_lock()\], or
-  \[new_solution()\] object.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md),
+  [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
+  [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
+  [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+  or
+  [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  object.
 
 ## Details
 
-Layers are cleared with \[mapgl::clear_layer()\].
+Layers are cleared with
+[`mapgl::clear_layer()`](https://walker-data.com/mapgl/reference/clear_layer.html).
 
 ## See also
 
-Other mapping:
+Other functions for mapping data:
 [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md),
 [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md),
 [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md),

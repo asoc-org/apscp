@@ -7,21 +7,18 @@
 has_mapbox_token()
 }
 \value{
-A `logical` value.
+A \code{logical} value.
 }
 \description{
 Determine if a Mapbox token is defined?
 }
 \examples{
-# see if a Mapbox token is defined?
-has_mapbox_token()
-
 # print if Mapbox token is available
 has_mapbox_token()
 
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=map_project]{map_project()}},

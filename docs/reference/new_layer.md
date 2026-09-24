@@ -21,46 +21,52 @@ new_layer(
 
 - column:
 
-  \`character\` value indicating the column in \`dataset\` and \`tile\`
-  that has the data for this layer.
+  `character` value indicating the column in `dataset` and `tile` that
+  has the data for this layer.
 
 - total:
 
-  \`numeric\` value indicating the total sum of values in the layer.
+  `numeric` value indicating the total sum of values in the layer.
 
 - dataset:
 
-  \[new_dataset()\] object with spatial data.
+  [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
+  object with spatial data.
 
 - tile:
 
-  \[new_tile()\] object.
+  [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+  object.
 
 - legend:
 
-  \[new_categorical_legend()\] or \[new_continuous \_legend()\] object.
+  [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
+  or
+  [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md)
+  object.
 
 - provenance:
 
-  \[new_provenance()\] object.
+  [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
+  object.
 
 - visible:
 
-  \`logical\` value indicating if the layer should be visible by
-  default? Defaults to \`FALSE\`.
+  `logical` value indicating if the layer should be visible by default?
+  Defaults to `FALSE`.
 
 - details:
 
-  \`character\` value with additional details for the layer. Defaults to
-  \`NULL\`.
+  `character` value with additional details for the layer. Defaults to
+  `NULL`.
 
 ## Value
 
-A \`Layer\` object.
+A `Layer` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

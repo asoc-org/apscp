@@ -1,6 +1,8 @@
 # Add sidebar control
 
-Add a sidebar control to a \[mapgl::mapboxgl()\] object.
+Add a sidebar control to a
+[`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html)
+object.
 
 ## Usage
 
@@ -18,37 +20,41 @@ add_sidebar_control(
 
 - map:
 
-  \[mapgl::mapboxgl()\] object.
+  [`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html)
+  object.
 
 - id:
 
-  \`character\` HTML identifier for sidebar.
+  `character` HTML identifier for sidebar.
 
 - position:
 
-  The position of the control. Can be one of "top-left", "top-right",
-  "bottom-left", or "bottom-right". Default is "top-right".
+  `character` value denoting the placement of the control the `map`
+  object. Available options include `"top-left"`, `"top-right`",
+  `"bottom-left"`, and `"bottom-right"`.
 
 - height:
 
-  \`character\` value denoting the height of the widget in CSS units.
-  For example, acceptable values include \`"100 or \`"400px"\`. Note
-  that if \`height\` is a percentage value, then it is recommended to
-  add other map controls to a different \`position\` to avoid overlaps.
+  `character` value denoting the height of the widget in CSS units. For
+  example, acceptable values include `"100%"`, `"30vh"`, or or
+  `"400px"`. Note that if `height` is a percentage value, then it is
+  recommended to add other map controls to a different `position` to
+  avoid overlaps.
 
 - selected:
 
-  \`character\` value denoting the identifier for the sidebar pane to
-  have open by default. Defaults to \`NULL\` such that the side bar is
-  closed.
+  `character` value denoting the identifier for the sidebar pane to have
+  open by default. Defaults to `NULL` such that the side bar is closed.
 
 ## Value
 
-An updated \[mapgl::mapboxgl()\] object.
+An updated
+[`mapgl::mapboxgl()`](https://walker-data.com/mapgl/reference/mapboxgl.html)
+object.
 
 ## See also
 
-Other sidebar:
+Other functions for the sidebar widget:
 [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md),
 [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md),
 [`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md),
@@ -62,9 +68,7 @@ Other sidebar:
 
 ``` r
 if (FALSE) { # interactive()
-library(shiny)
-
-# run example app showing a single sidebar
-runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
+# run example app showing a sidebar widget
+run_example_app("sidebar")
 }
 ```

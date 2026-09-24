@@ -165,6 +165,8 @@ export class Solver {
   reset() {
     this._nameInput.value = "";
     this._startButton.setAttribute("disabled", "");
+    // note that we set a callback to disable the button again in case
+    // the button state is automatically altered by Shiny
     setTimeout(() => {this._startButton.setAttribute("disabled", "")}, 500);
     this._stopButton.setAttribute("disabled", "");
   }

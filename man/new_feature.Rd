@@ -15,38 +15,38 @@ new_feature(
 )
 }
 \arguments{
-\item{name}{`character` value with the name.}
+\item{name}{\code{character} value with the name.}
 
-\item{layer}{[new_layer()] object used to store information for
+\item{layer}{\code{\link[=new_layer]{new_layer()}} object used to store information for
 visualization.}
 
-\item{zone_targets}{`numeric` vector with initial target values for
+\item{zone_targets}{\code{numeric} vector with initial target values for
 representing the feature within each zone associated with the project.
 These value should be specified
 as a proportion of the features total distribution (e.g., a value of 0.1
-corresponds to 10%) and the sum of these values should not exceed
+corresponds to 10\%) and the sum of these values should not exceed
 a value of 1.}
 
-\item{zone_weights}{`numeric` vector with initial weight values
+\item{zone_weights}{\code{numeric} vector with initial weight values
 for achieving the targets for each zone associated with the project.
 Each of these values should range
 between 0 and 1. Note that the sum of these values does not
-have any constraints (unlike `zone_targets`).}
+have any constraints (unlike \code{zone_targets}).}
 
-\item{zone_helds}{`numeric` vector with the proportion of each feature's
+\item{zone_helds}{\code{numeric} vector with the proportion of each feature's
 distribution held within planning units that are locked in.
 Each of these values should range
 between 0 and 1. Note that the sum of these values does not
-have any constraints (unlike `zone_targets`).}
+have any constraints (unlike \code{zone_targets}).}
 
-\item{themes}{`list` of [new_theme()] objects indicating the themes
+\item{themes}{\code{list} of \code{\link[=new_theme]{new_theme()}} objects indicating the themes
 to which the feature belongs.}
 
-\item{id}{`character` value with unique identifier.
-Defaults to a random identifier ([uuid::UUIDgenerate()]).}
+\item{id}{\code{character} value with unique identifier.
+Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
 }
 \value{
-A `Feature` object.
+A \code{Feature} object.
 }
 \description{
 Create a new feature object.
@@ -78,7 +78,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

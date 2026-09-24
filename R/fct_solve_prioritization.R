@@ -12,7 +12,7 @@ NULL
 #' See Settings format section for further details.
 #'
 #' @param gap `numeric` value denoting optimality gap.
-#' Defaults to 0.1 (10\% from optimality).
+#' Defaults to 0.1 (10% from optimality).
 #'
 #' @param solver `character` value indicating the name of the software
 #' used for optimization. Acceptable values include `"gurobi"` or `"cbc"`.
@@ -31,7 +31,7 @@ NULL
 #' @section Settings format:
 #' The argument to `settings` must be a `list` with the following elements.
 #' \describe{
-#' \item{features}{
+#' \item{`"features`"}{
 #' A `data.frame` with the theme and feature settings.
 #' These are used to specify the targets and weights considered for the
 #' features during optimization. Each row corresponds to a different
@@ -41,7 +41,7 @@ NULL
 #' value between zero and one).
 #' }
 #'
-#' \item{locks}{
+#' \item{`"locks"`}{
 #' A `data.frame` with the settings to specify which
 #' locks are used to lock in planning units to a particular zone.
 #' Each row corresponds to a different lock, and it must have the following
@@ -49,7 +49,7 @@ NULL
 #' `"id"`, `"name"`, `"column"`, and `"zone"`.
 #' }
 #'
-#' \item{costs}{
+#' \item{`"costs"`}{
 #' A `data.frame` with the cost settings. These
 #' are used to specify which costs are considered for each zone.
 #' Each row corresponds to a different cost, and it must have the following
@@ -57,7 +57,7 @@ NULL
 #' `"id"`, `"name"`, `"zone"`, and `"weight"`.
 #' }
 #'
-#' \item{zones}{
+#' \item{`"zones"`}{
 #' A `data.frame` with settings for the
 #' multi-objective optimization.
 #' Each row corresponds to a different zone, and it must have the following
@@ -70,7 +70,7 @@ NULL
 #' @return
 #' A `numeric` vector with values indicating the zone for each planning unit.
 #'
-#' @family optimization
+#' @family prioritization
 #'
 #' @examples
 #' # simulate data

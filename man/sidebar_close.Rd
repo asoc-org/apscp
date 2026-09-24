@@ -7,16 +7,16 @@
 sidebar_close(id, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{id}{`character` value with identifier for sidebar.}
+\item{id}{\code{character} value with identifier for sidebar.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
 Close a sidebar.
 }
 \seealso{
-Other sidebar:
+Other functions for the sidebar widget:
 \code{\link[=acknowledgments_sidebar_pane]{acknowledgments_sidebar_pane()}},
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
 \code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},

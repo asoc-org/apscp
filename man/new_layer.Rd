@@ -16,29 +16,29 @@ new_layer(
 )
 }
 \arguments{
-\item{column}{`character` value indicating the column in
-`dataset` and `tile` that has the data for this layer.}
+\item{column}{\code{character} value indicating the column in
+\code{dataset} and \code{tile} that has the data for this layer.}
 
-\item{total}{`numeric` value indicating the total sum of values in
+\item{total}{\code{numeric} value indicating the total sum of values in
 the layer.}
 
-\item{dataset}{[new_dataset()] object with spatial data.}
+\item{dataset}{\code{\link[=new_dataset]{new_dataset()}} object with spatial data.}
 
-\item{tile}{[new_tile()] object.}
+\item{tile}{\code{\link[=new_tile]{new_tile()}} object.}
 
-\item{legend}{[new_categorical_legend()] or [new_continuous _legend()]
+\item{legend}{\code{\link[=new_categorical_legend]{new_categorical_legend()}} or \code{\link[=new_continuous_legend]{new_continuous_legend()}}
 object.}
 
-\item{provenance}{[new_provenance()] object.}
+\item{provenance}{\code{\link[=new_provenance]{new_provenance()}} object.}
 
-\item{visible}{`logical` value indicating if the layer should
-be visible by default? Defaults to `FALSE`.}
+\item{visible}{\code{logical} value indicating if the layer should
+be visible by default? Defaults to \code{FALSE}.}
 
-\item{details}{`character` value with additional details for the layer.
-Defaults to `NULL`.}
+\item{details}{\code{character} value with additional details for the layer.
+Defaults to \code{NULL}.}
 }
 \value{
-A `Layer` object.
+A \code{Layer} object.
 }
 \description{
 Create a new layer object.
@@ -64,7 +64,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

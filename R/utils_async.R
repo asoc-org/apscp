@@ -1,4 +1,4 @@
-#' Setup asynchronous processing with mirai
+#' Start asynchronous processing
 #'
 #' Start daemons for asynchronous processing with the \pkg{mirai} package.
 #'
@@ -8,7 +8,7 @@
 #' @param verbose `logical` value indicating if messages should be displayed?
 #' Defaults to `TRUE`.
 #'
-#' @family mirai
+#' @family async
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
@@ -89,7 +89,7 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
-#' @family mirai
+#' @family async
 #'
 #' @inherit mirai_async_start examples
 #'

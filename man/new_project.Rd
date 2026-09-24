@@ -22,43 +22,43 @@ new_project(
 )
 }
 \arguments{
-\item{zones}{`character` vector of zone names.}
+\item{zones}{\code{character} vector of zone names.}
 
-\item{bbox}{[sf::st_bbox()] object.}
+\item{bbox}{\code{\link[sf:st_bbox]{sf::st_bbox()}} object.}
 
-\item{dataset}{[new_dataset()] object.}
+\item{dataset}{\code{\link[=new_dataset]{new_dataset()}} object.}
 
-\item{tiles}{`list` of [new_tile()] objects.}
+\item{tiles}{\code{list} of \code{\link[=new_tile]{new_tile()}} objects.}
 
-\item{costs}{`list` of [new_cost()] objects.}
+\item{costs}{\code{list} of \code{\link[=new_cost]{new_cost()}} objects.}
 
-\item{features}{`list` of [new_features()] objects.}
+\item{features}{\code{list} of \code{\link[=new_feature]{new_feature()}} objects.}
 
-\item{locks}{`list` of [new_locks()] objects.}
+\item{locks}{\code{list} of \code{\link[=new_lock]{new_lock()}} objects.}
 
-\item{solutions}{`list` of [new_solution()] objects.
+\item{solutions}{\code{list} of \code{\link[=new_solution]{new_solution()}} objects.
 Defaults to an empty list().}
 
-\item{name}{`character` name of the project.
-Defaults to `"Project"`.}
+\item{name}{\code{character} name of the project.
+Defaults to \code{"Project"}.}
 
-\item{author_name}{`character` name of the project author.
-Defaults to `"Unknown"`.}
+\item{author_name}{\code{character} name of the project author.
+Defaults to \code{"Unknown"}.}
 
-\item{author_email}{`character` email of the project author.
-Defaults to `"Unknown"`.}
+\item{author_email}{\code{character} email of the project author.
+Defaults to \code{"Unknown"}.}
 
-\item{version}{`character` version of package used to create the project.
-Defaults to `NULL`, such that the current package version is used.}
+\item{version}{\code{character} version of package used to create the project.
+Defaults to \code{NULL}, such that the current package version is used.}
 
-\item{bearing}{`numeric` value denoting the initial map rotation.
+\item{bearing}{\code{numeric} value denoting the initial map rotation.
 Defaults to 0.}
 
-\item{zoom}{`numeric` value denoting the initial map zoom.
+\item{zoom}{\code{numeric} value denoting the initial map zoom.
 Defaults to 0.}
 }
 \value{
-A new `Project` object.
+A new \code{Project} object.
 }
 \description{
 Create a new project object.
@@ -153,7 +153,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

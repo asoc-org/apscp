@@ -1,6 +1,8 @@
-# Create a sidebar pane
+# Sidebar pane
 
-Create a sidebar pane
+Create a sidebar pane. This pane is designed to be used as an argument
+to
+[`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md).
 
 ## Usage
 
@@ -18,31 +20,31 @@ sidebar_pane(
 
 - title:
 
-  A title for the sidebar pane
+  `character` value with a title for the sidebar pane.
 
 - id:
 
-  An id for the sidebar pane.
+  `character` value denoting an identifier for the sidebar pane.
 
 - icon:
 
-  An \[icon()\] object for the sidebar pane. This icon is used to create
-  a button for closing the pane. If \`NULL\`, then no icon is added for
-  the pane.
+  [`shiny::icon()`](https://rdrr.io/pkg/shiny/man/icon.html) object for
+  the sidebar pane. This icon is used to create a button for closing the
+  pane. If `NULL`, then no icon is added for the pane.
 
 - tooltip:
 
-  A \`character\` value with text to display in a tooltip when hovering
-  over the button to open the sidebar. Defaults to \`NULL\` such that no
+  `character` value with text to display in a tooltip when hovering over
+  the button to open the sidebar. Defaults to `NULL` such that no
   tooltip is displayed.
 
 - ...:
 
-  List of elements to include in the pane
+  List of elements to include in the pane.
 
 ## Value
 
-A \`shiny.tag\` with sidebar-specific HTML classes
+A `shiny.tag` object.
 
 ## References
 
@@ -51,7 +53,7 @@ A \`shiny.tag\` with sidebar-specific HTML classes
 
 ## See also
 
-Other sidebar:
+Other functions for the sidebar widget:
 [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md),
 [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md),
 [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md),
@@ -64,19 +66,19 @@ Other sidebar:
 ## Examples
 
 ``` r
-# \dontrun{
+# load packages
 library(shiny)
 library(htmltools)
-sidebar_pane(id = "id", icon = icon("cars"), tags$div())
-#> The `name` provided ('cars') does not correspond to a known icon
+
+# create sidebar pane
+sidebar_pane(id = "id", icon = icon("car"), tags$div())
 #> <div class="mapsidebar-pane" id="id">
 #>   <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
 #>     <div></div>
 #>     <span class="mapsidebar-close">
-#>       <i class="far fa-cars" role="presentation" aria-label="cars icon"></i>
+#>       <i class="fas fa-car" role="presentation" aria-label="car icon"></i>
 #>     </span>
 #>   </h3>
 #>   <div class="mapsidebar-pane-content"></div>
 #> </div>
-# }
 ```

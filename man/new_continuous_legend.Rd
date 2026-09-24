@@ -7,24 +7,24 @@
 new_continuous_legend(values, colors, breaks, labels, units = NULL)
 }
 \arguments{
-\item{values}{`numeric` vector of values for creating the color bar.}
+\item{values}{\code{numeric} vector of values for creating the color bar.}
 
-\item{colors}{`character` vector for creating the color bar.
-These colors should be in hex format (e.g. `"#AABBCC"`) and
+\item{colors}{\code{character} vector for creating the color bar.
+These colors should be in hex format (e.g. \code{"#AABBCC"}) and
 are used to generate the color bar.
-Note that `values` and `colors` must have the same number of values.}
+Note that \code{values} and \code{colors} must have the same number of values.}
 
-\item{breaks}{`numeric` vector of values for where labels should
+\item{breaks}{\code{numeric} vector of values for where labels should
 be shown on the color ramp.}
 
-\item{labels}{`character` vector with label text.
-Note that `labels` and `breaks` must have the same number of values.}
+\item{labels}{\code{character} vector with label text.
+Note that \code{labels} and \code{breaks} must have the same number of values.}
 
-\item{units}{`character` value containing the units for the values in the
-underlying data. Defaults to a `NULL` value.}
+\item{units}{\code{character} value containing the units for the values in the
+underlying data. Defaults to a \code{NULL} value.}
 }
 \value{
-A `ContinuousLegend` object.
+A \code{ContinuousLegend} object.
 }
 \description{
 Create a new continuous legend object.
@@ -43,7 +43,7 @@ l <- new_continuous_legend(
 print(l)
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

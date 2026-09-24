@@ -7,7 +7,7 @@
 read_builtin_project()
 }
 \value{
-A [new_project()] object.
+A \code{\link[=new_project]{new_project()}} object.
 }
 \description{
 Import builtin project data for the Antarctic Peninsula.
@@ -21,13 +21,15 @@ print(x)
 
 }
 \seealso{
-Other io:
+Other functions for reading and writing data:
 \code{\link[=deserialize_object]{deserialize_object()}},
 \code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_matrix]{read_matrix()}},
 \code{\link[=read_project]{read_project()}},
 \code{\link[=read_sf_data]{read_sf_data()}},
 \code{\link[=serialize_object]{serialize_object()}},
 \code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_matrix]{write_matrix()}},
 \code{\link[=write_project]{write_project()}},
 \code{\link[=write_sf_data]{write_sf_data()}}
 }

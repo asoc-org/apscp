@@ -1,6 +1,6 @@
-# Run the Shiny Application
+# Run the Shiny application
 
-Run the Shiny Application
+Run the Shiny application.
 
 ## Usage
 
@@ -48,5 +48,15 @@ run_app(
 
 - ...:
 
-  arguments to pass to golem_opts. See \`?golem::get_golem_options\` for
-  more details.
+  arguments to pass to golem_opts. See
+  [`?golem::get_golem_options`](https://thinkr-open.github.io/golem/reference/get_golem_options.html)
+  for more details.
+
+## Examples
+
+``` r
+if (FALSE) { # interactive()
+# launch application
+run_app()
+}
+```

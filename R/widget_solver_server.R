@@ -3,7 +3,7 @@ NULL
 
 #' Add lock to solver
 #'
-#' Add a [new_lock()] to a Solver widget.
+#' Add a [new_lock()] to a [solver()] widget.
 #'
 #' @param id `character` value with identifier for [solver()] object.
 #'
@@ -12,6 +12,8 @@ NULL
 #' @inheritParams sidebar_open
 #'
 #' @family solver
+#'
+#' @inherit solver examples
 #'
 #' @export
 solver_add_lock <- function(
@@ -49,6 +51,8 @@ solver_add_lock <- function(
 #'
 #' @family solver
 #'
+#' @inherit solver examples
+#'
 #' @export
 solver_reset <- function(id, session = shiny::getDefaultReactiveDomain()) {
   # assert valid arguments
@@ -80,6 +84,8 @@ solver_reset <- function(id, session = shiny::getDefaultReactiveDomain()) {
 #' bars based on which locks are selected for each zone.
 #'
 #' @family solver
+#'
+#' @inherit solver examples
 #'
 #' @export
 solver_sync <- function(

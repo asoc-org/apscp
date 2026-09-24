@@ -7,20 +7,26 @@
 add_layer_visibility_control(map, mapper_id, position = "top-left")
 }
 \arguments{
-\item{map}{[mapgl::mapboxgl()] object.}
+\item{map}{\code{\link[mapgl:mapboxgl]{mapgl::mapboxgl()}} object.}
 
-\item{mapper_id}{`character` value with HTML identifier for [mapper()]
+\item{mapper_id}{\code{character} value with HTML identifier for \code{\link[=mapper]{mapper()}}
 object.}
 
-\item{position}{`character` value denoting the placement of the
-control the `map` object. Available options include
-`"top-left"`, `"top-right`", `"bottom-left"`, and `"bottom-right"`.}
+\item{position}{\code{character} value denoting the placement of the
+control the \code{map} object. Available options include
+\code{"top-left"}, \verb{"top-right}", \code{"bottom-left"}, and \code{"bottom-right"}.}
 }
 \description{
 Add a control to show, hide, or highlight all layers on the map.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example app showing a mapper widget
+run_example_app("mapper")
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},
 \code{\link[=map_project]{map_project()}},

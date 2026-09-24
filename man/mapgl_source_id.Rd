@@ -7,17 +7,17 @@
 mapgl_source_id(x)
 }
 \arguments{
-\item{x}{[new_tile()], [new_feature()], [new_cost()], [new_lock()], or
-[new_solution()] object.}
+\item{x}{\code{\link[=new_tile]{new_tile()}}, \code{\link[=new_feature]{new_feature()}}, \code{\link[=new_cost]{new_cost()}}, \code{\link[=new_lock]{new_lock()}}, or
+\code{\link[=new_solution]{new_solution()}} object.}
 }
 \value{
-A `character` value.
+A \code{character} value.
 }
 \description{
 Get the source identifier.
 }
 \details{
-This corresponds to the `source` parameter of [mapgl::add_fill_layer()].
+This corresponds to the \code{source} parameter of \code{\link[mapgl:add_fill_layer]{mapgl::add_fill_layer()}}.
 }
 \examples{
 # simulate spatial data
@@ -31,7 +31,7 @@ mapgl_source_id(x)
 
 }
 \seealso{
-Other mapping:
+Other functions for mapping data:
 \code{\link[=add_layer_visibility_control]{add_layer_visibility_control()}},
 \code{\link[=get_paint_parameters]{get_paint_parameters()}},
 \code{\link[=has_mapbox_token]{has_mapbox_token()}},

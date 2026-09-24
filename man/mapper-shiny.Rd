@@ -17,7 +17,7 @@ renderMapper(expr, env = parent.frame(), quoted = FALSE)
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 string and have \code{'px'} appended.}
 
-\item{expr}{An expression that generates a [mapper()].}
+\item{expr}{An expression that generates a \code{\link[=mapper]{mapper()}}.}
 
 \item{env}{The environment in which to evaluate \code{expr}.}
 
@@ -25,11 +25,17 @@ string and have \code{'px'} appended.}
 is useful if you want to save an expression in a variable.}
 }
 \description{
-Output and render functions for using [mapper()] within Shiny
+Output and render functions for using \code{\link[=mapper]{mapper()}} within Shiny
 applications.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example app showing a mapper widget
+run_example_app("mapper")
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other mapper:
+Other functions for the mapper widget:
 \code{\link[=mapper]{mapper()}},
 \code{\link[=mapper_add_solution]{mapper_add_solution()}},
 \code{\link[=mapper_sync]{mapper_sync()}}

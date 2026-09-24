@@ -7,15 +7,15 @@
 new_theme(name, zone = NULL)
 }
 \arguments{
-\item{name}{`character` value with name.}
+\item{name}{\code{character} value with name.}
 
-\item{zone}{`character` name of zone associated with the theme.
-Note that `zone` should match one of the zone names associated with
-the [new_project()] to which this theme belongs. Defaults to `NULL`
+\item{zone}{\code{character} name of zone associated with the theme.
+Note that \code{zone} should match one of the zone names associated with
+the \code{\link[=new_project]{new_project()}} to which this theme belongs. Defaults to \code{NULL}
 such that the theme is not associated with any particular zone.}
 }
 \value{
-A `Theme` object.
+A \code{Theme} object.
 }
 \description{
 Create a new theme object.
@@ -29,7 +29,7 @@ print(x)
 
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

@@ -171,9 +171,14 @@ tile_server_dir <- function() {
   # get golem configuration
   x <- get_golem_config("tile_server_dir")
 
-  # if NULL, then manually create temporary directory
+  # if NULL, then manually specify temporary directory
   if (is.null(x)) {
     x <- tempfile()
+  }
+
+  # if directory does not exist and inherits from temporary directory,
+  # then create it
+  if (!dir.exists(x) && startsWith(x, tempdir())) {
     dir.create(x, showWarnings = FALSE, recursive = TRUE)
   }
 

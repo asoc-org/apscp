@@ -1,69 +1,24 @@
-#' Add sidebar control
-#'
-#' Add a sidebar control to a [mapgl::mapboxgl()] object.
-#'
-#' @param map [mapgl::mapboxgl()] object.
-#'
-#' @param id `character` HTML identifier for sidebar.
-#'
-#' @param height `character` value denoting the height of the widget
-#' in CSS units. For example, acceptable values include `"100%"`, `"30vh"`, or
-#' or `"400px"`. Note that if `height` is a percentage value, then it
-#' is recommended to add other map controls to a different
-#' `position` to avoid overlaps.
-#'
-#' @param selected `character` value denoting the identifier for the
-#' sidebar pane to have open by default. Defaults to `NULL`
-#' such that the side bar is closed.
-#'
-#' @inheritParams mapgl::add_control
-#'
-#' @return An updated [mapgl::mapboxgl()] object.
-#'
-#' @family sidebar
-#'
-#' @examplesIf interactive()
-#' library(shiny)
-#'
-#' # run example app showing a single sidebar
-#' runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
-#' @export
-add_sidebar_control <- function(
-  map,
-  id,
-  position = "top-right",
-  height = "100%",
-  selected = NULL
-) {
-  # add control to map
-  map |>
-    htmlwidgets::onRender(
-      paste0(
-        "function(el, x, data) ",
-        "{Shiny.mapglSidebarInitialize(",
-        "el, data.id, data.height, data.options)}"
-      ),
-      data = list(
-        id = id, height = height,
-        options = list(position = position, selected = selected)
-      )
-    )
-}
+#' @include internal.R
+NULL
 
-#' Create a sidebar pane
-#' @param title A title for the sidebar pane
+#' Sidebar pane
 #'
-#' @param id An id for the sidebar pane.
+#' Create a sidebar pane. This pane is designed to be used as an argument
+#' to [sidebar_tabs()].
 #'
-#' @param icon An [icon()] object for the sidebar pane. This icon
+#' @param title `character` value with a title for the sidebar pane.
+#'
+#' @param id `character` value denoting an identifier for the sidebar pane.
+#'
+#' @param icon [shiny::icon()] object for the sidebar pane. This icon
 #' is used to create a button for closing the pane. If `NULL`, then
 #' no icon is added for the pane.
 #'
-#' @param tooltip A `character` value with text to display in a tooltip
+#' @param tooltip `character` value with text to display in a tooltip
 #' when hovering over the button to open the sidebar.
 #' Defaults to `NULL` such that no tooltip is displayed.
 #'
-#' @param ... List of elements to include in the pane
+#' @param ... List of elements to include in the pane.
 #'
 #' @family sidebar
 #'
@@ -71,15 +26,15 @@ add_sidebar_control <- function(
 #' \url{https://github.com/Turbo87/sidebar-v2},
 #' \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
 #'
-#' @return A `shiny.tag` with sidebar-specific HTML classes
+#' @return A `shiny.tag` object.
 #'
 #' @examples
-#' \dontrun{
+#' # load packages
 #' library(shiny)
 #' library(htmltools)
-#' sidebar_pane(id = "id", icon = icon("cars"), tags$div())
-#' }
 #'
+#' # create sidebar pane
+#' sidebar_pane(id = "id", icon = icon("car"), tags$div())
 #' @export
 sidebar_pane <- function(
   title = "Sidebar Title",
@@ -115,37 +70,52 @@ sidebar_pane <- function(
   )
 }
 
-#' Create a sidebar
+#' Sidebar with tabs
+#'
+#' Create a sidebar with tabs.
 #'
 #' @param id `character` identifier for sidebar.
 #'
-#' @param icon_list A list of [icon()] objects.
+#' @param icon_list `list` of [icon()] objects.
 #' These icons are shown when the sidebar is collapsed.
 #' Not that the list is required and must match the amount of [sidebar_pane()]
-#' objects.
+#' objects. Defaults to `NULL` such that no icons are included.
 #'
 #' @param ... The individual [sidebar_pane()] objects.
 #'
-#' @return A `shiny.tag` with individual sidebar panes
+#' @return A `shiny.tag` object.
 #'
 #' @family sidebar
 #'
 #' @examples
-#' \dontrun{
 #' # load packages
 #' library(shiny)
+#' library(htmltools)
 #'
-#' # run example app showing a single sidebar
-#' runApp(system.file("examples", "sidebar_app.R", package = "apscp"))
-#' }
+#' # create sidebar panes
+#' p1 <- sidebar_pane(
+#'   id = "pane1", icon = icon("car"),
+#'   tags$div(tags$p("Text"))
+#' )
+#' p2 <- sidebar_pane(
+#'   id = "pane2", icon = icon("star"),
+#'   tags$div(actionButton(inputId = "button", label = "Click me!"))
+#' )
 #'
+#' # create sidebar with tabs
+#' sidebar_tabs(
+#'   id = "sidebar",
+#'   icon_list = list(icon("car"), icon("star")),
+#'   p1, p2
+#' )
 #' @export
 sidebar_tabs <- function(id, icon_list = NULL, ...) {
   arg <- list(...)
   ids <- lapply(arg, function(x) htmltools::tagGetAttribute(x, "id"))
-  if (length(ids) != length(icon_list)) {
-    stop("The number of icons needs to match the number of sidebar panes.")
-  }
+  assertthat::assert_that(
+    identical(length(ids), length(icon_list)),
+    msg = "The number of icons needs to match the number of sidebar panes."
+  )
   htmltools::attachDependencies(
     htmltools::tags$div(
       id = id,

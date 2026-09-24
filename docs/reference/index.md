@@ -8,12 +8,14 @@ Overview of the package.
   [`apscp-package`](https://asoc-org.github.io/apscp/reference/apscp.md)
   : apscp: Decision Support Tool for the Antarctic Peninsula
 
-## Application
+## Applications
 
-Main function for the application.
+Functions for launching applications.
 
 - [`run_app()`](https://asoc-org.github.io/apscp/reference/run_app.md) :
-  Run the Shiny Application
+  Run the Shiny application
+- [`run_example_app()`](https://asoc-org.github.io/apscp/reference/run_example_app.md)
+  : Run example application
 
 ## Classes and methods
 
@@ -21,97 +23,78 @@ Functions and definitions for new classes.
 
 - [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md) :
   R6 class representing a dataset
+
 - [`Project`](https://asoc-org.github.io/apscp/reference/Project.md) :
   Project class
+
 - [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
   : New categorical legend
+
 - [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md)
   : New continuous legend
+
 - [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md)
   : New cost
+
 - [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md)
   : New feature
+
 - [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md)
   : New Layer
+
 - [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md)
   : New lock
+
 - [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
   : New project
+
 - [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
   : New provenance
+
 - [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
   : New solution
+
 - [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md)
   : New theme
+
 - [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
   : New tile
+
 - [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md)
   : Create dataset from sf object.
+
 - [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
   : Create a new legend
+
 - [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md)
   : Create solution
+
 - [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md)
   : Create solution from prioritization
+
 - [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
   : Create solution legend
+
 - [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md)
   : Create tile from file
+
 - [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md)
   : Create tile from project.
+
 - [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md)
-  : Create tile from \`sf\` data.
+  :
+
+  Create tile from `sf` data.
+
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
   : New dataset
+
 - [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
   : Tool generated provenance
 
-## Widgets
+## Prioritization
 
-Functions for custom widgets.
-
-- [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md)
-  : Acknowledgments sidebar pane
-- [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md)
-  : Add sidebar control
-- [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md)
-  : Contact sidebar pane
-- [`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md)
-  : Close sidebar
-- [`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md)
-  : Disable sidebar
-- [`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md)
-  : Enable sidebar
-- [`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md)
-  : Open sidebar
-- [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
-  : Create a sidebar pane
-- [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)
-  : Create a sidebar
-- [`mapperOutput()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
-  [`renderMapper()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
-  : Shiny bindings for mapper
-- [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md) :
-  Mapper
-- [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
-  : Add solution to map
-- [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
-  : Synchronize mapper
-- [`solverOutput()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
-  [`renderSolver()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
-  : Shiny bindings for solver
-- [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md) :
-  Solver
-- [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md)
-  : Add lock to solver
-- [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md)
-  : Reset solver
-- [`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
-  : Synchronize solver settings
-
-## Optimization
-
-Functions for optimization.
+Functions for prioritization.
 
 - [`eval_prioritization()`](https://asoc-org.github.io/apscp/reference/eval_prioritization.md)
   : Evaluate a prioritization
@@ -120,7 +103,7 @@ Functions for optimization.
 
 ## Mapping
 
-Functions for mapping.
+Functions for creating maps.
 
 - [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md)
   : Add layer visibility control
@@ -173,6 +156,8 @@ Functions for reading and writing from disk and memory.
   : Read builtin project
 - [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md)
   : Read dataset
+- [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
+  : Read matrix
 - [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md)
   : Read project
 - [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
@@ -181,10 +166,87 @@ Functions for reading and writing from disk and memory.
   : Serialize object
 - [`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md)
   : Write dataset
+- [`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
+  : Write matrix
 - [`write_project()`](https://asoc-org.github.io/apscp/reference/write_project.md)
   : Write project
 - [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
   : Write sf data to zip file
+
+## Sidebar widget
+
+Functions for sidebar widget.
+
+- [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md)
+  : Acknowledgments sidebar pane
+- [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md)
+  : Add sidebar control
+- [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md)
+  : Contact sidebar pane
+- [`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md)
+  : Close sidebar
+- [`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md)
+  : Disable sidebar
+- [`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md)
+  : Enable sidebar
+- [`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md)
+  : Open sidebar
+- [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
+  : Sidebar pane
+- [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)
+  : Sidebar with tabs
+
+## Mapper widget
+
+Functions for widget to control map.
+
+- [`mapperOutput()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+  [`renderMapper()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+  : Shiny bindings for mapper
+- [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md) :
+  Mapper
+- [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
+  : Add solution to map
+- [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
+  : Synchronize mapper
+
+## Solver widget
+
+Functions for widget to control prioritization settings.
+
+- [`solverOutput()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
+  [`renderSolver()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
+  : Shiny bindings for solver
+- [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md) :
+  Solver
+- [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md)
+  : Add lock to solver
+- [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md)
+  : Reset solver
+- [`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
+  : Synchronize solver settings
+
+## Tile server
+
+Functions for creating a tile server.
+
+- [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)
+  : Add a tile to tile server
+- [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md)
+  : Tile server directory
+- [`tile_server_start()`](https://asoc-org.github.io/apscp/reference/tile_server_start.md)
+  : Start tile server
+- [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)
+  : Stop tile server
+
+## Asynchronous processing
+
+Functions for asynchronous processing
+
+- [`mirai_async_start()`](https://asoc-org.github.io/apscp/reference/mirai_async_start.md)
+  : Start asynchronous processing
+- [`mirai_async_stop()`](https://asoc-org.github.io/apscp/reference/mirai_async_stop.md)
+  : Stop asynchronous processing
 
 ## Simulation
 
@@ -211,31 +273,26 @@ Functions for simulating data.
 
 ## Miscellaneous functions
 
+Functions with assorted uses.
+
 - [`as.data.frame(`*`<JsDataFrame>`*`)`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md)
-  : Convert \`JsDataFrame\` object to data.frame
+  :
+
+  Convert `JsDataFrame` object to data.frame
+
 - [`as.list(`*`<JsDataFrameList>`*`)`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md)
-  : Convert \`JsDataFrameList\` object to list object.
+  :
+
+  Convert `JsDataFrameList` object to list object.
+
 - [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
   : Color palette
+
 - [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md)
   : Is package installed?
+
 - [`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md)
   : Is the freestiler Python library installed?
+
 - [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
   : Is relative path?
-- [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
-  : Read matrix
-- [`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
-  : Write matrix
-- [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)
-  : Add a tile to tile server
-- [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md)
-  : Tile server directory
-- [`tile_server_start()`](https://asoc-org.github.io/apscp/reference/tile_server_start.md)
-  : Start tile server
-- [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)
-  : Stop tile server
-- [`mirai_async_start()`](https://asoc-org.github.io/apscp/reference/mirai_async_start.md)
-  : Setup asynchronous processing with mirai
-- [`mirai_async_stop()`](https://asoc-org.github.io/apscp/reference/mirai_async_stop.md)
-  : Stop asynchronous processing

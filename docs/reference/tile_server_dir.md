@@ -10,11 +10,11 @@ tile_server_dir()
 
 ## Value
 
-A \`character\` value.
+A `character` value.
 
 ## See also
 
-Other tile_server:
+Other functions for working with a tile server:
 [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md),
 [`tile_server_start()`](https://asoc-org.github.io/apscp/reference/tile_server_start.md),
 [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)

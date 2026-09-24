@@ -36,7 +36,7 @@
 #' \item{start}{
 #' This is sent when the "Solve!" button is clicked and
 #' it sends a `list` that contains the settings for generating a prioritization.
-#' See documentation for the `settings` parameter of [prioritization()]
+#' See documentation for the `settings` parameter of [solve_prioritization()]
 #' for further details on the format of this value.
 #' }
 #'
@@ -48,10 +48,9 @@
 #' @family solver
 #'
 #' @examplesIf interactive()
-#' library(shiny)
+#' # run example application showing a solver widget
+#' run_example_app("solver")
 #'
-#' # run example app showing a solver
-#' runApp(system.file("examples", "solver_app.R", package = "apscp"))
 #' @export
 solver <- function(
   project,
@@ -113,6 +112,8 @@ solver <- function(
 #' @name solver-shiny
 #'
 #' @family solver
+#'
+#' @inherit solver examples
 #'
 #' @export
 solverOutput <- function(outputId, width = "100%", height = "400px"){

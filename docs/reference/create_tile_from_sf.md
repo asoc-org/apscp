@@ -1,6 +1,10 @@
-# Create tile from \`sf\` data.
+# Create tile from `sf` data.
 
-Create a \[new_tile()\] object from a \[sf::st_sf()\] object.
+Create a
+[`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+object from a
+[`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
+object.
 
 ## Usage
 
@@ -18,35 +22,37 @@ create_tile_from_sf(
 
 - x:
 
-  \[sf::st_sf()\] object.
+  [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
+  object.
 
 - source_layer:
 
-  \`character\` value with name for layer in PMTiles archive. Defaults
-  to \`"data-src"\`.
+  `character` value with name for layer in PMTiles archive. Defaults to
+  `"data-src"`.
 
 - path:
 
-  \`character\` value with file path for PMTiles archive. Note that
-  \`path\` must have a \`".pmtiles"\` file extension. Defaults to a
-  temporary file path.
+  `character` value with file path for PMTiles archive. Note that `path`
+  must have a `".pmtiles"` file extension. Defaults to a temporary file
+  path.
 
 - max_zoom:
 
-  \`integer\` value with maximum zoom level. Defaults to 8.
+  `integer` value with maximum zoom level. Defaults to 8.
 
 - verbose:
 
-  \`logical\` value indicating if information about tile creation should
-  be displayed? Defaults to \`FALSE\`.
+  `logical` value indicating if information about tile creation should
+  be displayed? Defaults to `FALSE`.
 
 ## Value
 
-A \[new_tile()\] object.
+A [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+object.
 
 ## See also
 
-Other method:
+Other functions for calling class methods:
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),

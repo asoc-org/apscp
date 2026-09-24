@@ -68,6 +68,8 @@ NULL
 #' * `"YlOrRd`" (see [RColorBrewer::brewer.pal()])
 #' * `"random"` (the above palettes are randomly used to generate colors)
 #'
+#' @return A `character` vector.
+#'
 #' @family misc
 #'
 #' @examples

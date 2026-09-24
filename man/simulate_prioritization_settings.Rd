@@ -7,14 +7,14 @@
 simulate_prioritization_settings(project)
 }
 \arguments{
-\item{project}{[new_project()] object.}
+\item{project}{\code{\link[=new_project]{new_project()}} object.}
 }
 \value{
-A `list` with the following elements:
-`"features"`, `"locks"`, and `"costs"`.
+A \code{list} with the following elements:
+\code{"features"}, \code{"locks"}, and \code{"costs"}.
 }
 \description{
-Simulate settings for [solve_prioritization()].
+Simulate settings for \code{\link[=solve_prioritization]{solve_prioritization()}}.
 }
 \details{
 Note that simulation functions are intended to help faciliate
@@ -32,7 +32,7 @@ print(s)
 
 }
 \seealso{
-Other simulation:
+Other functions for simulating data:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},

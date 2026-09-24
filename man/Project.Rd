@@ -7,9 +7,9 @@
 Definition for the Project class.
 }
 \seealso{
-See [new_project()] to create a `Project` object.
+See \code{\link[=new_project]{new_project()}} to create a \code{Project} object.
 
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},
 \code{\link[=new_continuous_legend]{new_continuous_legend()}},
@@ -27,33 +27,33 @@ Other class:
 \section{Public fields}{
   \if{html}{\out{<div class="r6-fields">}}
   \describe{
-    \item{\code{bbox}}{[sf::st_crs()] object.}
+    \item{\code{bbox}}{\code{\link[sf:st_crs]{sf::st_crs()}} object.}
 
-    \item{\code{bearing}}{`numeric` value denoting the initial rotation for the map.}
+    \item{\code{bearing}}{\code{numeric} value denoting the initial rotation for the map.}
 
-    \item{\code{zoom}}{`numeric` value denoting the initial zoom for the map.}
+    \item{\code{zoom}}{\code{numeric} value denoting the initial zoom for the map.}
 
-    \item{\code{dataset}}{[new_dataset()] object.}
+    \item{\code{dataset}}{\code{\link[=new_dataset]{new_dataset()}} object.}
 
-    \item{\code{tiles}}{`list` of [new_tile()] objects.}
+    \item{\code{tiles}}{\code{list} of \code{\link[=new_tile]{new_tile()}} objects.}
 
-    \item{\code{zones}}{`character` vector of zone names.}
+    \item{\code{zones}}{\code{character} vector of zone names.}
 
-    \item{\code{features}}{`list` of [new_feature()] objects.}
+    \item{\code{features}}{\code{list} of \code{\link[=new_feature]{new_feature()}} objects.}
 
-    \item{\code{locks}}{`list` of [new_lock()] objects.}
+    \item{\code{locks}}{\code{list} of \code{\link[=new_lock]{new_lock()}} objects.}
 
-    \item{\code{costs}}{`list` of [new_cost()] objects.}
+    \item{\code{costs}}{\code{list} of \code{\link[=new_cost]{new_cost()}} objects.}
 
-    \item{\code{solutions}}{`list` of [new_solution()] objects.}
+    \item{\code{solutions}}{\code{list} of \code{\link[=new_solution]{new_solution()}} objects.}
 
-    \item{\code{name}}{`character` name of the project.}
+    \item{\code{name}}{\code{character} name of the project.}
 
-    \item{\code{author_name}}{`character` name of the project author.}
+    \item{\code{author_name}}{\code{character} name of the project author.}
 
-    \item{\code{author_email}}{`character` email of the project author.}
+    \item{\code{author_email}}{\code{character} email of the project author.}
 
-    \item{\code{version}}{`character` value with package version used
+    \item{\code{version}}{\code{character} value with package version used
 to create the project.}
   }
   \if{html}{\out{</div>}}
@@ -76,7 +76,7 @@ to create the project.}
 \if{html}{\out{<a id="method-Project-initialize"></a>}}
 \if{latex}{\out{\hypertarget{method-Project-initialize}{}}}
 \subsection{\code{Project$new()}}{
-  Create a `Project` object.
+  Create a \code{Project} object.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
     \preformatted{Project$new(
@@ -100,32 +100,32 @@ to create the project.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{zones}}{`character` vector of zone names.}
-      \item{\code{bbox}}{[sf::st_bbox()] object.}
-      \item{\code{dataset}}{[new_dataset()] object.}
-      \item{\code{tiles}}{`list` of [new_tile()] objects.}
-      \item{\code{features}}{`list` of [new_feature()] objects.}
-      \item{\code{locks}}{`list` of [new_lock()] objects.}
-      \item{\code{costs}}{`list` of [new_cost()] objects.}
-      \item{\code{solutions}}{`list` of [new_solution()] objects.
+      \item{\code{zones}}{\code{character} vector of zone names.}
+      \item{\code{bbox}}{\code{\link[sf:st_bbox]{sf::st_bbox()}} object.}
+      \item{\code{dataset}}{\code{\link[=new_dataset]{new_dataset()}} object.}
+      \item{\code{tiles}}{\code{list} of \code{\link[=new_tile]{new_tile()}} objects.}
+      \item{\code{features}}{\code{list} of \code{\link[=new_feature]{new_feature()}} objects.}
+      \item{\code{locks}}{\code{list} of \code{\link[=new_lock]{new_lock()}} objects.}
+      \item{\code{costs}}{\code{list} of \code{\link[=new_cost]{new_cost()}} objects.}
+      \item{\code{solutions}}{\code{list} of \code{\link[=new_solution]{new_solution()}} objects.
 Defaults to an empty list.}
-      \item{\code{name}}{`character` name of the project.
-Defaults to `"Project"`.}
-      \item{\code{author_name}}{`character` name of the project author.
-Defaults to `"Unknown"`.}
-      \item{\code{author_email}}{`character` email of the project author.
-Defaults to `"Unknown"`.}
-      \item{\code{version}}{`character` value with package version used
+      \item{\code{name}}{\code{character} name of the project.
+Defaults to \code{"Project"}.}
+      \item{\code{author_name}}{\code{character} name of the project author.
+Defaults to \code{"Unknown"}.}
+      \item{\code{author_email}}{\code{character} email of the project author.
+Defaults to \code{"Unknown"}.}
+      \item{\code{version}}{\code{character} value with package version used
 to create the project.
-Defaults to `"Unknown"`.}
-      \item{\code{bearing}}{`numeric` value denoting the map rotation.
+Defaults to \code{"Unknown"}.}
+      \item{\code{bearing}}{\code{numeric} value denoting the map rotation.
 Defaults to 0.}
-      \item{\code{zoom}}{`numeric` value denoting the initial zoom for the map.}
+      \item{\code{zoom}}{\code{numeric} value denoting the initial zoom for the map.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A new `Project` object.
+    A new \code{Project} object.
   }
 }
 
@@ -142,14 +142,14 @@ Defaults to 0.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{native}}{`logical` value indicating if the bounding box should
-be in (`TRUE`) the native coordinate reference system or (`FALSE`)
+      \item{\code{native}}{\code{logical} value indicating if the bounding box should
+be in (\code{TRUE}) the native coordinate reference system or (\code{FALSE})
 re-projected to longitude/latitude?}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A `numeric` vector with two values.
+    A \code{numeric} vector with two values.
   }
 }
 
@@ -166,17 +166,17 @@ re-projected to longitude/latitude?}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{native}}{`logical` value indicating if the bounding box should
-be in (`TRUE`) the native coordinate reference system or (`FALSE`)
+      \item{\code{native}}{\code{logical} value indicating if the bounding box should
+be in (\code{TRUE}) the native coordinate reference system or (\code{FALSE})
 re-projected to longitude/latitude?}
-      \item{\code{expand}}{`numeric` value denoting the proportion to expand the
-bounding box. For example, `expand = 0.1` would expand the bounding
+      \item{\code{expand}}{\code{numeric} value denoting the proportion to expand the
+bounding box. For example, \code{expand = 0.1} would expand the bounding
 box by 10 percent. Defaults to 0.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A [sf::st_bbox()] object.
+    A \code{\link[sf:st_bbox]{sf::st_bbox()}} object.
   }
 }
 
@@ -193,12 +193,12 @@ box by 10 percent. Defaults to 0.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{id}}{`character` value.}
+      \item{\code{id}}{\code{character} value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A [new_solution()] object.
+    A \code{\link[=new_solution]{new_solution()}} object.
   }
 }
 
@@ -215,12 +215,12 @@ box by 10 percent. Defaults to 0.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{id}}{`character` value.}
+      \item{\code{id}}{\code{character} value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A [new_solution()] object.
+    A \code{\link[=new_solution]{new_solution()}} object.
   }
 }
 
@@ -237,12 +237,12 @@ box by 10 percent. Defaults to 0.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{x}}{[new_solution()] object.}
+      \item{\code{x}}{\code{\link[=new_solution]{new_solution()}} object.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    An invisible `TRUE` indicating success.
+    An invisible \code{TRUE} indicating success.
   }
 }
 
@@ -259,12 +259,12 @@ box by 10 percent. Defaults to 0.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{x}}{[new_lock()] object.}
+      \item{\code{x}}{\code{\link[=new_lock]{new_lock()}} object.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    An invisible `TRUE` indicating success.
+    An invisible \code{TRUE} indicating success.
   }
 }
 
@@ -281,12 +281,12 @@ box by 10 percent. Defaults to 0.}
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{x}}{[new_tile()] object.}
+      \item{\code{x}}{\code{\link[=new_tile]{new_tile()}} object.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    An invisible `TRUE` indicating success.
+    An invisible \code{TRUE} indicating success.
   }
 }
 

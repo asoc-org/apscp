@@ -13,24 +13,24 @@ new_tile(source_layer, path, max_zoom)
 
 - source_layer:
 
-  \`character\` value with name of layer source in the archive file.
+  `character` value with name of layer source in the archive file.
 
 - path:
 
-  \`character\` value with file path for the archive file. Note that
-  \`file\` must have a \`".pmtiles"\` file extension.
+  `character` value with file path for the archive file. Note that
+  `file` must have a `".pmtiles"` file extension.
 
 - max_zoom:
 
-  \`integer\` maximum zoom level for the archive.
+  `integer` maximum zoom level for the archive.
 
 ## Value
 
-A \`Tile\` object.
+A `Tile` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

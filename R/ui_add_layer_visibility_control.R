@@ -13,6 +13,8 @@
 #'
 #' @family mapping
 #'
+#' @inherit mapper examples
+#'
 #' @export
 add_layer_visibility_control <- function(
   map, mapper_id, position = "top-left"

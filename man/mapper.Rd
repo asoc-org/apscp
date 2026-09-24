@@ -14,39 +14,37 @@ mapper(
 )
 }
 \arguments{
-\item{project}{[new_project()] object.}
+\item{project}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{map_id}{`character` HTML identifier for [mapgl::mapboxglOutput()].
-Defaults to `NULL` since these identifiers are not used by Shiny.}
+\item{map_id}{\code{character} HTML identifier for \code{\link[mapgl:mapboxglOutput]{mapgl::mapboxglOutput()}}.
+Defaults to \code{NULL} since these identifiers are not used by Shiny.}
 
-\item{max_layers}{`integer` maximum number of layers to be active on
-the [mapgl::mapboxglOutput()] at a single point in time.
+\item{max_layers}{\code{integer} maximum number of layers to be active on
+the \code{\link[mapgl:mapboxglOutput]{mapgl::mapboxglOutput()}} at a single point in time.
 Defaults to 15.}
 
-\item{width}{`character` width of the displayed widget.
-Defaults to `NULL` such that the widget is automatically sized.}
+\item{width}{\code{character} width of the displayed widget.
+Defaults to \code{NULL} such that the widget is automatically sized.}
 
-\item{height}{`character` width of the displayed widget.
-Defaults to `NULL` such that the widget is automatically sized.}
+\item{height}{\code{character} width of the displayed widget.
+Defaults to \code{NULL} such that the widget is automatically sized.}
 
-\item{id}{`character` HTML identifier for the widget.
-Defaults to `NULL` since these identifiers are not used by Shiny.}
+\item{id}{\code{character} HTML identifier for the widget.
+Defaults to \code{NULL} since these identifiers are not used by Shiny.}
 }
 \description{
-Constructs a widget for managing layers on a [mapgl::mapboxgl()] map.
+Constructs a widget for managing layers on a \code{\link[mapgl:mapboxgl]{mapgl::mapboxgl()}} map.
 This widget is designed to be used in conjunction with an existing
 map within a Shiny web application.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-library(shiny)
-
-# run example app showing a mapper
-runApp(system.file("examples", "mapper_app.R", package = "apscp"))
+# run example app showing a mapper widget
+run_example_app("mapper")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other mapper:
+Other functions for the mapper widget:
 \code{\link{mapper-shiny}},
 \code{\link[=mapper_add_solution]{mapper_add_solution()}},
 \code{\link[=mapper_sync]{mapper_sync()}}

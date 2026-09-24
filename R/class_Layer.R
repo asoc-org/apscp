@@ -13,7 +13,7 @@ NULL
 #' @param total `numeric` value indicating the total sum of values in
 #' the layer.
 #'
-#' @param legend [new_categorical_legend()] or [new_continuous _legend()]
+#' @param legend [new_categorical_legend()] or [new_continuous_legend()]
 #' object.
 #'
 #' @param provenance [new_provenance()] object.

@@ -12,81 +12,170 @@ color_palette(x, n = NULL)
 
 - x:
 
-  \`character\` name of the color palette (see Details for available
+  `character` name of the color palette (see Details for available
   options).
 
 - n:
 
-  \`integer\` number of colors required. A \`NULL\` argument can also be
-  used to obtain a default number of colors. If a \`NULL\` argument is
+  `integer` number of colors required. A `NULL` argument can also be
+  used to obtain a default number of colors. If a `NULL` argument is
   supplied and the palette has a limited number of colors, then the
-  maximum number of colors is returned. Otherwise, if a \`NULL\`
-  argument is supplied and the palette does not have a limited number of
-  colors, then a 20 colors are returned. The default argument is
-  \`NULL\`.
+  maximum number of colors is returned. Otherwise, if a `NULL` argument
+  is supplied and the palette does not have a limited number of colors,
+  then a 20 colors are returned. The default argument is `NULL`.
+
+## Value
+
+A `character` vector.
 
 ## Details
 
 This function can be used to generate colors using palettes provided by
 the RColorBrewer and viridisLite packages. If colors are from multiple
-palettes, they can be supplied as a single \`character\` object
-delimited by semicolon (\`";"\`) characters.
+palettes, they can be supplied as a single `character` object delimited
+by semicolon (`";"`) characters.
 
-Specifically, available palettes include: \* \`"viridis"\` (see
-\[viridisLite::viridis()\]) \* \`"magma"\` (see
-\[viridisLite::magma()\]) \* \`"plasma"\` (see
-\[viridisLite::plasma()\]) \* \`"inferno"\` (see
-\[viridisLite::inferno()\]) \* \`"cividis"\` (see
-\[viridisLite::cividis()\]) \* \`"mako"\` (see \[viridisLite::mako()\])
-\* \`"rocket"\` (see \[viridisLite::rocket()\]) \* \`"turbo"\` (see
-\[viridisLite::turbo()\]) \* \`"BrBG\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"PiYG\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"PRGn\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"PuOr\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"RdBu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"RdGy\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"RdYlBu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"RdYlGn\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Spectral\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Accent\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Dark2\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Paired\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Pastel1\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Pastel2\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Set1\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Set2\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Set3\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Blues\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"BuGn\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"BuPu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"GnBu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Greens\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Greys\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Oranges\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"OrRd\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"PuBu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"PuBuGn\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"PuRd\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Purples\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"RdPu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"Reds\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"YlGn\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"YlGnBu\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"YlOrBr\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"YlOrRd\`" (see
-\[RColorBrewer::brewer.pal()\]) \* \`"random"\` (the above palettes are
-randomly used to generate colors)
+Specifically, available palettes include:
+
+- `"viridis"` (see
+  [`viridisLite::viridis()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"magma"` (see
+  [`viridisLite::magma()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"plasma"` (see
+  [`viridisLite::plasma()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"inferno"` (see
+  [`viridisLite::inferno()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"cividis"` (see
+  [`viridisLite::cividis()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"mako"` (see
+  [`viridisLite::mako()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"rocket"` (see
+  [`viridisLite::rocket()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"turbo"` (see
+  [`viridisLite::turbo()`](https://sjmgarnier.github.io/viridisLite/reference/viridis.html))
+
+- `"BrBG`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"PiYG`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"PRGn`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"PuOr`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"RdBu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"RdGy`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"RdYlBu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"RdYlGn`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Spectral`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Accent`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Dark2`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Paired`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Pastel1`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Pastel2`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Set1`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Set2`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Set3`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Blues`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"BuGn`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"BuPu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"GnBu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Greens`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Greys`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Oranges`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"OrRd`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"PuBu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"PuBuGn`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"PuRd`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Purples`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"RdPu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"Reds`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"YlGn`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"YlGnBu`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"YlOrBr`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"YlOrRd`" (see
+  [`RColorBrewer::brewer.pal()`](https://rdrr.io/pkg/RColorBrewer/man/ColorBrewer.html))
+
+- `"random"` (the above palettes are randomly used to generate colors)
 
 ## See also
 
-Other misc:
+Other miscellaneous functions:
 [`as.data.frame.JsDataFrame()`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md),
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
 [`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md),
-[`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md),
-[`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md),
-[`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
+[`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
 
 ## Examples
 

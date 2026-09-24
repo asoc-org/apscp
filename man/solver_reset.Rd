@@ -7,10 +7,10 @@
 solver_reset(id, session = shiny::getDefaultReactiveDomain())
 }
 \arguments{
-\item{id}{`character` value with identifier for [solver()] object.}
+\item{id}{\code{character} value with identifier for \code{\link[=solver]{solver()}} object.}
 
-\item{session}{The `session` object passed to function given to
-`shinyServer` Default is [shiny::getDefaultReactiveDomain()].}
+\item{session}{\code{session} object passed to function given to
+\code{shinyServer}. Default is \code{\link[shiny:getDefaultReactiveDomain]{shiny::getDefaultReactiveDomain()}}.}
 }
 \description{
 Reset the solver so that it is ready to generate a solution.
@@ -20,8 +20,14 @@ The solver is reset by (i) clearing the text from the input element for
 specifying a solution name, (ii) disabling the start button, and (iii)
 disabling the stop button.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example application showing a solver widget
+run_example_app("solver")
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other solver:
+Other functions for the solver widget:
 \code{\link[=solver]{solver()}},
 \code{\link{solver-shiny}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},

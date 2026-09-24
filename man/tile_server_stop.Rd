@@ -7,7 +7,7 @@
 tile_server_stop()
 }
 \value{
-An invisible `TRUE` indicating success.
+An invisible \code{TRUE} indicating success.
 }
 \description{
 Stop any tile servers that are active.
@@ -31,7 +31,7 @@ tile_server_stop()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other tile_server:
+Other functions for working with a tile server:
 \code{\link[=tile_server_add_tile]{tile_server_add_tile()}},
 \code{\link[=tile_server_dir]{tile_server_dir()}},
 \code{\link[=tile_server_start]{tile_server_start()}}

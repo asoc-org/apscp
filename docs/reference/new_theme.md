@@ -12,22 +12,23 @@ new_theme(name, zone = NULL)
 
 - name:
 
-  \`character\` value with name.
+  `character` value with name.
 
 - zone:
 
-  \`character\` name of zone associated with the theme. Note that
-  \`zone\` should match one of the zone names associated with the
-  \[new_project()\] to which this theme belongs. Defaults to \`NULL\`
-  such that the theme is not associated with any particular zone.
+  `character` name of zone associated with the theme. Note that `zone`
+  should match one of the zone names associated with the
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  to which this theme belongs. Defaults to `NULL` such that the theme is
+  not associated with any particular zone.
 
 ## Value
 
-A \`Theme\` object.
+A `Theme` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),

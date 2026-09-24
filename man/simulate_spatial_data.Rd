@@ -7,7 +7,7 @@
 simulate_spatial_data()
 }
 \value{
-A [sf::st_sf()] object.
+A \code{\link[sf:st_sf]{sf::st_sf()}} odbject.
 }
 \description{
 Simulate spatial data for conservation planning.
@@ -24,7 +24,7 @@ d <- simulate_spatial_data()
 print(d)
 }
 \seealso{
-Other simulation:
+Other functions for simulating data:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},

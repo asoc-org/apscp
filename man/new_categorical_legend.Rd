@@ -7,21 +7,21 @@
 new_categorical_legend(values, colors, labels, units = NULL)
 }
 \arguments{
-\item{values}{`numeric` vector of values that are linked to the labels.}
+\item{values}{\code{numeric} vector of values that are linked to the labels.}
 
-\item{colors}{`character` value with the name of the color palette
-(see [color_palette]) or a set of colors delimited by a semi-colon symbol
-(e.g. `"#AABBCC;#0A0A0A;#28282B"`).
-Note that `colors` must have a value for each value in `values`.}
+\item{colors}{\code{character} value with the name of the color palette
+(see \link{color_palette}) or a set of colors delimited by a semi-colon symbol
+(e.g. \code{"#AABBCC;#0A0A0A;#28282B"}).
+Note that \code{colors} must have a value for each value in \code{values}.}
 
-\item{labels}{`character` Labels to show in the legend.
-Note that `labels` must have a value for each value in `values`.}
+\item{labels}{\code{character} Labels to show in the legend.
+Note that \code{labels} must have a value for each value in \code{values}.}
 
-\item{units}{`character` value containing the units for the values in the
-underlying data. Defaults to a `NULL` value.}
+\item{units}{\code{character} value containing the units for the values in the
+underlying data. Defaults to a \code{NULL} value.}
 }
 \value{
-A `CategoricalLegend` object.
+A \code{CategoricalLegend} object.
 }
 \description{
 Create a new categorical legend object.
@@ -39,7 +39,7 @@ l <- new_categorical_legend(
 print(l)
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_continuous_legend]{new_continuous_legend()}},

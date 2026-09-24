@@ -7,7 +7,7 @@
 simulate_project()
 }
 \value{
-A [Project] object.
+A \code{\link{Project}} object.
 }
 \description{
 Simulate a new project.
@@ -25,7 +25,7 @@ print(x)
 
 }
 \seealso{
-Other simulation:
+Other functions for simulating data:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},

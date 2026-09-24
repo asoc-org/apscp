@@ -58,14 +58,14 @@ examples:
 	$(R) --slave -e "devtools::run_examples();warnings()" > examples.log 2>&1
 	rm -f Rplots.pdf
 
-example_sidebar: bundle_dev
-	$(R) --slave -e "source('inst/examples/sidebar_app.R')"
+app_sidebar: bundle_dev
+	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE); run_example_app('sidebar')"
 
-example_mapper: bundle_dev
-	$(R) --slave -e "source('inst/examples/mapper_app.R')"
+app_mapper: bundle_dev
+	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('mapper')"
 
-example_solver: bundle_dev
-	$(R) --slave -e "source('inst/examples/solver_app.R')"
+app_solver: bundle_dev
+	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('solver')"
 
 ## run checks
 check:
@@ -153,4 +153,4 @@ update-standalone:
 	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_vector.R')"
 	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-as_Matrix.R')"
 
-.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy_posit demo demo-kill image debug snapshot vigns R init init_dev bundle example_sidebar example_mapper
+.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy_posit demo demo-kill image debug snapshot vigns R init init_dev bundle app_sidebar app_mapper app_solver

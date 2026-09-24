@@ -9,7 +9,7 @@ NULL
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
-#' @family misc
+#' @family io
 #'
 #' @examples
 #' # create object
@@ -28,7 +28,7 @@ NULL
 #' y <- read_matrix(path)
 #'
 #' # print imported matrix,
-#' # we can see that its the same as the original matrix
+#' # we can see that it's the same as the original matrix
 #' print(y)
 #'
 #' @export
@@ -60,7 +60,7 @@ read_matrix <- function(path) {
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
-#' @family misc
+#' @family io
 #'
 #' @inherit read_matrix examples
 #'

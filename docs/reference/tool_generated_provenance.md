@@ -1,7 +1,8 @@
 # Tool generated provenance
 
-Create a \[new_provenance()\] object that indicates data were generated
-with the tool.
+Create a
+[`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
+object that indicates data were generated with the tool.
 
 ## Usage
 
@@ -11,11 +12,13 @@ tool_generated_provenance()
 
 ## Value
 
-A \[new_provenance()\] object
+A
+[`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
+object
 
 ## See also
 
-Other method:
+Other functions for calling class methods:
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
@@ -31,9 +34,8 @@ Other method:
 ``` r
 # create object
 x <- tool_generated_provenance()
-#> Error in tool_generated_provenance(): could not find function "tool_generated_provenance"
 
 # print object
 print(x)
-#> Error: object 'x' not found
+#> A <Provenance> object.
 ```

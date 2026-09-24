@@ -7,7 +7,7 @@
 simulate_binary_legend()
 }
 \value{
-A [new_categorical_legend()] object.
+A \code{\link[=new_categorical_legend]{new_categorical_legend()}} object.
 }
 \description{
 Simulate a legend for binary data.
@@ -22,7 +22,7 @@ simulate_binary_legend()
 
 }
 \seealso{
-Other simulation:
+Other functions for simulating data:
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},
 \code{\link[=simulate_prioritization_metrics]{simulate_prioritization_metrics()}},

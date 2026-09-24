@@ -1,6 +1,8 @@
 # New dataset
 
-Create a new \[Dataset\] object.
+Create a new
+[`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md)
+object.
 
 ## Usage
 
@@ -12,22 +14,26 @@ new_dataset(pu_path, boundary_path)
 
 - pu_path:
 
-  \`character\` file path.
+  `character` file path.
 
 - boundary_path:
 
-  \`character\` file path.
+  `character` file path.
 
 ## Value
 
-A \[Dataset\] object.
+A [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md)
+object.
 
 ## See also
 
-See \[create_dataset_from_sf()\] to automatically convert a
-\[sf::st_sf()\] object to a \[new_dataset()\] object.
+See
+[`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md)
+to automatically convert a
+[`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html) object
+to a `new_dataset()` object.
 
-Other method:
+Other functions for calling class methods:
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
 [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
@@ -61,7 +67,7 @@ print(x)
 #> <Dataset>
 #>   Public:
 #>     boundary_data: NULL
-#>     boundary_path: /tmp/RtmpK0Ujtc/file197dff3719d7b3.rds
+#>     boundary_path: /tmp/Rtmp0YbMia/file1bc3aa5da05e9d.rds
 #>     clone: function (deep = FALSE) 
 #>     get_boundary_data: function () 
 #>     get_column_data: function (column) 
@@ -76,8 +82,8 @@ print(x)
 #>     initialize: function (pu_path, boundary_path) 
 #>     n_pu: 90
 #>     pu_db_con: NULL
-#>     pu_db_table: file197dff1cef0627
-#>     pu_path: /tmp/RtmpK0Ujtc/file197dff1cef0627.gpkg
+#>     pu_db_table: file1bc3aa5c6aaca1
+#>     pu_path: /tmp/Rtmp0YbMia/file1bc3aa5c6aaca1.gpkg
 #>     set_column_data: function (column, values) 
 #>   Private:
 #>     close_db_con: function () 

@@ -17,7 +17,7 @@ renderSolver(expr, env = parent.frame(), quoted = FALSE)
 \code{'400px'}, \code{'auto'}) or a number, which will be coerced to a
 string and have \code{'px'} appended.}
 
-\item{expr}{An expression that generates a [solver()].}
+\item{expr}{An expression that generates a \code{\link[=solver]{solver()}}.}
 
 \item{env}{The environment in which to evaluate \code{expr}.}
 
@@ -25,11 +25,17 @@ string and have \code{'px'} appended.}
 is useful if you want to save an expression in a variable.}
 }
 \description{
-Output and render functions for using [solver()] within Shiny
+Output and render functions for using \code{\link[=solver]{solver()}} within Shiny
 applications.
 }
+\examples{
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# run example application showing a solver widget
+run_example_app("solver")
+\dontshow{\}) # examplesIf}
+}
 \seealso{
-Other solver:
+Other functions for the solver widget:
 \code{\link[=solver]{solver()}},
 \code{\link[=solver_add_lock]{solver_add_lock()}},
 \code{\link[=solver_reset]{solver_reset()}},

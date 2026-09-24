@@ -17,33 +17,33 @@ create_solution(
 )
 }
 \arguments{
-\item{name}{`character` value with name.}
+\item{name}{\code{character} value with name.}
 
-\item{project}{[new_project()] object that has a column with the solution.}
+\item{project}{\code{\link[=new_project]{new_project()}} object that has a column with the solution.}
 
-\item{column}{`character` value with column name in `project$dataset` that
+\item{column}{\code{character} value with column name in \code{project$dataset} that
 has the values.}
 
-\item{legend}{[new_categorical_legend()] or [new_continuous _legend()]
+\item{legend}{\code{\link[=new_categorical_legend]{new_categorical_legend()}} or \code{\link[=new_continuous_legend]{new_continuous_legend()}}
 object.}
 
-\item{provenance}{[new_provenance()] object.}
+\item{provenance}{\code{\link[=new_provenance]{new_provenance()}} object.}
 
-\item{settings}{`list` of settings used to generate the solution.}
+\item{settings}{\code{list} of settings used to generate the solution.}
 
-\item{metrics}{`list` with evaluation metrics for the solution.}
+\item{metrics}{\code{list} with evaluation metrics for the solution.}
 
-\item{tile}{[new_tile()] object tile information for the solution.
-Defaults to `NULL` such that a [new_tile()] object is automatically created.}
+\item{tile}{\code{\link[=new_tile]{new_tile()}} object tile information for the solution.
+Defaults to \code{NULL} such that a \code{\link[=new_tile]{new_tile()}} object is automatically created.}
 
-\item{id}{`character` value with unique identifier.
-Defaults to a random identifier ([uuid::UUIDgenerate()]).}
+\item{id}{\code{character} value with unique identifier.
+Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
 }
 \value{
-A `Solution` object.
+A \code{Solution} object.
 }
 \description{
-Create a [new_solution()] object.
+Create a \code{\link[=new_solution]{new_solution()}} object.
 }
 \examples{
 # create data
@@ -60,9 +60,12 @@ x <- create_solution(
   metrics = simulate_prioritization_metrics(project)
 )
 
+# print solution
+print(x)
+
 }
 \seealso{
-Other method:
+Other functions for calling class methods:
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},

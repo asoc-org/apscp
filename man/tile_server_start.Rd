@@ -7,23 +7,23 @@
 tile_server_start(x, verbose = TRUE)
 }
 \arguments{
-\item{x}{[new_project()] object.}
+\item{x}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{verbose}{`logical` value indicating if information about
-the tile server should be displayed? Defaults to `TRUE`.}
+\item{verbose}{\code{logical} value indicating if information about
+the tile server should be displayed? Defaults to \code{TRUE}.}
 }
 \value{
-An invisible `TRUE` indicating success.
+An invisible \code{TRUE} indicating success.
 }
 \description{
 Start a tile server for a project.
 }
 \details{
 The tile server directory is specified based on
-`get_golem_config("tile_server_dir")`. The port number is based on
-`get_golem_config("tile_server_url")` where the text after the
+\code{get_golem_config("tile_server_dir")}. The port number is based on
+\code{get_golem_config("tile_server_url")} where the text after the
 last colon is assumed to be the port number
-(e.g., the port number in `http://localhost:8085` is assumed to be 8085).
+(e.g., the port number in \verb{http://localhost:8085} is assumed to be 8085).
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
@@ -44,7 +44,7 @@ tile_server_stop()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other tile_server:
+Other functions for working with a tile server:
 \code{\link[=tile_server_add_tile]{tile_server_add_tile()}},
 \code{\link[=tile_server_dir]{tile_server_dir()}},
 \code{\link[=tile_server_stop]{tile_server_stop()}}

@@ -42,6 +42,9 @@ NULL
 #'   metrics = simulate_prioritization_metrics(project)
 #' )
 #'
+#' # print solution
+#' print(x)
+#'
 #' @export
 create_solution <- function(
   name, project, column, legend, provenance, settings, metrics,

@@ -10,7 +10,9 @@ simulate_provenance()
 
 ## Value
 
-A \[new_provenance()\] object.
+A
+[`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
+object.
 
 ## Details
 
@@ -19,7 +21,7 @@ testing and should not be used for any research purposes.
 
 ## See also
 
-Other simulation:
+Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md),
@@ -34,5 +36,5 @@ Other simulation:
 ``` r
 # simulate provenance
 simulate_provenance()
-#> Error in simulate_provenance(): could not find function "simulate_provenance"
+#> A <Provenance> object.
 ```

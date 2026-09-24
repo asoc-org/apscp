@@ -7,8 +7,8 @@ NULL
 #'
 #' @param x `list` object generated with [serialize_object()].
 #'
-#' @param dataset [Dataset] or `NULL` object. Note that some classes
-#' need a [Dataset] object to be deserialized.
+#' @param dataset [`Dataset`] or `NULL` object. Note that some classes
+#' need a [`Dataset`] object to be deserialized.
 #'
 #' @inherit serialize_object details examples
 #'

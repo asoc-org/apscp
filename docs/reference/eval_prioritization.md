@@ -13,23 +13,24 @@ eval_prioritization(project, prioritization)
 
 - project:
 
-  \[new_project()\] object to which \`prioritization \`should be added.
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object to which `prioritization `should be added.
 
 - prioritization:
 
-  \`numeric\` vector with a value for each planning unit to indicate
-  zone allocations.
+  `numeric` vector with a value for each planning unit to indicate zone
+  allocations.
 
 ## Value
 
-A \`list\` object. This is a \`list\` with a \`"summary"\` element that
-contains a data frame with area-based metrics, as well as
-\`"features"\`, \`"locks"\`, and \`"costs"\` elements that contain data
-frames with metrics for the features, locks, and costs (respectively).
+A `list` object. This is a `list` with a `"summary"` element that
+contains a data frame with area-based metrics, as well as `"features"`,
+`"locks"`, and `"costs"` elements that contain data frames with metrics
+for the features, locks, and costs (respectively).
 
 ## See also
 
-Other optimization:
+Other functions for prioritization:
 [`solve_prioritization()`](https://asoc-org.github.io/apscp/reference/solve_prioritization.md)
 
 ## Examples

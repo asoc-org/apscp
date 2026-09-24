@@ -1,6 +1,8 @@
 # Read dataset
 
-Import a \[Dataset\] object.
+Import a
+[`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md)
+object.
 
 ## Usage
 
@@ -12,26 +14,29 @@ read_dataset(pu_path, boundary_path)
 
 - pu_path:
 
-  \`character\` file path for planning unit data.
+  `character` file path for planning unit data.
 
 - boundary_path:
 
-  \`character\` file path for boundary data. If the dataset does not
-  have boundary data, then use \`boundary_path = NULL\`.
+  `character` file path for boundary data. If the dataset does not have
+  boundary data, then use `boundary_path = NULL`.
 
 ## Value
 
-A \[Dataset\] object.
+A [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md)
+object.
 
 ## See also
 
-Other io:
+Other functions for reading and writing data:
 [`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md),
 [`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md),
+[`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md),
 [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md),
 [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md),
 [`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md),
 [`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md),
+[`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md),
 [`write_project()`](https://asoc-org.github.io/apscp/reference/write_project.md),
 [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
 
@@ -56,7 +61,7 @@ print(x)
 #> <Dataset>
 #>   Public:
 #>     boundary_data: NULL
-#>     boundary_path: /tmp/RtmpdMMYkx/temp_libpath197d6f19f977e1/apscp/extdata ...
+#>     boundary_path: /tmp/RtmpPgHaFF/temp_libpath1bc31b465bc45a/apscp/extdata ...
 #>     clone: function (deep = FALSE) 
 #>     get_boundary_data: function () 
 #>     get_column_data: function (column) 
@@ -72,7 +77,7 @@ print(x)
 #>     n_pu: 48447
 #>     pu_db_con: NULL
 #>     pu_db_table: file116cb547f32dae
-#>     pu_path: /tmp/RtmpK0Ujtc/file197dff6a5610db/antarctic-peninsula_p ...
+#>     pu_path: /tmp/Rtmp0YbMia/file1bc3aa47915956/antarctic-peninsula_p ...
 #>     set_column_data: function (column, values) 
 #>   Private:
 #>     close_db_con: function () 

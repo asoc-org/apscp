@@ -7,14 +7,14 @@
 acknowledgments_sidebar_pane(id, icon = shiny::icon("heart"))
 }
 \arguments{
-\item{id}{An id for the sidebar pane.}
+\item{id}{\code{character} value denoting an identifier for the sidebar pane.}
 
-\item{icon}{An [icon()] object for the sidebar pane. This icon
-is used to create a button for closing the pane. If `NULL`, then
+\item{icon}{\code{\link[shiny:icon]{shiny::icon()}} object for the sidebar pane. This icon
+is used to create a button for closing the pane. If \code{NULL}, then
 no icon is added for the pane.}
 }
 \value{
-A `shiny.tag` with sidebar-specific HTML classes
+A \code{shiny.tag} object.
 }
 \description{
 Create a sidebar pane for displaying acknowledgments.
@@ -25,7 +25,7 @@ x <- acknowledgments_sidebar_pane("pane_id")
 
 }
 \seealso{
-Other sidebar:
+Other functions for the sidebar widget:
 \code{\link[=add_sidebar_control]{add_sidebar_control()}},
 \code{\link[=contact_sidebar_pane]{contact_sidebar_pane()}},
 \code{\link[=sidebar_close]{sidebar_close()}},

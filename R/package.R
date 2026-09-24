@@ -14,6 +14,15 @@
 #' *CBC* (via the *rcbc* package, <https://github.com/dirkschumacher/rcbc>)
 #' exact algorithm solvers.
 #'
+#' @seealso
+#' Useful links:
+#' * Package website (<https://asoc-org.github.io/apscp>)
+#' * Source code repository (<https://github.com/asoc-org/apscp>)
+#' * Report bugs (<https://github.com/asoc-org/apscp/issues>)
+#'
+#' @author
+#' * Jeffrey O. Hanson \email{jeffrey.hanson@uqconnect.edu.au} ([ORCID](https://orcid.org/0000-0002-4716-6134))
+#'
 #' @references
 #' Hanson JO, Schuster R, Strimas‐Mackey M, Morrell N, Edwards BPM, Arcese P,
 #' Bennett JR, Possingham HP (2024) Systematic conservation prioritization with
@@ -28,7 +37,7 @@
 #' @aliases apscp-package
 #'
 #' @examplesIf interactive()
-#  # launch application
+#' # launch application
 #' run_app()
 "_PACKAGE"
 

@@ -4,8 +4,8 @@
 #'
 #' @param id `character` value with identifier for sidebar.
 #'
-#' @param session The `session` object passed to function given to
-#' `shinyServer` Default is [shiny::getDefaultReactiveDomain()].
+#' @param session `session` object passed to function given to
+#' `shinyServer`. Default is [shiny::getDefaultReactiveDomain()].
 #'
 #' @param pane_id `character` value with identifier for sidebar pane.
 #'

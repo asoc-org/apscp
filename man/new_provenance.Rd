@@ -7,17 +7,17 @@
 new_provenance(name, icon, color, description)
 }
 \arguments{
-\item{name}{`character` name of provenance source.}
+\item{name}{\code{character} name of provenance source.}
 
-\item{icon}{`character` name of icon to depict the source.}
+\item{icon}{\code{character} name of icon to depict the source.}
 
-\item{color}{`character` value containing the color for the icon.}
+\item{color}{\code{character} value containing the color for the icon.}
 
-\item{description}{`character` value  containing a description of the
+\item{description}{\code{character} value  containing a description of the
 provenance.}
 }
 \value{
-A `Provenance` object.
+A \code{Provenance} object.
 }
 \description{
 Create a new provenance object.
@@ -33,7 +33,7 @@ x <- new_provenance(
 print(x)
 }
 \seealso{
-Other class:
+Other functions for defining classes:
 \code{\link{Dataset}},
 \code{\link{Project}},
 \code{\link[=new_categorical_legend]{new_categorical_legend()}},

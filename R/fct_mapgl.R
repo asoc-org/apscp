@@ -7,10 +7,6 @@ NULL
 #'
 #' @return A `logical` value.
 #'
-#' @examples
-#' # see if a Mapbox token is defined?
-#' has_mapbox_token()
-#'
 #' @family mapping
 #'
 #' @examples

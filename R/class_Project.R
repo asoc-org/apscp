@@ -332,9 +332,9 @@ Project <- R6::R6Class(
 #'
 #' @param costs `list` of [new_cost()] objects.
 #'
-#' @param features `list` of [new_features()] objects.
+#' @param features `list` of [new_feature()] objects.
 #'
-#' @param locks `list` of [new_locks()] objects.
+#' @param locks `list` of [new_lock()] objects.
 #'
 #' @param solutions `list` of [new_solution()] objects.
 #' Defaults to an empty list().

@@ -7,10 +7,10 @@
 read_project(path)
 }
 \arguments{
-\item{path}{`character` file path for YAML metadata file.}
+\item{path}{\code{character} file path for YAML metadata file.}
 }
 \value{
-A [Project] object.
+A \code{\link{Project}} object.
 }
 \description{
 Import project data.
@@ -27,13 +27,15 @@ print(x)
 
 }
 \seealso{
-Other io:
+Other functions for reading and writing data:
 \code{\link[=deserialize_object]{deserialize_object()}},
 \code{\link[=read_builtin_project]{read_builtin_project()}},
 \code{\link[=read_dataset]{read_dataset()}},
+\code{\link[=read_matrix]{read_matrix()}},
 \code{\link[=read_sf_data]{read_sf_data()}},
 \code{\link[=serialize_object]{serialize_object()}},
 \code{\link[=write_dataset]{write_dataset()}},
+\code{\link[=write_matrix]{write_matrix()}},
 \code{\link[=write_project]{write_project()}},
 \code{\link[=write_sf_data]{write_sf_data()}}
 }

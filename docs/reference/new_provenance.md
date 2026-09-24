@@ -12,27 +12,27 @@ new_provenance(name, icon, color, description)
 
 - name:
 
-  \`character\` name of provenance source.
+  `character` name of provenance source.
 
 - icon:
 
-  \`character\` name of icon to depict the source.
+  `character` name of icon to depict the source.
 
 - color:
 
-  \`character\` value containing the color for the icon.
+  `character` value containing the color for the icon.
 
 - description:
 
-  \`character\` value containing a description of the provenance.
+  `character` value containing a description of the provenance.
 
 ## Value
 
-A \`Provenance\` object.
+A `Provenance` object.
 
 ## See also
 
-Other class:
+Other functions for defining classes:
 [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md),
 [`Project`](https://asoc-org.github.io/apscp/reference/Project.md),
 [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md),
