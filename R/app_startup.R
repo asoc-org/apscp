@@ -37,8 +37,8 @@ app_startup <- function() {
           "\""
         ),
         "*" = paste0(
-          "NUMBER_WORKERS: \"",
-          Sys.getenv("NUMBER_WORKERS"),
+          "ASYNC_WORKERS: \"",
+          Sys.getenv("ASYNC_WORKERS"),
           "\""
         ),
         "*" = paste0(
@@ -68,7 +68,7 @@ app_startup <- function() {
 
   # setup asynchronous processing
   mirai_async_start(
-    n = get_golem_config("n_workers"),
+    n = get_golem_config("async_workers"),
     verbose = get_golem_config("verbose")
   )
 
