@@ -18,7 +18,12 @@ app_server_solution <- quote({
     function(id, name, project, settings, gap, solver, gurobi_server, verbose) {
       # if app cache has solution, then simply return it
       if (isTRUE(app_data$cache$exists(id))) {
-        return(list(id = id, name = name, result = app_data$cache$get(id)))
+        return(
+          append(
+            list(id = id, name = name, settings = settings),
+            app_data$cache$get(id)
+          )
+        )
       }
       # otherwise, generate prioritization with optimization...
       app_data$task_mirai <- mirai::mirai(
@@ -151,7 +156,10 @@ app_server_solution <- quote({
       return()
     }
     # add result to cache
-    app_data$cache$set(result$id, result$result)
+    app_data$cache$set(
+      result$id,
+      list(prioritization = result$prioritization, metrics = result$metrics)
+    )
     # create solution
     sol <- create_solution_from_prioritization(
       id = result$id,
