@@ -153,4 +153,4 @@ update-standalone:
 	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-assertions_vector.R')"
 	$(R) --slave -e "usethis::use_standalone('prioritizr/prioritizr', file = 'standalone-as_Matrix.R')"
 
-.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy_posit demo demo-kill image debug snapshot vigns R init init_dev bundle app_sidebar app_mapper app_solver
+.PHONY: clean data readme test check install man spellcheck examples site quicksite snapshot deploy_posit demo demo-kill image debug snapshot vigns R init init_dev bundle app_sidebar app_mapper app_solver reset
