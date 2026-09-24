@@ -127,8 +127,8 @@ image-dev: bundle
 
 ## delete all local containers and images
 reset:
-	docker rm $(docker ps -aq) || \
-	docker rmi -f $(docker images -aq)
+	docker rm $$(docker ps -aq) || \
+	docker rmi -f $$(docker images -aq)
 
 # renv commands
 ## activate profiles
