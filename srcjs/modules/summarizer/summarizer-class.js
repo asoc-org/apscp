@@ -9,6 +9,7 @@ import {createLocksPanel} from "./create-locks-panel.js";
 import {createCostsPanel} from "./create-costs-panel.js";
 // styling
 import "./css/style.css";
+import "./css/chart.css";
 import "../utils/css/tom-select.css";
 
 /** Class representing an object for generating a solution. */
@@ -94,6 +95,7 @@ export class Summarizer {
     this._costsPanel = element.querySelector(".costs-panel");
     this._tooltipsContainer = document.createElement("div");
     this._tooltipsContainer.id = `${element.id}-tooltips`;
+    this._tooltipsContainer.classList.add("summarizer-tooltips");
 
     // assign styling to elements based on zone colors
     for (let i = 0; i < project.zones.length; ++i) {

@@ -39,12 +39,13 @@ export class SemiDonutChart {
       // append arc values for locked
       locked_arc[zones[i]] = {
         begin: current_start,
-        end: Math.min(current_start + (locked[zones[i]] / total), 1)
+        end: current_start + (locked[zones[i]] / total)
       };
       // append arc values for held
       held_arc[zones[i]] = {
         begin: locked_arc[zones[i]].end,
-        end: Math.min(locked_arc[zones[i]].end + (held[zones[i]] / total), 1)
+        end: locked_arc[zones[i]].end +
+          ((held[zones[i]] - locked[zones[i]]) / total)
       };
       // update current start
       current_start = held_arc[zones[i]].end;
@@ -116,7 +117,8 @@ export class SemiDonutChart {
         // add statistics
         this.tooltip
           .append("div")
-          .style("white-space", "nowrap")
+          .classed("chart-tooltip-text", true)
+          .classed("emph", type === x && zone === z)
           .text(() =>
             `${z} ${x}: ` +
             Math.round((this.data[x][z] / this.data.total) * 100) +
@@ -125,7 +127,6 @@ export class SemiDonutChart {
               " (" + Math.round(this.data[x][z]).toLocaleString() +
               " " + this.data.units + ")" : "")
           )
-          .style("font-weight", type === x && zone === z ? "bold" : "normal")
           .style("color", this.getColor(x, z));
       });
     });
@@ -161,10 +162,9 @@ export class SemiDonutChart {
         }
         // set tooltip position
         this.tooltip
-          .style("display", "inline")
-          .style("text-align", "left")
+          .classed("active", true)
           .style("top", `${event.clientY + 5}px`)
-          .style("left", `${event.clientX + 5}px`)
+          .style("left", `${event.clientX + 5}px`);
         // set tooltip content
         this.renderTooltipContent(d.type, d.zone);
       })
@@ -173,10 +173,7 @@ export class SemiDonutChart {
           .select(event.target)
           .attr("stroke", null);
         this.tooltip
-          .style("display", "none")
-          .style("top", "0px")
-          .style("left", "0px");
-        this.tooltip
+          .classed("active", false)
           .selectAll("div")
           .remove();
       })
@@ -231,18 +228,7 @@ export class SemiDonutChart {
     this.tooltip = d3
       .select(`#${this.tooltipsId}`)
       .append("div")
-      .style("display", "none")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
-      .style("position", "fixed")
-      .style("width", "fit-content")
-      .style("z-index", 900)
-      .style("top", 0)
-      .style("left", 0)
-      .style("transform", "translateX(-100%)");
+      .classed("chart-tooltip", true);
   }
 
   /**
@@ -276,9 +262,7 @@ export class SemiDonutChart {
   renderTitle(element) {
     d3
       .select(element)
-      .style("max-width", "110px")
-      .style("word-break", "break-word")
-      .style("text-align", "center")
+      .classed("chart-title", true)
       .append("span")
       .append("label")
       .style("color", "black")
@@ -294,6 +278,8 @@ export class SemiDonutChart {
   render(element) {
     // if no data supplied, then exit
     if (this.data.total === 0) return;
+    // add semi-donut-chart class
+    element.classList.add("semi-donut-chart");
     // initialize and render tooltip
     this.renderTooltip(element);
     // render title for plot

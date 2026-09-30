@@ -50,18 +50,3 @@
   padding-bottom: var(--space-sm);
   justify-content: space-evenly;
 }
-
-/* Chart
-   ========================================================================== */
-
-/* .summarizer .chart {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-} */
-
-/* Override Bootstrap styles ========================================================================== */
-
-/* .summarizer .chart-pane {
-  margin: var(--space-sm) var(--space-sm) 0 var(--space-sm);
-} */

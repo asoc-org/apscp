@@ -1,0 +1,49 @@
+/* ==========================================================================
+   Semi-donut chart
+   ========================================================================== */
+
+/* Main container
+   ========================================================================== */
+
+/* Title
+   ========================================================================== */
+
+.summarizer .semi-donut-chart .chart-title {
+  max-width: 110px;
+  word-break: break-word;
+  text-align: center;
+}
+
+/* Tooltip
+   ========================================================================== */
+
+/* Tooltip container */
+.summarizer-tooltips .chart-tooltip {
+  display: none;
+  text-align: left;
+  background-color: white;
+  border: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 5px;
+  position: fixed;
+  width: fit-content;
+  z-index: 900;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%);
+}
+
+.summarizer-tooltips .chart-tooltip.active {
+  display: inline;
+}
+
+/* Tooltip text */
+.summarizer-tooltips .chart-tooltip-text {
+  white-space: nowrap;
+  font-weight: normal;
+}
+
+.summarizer-tooltips .chart-tooltip-text.emph {
+  font-weight: bold;
+}
