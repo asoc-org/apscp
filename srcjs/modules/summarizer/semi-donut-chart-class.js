@@ -261,8 +261,8 @@ export class SemiDonutChart {
   renderTitle(element) {
     d3
       .select(element)
+      .append("div")
       .classed("chart-title", true)
-      .append("span")
       .append("label")
       .style("color", "black")
       .node()

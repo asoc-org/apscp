@@ -9,7 +9,7 @@
    ========================================================================== */
 
 .summarizer .semi-donut-chart .chart-title {
-  max-width: 110px;
+  max-width: 120px;
   word-break: break-word;
   text-align: center;
 }
