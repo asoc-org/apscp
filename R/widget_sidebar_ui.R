@@ -64,7 +64,6 @@ sidebar_pane <- function(
     h,
     htmltools::tags$div(
       class = "mapsidebar-pane-content",
-
       ...
     )
   )

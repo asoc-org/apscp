@@ -13,7 +13,6 @@ import {projectMetadata} from "../utils/projectMetadata.js";
 import {getMetadata} from "../utils/projectMetadata.js";
 // utility functions
 import {waitFor} from "../utils/misc.js";
-
 // styling
 import "./css/style.css";
 

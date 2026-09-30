@@ -25,7 +25,8 @@ mapper_html <- function(id, style, class, ...) {
       htmltools::tags$input(
         class = "mapper-select",
         placeholder = "Add layer to map..",
-        multiple = NA
+        multiple = NA,
+        id = paste0(id, "-select")
       ),
       htmltools::div(class = c("mapper-menu", "well", "well-sm"))
     )

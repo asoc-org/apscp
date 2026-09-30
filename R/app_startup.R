@@ -83,8 +83,6 @@ app_startup <- function() {
       golem::get_golem_options("project"),
       verbose = get_golem_config("logging")
     )
-    ## kill tile server on session end
-    assign(".Last", function() {tile_server_stop()}, .GlobalEnv)
   } else if (identical(get_golem_config("tile_server_mode"), "external")) {
     ## otherwise, make tile files available for external tile server
     ## if logging, then display details

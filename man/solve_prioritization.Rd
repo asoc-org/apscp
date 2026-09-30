@@ -87,14 +87,14 @@ columns:
 
 \examples{
 # simulate data
-project <- simulate_project()
-settings <- simulate_prioritization_settings(project)
+sim_project <- simulate_project()
+sim_settings <- simulate_prioritization_settings(sim_project)
 
 # preview settings
-print(settings)
+print(sim_settings)
 
-# generate solution
-sol <- solve_prioritization(project, settings)
+# solve prioritization
+sol <- solve_prioritization(sim_project, sim_settings)
 
 # preview solution
 print(sol)

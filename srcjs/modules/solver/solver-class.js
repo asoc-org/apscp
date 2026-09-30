@@ -10,12 +10,6 @@ import "./css/style.css";
 export class Solver {
 
   /**
-   * Project data.
-   * @type {object}
-   */
-  _project;
-
-  /**
   * HTML element with the start button.
   * @type {HTMLElement}
   */
@@ -84,9 +78,6 @@ export class Solver {
     featureTargetChoices, featureWeightChoices, costWeightChoices,
     zoneColors
   ) {
-    // initialize fields
-    this._project = project;
-
     // assign styling to element based on zone colors
     for (let i = 0; i < project.zones.length; ++i) {
       element.style.setProperty(

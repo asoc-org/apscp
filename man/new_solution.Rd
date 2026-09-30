@@ -14,7 +14,8 @@ visualization.}
 
 \item{settings}{\code{list} of settings used to generate the solution.}
 
-\item{metrics}{\code{list} with evaluation metrics for the solution.}
+\item{metrics}{\code{list} with evaluation metrics for the solution.
+Defaults to \code{NULL} such that metrics are calculated automatically.}
 
 \item{id}{\code{character} value with unique identifier.
 Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
@@ -26,8 +27,11 @@ A \code{Solution} object.
 Create a new solution object.
 }
 \examples{
-# simulate spatial data
+# simulate project
 sim_project <- simulate_project()
+
+# simulate settings
+sim_settings = simulate_prioritization_settings(sim_project)
 
 # create object
 x <- new_solution(
@@ -42,7 +46,10 @@ x <- new_solution(
     details = "extra info"
   ),
   settings = simulate_prioritization_settings(sim_project),
-  metrics = simulate_prioritization_metrics(sim_project)
+  metrics = eval_prioritization(
+    sim_project, sim_settings,
+    sim_project$dataset$get_column_data("solution")
+  )
 )
 
 # preview object

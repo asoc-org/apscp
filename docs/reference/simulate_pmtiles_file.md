@@ -22,7 +22,6 @@ testing and should not be used for any research purposes.
 Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
-[`simulate_prioritization_metrics()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_metrics.md),
 [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md),
 [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md),
 [`simulate_provenance()`](https://asoc-org.github.io/apscp/reference/simulate_provenance.md),
@@ -34,5 +33,5 @@ Other functions for simulating data:
 ``` r
 # simulate PMTiles file
 simulate_pmtiles_file()
-#> [1] "/tmp/Rtmp0YbMia/file1bc3aa3f32d0fa.pmtiles"
+#> [1] "/tmp/Rtmpg5UpHV/file23385d133fd299.pmtiles"
 ```

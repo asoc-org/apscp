@@ -4,7 +4,7 @@ test_that("new_solution", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- simulate_prioritization_metrics(p)
+  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
   l <- new_layer(
     dataset = create_dataset_from_sf(p$dataset$get_sf()),
     tile = create_tile_from_sf(p$dataset$get_sf(), verbose = FALSE),
@@ -34,7 +34,7 @@ test_that("serialize_object", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- simulate_prioritization_metrics(p)
+  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
   l <- new_layer(
     dataset = create_dataset_from_sf(p$dataset$get_sf()),
     tile = create_tile_from_sf(p$dataset$get_sf(), verbose = FALSE),
@@ -65,7 +65,7 @@ test_that("deserialize_object", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- simulate_prioritization_metrics(p)
+  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
   l <- new_layer(
     dataset = p$dataset,
     tile = create_tile_from_sf(p$dataset$get_sf(), verbose = FALSE),
@@ -92,7 +92,7 @@ test_that("create_solution", {
   # prepare data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- simulate_prioritization_metrics(p)
+  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
   p$dataset$set_column_data("solv", v)
   # create object
@@ -146,14 +146,29 @@ test_that("create_solution_from_prioritization (metrics = NULL)", {
   expect_type(x$metrics, "list")
   expect_s3_class(x$metrics$summary, "data.frame")
   expect_type(x$metrics$features, "list")
-  expect_s3_class(x$metrics$features$relative, "data.frame")
-  expect_s3_class(x$metrics$features$absolute, "data.frame")
+  expect_type(x$metrics$features$name, "list")
+  expect_type(x$metrics$features$total, "list")
+  expect_type(x$metrics$features$units, "list")
+  expect_s3_class(x$metrics$features$held, "data.frame")
+  expect_s3_class(x$metrics$features$locked, "data.frame")
+  expect_true(assertthat::noNA(as.matrix(x$metrics$features$held)))
+  expect_true(assertthat::noNA(as.matrix(x$metrics$features$locked)))
   expect_type(x$metrics$locks, "list")
-  expect_s3_class(x$metrics$locks$relative, "data.frame")
-  expect_s3_class(x$metrics$locks$absolute, "data.frame")
+  expect_type(x$metrics$locks$name, "list")
+  expect_type(x$metrics$locks$units, "list")
+  expect_type(x$metrics$locks$total, "list")
+  expect_s3_class(x$metrics$locks$held, "data.frame")
+  expect_s3_class(x$metrics$locks$locked, "data.frame")
+  expect_true(assertthat::noNA(as.matrix(x$metrics$locks$held)))
+  expect_true(assertthat::noNA(as.matrix(x$metrics$locks$locked)))
   expect_type(x$metrics$costs, "list")
-  expect_s3_class(x$metrics$costs$relative, "data.frame")
-  expect_s3_class(x$metrics$costs$absolute, "data.frame")
+  expect_type(x$metrics$costs$name, "list")
+  expect_type(x$metrics$costs$total, "list")
+  expect_type(x$metrics$costs$units, "list")
+  expect_s3_class(x$metrics$costs$held, "data.frame")
+  expect_s3_class(x$metrics$costs$locked, "data.frame")
+  expect_true(assertthat::noNA(as.matrix(x$metrics$costs$held)))
+  expect_true(assertthat::noNA(as.matrix(x$metrics$costs$locked)))
 })
 
 test_that("create_solution_from_prioritization (metrics = list)", {
@@ -186,7 +201,7 @@ test_that("create_solution_from_prioritization (metrics = list)", {
     project = p,
     column = "solv2",
     settings = s,
-    metrics = eval_prioritization(p, d),
+    metrics = eval_prioritization(p, s, d),
     id = "id"
   )
   # override data

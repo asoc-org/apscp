@@ -66,9 +66,15 @@ reference:
 
   - title: Solver widget
     desc: >
-      Functions for widget to control prioritization settings.
+      Functions for widget to control solution settings.
     contents:
       - has_concept("solver")
+
+  - title: Summarizer widget
+    desc: >
+      Functions for widget to summarize solutions.
+    contents:
+      - has_concept("summarizer")
 
   - title: Tile server
     desc: >

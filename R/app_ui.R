@@ -24,7 +24,7 @@ app_ui <- function(request) {
           ),
           sidebar_pane(
             title = "Table of contents",
-            id = "navigation_panel",
+            id = "navigator_pane",
             icon = NULL,
             tooltip = "Open sidebar with map layers.",
             mapperOutput("mapper", height = "100%", width = "100%")
@@ -35,13 +35,20 @@ app_ui <- function(request) {
         ## right side bar
         sidebar_tabs(
           id = "right_sidebar",
-          list(shiny::icon("rocket")),
+          list(shiny::icon("rocket"), shiny::icon("chart-pie")),
           sidebar_pane(
             title = "Generate solution",
-            id = "settings_panel",
+            id = "settings_pane",
             icon = NULL,
-            tooltip = "Open sidebar to solution settings.",
+            tooltip = "Open sidebar for solution settings.",
             solverOutput("solver", height = "100%", width = "100%")
+          ),
+          sidebar_pane(
+            title = "Evaluate solution",
+            id = "results_pane",
+            icon = NULL,
+            tooltip = "Open sidebar for solution results.",
+            summarizerOutput("summarizer", height = "100%", width = "100%")
           )
         )
       ),

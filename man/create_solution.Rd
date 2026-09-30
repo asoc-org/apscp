@@ -11,8 +11,8 @@ create_solution(
   legend,
   provenance,
   settings,
-  metrics,
   tile = NULL,
+  metrics = NULL,
   id = uuid::UUIDgenerate()
 )
 }
@@ -31,10 +31,11 @@ object.}
 
 \item{settings}{\code{list} of settings used to generate the solution.}
 
-\item{metrics}{\code{list} with evaluation metrics for the solution.}
-
 \item{tile}{\code{\link[=new_tile]{new_tile()}} object tile information for the solution.
 Defaults to \code{NULL} such that a \code{\link[=new_tile]{new_tile()}} object is automatically created.}
+
+\item{metrics}{\code{list} with evaluation metrics for the solution.
+Defaults to \code{NULL} such that metrics are calculated automatically.}
 
 \item{id}{\code{character} value with unique identifier.
 Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
@@ -46,18 +47,17 @@ A \code{Solution} object.
 Create a \code{\link[=new_solution]{new_solution()}} object.
 }
 \examples{
-# create data
-project <- simulate_project()
+# simulate project
+sim_project <- simulate_project()
 
 # create solution
 x <- create_solution(
   name = "user solution",
-  project = project,
+  project = sim_project,
   column = "solution",
   legend = simulate_solution_legend(),
   provenance = simulate_provenance(),
-  settings = simulate_prioritization_settings(project),
-  metrics = simulate_prioritization_metrics(project)
+  settings = simulate_prioritization_settings(sim_project)
 )
 
 # print solution

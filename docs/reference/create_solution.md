@@ -14,8 +14,8 @@ create_solution(
   legend,
   provenance,
   settings,
-  metrics,
   tile = NULL,
+  metrics = NULL,
   id = uuid::UUIDgenerate()
 )
 ```
@@ -52,10 +52,6 @@ create_solution(
 
   `list` of settings used to generate the solution.
 
-- metrics:
-
-  `list` with evaluation metrics for the solution.
-
 - tile:
 
   [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
@@ -63,6 +59,11 @@ create_solution(
   a
   [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
   object is automatically created.
+
+- metrics:
+
+  `list` with evaluation metrics for the solution. Defaults to `NULL`
+  such that metrics are calculated automatically.
 
 - id:
 
@@ -90,18 +91,17 @@ Other functions for calling class methods:
 ## Examples
 
 ``` r
-# create data
-project <- simulate_project()
+# simulate project
+sim_project <- simulate_project()
 
 # create solution
 x <- create_solution(
   name = "user solution",
-  project = project,
+  project = sim_project,
   column = "solution",
   legend = simulate_solution_legend(),
   provenance = simulate_provenance(),
-  settings = simulate_prioritization_settings(project),
-  metrics = simulate_prioritization_metrics(project)
+  settings = simulate_prioritization_settings(sim_project)
 )
 
 # print solution

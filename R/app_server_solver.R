@@ -13,10 +13,12 @@
 #' @noRd
 app_server_solver <- quote({
 
-  # initialize solver
+  # initialize widget
   output$solver <- renderSolver({
     solver(project = app_data$project)
   })
+
+  # define widget synchronization
   observeEvent(input$solver_sync, {
     req(input$solver_sync)
     solver_sync(
@@ -25,5 +27,11 @@ app_server_solver <- quote({
       data = input$solver_sync
     )
   })
+
+  # force widget to render when not visible
+  shiny::outputOptions(
+    output, "solver",
+    suspendWhenHidden = FALSE, priority = 1
+  )
 
 })

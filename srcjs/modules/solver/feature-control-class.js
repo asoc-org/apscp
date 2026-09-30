@@ -1,6 +1,5 @@
 /** Import dependencies */
 // Tom Select module
-import "./css/tom-select.css";
 import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // classes to create components
@@ -13,6 +12,7 @@ import {toArray} from "../utils/misc.js";
 import "./css/solver-control.css";
 import "./css/solver-settings.css";
 import "./css/feature-control.css";
+import "../utils/css/tom-select.css";
 
 /** Class representing the control for multiple features. */
 export class FeatureControl {

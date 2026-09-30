@@ -22,6 +22,7 @@ Other miscellaneous functions:
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_installed]{is_installed()}},
+\code{\link[=is_prioritization_settings]{is_prioritization_settings()}},
 \code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}},
 \code{\link[=is_relative_path]{is_relative_path()}}
 }

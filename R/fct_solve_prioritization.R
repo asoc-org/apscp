@@ -74,14 +74,14 @@ NULL
 #'
 #' @examples
 #' # simulate data
-#' project <- simulate_project()
-#' settings <- simulate_prioritization_settings(project)
+#' sim_project <- simulate_project()
+#' sim_settings <- simulate_prioritization_settings(sim_project)
 #'
 #' # preview settings
-#' print(settings)
+#' print(sim_settings)
 #'
-#' # generate solution
-#' sol <- solve_prioritization(project, settings)
+#' # solve prioritization
+#' sol <- solve_prioritization(sim_project, sim_settings)
 #'
 #' # preview solution
 #' print(sol)
@@ -103,29 +103,7 @@ solve_prioritization <- function(
     ## project
     inherits(project, "Project"),
     ## settings
-    is.list(settings),
-    ## features settings
-    is.data.frame(settings$features),
-    assertthat::has_name(
-      settings$features,
-      c("id", "name", "column", "zone", "target", "weight")
-    ),
-    assertthat::assert_that(
-      all(project$zones %in% settings$features$zone),
-      msg = "Each zone must have at least one feature."
-    ),
-    ## locks settings
-    is.data.frame(settings$locks),
-    assertthat::has_name(
-      settings$locks,
-      c("id", "name", "column", "zone", "priority")
-    ),
-    ## costs settings
-    is.data.frame(settings$costs),
-    assertthat::has_name(
-      settings$costs,
-      c("id", "name", "zone", "weight")
-    ),
+    is_prioritization_settings(settings),
     ## gap
     assertthat::is.number(gap),
     ## verbose
@@ -236,22 +214,18 @@ solve_prioritization <- function(
 
   # if needed, add locked constraints
   if (nrow(settings$locks) > 0L) {
-    ## create data frame with all locked planning units
-    lock_data <- convert_lock_settings_to_allocation(settings$locks)
-    lock_data <- vapply(
-      seq_along(project$zones),
-      FUN.VALUE = numeric(project$dataset$get_n_pu()),
-      USE.NAMES = FALSE,
-      function(i) project$dataset$get_pu_status(project$zones[[i]], lock_data)
-    )
-    lock_data <- which(lock_data > 0.5, arr.ind = TRUE)
+    ## create matrix with prioritization based on locks
+    locked <- convert_lock_settings_to_prioritization(project, settings)
+    idx <- which(locked > 0)
     lock_data <- data.frame(
-      pu = lock_data[, 1],
-      zone = project$zones[lock_data[, 2]],
+      pu = idx,
+      zone = project$zones[locked[idx]],
       status = 1
     )
     ## add constraints to the first problem
     prob[[1]] <- prioritizr::add_manual_locked_constraints(prob[[1]], lock_data)
+  } else {
+    locked <- rep(0, project$dataset$get_n_pu())
   }
 
   # convert list of problems to multi_problem object
@@ -301,7 +275,41 @@ solve_prioritization <- function(
   # return solution
   out <- structure(sol, class = "Prioritization")
   attr(out, "obj_value") <- obj_value
+  attr(out, "locked") <- locked
   out
+}
+
+#' Convert lock settings to prioritization
+#'
+#' Create a prioritization based on which layers are locked to different zones.
+#'
+#' @inheritParams solve_prioritization
+#'
+#' @return A `numeric` vector with values indicating which zone to which
+#' each planning unit is allocated.
+#'
+#' @family solver
+#'
+#' @noRd
+convert_lock_settings_to_prioritization <- function(project, settings) {
+  # assert valid arguments
+  assertthat::assert_that(
+    ## project
+    inherits(project, "Project"),
+    ## settings
+    is_prioritization_settings(settings)
+  )
+  # prepare zone allocation data
+  lock_data <- convert_lock_settings_to_allocation(settings)
+  # generate matrix with planning unit statuses
+  status <- vapply(
+    seq_along(project$zones),
+    FUN.VALUE = numeric(project$dataset$get_n_pu()),
+    USE.NAMES = FALSE,
+    function(i) project$dataset$get_pu_status(project$zones[[i]], lock_data)
+  )
+  # return result
+  prioritizr::category_vector(status)
 }
 
 #' Convert lock settings to zone allocation
@@ -310,22 +318,18 @@ solve_prioritization <- function(
 #' to allocate planning units to zone. This function is designed
 #' to prepare data for `Dataset$get_pu_status()`.
 #'
-#' @param data `data.frame` with lock settings.
+#' @inheritParams solve_prioritization
 #'
 #' @return A named `character` vector.
 #'
 #' @family solver
 #'
 #' @noRd
-convert_lock_settings_to_allocation <- function(data) {
+convert_lock_settings_to_allocation <- function(settings) {
   # assert valid arguments
-  assertthat::assert_that(
-    is.data.frame(data),
-    assertthat::has_name(data, "id"),
-    assertthat::has_name(data, "column"),
-    assertthat::has_name(data, "zone"),
-    assertthat::has_name(data, "priority")
-  )
+  assertthat::assert_that(is_prioritization_settings(settings))
+  # extract lock settings
+  data <- settings$locks
   # if has zero rows, then return empty vector
   if (identical(nrow(data), 0L)) return(character(0))
   # remove any rows with a missing zone value

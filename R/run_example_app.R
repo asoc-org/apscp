@@ -19,6 +19,9 @@ NULL
 #' # run example application for solver widget
 #' run_example("solver_app")
 #'
+#' # run example application for summarizer widget
+#' run_example("summarizer_app")
+#'
 #' @export
 run_example_app <- function(name) {
   # assert valid arguments

@@ -37,7 +37,10 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
     "convert_lock_settings_to_allocation",
     "solve_prioritization",
     "eval_prioritization",
-    "calc_repr_metrics"
+    "calc_repr_metrics",
+    "is_prioritization_settings",
+    "convert_lock_settings_to_prioritization",
+    "convert_lock_settings_to_allocation"
   )
   # create list with desired functions,
   ## note that we manually override the environment for each function
@@ -79,6 +82,8 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
       worker_funs
     )
   )
+  # set asynchronous processing status
+  .pkg_env$async_status <- TRUE
   # return success
   invisible(TRUE)
 }
@@ -95,5 +100,6 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
 #'
 #' @export
 mirai_async_stop <- function() {
+  .pkg_env$async_status <- FALSE
   mirai::daemons(0)
 }

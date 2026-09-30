@@ -14,8 +14,11 @@ NULL
 #' @family class
 #'
 #' @examples
-#' # simulate spatial data
+#' # simulate project
 #' sim_project <- simulate_project()
+#'
+#' # simulate settings
+#' sim_settings = simulate_prioritization_settings(sim_project)
 #'
 #' # create object
 #' x <- new_solution(
@@ -30,7 +33,10 @@ NULL
 #'     details = "extra info"
 #'   ),
 #'   settings = simulate_prioritization_settings(sim_project),
-#'   metrics = simulate_prioritization_metrics(sim_project)
+#'   metrics = eval_prioritization(
+#'     sim_project, sim_settings,
+#'     sim_project$dataset$get_column_data("solution")
+#'   )
 #' )
 #'
 #' # preview object
@@ -55,6 +61,17 @@ new_solution <- function(
     assertthat::is.string(id),
     assertthat::noNA(id)
   )
+  # if needed, format metrics
+  if (is.list(metrics)) {
+    metrics <- lapply(metrics, function(x) {
+      if (assertthat::has_name(x, "name")) {
+        x$name <- as.list(x$name)
+        x$total <- as.list(x$total)
+        x$units <- as.list(x$units)
+      }
+      x
+    })
+  }
   # return object
   structure(
     list(

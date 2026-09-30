@@ -6,7 +6,7 @@ locks, and costs. Additionally, area-based metrics are calculated.
 ## Usage
 
 ``` r
-eval_prioritization(project, prioritization)
+eval_prioritization(project, settings, prioritization)
 ```
 
 ## Arguments
@@ -15,6 +15,10 @@ eval_prioritization(project, prioritization)
 
   [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
   object to which `prioritization `should be added.
+
+- settings:
+
+  `list` of settings used to generate the solution.
 
 - prioritization:
 
@@ -36,74 +40,167 @@ Other functions for prioritization:
 ## Examples
 
 ``` r
-# simulate data
-project <- simulate_project()
+# simulate project
+sim_project <- simulate_project()
 
 # generate a simulated prioritization
-prioritization <- sample.int(
-  length(project$zones), project$dataset$get_n_pu(), replace = TRUE
+sim_prioritization <- sample.int(
+  length(sim_project$zones), sim_project$dataset$get_n_pu(), replace = TRUE
 )
 
+# simulate settings to evaluate prioritization
+sim_settings <- simulate_prioritization_settings(sim_project)
+
 # evaluate prioritization
-eval_prioritization(project, prioritization)
+eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> $summary
 #> # A tibble: 3 × 3
 #>   zone         abs_coverage rel_coverage
 #>   <chr>               <int>        <dbl>
-#> 1 Biodiversity           32        0.356
-#> 2 Tourism                30        0.333
-#> 3 Scientific             28        0.311
+#> 1 Biodiversity           29        0.322
+#> 2 Tourism                37        0.411
+#> 3 Scientific             24        0.267
 #> 
 #> $features
-#> $features$relative
-#> # A tibble: 5 × 4
-#>   name      Biodiversity Tourism Scientific
-#>   <chr>            <dbl>   <dbl>      <dbl>
-#> 1 Species 1        0.351   0.873      0.367
-#> 2 Species 2        0.268   0.184      0.115
-#> 3 Species 3        0.818   0.323      0.549
-#> 4 Species 4        0.270   0.177      0.401
-#> 5 Species 5        0.274   0.443      0.315
+#> $features$name
+#> $features$name[[1]]
+#> [1] "Species 1"
 #> 
-#> $features$absolute
-#> # A tibble: 5 × 4
-#>   name      Biodiversity Tourism Scientific
-#>   <chr>            <dbl>   <dbl>      <dbl>
-#> 1 Species 1         26.2   24.5       23.8 
-#> 2 Species 2         10.2    9.32       8.55
-#> 3 Species 3         23.0   20.9       21.0 
-#> 4 Species 4         13.7   13.2       11.3 
-#> 5 Species 5         17.8   16.9       16.0 
+#> $features$name[[2]]
+#> [1] "Species 2"
+#> 
+#> $features$name[[3]]
+#> [1] "Species 3"
+#> 
+#> $features$name[[4]]
+#> [1] "Species 4"
+#> 
+#> $features$name[[5]]
+#> [1] "Species 5"
+#> 
+#> 
+#> $features$total
+#> $features$total[[1]]
+#> [1] 74.53071
+#> 
+#> $features$total[[2]]
+#> [1] 28.08803
+#> 
+#> $features$total[[3]]
+#> [1] 64.8778
+#> 
+#> $features$total[[4]]
+#> [1] 38.17078
+#> 
+#> $features$total[[5]]
+#> [1] 50.66808
+#> 
+#> 
+#> $features$units
+#> $features$units[[1]]
+#> [1] "suitability"
+#> 
+#> $features$units[[2]]
+#> [1] "suitability"
+#> 
+#> $features$units[[3]]
+#> [1] "suitability"
+#> 
+#> $features$units[[4]]
+#> [1] "suitability"
+#> 
+#> $features$units[[5]]
+#> [1] "suitability"
+#> 
+#> 
+#> $features$held
+#> # A tibble: 5 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1        23.7     30.7      20.2 
+#> 2         9.27    11.5       7.31
+#> 3        20.6     27.0      17.3 
+#> 4        12.7     15.6       9.85
+#> 5        16.2     20.6      13.8 
+#> 
+#> $features$locked
+#> # A tibble: 5 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1         8.28       0       8.22
+#> 2         3.15       0       3.06
+#> 3         7.68       0       7.13
+#> 4         4.08       0       4.09
+#> 5         5.36       0       5.69
 #> 
 #> 
 #> $locks
-#> $locks$relative
-#> # A tibble: 2 × 4
-#>   name            Biodiversity Tourism Scientific
-#>   <chr>                  <dbl>   <dbl>      <dbl>
-#> 1 Protected areas          0.4     0.5        0.1
-#> 2 Field camps              0.4     0.3        0.3
+#> $locks$name
+#> $locks$name[[1]]
+#> [1] "Protected areas"
 #> 
-#> $locks$absolute
-#> # A tibble: 2 × 4
-#>   name            Biodiversity Tourism Scientific
-#>   <chr>                  <dbl>   <dbl>      <dbl>
-#> 1 Protected areas            4       5          1
-#> 2 Field camps                4       3          3
+#> $locks$name[[2]]
+#> [1] "Field camps"
+#> 
+#> 
+#> $locks$total
+#> $locks$total[[1]]
+#> [1] 10
+#> 
+#> $locks$total[[2]]
+#> [1] 10
+#> 
+#> 
+#> $locks$units
+#> $locks$units[[1]]
+#> [1] "presence-only"
+#> 
+#> $locks$units[[2]]
+#> [1] "presence/absence"
+#> 
+#> 
+#> $locks$held
+#> # A tibble: 2 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1            4       5          1
+#> 2            2       5          3
+#> 
+#> $locks$locked
+#> # A tibble: 2 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1           10       0          0
+#> 2            0       0         10
 #> 
 #> 
 #> $costs
-#> $costs$relative
-#> # A tibble: 1 × 4
-#>   name            Biodiversity Tourism Scientific
-#>   <chr>                  <dbl>   <dbl>      <dbl>
-#> 1 Tourism revenue        0.357   0.334      0.309
+#> $costs$name
+#> $costs$name[[1]]
+#> [1] "Tourism revenue"
 #> 
-#> $costs$absolute
-#> # A tibble: 1 × 4
-#>   name            Biodiversity Tourism Scientific
-#>   <chr>                  <dbl>   <dbl>      <dbl>
-#> 1 Tourism revenue        6594.   6172.      5721.
+#> 
+#> $costs$total
+#> $costs$total[[1]]
+#> [1] 18487.2
+#> 
+#> 
+#> $costs$units
+#> $costs$units[[1]]
+#> [1] "USD"
+#> 
+#> 
+#> $costs$held
+#> # A tibble: 1 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1        5963.   7602.      4923.
+#> 
+#> $costs$locked
+#> # A tibble: 1 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1        2064.       0      2042.
 #> 
 #> 
 ```

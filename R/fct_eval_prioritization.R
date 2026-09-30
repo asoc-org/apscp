@@ -17,25 +17,30 @@ NULL
 #' @family prioritization
 #'
 #' @examples
-#' # simulate data
-#' project <- simulate_project()
+#' # simulate project
+#' sim_project <- simulate_project()
 #'
 #' # generate a simulated prioritization
-#' prioritization <- sample.int(
-#'   length(project$zones), project$dataset$get_n_pu(), replace = TRUE
+#' sim_prioritization <- sample.int(
+#'   length(sim_project$zones), sim_project$dataset$get_n_pu(), replace = TRUE
 #' )
 #'
+#' # simulate settings to evaluate prioritization
+#' sim_settings <- simulate_prioritization_settings(sim_project)
+#'
 #' # evaluate prioritization
-#' eval_prioritization(project, prioritization)
+#' eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #'
 #' @export
-eval_prioritization <- function(project, prioritization) {
+eval_prioritization <- function(project, settings, prioritization) {
   # assert that arguments are valid
   assertthat::assert_that(
     ## dependencies
     is_installed("prioritizr"),
     ## project
     inherits(project, "Project"),
+    ## settings
+    is_prioritization_settings(settings),
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), project$dataset$get_n_pu()),
@@ -45,6 +50,15 @@ eval_prioritization <- function(project, prioritization) {
   # prepare data for evaluation
   pu_data <- as.matrix(project$dataset$get_dataframe())
   pu_data[is.na(pu_data)] <- 0
+
+  # prepare prioritization for evaluation
+  prioritization[is.na(prioritization)] <- 0
+
+  # if needed, generate matrix with locked data based on settings
+  if (is.null(attr(prioritization, "locked"))) {
+    attr(prioritization, "locked") <-
+      convert_lock_settings_to_prioritization(project, settings)
+  }
 
   # calculate summary metrics
   summary_metrics <- tibble::tibble(
@@ -87,8 +101,14 @@ eval_prioritization <- function(project, prioritization) {
 #' @param zones `character` vector with zone names.
 #'
 #' @return
-#' A `list` with the following elements: `"relative"` and `"absolute"`.
-#' Each of these elements contains a data frame.
+#' A `list` with the following elements:
+#' (`"name"`) `character` vector name of each feature,
+#' (`"total"`) `numeric` vector with the total amount of each feature,
+#' (`"units"`) `list` with the units for each feature,
+#' (`"held"`) [tibble::tibble()] with the absolute amount held
+#' for each component by each zone.
+#' (`"locked"`) [tibble::tibble()] with the absolute amount locked
+#' for each component by each zone.
 #'
 #' @noRd
 calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
@@ -101,6 +121,7 @@ calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), nrow(pu_data)),
+    !is.null(attr(prioritization, "locked")),
     ## zones
     is.character(zones)
   )
@@ -118,37 +139,47 @@ calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
   ln <- vapply(x, `[[`, character(1), "name")
   lc <- vapply(x, function(x) x$layer$column, character(1))
 
-  # calculate preliminary calculations
-  total_matrix <- matrix(
-    colSums(pu_data[, lc, drop = FALSE]),
-    byrow = TRUE, nrow = length(lc), ncol = length(zones)
-  )
-  abs_matrix <- vapply(
+  # calculate total amount for each layer
+  total_amount <- unname(colSums(pu_data[, lc, drop = FALSE]))
+
+  # calculate absolute held by prioritization
+  held_matrix <- vapply(
     seq_along(zones),
     FUN.VALUE = numeric(length(ln)),
     function(i) {
-      c(as.numeric(prioritization == i) %*% pu_data[, lc, drop = FALSE])
+      c(
+        as.numeric(prioritization == i) %*%
+        pu_data[, lc, drop = FALSE]
+      )
     }
   )
-  if (!is.matrix(abs_matrix)) {
-   abs_matrix <- matrix(abs_matrix, nrow = 1)
+  if (!is.matrix(held_matrix)) {
+   held_matrix <- matrix(held_matrix, nrow = 1)
   }
-  colnames(abs_matrix) <- zones
-  rel_matrix <- abs_matrix / total_matrix
+  colnames(held_matrix) <- zones
+
+  # calculate absolute held by lock
+  locked_matrix <- vapply(
+    seq_along(zones),
+    FUN.VALUE = numeric(length(ln)),
+    function(i) {
+      c(
+        as.numeric(attr(prioritization, "locked") == i) %*%
+        pu_data[, lc, drop = FALSE]
+      )
+    }
+  )
+  if (!is.matrix(locked_matrix)) {
+   locked_matrix <- matrix(locked_matrix, nrow = 1)
+  }
+  colnames(locked_matrix) <- zones
 
   # return result
   list(
-    relative = tibble::as_tibble(
-      cbind(
-        tibble::tibble(name = ln),
-        tibble::as_tibble(rel_matrix)
-      )
-    ),
-    absolute = tibble::as_tibble(
-      cbind(
-        tibble::tibble(name = ln),
-        tibble::as_tibble(abs_matrix)
-      )
-    )
+    name = as.list(ln),
+    total = as.list(total_amount),
+    units = lapply(x, function(x) x$layer$legend$units),
+    held = tibble::as_tibble(held_matrix),
+    locked = tibble::as_tibble(locked_matrix)
   )
 }

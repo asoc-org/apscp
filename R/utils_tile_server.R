@@ -19,8 +19,8 @@
 #' @family tile_server
 #'
 #' @examplesIf interactive()
-#' # simulate tile
-#' project <- simulate_project()
+#' # simulate project
+#' sim_project <- simulate_project()
 #'
 #' # display the tile server directory
 #' print(tile_server_dir())
@@ -28,8 +28,11 @@
 #' # start tile server
 #' tile_server_start()
 #'
+#' # check if tile server is active
+#' is_tile_server_active()
+#'
 #' # add tile to tile server directory
-#' tile_server_add_tile(project$tiles[[1]])
+#' tile_server_add_tile(sim_project$tiles[[1]])
 #'
 #' # stop tile server
 #' tile_server_stop()
@@ -85,6 +88,9 @@ tile_server_start <- function(x, verbose = TRUE) {
     message("Use `stop_tile_server()` to stop.")
   }
 
+  # set tile server variable as active
+  .pkg_env$tile_server_status <- TRUE
+
   # return success
   invisible(TRUE)
 }
@@ -107,6 +113,10 @@ tile_server_add_tile <- function(x) {
   # assert argument is valid
   assertthat::assert_that(
     inherits(x, "ProjectComponent") || inherits(x, "Tile")
+  )
+  assertthat::assert_that(
+    is_tile_server_active(),
+    msg = "Tile server must be active."
   )
 
   # obtain directory for tile server
@@ -146,7 +156,24 @@ tile_server_add_tile <- function(x) {
 #' @export
 tile_server_stop <- function() {
   freestiler::stop_server()
+  .pkg_env$tile_server_status <- FALSE
   invisible(TRUE)
+}
+
+#' Is tile server active?
+#'
+#' Determine if a tile server is active.
+#'
+#' @return A `logical` value.
+#'
+#' @family tile_server
+#'
+#' @inherit tile_server_start examples
+#'
+#' @export
+is_tile_server_active <- function() {
+  if (is.null(.pkg_env$tile_server_status)) return(FALSE)
+  .pkg_env$tile_server_status
 }
 
 #' Tile server directory

@@ -1,0 +1,51 @@
+/** Import dependencies */
+// functions to create elements
+import {SemiDonutChart} from  "./semi-donut-chart-class.js";
+// styling
+import "./css/style.css";
+
+/**
+ * Create locks panel for Summarizer widget.
+ * @param {object} solution - Object with solution.
+ * @param {Array<string>} zones - Array of zone names.
+ * @param {string} tooltipsId - Identifier for element to contain tooltips.
+ * @return {void}
+ */
+export function createLocksPanel(solution, zones, tooltipsId) {
+  // create element
+  let el = document.createElement("div");
+  el.classList.add("locks-results", "charts-panel");
+
+  // add charts for each lock
+  for (let i = 0; i < solution.metrics.locks.name.length; ++i) {
+    // create chart container
+    let chartEl = document.createElement("div");
+    chartEl.classList.add("semi-donut-chart", "chart");
+    // create chart
+    const chart = new SemiDonutChart(
+      solution.settings.locks.name[i],
+      solution.metrics.locks.total[i],
+      solution.metrics.locks.units[i],
+      Object.fromEntries(
+        Object.keys(solution.metrics.locks.held).map(
+          (x) => [x, solution.metrics.locks.held[x][i]]
+        )
+      ),
+      Object.fromEntries(
+        Object.keys(solution.metrics.locks.locked).map(
+          (x) => [x, solution.metrics.locks.locked[x][i]]
+        )
+      ),
+      zones,
+      tooltipsId,
+      false
+    );
+    // render chart on element
+    chart.render(chartEl);
+    chartEl.chart = chart;
+    el.appendChild(chartEl);
+  }
+
+  // return element
+  return el;
+}

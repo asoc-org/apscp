@@ -24,7 +24,7 @@ test_that("prioritization", {
   on.exit(mirai_async_stop(), add = TRUE)
   # generate solution
   x <- mirai::mirai(
-    eval_prioritization(p, solve_prioritization(p, s)),
+    eval_prioritization(p, s, solve_prioritization(p, s)),
     .args = list(p = p, s = s)
   )[]
   # run tests

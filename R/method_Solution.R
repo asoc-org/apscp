@@ -18,6 +18,7 @@ NULL
 #' @param settings `list` of settings used to generate the solution.
 #'
 #' @param metrics `list` with evaluation metrics for the solution.
+#' Defaults to `NULL` such that metrics are calculated automatically.
 #'
 #' @inheritParams new_feature
 #'
@@ -28,18 +29,17 @@ NULL
 #' @family method
 #'
 #' @examples
-#' # create data
-#' project <- simulate_project()
+#' # simulate project
+#' sim_project <- simulate_project()
 #'
 #' # create solution
 #' x <- create_solution(
 #'   name = "user solution",
-#'   project = project,
+#'   project = sim_project,
 #'   column = "solution",
 #'   legend = simulate_solution_legend(),
 #'   provenance = simulate_provenance(),
-#'   settings = simulate_prioritization_settings(project),
-#'   metrics = simulate_prioritization_metrics(project)
+#'   settings = simulate_prioritization_settings(sim_project)
 #' )
 #'
 #' # print solution
@@ -47,8 +47,8 @@ NULL
 #'
 #' @export
 create_solution <- function(
-  name, project, column, legend, provenance, settings, metrics,
-  tile = NULL, id = uuid::UUIDgenerate()
+  name, project, column, legend, provenance, settings,
+  tile = NULL, metrics = NULL, id = uuid::UUIDgenerate()
 ) {
   # assert valid arguments
   assertthat::assert_that(
@@ -65,8 +65,6 @@ create_solution <- function(
     inherits(provenance, "Provenance"),
     ## settings
     is.list(settings),
-    ## metrics
-    is.list(metrics),
     ## id
     assertthat::is.string(id)
   )
@@ -86,6 +84,14 @@ create_solution <- function(
     )
   }
   assertthat::assert_that(inherits(tile, "Tile"))
+
+  # if needed, create metrics
+  if (is.null(metrics)) {
+    metrics <- eval_prioritization(
+      project, settings, project$dataset$get_column_data(column)
+    )
+  }
+  assertthat::assert_that(is.list(metrics))
 
   # return new solution
   new_solution(
@@ -163,6 +169,8 @@ create_solution_from_prioritization <- function(
     ## name
     assertthat::is.string(name),
     assertthat::noNA(name),
+    ## settings
+    is.list(settings),
     ## id
     assertthat::is.string(id),
     assertthat::noNA(id),
@@ -194,7 +202,7 @@ create_solution_from_prioritization <- function(
   if (!is.null(metrics)) {
     assertthat::assert_that(is.list(metrics))
   } else {
-    metrics <- eval_prioritization(project, prioritization)
+    metrics <- eval_prioritization(project, settings, prioritization)
   }
 
   # store column in dataset

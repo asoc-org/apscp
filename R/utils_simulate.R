@@ -255,6 +255,9 @@ simulate_project <- function() {
     solutions = list()
   )
 
+  # create prioritization settings
+  s <- simulate_prioritization_settings(out)
+
   # add solution to project
   out$add_solution(
     new_solution(
@@ -272,8 +275,8 @@ simulate_project <- function() {
         provenance = provenance,
         total = unname(dataset$get_column_total("solution"))
       ),
-      settings = simulate_prioritization_settings(out),
-      metrics = simulate_prioritization_metrics(out)
+      settings = s,
+      metrics = eval_prioritization(out, s, d$solution)
     )
   )
 
@@ -523,116 +526,4 @@ simulate_feature_zone_targets <- function(x, n) {
   }
   ## return output
   out
-}
-
-#' Simulate prioritization metrics
-#'
-#' Simulate metrics for evaluating a [solve_prioritization()].
-#'
-#' @param project [new_project()] object.
-#'
-#' @inherit simulate_spatial_data details
-#'
-#' @family simulation
-#'
-#' @return
-#' A `list` with the following elements:
-#' (`"summary"`) a data frame, `"features"` a `list` with elements
-#' named `"relative"`, "`absolute`", and `"targets"`,
-#' `"locks"` a `list` with elements named `"relative"` and "`absolute`",
-#' and `"costs"` a `list` with elements named `"relative"` and "`absolute`".
-#'
-#' @examples
-#' # simulate project
-#' x <- simulate_project()
-#'
-#' # simulate prioritization metrics
-#' s <- simulate_prioritization_metrics(x)
-#'
-#' # print settings
-#' print(s)
-#'
-#' @export
-simulate_prioritization_metrics <- function(project) {
-  # assert that argument is valid
-  assertthat::assert_that(inherits(project, "Project"))
-
-  # simulate summary metrics
-  zone_prop <- stats::runif(length(project$zones))
-  zone_prop <- zone_prop / sum(zone_prop)
-  summary_metrics <- tibble::tibble(
-    zone = project$zone,
-    abs_coverage = zone_prop * project$dataset$get_n_pu(),
-    rel_coverage = zone_prop
-  )
-
-  # return result
-  list(
-    summary = summary_metrics,
-    features = simulate_repr_metrics(
-      vapply(project$features, `[[`, character(1), "name"),
-      project$zones
-    ),
-    locks = simulate_repr_metrics(
-      vapply(project$locks, `[[`, character(1), "name"),
-      project$zones
-    ),
-    costs = simulate_repr_metrics(
-      vapply(project$costs, `[[`, character(1), "name"),
-      project$zones
-    )
-  )
-}
-
-#' Simulate representation metrics
-#'
-#' @param names `character` vector of layer names.
-#'
-#' @param zones `character` vector of zone names.
-#'
-#' @return
-#' A `list` with the following elements: `"relative"` and `"absolute"`.
-#' Each of these elements contains a data frame.
-#'
-#' @noRd
-simulate_repr_metrics <- function(names, zones) {
-  # assert valid arguments
-  assert(
-    is.character(names),
-    assertthat::noNA(names),
-    is.character(zones),
-    assertthat::noNA(zones)
-  )
-
-  # calculate constants
-  nn <- length(names)
-  nz <- length(zones)
-
-  # simulate relative metrics
-  rel_matrix <- matrix(
-    stats::runif(nn * nz, 0, 1), nrow = nn, ncol = nz,
-    dimnames = list(NULL, zones)
-  )
-  rel_metrics <- tibble::as_tibble(
-    cbind(
-      tibble::tibble(name = names),
-      tibble::as_tibble(rel_matrix)
-    )
-  )
-
-  # simulate absolute metrics
-  abs_matrix <-
-    matrix(
-      stats::runif(nn, 0, 800), nrow = nn, ncol = nz,
-      byrow = TRUE, dimnames = list(NULL, zones)
-    ) * rel_matrix
-  abs_metrics <- tibble::as_tibble(
-    cbind(
-      tibble::tibble(name = names),
-      tibble::as_tibble(abs_matrix)
-    )
-  )
-
-  # return result
-  list(relative = rel_metrics, absolute = abs_metrics)
 }

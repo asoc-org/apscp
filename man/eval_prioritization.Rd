@@ -4,11 +4,13 @@
 \alias{eval_prioritization}
 \title{Evaluate a prioritization}
 \usage{
-eval_prioritization(project, prioritization)
+eval_prioritization(project, settings, prioritization)
 }
 \arguments{
 \item{project}{\code{\link[=new_project]{new_project()}} object to which \code{prioritization }should be
 added.}
+
+\item{settings}{\code{list} of settings used to generate the solution.}
 
 \item{prioritization}{\code{numeric} vector with a value for each planning
 unit to indicate zone allocations.}
@@ -24,16 +26,19 @@ Evaluate a prioritization according to how well its represents features,
 locks, and costs. Additionally, area-based metrics are calculated.
 }
 \examples{
-# simulate data
-project <- simulate_project()
+# simulate project
+sim_project <- simulate_project()
 
 # generate a simulated prioritization
-prioritization <- sample.int(
-  length(project$zones), project$dataset$get_n_pu(), replace = TRUE
+sim_prioritization <- sample.int(
+  length(sim_project$zones), sim_project$dataset$get_n_pu(), replace = TRUE
 )
 
+# simulate settings to evaluate prioritization
+sim_settings <- simulate_prioritization_settings(sim_project)
+
 # evaluate prioritization
-eval_prioritization(project, prioritization)
+eval_prioritization(sim_project, sim_settings, sim_prioritization)
 
 }
 \seealso{

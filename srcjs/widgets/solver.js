@@ -6,9 +6,9 @@ HTMLWidgets.widget({
   type: "output",
   factory: function(el, width, height) {
     // shared variables
-    var elementId = el.id;
-    var initialized = false;
-    var handle = new Solver();
+    let elementId = el.id;
+    let initialized = false;
+    let handle = new Solver();
 
     return {
       renderValue: function(opts) {
@@ -55,12 +55,12 @@ HTMLWidgets.widget({
 
 // Attach message handlers if in Shiny mode (these correspond to API)
 if (HTMLWidgets.shinyMode) {
-  var fxns = ["addLock", "reset", "sync"];
-  var addShinyHandler = function(fxn) {
+  let fxns = ["addLock", "reset", "sync"];
+  let addShinyHandler = function(fxn) {
     return function() {
       Shiny.addCustomMessageHandler(
         "solver:" + fxn, function(message) {
-          var el = document.getElementById(message.id);
+          let el = document.getElementById(message.id);
           if (el) {
             delete message["id"];
             el.widget[fxn](message);
@@ -69,7 +69,7 @@ if (HTMLWidgets.shinyMode) {
       );
     }
   };
-  for (var i = 0; i < fxns.length; ++i) {
+  for (let i = 0; i < fxns.length; ++i) {
     addShinyHandler(fxns[i])();
   }
 }

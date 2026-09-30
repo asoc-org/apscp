@@ -102,69 +102,74 @@ Other functions for prioritization:
 
 ``` r
 # simulate data
-project <- simulate_project()
-settings <- simulate_prioritization_settings(project)
+sim_project <- simulate_project()
+sim_settings <- simulate_prioritization_settings(sim_project)
 
 # preview settings
-print(settings)
+print(sim_settings)
 #> $features
 #>                                      id      name column         zone target
-#> 1  4c8f198b-ca24-4df2-a377-4b3febfb8fa2 Species 1 feat_1 Biodiversity    0.8
-#> 2  4c8f198b-ca24-4df2-a377-4b3febfb8fa2 Species 1 feat_1      Tourism    0.0
-#> 3  4c8f198b-ca24-4df2-a377-4b3febfb8fa2 Species 1 feat_1   Scientific    0.2
-#> 4  20cc9826-dc27-495b-8e42-638897815c90 Species 2 feat_2 Biodiversity    0.0
-#> 5  20cc9826-dc27-495b-8e42-638897815c90 Species 2 feat_2      Tourism    1.0
-#> 6  20cc9826-dc27-495b-8e42-638897815c90 Species 2 feat_2   Scientific    0.0
-#> 7  1000e37e-cdd5-4ff1-8424-730a278e9a17 Species 3 feat_3 Biodiversity    0.4
-#> 8  1000e37e-cdd5-4ff1-8424-730a278e9a17 Species 3 feat_3      Tourism    0.0
-#> 9  1000e37e-cdd5-4ff1-8424-730a278e9a17 Species 3 feat_3   Scientific    0.4
-#> 10 55e42861-da1b-4608-8db5-7eb71d3c2132 Species 4 feat_4 Biodiversity    1.0
-#> 11 55e42861-da1b-4608-8db5-7eb71d3c2132 Species 4 feat_4      Tourism    0.0
-#> 12 55e42861-da1b-4608-8db5-7eb71d3c2132 Species 4 feat_4   Scientific    0.0
-#> 13 50de4485-73a3-4ba1-b5f7-c45ab61192c4 Species 5 feat_5 Biodiversity    0.4
-#> 14 50de4485-73a3-4ba1-b5f7-c45ab61192c4 Species 5 feat_5      Tourism    0.6
-#> 15 50de4485-73a3-4ba1-b5f7-c45ab61192c4 Species 5 feat_5   Scientific    0.0
+#> 1  b712e733-2e2a-483c-87a9-b7c9131c9657 Species 1 feat_1 Biodiversity    0.4
+#> 2  b712e733-2e2a-483c-87a9-b7c9131c9657 Species 1 feat_1      Tourism    0.0
+#> 3  b712e733-2e2a-483c-87a9-b7c9131c9657 Species 1 feat_1   Scientific    0.2
+#> 4  a88accea-2654-421f-854d-b49ddd2f4135 Species 2 feat_2 Biodiversity    0.8
+#> 5  a88accea-2654-421f-854d-b49ddd2f4135 Species 2 feat_2      Tourism    0.0
+#> 6  a88accea-2654-421f-854d-b49ddd2f4135 Species 2 feat_2   Scientific    0.2
+#> 7  77c74edd-4ca7-4c62-9460-46e320ca063f Species 3 feat_3 Biodiversity    0.0
+#> 8  77c74edd-4ca7-4c62-9460-46e320ca063f Species 3 feat_3      Tourism    0.0
+#> 9  77c74edd-4ca7-4c62-9460-46e320ca063f Species 3 feat_3   Scientific    0.0
+#> 10 5f2a1a04-d5f8-4f8d-ad9e-9015ea8105f8 Species 4 feat_4 Biodiversity    0.6
+#> 11 5f2a1a04-d5f8-4f8d-ad9e-9015ea8105f8 Species 4 feat_4      Tourism    0.0
+#> 12 5f2a1a04-d5f8-4f8d-ad9e-9015ea8105f8 Species 4 feat_4   Scientific    0.0
+#> 13 24c49aa6-32cc-404f-b236-36bf201c6f8f Species 5 feat_5 Biodiversity    1.0
+#> 14 24c49aa6-32cc-404f-b236-36bf201c6f8f Species 5 feat_5      Tourism    0.0
+#> 15 24c49aa6-32cc-404f-b236-36bf201c6f8f Species 5 feat_5   Scientific    0.0
 #>    weight
-#> 1     0.5
-#> 2     0.5
-#> 3     1.0
-#> 4     1.0
-#> 5     0.5
-#> 6     0.5
-#> 7     1.0
-#> 8     0.0
-#> 9     0.5
-#> 10    1.0
+#> 1     0.0
+#> 2     1.0
+#> 3     0.5
+#> 4     0.5
+#> 5     0.0
+#> 6     1.0
+#> 7     0.5
+#> 8     1.0
+#> 9     0.0
+#> 10    0.0
 #> 11    0.0
-#> 12    0.0
-#> 13    0.5
-#> 14    1.0
-#> 15    0.0
+#> 12    1.0
+#> 13    1.0
+#> 14    0.5
+#> 15    1.0
 #> 
 #> $locks
 #>                                     id            name column         zone
-#> 1 26e48dc6-9800-450a-b934-43ad7dafc9f3 Protected areas  aspas Biodiversity
-#> 2 80f206a3-7d0a-42f8-b7d9-de45ce0989a0     Field camps  camps   Scientific
+#> 1 18f96530-48bb-403e-a30b-b5613b47ae8e Protected areas  aspas Biodiversity
+#> 2 7a98e11f-68fd-471f-885a-02a73d2b8aa6     Field camps  camps   Scientific
 #>   priority
 #> 1        2
 #> 2        1
 #> 
 #> $costs
 #>                                     id            name column    zone weight
-#> 1 7210629b-ce8b-434e-b7ac-f39ced3b738c Tourism revenue   cost Tourism      1
+#> 1 afd345f1-df6c-4647-a4ef-99eb46b46c77 Tourism revenue   cost Tourism      1
 #> 
 
-# generate solution
-sol <- solve_prioritization(project, settings)
+# solve prioritization
+sol <- solve_prioritization(sim_project, sim_settings)
 
 # preview solution
 print(sol)
-#>  [1] 2 2 2 3 2 2 2 3 2 2 3 2 2 2 1 2 2 2 2 3 1 1 2 3 1 1 2 2 2 3 3 3 1 1 1 1 1 2
-#> [39] 2 3 3 3 1 1 1 1 3 2 2 1 1 1 1 1 1 1 1 2 3 2 1 1 1 1 1 2 2 1 1 3 1 1 3 2 3 2
-#> [77] 1 1 1 1 2 2 2 2 2 2 2 3 2 2
+#>  [1] NA NA NA  3 NA NA  3  3  1  1  3 NA NA NA  1 NA NA NA NA NA  1  1 NA  3 NA
+#> [26]  1 NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA  1 NA NA NA  3 NA NA  1
+#> [51] NA  1 NA NA NA NA NA NA  3 NA NA  3  1 NA NA NA NA  1 NA  3  3 NA  3 NA  3
+#> [76] NA  3  3 NA  1 NA NA NA  3  3  3  1  3 NA NA
 #> attr(,"class")
 #> [1] "Prioritization"
 #> attr(,"obj_value")
-#>            Problem 1 Problem 2 Problem 3 Problem 4
-#> solution_1 0.8543702   0.57479 0.3085766  10654.09
+#>            Problem 1 Problem 2 Problem 3
+#> solution_1  1.262683         0  6319.059
+#> attr(,"locked")
+#>  [1] 0 0 0 3 0 0 0 3 0 0 3 0 0 0 1 0 0 0 0 0 1 1 0 3 0 1 0 0 0 0 0 0 0 0 0 0 0 0
+#> [39] 0 0 0 0 1 0 0 0 3 0 0 1 0 1 0 0 0 0 0 0 3 0 0 0 1 0 0 0 0 1 0 3 0 0 3 0 3 0
+#> [77] 0 0 0 1 0 0 0 0 0 0 0 3 0 0
 ```

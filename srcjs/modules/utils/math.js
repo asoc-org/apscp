@@ -85,3 +85,19 @@ export function convertSliderValuesToTargets(x) {
   }
   return y;
 }
+
+/** Convert radians to degrees
+ * @param <number> angle - Angle in degrees.
+ * @return <number>
+ */
+export function rad2deg(angle) {
+  return angle * 180 / Math.PI;
+}
+
+/** Convert degrees to radians
+ * @param <number> angle - Angle in radians.
+ * @return <number>
+ */
+export function deg2rad(angle) {
+  return (Math.PI / 180) * angle;
+}

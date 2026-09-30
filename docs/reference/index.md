@@ -212,7 +212,7 @@ Functions for widget to control map.
 
 ## Solver widget
 
-Functions for widget to control prioritization settings.
+Functions for widget to control solution settings.
 
 - [`solverOutput()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
   [`renderSolver()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
@@ -226,10 +226,24 @@ Functions for widget to control prioritization settings.
 - [`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
   : Synchronize solver settings
 
+## Summarizer widget
+
+Functions for widget to summarize solutions.
+
+- [`summarizerOutput()`](https://asoc-org.github.io/apscp/reference/summarizer-shiny.md)
+  [`renderSummarizer()`](https://asoc-org.github.io/apscp/reference/summarizer-shiny.md)
+  : Shiny bindings for summarizer
+- [`summarizer()`](https://asoc-org.github.io/apscp/reference/summarizer.md)
+  : Summarizer
+- [`summarizer_add_solution()`](https://asoc-org.github.io/apscp/reference/summarizer_add_solution.md)
+  : Add solution to summarizer
+
 ## Tile server
 
 Functions for creating a tile server.
 
+- [`is_tile_server_active()`](https://asoc-org.github.io/apscp/reference/is_tile_server_active.md)
+  : Is tile server active?
 - [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)
   : Add a tile to tile server
 - [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md)
@@ -258,8 +272,6 @@ Functions for simulating data.
   : Simulate continuous legend
 - [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
   : Simulate PMtiles file
-- [`simulate_prioritization_metrics()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_metrics.md)
-  : Simulate prioritization metrics
 - [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md)
   : Simulate prioritization settings
 - [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md)
@@ -290,6 +302,9 @@ Functions with assorted uses.
 
 - [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md)
   : Is package installed?
+
+- [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md)
+  : Is prioritization settings?
 
 - [`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md)
   : Is the freestiler Python library installed?

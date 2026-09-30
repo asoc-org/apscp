@@ -67,6 +67,9 @@ app_mapper: bundle_dev
 app_solver: bundle_dev
 	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('solver')"
 
+app_summarizer: bundle_dev
+	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('summarizer')"
+
 ## run checks
 check:
 	echo "\n===== R CMD CHECK =====\n" > check.log 2>&1

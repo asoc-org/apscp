@@ -13,7 +13,7 @@ sim_data$features[[3]]$zone_helds <- c(0, 0, 1)
 
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
-  h4("Mapp Demo"),
+  h4("Solver Demo"),
   splitLayout(
     cellWidths = c("395px", "80%"),
     tagList(

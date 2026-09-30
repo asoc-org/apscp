@@ -18,8 +18,8 @@ Add PMTile file to a tile server.
 }
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
-# simulate tile
-project <- simulate_project()
+# simulate project
+sim_project <- simulate_project()
 
 # display the tile server directory
 print(tile_server_dir())
@@ -27,8 +27,11 @@ print(tile_server_dir())
 # start tile server
 tile_server_start()
 
+# check if tile server is active
+is_tile_server_active()
+
 # add tile to tile server directory
-tile_server_add_tile(project$tiles[[1]])
+tile_server_add_tile(sim_project$tiles[[1]])
 
 # stop tile server
 tile_server_stop()
@@ -36,6 +39,7 @@ tile_server_stop()
 }
 \seealso{
 Other functions for working with a tile server:
+\code{\link[=is_tile_server_active]{is_tile_server_active()}},
 \code{\link[=tile_server_dir]{tile_server_dir()}},
 \code{\link[=tile_server_start]{tile_server_start()}},
 \code{\link[=tile_server_stop]{tile_server_stop()}}

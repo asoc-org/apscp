@@ -44,7 +44,10 @@ app_server_solution <- quote({
             name = name,
             prioritization = x,
             settings = settings,
-            metrics = try(eval_prioritization(project, x), silent = TRUE)
+            metrics = try(
+              eval_prioritization(project, settings, x),
+              silent = TRUE
+            )
           )
         },
         .args = list(
@@ -162,7 +165,7 @@ app_server_solution <- quote({
     )
     # create solution
     sol <- create_solution_from_prioritization(
-      id = result$id,
+      id = uuid::UUIDgenerate(),
       name = result$name,
       project = app_data$project,
       prioritization = result$prioritization,
@@ -173,6 +176,9 @@ app_server_solution <- quote({
     app_data$session_files <- c(app_data$session_files, sol$layer$tile$path)
     # add solution to project
     app_data$project$add_solution(sol)
+    # reset state
+    app_data$task_mirai <- NULL
+    app_data$task_id <- NULL
     # add solution to mapper
     mapper_add_solution(
       id = "mapper",
@@ -180,9 +186,14 @@ app_server_solution <- quote({
       solution = sol,
       visible = TRUE
     )
-    # reset state
-    app_data$task_mirai <- NULL
-    app_data$task_id <- NULL
+    # add solution to summarizer
+    summarizer_add_solution(
+      id = "summarizer",
+      solution = sol,
+      show = TRUE
+    )
+    # open solution results sidebar
+    sidebar_open(id = "right_sidebar", pane_id = "results_pane")
     # reset solver status
     solver_reset("solver")
   })

@@ -30,5 +30,8 @@ run_example("sidebar_app")
 
 # run example application for solver widget
 run_example("solver_app")
+
+# run example application for summarizer widget
+run_example("summarizer_app")
 }
 ```

@@ -1,6 +1,5 @@
 /** Import dependencies */
 // Tom Select module
-import "./css/tom-select.css";
 import "tom-select/dist/css/tom-select.bootstrap5.css";
 import TomSelect from 'tom-select/dist/js/tom-select.complete.min.js';
 // functions to create elements
@@ -9,6 +8,7 @@ import {createProvenance} from "../utils/element.js";
 // styling
 import "./css/solver-setting.css"
 import "./css/lock-setting.css"
+import "../utils/css/tom-select.css";
 
 /** Class representing the setting for a single lock. */
 export class LockSetting {
