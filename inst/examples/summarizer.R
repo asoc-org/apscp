@@ -16,14 +16,14 @@ print(sim_data$solutions[[1]]$metrics$costs)
 ui <- bslib::page_fluid(
   h4("Summarizer Demo"),
   splitLayout(
-    cellWidths = c("395px", "80%"),
+    cellWidths = c("80%", "395px"),
+    tagList(htmltools::tags$div()),
     tagList(
       h3("Summarizer"),
       htmltools::tags$div(
         summarizerOutput("summarizer", height = "100%", width = "100%")
       )
-    ),
-    tagList(htmltools::tags$div())
+    )
   )
 )
 
