@@ -43,9 +43,8 @@ export class SemiDonutChart {
       };
       // append arc values for held
       held_arc[zones[i]] = {
-        begin: locked_arc[zones[i]].end,
-        end: locked_arc[zones[i]].end +
-          ((held[zones[i]] - locked[zones[i]]) / total)
+        begin: current_start,
+        end: current_start + (held[zones[i]] / total)
       };
       // update current start
       current_start = held_arc[zones[i]].end;
@@ -205,18 +204,18 @@ export class SemiDonutChart {
     this.renderSegment(svg, "total", undefined, 0);
     // render segments for each zone
     for (let i = 0; i < this.data.zones.length; ++i) {
-      // render locked arc
-      this.renderSegment(svg, "locked", this.data.zones[i], delay);
-      // update delay for next arc
-      delay +=
-        50 +
-        (this.data.locked[this.data.zones[i]] / this.data.total) * total_delay;
       // render held arc
       this.renderSegment(svg, "held", this.data.zones[i], delay);
       // update delay for next arc
       delay +=
         50 +
         (this.data.held[this.data.zones[i]] / this.data.total) * total_delay;
+      // render locked arc
+      this.renderSegment(svg, "locked", this.data.zones[i], delay);
+      // update delay for next arc
+      delay +=
+        50 +
+        (this.data.locked[this.data.zones[i]] / this.data.total) * total_delay;
     }
   }
 
