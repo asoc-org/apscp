@@ -187,7 +187,7 @@ export class SemiDonutChart {
           end = this.data.arcs[d.type][d.zone].end;
         }
         const interpolate = d3.interpolate(begin, end);
-        return t => this.createArc({begin: begin, end:interpolate(t)}, i);
+        return t => this.createArc({begin: begin, end: interpolate(t)}, i);
       });
   }
 

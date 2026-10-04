@@ -38,6 +38,8 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
     "solve_prioritization",
     "eval_prioritization",
     "calc_repr_metrics",
+    "calc_coverage_metrics",
+    "calc_performance_metrics",
     "is_prioritization_settings",
     "convert_lock_settings_to_prioritization",
     "convert_lock_settings_to_allocation"

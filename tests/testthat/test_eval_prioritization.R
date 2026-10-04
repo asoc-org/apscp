@@ -8,7 +8,7 @@ test_that("numeric vector", {
   x <- eval_prioritization(p, s, status)
   # run tests
   expect_type(x, "list")
-  expect_s3_class(x$summary, "data.frame")
+  expect_type(x$summary, "list")
   expect_type(x$features, "list")
   expect_type(x$features$name, "list")
   expect_type(x$features$total, "list")
@@ -44,7 +44,7 @@ test_that("Prioritization", {
   x <- eval_prioritization(p, s, prioritization)
   # run tests
   expect_type(x, "list")
-  expect_s3_class(x$summary, "data.frame")
+  expect_type(x$summary, "list")
   expect_type(x$features, "list")
   expect_type(x$features$name, "list")
   expect_type(x$features$total, "list")

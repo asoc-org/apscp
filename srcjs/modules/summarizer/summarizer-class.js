@@ -28,6 +28,12 @@ export class Summarizer {
   _zones;
 
   /**
+   * Map indicating which features belong to each theme.
+   * @type {Map<string,Array<string>>}
+   */
+  _themes = new Map();
+
+  /**
    * HTML Element that contains the select input.
    * @type {HTMLElement}
    */
@@ -82,10 +88,24 @@ export class Summarizer {
    */
   initialize(element, project, zoneColors) {
     // initialize data fields
-    for (let i = 0; i < project.solutions.length; ++i)  {
+    for (let i = 0; i < project.solutions.length; ++i) {
       this._solutions.set(project.solutions[i].id, project.solutions[i]);
     }
     this._zones = project.zones;
+    for (let i = 0; i < project.features.length; ++i) {
+      for (let j = 0; j < project.features[i].themes.length; ++j) {
+        if (this._themes.has(project.features[i].themes[j].name)) {
+          this._themes
+            .get(project.features[i].themes[j].name)
+            .push(project.features[i].id);
+        } else {
+          this._themes.set(
+            project.features[i].themes[j].name,
+            [project.features[i].id]
+          );
+        }
+      }
+    }
 
     // initialize HTML fields
     this._select = element.querySelector(".summarizer-select");
@@ -187,7 +207,7 @@ export class Summarizer {
         createSummaryPanel(solution, this._zones, this._tooltipsContainer.id)
       );
       this._featuresPanel.replaceChildren(
-        createFeaturesPanel(solution, this._zones, this._tooltipsContainer.id)
+        createFeaturesPanel(solution, this._themes, this._tooltipsContainer.id)
       );
       this._locksPanel.replaceChildren(
         createLocksPanel(solution, this._zones, this._tooltipsContainer.id)

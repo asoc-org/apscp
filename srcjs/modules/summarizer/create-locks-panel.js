@@ -16,6 +16,9 @@ export function createLocksPanel(solution, zones, tooltipsId) {
   let el = document.createElement("div");
   el.classList.add("locks-results", "charts-panel");
 
+  console.log("locks");
+  console.log(solution.metrics.locks);
+
   // add charts for each lock
   for (let i = 0; i < solution.metrics.locks.name.length; ++i) {
     // create chart container
@@ -23,7 +26,7 @@ export function createLocksPanel(solution, zones, tooltipsId) {
     chartEl.classList.add("semi-donut-chart", "chart");
     // create chart
     const chart = new SemiDonutChart(
-      solution.settings.locks.name[i],
+      solution.metrics.locks.name[i],
       solution.metrics.locks.total[i],
       solution.metrics.locks.units[i],
       Object.fromEntries(

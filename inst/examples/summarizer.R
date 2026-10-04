@@ -8,10 +8,6 @@ library(mapgl)
 set.seed(500)
 sim_data <- simulate_project()
 
-print("sim_data$solutions[[1]]$metrics$costs")
-print(sim_data$solutions[[1]]$metrics$costs)
-
-
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
   h4("Summarizer Demo"),

@@ -23,7 +23,7 @@ export function createCostsPanel(solution, zones, tooltipsId) {
     chartEl.classList.add("semi-donut-chart", "chart");
     // create chart
     const chart = new SemiDonutChart(
-      solution.settings.costs.name[i],
+      solution.metrics.costs.name[i],
       solution.metrics.costs.total[i],
       solution.metrics.costs.units[i],
       Object.fromEntries(
