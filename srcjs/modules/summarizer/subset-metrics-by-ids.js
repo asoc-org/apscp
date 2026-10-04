@@ -1,10 +1,10 @@
 /**
- * Subset features metrics.
- * @param {object} metrics - Object with data for features metrics.
- * @param {Array<string>} ids - Identifiers for features to retain.
+ * Subset metrics
+ * @param {object} metrics - Object with data for metrics.
+ * @param {Array<string>} ids - Identifiers for metrics to retain.
  * @return {object}
  */
-export function subsetFeaturesMetrics(metrics, ids) {
+export function subsetMetricsByIds(metrics, ids) {
   // identify which features to retain
   const retain = metrics.id.map((x) => ids.includes(x));
   // return object

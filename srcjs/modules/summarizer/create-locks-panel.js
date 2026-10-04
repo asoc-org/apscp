@@ -1,6 +1,8 @@
 /** Import dependencies */
 // functions to create elements
 import {SemiDonutChart} from  "./semi-donut-chart-class.js";
+// functions for data wrangling
+import {subsetMetricsByIds} from "./subset-metrics-by-ids.js";
 // styling
 import "./css/style.css";
 
@@ -16,9 +18,6 @@ export function createLocksPanel(solution, zones, tooltipsId) {
   let el = document.createElement("div");
   el.classList.add("locks-results", "charts-panel");
 
-  console.log("locks");
-  console.log(solution.metrics.locks);
-
   // add charts for each lock
   for (let i = 0; i < solution.metrics.locks.name.length; ++i) {
     // create chart container
@@ -26,20 +25,11 @@ export function createLocksPanel(solution, zones, tooltipsId) {
     chartEl.classList.add("semi-donut-chart", "chart");
     // create chart
     const chart = new SemiDonutChart(
-      solution.metrics.locks.name[i],
-      solution.metrics.locks.total[i],
-      solution.metrics.locks.units[i],
-      Object.fromEntries(
-        Object.keys(solution.metrics.locks.held).map(
-          (x) => [x, solution.metrics.locks.held[x][i]]
-        )
+      subsetMetricsByIds(
+        solution.metrics.locks,
+        [solution.metrics.locks.id[i]]
       ),
-      Object.fromEntries(
-        Object.keys(solution.metrics.locks.locked).map(
-          (x) => [x, solution.metrics.locks.locked[x][i]]
-        )
-      ),
-      zones,
+      solution.metrics.locks.name[0],
       tooltipsId,
       false
     );

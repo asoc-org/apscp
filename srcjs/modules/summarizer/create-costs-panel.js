@@ -1,6 +1,8 @@
 /** Import dependencies */
 // functions to create elements
 import {SemiDonutChart} from  "./semi-donut-chart-class.js";
+// functions for data wrangling
+import {subsetMetricsByIds} from "./subset-metrics-by-ids.js";
 // styling
 import "./css/style.css";
 
@@ -23,22 +25,13 @@ export function createCostsPanel(solution, zones, tooltipsId) {
     chartEl.classList.add("semi-donut-chart", "chart");
     // create chart
     const chart = new SemiDonutChart(
-      solution.metrics.costs.name[i],
-      solution.metrics.costs.total[i],
-      solution.metrics.costs.units[i],
-      Object.fromEntries(
-        Object.keys(solution.metrics.costs.held).map(
-          (x) => [x, solution.metrics.costs.held[x][i]]
-        )
+      subsetMetricsByIds(
+        solution.metrics.costs,
+        [solution.metrics.costs.id[i]]
       ),
-      Object.fromEntries(
-        Object.keys(solution.metrics.costs.locked).map(
-          (x) => [x, solution.metrics.costs.locked[x][i]]
-        )
-      ),
-      zones,
+      solution.metrics.costs.name[0],
       tooltipsId,
-      true,
+      false
     );
     // render chart on element
     chart.render(chartEl);

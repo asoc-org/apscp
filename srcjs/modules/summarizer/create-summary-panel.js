@@ -22,20 +22,8 @@ export function createSummaryPanel(solution, zones, tooltipsId) {
   chart1El.classList.add("semi-donut-chart", "chart");
   // create chart
   let chart1 = new SemiDonutChart(
+    solution.metrics.summary.coverage,
     solution.metrics.summary.coverage.name[0],
-    solution.metrics.summary.coverage.total[0],
-    solution.metrics.summary.coverage.units[0],
-    Object.fromEntries(
-      Object.keys(solution.metrics.summary.coverage.held).map(
-        (x) => [x, solution.metrics.summary.coverage.held[x][0]]
-      )
-    ),
-    Object.fromEntries(
-      Object.keys(solution.metrics.summary.coverage.locked).map(
-        (x) => [x, solution.metrics.summary.coverage.locked[x][0]]
-      )
-    ),
-    zones,
     tooltipsId,
     false
   );

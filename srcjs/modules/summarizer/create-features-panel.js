@@ -2,7 +2,7 @@
 // functions to create elements
 import {RadialBarChart} from  "./radial-bar-chart-class.js";
 // functions for data wrangling
-import {subsetFeaturesMetrics} from "./subset-features-metrics.js";
+import {subsetMetricsByIds} from "./subset-metrics-by-ids.js";
 // styling
 import "./css/style.css";
 
@@ -27,7 +27,7 @@ export function createFeaturesPanel(solution, themes, tooltipsId) {
     chartEl.classList.add("radial-bar-chart", "chart");
     // create chart
     const chart = new RadialBarChart(
-      subsetFeaturesMetrics(solution.metrics.features, themes.get(theme)),
+      subsetMetricsByIds(solution.metrics.features, themes.get(theme)),
       theme,
       tooltipsId,
       true

@@ -242,6 +242,7 @@ calc_coverage_metrics <- function(pu_data, prioritization, zones) {
   # return result
   list(
     name = list("Spatial coverage"),
+    id = list(uuid::UUIDgenerate()),
     units = list("planning units"),
     total = as.list(total_amount),
     held = tibble::as_tibble(held_matrix),
@@ -353,6 +354,7 @@ calc_performance_metrics <- function(
   # return result
   list(
     name = list("Average"),
+    id = list(uuid::UUIDgenerate()),
     units = list("performance"),
     total = as.list(rep(1, length(zones))),
     held = tibble::as_tibble(held_matrix),
