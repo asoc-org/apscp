@@ -22,20 +22,13 @@ export function createFeaturesPanel(solution, themes, tooltipsId) {
 
   // add charts for each theme
   for (const theme of themes.keys()) {
-    // create chart container
-    let chartEl = document.createElement("div");
-    chartEl.classList.add("radial-bar-chart", "chart");
     // create chart
-    const chart = new RadialBarChart(
+    new RadialBarChart(
       subsetMetricsByIds(solution.metrics.features, themes.get(theme)),
       theme,
       tooltipsId,
       true
-    );
-    // render chart on element
-    chart.render(chartEl);
-    chartEl.chart = chart;
-    el.appendChild(chartEl);
+    ).render(el);
   }
 
   // return element

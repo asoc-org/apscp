@@ -50,7 +50,7 @@ export class RadialBarChart {
       )
     };
 
-    // set plotting fields
+    // set chart fields
     this.width = 120;
     this.height = 120;
     this.chartRadius = this.width / 2;
@@ -165,7 +165,7 @@ export class RadialBarChart {
   }
 
   /**
-   * Render all segments on the plot.
+   * Render all segments on the chart.
    * @param <object> svg - Object created with D3.
    * @return <void>
    */
@@ -253,8 +253,8 @@ export class RadialBarChart {
   }
 
   /**
-   * Render the plot as an SVG.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render the chart as an SVG.
+   * @param <HTMLElement> element - Element that contains the chart.
    * @return <HTMLElement>
    */
   renderSvg(element) {
@@ -268,8 +268,8 @@ export class RadialBarChart {
   }
 
   /**
-   * Render title for the plot.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render title for the chart.
+   * @param <HTMLElement> element - Element that contains the chart.
    * @return <HTMLElement>
    */
   renderTitle(element) {
@@ -284,23 +284,26 @@ export class RadialBarChart {
   }
 
   /**
-   * Render plot.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render chart.
+   * @param <HTMLElement> element - Element to append chart.
    * @return <void>
    */
   render(element) {
-    // if no data supplied, then exit
-    if (this.metrics === 0) return;
-    // add semi-donut-chart class
-    element.classList.add("radial-bar-chart");
+    // create new element
+    let el = document.createElement("div")
+    el.classList.add("radial-bar-chart", "chart");
     // initialize and render tooltip
-    this.renderTooltip(element);
-    // render title for plot
-    this.renderTitle(element);
-    // initialize plot
-    const svg = this.renderSvg(element);
-    // render all segments for plot
+    this.renderTooltip(el);
+    // render title
+    this.renderTitle(el);
+    // initialize chart
+    const svg = this.renderSvg(el);
+    // render all segments for chart
     this.renderAllSegments(svg);
+    // attach class
+    el.chart = this;
+    // append to element
+    element.appendChild(el);
   }
 
 }

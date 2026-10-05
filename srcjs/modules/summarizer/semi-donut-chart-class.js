@@ -225,7 +225,7 @@ export class SemiDonutChart {
 
   /**
    * Render the plot as an SVG.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * @param <HTMLElement> element - Element that contains the chart.
    * @return <HTMLElement>
    */
   renderSvg(element) {
@@ -239,8 +239,8 @@ export class SemiDonutChart {
   }
 
   /**
-   * Render title for the plot.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render title for the chart.
+   * @param <HTMLElement> element - Element that contains the chart.
    * @return <HTMLElement>
    */
   renderTitle(element) {
@@ -255,21 +255,26 @@ export class SemiDonutChart {
   }
 
   /**
-   * Render plot.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render chart.
+   * @param <HTMLElement> element - Element to append chart.
    * @return <void>
    */
   render(element) {
-    // add semi-donut-chart class
-    element.classList.add("semi-donut-chart");
+    // create new element
+    let el = document.createElement("div")
+    el.classList.add("smi-donut-chart", "chart");
     // initialize and render tooltip
-    this.renderTooltip(element);
-    // render title for plot
-    this.renderTitle(element);
-    // initialize plot
-    const svg = this.renderSvg(element);
-    // render all segments for plot
+    this.renderTooltip(el);
+    // render title
+    this.renderTitle(el);
+    // initialize chart
+    const svg = this.renderSvg(el);
+    // render all segments
     this.renderAllSegments(svg);
+    // attach class
+    el.chart = this;
+    // append to element
+    element.appendChild(el);
   }
 
 }

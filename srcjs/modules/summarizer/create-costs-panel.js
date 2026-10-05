@@ -1,6 +1,6 @@
 /** Import dependencies */
 // functions to create elements
-import {SemiDonutChart} from  "./semi-donut-chart-class.js";
+import {PieChart} from  "./pie-chart-class.js";
 // functions for data wrangling
 import {subsetMetricsByIds} from "./subset-metrics-by-ids.js";
 // styling
@@ -20,23 +20,16 @@ export function createCostsPanel(solution, zones, tooltipsId) {
 
   // add charts for each cost
   for (let i = 0; i < solution.metrics.costs.name.length; ++i) {
-    // create chart container
-    let chartEl = document.createElement("div");
-    chartEl.classList.add("semi-donut-chart", "chart");
     // create chart
-    const chart = new SemiDonutChart(
+    new PieChart(
       subsetMetricsByIds(
         solution.metrics.costs,
         [solution.metrics.costs.id[i]]
       ),
-      solution.metrics.costs.name[0],
+      solution.metrics.costs.name[i],
       tooltipsId,
       false
-    );
-    // render chart on element
-    chart.render(chartEl);
-    chartEl.chart = chart;
-    el.appendChild(chartEl);
+    ).render(el);
   }
 
   // return element
