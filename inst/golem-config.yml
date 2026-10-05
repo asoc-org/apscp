@@ -85,7 +85,7 @@ demo:
   async_workers: !expr as.numeric(Sys.getenv("ASYNC_WORKERS"))
   solver_name: !expr Sys.getenv("SOLVER_NAME")
   solver_gurobi_server: "http://compute:61000"
-  tile_engine: "python"
+  tile_engine: "rust"
 
 # production configuration
 ## this is intended for running within the launcher on prod mode
@@ -97,4 +97,4 @@ prod:
   async_workers: !expr as.numeric(Sys.getenv("ASYNC_WORKERS"))
   solver_name: !expr Sys.getenv("SOLVER_NAME")
   solver_gurobi_server: "http://compute:61000"
-  tile_engine: "python"
+  tile_engine: "rust"

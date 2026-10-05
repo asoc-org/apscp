@@ -43,15 +43,3 @@ skip_if_color_deps_not_installed <- function() {
     )
   )
 }
-
-#' Skip if Python freestiler library not installed
-#'
-#' Skip if a test if Python does not have the freestiler library installed.
-#'
-#' @export
-skip_if_python_freestiler_not_installed <- function() {
-  skip_if_not(
-    is_python_freestiler_installed(),
-    message = "Python freestiler library is not installed."
-  )
-}

@@ -89,7 +89,7 @@ create_tile_from_sf <- function(
 #' @param column `character` value with column name.
 #'
 #' @param engine `character` value denoting the engine for processing the
-#' the tiles. Available options include `"r"` or `"python"`.
+#' the tiles. Available options include `"r"` or `"rust"`.
 #' Defaults to `get_golem_config("tile_engine")`.
 #'
 #' @inherit create_tile_from_sf return
@@ -139,7 +139,7 @@ create_tile_from_project <- function(
     ## engine
     assertthat::is.string(engine),
     assertthat::noNA(engine),
-    engine %in% c("r", "python"),
+    engine %in% c("r", "rust"),
     ## verbose
     assertthat::is.flag(verbose),
     assertthat::noNA(verbose)
@@ -231,30 +231,21 @@ create_tile_from_file <- function(
     assertthat::noNA(max_zoom),
     ## verbose
     assertthat::is.flag(verbose),
-    assertthat::noNA(verbose),
-    ## dependencies
-    is_python_freestiler_installed()
+    assertthat::noNA(verbose)
   )
-  # call python script
-  system(
-    paste0(
-      "python3 \"",
-      system.file("scripts", "make-tiles.py", package = "apscp"),
-      "\" \"",
-      x,
-      "\" \"",
-      path,
-      "\" \"",
-      column,
-      "\" \"",
-      max_zoom,
-      "\" \"",
-      source_layer,
-      "\" \"",
-      as.numeric(verbose),
-      "\""
+  # create tiles
+  withr::with_options(
+    list(freestiler.duckdb_backend = "rust"), {
+    freestiler::freestile_query(
+      query = paste0(
+        "SELECT \"", column, "\",\"GEOM\" FROM ST_Read(\"", x, "\")"
+      ),
+      output = path,
+      layer_name = source_layer,
+      max_zoom = max_zoom,
+      quiet = !verbose
     )
-  )
+  })
   # verify tile generation worked
   assertthat::assert_that(
     file.exists(path),

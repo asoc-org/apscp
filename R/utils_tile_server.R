@@ -114,10 +114,6 @@ tile_server_add_tile <- function(x) {
   assertthat::assert_that(
     inherits(x, "ProjectComponent") || inherits(x, "Tile")
   )
-  assertthat::assert_that(
-    is_tile_server_active(),
-    msg = "Tile server must be active."
-  )
 
   # obtain directory for tile server
   dir <- tile_server_dir()

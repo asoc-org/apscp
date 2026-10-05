@@ -306,8 +306,5 @@ Functions with assorted uses.
 - [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md)
   : Is prioritization settings?
 
-- [`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md)
-  : Is the freestiler Python library installed?
-
 - [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
   : Is relative path?

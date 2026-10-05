@@ -29,7 +29,7 @@ Defaults to a temporary file path.}
 \item{max_zoom}{\code{integer} value with maximum zoom level. Defaults to 8.}
 
 \item{engine}{\code{character} value denoting the engine for processing the
-the tiles. Available options include \code{"r"} or \code{"python"}.
+the tiles. Available options include \code{"r"} or \code{"rust"}.
 Defaults to \code{get_golem_config("tile_engine")}.}
 
 \item{verbose}{\code{logical} value indicating if information about tile

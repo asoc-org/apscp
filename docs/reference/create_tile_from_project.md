@@ -47,7 +47,7 @@ create_tile_from_project(
 - engine:
 
   `character` value denoting the engine for processing the the tiles.
-  Available options include `"r"` or `"python"`. Defaults to
+  Available options include `"r"` or `"rust"`. Defaults to
   `get_golem_config("tile_engine")`.
 
 - verbose:

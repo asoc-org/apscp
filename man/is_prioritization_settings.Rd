@@ -22,7 +22,6 @@ Other miscellaneous functions:
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_installed]{is_installed()}},
-\code{\link[=is_python_freestiler_installed]{is_python_freestiler_installed()}},
 \code{\link[=is_relative_path]{is_relative_path()}}
 }
 \concept{misc}

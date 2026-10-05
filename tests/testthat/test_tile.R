@@ -73,7 +73,6 @@ test_that("create_tile_from_project", {
 })
 
 test_that("create_tile_from_file", {
-  skip_if_python_freestiler_not_installed()
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
@@ -88,7 +87,7 @@ test_that("create_tile_from_file", {
   # run tests
   expect_s3_class(x, "Tile")
   expect_equal(x$source_layer, "x")
-  expect_equal(x$path, path)
-  expect_true(file.exists(path))
+  expect_equal(x$path, path2)
+  expect_true(file.exists(path2))
   expect_equal(x$max_zoom, 5)
 })

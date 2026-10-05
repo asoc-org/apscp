@@ -25,7 +25,6 @@ Other miscellaneous functions:
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md),
 [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md),
-[`is_python_freestiler_installed()`](https://asoc-org.github.io/apscp/reference/is_python_freestiler_installed.md),
 [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
 
 ## Examples

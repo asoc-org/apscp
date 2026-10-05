@@ -62,13 +62,11 @@ eval_prioritization <- function(project, settings, prioritization) {
 
   # return metrics
   list(
-    summary = list(
-      coverage = calc_coverage_metrics(
+    coverage = calc_coverage_metrics(
         pu_data, prioritization, project$zones
       ),
-      performance = calc_performance_metrics(
-        project$features, pu_data, prioritization, project$zones, settings
-      )
+    performance = calc_performance_metrics(
+      project$features, pu_data, prioritization, project$zones, settings
     ),
     features = calc_repr_metrics(
       project$features, pu_data, prioritization, project$zones
@@ -242,7 +240,7 @@ calc_coverage_metrics <- function(pu_data, prioritization, zones) {
   # return result
   list(
     name = list("Spatial coverage"),
-    id = list(uuid::UUIDgenerate()),
+    id = list("spatial-coverage"),
     units = list("planning units"),
     total = as.list(total_amount),
     held = tibble::as_tibble(held_matrix),
@@ -353,9 +351,9 @@ calc_performance_metrics <- function(
 
   # return result
   list(
-    name = list("Average"),
-    id = list(uuid::UUIDgenerate()),
-    units = list("performance"),
+    name = list("Performance"),
+    id = list("performance"),
+    units = list("average percent target met"),
     total = as.list(rep(1, length(zones))),
     held = tibble::as_tibble(held_matrix),
     locked = tibble::as_tibble(locked_matrix)

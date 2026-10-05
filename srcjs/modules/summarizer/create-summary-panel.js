@@ -19,16 +19,16 @@ export function createSummaryPanel(solution, zones, tooltipsId) {
 
   // create chart
   new PieChart(
-    solution.metrics.summary.coverage,
-    solution.metrics.summary.coverage.name[0],
+    solution.metrics.coverage,
+    solution.metrics.coverage.name[0],
     tooltipsId,
     false
   ).render(el);
 
   // add chart for overall target met for each zone
   new RadialBarChart(
-    solution.metrics.summary.performance,
-    "Performance",
+    solution.metrics.performance,
+    solution.metrics.performance.name[0],
     tooltipsId,
     false
   ).render(el);

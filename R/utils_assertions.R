@@ -24,36 +24,6 @@ assertthat::on_failure(is_installed) <- function(call, env) {
   paste0("The \"", pkg, "\" package must be installed.")
 }
 
-#' Is the freestiler Python library installed?
-#'
-#' Check if the freestiler Python library is installed?
-#'
-#' @return A `logical` value.
-#'
-#' @family misc
-#'
-#' @examples
-#' # print if freestiler Python library is installed?
-#' is_python_freestiler_installed()
-#'
-#' @export
-is_python_freestiler_installed <- function() {
-  identical(
-    suppressWarnings(
-      system(
-        "python3 -c \"import freestiler\"",
-        ignore.stdout = TRUE,
-        ignore.stderr = TRUE
-      )
-    ),
-    0L
-  )
-}
-
-assertthat::on_failure(is_python_freestiler_installed) <- function(call, env) {
-  "Python must have freestiler library installed, use `pip install freestiler`."
-}
-
 #' Is prioritization settings?
 #'
 #' Determine if an object contains valid data for generating a prioritization

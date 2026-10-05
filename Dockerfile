@@ -15,7 +15,6 @@ RUN apt-get update \
     curl \
     gdal-bin \
     htop \
-    pip \
     libuv1-dev \
     libglpk-dev \
     libabsl-dev \
@@ -50,14 +49,15 @@ RUN wget -v https://packages.gurobi.com/${GRB_SHORT_VERSION}/gurobi${GRB_VERSION
   && mv -f gurobi* /opt/gurobi \
   && rm -rf gurobi/linux64/docs
 
-## install python packages
-RUN pip install --break-system-packages --no-cache-dir freestiler
-
 ## install R packages
+### note that Renviron file is configured to ensure freestiler is
+### installed with DuckDB support
 RUN mkdir /renv
 COPY renv.lock /renv/renv.lock
 COPY renv /renv/renv
 RUN cd /renv \
+  && echo "NOT_CRAN=true" > .Renviron \
+  && echo "MY_UNIVERSE=true" >> .Renviron \
   && Rscript -e 'install.packages(c("renv", "remotes"))' \
   && Rscript -e 'options(renv.config.pak.enabled=TRUE);renv::restore()' \
   && Rscript -e 'install.packages("slam", repos = "https://cloud.r-project.org")' \
@@ -91,12 +91,12 @@ EXPOSE 3838
 ## store environmental variables
 ENV R_SHINY_PORT=3838
 ENV R_SHINY_HOST=0.0.0.0
-RUN env | grep R_SHINY_PORT > /home/shiny/.Renviron && \
-    env | grep R_SHINY_HOST >> /home/shiny/.Renviron && \
-    echo "R_DEFAULT_PACKAGES='utils,stats,methods'" >> /home/shiny/.Renviron
+RUN env | grep R_SHINY_PORT > /home/shiny/.Renviron \
+  && env | grep R_SHINY_HOST >> /home/shiny/.Renviron
 
 ## setup shiny application
 RUN mkdir /home/shiny/app
+COPY .Renviron /home/shiny/app
 COPY inst/scripts/app.R /home/shiny/app/app.R
 WORKDIR /home/shiny/app
 

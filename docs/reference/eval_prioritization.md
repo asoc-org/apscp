@@ -53,13 +53,79 @@ sim_settings <- simulate_prioritization_settings(sim_project)
 
 # evaluate prioritization
 eval_prioritization(sim_project, sim_settings, sim_prioritization)
-#> $summary
-#> # A tibble: 3 × 3
-#>   zone         abs_coverage rel_coverage
-#>   <chr>               <int>        <dbl>
-#> 1 Biodiversity           29        0.322
-#> 2 Tourism                37        0.411
-#> 3 Scientific             24        0.267
+#> $coverage
+#> $coverage$name
+#> $coverage$name[[1]]
+#> [1] "Spatial coverage"
+#> 
+#> 
+#> $coverage$id
+#> $coverage$id[[1]]
+#> [1] "spatial-coverage"
+#> 
+#> 
+#> $coverage$units
+#> $coverage$units[[1]]
+#> [1] "planning units"
+#> 
+#> 
+#> $coverage$total
+#> $coverage$total[[1]]
+#> [1] 90
+#> 
+#> 
+#> $coverage$held
+#> # A tibble: 1 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1           29      37         24
+#> 
+#> $coverage$locked
+#> # A tibble: 1 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1           10       0         10
+#> 
+#> 
+#> $performance
+#> $performance$name
+#> $performance$name[[1]]
+#> [1] "Performance"
+#> 
+#> 
+#> $performance$id
+#> $performance$id[[1]]
+#> [1] "performance"
+#> 
+#> 
+#> $performance$units
+#> $performance$units[[1]]
+#> [1] "average percent target met"
+#> 
+#> 
+#> $performance$total
+#> $performance$total[[1]]
+#> [1] 1
+#> 
+#> $performance$total[[2]]
+#> [1] 1
+#> 
+#> $performance$total[[3]]
+#> [1] 1
+#> 
+#> 
+#> $performance$held
+#> # A tibble: 1 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1        0.321   0.272        NaN
+#> 
+#> $performance$locked
+#> # A tibble: 1 × 3
+#>   Biodiversity Tourism Scientific
+#>          <dbl>   <dbl>      <dbl>
+#> 1        0.112       0        NaN
+#> 
 #> 
 #> $features
 #> $features$name
@@ -77,6 +143,23 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $features$name[[5]]
 #> [1] "Species 5"
+#> 
+#> 
+#> $features$id
+#> $features$id[[1]]
+#> [1] "efc64e09-b015-4a56-ad96-65dc21ca9023"
+#> 
+#> $features$id[[2]]
+#> [1] "90f5be33-228a-400a-94b7-c314b78fcb97"
+#> 
+#> $features$id[[3]]
+#> [1] "5229a4e8-46a1-46bf-ba3c-8893f3f16c8f"
+#> 
+#> $features$id[[4]]
+#> [1] "59c703ad-858f-4e2b-9276-0309bbacc9e6"
+#> 
+#> $features$id[[5]]
+#> [1] "fc846228-e285-4ef9-a3a2-553cbf1e4ddc"
 #> 
 #> 
 #> $features$total
@@ -143,6 +226,14 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> [1] "Field camps"
 #> 
 #> 
+#> $locks$id
+#> $locks$id[[1]]
+#> [1] "688782db-1c05-4551-9ef8-60078e50fcd7"
+#> 
+#> $locks$id[[2]]
+#> [1] "c876bb7b-cb5c-4a5a-a1e8-7b9d7bc0f125"
+#> 
+#> 
 #> $locks$total
 #> $locks$total[[1]]
 #> [1] 10
@@ -178,6 +269,11 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> $costs$name
 #> $costs$name[[1]]
 #> [1] "Tourism revenue"
+#> 
+#> 
+#> $costs$id
+#> $costs$id[[1]]
+#> [1] "f0698a5a-28d5-4139-94c6-b0a579d26348"
 #> 
 #> 
 #> $costs$total
