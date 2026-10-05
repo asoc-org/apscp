@@ -10,58 +10,41 @@ export class SemiDonutChart {
 
   /**
    * Create a semi-donut chart.
-   * @param {string} name - Chart title.
-   * @param {number} total - Total amount for the layer.
-   * @param {string} units - Units for the layer.
-   * @param {Array<number>} held - Amount of the layer held by each zone.
-   * @param {Array<number>} locked - Amount of the layer locked by each zone.
-   * @param {Array<string>} zones - Array of zone names.
+   * @param {object} metrics - Object with metric data.
+   * @param {string} title - Chart title.
    * @param {string} tooltipsId - Identifier for element to contain tooltips.
    * @param {boolean} tooltipShowAbsoluteUnits - Should tooltip report
    * statistics for absolute units?
    * @return {void}
    */
-  constructor(
-    name,
-    total,
-    units,
-    held,
-    locked,
-    zones,
-    tooltipsId,
-    tooltipShowAbsoluteUnits
-  ) {
-    // compute start end for each arc
-    let held_arc = {};
-    let locked_arc = {};
-    let current_start = 0;
-    for (let i = 0;  i < zones.length; ++i) {
-      // append arc values for locked
-      locked_arc[zones[i]] = {
-        begin: current_start,
-        end: current_start + (locked[zones[i]] / total)
-      };
-      // append arc values for held
-      held_arc[zones[i]] = {
-        begin: current_start,
-        end: current_start + (held[zones[i]] / total)
-      };
-      // update current start
-      current_start = held_arc[zones[i]].end;
-    }
-
-    // set data field
-    this.data = {
-      name: name,
-      total: total,
-      units: units,
-      held: held,
-      locked: locked,
-      arcs: {locked: locked_arc, held: held_arc},
-      zones: zones
-    };
+  constructor(metrics, title, tooltipsId, tooltipShowAbsoluteUnits) {
+    // assign fields
+    this.metrics = metrics;
+    this.title = title;
     this.tooltipsId = tooltipsId;
     this.tooltipShowAbsoluteUnits = tooltipShowAbsoluteUnits;
+    this.zones = Object.keys(metrics.locked);
+    if (metrics.total.length > 1) {
+      console.log("`SemiDonutPlot()`: `metrics` must have a single metric.");
+    }
+
+    // compute data for arcs
+    this.arcs = {locked: {}, held: {}};
+    let start = 0;
+    for (let z of this.zones) {
+      // append arc values for locked
+      this.arcs.locked[z] = {
+        begin: start,
+        end: start + (metrics.locked[z][0] / metrics.total[0])
+      };
+      // append arc values for held
+      this.arcs.held[z] = {
+        begin: start,
+        end: start + (metrics.held[z][0] / metrics.total[0])
+      };
+      // update current start
+      start = this.arcs.held[z].end;
+    }
 
     // set plotting fields
     this.width = 120;
@@ -108,10 +91,9 @@ export class SemiDonutChart {
    * @param <string> zone - Zone name or `undefined`.
    * @return <void>
    */
-
   renderTooltipContent(type, zone) {
     // add content
-    this.data.zones.forEach((z) => {
+    this.zones.forEach((z) => {
       ["locked", "held"].forEach((x) => {
         // add statistics
         this.tooltip
@@ -120,11 +102,11 @@ export class SemiDonutChart {
           .classed("emph", type === x && zone === z)
           .text(() =>
             `${z} ${x}: ` +
-            Math.round((this.data[x][z] / this.data.total) * 100) +
+            Math.round((this.metrics[x][z][0] / this.metrics.total[0]) * 100) +
             "%" +
             (this.tooltipShowAbsoluteUnits ?
-              " (" + Math.round(this.data[x][z]).toLocaleString() +
-              " " + this.data.units + ")" : "")
+              " (" + Math.round(this.metrics[x][z][0]).toLocaleString() +
+              " " + this.metrics.units[0] + ")" : "")
           )
           .style("color", this.getColor(x, z));
       });
@@ -183,11 +165,11 @@ export class SemiDonutChart {
         let begin = 0;
         let end = 1;
         if (d.type !== "total") {
-          begin = this.data.arcs[d.type][d.zone].begin;
-          end = this.data.arcs[d.type][d.zone].end;
+          begin = this.arcs[d.type][d.zone].begin;
+          end = this.arcs[d.type][d.zone].end;
         }
         const interpolate = d3.interpolate(begin, end);
-        return t => this.createArc({begin: begin, end:interpolate(t)}, i);
+        return t => this.createArc({begin: begin, end: interpolate(t)}, i);
       });
   }
 
@@ -203,19 +185,21 @@ export class SemiDonutChart {
     // render total segment
     this.renderSegment(svg, "total", undefined, 0);
     // render segments for each zone
-    for (let i = 0; i < this.data.zones.length; ++i) {
+    for (let i = 0; i < this.zones.length; ++i) {
       // render held arc
-      this.renderSegment(svg, "held", this.data.zones[i], delay);
+      this.renderSegment(svg, "held", this.zones[i], delay);
       // update delay for next arc
       delay +=
         50 +
-        (this.data.held[this.data.zones[i]] / this.data.total) * total_delay;
+        (this.metrics.held[this.zones[i]][0] / this.metrics.total[0]) *
+        total_delay;
       // render locked arc
-      this.renderSegment(svg, "locked", this.data.zones[i], delay);
+      this.renderSegment(svg, "locked", this.zones[i], delay);
       // update delay for next arc
       delay +=
         50 +
-        (this.data.locked[this.data.zones[i]] / this.data.total) * total_delay;
+        (this.metrics.locked[this.zones[i]][0] / this.metrics.total[0]) *
+        total_delay;
     }
   }
 
@@ -240,7 +224,7 @@ export class SemiDonutChart {
 
   /**
    * Render the plot as an SVG.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * @param <HTMLElement> element - Element that contains the chart.
    * @return <HTMLElement>
    */
   renderSvg(element) {
@@ -254,8 +238,8 @@ export class SemiDonutChart {
   }
 
   /**
-   * Render title for the plot.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render title for the chart.
+   * @param <HTMLElement> element - Element that contains the chart.
    * @return <HTMLElement>
    */
   renderTitle(element) {
@@ -266,27 +250,30 @@ export class SemiDonutChart {
       .append("label")
       .style("color", "black")
       .node()
-      .innerHTML = this.data.name;
+      .innerHTML = this.title;
   }
 
   /**
-   * Render plot.
-   * @param <HTMLElement> element - Element that contains the plot.
+   * Render chart.
+   * @param <HTMLElement> element - Element to append chart.
    * @return <void>
    */
   render(element) {
-    // if no data supplied, then exit
-    if (this.data.total === 0) return;
-    // add semi-donut-chart class
-    element.classList.add("semi-donut-chart");
+    // create new element
+    let el = document.createElement("div")
+    el.classList.add("smi-donut-chart", "chart");
     // initialize and render tooltip
-    this.renderTooltip(element);
-    // render title for plot
-    this.renderTitle(element);
-    // initialize plot
-    const svg = this.renderSvg(element);
-    // render all segments for plot
+    this.renderTooltip(el);
+    // render title
+    this.renderTitle(el);
+    // initialize chart
+    const svg = this.renderSvg(el);
+    // render all segments
     this.renderAllSegments(svg);
+    // attach class
+    el.chart = this;
+    // append to element
+    element.appendChild(el);
   }
 
 }

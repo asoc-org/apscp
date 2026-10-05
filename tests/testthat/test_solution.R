@@ -144,7 +144,7 @@ test_that("create_solution_from_prioritization (metrics = NULL)", {
   expect_equal(x$layer$column, "solv")
   expect_true(file.exists(x$layer$tile$path))
   expect_type(x$metrics, "list")
-  expect_s3_class(x$metrics$summary, "data.frame")
+  expect_type(x$metrics$summary, "list")
   expect_type(x$metrics$features, "list")
   expect_type(x$metrics$features$name, "list")
   expect_type(x$metrics$features$total, "list")

@@ -31,7 +31,7 @@ summarizer_html <- function(id, style, class, ...) {
       # define tabset for panels
       bslib::navset_tab(
         id = paste0(id, "-tabset"),
-        selected = "costs-panel",
+        selected = "summary-panel",
         # define panel for summary information
         bslib::nav_panel(
           id = paste0(id, "-summary-panel"),

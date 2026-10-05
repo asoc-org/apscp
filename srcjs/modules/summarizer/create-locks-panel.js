@@ -1,6 +1,8 @@
 /** Import dependencies */
 // functions to create elements
-import {SemiDonutChart} from  "./semi-donut-chart-class.js";
+import {PieChart} from  "./pie-chart-class.js";
+// functions for data wrangling
+import {subsetMetricsByIds} from "./subset-metrics-by-ids.js";
 // styling
 import "./css/style.css";
 
@@ -18,32 +20,16 @@ export function createLocksPanel(solution, zones, tooltipsId) {
 
   // add charts for each lock
   for (let i = 0; i < solution.metrics.locks.name.length; ++i) {
-    // create chart container
-    let chartEl = document.createElement("div");
-    chartEl.classList.add("semi-donut-chart", "chart");
     // create chart
-    const chart = new SemiDonutChart(
-      solution.settings.locks.name[i],
-      solution.metrics.locks.total[i],
-      solution.metrics.locks.units[i],
-      Object.fromEntries(
-        Object.keys(solution.metrics.locks.held).map(
-          (x) => [x, solution.metrics.locks.held[x][i]]
-        )
+    new PieChart(
+      subsetMetricsByIds(
+        solution.metrics.locks,
+        [solution.metrics.locks.id[i]]
       ),
-      Object.fromEntries(
-        Object.keys(solution.metrics.locks.locked).map(
-          (x) => [x, solution.metrics.locks.locked[x][i]]
-        )
-      ),
-      zones,
+      solution.metrics.locks.name[i],
       tooltipsId,
       false
-    );
-    // render chart on element
-    chart.render(chartEl);
-    chartEl.chart = chart;
-    el.appendChild(chartEl);
+    ).render(el);
   }
 
   // return element

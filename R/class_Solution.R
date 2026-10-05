@@ -66,6 +66,7 @@ new_solution <- function(
     metrics <- lapply(metrics, function(x) {
       if (assertthat::has_name(x, "name")) {
         x$name <- as.list(x$name)
+        x$id <- as.list(x$id)
         x$total <- as.list(x$total)
         x$units <- as.list(x$units)
       }

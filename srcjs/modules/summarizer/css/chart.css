@@ -5,10 +5,18 @@
 /* Main container
    ========================================================================== */
 
+.summarizer .chart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
 /* Title
    ========================================================================== */
 
-.summarizer .semi-donut-chart .chart-title {
+.summarizer .chart-title {
   max-width: 120px;
   word-break: break-word;
   text-align: center;
@@ -35,7 +43,9 @@
 }
 
 .summarizer-tooltips .chart-tooltip.active {
-  display: inline;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 5px;
 }
 
 /* Tooltip text */
