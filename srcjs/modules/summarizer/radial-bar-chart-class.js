@@ -131,19 +131,37 @@ export class RadialBarChart {
    * @return <void>
    */
    renderMultipleLayersStatistics(element, type, zone) {
-    // render average statistic for the layers
-    element
+    // create status header element
+    let el1 = element
       .append("div")
+      .classed("held-header", true);
+    // add color symbol
+    el1
+      .append("div")
+      .classed("held-symbol", true)
+      .style("color", this.getColor(type, zone))
+      .style("background-color", this.getColor(type, zone));
+    // add statistics
+    el1
+      .append("div")
+      .classed("held-label", true)
       .text(() => `${zone} ${type}:`);
-    element
+    // create status body element
+    let el2 = element
       .append("div")
+      .classed("held-body", true);
+    // render average statistic for the layers
+    el2
+      .append("div")
+      .classed("held-label", true)
       .text(() =>
         `\u2022 Average: ${Math.round(this.arcs[type][zone].end * 100)}%`
       );
     // render statistics for each layer
     this.metrics.name.forEach((x, i) => {
-      element
+      el2
         .append("div")
+        .classed("held-label", true)
         .text(() =>
           `\u2022 ${x}: ` +
           Math.round(
@@ -164,9 +182,21 @@ export class RadialBarChart {
    * @param <string> zone - Zone name or `undefined`.
    * @return <void>
    */
-   renderSingleLayerStatistics(element, type, zone) {
-    element
+  renderSingleLayerStatistics(element, type, zone) {
+    // create status element
+    let el = element
       .append("div")
+      .classed("held-header", true);
+    // add color symbol
+    el
+      .append("div")
+      .classed("held-symbol", true)
+      .style("color", this.getColor(type, zone))
+      .style("background-color", this.getColor(type, zone));
+    // add statistics
+    el
+      .append("div")
+      .classed("held-label", true)
       .text(() =>
         `${zone} ${type}: ` +
         Math.round(
@@ -176,7 +206,7 @@ export class RadialBarChart {
         (this.tooltipShowAbsoluteUnits ?
           " (" + Math.round(this.metrics[type][zone][0]).toLocaleString() +
           " " + this.metrics.units[0] + ")" : "")
-    );
+      );
   }
 
   /**
@@ -189,11 +219,11 @@ export class RadialBarChart {
     // add content
     this.zones.forEach((z) => {
       ["locked", "held"].forEach((x) => {
+        // create status element
         this.tooltip
           .append("div")
-          .classed("chart-tooltip-text", true)
           .classed("emph", type === x && zone === z)
-          .style("color", this.getColor(x, z))
+          .classed("held-status", true)
           .call(this.renderLayerStatistics.bind(this), x, z)
       });
     });

@@ -95,11 +95,23 @@ export class SemiDonutChart {
     // add content
     this.zones.forEach((z) => {
       ["locked", "held"].forEach((x) => {
-        // add statistics
-        this.tooltip
+        // create status element
+        let el = this.tooltip
           .append("div")
-          .classed("chart-tooltip-text", true)
+          .classed("held-status", true)
           .classed("emph", type === x && zone === z)
+          .append("div")
+          .classed("held-header", true);
+        // add header color symbol
+        el
+          .append("div")
+          .classed("held-symbol", true)
+          .style("color", this.getColor(x, z))
+          .style("background-color", this.getColor(x, z));
+        // add header statistics
+        el
+          .append("div")
+          .classed("held-label", true)
           .text(() =>
             `${z} ${x}: ` +
             Math.round((this.metrics[x][z][0] / this.metrics.total[0]) * 100) +
@@ -107,8 +119,7 @@ export class SemiDonutChart {
             (this.tooltipShowAbsoluteUnits ?
               " (" + Math.round(this.metrics[x][z][0]).toLocaleString() +
               " " + this.metrics.units[0] + ")" : "")
-          )
-          .style("color", this.getColor(x, z));
+          );
       });
     });
   }
