@@ -109,25 +109,38 @@ export class RadialBarChart {
   }
 
   /**
-   * Render average statistics for all features.
+   * Render statistics for all layers.
    * @param <HTMLElement> element - Element to render text on.
    * @param <string> type - Value equal to `"held"`, `"locked"`, or `"total"`.
    * @param <string> zone - Zone name or `undefined`.
    * @return <void>
    */
-  renderFeatureStatistics(element, type, zone) {
-    // render average statistic for the features
+  renderLayerStatistics(element, type, zone) {
+    if (this.metrics.name.length > 1) {
+      this.renderMultipleLayersStatistics(element, type, zone);
+    } else {
+      this.renderSingleLayerStatistics(element, type, zone);
+    }
+  }
+
+  /**
+   * Render statistics for multiple layers.
+   * @param <HTMLElement> element - Element to render text on.
+   * @param <string> type - Value equal to `"held"`, `"locked"`, or `"total"`.
+   * @param <string> zone - Zone name or `undefined`.
+   * @return <void>
+   */
+   renderMultipleLayersStatistics(element, type, zone) {
+    // render average statistic for the layers
     element
       .append("div")
       .text(() => `${zone} ${type}:`);
-    if (this.metrics.name.length > 1) {
-      element
-        .append("div")
-        .text(() =>
-          `\u2022 Average: ${Math.round(this.arcs[type][zone].end * 100)}%`
-        );
-    }
-    // render statistics for each feature
+    element
+      .append("div")
+      .text(() =>
+        `\u2022 Average: ${Math.round(this.arcs[type][zone].end * 100)}%`
+      );
+    // render statistics for each layer
     this.metrics.name.forEach((x, i) => {
       element
         .append("div")
@@ -141,7 +154,29 @@ export class RadialBarChart {
             " (" + Math.round(this.metrics[type][zone][i]).toLocaleString() +
             " " + this.metrics.units[i] + ")" : "")
         )
-    })
+    });
+  }
+
+  /**
+   * Render statistics for a single layer.
+   * @param <HTMLElement> element - Element to render text on.
+   * @param <string> type - Value equal to `"held"`, `"locked"`, or `"total"`.
+   * @param <string> zone - Zone name or `undefined`.
+   * @return <void>
+   */
+   renderSingleLayerStatistics(element, type, zone) {
+    element
+      .append("div")
+      .text(() =>
+        `${zone} ${type}: ` +
+        Math.round(
+          (this.metrics[type][zone][0] / this.metrics.total[0]) * 100
+        ) +
+        "%" +
+        (this.tooltipShowAbsoluteUnits ?
+          " (" + Math.round(this.metrics[type][zone][0]).toLocaleString() +
+          " " + this.metrics.units[0] + ")" : "")
+    );
   }
 
   /**
@@ -159,7 +194,7 @@ export class RadialBarChart {
           .classed("chart-tooltip-text", true)
           .classed("emph", type === x && zone === z)
           .style("color", this.getColor(x, z))
-          .call(this.renderFeatureStatistics.bind(this), x, z)
+          .call(this.renderLayerStatistics.bind(this), x, z)
       });
     });
   }

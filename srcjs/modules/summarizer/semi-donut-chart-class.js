@@ -91,7 +91,6 @@ export class SemiDonutChart {
    * @param <string> zone - Zone name or `undefined`.
    * @return <void>
    */
-
   renderTooltipContent(type, zone) {
     // add content
     this.zones.forEach((z) => {
