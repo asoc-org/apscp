@@ -54,6 +54,9 @@ Functions and definitions for new classes.
 - [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
   : New solution
 
+- [`new_solution_legend()`](https://asoc-org.github.io/apscp/reference/new_solution_legend.md)
+  : New solution legend
+
 - [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md)
   : New theme
 

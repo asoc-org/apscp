@@ -21,7 +21,12 @@ create_solution_from_prioritization(
 added.}
 
 \item{prioritization}{\code{numeric} vector with a value for each planning
-unit to indicate zone allocations.}
+unit to indicate zone allocations.
+For example, if the prioritization has three zones, then elements
+with values ranging between 1 and 3 correspond to planning units
+that are locked to the three zones (respectively). Additionally,
+elements with values ranging between 4 and 6 correspond to planning units
+that are selected as a priority for the three zones (respectively).}
 
 \item{settings}{\code{list} of settings used to generate the solution.}
 

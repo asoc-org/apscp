@@ -43,6 +43,7 @@ Other functions for defining classes:
 [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
+[`new_solution_legend()`](https://asoc-org.github.io/apscp/reference/new_solution_legend.md),
 [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md),
 [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
 

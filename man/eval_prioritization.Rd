@@ -13,7 +13,12 @@ added.}
 \item{settings}{\code{list} of settings used to generate the solution.}
 
 \item{prioritization}{\code{numeric} vector with a value for each planning
-unit to indicate zone allocations.}
+unit to indicate zone allocations.
+For example, if the prioritization has three zones, then elements
+with values ranging between 1 and 3 correspond to planning units
+that are locked to the three zones (respectively). Additionally,
+elements with values ranging between 4 and 6 correspond to planning units
+that are selected as a priority for the three zones (respectively).}
 }
 \value{
 A \code{list} object. This is a \code{list} with a

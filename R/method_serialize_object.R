@@ -106,6 +106,18 @@ serialize_object.CategoricalLegend <- function(x) {
 }
 
 #' @rdname serialize_object
+#' @method serialize_object SolutionLegend
+#' @export
+serialize_object.SolutionLegend <- function(x) {
+  list(
+    values = x$values,
+    labels = x$labels,
+    colors = x$colors,
+    class = "SolutionLegend"
+  )
+}
+
+#' @rdname serialize_object
 #' @method serialize_object Layer
 #' @export
 serialize_object.Layer <- function(x) {

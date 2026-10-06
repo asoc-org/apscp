@@ -164,6 +164,7 @@ Other functions for defining classes:
 \code{\link[=new_lock]{new_lock()}},
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
+\code{\link[=new_solution_legend]{new_solution_legend()}},
 \code{\link[=new_theme]{new_theme()}},
 \code{\link[=new_tile]{new_tile()}}
 }

@@ -23,7 +23,12 @@ eval_prioritization(project, settings, prioritization)
 - prioritization:
 
   `numeric` vector with a value for each planning unit to indicate zone
-  allocations.
+  allocations. For example, if the prioritization has three zones, then
+  elements with values ranging between 1 and 3 correspond to planning
+  units that are locked to the three zones (respectively). Additionally,
+  elements with values ranging between 4 and 6 correspond to planning
+  units that are selected as a priority for the three zones
+  (respectively).
 
 ## Value
 
@@ -84,7 +89,7 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1           10       0         10
+#> 1           29      37         24
 #> 
 #> 
 #> $performance
@@ -124,7 +129,7 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        0.112       0        NaN
+#> 1        0.321   0.272        NaN
 #> 
 #> 
 #> $features
@@ -147,19 +152,19 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $features$id
 #> $features$id[[1]]
-#> [1] "efc64e09-b015-4a56-ad96-65dc21ca9023"
+#> [1] "d16601de-72ee-4b94-854e-ff632c72a0fb"
 #> 
 #> $features$id[[2]]
-#> [1] "90f5be33-228a-400a-94b7-c314b78fcb97"
+#> [1] "a03de850-3614-4359-bd1c-019b8bb36f86"
 #> 
 #> $features$id[[3]]
-#> [1] "5229a4e8-46a1-46bf-ba3c-8893f3f16c8f"
+#> [1] "5365f5d2-a918-4c45-a319-8592c6e132a6"
 #> 
 #> $features$id[[4]]
-#> [1] "59c703ad-858f-4e2b-9276-0309bbacc9e6"
+#> [1] "d631a7bf-ad02-4fd0-8ce1-62ee1c3a9519"
 #> 
 #> $features$id[[5]]
-#> [1] "fc846228-e285-4ef9-a3a2-553cbf1e4ddc"
+#> [1] "8b49c6d9-1243-4227-916c-b87c6f2e1827"
 #> 
 #> 
 #> $features$total
@@ -210,11 +215,11 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 5 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1         8.28       0       8.22
-#> 2         3.15       0       3.06
-#> 3         7.68       0       7.13
-#> 4         4.08       0       4.09
-#> 5         5.36       0       5.69
+#> 1        23.7     30.7      20.2 
+#> 2         9.27    11.5       7.31
+#> 3        20.6     27.0      17.3 
+#> 4        12.7     15.6       9.85
+#> 5        16.2     20.6      13.8 
 #> 
 #> 
 #> $locks
@@ -228,10 +233,10 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $locks$id
 #> $locks$id[[1]]
-#> [1] "688782db-1c05-4551-9ef8-60078e50fcd7"
+#> [1] "8db4909f-3425-41d3-b8ec-a2a632c4fe0c"
 #> 
 #> $locks$id[[2]]
-#> [1] "c876bb7b-cb5c-4a5a-a1e8-7b9d7bc0f125"
+#> [1] "ef00ce50-8c2e-4345-82db-73b53b52297f"
 #> 
 #> 
 #> $locks$total
@@ -261,8 +266,8 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 2 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1           10       0          0
-#> 2            0       0         10
+#> 1            4       5          1
+#> 2            2       5          3
 #> 
 #> 
 #> $costs
@@ -273,7 +278,7 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $costs$id
 #> $costs$id[[1]]
-#> [1] "f0698a5a-28d5-4139-94c6-b0a579d26348"
+#> [1] "fab71052-ca37-4ea8-adda-1aee9a3219c5"
 #> 
 #> 
 #> $costs$total
@@ -296,7 +301,7 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        2064.       0      2042.
+#> 1        5963.   7602.      4923.
 #> 
 #> 
 ```

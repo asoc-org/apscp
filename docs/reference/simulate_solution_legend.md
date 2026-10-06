@@ -35,5 +35,16 @@ Other functions for simulating data:
 ``` r
 # simulate legend
 simulate_solution_legend()
-#> A <CategoricalLegend> object.
+#> $values
+#> [1] 1 2 3 4 5 6
+#> 
+#> $colors
+#> [1] "#000000" "#DDDDDD" "#AAAAAA" "#fbb4ae" "#b3cde3" "#ccebc5"
+#> 
+#> $labels
+#> [1] "Biodiversity locked"   "Tourism locked"        "Science locked"       
+#> [4] "Biodiversity priority" "Tourism priority"      "Science priority"     
+#> 
+#> attr(,"class")
+#> [1] "SolutionLegend" "Legend"        
 ```

@@ -15,6 +15,7 @@
 summarizer <- function(
   project,
   zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors"),
   width = NULL,
   height = NULL,
   id = NULL
@@ -23,7 +24,11 @@ summarizer <- function(
   assertthat::assert_that(
     inherits(project, "Project"),
     is.character(zone_colors),
-    length(zone_colors) >= length(project$zones)
+    assertthat::noNA(zone_colors),
+    length(zone_colors) >= length(project$zones),
+    is.character(zone_locked_colors),
+    assertthat::noNA(zone_locked_colors),
+    length(zone_locked_colors) >= length(project$zones)
   )
 
   # create widget
@@ -31,7 +36,8 @@ summarizer <- function(
     name = "summarizer",
     x = list(
       project = serialize_object(project),
-      zoneColors = zone_colors[seq_along(project$zones)]
+      zoneColors = zone_colors[seq_along(project$zones)],
+      zoneLockedColors = zone_locked_colors[seq_along(project$zones)]
     ),
     width = width,
     height = height,

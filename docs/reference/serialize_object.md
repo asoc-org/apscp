@@ -19,6 +19,9 @@ serialize_object(x)
 # S3 method for class 'CategoricalLegend'
 serialize_object(x)
 
+# S3 method for class 'SolutionLegend'
+serialize_object(x)
+
 # S3 method for class 'Layer'
 serialize_object(x)
 

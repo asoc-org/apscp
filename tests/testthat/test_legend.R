@@ -132,7 +132,7 @@ test_that("create_legend (categorical)", {
   )
   # run tests
   expect_s3_class(x, "CategoricalLegend")
-  expect_equal(x$labels, c("0", "1", "2", "3"))
+  expect_equal(x$labels, c("0", "1", "2", "3", "4", "5", "6"))
   expect_equal(x$units, "acres")
 })
 

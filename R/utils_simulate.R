@@ -35,7 +35,7 @@ simulate_spatial_data <- function() {
   solution <- pu * NA_real_
   solution[idx] <- withr::with_seed(
     seed = 500,
-    sample(seq(0, 3), size = length(idx), replace = TRUE)
+    sample(seq(0, 6), size = length(idx), replace = TRUE)
   )
 
   # create binary layer
@@ -267,11 +267,7 @@ simulate_project <- function() {
         tile = tile,
         column = "solution",
         visible = TRUE,
-        legend = new_categorical_legend(
-          c(1, 2, 3), c("#000000", "#DDDDDD", "#AAAAAA"),
-          c("Conservation", "Tourism", "Science"),
-          units = "categorical"
-        ),
+        legend = create_solution_legend(out),
         provenance = provenance,
         total = unname(dataset$get_column_total("solution"))
       ),
@@ -325,11 +321,16 @@ simulate_continuous_legend <- function() {
 #'
 #' @export
 simulate_solution_legend <- function() {
-  new_categorical_legend(
-    values = c(1, 2, 3),
-    colors = c("#000000", "#DDDDDD", "#AAAAAA"),
-    labels = c("Biodiversity", "Tourism", "Science"),
-    units = "ternary"
+  new_solution_legend(
+    values = seq(1, 6),
+    colors = c(
+      "#000000", "#DDDDDD", "#AAAAAA",
+      "#fbb4ae", "#b3cde3", "#ccebc5"
+    ),
+    labels = c(
+      "Biodiversity locked", "Tourism locked", "Science locked",
+      "Biodiversity priority", "Tourism priority", "Science priority"
+    )
   )
 }
 

@@ -71,12 +71,13 @@ export class Solver {
    * @param {Array<number>} costWeightChoices - Array of numbers used to
    * define the potential values for setting cost weights.
    * @param {Array<string>} zoneColors - Array of colors for zones.
+   * @param {Array<string>} zoneLockedColors - Array of colors for locked zones.
    * @return {void}
    */
   initialize(
     element, project,
     featureTargetChoices, featureWeightChoices, costWeightChoices,
-    zoneColors
+    zoneColors, zoneLockedColors
   ) {
     // assign styling to element based on zone colors
     for (let i = 0; i < project.zones.length; ++i) {
@@ -86,7 +87,7 @@ export class Solver {
       );
       element.style.setProperty(
         `--zone-${project.zones[i]}-secondary`,
-        `color-mix(in srgb, ${zoneColors[i]}, white 50%)`
+        zoneLockedColors[i]
       );
     }
 

@@ -84,9 +84,10 @@ export class Summarizer {
    * @param {Array<object>} project.locks - Array of lock objects.
    * @param {Array<object>} project.solutions - Array of solution objects.
    * @param {Array<string>} zoneColors - Array of colors for zones.
+   * @param {Array<string>} zoneLockedColors - Array of colors for locked zones.
    * @return {void}
    */
-  initialize(element, project, zoneColors) {
+  initialize(element, project, zoneColors, zoneLockedColors) {
     // initialize data fields
     for (let i = 0; i < project.solutions.length; ++i) {
       this._solutions.set(project.solutions[i].id, project.solutions[i]);
@@ -126,7 +127,7 @@ export class Summarizer {
       );
       element.style.setProperty(
         `--zone-${project.zones[i]}-secondary`,
-        `color-mix(in srgb, ${zoneColors[i]}, white 50%)`
+        zoneLockedColors[i]
       );
       // tooltips container element
       this._tooltipsContainer.style.setProperty(
@@ -135,7 +136,7 @@ export class Summarizer {
       );
       this._tooltipsContainer.style.setProperty(
         `--zone-${project.zones[i]}-secondary`,
-        `color-mix(in srgb, ${zoneColors[i]}, white 50%)`
+        zoneLockedColors[i]
       );
     }
 

@@ -40,6 +40,11 @@ displayed during optimization process. Defaults to \code{FALSE}.}
 }
 \value{
 A \code{numeric} vector with values indicating the zone for each planning unit.
+For example, if the prioritization has three zones, then elements
+with values ranging between 1 and 3 correspond to planning units
+that are locked to the three zones (respectively). Additionally,
+elements with values ranging between 4 and 6 correspond to planning units
+that are selected as a priority for the three zones (respectively).
 }
 \description{
 Generate a prioritization using multi-objective optimization techniques.

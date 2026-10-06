@@ -293,7 +293,9 @@ mapgl_add_layer <- function(
       ),
       fill_opacity = 0.8
     )
-  } else if(inherits(x$layer$legend, "CategoricalLegend")) {
+  } else if (
+    inherits(x$layer$legend, c("SolutionLegend", "CategoricalLegend"))
+  ) {
     paint_params <- list(
       fill_color = mapgl::step_expr(
         column = x$layer$column,

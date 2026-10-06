@@ -46,7 +46,11 @@ function createPopup(data, zones) {
     // create span
     let span = document.createElement("span");
     if (value.class === "Solution") {
-      span.innerText = zones[value.value - 1];
+      if (value.value <= zones.length) {
+        span.innerText = `${zones[value.value - 1]} locked`;
+      } else {
+        span.innerText = `${zones[value.value - zones.length - 1]} priority`;
+      }
     } else {
       span.innerText = value.value;
     }

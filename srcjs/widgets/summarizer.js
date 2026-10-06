@@ -20,7 +20,12 @@ HTMLWidgets.widget({
           let el = document.getElementById(elementId);
           el.widget = this;
           // initialize widget
-          handle.initialize(el, opts.project, opts.zoneColors);
+          handle.initialize(
+            el,
+            opts.project,
+            opts.zoneColors,
+            opts.zoneLockedColors
+          );
         }
       },
 

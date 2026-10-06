@@ -34,12 +34,7 @@ NULL
 #' # print object
 #' print(l)
 #' @export
-new_categorical_legend <- function(
-  values,
-  colors,
-  labels,
-  units = NULL
-) {
+new_categorical_legend <- function(values, colors, labels, units = NULL) {
   # assert valid parameters
   assertthat::assert_that(
     ## values
@@ -69,6 +64,53 @@ new_categorical_legend <- function(
   structure(
     list(values = values, colors = colors, labels = labels, units = units),
     class = c("CategoricalLegend", "Legend")
+  )
+}
+
+#' New solution legend
+#'
+#' Create a new solution legend object.
+#'
+#' @inheritParams new_categorical_legend
+#'
+#' @return A `SolutionLegend` object.
+#'
+#' @family class
+#'
+#' @examples
+#' # create new object
+#' l <- new_solution_legend(
+#'   values = c(0, 1),
+#'   colors = c("#000000", "#AAAAAA"),
+#'   labels = c("a", "b")
+#' )
+#'
+#' # print object
+#' print(l)
+#' @export
+new_solution_legend <- function(values, colors, labels) {
+  # assert valid parameters
+  assertthat::assert_that(
+    ## values
+    is.numeric(values),
+    assertthat::noNA(values),
+    ## labels
+    is.character(labels),
+    assertthat::noNA(labels),
+    ## colors
+    is.character(colors),
+    assertthat::noNA(colors),
+    all(nchar(colors) %in% c(7, 9)),
+    all(substr(colors, 1, 1) == "#"),
+    ## lengths
+    length(values) == length(labels),
+    length(colors) == length(labels)
+  )
+
+  # return object
+  structure(
+    list(values = values, colors = colors, labels = labels),
+    class = c("SolutionLegend", "Legend")
   )
 }
 

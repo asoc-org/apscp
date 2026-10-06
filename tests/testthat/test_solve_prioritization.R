@@ -11,12 +11,12 @@ test_that("basic", {
   # ensure no active costs or locks
   s$locks <- s$locks[FALSE, , drop = FALSE]
   s$costs$zones <- NA
-  # generate solution
+  # generate prioritization
   x <- solve_prioritization(p, s)
   # run tests
   expect_s3_class(x, "Prioritization")
   expect_type(x, "double")
-  expect_true(all(seq_along(p$zones) %in% x))
+  expect_true(all(x %in% c(NA, seq(0, length(p$zones) * 2))))
 })
 
 test_that("active costs", {
@@ -35,7 +35,7 @@ test_that("active costs", {
   s$features$weight[!i] <- 1
   # ensure no active locks
   s$locks <- s$locks[FALSE, , drop = FALSE]
-  # generate solution
+  # generate prioritization
   x <- solve_prioritization(p, s)
   # run tests
   expect_s3_class(x, "Prioritization")
@@ -55,7 +55,7 @@ test_that("active locks", {
   s$features$weight <- 1
   # ensure no active costs
   s$costs$zones <- NA
-  # generate solution
+  # generate prioritization
   x <- solve_prioritization(p, s)
   # run tests
   expect_s3_class(x, "Prioritization")
@@ -79,7 +79,7 @@ test_that("both solvers work", {
   # simulate data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  # generate solution
+  # generate prioritization
   x <- solve_prioritization(p, s, solver = "cbc", gap = 0)
   y <- solve_prioritization(p, s, solver = "gurobi", gap = 0)
   # run tests
@@ -88,4 +88,64 @@ test_that("both solvers work", {
   expect_s3_class(y, "Prioritization")
   expect_type(y, "double")
   expect_equal(attr(x, "objective"), attr(y, "objective"), tolerance = 1e-4)
+})
+
+test_that("expected behavior (no locks)", {
+  # define skips
+  skip_if_not_installed("rcbc")
+  skip_if_not_installed("prioritizr")
+  # simulate data
+  p <- read_builtin_project()
+  s <- simulate_prioritization_settings(p)
+  # ensure no active costs or locks
+  s$costs$zones <- NA
+  s$locks <- s$locks[0, , drop = FALSE]
+  # create settings to focus only on each zone
+  s <- lapply(p$zones, function(x) {
+    s$features$target[s$features$zone != x] <- 0
+    s
+  })
+  # generate prioritizations
+  x <- lapply(s, function(x) {
+    solve_prioritization(p, x, solver = "cbc", gap = 0)
+  })
+  # run tests
+  expect_type(x, "list")
+  expect_true(
+    all(
+      vapply(seq_along(x), FUN.VALUE = logical(1), function(i) {
+        all(x[[i]] %in% c(NA, 0, length(p$zones) + i))
+      })
+    )
+  )
+})
+
+test_that("expected behavior (active locks)", {
+  # define skips
+  skip_if_not_installed("rcbc")
+  skip_if_not_installed("prioritizr")
+  # simulate data
+  p <- read_builtin_project()
+  s <- simulate_prioritization_settings(p)
+  # ensure no active costs or locks
+  s$costs$zones <- NA
+  # create settings to focus only on each zone
+  s <- lapply(p$zones, function(x) {
+    s$locks$zone <- x
+    s$features$target[s$features$zone != x] <- 0
+    s
+  })
+  # generate prioritizations
+  x <- lapply(s, function(x) {
+    solve_prioritization(p, x, solver = "cbc", gap = 0)
+  })
+  # run tests
+  expect_type(x, "list")
+  expect_true(
+    all(
+      vapply(seq_along(x), FUN.VALUE = logical(1), function(i) {
+        all(x[[i]] %in% c(NA, 0, i, length(p$zones) + i))
+      })
+    )
+  )
 })

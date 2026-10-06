@@ -30,7 +30,12 @@ create_solution_from_prioritization(
 - prioritization:
 
   `numeric` vector with a value for each planning unit to indicate zone
-  allocations.
+  allocations. For example, if the prioritization has three zones, then
+  elements with values ranging between 1 and 3 correspond to planning
+  units that are locked to the three zones (respectively). Additionally,
+  elements with values ranging between 4 and 6 correspond to planning
+  units that are selected as a priority for the three zones
+  (respectively).
 
 - settings:
 

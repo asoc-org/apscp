@@ -63,8 +63,24 @@ default:
     - "#984ea3"
     - "#ffff33"
     - "#a65628"
-    - "#999999"
     - "#e41a1c"
+    - "#525252"
+
+  ## define color palette used for locking zones in solutions
+  ### note that if more colors are defined than zones, then only
+  ### the first set of color values are used. also, these colors
+  ### were generated with the following code:
+  ### dput(colorspace::lighten(get_golem_config("zone_colors"), 0.85))
+  zone_locked_colors:
+    - "#C0FFBF"
+    - "#FEEDF5"
+    - "#DEEBFF"
+    - "#FFEDE8"
+    - "#F9DFFF"
+    - "#FFFFEB"
+    - "#FFE1D9"
+    - "#FFE2E3"
+    - "#E3E3E3"
 
 # development configuration
 ## this is intended for running locally outside of a docker environment

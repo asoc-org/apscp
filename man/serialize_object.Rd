@@ -6,6 +6,7 @@
 \alias{serialize_object.Tile}
 \alias{serialize_object.ContinuousLegend}
 \alias{serialize_object.CategoricalLegend}
+\alias{serialize_object.SolutionLegend}
 \alias{serialize_object.Layer}
 \alias{serialize_object.Feature}
 \alias{serialize_object.Lock}
@@ -25,6 +26,8 @@ serialize_object(x)
 \method{serialize_object}{ContinuousLegend}(x)
 
 \method{serialize_object}{CategoricalLegend}(x)
+
+\method{serialize_object}{SolutionLegend}(x)
 
 \method{serialize_object}{Layer}(x)
 

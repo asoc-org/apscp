@@ -109,6 +109,7 @@ deserialize_object <- function(x, dataset = NULL) {
     Tile = do.call(new_tile, x),
     CategoricalLegend = do.call(new_categorical_legend, x),
     ContinuousLegend = do.call(new_continuous_legend, x),
+    SolutionLegend = do.call(new_solution_legend, x),
     Layer = do.call(new_layer, x),
     Feature = do.call(new_feature, x),
     Lock = do.call(new_lock, x),

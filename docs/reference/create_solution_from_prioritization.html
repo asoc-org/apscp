@@ -70,7 +70,12 @@ added.</p></dd>
 
 <dt id="arg-prioritization">prioritization<a class="anchor" aria-label="anchor" href="#arg-prioritization"></a></dt>
 <dd><p><code>numeric</code> vector with a value for each planning
-unit to indicate zone allocations.</p></dd>
+unit to indicate zone allocations.
+For example, if the prioritization has three zones, then elements
+with values ranging between 1 and 3 correspond to planning units
+that are locked to the three zones (respectively). Additionally,
+elements with values ranging between 4 and 6 correspond to planning units
+that are selected as a priority for the three zones (respectively).</p></dd>
 
 
 <dt id="arg-settings">settings<a class="anchor" aria-label="anchor" href="#arg-settings"></a></dt>

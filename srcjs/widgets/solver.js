@@ -25,7 +25,8 @@ HTMLWidgets.widget({
             opts.featureTargetChoices,
             opts.featureWeightChoices,
             opts.costWeightChoices,
-            opts.zoneColors
+            opts.zoneColors,
+            opts.zoneLockedColors
           );
         }
       },

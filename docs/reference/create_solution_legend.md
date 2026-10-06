@@ -50,5 +50,16 @@ x <- create_solution_legend(p)
 
 # print legend
 print(x)
-#> A <CategoricalLegend> object.
+#> $values
+#> [1] 1 2 3 4 5 6
+#> 
+#> $colors
+#> [1] "#C0FFBF" "#FEEDF5" "#DEEBFF" "#4daf4a" "#f781bf" "#377eb8"
+#> 
+#> $labels
+#> [1] "Biodiversity locked"   "Tourism locked"        "Scientific locked"    
+#> [4] "Biodiversity priority" "Tourism priority"      "Scientific priority"  
+#> 
+#> attr(,"class")
+#> [1] "SolutionLegend" "Legend"        
 ```

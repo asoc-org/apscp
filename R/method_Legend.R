@@ -184,18 +184,31 @@ create_solution_legend <- function(project) {
 
   # obtain colors
   cols <- get_golem_config("zone_colors")
+  locked_cols <- get_golem_config("zone_locked_colors")
 
   # if needed, add extra colors
   if (length(zones) > length(cols)) {
-    cols <- c(cols, color_palette("plasma", length(zones) - length(cols) + 1L))
+    cols <- c(
+      cols,
+      color_palette("plasma", length(zones) - length(cols) + 1L)
+    )
+  }
+  if (length(zones) > length(locked_cols)) {
+    locked_cols <- c(
+      locked_cols,
+      color_palette("viridis", length(zones) - length(cols) + 1L)
+    )
   }
 
+  # subset required colors
+  cols <- cols[seq_along(zones)]
+  locked_cols <- locked_cols[seq_along(zones)]
+
   # create legend
-  new_categorical_legend(
-    values = seq_along(zones),
-    colors = cols[seq_along(zones)],
-    labels = zones,
-    units = NULL
+  new_solution_legend(
+    values = seq_len(length(zones) * 2L),
+    colors = c(locked_cols, cols),
+    labels = c(paste(zones, "locked"), paste(zones, "priority"))
   )
 }
 

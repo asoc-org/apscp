@@ -43,8 +43,15 @@ eval_prioritization <- function(project, settings, prioritization) {
     is_prioritization_settings(settings),
     ## prioritization
     is.numeric(prioritization),
-    identical(length(prioritization), project$dataset$get_n_pu()),
-    suppressWarnings(max(prioritization, na.rm = TRUE)) <= length(project$zones)
+    identical(length(prioritization), project$dataset$get_n_pu())
+  )
+  assertthat::assert_that(
+    suppressWarnings(max(prioritization, na.rm = TRUE)) <=
+      (length(project$zones) * 2),
+    msg = paste(
+      "`prioritization` does not have a values that reflect zones in",
+      "`project`."
+    )
   )
 
   # prepare data for evaluation
@@ -53,12 +60,6 @@ eval_prioritization <- function(project, settings, prioritization) {
 
   # prepare prioritization for evaluation
   prioritization[is.na(prioritization)] <- 0
-
-  # if needed, generate matrix with locked data based on settings
-  if (is.null(attr(prioritization, "locked"))) {
-    attr(prioritization, "locked") <-
-      convert_lock_settings_to_prioritization(project, settings)
-  }
 
   # return metrics
   list(
@@ -115,7 +116,6 @@ calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), nrow(pu_data)),
-    !is.null(attr(prioritization, "locked")),
     ## zones
     is.character(zones)
   )
@@ -143,7 +143,10 @@ calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
     FUN.VALUE = numeric(length(nm)),
     function(i) {
       c(
-        as.numeric(prioritization == i) %*%
+        as.numeric(
+          prioritization == i |
+          prioritization == (length(zones) + i)
+        ) %*%
         pu_data[, cl, drop = FALSE]
       )
     }
@@ -159,7 +162,7 @@ calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
     FUN.VALUE = numeric(length(nm)),
     function(i) {
       c(
-        as.numeric(attr(prioritization, "locked") == i) %*%
+        as.numeric(prioritization == i) %*%
         pu_data[, cl, drop = FALSE]
       )
     }
@@ -207,7 +210,6 @@ calc_coverage_metrics <- function(pu_data, prioritization, zones) {
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), nrow(pu_data)),
-    !is.null(attr(prioritization, "locked")),
     ## zones
     is.character(zones)
   )
@@ -219,7 +221,9 @@ calc_coverage_metrics <- function(pu_data, prioritization, zones) {
   held_matrix <- vapply(
     seq_along(zones),
     FUN.VALUE = numeric(1L),
-    function(i) sum(as.numeric(prioritization == i))
+    function(i) sum(
+      as.numeric(prioritization == i | prioritization == (length(zones) + i))
+    )
   )
   if (!is.matrix(held_matrix)) {
    held_matrix <- matrix(held_matrix, nrow = 1)
@@ -230,7 +234,7 @@ calc_coverage_metrics <- function(pu_data, prioritization, zones) {
   locked_matrix <- vapply(
     seq_along(zones),
     FUN.VALUE = numeric(1L),
-    function(i) sum(as.numeric(attr(prioritization, "locked") == i))
+    function(i) sum(as.numeric(prioritization == i))
   )
   if (!is.matrix(locked_matrix)) {
    locked_matrix <- matrix(locked_matrix, nrow = 1)
@@ -277,7 +281,6 @@ calc_performance_metrics <- function(
     ## prioritization
     is.numeric(prioritization),
     identical(length(prioritization), nrow(pu_data)),
-    !is.null(attr(prioritization, "locked")),
     ## zones
     is.character(zones),
     ## settings
@@ -311,7 +314,10 @@ calc_performance_metrics <- function(
       mean(
         pmin(
           c(
-            as.numeric(prioritization == i) %*%
+            as.numeric(
+              prioritization == i |
+              prioritization == (length(zones) + i)
+            ) %*%
             pu_data[, d$column, drop = FALSE]
           ) / colSums(pu_data[, d$column, drop = FALSE]),
           1
@@ -336,7 +342,7 @@ calc_performance_metrics <- function(
       mean(
         pmin(
           c(
-            as.numeric(attr(prioritization, "locked") == i) %*%
+            as.numeric(prioritization == i) %*%
             pu_data[, d$column, drop = FALSE]
           ) / colSums(pu_data[, d$column, drop = FALSE]),
           1

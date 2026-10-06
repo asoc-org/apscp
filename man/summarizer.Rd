@@ -7,6 +7,7 @@
 summarizer(
   project,
   zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors"),
   width = NULL,
   height = NULL,
   id = NULL
@@ -17,6 +18,9 @@ summarizer(
 
 \item{zone_colors}{\code{character} vector of colors for each zone.
 Defaults to \code{get_golem_config("zone_colors")}.}
+
+\item{zone_locked_colors}{\code{character} vector of colors for each zone.
+Defaults to \code{get_golem_config("zone_locked_colors")}.}
 
 \item{width}{\code{character} width of the displayed widget.
 Defaults to \code{NULL} such that the widget is automatically sized.}

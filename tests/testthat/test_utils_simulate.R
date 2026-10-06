@@ -23,7 +23,7 @@ test_that("simulate_solution_legend", {
   # define skips
   skip_if_sim_deps_not_installed()
   # run tests
-  expect_s3_class(simulate_solution_legend(), "CategoricalLegend")
+  expect_s3_class(simulate_solution_legend(), "SolutionLegend")
 })
 
 test_that("simulate_binary_legend", {

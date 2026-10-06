@@ -13,6 +13,7 @@ solver(
   feature_weights = get_golem_config("prioritization_feature_weights"),
   cost_weights = get_golem_config("prioritization_cost_weights"),
   zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors"),
   width = NULL,
   height = NULL,
   id = NULL
@@ -48,6 +49,11 @@ solver(
 
   `character` vector of colors for each zone. Defaults to
   `get_golem_config("zone_colors")`.
+
+- zone_locked_colors:
+
+  `character` vector of colors for each zone. Defaults to
+  `get_golem_config("zone_locked_colors")`.
 
 - width:
 

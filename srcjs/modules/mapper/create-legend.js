@@ -3,6 +3,7 @@
 import {addTooltip} from  "../utils/element.js";
 // styling
 import "./css/categorical-legend.css";
+import "./css/solution-legend.css";
 import "./css/continuous-legend.css";
 
 /**
@@ -38,7 +39,6 @@ export function createCategoricalLegend(x) {
   if (!Array.isArray(x.colors)) {
     x.colors = [x.colors]
   }
-
   // create legend
   for (let i = 0; i < x.values.length; ++i) {
     // create item to add to legend
@@ -58,7 +58,66 @@ export function createCategoricalLegend(x) {
     item.appendChild(itemLabel);
     el.appendChild(item);
   }
+  // return legend
+  return el;
+}
 
+/**
+ * Create a solution legend.
+ * @param {object} x - Object with items to display in legend.
+ * @param {Array<number>} x.values - Set of values denoting the numeric
+ * values for each legend item. Note that these values are not shown
+ * in the legend.
+ * @param {Array<string>} x.colors - Set of values denoting the color
+ * for each legend item.
+ * Note that this must have the same length as {@link x.values}.
+ * @param {Array<string>} x.labels - Set of values denoting the text label
+ * for each legend item.
+ * Note that this must have the same length as {@link x.values}.
+ * @param {string} x.units - Units for the legend items.
+ * @return {HTMLElement}
+ */
+export function createSolutionLegend(x) {
+  // initialize legend
+  let el = document.createElement("div");
+  el.className = "solution-legend";
+  addTooltip(
+    el,
+    "This layer has a solution and indicates management priorities."
+  );
+  // if needed, force values into an array
+  if (!Array.isArray(x.labels)) {
+    x.labels = [x.labels]
+  }
+  if (!Array.isArray(x.values)) {
+    x.values = [x.values]
+  }
+  if (!Array.isArray(x.colors)) {
+    x.colors = [x.colors]
+  }
+  // determine number of zones
+  let n = x.values.length / 2;
+  // create legend
+  for (let i = 0; i < n; ++i) {
+    for (let j = 0; j < 2; ++j) {
+      // create item for locked to add to legend
+      let item = document.createElement("div");
+      item.className = "item";
+      // create text component to display the text
+      let itemLabel = document.createElement("label");
+      itemLabel.className = "item-label";
+      itemLabel.innerText = `${x.labels[(j * n) + i]}`;
+      // create symbol component to display the color
+      let itemSymbol = document.createElement("div");
+      itemSymbol.className = "item-symbol";
+      itemSymbol.style.backgroundColor = x.colors[(j * n) + i];
+      itemSymbol.style.color = x.colors[(j * n) + i];
+      // add item to legend
+      item.appendChild(itemSymbol);
+      item.appendChild(itemLabel);
+      el.appendChild(item)
+    }
+  }
   // return legend
   return el;
 }
@@ -88,12 +147,10 @@ export function createContinuousLegend(x) {
     "This layer has continuous data and the " +
       "legend shows the range of colors used for display"
   );
-
   // compute values
   let maxValue = Math.max(...x.values);
   let minValue = Math.min(...x.values);
   let rangeValue = maxValue - minValue;
-
   // create color bar
   let colorbar = document.createElement("div");
   colorbar.className = "colorbar-ramp";
@@ -108,18 +165,15 @@ export function createContinuousLegend(x) {
   colorbarBackground += ")";
   colorbar.style.backgroundColor = x.colors[0];
   colorbar.style.backgroundImage = colorbarBackground;
-
   // create units label
   let units = document.createElement("div")
   units.className = "colorbar-units";
   if (typeof(x.units) === "string") {
     units.innerText = `${x.units}`;
   }
-
   // create container for ticks and labels
   let items = document.createElement("div");
   items.className = "colorbar-items";
-
   // create axis ticks and labels
   for (let i = 0; i < x.breaks.length; ++i) {
     // calculate width
@@ -145,7 +199,6 @@ export function createContinuousLegend(x) {
     item.appendChild(itemLabel);
     items.appendChild(item);
   }
-
   // construct legend
   let container = document.createElement("div");
   container.classList.add("colorbar-container");
@@ -153,7 +206,6 @@ export function createContinuousLegend(x) {
   container.appendChild(items);
   el.appendChild(container);
   el.appendChild(units);
-
   // return legend
   return el;
 }
@@ -164,7 +216,8 @@ export function createContinuousLegend(x) {
  * See {@link createContinuousLegend} and {@link createCategoricalLegend}
  * for additional parameter details.
  * @param {string} x.class - Value indicating the desired type of legend.
- * Acceptable values include `"ContinuousLegend"` and `"CategoricalLegend"`.
+ * Acceptable values include `"ContinuousLegend"`, `"CategoricalLegend"`,
+ * or `"SolutionLegend"`.
  * @return {HTMLElement}
  */
 export function createLegend(x) {
@@ -172,6 +225,8 @@ export function createLegend(x) {
     return createContinuousLegend(x);
   } else if (x.class === "CategoricalLegend") {
     return createCategoricalLegend(x);
+  } else if (x.class === "SolutionLegend") {
+    return createSolutionLegend(x);
   } else {
     console.error("createLegend(): `x` not a recognized value.");
   }

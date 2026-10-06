@@ -65,7 +65,12 @@ added.</p></dd>
 
 <dt id="arg-prioritization">prioritization<a class="anchor" aria-label="anchor" href="#arg-prioritization"></a></dt>
 <dd><p><code>numeric</code> vector with a value for each planning
-unit to indicate zone allocations.</p></dd>
+unit to indicate zone allocations.
+For example, if the prioritization has three zones, then elements
+with values ranging between 1 and 3 correspond to planning units
+that are locked to the three zones (respectively). Additionally,
+elements with values ranging between 4 and 6 correspond to planning units
+that are selected as a priority for the three zones (respectively).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -127,7 +132,7 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Biodiversity Tourism Scientific</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>           10       0         10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>           29      37         24</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $performance</span>
@@ -167,7 +172,7 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Biodiversity Tourism Scientific</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        0.112       0        <span style="color: #BB0000;">NaN</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        0.321   0.272        <span style="color: #BB0000;">NaN</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
@@ -190,19 +195,19 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$id[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "efc64e09-b015-4a56-ad96-65dc21ca9023"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d16601de-72ee-4b94-854e-ff632c72a0fb"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$id[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "90f5be33-228a-400a-94b7-c314b78fcb97"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "a03de850-3614-4359-bd1c-019b8bb36f86"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$id[[3]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "5229a4e8-46a1-46bf-ba3c-8893f3f16c8f"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "5365f5d2-a918-4c45-a319-8592c6e132a6"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$id[[4]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "59c703ad-858f-4e2b-9276-0309bbacc9e6"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d631a7bf-ad02-4fd0-8ce1-62ee1c3a9519"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$id[[5]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fc846228-e285-4ef9-a3a2-553cbf1e4ddc"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "8b49c6d9-1243-4227-916c-b87c6f2e1827"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features$total</span>
@@ -253,11 +258,11 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Biodiversity Tourism Scientific</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>         8.28       0       8.22</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         3.15       0       3.06</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>         7.68       0       7.13</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>         4.08       0       4.09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>         5.36       0       5.69</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        23.7     30.7      20.2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>         9.27    11.5       7.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        20.6     27.0      17.3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        12.7     15.6       9.85</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        16.2     20.6      13.8 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks</span>
@@ -271,10 +276,10 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks$id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks$id[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "688782db-1c05-4551-9ef8-60078e50fcd7"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "8db4909f-3425-41d3-b8ec-a2a632c4fe0c"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks$id[[2]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "c876bb7b-cb5c-4a5a-a1e8-7b9d7bc0f125"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ef00ce50-8c2e-4345-82db-73b53b52297f"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks$total</span>
@@ -304,8 +309,8 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Biodiversity Tourism Scientific</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>           10       0          0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>            0       0         10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>            4       5          1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>            2       5          3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $costs</span>
@@ -316,7 +321,7 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $costs$id</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $costs$id[[1]]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "f0698a5a-28d5-4139-94c6-b0a579d26348"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fab71052-ca37-4ea8-adda-1aee9a3219c5"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $costs$total</span>
@@ -339,7 +344,7 @@ data frames with metrics for the features, locks, and costs (respectively).</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Biodiversity Tourism Scientific</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        <span style="text-decoration: underline;">2</span>064.       0      <span style="text-decoration: underline;">2</span>042.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        <span style="text-decoration: underline;">5</span>963.   <span style="text-decoration: underline;">7</span>602.      <span style="text-decoration: underline;">4</span>923.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>

@@ -69,6 +69,11 @@ NULL
 #'
 #' @return
 #' A `numeric` vector with values indicating the zone for each planning unit.
+#' For example, if the prioritization has three zones, then elements
+#' with values ranging between 1 and 3 correspond to planning units
+#' that are locked to the three zones (respectively). Additionally,
+#' elements with values ranging between 4 and 6 correspond to planning units
+#' that are selected as a priority for the three zones (respectively).
 #'
 #' @family prioritization
 #'
@@ -270,12 +275,15 @@ solve_prioritization <- function(
   sol <- prioritizr::category_vector(
     sol[, paste0("solution_1_", project$zones),  drop = FALSE]
   )
+  sol <- sol + ((sol > 0) * length(project$zones))
+  if (nrow(settings$locks) > 0L) {
+    sol[idx] <- locked[idx]
+  }
   sol[sol < 0.5] <- NA_real_
 
   # return solution
   out <- structure(sol, class = "Prioritization")
   attr(out, "obj_value") <- obj_value
-  attr(out, "locked") <- locked
   out
 }
 

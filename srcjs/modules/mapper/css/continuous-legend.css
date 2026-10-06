@@ -11,7 +11,7 @@
   width: 100%;
   flex-direction: row;
   align-items: stretch;
-  padding: 0px 0px 3px 10px;
+  padding: 3px 0px 0px 10px;
   --symbol-border: #D3D3D3;
 }
 
@@ -62,7 +62,8 @@
   font-weight: 400;
   display: inline-block;
   padding: 0;
-  margin: 0;
+  margin-top: 3px;
+  line-height: 1;
 }
 
 /* ticks */

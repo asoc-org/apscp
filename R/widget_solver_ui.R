@@ -20,6 +20,9 @@
 #' @param zone_colors `character` vector of colors for each zone.
 #' Defaults to `get_golem_config("zone_colors")`.
 #'
+#' @param zone_locked_colors `character` vector of colors for each zone.
+#' Defaults to `get_golem_config("zone_locked_colors")`.
+#'
 #' @param width `character` width of the displayed widget.
 #' Defaults to `NULL` such that the widget is automatically sized.
 #'
@@ -58,6 +61,7 @@ solver <- function(
   feature_weights = get_golem_config("prioritization_feature_weights"),
   cost_weights = get_golem_config("prioritization_cost_weights"),
   zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors"),
   width = NULL,
   height = NULL,
   id = NULL
@@ -71,7 +75,12 @@ solver <- function(
     assertthat::noNA(feature_weights),
     is.numeric(cost_weights),
     assertthat::noNA(cost_weights),
-    length(zone_colors) >= length(project$zones)
+    is.character(zone_colors),
+    assertthat::noNA(zone_colors),
+    length(zone_colors) >= length(project$zones),
+    is.character(zone_locked_colors),
+    assertthat::noNA(zone_locked_colors),
+    length(zone_locked_colors) >= length(project$zones)
   )
 
   # create widget
@@ -82,7 +91,8 @@ solver <- function(
       featureTargetChoices = feature_targets,
       featureWeightChoices = feature_weights,
       costWeightChoices = cost_weights,
-      zoneColors = zone_colors[seq_along(project$zones)]
+      zoneColors = zone_colors[seq_along(project$zones)],
+      zoneLockedColors = zone_locked_colors[seq_along(project$zones)]
     ),
     width = width,
     height = height,

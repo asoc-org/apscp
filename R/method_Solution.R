@@ -127,6 +127,11 @@ create_solution <- function(
 #'
 #' @param prioritization `numeric` vector with a value for each planning
 #' unit to indicate zone allocations.
+#' For example, if the prioritization has three zones, then elements
+#' with values ranging between 1 and 3 correspond to planning units
+#' that are locked to the three zones (respectively). Additionally,
+#' elements with values ranging between 4 and 6 correspond to planning units
+#' that are selected as a priority for the three zones (respectively).
 #'
 #' @param metrics `list` with evaluation metrics for prioritization.
 #' Defaults to `NULL` such that the metrics are calculated automatically.
@@ -176,8 +181,15 @@ create_solution_from_prioritization <- function(
     assertthat::noNA(id),
     ## prioritization
     is.numeric(prioritization),
-    identical(length(prioritization), project$dataset$get_n_pu()),
-    suppressWarnings(max(prioritization, na.rm = TRUE)) <= length(project$zones)
+    identical(length(prioritization), project$dataset$get_n_pu())
+  )
+  assertthat::assert_that(
+    suppressWarnings(max(prioritization, na.rm = TRUE)) <=
+      (length(project$zones) * 2),
+    msg = paste(
+      "`prioritization` does not have a values that reflect zones in",
+      "`project`."
+    )
   )
 
   # process column name
