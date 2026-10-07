@@ -58,11 +58,16 @@ metadata$type[metadata$units == "presence"] <- "presence"
 
 ### set provenance description text
 metadata$provenance_description <- paste0(
-  "Obtained from <a href=\"", metadata$provenance_url, "\">",
-  metadata$provenance_source, "</a>"
+  "Obtained from ", metadata$provenance_source, "."
 )
-metadata$provenance_description[is.na(metadata$provenance_url)] <-
-  metadata$provenance_source[is.na(metadata$provenance_url)]
+
+### set details
+idx <- which(
+  !is.na(metadata$details) &
+  nzchar(metadata$details) &
+  !endsWith(metadata$details, ".")
+)
+metadata$details[idx] <- paste0(metadata$details[idx], ".")
 
 ## prepare targets data
 ### assign targets
@@ -183,7 +188,8 @@ locks <-
           name = x$provenance_source,
           icon = x$provenance_icon,
           color = "#000000",
-          description = x$provenance_description
+          description = x$provenance_description,
+          url = x$provenance_url
         ),
         legend = create_legend(
           x = vector_data,
@@ -219,7 +225,8 @@ costs <-
           name = x$provenance_source,
           icon = x$provenance_icon,
           color = "#000000",
-          description = x$provenance_description
+          description = x$provenance_description,
+          url = x$provenance_url
         ),
         legend = create_legend(
           x = vector_data,
@@ -268,7 +275,8 @@ features <-
           name = x$provenance_source,
           icon = x$provenance_icon,
           color = "#000000",
-          description = x$provenance_description
+          description = x$provenance_description,
+          url = x$provenance_url
         ),
         legend = create_legend(
           x = vector_data,

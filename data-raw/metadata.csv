@@ -1,10 +1,10 @@
 file,layer,name,visible,class,theme,units,details,palette,provenance_source,provenance_url,provenance_icon
-ant_circ_1km.tif,1,Sites past the Antarctic circle,FALSE,feature,Geographic,presence,Site is located south of the Antarctic Circle,#cc4c02,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
-cont_land_1km.tif,1,Continental landing site,FALSE,feature,Geographic,presence,,#fe9929,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+ant_circ_1km.tif,1,Sites past the Antarctic circle,FALSE,feature,Geographic,presence,Site is located south of the Antarctic Circle,#cc4c02,the Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+cont_land_1km.tif,1,Continental landing site,FALSE,feature,Geographic,presence,,#fe9929,the Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
 field_camp_1km.tif,1,Scientific field camps,FALSE,feature,Science,presence,,#08519c,COMNAP 2023,https://github.com/PolarGeospatialCenter/comnap-antarctic-facilities,server
-fresh_wat_1km.tif,1,Fresh water,FALSE,feature,Habitats,presence,,#a6cee3,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+fresh_wat_1km.tif,1,Fresh water,FALSE,feature,Habitats,presence,,#a6cee3,the Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
 geotherm_1km.tif,1,Geotermal/volcanic sites,FALSE,feature,Habitats,presence,,#fb9a99,Fraster et al. 2014,https://doi.org/10.1073/pnas.1321437111,book
-HSM_1km.tif,1,Historic monuments,FALSE,feature,Historic,presence,,#fee391,Antarctic Protected Areas Database,https://www.ats.aq/devph/en/apa-database/,
+HSM_1km.tif,1,Historic monuments,FALSE,feature,Historic,presence,,#fee391,the Antarctic Protected Areas Database,https://www.ats.aq/devph/en/apa-database/,
 inv_spec_1km.tif,1,Invasive species,FALSE,feature,Habitats,presence,Important for monitoring and management and inversely important to biodiversity (i.e. sites free of invasives important),#984ea3,Hughes et al. 2015,https://doi.org/10.1007/s10531-015-0896-6,book
 invert_1km.tif,1,General invertebrates,FALSE,feature,Invertebrates,presence,,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
 inviolate_1km.tif,1,Inviolate sites,FALSE,lock,NA,presence,"Important for ASPA designation, also as future scientific monitoring/control sites. Including undisturbed coastal areas (which are rare in the Peninsula)",#74c476,Leihy et al. 2020,https://doi.org/10.1038/s41586-020-2506-3,book
@@ -50,10 +50,10 @@ SCPID_81_1km.tif,1,Minerals and crystals,FALSE,feature,Outstanding geological,ab
 SCPID_82_1km.tif,1,Geological processes,FALSE,feature,Outstanding geological,abundance,"Sites containing examples of interesting geological processes (e.g., ventifacts)",viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
 SCPID_9_1km.tif,1,Entomobryomorpha springtails,FALSE,feature,Invertebrates,abundance,"E.g., Isotoma klovstadi",viridis,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
 seabird_1km.tif,1,Other seabird colonies,FALSE,feature,Seabirds,presence,"E.g., southern giant petrels, sheathbills, Antarctic shag, terns, petrels",#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
-shelf_ice_1km.tif,1,Ice shelf,FALSE,feature,Ice,presence,,#cab2d6,Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
+shelf_ice_1km.tif,1,Ice shelf,FALSE,feature,Ice,presence,,#cab2d6,the Antarctic Digital Database,https://www.bas.ac.uk/project/add/,server
 snow_alg_1km.tif,1,Snow algae 2,FALSE,feature,Microbes,presence,,#984ea3,Gray et al. 2020,https://doi.org/10.1038/s41467-020-16018-w,book
 veg_1km.tif,1,Vegetation,FALSE,feature,Vegetation,presence,Sites with the two Antarctic plants or moss or lichens,#984ea3,Terauds et al. 2025,https://doi.org/10.1002/ecy.70000,book
 PUID_1km.tif,1,Planning units,FALSE,pu,NA,index,,NA,Lee et al. 2025,https://doi.org/10.26180/29092346,book
-ASPA_1km.tif,1,ASPA,TRUE,lock,NA,presence,,#006d2c,Australian Antarctic Data Centre,https://data.aad.gov.au/metadata/records/AAS_4296_Updated_ASPAs_2024,server
-max_tvis_1km.tif,1,Tourism visitor landings,FALSE,cost,NA,number of visitors,,magma,International Association of Antarctica Tour Operators,https://iaato.org/news-room/data-statistics,server
-max_tves_1km.tif,1,Tourism vessel landings,FALSE,cost,NA,number of vessels,,inferno,International Association of Antarctica Tour Operators,https://iaato.org/news-room/data-statistics,server
+ASPA_1km.tif,1,ASPA,TRUE,lock,NA,presence,,#006d2c,the Australian Antarctic Data Centre,https://data.aad.gov.au/metadata/records/AAS_4296_Updated_ASPAs_2024,server
+max_tvis_1km.tif,1,Tourism visitor landings,FALSE,cost,NA,number of visitors,,magma,the International Association of Antarctica Tour Operators (IAATO),https://iaato.org/news-room/data-statistics,server
+max_tves_1km.tif,1,Tourism vessel landings,FALSE,cost,NA,number of vessels,,inferno,the International Association of Antarctica Tour Operators (IAATO),https://iaato.org/news-room/data-statistics,server

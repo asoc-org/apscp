@@ -18,9 +18,10 @@ export function addTooltip(element, text) {
 /**
  * Create a provenance.
  * @param {object} x - Object with properties for customization.
- * @param {string} x.description - Text to display in tool tip.
  * @param {string} x.icon - Name of Font Awesome icon.
  * @param {string} x.color - Color for icon.
+ * @param {string} x.description - Text to display in tool tip.
+ * @param {string} x.url - URL to open when icon clicked.
  * @return {HTMLElement}
  */
 export function createProvenance(x) {
@@ -32,6 +33,10 @@ export function createProvenance(x) {
   el.classList.add("fas");
   el.classList.add("fa-" + x.icon);
   el.style.color = x.color;
+  if (x.url !== undefined) {
+    el.classList.add("has-link");
+    el.addEventListener("click", () => window.open(x.url, "_blank"));
+  }
   return el;
 }
 
@@ -154,7 +159,7 @@ export function createButtonGroups(
       btn.setAttribute("data-group-index", i);
       btn.setAttribute("data-group-label", groupLabels[i]);
       btn.setAttribute("data-label", buttonLabels[j]);
-      btn.style.backgroundColor = groupColors[i];
+      btn.style.setProperty("--color", groupColors[i]);
       addTooltip(btn, tooltipLabels[i][j]);
       // append elements
       btn.appendChild(span);

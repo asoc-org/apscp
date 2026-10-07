@@ -73,6 +73,12 @@ export class CostSetting {
   _switch;
 
   /**
+   * Name element.
+   * @type {HTMLElement}
+   */
+  _name;
+
+  /**
    * Construct a new CostSetting object.
    * @param {object} cost - Cost object.
    * @param {string} cost.id - Unique identifier.
@@ -100,6 +106,7 @@ export class CostSetting {
     this._select = this.element.querySelector(".zone-status");
     this._slider = this.element.querySelector(".weight-slider");
     this._switch = this.element.querySelector(".switch");
+    this._name = this.element.querySelector(".name-label");
     // initialize select widget
     new HoverSelect(this._select, {
       selected: cost.zone,
@@ -173,6 +180,7 @@ export class CostSetting {
     this._slider.smartSlider.enable();
     this._select.hoverSelect.enable();
     this._switch.checked = true;
+    this._name.removeAttribute("disabled");
   }
 
   /**
@@ -183,6 +191,7 @@ export class CostSetting {
     this._slider.smartSlider.disable();
     this._select.hoverSelect.disable();
     this._switch.checked = false;
+    this._name.setAttribute("disabled", "");
   }
 
 }

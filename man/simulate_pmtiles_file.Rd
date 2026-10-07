@@ -13,7 +13,7 @@ A \code{character} value with the file path.
 Simulate a PMtiles file by creating a dummy file on disk.
 }
 \details{
-Note that simulation functions are intended to help faciliate
+Note that simulation functions are intended to help facilitate
 package testing and should not be used for any research purposes.
 }
 \examples{

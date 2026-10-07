@@ -58,6 +58,7 @@ serialize_object.Provenance <- function(x) {
     icon = x$icon,
     color = x$color,
     description = x$description,
+    url = x$url,
     class = "Provenance"
   )
 }

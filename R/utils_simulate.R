@@ -8,7 +8,7 @@ NULL
 #' @return A [sf::st_sf()] odbject.
 #'
 #' @details
-#' Note that simulation functions are intended to help faciliate
+#' Note that simulation functions are intended to help facilitate
 #' package testing and should not be used for any research purposes.
 #'
 #' @family simulation
@@ -126,8 +126,9 @@ simulate_project <- function() {
 
   # create provenance
   provenance <- new_provenance(
-   name = "Simulated", icon = "server", color = "#123456",
-   description = "Data is simulated."
+    name = "Simulated", icon = "server", color = "#123456",
+    description = "Data is simulated.",
+    url = "https://google.com"
   )
 
   # create cost
@@ -375,10 +376,11 @@ simulate_binary_legend <- function() {
 #' @export
 simulate_provenance <- function() {
   new_provenance(
-   name = "Global",
-   icon = "globe",
-   color = "#123456",
-   description = "Data is global."
+    name = "Global",
+    icon = "globe",
+    color = "#123456",
+    description = "Data is global.",
+    url = "https://google.com"
   )
 }
 

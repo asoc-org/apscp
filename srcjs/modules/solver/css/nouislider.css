@@ -26,6 +26,7 @@
   width: 14px;
   height: 20px;
   right: -7px;
+  cursor: pointer;
 }
 
 .solver .noUi-handle:before,
@@ -36,4 +37,11 @@
 
 .solver .noUi-handle:after {
   left: 7px;
+}
+
+/* Connect elements
+   ========================================================================== */
+
+.solver .noUi-connect.noUi-draggable {
+  cursor: default;
 }

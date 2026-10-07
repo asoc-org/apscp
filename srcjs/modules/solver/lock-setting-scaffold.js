@@ -40,7 +40,7 @@ function lockSettingHeader(zone, priority) {
   let switchElement = createSwitches(1);
   switchElement.children[0].children[0].setAttribute("data-zone", zone);
   switchElement.children[0].children[0].style.setProperty(
-    "--switch-primary",
+    "--color",
     `var(--zone-${zone}-primary)`
   );
   // create name element

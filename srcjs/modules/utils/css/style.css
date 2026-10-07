@@ -1,4 +1,17 @@
 /* ==========================================================================
+   Provenance styles
+   ========================================================================== */
+
+.provenance.has-link {
+  cursor: pointer;
+  transition: text-shadow 0.3s ease;
+}
+
+.provenance.has-link:not(:disabled):hover {
+  text-shadow: 0px 4px 10px rgba(51, 51, 51, 0.5);
+}
+
+/* ==========================================================================
    Switch styles
    ========================================================================== */
 
@@ -15,21 +28,39 @@
 
 /* switch element */
 .switch {
+  --color: #073b4c;
   font-size: 11px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .switch:checked {
-  background-color: var(--switch-primary) !important;
-  border-color: var(--switch-primary) !important;
-  color: var(--switch-primary) !important;
+  background-color: var(--color) !important;
+  border-color: var(--color) !important;
+  color: var(--color) !important;
+}
+
+.switch:checked:not(:disabled):hover {
+  background-color: oklch(from var(--color) calc(l - 0.2) c h) !important;
+}
+
+.switch:not(:checked):not(:disabled):hover {
+  border: var(--bs-border-width) solid oklch(from #8D959E calc(l - 0.2) c h);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280,0,0,0.5%29'/%3e%3c/svg%3e") !important;
 }
 
 .switch:focus {
-  border-color: var(--switch-secondary) !important;
-  box-shadow: 0 0 0 0.25rem var(--switch-secondary) !important;
+  box-shadow: initial;
+  border-color: initial;
+}
+
+.switch:not(:checked):not(:hover):not(:disabled):focus {
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280,0,0,0.25%29'/%3e%3c/svg%3e") !important;
 }
+
+/* ==========================================================================
+   Button groups styles
+   ========================================================================== */
 
 .button-groups {
   display: flex;
@@ -39,4 +70,13 @@
 
 .button-groups span {
   color: white;
+}
+
+.button-groups button {
+  --color: #f0f0f0;
+  background-color: var(--color);
+  transition: background-color 0.3s ease;
+}
+.button-groups button:not(:disabled):hover {
+  background-color: oklch(from var(--color) calc(l - 0.2) c h) !important;
 }

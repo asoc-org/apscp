@@ -4,7 +4,7 @@
 \alias{new_provenance}
 \title{New provenance}
 \usage{
-new_provenance(name, icon, color, description)
+new_provenance(name, icon, color, description, url)
 }
 \arguments{
 \item{name}{\code{character} name of provenance source.}
@@ -13,8 +13,10 @@ new_provenance(name, icon, color, description)
 
 \item{color}{\code{character} value containing the color for the icon.}
 
-\item{description}{\code{character} value  containing a description of the
+\item{description}{\code{character} value containing a description of the
 provenance.}
+
+\item{url}{\code{character} value containing the source URL.}
 }
 \value{
 A \code{Provenance} object.
@@ -26,7 +28,8 @@ Create a new provenance object.
 # create a provenance
 x <- new_provenance(
   name = "Global", icon = "globe", color = "#123456",
-  description = "Data is global."
+  description = "Data is global.",
+  url = "https://www.google.com"
 )
 
 # print object

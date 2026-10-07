@@ -194,7 +194,7 @@ export default class HoverSelect {
     this._value = option.value;
     this.element.setAttribute("data-value", this._value);
     this.element.children[0].children[0].innerText = option.text;
-    this.element.children[0].style.backgroundColor = option.color;
+    this.element.children[0].style.setProperty("--color", option.color);
   }
 
   /**
@@ -215,7 +215,7 @@ export default class HoverSelect {
     // create button
     let button = document.createElement("button");
     button.classList.add("select-button");
-    button.style.backgroundColor = initialOption.color;
+    button.style.setProperty("--color", initialOption.color);
     // create element to specify button text
     let text = document.createElement("span");
     text.classList.add("select-button-text");

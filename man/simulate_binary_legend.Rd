@@ -13,7 +13,7 @@ A \code{\link[=new_categorical_legend]{new_categorical_legend()}} object.
 Simulate a legend for binary data.
 }
 \details{
-Note that simulation functions are intended to help faciliate
+Note that simulation functions are intended to help facilitate
 package testing and should not be used for any research purposes.
 }
 \examples{

@@ -17,7 +17,7 @@ A \code{list} with the following elements:
 Simulate settings for \code{\link[=solve_prioritization]{solve_prioritization()}}.
 }
 \details{
-Note that simulation functions are intended to help faciliate
+Note that simulation functions are intended to help facilitate
 package testing and should not be used for any research purposes.
 }
 \examples{

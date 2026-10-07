@@ -13,7 +13,7 @@ A \code{\link[sf:st_sf]{sf::st_sf()}} odbject.
 Simulate spatial data for conservation planning.
 }
 \details{
-Note that simulation functions are intended to help faciliate
+Note that simulation functions are intended to help facilitate
 package testing and should not be used for any research purposes.
 }
 \examples{

@@ -15,6 +15,8 @@
    ========================================================================== */
 
 .hoverSelect-widget .select-button {
+  --color: #073b4c;
+  background-color: var(--color);
   display: inline-grid;
   grid-template-areas: "stack";
   color: white;
@@ -24,6 +26,11 @@
   border-radius: 2px;
   padding-top: 0;
   padding-bottom: 0;
+  transition: background-color 0.3s ease;
+}
+
+.hoverSelect-widget .select-button:not(:disabled):hover {
+  background-color: oklch(from var(--color) calc(l - 0.2) c h) !important;
 }
 
 .hoverSelect-widget .select-button-text {

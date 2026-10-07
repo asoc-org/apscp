@@ -123,6 +123,10 @@
   cursor: pointer;
 }
 
+.mapper .mapper-menu-item .layer-button:not(:disabled):hover {
+  background-color: initial;
+}
+
 /* icon container */
 .mapper .icon-container {
   margin-right: 5px;
@@ -174,4 +178,19 @@
 
 .mapper .layer-checkbox-container input[type="checkbox"]:checked ~ .unchecked {
   display: none;
+}
+
+/* hover elements */
+.mapper .handle,
+.mapper .mapper-menu-item .layer-button,
+.mapper .legend-checkbox-container,
+.mapper .layer-checkbox-container {
+  transition: text-shadow 0.3s ease;
+}
+
+.mapper .handle:not(:disabled):hover,
+.mapper .mapper-menu-item .layer-button:not(:disabled):hover,
+.mapper .legend-checkbox-container:not(:disabled):hover,
+.mapper .layer-checkbox-container:not(:disabled):hover {
+  text-shadow: 0px 4px 10px rgba(51, 51, 51, 0.5);
 }

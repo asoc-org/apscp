@@ -54,9 +54,8 @@ function featureSettingHeader(feature, zones) {
   // create switches for each zone
   let switchContainer = createSwitches(zones.length);
   for (let i = 0; i < zones.length; ++i) {
-    switchContainer.children[i].style.setProperty(
-      "--switch-primary",
-      `var(--zone-${zones[i]}-primary)`
+    switchContainer.children[i].children[0].style.setProperty(
+      "--color", `var(--zone-${zones[i]}-primary)`
     );
   }
   // create name element

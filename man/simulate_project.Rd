@@ -13,7 +13,7 @@ A \code{\link{Project}} object.
 Simulate a new project.
 }
 \details{
-Note that simulation functions are intended to help faciliate
+Note that simulation functions are intended to help facilitate
 package testing and should not be used for any research purposes.
 }
 \examples{

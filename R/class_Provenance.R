@@ -11,8 +11,10 @@ NULL
 #'
 #' @param color `character` value containing the color for the icon.
 #'
-#' @param description `character` value  containing a description of the
+#' @param description `character` value containing a description of the
 #' provenance.
+#'
+#' @param url `character` value containing the source URL.
 #'
 #' @return A `Provenance` object.
 #'
@@ -22,13 +24,14 @@ NULL
 #' # create a provenance
 #' x <- new_provenance(
 #'   name = "Global", icon = "globe", color = "#123456",
-#'   description = "Data is global."
+#'   description = "Data is global.",
+#'   url = "https://www.google.com"
 #' )
 #'
 #' # print object
 #' print(x)
 #' @export
-new_provenance <- function(name, icon, color, description) {
+new_provenance <- function(name, icon, color, description, url) {
   # assert arguments are valid
   assertthat::assert_that(
     ## name
@@ -42,7 +45,10 @@ new_provenance <- function(name, icon, color, description) {
     assertthat::noNA(color),
     ## description
     assertthat::is.string(description),
-    assertthat::noNA(description)
+    assertthat::noNA(description),
+    ## url
+    assertthat::is.string(url),
+    assertthat::noNA(url)
   )
   # return object
   structure(
@@ -50,7 +56,8 @@ new_provenance <- function(name, icon, color, description) {
       name = name,
       icon = icon,
       color = color,
-      description = description
+      description = description,
+      url = url
     ),
     class = "Provenance"
   )
