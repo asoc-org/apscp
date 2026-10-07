@@ -68,7 +68,7 @@ A \code{data.frame} with the settings to specify which
 locks are used to lock in planning units to a particular zone.
 Each row corresponds to a different lock, and it must have the following
 columns:
-\code{"id"}, \code{"name"}, \code{"column"}, and \code{"zone"}.
+\code{"id"}, \code{"name"}, \code{"column"}, \code{"zone"}, and \code{"priority"}.
 }
 
 \item{\code{"costs"}}{

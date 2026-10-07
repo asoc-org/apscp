@@ -82,7 +82,7 @@ The argument to `settings` must be a `list` with the following elements.
   A `data.frame` with the settings to specify which locks are used to
   lock in planning units to a particular zone. Each row corresponds to a
   different lock, and it must have the following columns: `"id"`,
-  `"name"`, `"column"`, and `"zone"`.
+  `"name"`, `"column"`, `"zone"`, and `"priority"`.
 
 - `"costs"`:
 
@@ -113,21 +113,21 @@ sim_settings <- simulate_prioritization_settings(sim_project)
 print(sim_settings)
 #> $features
 #>                                      id      name column         zone target
-#> 1  91945ac3-3867-4477-8219-8585759e75e9 Species 1 feat_1 Biodiversity    0.4
-#> 2  91945ac3-3867-4477-8219-8585759e75e9 Species 1 feat_1      Tourism    0.0
-#> 3  91945ac3-3867-4477-8219-8585759e75e9 Species 1 feat_1   Scientific    0.2
-#> 4  8e69686e-c59a-4e00-a845-5dd980a74a90 Species 2 feat_2 Biodiversity    0.8
-#> 5  8e69686e-c59a-4e00-a845-5dd980a74a90 Species 2 feat_2      Tourism    0.0
-#> 6  8e69686e-c59a-4e00-a845-5dd980a74a90 Species 2 feat_2   Scientific    0.2
-#> 7  142a43ae-f502-4f5d-b657-d7d6602baf55 Species 3 feat_3 Biodiversity    0.0
-#> 8  142a43ae-f502-4f5d-b657-d7d6602baf55 Species 3 feat_3      Tourism    0.0
-#> 9  142a43ae-f502-4f5d-b657-d7d6602baf55 Species 3 feat_3   Scientific    0.0
-#> 10 178333f7-5dbe-4f4f-aeb2-61ba01540980 Species 4 feat_4 Biodiversity    0.6
-#> 11 178333f7-5dbe-4f4f-aeb2-61ba01540980 Species 4 feat_4      Tourism    0.0
-#> 12 178333f7-5dbe-4f4f-aeb2-61ba01540980 Species 4 feat_4   Scientific    0.0
-#> 13 8bb983f1-fa09-4086-ad93-ef0203839611 Species 5 feat_5 Biodiversity    1.0
-#> 14 8bb983f1-fa09-4086-ad93-ef0203839611 Species 5 feat_5      Tourism    0.0
-#> 15 8bb983f1-fa09-4086-ad93-ef0203839611 Species 5 feat_5   Scientific    0.0
+#> 1  bdff5d7c-bbc0-42c7-a542-8d4fe057c6b4 Species 1 feat_1 Biodiversity    0.4
+#> 2  bdff5d7c-bbc0-42c7-a542-8d4fe057c6b4 Species 1 feat_1      Tourism    0.0
+#> 3  bdff5d7c-bbc0-42c7-a542-8d4fe057c6b4 Species 1 feat_1   Scientific    0.2
+#> 4  58e0c9f7-667f-4826-a6a6-509127f90d8c Species 2 feat_2 Biodiversity    0.8
+#> 5  58e0c9f7-667f-4826-a6a6-509127f90d8c Species 2 feat_2      Tourism    0.0
+#> 6  58e0c9f7-667f-4826-a6a6-509127f90d8c Species 2 feat_2   Scientific    0.2
+#> 7  85d41d68-3844-47c5-afd2-165311567b8b Species 3 feat_3 Biodiversity    0.0
+#> 8  85d41d68-3844-47c5-afd2-165311567b8b Species 3 feat_3      Tourism    0.0
+#> 9  85d41d68-3844-47c5-afd2-165311567b8b Species 3 feat_3   Scientific    0.0
+#> 10 19c7c02d-931e-4339-9406-691aa5c2b55d Species 4 feat_4 Biodiversity    0.6
+#> 11 19c7c02d-931e-4339-9406-691aa5c2b55d Species 4 feat_4      Tourism    0.0
+#> 12 19c7c02d-931e-4339-9406-691aa5c2b55d Species 4 feat_4   Scientific    0.0
+#> 13 7ba9e13f-718b-4343-9158-2d2647c53e06 Species 5 feat_5 Biodiversity    1.0
+#> 14 7ba9e13f-718b-4343-9158-2d2647c53e06 Species 5 feat_5      Tourism    0.0
+#> 15 7ba9e13f-718b-4343-9158-2d2647c53e06 Species 5 feat_5   Scientific    0.0
 #>    weight
 #> 1     0.0
 #> 2     1.0
@@ -147,15 +147,15 @@ print(sim_settings)
 #> 
 #> $locks
 #>                                     id            name column         zone
-#> 1 b4de52f4-8db8-4273-b7a9-a710b30ef52a Protected areas  aspas Biodiversity
-#> 2 ba451471-cb71-4850-a632-9ea7f99381f9     Field camps  camps   Scientific
+#> 1 154e4510-1aa9-4972-804d-408c369756e1 Protected areas  aspas Biodiversity
+#> 2 c35d30e6-a9f7-47b4-812a-b0d5d6acea44     Field camps  camps   Scientific
 #>   priority
 #> 1        2
 #> 2        1
 #> 
 #> $costs
 #>                                     id            name column    zone weight
-#> 1 cd89b503-dec3-4f48-819b-9f54d85e9ac2 Tourism revenue   cost Tourism      1
+#> 1 9cf5c2ec-0805-4f84-ba6b-5567814900be Tourism revenue   cost Tourism      1
 #> 
 
 # solve prioritization

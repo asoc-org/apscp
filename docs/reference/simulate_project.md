@@ -15,7 +15,7 @@ object.
 
 ## Details
 
-Note that simulation functions are intended to help faciliate package
+Note that simulation functions are intended to help facilitate package
 testing and should not be used for any research purposes.
 
 ## See also

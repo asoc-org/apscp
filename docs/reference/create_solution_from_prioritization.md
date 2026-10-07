@@ -81,7 +81,7 @@ The argument to `settings` must be a `list` with the following elements.
   A `data.frame` with the settings to specify which locks are used to
   lock in planning units to a particular zone. Each row corresponds to a
   different lock, and it must have the following columns: `"id"`,
-  `"name"`, `"column"`, and `"zone"`.
+  `"name"`, `"column"`, `"zone"`, and `"priority"`.
 
 - `"costs"`:
 

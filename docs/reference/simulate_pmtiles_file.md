@@ -14,7 +14,7 @@ A `character` value with the file path.
 
 ## Details
 
-Note that simulation functions are intended to help faciliate package
+Note that simulation functions are intended to help facilitate package
 testing and should not be used for any research purposes.
 
 ## See also
@@ -33,5 +33,5 @@ Other functions for simulating data:
 ``` r
 # simulate PMTiles file
 simulate_pmtiles_file()
-#> [1] "/tmp/Rtmp9Z5I1u/file4779a6a6afa12.pmtiles"
+#> [1] "/tmp/RtmpyMxqoF/file62a267c309187.pmtiles"
 ```

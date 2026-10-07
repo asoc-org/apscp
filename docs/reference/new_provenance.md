@@ -5,7 +5,7 @@ Create a new provenance object.
 ## Usage
 
 ``` r
-new_provenance(name, icon, color, description)
+new_provenance(name, icon, color, description, url)
 ```
 
 ## Arguments
@@ -25,6 +25,10 @@ new_provenance(name, icon, color, description)
 - description:
 
   `character` value containing a description of the provenance.
+
+- url:
+
+  `character` value containing the source URL.
 
 ## Value
 
@@ -53,7 +57,8 @@ Other functions for defining classes:
 # create a provenance
 x <- new_provenance(
   name = "Global", icon = "globe", color = "#123456",
-  description = "Data is global."
+  description = "Data is global.",
+  url = "https://www.google.com"
 )
 
 # print object

@@ -46,7 +46,7 @@ NULL
 #' locks are used to lock in planning units to a particular zone.
 #' Each row corresponds to a different lock, and it must have the following
 #' columns:
-#' `"id"`, `"name"`, `"column"`, and `"zone"`.
+#' `"id"`, `"name"`, `"column"`, `"zone"`, and `"priority"`.
 #' }
 #'
 #' \item{`"costs"`}{
@@ -308,7 +308,7 @@ convert_lock_settings_to_prioritization <- function(project, settings) {
     is_prioritization_settings(settings)
   )
   # prepare zone allocation data
-  lock_data <- convert_lock_settings_to_allocation(settings)
+  lock_data <- convert_lock_settings_to_allocation(settings$locks)
   # generate matrix with planning unit statuses
   status <- vapply(
     seq_along(project$zones),
@@ -326,18 +326,27 @@ convert_lock_settings_to_prioritization <- function(project, settings) {
 #' to allocate planning units to zone. This function is designed
 #' to prepare data for `Dataset$get_pu_status()`.
 #'
-#' @inheritParams solve_prioritization
+#' @param data `data.frame` with the settings to specify which
+#' locks are used to lock in planning units to a particular zone.
+#' Each row corresponds to a different lock, and it must have the following
+#' columns:
+#' `"id"`, `"name"`, `"column"`, `"zone"`, and `"priority"`.
 #'
 #' @return A named `character` vector.
 #'
 #' @family solver
 #'
 #' @noRd
-convert_lock_settings_to_allocation <- function(settings) {
+convert_lock_settings_to_allocation <- function(data) {
   # assert valid arguments
-  assertthat::assert_that(is_prioritization_settings(settings))
-  # extract lock settings
-  data <- settings$locks
+  assertthat::assert_that(
+    is.data.frame(data),
+    assertthat::has_name(data, "id"),
+    assertthat::has_name(data, "name"),
+    assertthat::has_name(data, "zone"),
+    assertthat::has_name(data, "priority"),
+    assertthat::has_name(data, "column")
+  )
   # if has zero rows, then return empty vector
   if (identical(nrow(data), 0L)) return(character(0))
   # remove any rows with a missing zone value
