@@ -423,7 +423,7 @@ export class Mapper {
    */
   highlightLayerOnMap(layerId, values = undefined) {
     // add highlight
-    if (values === undefined || values.length === 0) {
+    if (values === undefined || values.size === 0) {
       this._map.map.setPaintProperty(
         "lyr-" + layerId, "fill-outline-color",
         [

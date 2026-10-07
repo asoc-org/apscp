@@ -25,6 +25,7 @@
   padding: 0px;
   margin: 0px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
 .categorical-legend .item label {
@@ -33,6 +34,9 @@
   vertical-align: middle;
   margin-left: 4px;
   line-height: 1;
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .categorical-legend .item .item-symbol{
