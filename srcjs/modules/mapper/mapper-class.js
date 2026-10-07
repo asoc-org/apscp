@@ -308,8 +308,8 @@ export class Mapper {
     // find element for layer's menu item
     let el = this._hiddenLayers.get(layerId);
     // find menu item checkbox for showing map and set accordingly
-    let layerTristate = el.querySelector(".layer-tristate");
-    layerTristate.value = "show";
+    let layerCheckbox = el.querySelector(".layer-checkbox");
+    layerCheckbox = true;
     // find menu item checkbox for showing legend and set accordingly
     let legendCheckbox = el.querySelector(".legend-checkbox");
     if (showLegend === true) {
@@ -333,47 +333,17 @@ export class Mapper {
     this._map.map.setLayoutProperty(
       "lyr-" + layerId, "visibility", "visible"
     );
-    // remove highlight
-    this._map.map.setPaintProperty(
-      "lyr-" + layerId, "fill-outline-color", undefined
-    );
   }
 
   /**
-  * Hide layer on map.
-  * @param {string} layerId - HTML identifier for layer.;
-  * @return {void}
-  */
+   * Hide layer on map.
+   * @param {string} layerId - HTML identifier for layer.;
+   * @return {void}
+   */
   hideLayerOnMap(layerId) {
     // set layer visibility on map
     this._map.map.setLayoutProperty(
       "lyr-" + layerId, "visibility", "none"
-    );
-    // remove highlight
-    this._map.map.setPaintProperty(
-      "lyr-" + layerId, "fill-outline-color", undefined
-    );
-  }
-
-  /**
-  * Highlight layer on map.
-  * @param {string} layerId - HTML identifier for layer.;
-  * @return {void}
-  */
-  highlightLayerOnMap(layerId) {
-    // set layer visibility on map
-    this._map.map.setLayoutProperty(
-      "lyr-" + layerId, "visibility", "visible"
-    );
-    // add highlight
-    this._map.map.setPaintProperty(
-      "lyr-" + layerId, "fill-outline-color",
-      [
-        "case",
-        ["==", ["get", this._metadata.get("lyr-" + layerId).column], null],
-        "transparent",
-        "#FFFF00"
-      ]
     );
   }
 
@@ -427,7 +397,7 @@ export class Mapper {
       .querySelectorAll(".mapper-menu-item")
       .forEach((x) => {
         this.showLayerOnMap(x.getAttribute("data-id"));
-        x.querySelector(".layer-tristate").value = "show";
+        x.querySelector(".layer-checkbox").checked = true;
       });
    }
 
@@ -440,22 +410,79 @@ export class Mapper {
       .querySelectorAll(".mapper-menu-item")
       .forEach((x) => {
         this.hideLayerOnMap(x.getAttribute("data-id"));
-        x.querySelector(".layer-tristate").value = "hide";
+        x.querySelector(".layer-checkbox").checked = false;
       });
    }
 
   /**
-   * Highlight all menu layers on map.
+   * Add highlighting to layer on map.
+   * @param {string} layerId - HTML identifier for layer.
+   * @param {Array<number>} values - Values to highlight.
+   * Defaults to `undefined` such that all non-zero values are highlighted.
    * @return {void}
    */
-   highlightAllMenuLayersOnMap() {
+  highlightLayerOnMap(layerId, values = undefined) {
+    // add highlight
+    if (values === undefined || values.length === 0) {
+      this._map.map.setPaintProperty(
+        "lyr-" + layerId, "fill-outline-color",
+        [
+          "case",
+          ["==", ["get", this._metadata.get("lyr-" + layerId).column], null],
+          "transparent",
+          "#FFFF00"
+        ]
+      );
+    } else {
+      this._map.map.setPaintProperty(
+        "lyr-" + layerId, "fill-outline-color",
+        [
+          "case",
+          [
+            "in",
+            ["get", this._metadata.get("lyr-" + layerId).column],
+            ["literal", values]
+          ],
+          "#FFFF00",
+          "transparent"
+        ]
+      );
+    }
+  }
+
+  /**
+   * Remove highlighting for layer on map.
+   * @param {string} layerId - HTML identifier for layer.;
+   * @return {void}
+   */
+  unhighlightLayerOnMap(layerId) {
+    // remove highlight
+    this._map.map.setPaintProperty(
+      "lyr-" + layerId, "fill-outline-color",
+      undefined
+    );
+  }
+
+  /**
+   * Remove highlighting for all menu layers on map.
+   * @return {void}
+   */
+  unhighlightAllMenuLayersOnMap() {
+    // unhighlight layers
     this._menu
       .querySelectorAll(".mapper-menu-item")
       .forEach((x) => {
-        this.highlightLayerOnMap(x.getAttribute("data-id"));
-        x.querySelector(".layer-tristate").value = "highlight";
+        this.unhighlightLayerOnMap(x.getAttribute("data-id"));
       });
-   }
+    // update styling for categorical and solution legends
+    this._menu
+      .querySelectorAll(".mapper-menu-item .item.highlight")
+      .forEach((x) => x.classList.remove("highlight"));
+    // update styling for continuous legends
+    this._menu
+      .querySelectorAll(".mapper-menu-item .legend-container.highlight")
+      .forEach((x) => x.classList.remove("highlight"));
+  }
 
   /**
    * Remove all layers from the menu and the map.

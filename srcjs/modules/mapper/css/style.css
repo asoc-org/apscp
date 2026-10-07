@@ -152,42 +152,26 @@
   display: none;
 }
 
-/* layer tristate */
-.mapper .layer-tristate-container {
+/* layer visibility checkbox */
+.mapper .layer-checkbox-container {
+  margin-right: 1px;
   cursor: pointer;
 }
 
-.mapper .layer-tristate-container input[type="button"],
-.mapper .layer-tristate-container .show,
-.mapper .layer-tristate-container .hide,
-.mapper .layer-tristate-container .highlight {
+.mapper .layer-checkbox-container input[type="checkbox"],
+.mapper .layer-checkbox-container .checked {
   display: none;
-}
-
-.mapper .layer-tristate-container .show {
   color: black;
 }
 
-.mapper .layer-tristate-container .hide {
+.mapper .layer-checkbox-container .unchecked {
   color: red;
 }
 
-.mapper .layer-tristate-container .highlight {
-  color: black;
-  text-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 20px yellow;
-}
-
-.mapper .layer-tristate-container input[type="button"][value="show"] ~ .show
-{
+.mapper .layer-checkbox-container input[type="checkbox"]:checked ~ .checked {
   display: inline-block;
 }
 
-.mapper .layer-tristate-container input[type="button"][value="hide"] ~ .hide
-{
-  display: inline-block;
-}
-
-.mapper .layer-tristate-container input[type="button"][value="highlight"] ~ .highlight
-{
-  display: inline-block;
+.mapper .layer-checkbox-container input[type="checkbox"]:checked ~ .unchecked {
+  display: none;
 }

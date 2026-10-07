@@ -31,6 +31,10 @@
   border: 1px solid var(--symbol-border);
 }
 
+.legend-container.highlight .continuous-legend .colorbar-ramp {
+  border: 3px solid #FFFF00;
+}
+
 /* color bar items */
 .continuous-legend .colorbar-items {
   display: grid;
@@ -54,6 +58,7 @@
   font-weight: 400;
   padding-left: 5px;
   margin-right: 5px;
+  cursor: default;
 }
 
 /* labels */
@@ -74,24 +79,4 @@
     background-color: var(--symbol-border);
     color: var(--symbol-border);
     margin: 0 auto;
-}
-
-/* small screens */
-@media only screen and (max-width: 991px) {
-  .continuous-legend .colorbar-ramp {
-    width: 175px;
-  }
-  .continuous-legend .colorbar-items {
-    width: 175px;
-  }
-}
-
-/* medium screens */
-@media only screen and (max-width: 1199px) and (min-width: 992px) {
-  .continuous-legend .colorbar-ramp {
-    width: 250px;
-  }
-  .continuous-legend .items {
-    width: 250px;
-  }
 }

@@ -69,12 +69,12 @@ add_layer_visibility_control <- function(
           ),
           htmltools::tags$i(class = "fa fa-eye-slash", style = "color:red;")
         ),
-        ## highlight layers
+        ## unhighlight layers
         htmltools::tags$button(
           `data-toggle` = "tooltip",
           `data-placement` = "top",
           `data-container` = "body",
-          title = "Highlight all layers on map.",
+          title = "Remove highlight from all layers on map.",
           class = c(
             "mapboxgl-ctrl-highlight-layers", "mapboxgl-ctrl-icon",
             "btn", "btn-sm", "btn-light"
@@ -82,10 +82,10 @@ add_layer_visibility_control <- function(
           onclick = paste0(
             "document.querySelector('#",
             mapper_id,
-            "').widget.mapper.highlightAllMenuLayersOnMap();"
+            "').widget.mapper.unhighlightAllMenuLayersOnMap();"
           ),
           htmltools::tags$i(
-            class = "fa fa-eye",
+            class = "fa fa-eye-slash",
             style =
               "text-shadow: 0 0 5px yellow, 0 0 10px yellow, 0 0 20px yellow;"
           )

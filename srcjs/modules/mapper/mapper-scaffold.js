@@ -27,7 +27,7 @@ export function createMenuItem(x, mapper, themes = undefined) {
 
   // find components of container element
   let showLegendCheckbox = el.querySelector(".legend-checkbox");
-  let showLayerTristate = el.querySelector(".layer-tristate");
+  let showLayerCheckbox = el.querySelector(".layer-checkbox");
   let removeLayerFromMapButton = el.querySelector(".layer-button");
   let legendElement = el.querySelector(".legend-container");
   let nameElement = el.querySelector(".name-container");
@@ -41,7 +41,7 @@ export function createMenuItem(x, mapper, themes = undefined) {
   nameElement.appendChild(createNameLabel(x));
 
   // set layer checkbox status
-  showLayerTristate.value = "show";
+  showLayerCheckbox.checked = true;
 
   // set legend checkbox
   showLegendCheckbox.checked = true;
@@ -61,24 +61,12 @@ export function createMenuItem(x, mapper, themes = undefined) {
     }
   });
 
-  // set listener for button to hide layer
-  showLayerTristate.addEventListener("click", function () {
-    switch (this.value) {
-      case "show":
-        this.value = "hide";
-        mapper.hideLayerOnMap(x.id);
-        break;
-      case "hide":
-        this.value = "highlight";
-        mapper.highlightLayerOnMap(x.id);
-        break;
-      case "highlight":
-        this.value = "show";
-        mapper.showLayerOnMap(x.id);
-        break;
-      default:
-        this.value = "show";
-        mapper.showLayerOnMap(x.id);
+  // set listener for checkbox to show/hide layer
+  showLayerCheckbox.addEventListener("click", function () {
+    if (this.checked) {
+      mapper.showLayerOnMap(x.id);
+    } else {
+      mapper.hideLayerOnMap(x.id);
     }
   });
 
@@ -86,6 +74,41 @@ export function createMenuItem(x, mapper, themes = undefined) {
   removeLayerFromMapButton.addEventListener("click", function () {
     mapper._select.tomselect.removeItem(x.id);
   });
+
+  // set listener for buttons to highlight layer
+  if (x.layer.legend.class == "ContinuousLegend") {
+    // listener for continuous legend
+    legendElement.addEventListener("click", (event) => {
+      if (!legendElement.classList.contains("highlight")) {
+        legendElement.classList.add("highlight");
+        mapper.highlightLayerOnMap(x.id);
+      } else {
+        legendElement.classList.remove("highlight");
+        mapper.unhighlightLayerOnMap(x.id);
+      }
+    });
+  } else {
+    // listener for categorical or solution legend
+    legendElement
+      .querySelectorAll(".item")
+      .forEach((item) => {
+        item.addEventListener("click", (event) => {
+          let h = !item.classList.contains("highlight");
+          if (h) {
+            item.classList.add("highlight");
+          } else {
+            item.classList.remove("highlight");
+          }
+          mapper.highlightLayerOnMap(
+            x.id,
+            Array.from(
+              legendElement.querySelectorAll(".item.highlight"),
+              (x) => Number(x.dataset.value)
+            )
+          );
+        });
+      });
+  }
 
   // return element
   return el;

@@ -44,6 +44,8 @@ export function createCategoricalLegend(x) {
     // create item to add to legend
     let item = document.createElement("div");
     item.className = "item";
+    // set data attributes
+    item.setAttribute("data-value", x.values[i]);
     // create text component to display the text
     let itemLabel = document.createElement("label");
     itemLabel.className = "item-label";
@@ -103,6 +105,8 @@ export function createSolutionLegend(x) {
       // create item for locked to add to legend
       let item = document.createElement("div");
       item.className = "item";
+      // set data attributes
+      item.setAttribute("data-value", x.values[(j * n) + i]);
       // create text component to display the text
       let itemLabel = document.createElement("label");
       itemLabel.className = "item-label";
