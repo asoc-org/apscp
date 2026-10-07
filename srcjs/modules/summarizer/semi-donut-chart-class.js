@@ -25,7 +25,7 @@ export class SemiDonutChart {
     this.tooltipShowAbsoluteUnits = tooltipShowAbsoluteUnits;
     this.zones = Object.keys(metrics.locked);
     if (metrics.total.length > 1) {
-      console.log("`SemiDonutPlot()`: `metrics` must have a single metric.");
+      console.error("`SemiDonutPlot()`: `metrics` must have a single metric.");
     }
 
     // compute data for arcs
