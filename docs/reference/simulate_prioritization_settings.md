@@ -50,21 +50,21 @@ s <- simulate_prioritization_settings(x)
 print(s)
 #> $features
 #>                                      id      name column         zone target
-#> 1  98215f3b-032b-4d8d-8b4d-da098bb5517c Species 1 feat_1 Biodiversity    0.2
-#> 2  98215f3b-032b-4d8d-8b4d-da098bb5517c Species 1 feat_1      Tourism    0.0
-#> 3  98215f3b-032b-4d8d-8b4d-da098bb5517c Species 1 feat_1   Scientific    0.0
-#> 4  18974665-c416-4981-b2ed-fdf34f6c98a6 Species 2 feat_2 Biodiversity    1.0
-#> 5  18974665-c416-4981-b2ed-fdf34f6c98a6 Species 2 feat_2      Tourism    0.0
-#> 6  18974665-c416-4981-b2ed-fdf34f6c98a6 Species 2 feat_2   Scientific    0.0
-#> 7  b7a60a28-8287-4de8-ab1c-fed688957d32 Species 3 feat_3 Biodiversity    0.4
-#> 8  b7a60a28-8287-4de8-ab1c-fed688957d32 Species 3 feat_3      Tourism    0.4
-#> 9  b7a60a28-8287-4de8-ab1c-fed688957d32 Species 3 feat_3   Scientific    0.0
-#> 10 45074f8f-341c-435b-93fe-95f586c017fe Species 4 feat_4 Biodiversity    0.2
-#> 11 45074f8f-341c-435b-93fe-95f586c017fe Species 4 feat_4      Tourism    0.2
-#> 12 45074f8f-341c-435b-93fe-95f586c017fe Species 4 feat_4   Scientific    0.0
-#> 13 83c6e630-b038-4309-b42a-3fb7af39b4b7 Species 5 feat_5 Biodiversity    0.4
-#> 14 83c6e630-b038-4309-b42a-3fb7af39b4b7 Species 5 feat_5      Tourism    0.6
-#> 15 83c6e630-b038-4309-b42a-3fb7af39b4b7 Species 5 feat_5   Scientific    0.0
+#> 1  89fa5608-cd16-4a5e-bf64-c274b20fc1f3 Species 1 feat_1 Biodiversity    0.2
+#> 2  89fa5608-cd16-4a5e-bf64-c274b20fc1f3 Species 1 feat_1      Tourism    0.0
+#> 3  89fa5608-cd16-4a5e-bf64-c274b20fc1f3 Species 1 feat_1   Scientific    0.0
+#> 4  a2736f83-fe2f-48d9-9e2a-6cf96bf0abdb Species 2 feat_2 Biodiversity    1.0
+#> 5  a2736f83-fe2f-48d9-9e2a-6cf96bf0abdb Species 2 feat_2      Tourism    0.0
+#> 6  a2736f83-fe2f-48d9-9e2a-6cf96bf0abdb Species 2 feat_2   Scientific    0.0
+#> 7  6d5f7bf7-7432-44f4-ad48-bb3eb3d742fe Species 3 feat_3 Biodiversity    0.4
+#> 8  6d5f7bf7-7432-44f4-ad48-bb3eb3d742fe Species 3 feat_3      Tourism    0.4
+#> 9  6d5f7bf7-7432-44f4-ad48-bb3eb3d742fe Species 3 feat_3   Scientific    0.0
+#> 10 26c33317-9c9f-4dc0-b31e-d58f6bfa2a48 Species 4 feat_4 Biodiversity    0.2
+#> 11 26c33317-9c9f-4dc0-b31e-d58f6bfa2a48 Species 4 feat_4      Tourism    0.2
+#> 12 26c33317-9c9f-4dc0-b31e-d58f6bfa2a48 Species 4 feat_4   Scientific    0.0
+#> 13 e9e6df06-8200-43a5-9f45-0f8837319702 Species 5 feat_5 Biodiversity    0.4
+#> 14 e9e6df06-8200-43a5-9f45-0f8837319702 Species 5 feat_5      Tourism    0.6
+#> 15 e9e6df06-8200-43a5-9f45-0f8837319702 Species 5 feat_5   Scientific    0.0
 #>    weight
 #> 1     0.5
 #> 2     0.5
@@ -84,14 +84,14 @@ print(s)
 #> 
 #> $locks
 #>                                     id            name column         zone
-#> 1 127b4532-b394-4a0f-b7a9-7044a28171ab Protected areas  aspas Biodiversity
-#> 2 005c3b03-d102-40fd-b362-7731ba507b56     Field camps  camps   Scientific
+#> 1 d3307f55-c966-42ff-81c2-36a36e3cb05d Protected areas  aspas Biodiversity
+#> 2 feca0ae6-48a5-4ca7-8a83-cfd92bd38455     Field camps  camps   Scientific
 #>   priority
 #> 1        2
 #> 2        1
 #> 
 #> $costs
 #>                                     id            name column    zone weight
-#> 1 d47fb565-92a7-41f6-ac47-23f260fce22f Tourism revenue   cost Tourism      1
+#> 1 905ef9e2-9332-4f16-85cb-5fcdc2ede13d Tourism revenue   cost Tourism      1
 #> 
 ```

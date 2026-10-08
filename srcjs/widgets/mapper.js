@@ -1,4 +1,5 @@
 /** Import dependencies */
+import "htmlwidgets"; 
 import {Mapper} from "../modules/mapper/mapper-class.js";
 
 HTMLWidgets.widget({

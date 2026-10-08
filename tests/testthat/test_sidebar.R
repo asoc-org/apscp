@@ -98,8 +98,6 @@ test_that("sidebar_tabs", {
   expect_equal(x$name, "div")
   expect_equal(htmltools::tagGetAttribute(x, "id"), "sidebar")
   expect_equal(htmltools::tagGetAttribute(x, "class"), "mapsidebar collapsed")
-  expect_type(htmltools::htmlDependencies(x), "list")
-  expect_equal(htmltools::htmlDependencies(x)[[1]]$name, "sidebar")
   expect_length(x$children, 2L)
   ## sidebar tabs
   expect_s3_class(x$children[[1]], "shiny.tag")

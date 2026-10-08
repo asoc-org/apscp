@@ -20,8 +20,8 @@ sample_pts_data <- function(data, n_obs) {
 
 # define user interface for Shiny application
 ui <- fluidPage(
+  add_external_resources(),
   tags$head(tags$style(".btn-default {display: block;}")),
-  sidebar_deps(),
   h4("Sidebar Demo"),
   splitLayout(
     cellWidths = c("20%", "80%"),

@@ -1,4 +1,5 @@
 /** Import dependencies */
+import "htmlwidgets"; 
 import {Solver} from "../modules/solver/solver-class.js";
 
 HTMLWidgets.widget({

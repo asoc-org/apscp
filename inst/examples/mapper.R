@@ -13,6 +13,7 @@ tile_server_start(sim_data)
 
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
+  add_external_resources(),
   tags$head(tags$style(".btn-default {display: block;}")),
   h4("Mapper Demo"),
   splitLayout(

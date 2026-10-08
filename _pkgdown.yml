@@ -99,3 +99,4 @@ reference:
       Functions with assorted uses.
     contents:
       - has_concept("misc")
+      - add_external_resources

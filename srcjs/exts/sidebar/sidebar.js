@@ -1,5 +1,6 @@
 /** Import dependencies */
 // classes to create components
+import "shiny";
 import {MapSidebar} from "./class.js"
 
 /**

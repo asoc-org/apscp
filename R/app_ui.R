@@ -7,7 +7,7 @@
 app_ui <- function(request) {
   htmltools::tagList(
     # add external resources
-    golem_add_external_resources(),
+    add_external_resources(),
 
     # app content
     bslib::page_fillable(
@@ -69,22 +69,33 @@ app_ui <- function(request) {
 
 }
 
-#' Add external Resources to the Application
+#' Add external resources to a Shiny application
 #'
-#' This function is internally used to add external
-#' resources inside the Shiny application.
+#' This function is used to add external resources to a Shiny application.
+#'
+#' @details
+#' This function adds JavaScript and CSS files for the
+#' [mapper()], [solver()], [summarizer()], [sidebar_pane()],
+#' and [sidebar_tabs()].
+#'
+#' @return A `shiny.tag` object.
 #'
 #' @import shiny
 #' @importFrom golem add_resource_path activate_js favicon bundle_resources
-#' @noRd
-golem_add_external_resources <- function() {
+#' @export
+add_external_resources <- function() {
   add_resource_path("www", app_sys("app/www"))
   tags$head(
     favicon(),
+    htmltools::htmlDependency(
+      "htmlwidgets",
+      "1.0.0",
+      src = system.file("www", package = "htmlwidgets"),
+      script = "htmlwidgets.js"
+    ),
     bundle_resources(
       path = app_sys("app/www"),
       app_title = "apscp"
-    ),
-    sidebar_deps()
+    )
   )
 }

@@ -115,51 +115,28 @@ sidebar_tabs <- function(id, icon_list = NULL, ...) {
     identical(length(ids), length(icon_list)),
     msg = "The number of icons needs to match the number of sidebar panes."
   )
-  htmltools::attachDependencies(
+  htmltools::tags$div(
+    id = id,
+    class = "mapsidebar collapsed",
+    style = "display: none",
     htmltools::tags$div(
-      id = id,
-      class = "mapsidebar collapsed",
-      style = "display: none",
-      htmltools::tags$div(
-        class = "mapsidebar-tabs", style = "display: none",
-        htmltools::tags$ul(
-          role = "tablist",
-          htmltools::tagList(
-            lapply(seq_along(ids), function(x) {
-              htmltools::tags$li(
-                htmltools::tags$a(
-                  href = paste0("#", ids[[x]]), role = "tab", icon_list[[x]]
-                )
+      class = "mapsidebar-tabs", style = "display: none",
+      htmltools::tags$ul(
+        role = "tablist",
+        htmltools::tagList(
+          lapply(seq_along(ids), function(x) {
+            htmltools::tags$li(
+              htmltools::tags$a(
+                href = paste0("#", ids[[x]]), role = "tab", icon_list[[x]]
               )
-            })
-          )
+            )
+          })
         )
-      ),
-      htmltools::tags$div(
-        class = "mapsidebar-content", style = "display: none",
-        htmltools::tagList(arg)
       )
     ),
-    sidebar_deps(),
-    append = TRUE
-  )
-}
-
-#' Sidebar dependencies
-#'
-#' Add dependencies for sidebar to a Shiny application.
-#'
-#' @return A `list` with the HTML dependencies.
-#'
-#' @noRd
-sidebar_deps <- function() {
-  list(
-    htmltools::htmlDependency(
-      "sidebar",
-      "1.0.0",
-      src = system.file("htmlwidgets", package = "apscp"),
-      script = "sidebar.js",
-      stylesheet = "sidebar.css"
+    htmltools::tags$div(
+      class = "mapsidebar-content", style = "display: none",
+      htmltools::tagList(arg)
     )
   )
 }

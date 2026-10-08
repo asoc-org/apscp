@@ -10,6 +10,7 @@ sim_data <- simulate_project()
 
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
+  add_external_resources(),
   h4("Summarizer Demo"),
   splitLayout(
     cellWidths = c("80%", "395px"),

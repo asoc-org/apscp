@@ -1,4 +1,5 @@
 /** Import dependencies */
+import "htmlwidgets"; 
 import {Summarizer} from "../modules/summarizer/summarizer-class.js";
 
 HTMLWidgets.widget({

@@ -1,6 +1,6 @@
-dependencies:
-  - name: mapper-style
-    version: 1.0.0
-    src: htmlwidgets
-    stylesheet:
-      - mapper.css
+# dependencies:
+#   - name: mapper-style
+#     version: 1.0.0
+#     src: htmlwidgets
+#     stylesheet:
+#       - mapper.css

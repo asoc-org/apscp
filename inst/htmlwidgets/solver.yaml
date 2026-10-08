@@ -1,6 +1,6 @@
-dependencies:
-  - name: solver-style
-    version: 1.0.0
-    src: htmlwidgets
-    stylesheet:
-      - solver.css
+# dependencies:
+#   - name: solver-style
+#     version: 1.0.0
+#     src: htmlwidgets
+#     stylesheet:
+#       - solver.css
