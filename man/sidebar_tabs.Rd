@@ -22,6 +22,13 @@ A \code{shiny.tag} object.
 \description{
 Create a sidebar with tabs.
 }
+\section{Dependencies}{
+
+The \code{\link[=add_external_resources]{add_external_resources()}} function must be manually added to the
+user-interface component of the Shiny application in order for this
+widget to work correctly.
+}
+
 \examples{
 # load packages
 library(shiny)

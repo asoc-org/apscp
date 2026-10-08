@@ -7,6 +7,8 @@
 #'
 #' @family summarizer
 #'
+#' @inheritSection mapper Dependencies
+#'
 #' @examplesIf interactive()
 #' # run example application showing a summarizer widget
 #' run_example_app("summarizer")

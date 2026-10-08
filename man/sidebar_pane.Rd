@@ -34,6 +34,13 @@ A \code{shiny.tag} object.
 Create a sidebar pane. This pane is designed to be used as an argument
 to \code{\link[=sidebar_tabs]{sidebar_tabs()}}.
 }
+\section{Dependencies}{
+
+The \code{\link[=add_external_resources]{add_external_resources()}} function must be manually added to the
+user-interface component of the Shiny application in order for this
+widget to work correctly.
+}
+
 \examples{
 # load packages
 library(shiny)

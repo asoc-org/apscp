@@ -35,6 +35,13 @@ Defaults to \code{NULL} since these identifiers are not used by Shiny.}
 Constructs a widget to summarize solutions.
 This widget is designed to be used within a Shiny web application.
 }
+\section{Dependencies}{
+
+The \code{\link[=add_external_resources]{add_external_resources()}} function must be manually added to the
+user-interface component of the Shiny application in order for this
+widget to work correctly.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # run example application showing a summarizer widget

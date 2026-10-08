@@ -37,6 +37,13 @@ Constructs a widget for managing layers on a \code{\link[mapgl:mapboxgl]{mapgl::
 This widget is designed to be used in conjunction with an existing
 map within a Shiny web application.
 }
+\section{Dependencies}{
+
+The \code{\link[=add_external_resources]{add_external_resources()}} function must be manually added to the
+user-interface component of the Shiny application in order for this
+widget to work correctly.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # run example app showing a mapper widget

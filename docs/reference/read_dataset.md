@@ -61,7 +61,7 @@ print(x)
 #> <Dataset>
 #>   Public:
 #>     boundary_data: NULL
-#>     boundary_path: /tmp/Rtmp6bOpOO/temp_libpath6e3611ddd93b8/apscp/extdata/ ...
+#>     boundary_path: /tmp/RtmpyjzPnf/temp_libpath6f8921bdca6ba/apscp/extdata/ ...
 #>     clone: function (deep = FALSE) 
 #>     get_boundary_data: function () 
 #>     get_column_data: function (column) 
@@ -77,7 +77,7 @@ print(x)
 #>     n_pu: 48447
 #>     pu_db_con: NULL
 #>     pu_db_table: file532d112bd02b9
-#>     pu_path: /tmp/Rtmp7uslcB/file6e4288c0a7c1/antarctic-peninsula_pu.gpkg
+#>     pu_path: /tmp/RtmpMCjUTS/file6f9202d12d266/antarctic-peninsula_pu ...
 #>     set_column_data: function (column, values) 
 #>   Private:
 #>     close_db_con: function () 

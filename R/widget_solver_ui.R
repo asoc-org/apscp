@@ -48,6 +48,8 @@
 #' }
 #' }
 #'
+#' @inheritSection mapper Dependencies
+#'
 #' @family solver
 #'
 #' @examplesIf interactive()

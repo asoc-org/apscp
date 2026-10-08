@@ -22,6 +22,8 @@ NULL
 #'
 #' @family sidebar
 #'
+#' @inheritSection mapper Dependencies
+#'
 #' @references
 #' \url{https://github.com/Turbo87/sidebar-v2},
 #' \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
@@ -81,6 +83,8 @@ sidebar_pane <- function(
 #' objects. Defaults to `NULL` such that no icons are included.
 #'
 #' @param ... The individual [sidebar_pane()] objects.
+#'
+#' @inheritSection mapper Dependencies
 #'
 #' @return A `shiny.tag` object.
 #'

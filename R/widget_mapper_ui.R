@@ -24,6 +24,11 @@
 #'
 #' @family mapper
 #'
+#' @section Dependencies:
+#' The [add_external_resources()] function must be manually added to the
+#' user-interface component of the Shiny application in order for this
+#' widget to work correctly.
+#'
 #' @examplesIf interactive()
 #' # run example app showing a mapper widget
 #' run_example_app("mapper")

@@ -86,6 +86,13 @@ The widget sends the following values to the server:
 
   This is sent when the stop button is clicked.
 
+## Dependencies
+
+The
+[`add_external_resources()`](https://asoc-org.github.io/apscp/reference/add_external_resources.md)
+function must be manually added to the user-interface component of the
+Shiny application in order for this widget to work correctly.
+
 ## See also
 
 Other functions for the solver widget:

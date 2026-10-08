@@ -48,6 +48,13 @@ summarizer(
   `character` HTML identifier for the widget. Defaults to `NULL` since
   these identifiers are not used by Shiny.
 
+## Dependencies
+
+The
+[`add_external_resources()`](https://asoc-org.github.io/apscp/reference/add_external_resources.md)
+function must be manually added to the user-interface component of the
+Shiny application in order for this widget to work correctly.
+
 ## See also
 
 Other summarizer:

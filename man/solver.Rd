@@ -68,6 +68,13 @@ This is sent when the stop button is clicked.
 }
 }
 
+\section{Dependencies}{
+
+The \code{\link[=add_external_resources]{add_external_resources()}} function must be manually added to the
+user-interface component of the Shiny application in order for this
+widget to work correctly.
+}
+
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # run example application showing a solver widget
