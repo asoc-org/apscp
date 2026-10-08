@@ -79,7 +79,7 @@
 
 .mapsidebar-tabs > li.disabled > a,
 .mapsidebar-tabs > ul > li.disabled > a {
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .mapsidebar-tabs > li > a,

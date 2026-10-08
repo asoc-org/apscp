@@ -64,6 +64,7 @@ ui <- fluidPage(
           id = "table_id",
           icon = icon("table", verify_fa = FALSE),
           tooltip = NULL,
+          disabled = TRUE,
           tagList(
             tableOutput("data2")
           )

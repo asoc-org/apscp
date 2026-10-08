@@ -48,6 +48,7 @@ app_ui <- function(request) {
             id = "results_pane",
             icon = NULL,
             tooltip = "Open sidebar for solution results.",
+            disabled = TRUE,
             summarizerOutput("summarizer", height = "100%", width = "100%")
           )
         )

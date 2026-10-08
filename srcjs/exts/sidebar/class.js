@@ -70,7 +70,7 @@ export class MapSidebar {
     // find sidebar panes and close buttons
     this._panes = [];
     this._closeButtons = [];
-    for (i = this._paneContainer.children.length - 1; i >= 0; i--) {
+    for (i = 0; i < this._paneContainer.children.length; i++) {
       child = this._paneContainer.children[i];
       if (
         child.tagName == "DIV" &&
@@ -107,6 +107,9 @@ export class MapSidebar {
       if (typeof(tooltip) === "string") {
         addTooltip(sub, tooltip)
       }
+      if (this._panes[i].getAttribute("data-disabled") === "TRUE") {
+        this._tabs[i].classList.add("disabled");
+      }
     }
     // if height is a percentage, then modify control position container
     if (this._height.endsWith("%")) {
@@ -140,6 +143,7 @@ export class MapSidebar {
     this._closeButtons.forEach((button) => {
       button.addEventListener("click", () => this.close());
     });
+    // disabled
     // show sidebar and content
     setTimeout(function(){
       $(".mapsidebar.collapsed .mapsidebar-tabs, .mapsidebar.collapsed .mapsidebar-content, .mapsidebar.collapsed").css("display", "block");
@@ -183,6 +187,8 @@ export class MapSidebar {
         child.classList.remove("active");
       }
     }
+    // if needed, enable sidebar
+    this.enable(pane_id);
     // if needed, open sidebar
     if (this.element.classList.contains("collapsed")) {
       var pos = this.element.classList.contains("mapsidebar-left") ?

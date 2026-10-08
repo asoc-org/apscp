@@ -7,7 +7,7 @@
 sidebar_tabs(id, icon_list = NULL, ...)
 }
 \arguments{
-\item{id}{\code{character} identifier for sidebar.}
+\item{id}{\code{character} value with identifier for sidebar.}
 
 \item{icon_list}{\code{list} of \code{\link[shiny:icon]{icon()}} objects.
 These icons are shown when the sidebar is collapsed.
@@ -22,13 +22,6 @@ A \code{shiny.tag} object.
 \description{
 Create a sidebar with tabs.
 }
-\section{Dependencies}{
-
-The \code{\link[=add_external_resources]{add_external_resources()}} function must be manually added to the
-user-interface component of the Shiny application in order for this
-widget to work correctly.
-}
-
 \examples{
 # load packages
 library(shiny)

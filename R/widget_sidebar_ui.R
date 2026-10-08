@@ -18,6 +18,10 @@ NULL
 #' when hovering over the button to open the sidebar.
 #' Defaults to `NULL` such that no tooltip is displayed.
 #'
+#' @param disabled `logical` value indicating if the button to open the
+#' sidebar pane should be disabled or not?
+#' Defaults to `FALSE`.
+#'
 #' @param ... List of elements to include in the pane.
 #'
 #' @family sidebar
@@ -42,8 +46,9 @@ sidebar_pane <- function(
   title = "Sidebar Title",
   id = NULL,
   icon = shiny::icon("caret-right"),
+  ...,
   tooltip = NULL,
-  ...
+  disabled = FALSE
 ) {
   if (is.null(id)) {
     stop("The sidebar pane needs an `id`.")
@@ -63,6 +68,7 @@ sidebar_pane <- function(
     class = "mapsidebar-pane",
     id = id,
     `data-tooltip` = tooltip,
+    `data-disabled` = ifelse(isTRUE(disabled), "TRUE", "FALSE"),
     h,
     htmltools::tags$div(
       class = "mapsidebar-pane-content",
@@ -75,7 +81,7 @@ sidebar_pane <- function(
 #'
 #' Create a sidebar with tabs.
 #'
-#' @param id `character` identifier for sidebar.
+#' @param id `character` value with identifier for sidebar.
 #'
 #' @param icon_list `list` of [icon()] objects.
 #' These icons are shown when the sidebar is collapsed.
@@ -83,8 +89,6 @@ sidebar_pane <- function(
 #' objects. Defaults to `NULL` such that no icons are included.
 #'
 #' @param ... The individual [sidebar_pane()] objects.
-#'
-#' @inheritSection mapper Dependencies
 #'
 #' @return A `shiny.tag` object.
 #'
@@ -113,25 +117,30 @@ sidebar_pane <- function(
 #' )
 #' @export
 sidebar_tabs <- function(id, icon_list = NULL, ...) {
+  # assert valid arguments
   arg <- list(...)
   ids <- lapply(arg, function(x) htmltools::tagGetAttribute(x, "id"))
   assertthat::assert_that(
     identical(length(ids), length(icon_list)),
     msg = "The number of icons needs to match the number of sidebar panes."
   )
+  # return HTML element
   htmltools::tags$div(
     id = id,
     class = "mapsidebar collapsed",
     style = "display: none",
     htmltools::tags$div(
-      class = "mapsidebar-tabs", style = "display: none",
+      class = "mapsidebar-tabs",
+      style = "display: none",
       htmltools::tags$ul(
         role = "tablist",
         htmltools::tagList(
-          lapply(seq_along(ids), function(x) {
+          lapply(seq_along(ids), function(i) {
             htmltools::tags$li(
               htmltools::tags$a(
-                href = paste0("#", ids[[x]]), role = "tab", icon_list[[x]]
+                href = paste0("#", ids[[i]]),
+                role = "tab",
+                icon_list[[i]],
               )
             )
           })
@@ -139,7 +148,8 @@ sidebar_tabs <- function(id, icon_list = NULL, ...) {
       )
     ),
     htmltools::tags$div(
-      class = "mapsidebar-content", style = "display: none",
+      class = "mapsidebar-content",
+      style = "display: none",
       htmltools::tagList(arg)
     )
   )

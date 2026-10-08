@@ -8,8 +8,9 @@ sidebar_pane(
   title = "Sidebar Title",
   id = NULL,
   icon = shiny::icon("caret-right"),
+  ...,
   tooltip = NULL,
-  ...
+  disabled = FALSE
 )
 }
 \arguments{
@@ -21,11 +22,15 @@ sidebar_pane(
 is used to create a button for closing the pane. If \code{NULL}, then
 no icon is added for the pane.}
 
+\item{...}{List of elements to include in the pane.}
+
 \item{tooltip}{\code{character} value with text to display in a tooltip
 when hovering over the button to open the sidebar.
 Defaults to \code{NULL} such that no tooltip is displayed.}
 
-\item{...}{List of elements to include in the pane.}
+\item{disabled}{\code{logical} value indicating if the button to open the
+sidebar pane should be disabled or not?
+Defaults to \code{FALSE}.}
 }
 \value{
 A \code{shiny.tag} object.
