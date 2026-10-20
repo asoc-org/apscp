@@ -24,13 +24,13 @@ w = 3.0
 ow = "400"
 ```
 
-Interactive decision support tool to navigate management options for the Antarctic Peninsula. The tool identifies priority areas for implementing policies for conservation, tourism, and scientific research. To achieve this, it leverages previously published data ([Lee et al. 2024](https://doi.org/10.1007/s13280-024-02009-4)) and multi-objective optimization techniques through the [_prioritizr_ package](https://prioritizr.net) ([Hanson et al. 2025](https://doi.org/10.1111/cobi.14376)). Although default parameters are specified based on stakeholder surveys, users can calibrate weights and representation targets to fine tune optimization procedures according to their own preferences. Optimization procedures can be performed with the _Gurobi_ (<https://www.gurobi.com/>) or _CBC_ (via the _rcbc_ package, <https://github.com/dirkschumacher/rcbc>) exact algorithm solvers.
+Interactive decision support tool to navigate management options for the Antarctic Peninsula. The tool identifies priority areas for implementing policies for conservation, tourism, and scientific research. To achieve this, it leverages previously published data ([Lee et al. 2024](https://doi.org/10.1007/s13280-024-02009-4)) and multi-objective optimization techniques through the [_prioritizr_ package](https://prioritizr.net) ([Hanson et al. 2025](https://doi.org/10.1111/cobi.14376)). Although default parameters are specified based on stakeholder surveys, users can calibrate weights and representation targets to fine tune optimization procedures according to their own preferences. Optimization procedures can be performed with the [_Gurobi_]( https://www.gurobi.com/) or [_CBC_](https://github.com/coin-or/cbc) (via the [_rcbc_](https://github.com/dirkschumacher/rcbc) package) exact algorithm solvers.
 
 ## Usage
 
 The application is available online. Please note that you must use [Google Chrome](https://www.google.com/chrome/) for it to work.
 
-<table><tr><td><img class="screenshot" src="man/figures/screenshot.png" align="center" width="100%"/></td></tr></table>
+<table style="border:none;border-spacing:0;"><tr style="border:none;border-spacing:0;"><td style="border:none;border-spacing:0;"><img class="screenshot" src="man/figures/screenshot.png" align="center" width="100%"/></td></tr></table>
 
 ## Installation
 
@@ -96,9 +96,13 @@ The application is a [_Shiny_ web application](https://mastering-shiny.org/) dev
 * `widget_`:  Defines custom [_htmlwidgets_ widgets](https://www.htmlwidgets.org/).
 * `utils_`: Defines utility functions.
 
+## Getting help
+
+Thank you for checking out this application. If you encounter any software defects (e.g. application crashes, unexpected behavior, or spelling mistakes), please feel free to post them on the [issue tracker](https://github.com/asoc-org/apscp/issues).
+
 ## Acknowledgments
 
-```{r, results = "asis"}
+```{r, results = "asis", echo = FALSE}
 cat(
   readLines(
     system.file("app", "text", "acknowledgments.md", package = "apscp")
@@ -106,6 +110,4 @@ cat(
 )
 ```
 
-## Getting help
-
-Thank you for checking out this application. If you encounter any software defects (e.g. application crashes, unexpected behavior, or spelling mistakes), please feel free to post them on the [issue tracker](https://github.com/asoc-org/apscp/issues).
+<table style="border:none;border-spacing:0;"><tr style="border:none;border-spacing:0;"><td style="border:none;border-spacing:0;vertical-align:middle;"><img src="man/figures/asoc.jpg" align="center" style="height:150px;"/></td><td style="border:none;border-spacing:0;vertical-align:middle;"><img src="man/figures/gurobi.svg" align="center" style="height:150px;"/></td></tr></table>

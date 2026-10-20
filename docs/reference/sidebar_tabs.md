@@ -12,7 +12,7 @@ sidebar_tabs(id, icon_list = NULL, ...)
 
 - id:
 
-  `character` identifier for sidebar.
+  `character` value with identifier for sidebar.
 
 - icon_list:
 
@@ -31,13 +31,6 @@ sidebar_tabs(id, icon_list = NULL, ...)
 ## Value
 
 A `shiny.tag` object.
-
-## Dependencies
-
-The
-[`add_external_resources()`](https://asoc-org.github.io/apscp/reference/add_external_resources.md)
-function must be manually added to the user-interface component of the
-Shiny application in order for this widget to work correctly.
 
 ## See also
 
@@ -90,7 +83,7 @@ sidebar_tabs(
 #>     </ul>
 #>   </div>
 #>   <div class="mapsidebar-content" style="display: none">
-#>     <div class="mapsidebar-pane" id="pane1">
+#>     <div class="mapsidebar-pane" id="pane1" data-disabled="FALSE">
 #>       <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
 #>         <div>
 #>           <p>Text</p>
@@ -101,7 +94,7 @@ sidebar_tabs(
 #>       </h3>
 #>       <div class="mapsidebar-pane-content"></div>
 #>     </div>
-#>     <div class="mapsidebar-pane" id="pane2">
+#>     <div class="mapsidebar-pane" id="pane2" data-disabled="FALSE">
 #>       <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
 #>         <div>
 #>           <button id="button" type="button" class="btn btn-default action-button"><span class="action-label">Click me!</span></button>

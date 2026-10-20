@@ -37,6 +37,19 @@ acknowledgments_sidebar_pane <- function(id, icon = shiny::icon("heart")) {
           "app", "text", "acknowledgments.md", package = "apscp"
         )
       ),
+      ## logos
+      htmltools::tags$div(
+        align = "center",
+        style = "display:flex;justify-content:space-around;",
+        htmltools::tags$img(
+          src = "www/asoc.jpg",
+          style = "height:100px"
+        ),
+        htmltools::tags$img(
+          src = "www/gurobi.svg",
+          style = "height:100px"
+        )
+      ),
       ## main dependencies
       shiny::includeMarkdown(
         system.file(

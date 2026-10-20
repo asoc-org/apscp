@@ -20,8 +20,9 @@ al. 2025](https://doi.org/10.1111/cobi.14376)). Although default
 parameters are specified based on stakeholder surveys, users can
 calibrate weights and representation targets to fine tune optimization
 procedures according to their own preferences. Optimization procedures
-can be performed with the *Gurobi* (<https://www.gurobi.com/>) or *CBC*
-(via the *rcbc* package, <https://github.com/dirkschumacher/rcbc>) exact
+can be performed with the [*Gurobi*](https://www.gurobi.com/) or
+[*CBC*](https://github.com/coin-or/cbc) (via the
+[*rcbc*](https://github.com/dirkschumacher/rcbc) package) exact
 algorithm solvers.
 
 ## Usage
@@ -29,11 +30,11 @@ algorithm solvers.
 The application is available online. Please note that you must use
 [Google Chrome](https://www.google.com/chrome/) for it to work.
 
-<table>
+<table style="border:none;border-spacing:0;">
 
-<tr>
+<tr style="border:none;border-spacing:0;">
 
-<td>
+<td style="border:none;border-spacing:0;">
 
 <img class="screenshot" src="man/figures/screenshot.png" align="center" width="100%"/>
 </td>
@@ -159,15 +160,14 @@ conventions:
   widgets](https://www.htmlwidgets.org/).
 - `utils_`: Defines utility functions.
 
-## Acknowledgments
+## Getting help
 
-``` r
-cat(
-  readLines(
-    system.file("app", "text", "acknowledgments.md", package = "apscp")
-  )
-)
-```
+Thank you for checking out this application. If you encounter any
+software defects (e.g. application crashes, unexpected behavior, or
+spelling mistakes), please feel free to post them on the [issue
+tracker](https://github.com/asoc-org/apscp/issues).
+
+## Acknowledgments
 
 This project is supported and led by the [Antarctic and Southern Ocean
 Coalition (ASOC)](https://www.asoc.org/). The
@@ -176,25 +176,27 @@ project were produced during the [SCAR-IAATO Systematic Conservation
 Planning Project](https://scar.org/scar-news/scar-iaato-scp), which was
 supported by the [International Association of Antarctica Tour Operators
 (IAATO)](https://iaato.org/), the [Scientific Committee on Antarctic
-Research (SCAR) and Monash University](https://scar.org/). This
-application was built using the [Shiny web application
-framework](https://shiny.rstudio.com/) for the [R statistical computing
-environment](https://www.r-project.org/). It uses the [prioritizr R
-package](https://prioritizr.net/) and the [CBC (Coin-OR branch and
-cut)](https://www.coin-or.org/Cbc/) and
-[Gurobi](https://www.gurobi.com/) optimization software to generate
-solutions. It also uses the [DataTables](https://datatables.net/),
-[D3](https://d3js.org/), [Mapbox GL
-JS](https://docs.mapbox.com/mapbox-gl-js/),
-[noUiSlider](https://refreshless.com/nouislider/),
-[SortableJS](https://sortablejs.github.io/Sortable/), modified version
-of the [sidebar-v2](https://github.com/Turbo87/sidebar-v2) Leaflet
-plugin, and [Tom Select](https://tom-select.js.org/) JavaScript
-libraries.
+Research (SCAR) and Monash University](https://scar.org/). This work was
+supported by [Gurobi Optimization](https://www.gurobi.com/) through
+their [Gurobi Gives Back
+program](https://www.gurobi.com/company/gurobi-gives-back), which
+provides free access to optimization software for qualifying
+non-profits.
 
-## Getting help
+<table style="border:none;border-spacing:0;">
 
-Thank you for checking out this application. If you encounter any
-software defects (e.g. application crashes, unexpected behavior, or
-spelling mistakes), please feel free to post them on the [issue
-tracker](https://github.com/asoc-org/apscp/issues).
+<tr style="border:none;border-spacing:0;">
+
+<td style="border:none;border-spacing:0;vertical-align:middle;">
+
+<img src="man/figures/asoc.jpg" align="center" style="height:150px;"/>
+</td>
+
+<td style="border:none;border-spacing:0;vertical-align:middle;">
+
+<img src="man/figures/gurobi.svg" align="center" style="height:150px;"/>
+</td>
+
+</tr>
+
+</table>

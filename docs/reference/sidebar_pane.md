@@ -11,8 +11,9 @@ sidebar_pane(
   title = "Sidebar Title",
   id = NULL,
   icon = shiny::icon("caret-right"),
+  ...,
   tooltip = NULL,
-  ...
+  disabled = FALSE
 )
 ```
 
@@ -32,15 +33,20 @@ sidebar_pane(
   the sidebar pane. This icon is used to create a button for closing the
   pane. If `NULL`, then no icon is added for the pane.
 
+- ...:
+
+  List of elements to include in the pane.
+
 - tooltip:
 
   `character` value with text to display in a tooltip when hovering over
   the button to open the sidebar. Defaults to `NULL` such that no
   tooltip is displayed.
 
-- ...:
+- disabled:
 
-  List of elements to include in the pane.
+  `logical` value indicating if the button to open the sidebar pane
+  should be disabled or not? Defaults to `FALSE`.
 
 ## Value
 
@@ -79,7 +85,7 @@ library(htmltools)
 
 # create sidebar pane
 sidebar_pane(id = "id", icon = icon("car"), tags$div())
-#> <div class="mapsidebar-pane" id="id">
+#> <div class="mapsidebar-pane" id="id" data-disabled="FALSE">
 #>   <h3 class="mapsidebar-pane-header mapsidebar-pane-header-icon">
 #>     <div></div>
 #>     <span class="mapsidebar-close">
