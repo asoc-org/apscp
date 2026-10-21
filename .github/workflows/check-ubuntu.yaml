@@ -50,6 +50,7 @@ jobs:
       - name: Install dependencies
         run: |
           options(install.packages.compile.from.source = "never")
+          options(renv.config.install.verbose = TRUE)
           install.packages(c("renv", "remotes", "testthat", "rvest"))
           renv::restore()
           remotes::install_cran("rcmdcheck")
