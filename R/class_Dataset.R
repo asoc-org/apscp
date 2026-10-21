@@ -375,11 +375,19 @@ Dataset <- R6::R6Class(
         )
         # enable spatial extension for database connection
         if (identical(.Platform$OS.type, "windows")) {
+          assertthat::assert_that(
+            nzchar(Sys.getenv("RTOOLS45_HOME")),
+            msg = "System variable \"RTOOLS45_HOME\" must be defined."
+          )
           ext_path <- dir(
-            "mod_spatialite.dll"
+            "mod_spatialite\\.dll$"
             path = Sys.getenv("RTOOLS45_HOME"),
             recursive = TRUE,
             full.names = TRUE
+          )
+          assertthat::assert_that(
+            assertthat::is.string(ext_path),
+            msg = "Couldn't find \"mod_spatialite.dll\" at \"RTOOLS45_HOME\"."
           )
           withr::with_dir(
             dirname(ext_path),
