@@ -39,12 +39,6 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install system dependencies
-        run: |
-          pacman -Syu --noconfirm
-          pacman -S --noconfirm mingw-w64-x86_64-libspatialite
-        shell: bash
-
       - name: Install dependencies
         run: |
           options(install.packages.compile.from.source = "always")
