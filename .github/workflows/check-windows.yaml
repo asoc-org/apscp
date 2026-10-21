@@ -39,9 +39,9 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
-      - name: Install spatiallite
+      - name: Install system dependencies
         run: |
-          pacman -Syu
+          pacman -Syu --noconfirm
           pacman -S --noconfirm mingw-w64-x86_64-libspatialite
         shell: bash
 
