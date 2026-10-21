@@ -4,6 +4,3 @@ R_DEFAULT_PACKAGES='utils,stats,methods'
 # ensure that freestiler is compiled with DuckDB support
 NOT_CRAN=true
 MY_UNIVERSE=true
-
-# customize package checks
-_R_CHECK_CODE_ASSIGN_TO_GLOBALENV_=false
