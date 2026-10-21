@@ -15,9 +15,13 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
     permissions:
       contents: read
       packages: write
+
+    env:
+      CI: true
 
     steps:
       - name: Checkout repository
