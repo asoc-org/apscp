@@ -375,12 +375,13 @@ Dataset <- R6::R6Class(
         )
         # enable spatial extension for database connection
         if (identical(.Platform$OS.type, "windows")) {
+          #nocov start
           assertthat::assert_that(
             nzchar(Sys.getenv("RTOOLS45_HOME")),
             msg = "System variable \"RTOOLS45_HOME\" must be defined."
           )
           ext_path <- dir(
-            "mod_spatialite\\.dll$"
+            "mod_spatialite\\.dll$",
             path = Sys.getenv("RTOOLS45_HOME"),
             recursive = TRUE,
             full.names = TRUE
@@ -393,9 +394,10 @@ Dataset <- R6::R6Class(
             dirname(ext_path),
             DBI::dbExecute(
               self$pu_db_con,
-              "SELECT load_extension('", ext_path, "');"
+              paste0("SELECT load_extension('", ext_path, "');")
             )
           )
+          # nocov end
         } else {
           DBI::dbExecute(
             self$pu_db_con,
