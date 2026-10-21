@@ -42,7 +42,7 @@ jobs:
       - name: Install spatiallite
         run: |
           pacman -Syu
-          pacman -Sy mingw-w64-x86_64-libspatialite
+          pacman -S --noconfirm mingw-w64-x86_64-libspatialite
         shell: bash
 
       - name: Install dependencies
