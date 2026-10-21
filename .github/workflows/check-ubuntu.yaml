@@ -49,6 +49,7 @@ jobs:
 
       - name: Debug
         run: |
+          options(repos = "https://cloud.r-project.org")
           install.packages("nanonext")
           install.packages("mirai")
         shell: Rscript --vanilla {0}
