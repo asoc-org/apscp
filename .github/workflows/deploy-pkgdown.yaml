@@ -13,15 +13,21 @@ permissions: read-all
 
 jobs:
   pkgdown:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.config.os }}
 
-    concurrency:
-      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - {os: ubuntu-latest, r: '4.6.0'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       NANONEXT_LIBS: 1
       CI: true
+
+    concurrency:
+      group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
 
     permissions:
       contents: write
