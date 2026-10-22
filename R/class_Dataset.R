@@ -398,6 +398,25 @@ Dataset <- R6::R6Class(
             )
           )
           # nocov end
+        } else if (identical(Sys.info()[["sysname"]], "Darwin")) {
+          # nocov start
+          ext_path <- "/opt/homebrew/lib/mod_spatialite.dylib"
+          assertthat::assert_that(
+            file.exists(ext_path),
+            msg = paste(
+              "File \"/opt/homebrew/lib/mod_spatialite.dylib\"",
+              "must exist. To install it, use",
+              "`brew install sqlite3 libspatialite spatialite-tools`."
+            )
+          )
+          withr::with_dir(
+            dirname(ext_path),
+            DBI::dbExecute(
+              self$pu_db_con,
+              paste0("SELECT load_extension('", ext_path, "');")
+            )
+          )
+          # nocov end
         } else {
           DBI::dbExecute(
             self$pu_db_con,
