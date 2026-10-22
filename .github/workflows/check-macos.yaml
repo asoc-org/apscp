@@ -53,6 +53,7 @@ jobs:
           brew link osi --force
           brew link clp --force
           brew link cgl --force
+          ls -la /opt/homebrew/lib/
 
       - name: Install dependencies
         run: |
