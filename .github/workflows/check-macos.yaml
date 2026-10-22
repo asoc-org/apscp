@@ -44,6 +44,7 @@ jobs:
           brew install pkg-config
           brew install sqlite3
           brew install libspatialite
+          brew install spatialite-tools
           brew install proj
           brew install geos
           brew install gdal
@@ -54,6 +55,7 @@ jobs:
           brew link clp --force
           brew link cgl --force
           ls -la /opt/homebrew/lib/
+          ls -la /usr/local/lib/
 
       - name: Install dependencies
         run: |
