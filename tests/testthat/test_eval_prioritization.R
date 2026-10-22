@@ -1,6 +1,7 @@
 test_that("numeric vector", {
   # define skips
   skip_if_not_installed("prioritizr")
+  skip_on_os("windows")
   # simulate data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
@@ -19,6 +20,7 @@ test_that("numeric vector", {
 
 test_that("Prioritization", {
   # define skips
+  skip_on_os("windows")
   skip_if_not_installed("rcbc")
   skip_if_not_installed("prioritizr")
   # simulate data
