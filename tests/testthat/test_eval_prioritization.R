@@ -7,8 +7,7 @@ test_that("numeric vector", {
   status <- sample.int(length(p$zones), p$dataset$get_n_pu(), replace = TRUE)
   status[c(2, 4)] <- NA_real_
   # create object
-  ## note try() is used to avoid false positive errors on windows
-  x <- try(eval_prioritization(p, s, status), silent = TRUE)
+  x <- eval_prioritization(p, s, status)
   # run tests
   expect_type(x, "list")
   expect_type(x$coverage, "list")
@@ -27,8 +26,7 @@ test_that("Prioritization", {
   s <- simulate_prioritization_settings(p)
   prioritization <- solve_prioritization(p, s)
   # create object
-  ## note try() is used to avoid false positive errors on windows
-  x <- try(eval_prioritization(p, s, prioritization), silent = TRUE)
+  x <- eval_prioritization(p, s, prioritization)
   # run tests
   expect_type(x, "list")
   expect_type(x, "list")
