@@ -42,6 +42,8 @@ jobs:
       - name: Install system dependencies
         run: |
           brew install pkg-config
+          brew install sqlite3
+          brew install libspatialite
           brew install proj
           brew install geos
           brew install gdal
