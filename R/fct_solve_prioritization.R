@@ -86,7 +86,7 @@ NULL
 #' print(sim_settings)
 #'
 #' # solve prioritization
-#' sol <- solve_prioritization(sim_project, sim_settings)
+#' sol <- solve_prioritization(sim_project, sim_settings, gap = 0.1)
 #'
 #' # preview solution
 #' print(sol)

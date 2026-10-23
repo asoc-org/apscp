@@ -6,7 +6,7 @@ test_that("new_project", {
   w <- create_dataset_from_sf(s)
   g <- create_tile_from_sf(s)
   # create bbox
-  bb <- sf::st_bbox(c(0, 1, 0, 1),  crs = sf::st_crs(4326))
+  bb <- sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
   # create cost
   cost <- new_cost(
     name = "cost",
