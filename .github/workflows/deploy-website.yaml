@@ -51,15 +51,8 @@ jobs:
           install.packages(c("renv", "remotes", "testthat", "rvest"))
           renv::restore()
           remotes::install_cran("rcmdcheck")
-          remotes::install_cran("covr")
+          remotes::install_cran("pkgdown")
         shell: Rscript {0}
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: |
-            any::pkgdown
-            local::.
-          needs: website
 
       - name: Session information
         run: |
