@@ -6,7 +6,7 @@
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![check-ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
 [![check-windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-windows.yaml?branch=master&label=Windows)](https://github.com/asoc-org/apscp/actions)
-[![check-mac](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-mac.yaml?branch=master&label=macOS)](https://github.com/asoc-org/apscp/actions)
+[![check-macos](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-macos.yaml?branch=master&label=macOS)](https://github.com/asoc-org/apscp/actions)
 [![Coverage
 Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=master)](https://codecov.io/github/asoc-org/apscp?branch=master)
 
