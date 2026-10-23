@@ -86,7 +86,7 @@ NULL
 #' print(sim_settings)
 #'
 #' # solve prioritization
-#' sol <- solve_prioritization(sim_project, sim_settings)
+#' sol <- solve_prioritization(sim_project, sim_settings, gap = 0.1)
 #'
 #' # preview solution
 #' print(sol)
@@ -268,10 +268,26 @@ solve_prioritization <- function(
   )
 
   # solve problem
-  sol <- solve(prob, run_checks = FALSE, force = TRUE)
-  obj_value <- attr(sol, "objective")
+  # nocov start
+  if (identical(Sys.getenv("TESTTHAT"), "true")) {
+    sol <- try(
+      suppressMessages(
+        suppressWarnings(
+          solve(prob, run_checks = FALSE, force = TRUE)
+        )
+      ),
+      silent = TRUE
+    )
+    if (inherits(sol, "try-error")) {
+      cli::cli_abort("Failed to generate solution!")
+    }
+  } else {
+    sol <- solve(prob, run_checks = FALSE, force = TRUE)
+  }
+  # nocov end
 
   # format solution
+  obj_value <- attr(sol, "objective")
   sol <- prioritizr::category_vector(
     sol[, paste0("solution_1_", project$zones),  drop = FALSE]
   )

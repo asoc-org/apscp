@@ -116,11 +116,11 @@ is_relative_path <- function(x) {
   assertthat::assert_that(assertthat::is.string(x))
 
   # check if file path is absolute
-  is_abs <- startsWith(x, "/") || startsWith(x, "~/")
+  is_abs <- startsWith(x, "/")
   if (!is_abs && nchar(x) >= 3L) {
     is_abs <- any(
       tolower(substr(x, 1, 3)) %in%
-      c(paste0(letters, "\\:"), paste0(letters, "/:"))
+      c(paste0(letters, ":\\"), paste0(letters, ":/"))
     )
   }
 

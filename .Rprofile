@@ -5,6 +5,9 @@
 ## be successfully installed as an R package.
 options(shiny.autoload.r = FALSE)
 
+# ensure that renv displays installation logs
+options(renv.config.install.verbose = TRUE)
+
 # active renv package management
 source("renv/activate.R")
 

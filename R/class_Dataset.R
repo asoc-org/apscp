@@ -374,10 +374,55 @@ Dataset <- R6::R6Class(
           dbname = self$pu_path
         )
         # enable spatial extension for database connection
-        DBI::dbExecute(
-          self$pu_db_con,
-          "SELECT load_extension('mod_spatialite');"
-        )
+        if (identical(.Platform$OS.type, "windows")) {
+          #nocov start
+          assertthat::assert_that(
+            nzchar(Sys.getenv("RTOOLS45_HOME")),
+            msg = "System variable \"RTOOLS45_HOME\" must be defined."
+          )
+          ext_path <- dir(
+            "mod_spatialite\\.dll$",
+            path = Sys.getenv("RTOOLS45_HOME"),
+            recursive = TRUE,
+            full.names = TRUE
+          )
+          assertthat::assert_that(
+            assertthat::is.string(ext_path),
+            msg = "Couldn't find \"mod_spatialite.dll\" at \"RTOOLS45_HOME\"."
+          )
+          withr::with_dir(
+            dirname(ext_path),
+            DBI::dbExecute(
+              self$pu_db_con,
+              paste0("SELECT load_extension('", ext_path, "');")
+            )
+          )
+          # nocov end
+        } else if (identical(Sys.info()[["sysname"]], "Darwin")) {
+          # nocov start
+          ext_path <- "/opt/homebrew/lib/mod_spatialite.dylib"
+          assertthat::assert_that(
+            file.exists(ext_path),
+            msg = paste(
+              "File \"/opt/homebrew/lib/mod_spatialite.dylib\"",
+              "must exist. To install it, use",
+              "`brew install sqlite3 libspatialite spatialite-tools`."
+            )
+          )
+          withr::with_dir(
+            dirname(ext_path),
+            DBI::dbExecute(
+              self$pu_db_con,
+              paste0("SELECT load_extension('", ext_path, "');")
+            )
+          )
+          # nocov end
+        } else {
+          DBI::dbExecute(
+            self$pu_db_con,
+            "SELECT load_extension('mod_spatialite');"
+          )
+        }
       }
       invisible(NULL)
     },
