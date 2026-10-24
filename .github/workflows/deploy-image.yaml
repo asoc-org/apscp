@@ -49,3 +49,14 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Remove old images
+        uses: snok/container-retention-policy@v3
+        with:
+          image-names: apscp
+          image-tags: "!latest !release"
+          cut-off: "1s"
+          keep-at-least: 1
+          account: asoc-org
+          account-type: org
+          token: ${{ secrets.GITHUB_TOKEN }}
