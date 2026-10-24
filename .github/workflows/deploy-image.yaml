@@ -51,7 +51,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
       - name: Remove old images
-        uses: snok/container-retention-policy@v3
+        uses: snok/container-retention-policy@v3.1.0
         with:
           image-names: apscp
           image-tags: "!latest !release"
