@@ -1,0 +1,503 @@
+# apscp: Decision Support Tool for the Antarctic Peninsula
+
+[![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
+[![check-ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
+[![check-windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-windows.yaml?branch=master&label=Windows)](https://github.com/asoc-org/apscp/actions)
+[![check-macos](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-macos.yaml?branch=master&label=macOS)](https://github.com/asoc-org/apscp/actions)
+[![Coverage
+Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=master)](https://codecov.io/github/asoc-org/apscp?branch=master)
+
+Interactive decision support tool to navigate management options for the
+Antarctic Peninsula. The tool identifies priority areas for implementing
+policies for conservation, tourism, and scientific research. To achieve
+this, it leverages previously published data ([Lee et
+al. 2024](https://doi.org/10.1007/s13280-024-02009-4)) and
+multi-objective optimization techniques through the [*prioritizr*
+package](https://prioritizr.net) ([Hanson et
+al. 2025](https://doi.org/10.1111/cobi.14376)). Although default
+parameters are specified based on stakeholder surveys, users can
+calibrate weights and representation targets to fine tune optimization
+procedures according to their own preferences. Optimization procedures
+can be performed with the [*Gurobi*](https://www.gurobi.com/) or
+[*CBC*](https://github.com/coin-or/cbc) (via the
+[*rcbc*](https://github.com/dirkschumacher/rcbc) package) exact
+algorithm solvers.
+
+## Usage
+
+The application is available online. Please note that you must use
+[Google Chrome](https://www.google.com/chrome/) for it to work.
+
+|                                       |
+|---------------------------------------|
+| ![](reference/figures/screenshot.png) |
+
+## Installation
+
+The application is available as an online service provided by the
+[Antarctic and Southern Ocean Coalition](https://www.asoc.org/). If you
+need to run the application on your own computer, then you can run it
+using the [R statistical computing
+environment](https://www.r-project.org/),
+[Docker](https://www.docker.com/), or [Docker
+Compose](https://docs.docker.com/compose/).
+
+### Using R
+
+To use this method, you will need to install the [R statistical
+computing environment](https://www.r-project.org/). After completing the
+installation, you can install the application using the following R
+code:
+
+``` r
+
+if (!require(remotes)) install.packages("remotes")
+remotes::install_github("asoc-org/asoc")
+```
+
+You can then use the following R code to start the application and open
+it in your web browser:
+
+``` r
+
+asoc::run_app()
+```
+
+### Using Docker
+
+To use this method, you will need to install [Docker
+Engine](https://www.docker.com/) ([see here for
+instructions](https://docs.docker.com/get-docker/)). After completing
+this step, you can install the application from the [DockerHub
+repository](https://hub.docker.com/repository/docker/jhansocasoc/apscp).
+Specifically, please use the following system command:
+
+``` bash
+docker run -dp 3838:3838 --name apscp -it jhansonasoc/apscp:latest
+```
+
+You can then view the application by opening the following link in
+[Google Chrome](https://www.google.com/chrome/):
+`http://localhost:3838`. After you have finished using the application,
+you can terminate it using the following system command. **Note that if
+you don’t terminate the application once you are finished using it, then
+it will continue running in the background.**
+
+``` bash
+docker rm -f apscp
+```
+
+### Using Docker Compose
+
+To use this method, you will need to install [Docker
+Engine](https://www.docker.com/) ([see here for
+instructions](https://docs.docker.com/get-docker/)) and Docker Compose
+([see here for instructions](https://docs.docker.com/compose/install/)).
+After installing both programs, you can install the application by
+[cloning this
+repository](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository)
+and then using the following system commands:
+
+``` bash
+docker-compose pull
+docker-compose up -d
+```
+
+You can then view the application by opening the following link in
+[Google Chrome](https://www.google.com/chrome/):
+`http://localhost:3838`. After you have finished using the application,
+you can terminate it using the following system command. **Note that if
+you don’t terminate the application once you are finished using it, then
+it will continue running in the background.**
+
+``` bash
+docker-compose down
+```
+
+## Contributing
+
+The application is a [*Shiny* web
+application](https://mastering-shiny.org/) developed with the [R
+statistical computing environment](https://www.r-project.org/).
+Specifically, it follows the [*golem*
+framework](https://thinkr-open.github.io/golem/) for application
+development, [*packer* framework](https://github.com/johncoene/packer)
+for JavaScript code and dependency management, [*htmlwidgets*
+package](https://www.htmlwidgets.org/) for interfacing with JavaScript
+widgets, and [*renv* package](https://rstudio.github.io/renv/index.html)
+for R package dependency management. This means that the application is
+effectively an [R package](https://r-pkgs.org/) that contains code for
+defining and launching the application ([see here for more
+details](https://engineering-shiny.org/)). The R code files (located in
+the `./R` directory) are organized according to the following naming
+conventions:
+
+- `app_`: Defines the web application:
+  - `app_config.R`: Imports configuration settings.
+  - `app_startup.R`: Initializes the application. It performs a similar
+    to the `global.R` file in typical Shiny applications.
+  - `app_ui.R`: Defines the user interface for the application. It
+    performs a similar role to the `ui.R` file in typical Shiny
+    applications.
+  - `app_server.R`: Defines the (back-end) server-side logic for the
+    application. It performs a similar role to the `server.R` file in
+    typical Shiny applications.
+  - `app_server_*.R`: Defines components used to assemble the
+    server-side logic for the application.
+- `class_`: Defines S3 and R6 object classes for managing data.
+- `method_`: Defines S3 methods for managing data.
+- `fct_`: Defines functions for analysis and data manipulation.
+- `widget_`: Defines custom [*htmlwidgets*
+  widgets](https://www.htmlwidgets.org/).
+- `utils_`: Defines utility functions.
+
+## Getting help
+
+Thank you for checking out this application. If you encounter any
+software defects (e.g. application crashes, unexpected behavior, or
+spelling mistakes), please feel free to post them on the [issue
+tracker](https://github.com/asoc-org/apscp/issues).
+
+## Acknowledgments
+
+This project is supported and led by the [Antarctic and Southern Ocean
+Coalition (ASOC)](https://www.asoc.org/). The
+[data](https://doi.org/10.26180/29092346) and foundations underlying the
+project were produced during the [SCAR-IAATO Systematic Conservation
+Planning Project](https://scar.org/scar-news/scar-iaato-scp), which was
+supported by the [International Association of Antarctica Tour Operators
+(IAATO)](https://iaato.org/), the [Scientific Committee on Antarctic
+Research (SCAR) and Monash University](https://scar.org/). This work was
+supported by [Gurobi Optimization](https://www.gurobi.com/) through
+their [Gurobi Gives Back
+program](https://www.gurobi.com/company/gurobi-gives-back), which
+provides free access to optimization software for qualifying
+non-profits.
+
+|                                 |                                   |
+|---------------------------------|-----------------------------------|
+| ![](reference/figures/asoc.jpg) | ![](reference/figures/gurobi.svg) |
+
+# Package index
+
+## Overview
+
+Overview of the package.
+
+- [`apscp`](https://asoc-org.github.io/apscp/reference/apscp.md)
+  [`apscp-package`](https://asoc-org.github.io/apscp/reference/apscp.md)
+  : apscp: Decision Support Tool for the Antarctic Peninsula
+
+## Applications
+
+Functions for launching applications.
+
+- [`run_app()`](https://asoc-org.github.io/apscp/reference/run_app.md) :
+  Run the Shiny application
+- [`run_example_app()`](https://asoc-org.github.io/apscp/reference/run_example_app.md)
+  : Run example application
+
+## Classes and methods
+
+Functions and definitions for new classes.
+
+- [`Dataset`](https://asoc-org.github.io/apscp/reference/Dataset.md) :
+  R6 class representing a dataset
+
+- [`Project`](https://asoc-org.github.io/apscp/reference/Project.md) :
+  Project class
+
+- [`new_categorical_legend()`](https://asoc-org.github.io/apscp/reference/new_categorical_legend.md)
+  : New categorical legend
+
+- [`new_continuous_legend()`](https://asoc-org.github.io/apscp/reference/new_continuous_legend.md)
+  : New continuous legend
+
+- [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md)
+  : New cost
+
+- [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md)
+  : New feature
+
+- [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md)
+  : New Layer
+
+- [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md)
+  : New lock
+
+- [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  : New project
+
+- [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
+  : New provenance
+
+- [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  : New solution
+
+- [`new_solution_legend()`](https://asoc-org.github.io/apscp/reference/new_solution_legend.md)
+  : New solution legend
+
+- [`new_theme()`](https://asoc-org.github.io/apscp/reference/new_theme.md)
+  : New theme
+
+- [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
+  : New tile
+
+- [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md)
+  : Create dataset from sf object.
+
+- [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
+  : Create a new legend
+
+- [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md)
+  : Create solution
+
+- [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md)
+  : Create solution from prioritization
+
+- [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md)
+  : Create solution legend
+
+- [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md)
+  : Create tile from file
+
+- [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md)
+  : Create tile from project.
+
+- [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md)
+  :
+
+  Create tile from `sf` data.
+
+- [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
+  : New dataset
+
+- [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
+  : Tool generated provenance
+
+## Prioritization
+
+Functions for prioritization.
+
+- [`eval_prioritization()`](https://asoc-org.github.io/apscp/reference/eval_prioritization.md)
+  : Evaluate a prioritization
+- [`solve_prioritization()`](https://asoc-org.github.io/apscp/reference/solve_prioritization.md)
+  : Generate a prioritization
+
+## Mapping
+
+Functions for creating maps.
+
+- [`add_layer_visibility_control()`](https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.md)
+  : Add layer visibility control
+
+- [`get_paint_parameters()`](https://asoc-org.github.io/apscp/reference/get_paint_parameters.md)
+  : Get paint parameters
+
+- [`has_mapbox_token()`](https://asoc-org.github.io/apscp/reference/has_mapbox_token.md)
+  : Has Mapbox token?
+
+- [`map_project()`](https://asoc-org.github.io/apscp/reference/map_project.md)
+  : Map project
+
+- [`mapgl_add_layer()`](https://asoc-org.github.io/apscp/reference/mapgl_add_layer.md)
+  : Add layer
+
+- [`mapgl_add_source()`](https://asoc-org.github.io/apscp/reference/mapgl_add_source.md)
+  : Add source
+
+- [`mapgl_clear_layer()`](https://asoc-org.github.io/apscp/reference/mapgl_clear_layer.md)
+  : Clear layer
+
+- [`mapgl_layer_id()`](https://asoc-org.github.io/apscp/reference/mapgl_layer_id.md)
+  :
+
+  Get mapgl layer identifier
+
+- [`mapgl_source_id()`](https://asoc-org.github.io/apscp/reference/mapgl_source_id.md)
+  :
+
+  Get mapgl source identifier
+
+- [`mapgl_source_layer_id()`](https://asoc-org.github.io/apscp/reference/mapgl_source_layer_id.md)
+  :
+
+  Get mapgl source layer identifier
+
+- [`mapgl_source_url()`](https://asoc-org.github.io/apscp/reference/mapgl_source_url.md)
+  :
+
+  Get mapgl source URL.
+
+## Reading and writing
+
+Functions for reading and writing from disk and memory.
+
+- [`deserialize_object()`](https://asoc-org.github.io/apscp/reference/deserialize_object.md)
+  : Deserialize
+- [`read_builtin_project()`](https://asoc-org.github.io/apscp/reference/read_builtin_project.md)
+  : Read builtin project
+- [`read_dataset()`](https://asoc-org.github.io/apscp/reference/read_dataset.md)
+  : Read dataset
+- [`read_matrix()`](https://asoc-org.github.io/apscp/reference/read_matrix.md)
+  : Read matrix
+- [`read_project()`](https://asoc-org.github.io/apscp/reference/read_project.md)
+  : Read project
+- [`read_sf_data()`](https://asoc-org.github.io/apscp/reference/read_sf_data.md)
+  : Read sf data from zip file
+- [`serialize_object()`](https://asoc-org.github.io/apscp/reference/serialize_object.md)
+  : Serialize object
+- [`write_dataset()`](https://asoc-org.github.io/apscp/reference/write_dataset.md)
+  : Write dataset
+- [`write_matrix()`](https://asoc-org.github.io/apscp/reference/write_matrix.md)
+  : Write matrix
+- [`write_project()`](https://asoc-org.github.io/apscp/reference/write_project.md)
+  : Write project
+- [`write_sf_data()`](https://asoc-org.github.io/apscp/reference/write_sf_data.md)
+  : Write sf data to zip file
+
+## Sidebar widget
+
+Functions for sidebar widget.
+
+- [`acknowledgments_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/acknowledgments_sidebar_pane.md)
+  : Acknowledgments sidebar pane
+- [`add_sidebar_control()`](https://asoc-org.github.io/apscp/reference/add_sidebar_control.md)
+  : Add sidebar control
+- [`contact_sidebar_pane()`](https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.md)
+  : Contact sidebar pane
+- [`sidebar_close()`](https://asoc-org.github.io/apscp/reference/sidebar_close.md)
+  : Close sidebar
+- [`sidebar_disable()`](https://asoc-org.github.io/apscp/reference/sidebar_disable.md)
+  : Disable sidebar
+- [`sidebar_enable()`](https://asoc-org.github.io/apscp/reference/sidebar_enable.md)
+  : Enable sidebar
+- [`sidebar_open()`](https://asoc-org.github.io/apscp/reference/sidebar_open.md)
+  : Open sidebar
+- [`sidebar_pane()`](https://asoc-org.github.io/apscp/reference/sidebar_pane.md)
+  : Sidebar pane
+- [`sidebar_tabs()`](https://asoc-org.github.io/apscp/reference/sidebar_tabs.md)
+  : Sidebar with tabs
+
+## Mapper widget
+
+Functions for widget to control map.
+
+- [`mapperOutput()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+  [`renderMapper()`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md)
+  : Shiny bindings for mapper
+- [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md) :
+  Mapper
+- [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
+  : Add solution to map
+- [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
+  : Synchronize mapper
+
+## Solver widget
+
+Functions for widget to control solution settings.
+
+- [`solverOutput()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
+  [`renderSolver()`](https://asoc-org.github.io/apscp/reference/solver-shiny.md)
+  : Shiny bindings for solver
+- [`solver()`](https://asoc-org.github.io/apscp/reference/solver.md) :
+  Solver
+- [`solver_add_lock()`](https://asoc-org.github.io/apscp/reference/solver_add_lock.md)
+  : Add lock to solver
+- [`solver_reset()`](https://asoc-org.github.io/apscp/reference/solver_reset.md)
+  : Reset solver
+- [`solver_sync()`](https://asoc-org.github.io/apscp/reference/solver_sync.md)
+  : Synchronize solver settings
+
+## Summarizer widget
+
+Functions for widget to summarize solutions.
+
+- [`summarizerOutput()`](https://asoc-org.github.io/apscp/reference/summarizer-shiny.md)
+  [`renderSummarizer()`](https://asoc-org.github.io/apscp/reference/summarizer-shiny.md)
+  : Shiny bindings for summarizer
+- [`summarizer()`](https://asoc-org.github.io/apscp/reference/summarizer.md)
+  : Summarizer
+- [`summarizer_add_solution()`](https://asoc-org.github.io/apscp/reference/summarizer_add_solution.md)
+  : Add solution to summarizer
+
+## Tile server
+
+Functions for creating a tile server.
+
+- [`is_tile_server_active()`](https://asoc-org.github.io/apscp/reference/is_tile_server_active.md)
+  : Is tile server active?
+- [`tile_server_add_tile()`](https://asoc-org.github.io/apscp/reference/tile_server_add_tile.md)
+  : Add a tile to tile server
+- [`tile_server_dir()`](https://asoc-org.github.io/apscp/reference/tile_server_dir.md)
+  : Tile server directory
+- [`tile_server_start()`](https://asoc-org.github.io/apscp/reference/tile_server_start.md)
+  : Start tile server
+- [`tile_server_stop()`](https://asoc-org.github.io/apscp/reference/tile_server_stop.md)
+  : Stop tile server
+
+## Asynchronous processing
+
+Functions for asynchronous processing
+
+- [`mirai_async_start()`](https://asoc-org.github.io/apscp/reference/mirai_async_start.md)
+  : Start asynchronous processing
+- [`mirai_async_stop()`](https://asoc-org.github.io/apscp/reference/mirai_async_stop.md)
+  : Stop asynchronous processing
+
+## Simulation
+
+Functions for simulating data.
+
+- [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md)
+  : Simulate binary legend
+- [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md)
+  : Simulate continuous legend
+- [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
+  : Simulate PMtiles file
+- [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md)
+  : Simulate prioritization settings
+- [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md)
+  : Simulate project
+- [`simulate_provenance()`](https://asoc-org.github.io/apscp/reference/simulate_provenance.md)
+  : Simulate provenance
+- [`simulate_solution_legend()`](https://asoc-org.github.io/apscp/reference/simulate_solution_legend.md)
+  : Simulate solution legend
+- [`simulate_spatial_data()`](https://asoc-org.github.io/apscp/reference/simulate_spatial_data.md)
+  : Simulate spatial data
+
+## Miscellaneous functions
+
+Functions with assorted uses.
+
+- [`as.data.frame(`*`<JsDataFrame>`*`)`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md)
+  :
+
+  Convert `JsDataFrame` object to data.frame
+
+- [`as.list(`*`<JsDataFrameList>`*`)`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md)
+  :
+
+  Convert `JsDataFrameList` object to list object.
+
+- [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
+  : Color palette
+
+- [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md)
+  : Is package installed?
+
+- [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md)
+  : Is prioritization settings?
+
+- [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
+  : Is relative path?
+
+- [`add_external_resources()`](https://asoc-org.github.io/apscp/reference/add_external_resources.md)
+  : Add external resources to a Shiny application
+
+# Articles
+
+### All vignettes
+
+- [Getting started](https://asoc-org.github.io/apscp/articles/apscp.md):
+- [Optimization](https://asoc-org.github.io/apscp/articles/optimization.md):
