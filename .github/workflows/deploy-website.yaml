@@ -52,6 +52,7 @@ jobs:
           renv::restore()
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("pkgdown")
+          remotes::install_local()
         shell: Rscript {0}
 
       - name: Session information
