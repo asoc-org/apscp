@@ -7,7 +7,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/asoc-org/apscp/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/asoc-org/apscp/blob/main/DESCRIPTION)
 
 Hanson JO (2026). *apscp: Decision Support Tool for the Antarctic
 Peninsula*. R package version 0.0.0.9000,

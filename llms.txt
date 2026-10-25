@@ -1,11 +1,11 @@
 # apscp: Decision Support Tool for the Antarctic Peninsula
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![check-ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
-[![check-windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-windows.yaml?branch=master&label=Windows)](https://github.com/asoc-org/apscp/actions)
-[![check-macos](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-macos.yaml?branch=master&label=macOS)](https://github.com/asoc-org/apscp/actions)
+[![check-ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-ubuntu.yaml?branch=main&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
+[![check-windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-windows.yaml?branch=main&label=Windows)](https://github.com/asoc-org/apscp/actions)
+[![check-macos](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-macos.yaml?branch=main&label=macOS)](https://github.com/asoc-org/apscp/actions)
 [![Coverage
-Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=master)](https://codecov.io/github/asoc-org/apscp?branch=master)
+Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=main)](https://codecov.io/github/asoc-org/apscp?branch=main)
 
 Interactive decision support tool to navigate management options for the
 Antarctic Peninsula. The tool identifies priority areas for implementing
@@ -113,43 +113,6 @@ it will continue running in the background.**
 ``` bash
 docker-compose down
 ```
-
-## Contributing
-
-The application is a [*Shiny* web
-application](https://mastering-shiny.org/) developed with the [R
-statistical computing environment](https://www.r-project.org/).
-Specifically, it follows the [*golem*
-framework](https://thinkr-open.github.io/golem/) for application
-development, [*packer* framework](https://github.com/johncoene/packer)
-for JavaScript code and dependency management, [*htmlwidgets*
-package](https://www.htmlwidgets.org/) for interfacing with JavaScript
-widgets, and [*renv* package](https://rstudio.github.io/renv/index.html)
-for R package dependency management. This means that the application is
-effectively an [R package](https://r-pkgs.org/) that contains code for
-defining and launching the application ([see here for more
-details](https://engineering-shiny.org/)). The R code files (located in
-the `./R` directory) are organized according to the following naming
-conventions:
-
-- `app_`: Defines the web application:
-  - `app_config.R`: Imports configuration settings.
-  - `app_startup.R`: Initializes the application. It performs a similar
-    to the `global.R` file in typical Shiny applications.
-  - `app_ui.R`: Defines the user interface for the application. It
-    performs a similar role to the `ui.R` file in typical Shiny
-    applications.
-  - `app_server.R`: Defines the (back-end) server-side logic for the
-    application. It performs a similar role to the `server.R` file in
-    typical Shiny applications.
-  - `app_server_*.R`: Defines components used to assemble the
-    server-side logic for the application.
-- `class_`: Defines S3 and R6 object classes for managing data.
-- `method_`: Defines S3 methods for managing data.
-- `fct_`: Defines functions for analysis and data manipulation.
-- `widget_`: Defines custom [*htmlwidgets*
-  widgets](https://www.htmlwidgets.org/).
-- `utils_`: Defines utility functions.
 
 ## Getting help
 
