@@ -71,7 +71,7 @@ computer.
   in your `.Renviron` file. You can use the R code
   `usethis::edit_r_environ()` to automatically find and open this file.
   After finding and opening this file, you can save the token by adding
-  the following text to it (replacing `INSERT_TOKEN_HERE` with the
+  the following text to it (replacing `**INSERT_TOKEN_HERE**` with the
   actual token value).
 
       MAPBOX_PUBLIC_TOKEN=**INSERT_TOKEN_HERE**
@@ -84,7 +84,7 @@ computer.
   On a Linux or macOS system, this step can be completed by opening the
   `~/.bashrc` file or `~/.zshrc` file (which ever file already exists)
   and then adding the following text to it (replacing
-  `INSERT_TOKEN_HERE` with the actual token value).
+  `**INSERT_TOKEN_HERE**` with the actual token value).
 
       export MAPBOX_PUBLIC_TOKEN=**INSERT_TOKEN_HERE**
 
