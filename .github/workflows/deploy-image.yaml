@@ -44,6 +44,7 @@ jobs:
           tags: |
             type=raw,value=dev,enable=${{ github.event_name != 'release' }}
             type=raw,value=latest,enable=${{ github.event_name == 'release' }}
+            type=raw,value=release,enable=${{ github.event_name == 'release' }}
             type=semver,pattern={{version}},value={{version}},prefix=release-,enable=${{ github.event_name == 'release' }}
             type=sha,format=short
 
@@ -55,6 +56,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Remove old images
         uses: snok/container-retention-policy@v3.1.0
