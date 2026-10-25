@@ -39,9 +39,9 @@ RUN apt-get update \
   && rm -rf /srv/shiny-server
 
 ## install gurobi
-ENV GRB_VERSION 13.0.3
-ENV GRB_SHORT_VERSION 13.0
-ENV GUROBI_HOME /opt/gurobi/linux64
+ENV GRB_VERSION=13.0.3
+ENV GRB_SHORT_VERSION=13.0
+ENV GUROBI_HOME=/opt/gurobi/linux64
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
 RUN wget -v https://packages.gurobi.com/${GRB_SHORT_VERSION}/gurobi${GRB_VERSION}_linux64.tar.gz \
   && tar -xvf gurobi${GRB_VERSION}_linux64.tar.gz  \

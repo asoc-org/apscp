@@ -54,3 +54,4 @@ logs
 ^R/_disable_autoload\.R$
 inst/tiles/*.pmtiles
 ^pkgdown$
+^CONTRIBUTING.md$

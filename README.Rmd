@@ -81,22 +81,6 @@ You can then view the application by opening the following link in [Google Chrom
 docker-compose down
 ```
 
-## Contributing
-
-The application is a [_Shiny_ web application](https://mastering-shiny.org/) developed with the [R statistical computing environment](https://www.r-project.org/). Specifically, it follows the [_golem_ framework](https://thinkr-open.github.io/golem/) for application development, [_packer_ framework](https://github.com/johncoene/packer) for JavaScript code and dependency management, [_htmlwidgets_ package](https://www.htmlwidgets.org/) for interfacing with JavaScript widgets, and [_renv_ package](https://rstudio.github.io/renv/index.html) for R package dependency management. This means that the application is effectively an [R package](https://r-pkgs.org/) that contains code for defining and launching the application ([see here for more details](https://engineering-shiny.org/)). The R code files (located in the `./R` directory) are organized according to the following naming conventions:
-
-* `app_`: Defines the web application:
-    * `app_config.R`: Imports configuration settings.
-    * `app_startup.R`: Initializes the application. It performs a similar to the `global.R` file in typical Shiny applications.
-    * `app_ui.R`: Defines the user interface for the application. It performs a similar role to the `ui.R` file in typical Shiny applications.
-    * `app_server.R`: Defines the (back-end) server-side logic for the application. It performs a similar role to the `server.R` file in typical Shiny applications.
-    * `app_server_*.R`: Defines components used to assemble the server-side logic for the application.
-* `class_`: Defines S3 and R6 object classes for managing data.
-* `method_`: Defines S3 methods for managing data.
-* `fct_`:  Defines functions for analysis and data manipulation.
-* `widget_`:  Defines custom [_htmlwidgets_ widgets](https://www.htmlwidgets.org/).
-* `utils_`: Defines utility functions.
-
 ## Getting help
 
 Thank you for checking out this application. If you encounter any software defects (e.g. application crashes, unexpected behavior, or spelling mistakes), please feel free to post them on the [issue tracker](https://github.com/asoc-org/apscp/issues).

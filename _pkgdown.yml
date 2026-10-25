@@ -4,6 +4,7 @@ template:
   bootstrap: 5
   math-rendering: katex
 
+
 navbar:
   structure:
     left:  [home, intro, reference, articles, news]
@@ -13,6 +14,10 @@ navbar:
       menu:
       - text: Optimization
         href: articles/optimization.html
+  components:
+    custom_link:
+    - text: Learn about contributing
+      href: https://asoc-org.github.io/apscp/CONTRIBUTING.html
 
 reference:
   - title: Overview
