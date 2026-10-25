@@ -14,7 +14,7 @@ on:
       - dev
 
 concurrency:
-  group: check-windows-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:

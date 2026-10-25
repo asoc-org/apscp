@@ -9,7 +9,7 @@ on:
     types: [published]
 
 concurrency:
-  group: deploy-image-${{ github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
