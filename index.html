@@ -63,7 +63,7 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>The application is available online. Please note that you must use <a href="https://www.google.com/chrome/" class="external-link">Google Chrome</a> for it to work.</p>
+<p>The application is available online. Please note that you must use <a href="https://www.google.com/chrome/" class="external-link"><em>Google Chrome</em></a> for it to work.</p>
 <table style="border:none;border-spacing:0;" class="table"><tr style="border:none;border-spacing:0;">
 <td style="border:none;border-spacing:0;">
 <img class="screenshot" src="reference/figures/screenshot.png" align="center" width="100%">
@@ -73,38 +73,53 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>The application is available as an online service provided by the <a href="https://www.asoc.org/" class="external-link">Antarctic and Southern Ocean Coalition</a>. If you need to run the application on your own computer, then you can run it using the <a href="https://www.r-project.org/" class="external-link">R statistical computing environment</a>, <a href="https://www.docker.com/" class="external-link">Docker</a>, or <a href="https://docs.docker.com/compose/" class="external-link">Docker Compose</a>.</p>
+<p>The application is available as an online service provided by the <a href="https://www.asoc.org/" class="external-link">Antarctic and Southern Ocean Coalition</a>. If you need to run the application directly on your own computer, then you can run it using the <a href="https://www.r-project.org/" class="external-link"><em>R</em> statistical computing environment</a>, <a href="https://www.docker.com/" class="external-link"><em>Docker</em></a>, or <a href="https://docs.docker.com/compose/" class="external-link"><em>Docker Compose</em></a>. <strong>Note that if you choose to run the application directly on your computer, you will need to have obtained a <a href="https://docs.mapbox.com/help/getting-started/access-tokens/" class="external-link"><em>Mapbox</em> token</a> and configured your computer so that the application can find the token.</strong></p>
+<div class="section level3">
+<h3 id="obtaining-and-setting-up-a-mapbox-token">Obtaining and setting up a Mapbox token<a class="anchor" aria-label="anchor" href="#obtaining-and-setting-up-a-mapbox-token"></a>
+</h3>
+<p>To begin with, you will need to obtain a <em>Mapbox</em> token. This is because the application uses <em>Mapbox</em> for displaying maps. To obtain a token, please refer to <a href="https://docs.mapbox.com/help/getting-started/access-tokens/" class="external-link"><em>Mapbox</em> documentation for detailed instructions</a>. After obtaining a token, you will then need to save the token on your computer.</p>
+<ul>
+<li>
+<p>If you intend to run the application using <em>R</em>, you can save the token in your <code>.Renviron</code> file. You can use the <em>R</em> code <code>usethis::edit_r_environ()</code> to automatically find and open this file. After finding and opening this file, you can save the token by adding the following text to it (replacing <code>**INSERT_TOKEN_HERE**</code> with the actual token value).</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>MAPBOX_PUBLIC_TOKEN<span class="ot">=</span><span class="er">**</span>INSERT_TOKEN_HERE<span class="sc">**</span></span></code></pre></div>
+</li>
+<li>
+<p>Alternatively, if you intend to run the application using <em>Docker</em> or <em>Docker Compose</em>, you can save the token as a system environmental variable named <code>MAPBOX_PUBLIC_TOKEN</code>. To complete this step on a Windows computer, please <a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-set-an-environment-variable.html" class="external-link">refer to these instructions</a>. On a Linux or macOS system, this step can be completed by opening the <code>~/.bashrc</code> file or <code>~/.zshrc</code> file (which ever file already exists) and then adding the following text to it (replacing <code>**INSERT_TOKEN_HERE**</code> with the actual token value).</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>export MAPBOX_PUBLIC_TOKEN<span class="ot">=</span><span class="er">**</span>INSERT_TOKEN_HERE<span class="sc">**</span></span></code></pre></div>
+</li>
+</ul>
+</div>
 <div class="section level3">
 <h3 id="using-r">Using R<a class="anchor" aria-label="anchor" href="#using-r"></a>
 </h3>
-<p>To use this method, you will need to install the <a href="https://www.r-project.org/" class="external-link">R statistical computing environment</a>. After completing the installation, you can install the application using the following R code:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<p>To use this method, you will need to install the <a href="https://www.r-project.org/" class="external-link"><em>R</em> statistical computing environment</a>. After completing the installation, you can install the application using the following <em>R</em> code:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org" class="external-link">remotes</a></span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"asoc-org/asoc"</span><span class="op">)</span></span></code></pre></div>
 <p>You can then use the following R code to start the application and open it in your web browser:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">asoc</span><span class="fu">::</span><span class="fu">run_app</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="using-docker">Using Docker<a class="anchor" aria-label="anchor" href="#using-docker"></a>
 </h3>
-<p>To use this method, you will need to install <a href="https://www.docker.com/" class="external-link">Docker Engine</a> (<a href="https://docs.docker.com/get-docker/" class="external-link">see here for instructions</a>). After completing this step, you can install the application from the <a href="https://hub.docker.com/repository/docker/jhansocasoc/apscp" class="external-link">DockerHub repository</a>. Specifically, please use the following system command for the latest stable release.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># run latest stable release</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-dp</span> 3838:3838 <span class="at">--name</span> apscp <span class="at">-it</span> ghcr.io/asoc-org/apscp:latest</span></code></pre></div>
+<p>To use this method, you will need to install <a href="https://www.docker.com/" class="external-link"><em>Docker Engine</em></a> (<a href="https://docs.docker.com/get-docker/" class="external-link">see here for instructions</a>). After completing this step, you can install the application from the <a href="https://github.com/asoc-org/apscp/pkgs/container/apscp" class="external-link">container repository</a>. Specifically, please use the following system command for the latest stable release.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># run latest stable release</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> MAPBOX_PUBLIC_TOKEN <span class="at">-dp</span> 3838:3838 <span class="at">--name</span> apscp <span class="at">-it</span> ghcr.io/asoc-org/apscp:latest</span></code></pre></div>
 <p>Alternatively, you can instead use the following system command for the most recent developmental release.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># run developmental release</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-dp</span> 3838:3838 <span class="at">--name</span> apscp <span class="at">-it</span> ghcr.io/asoc-org/apscp:dev</span></code></pre></div>
-<p>After running the system command, you can view the application by opening the following link in <a href="https://www.google.com/chrome/" class="external-link">Google Chrome</a>: <code>http://localhost:3838</code>. After you have finished using the application, you can terminate it using the following system command. <strong>Note that if you don’t terminate the application once you are finished using it, then it will continue running in the background.</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">docker</span> rm <span class="at">-f</span> apscp</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># run developmental release</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">-e</span> MAPBOX_PUBLIC_TOKEN <span class="at">-dp</span> 3838:3838 <span class="at">--name</span> apscp <span class="at">-it</span> ghcr.io/asoc-org/apscp:dev</span></code></pre></div>
+<p>After running the system command, you can view the application by opening the following link in <a href="https://www.google.com/chrome/" class="external-link"><em>Google Chrome</em></a>: <code>http://localhost:3838</code>. After you have finished using the application, you can terminate it using the following system command. <strong>Note that if you don’t terminate the application once you are finished using it, then it will continue running in the background.</strong></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">docker</span> rm <span class="at">-f</span> apscp</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="using-docker-compose">Using Docker Compose<a class="anchor" aria-label="anchor" href="#using-docker-compose"></a>
 </h3>
-<p>To use this method, you will need to install <a href="https://www.docker.com/" class="external-link">Docker Engine</a> (<a href="https://docs.docker.com/get-docker/" class="external-link">see here for instructions</a>) and Docker Compose (<a href="https://docs.docker.com/compose/install/" class="external-link">see here for instructions</a>). After installing both programs, you can install the application by <a href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository" class="external-link">cloning this repository</a> and then using the following system commands:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">docker-compose</span> pull</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span></span></code></pre></div>
-<p>You can then view the application by opening the following link in <a href="https://www.google.com/chrome/" class="external-link">Google Chrome</a>: <code>http://localhost:3838</code>. After you have finished using the application, you can terminate it using the following system command. <strong>Note that if you don’t terminate the application once you are finished using it, then it will continue running in the background.</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">docker-compose</span> down</span></code></pre></div>
+<p>To use this method, you will need to install <a href="https://www.docker.com/" class="external-link"><em>Docker Engine</em></a> (<a href="https://docs.docker.com/get-docker/" class="external-link">see here for instructions</a>) and <em>Docker Compose</em> (<a href="https://docs.docker.com/compose/install/" class="external-link">see here for instructions</a>). After installing both programs, you can install the application by <a href="https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository-from-github/cloning-a-repository" class="external-link">cloning this repository</a> and then using the following system commands:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">docker-compose</span> pull</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="ex">docker-compose</span> up <span class="at">-d</span></span></code></pre></div>
+<p>You can then view the application by opening the following link in <a href="https://www.google.com/chrome/" class="external-link"><em>Google Chrome</em></a>: <code>http://localhost:3838</code>. After you have finished using the application, you can terminate it using the following system command. <strong>Note that if you don’t terminate the application once you are finished using it, then it will continue running in the background.</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">docker-compose</span> down</span></code></pre></div>
 </div>
 </div>
 <div class="section level2">

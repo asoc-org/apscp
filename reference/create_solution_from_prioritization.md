@@ -115,7 +115,7 @@ Other functions for calling class methods:
 # simulate data
 p <- simulate_project()
 s <- simulate_prioritization_settings(p)
-d <- solve_prioritization(p, s, solver = "cbc", gap = 0.1)
+d <- solve_prioritization(p, s, gap = 0.1)
 
 # generate solution
 x <- create_solution_from_prioritization(

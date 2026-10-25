@@ -95,16 +95,17 @@ guide](https://style.tidyverse.org/).
 
 The application is a [*Shiny* web
 application](https://mastering-shiny.org/) developed with the [R
-statistical computing environment](https://www.r-project.org/).
+statistical computing environment](https://www.r%20project.org/).
 Specifically, it follows the [*golem*
-framework](https://thinkr-open.github.io/golem/) for application
-development, [*packer* framework](https://github.com/johncoene/packer)
-for JavaScript code and dependency management, [*htmlwidgets*
-package](https://www.htmlwidgets.org/) for interfacing with JavaScript
-widgets, and [*renv* package](https://rstudio.github.io/renv/index.html)
-for *R* package dependency management. This means that the application
-is effectively an [R package](https://r-pkgs.org/) that contains code
-for defining and launching the application ([see here for more
+framework](https://thinkr%20open.github.io/golem/) for application
+development, [*packer* framework](https:%20/github.com/johncoene/packer)
+for JavaScript code and dependency management, [*htmlwidgets R*
+package](https://www.htmlwidgets.org/) for interfacing with *JavaScript*
+widgets, and [*renv R*
+package](https://rstudio.github.io/renv/index.html) for *R* package
+dependency management. This means that the application is effectively an
+[*R* package](https://r-pkgs.org/) that contains code for defining and
+launching the application ([see here for more
 details](https://engineering-shiny.org/)). The *R* code files (located
 in the `R` directory) are organized with the following naming
 conventions:
@@ -132,8 +133,7 @@ conventions:
   - `run_app.R`: Run the main Shiny application.
   - `run_example_app.R`: Run the example Shiny applications for
     demonstrating individual widgets.
-- `widget_*.R`: Defines custom [*htmlwidgets*
-  widgets](https://www.htmlwidgets.org/).
+- `widget_*.R`: Defines custom widgets.
   - `widget_*_ui.R`: Defines functions for widgets to be used in the
     user-interface component of a Shiny application (i.e., `app_ui.R`).
   - `widget_*_html.R`: Defines HTML scaffold for widget.
