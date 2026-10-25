@@ -8,6 +8,10 @@ on:
   release:
     types: [published]
 
+concurrency:
+  group: docker-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -38,8 +42,9 @@ jobs:
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
-            type=raw,value=latest
-            type=ref,event=branch
+            type=raw,value=dev,enable=${{ github.event_name != 'release' }}
+            type=raw,value=latest,enable=${{ github.event_name == 'release' }}
+            type=semver,value={{version}},prefix=release-,enable=${{ github.event_name == 'release' }}
             type=sha,format=short
 
       - name: Build and push image
@@ -49,6 +54,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
 
       - name: Remove old images
         uses: snok/container-retention-policy@v3.1.0
