@@ -80,18 +80,29 @@ Engine](https://www.docker.com/) ([see here for
 instructions](https://docs.docker.com/get-docker/)). After completing
 this step, you can install the application from the [DockerHub
 repository](https://hub.docker.com/repository/docker/jhansocasoc/apscp).
-Specifically, please use the following system command:
+Specifically, please use the following system command for the latest
+stable release.
 
 ``` bash
-docker run -dp 3838:3838 --name apscp -it jhansonasoc/apscp:latest
+# run latest stable release
+docker run -dp 3838:3838 --name apscp -it ghcr.io/asoc-org/apscp:latest
 ```
 
-You can then view the application by opening the following link in
-[Google Chrome](https://www.google.com/chrome/):
-`http://localhost:3838`. After you have finished using the application,
-you can terminate it using the following system command. **Note that if
-you don’t terminate the application once you are finished using it, then
-it will continue running in the background.**
+Alternatively, you can instead use the following system command for the
+most recent developmental release.
+
+``` bash
+# run developmental release
+docker run -dp 3838:3838 --name apscp -it ghcr.io/asoc-org/apscp:dev
+```
+
+After running the system command, you can view the application by
+opening the following link in [Google
+Chrome](https://www.google.com/chrome/): `http://localhost:3838`. After
+you have finished using the application, you can terminate it using the
+following system command. **Note that if you don’t terminate the
+application once you are finished using it, then it will continue
+running in the background.**
 
 ``` bash
 docker rm -f apscp
