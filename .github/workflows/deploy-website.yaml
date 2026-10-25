@@ -9,6 +9,10 @@ on:
     types: [published]
   workflow_dispatch:
 
+concurrency:
+  group: deploy-website-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions: read-all
 
 jobs:
