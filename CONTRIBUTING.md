@@ -15,8 +15,7 @@ Want to ask a question in private? Please feel free to email the package develop
 
 ### Propose an idea
 
-Have an idea for a new feature? Take a look at the [documentation](https://asoc-org.github.io/apscp/) and [issue tracker](https://github.com/asoc-org/apscp/issues) to see if it isn't included or suggested yet. If not, suggest your idea as an [issue on GitHub](https://github.com/asoc-org/apscp/issues/new). While
-we can't promise to implement your idea, it helps to:
+Have an idea for a new feature? Take a look at the [documentation](https://asoc-org.github.io/apscp/) and [issue tracker](https://github.com/asoc-org/apscp/issues) to see if it isn't included or suggested yet. If not, suggest your idea as an [issue on GitHub](https://github.com/asoc-org/apscp/issues/new). While we can't promise to implement your idea, it helps to:
 
 * Explain in detail how it would work.
 * Keep the scope as narrow as possible.
@@ -33,18 +32,15 @@ Using the package and discovered a bug? That's annoying! Don't let others have t
 
 ### Improve the documentation
 
-Noticed a typo on the website? Think a function could use a better
-example? Good documentation makes all the difference, so your help to
-improve it is very welcome!
+Noticed a typo on the website? Think a function could use a better example? Good documentation makes all the difference, so your help to improve it is very welcome!
 
 #### The website
 
-[This website](https://asoc-org.github.io/apscp/) is generated using the [*pkgdown R* package](http://pkgdown.r-lib.org/) package. That means we don't have to write any html: content is pulled together from documentation in the code, vignettes, [Markdown](https://guides.github.com/features/mastering-markdown/) files, the package `DESCRIPTION` and `_pkgdown.yml` settings. If you know your way around `pkgdown`, you can [propose a file change](https://help.github.com/articles/editing-files-in-another-user-s-repository/) to improve documentation. If not, [report an issue](https://github.com/asoc-org/apscp/issues/new) and we can
-point you in the right direction.
+[This website](https://asoc-org.github.io/apscp/) is generated using the [_pkgdown R_ package](http://pkgdown.r-lib.org/) package. That means we don't have to write any html: content is pulled together from documentation in the code, vignettes, [Markdown](https://guides.github.com/features/mastering-markdown/) files, the package `DESCRIPTION` and `_pkgdown.yml` settings. If you know your way around `pkgdown`, you can [propose a file change](https://help.github.com/articles/editing-files-in-another-user-s-repository/) to improve documentation. If not, [report an issue](https://github.com/asoc-org/apscp/issues/new) and we can point you in the right direction.
 
 #### Function documentation
 
-Functions are described as comments near their code and translated to documentation using the [*roxygen2 R* package](https://github.com/r-lib/roxygen2) package. If you want to improve a function description:
+Functions are described as comments near their code and translated to documentation using the [_roxygen2 R_ package](https://github.com/r-lib/roxygen2) package. If you want to improve a function description:
 
 1.  Go to `R/` directory in the [code repository](https://github.com/asoc-org/apscp).
 2.  Look for the file with the name of the function.
@@ -54,7 +50,7 @@ Functions are described as comments near their code and translated to documentat
 
 Care to fix bugs or implement new functionality? That's brilliant! Have a look at the [issue list](https://github.com/asoc-org/apscp/issues) and leave a comment on the things you want to work on. See also the development guidelines below. Please note that we use American spelling for the package, and follow the [tidyverse style guide](https://style.tidyverse.org/).
 
-The application is a [_Shiny_ web application](https://mastering-shiny.org/) developed with the [R statistical computing environment](https://www.r-project.org/). Specifically, it follows the [_golem_ framework](https://thinkr-open.github.io/golem/) for application development, [_packer_ framework](https://github.com/johncoene/packer) for JavaScript code and dependency management, [_htmlwidgets_ package](https://www.htmlwidgets.org/) for interfacing with JavaScript widgets, and [_renv_ package](https://rstudio.github.io/renv/index.html) for _R_ package dependency management. This means that the application is effectively an [R package](https://r-pkgs.org/) that contains code for defining and launching the application ([see here for more details](https://engineering-shiny.org/)). The _R_ code files (located in the `R` directory) are organized with the following naming conventions:
+The application is a [_Shiny_ web application](https://mastering-shiny.org/) developed with the [R statistical computing environment](https://www.r project.org/). Specifically, it follows the [_golem_ framework](https://thinkr open.github.io/golem/) for application development, [_packer_ framework](https: /github.com/johncoene/packer) for JavaScript code and dependency management, [_htmlwidgets R_ package](https://www.htmlwidgets.org/) for interfacing with _JavaScript_ widgets, and [_renv R_ package](https://rstudio.github.io/renv/index.html) for _R_ package dependency management. This means that the application is effectively an [_R_ package](https://r-pkgs.org/) that contains code for defining and launching the application ([see here for more details](https://engineering-shiny.org/)). The _R_ code files (located in the `R` directory) are organized with the following naming conventions:
 
 * `app_*.R`: Defines the web application.
     * `app_config.R`: Imports configuration settings.
@@ -71,7 +67,7 @@ The application is a [_Shiny_ web application](https://mastering-shiny.org/) dev
 * `run_*.R`: Functions for running Shiny applications.
     * `run_app.R`: Run the main Shiny application.
     * `run_example_app.R`: Run the example Shiny applications for demonstrating individual widgets.
-* `widget_*.R`:  Defines custom [_htmlwidgets_ widgets](https://www.htmlwidgets.org/).
+* `widget_*.R`:  Defines custom widgets.
     * `widget_*_ui.R`: Defines functions for widgets to be used in the user-interface component of a Shiny application (i.e., `app_ui.R`).
     * `widget_*_html.R`: Defines HTML scaffold for widget.
     * `widget_*_server.R`: Defines functions for widgets to be used in the user-interface component of a Shiny application (e.g., `app_server_*.R`).

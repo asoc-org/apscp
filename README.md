@@ -29,7 +29,7 @@ algorithm solvers.
 ## Usage
 
 The application is available online. Please note that you must use
-[Google Chrome](https://www.google.com/chrome/) for it to work.
+[*Google Chrome*](https://www.google.com/chrome/) for it to work.
 
 <table style="border:none;border-spacing:0;">
 
@@ -49,26 +49,26 @@ The application is available online. Please note that you must use
 The application is available as an online service provided by the
 [Antarctic and Southern Ocean Coalition](https://www.asoc.org/). If you
 need to run the application directly on your own computer, then you can
-run it using the [R statistical computing
+run it using the [*R* statistical computing
 environment](https://www.r-project.org/),
-[Docker](https://www.docker.com/), or [Docker
-Compose](https://docs.docker.com/compose/). **Note that if you choose to
-run the application directly on your computer, you will need to have
-obtained a [Mapbox
+[*Docker*](https://www.docker.com/), or [*Docker
+Compose*](https://docs.docker.com/compose/). **Note that if you choose
+to run the application directly on your computer, you will need to have
+obtained a [*Mapbox*
 token](https://docs.mapbox.com/help/getting-started/access-tokens/) and
 configured your computer so that the application can find the token.**
 
 ### Obtaining and setting up a Mapbox token
 
-To begin with, you will need to obtain a Mapbox token. This is because
-the application uses Mapbox for displaying maps. To obtain a token,
-please refer to [Mapbox documentation for detailed
+To begin with, you will need to obtain a *Mapbox* token. This is because
+the application uses *Mapbox* for displaying maps. To obtain a token,
+please refer to [*Mapbox* documentation for detailed
 instructions](https://docs.mapbox.com/help/getting-started/access-tokens/).
 After obtaining a token, you will then need to save the token on your
 computer.
 
-- If you intend to run the application using R, you can save the token
-  in your `.Renviron` file. You can use the R code
+- If you intend to run the application using *R*, you can save the token
+  in your `.Renviron` file. You can use the *R* code
   `usethis::edit_r_environ()` to automatically find and open this file.
   After finding and opening this file, you can save the token by adding
   the following text to it (replacing `**INSERT_TOKEN_HERE**` with the
@@ -76,8 +76,8 @@ computer.
 
       MAPBOX_PUBLIC_TOKEN=**INSERT_TOKEN_HERE**
 
-- Alternatively, if you intend to run the application using Docker or
-  Docker Compose, you can save the token as a system environmental
+- Alternatively, if you intend to run the application using *Docker* or
+  *Docker Compose*, you can save the token as a system environmental
   variable named `MAPBOX_PUBLIC_TOKEN`. To complete this step on a
   Windows computer, please [refer to these
   instructions](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-set-an-environment-variable.html).
@@ -90,9 +90,9 @@ computer.
 
 ### Using R
 
-To use this method, you will need to install the [R statistical
+To use this method, you will need to install the [*R* statistical
 computing environment](https://www.r-project.org/). After completing the
-installation, you can install the application using the following R
+installation, you can install the application using the following *R*
 code:
 
 ``` r
@@ -109,11 +109,11 @@ asoc::run_app()
 
 ### Using Docker
 
-To use this method, you will need to install [Docker
-Engine](https://www.docker.com/) ([see here for
+To use this method, you will need to install [*Docker
+Engine*](https://www.docker.com/) ([see here for
 instructions](https://docs.docker.com/get-docker/)). After completing
-this step, you can install the application from the [DockerHub
-repository](https://hub.docker.com/repository/docker/jhansocasoc/apscp).
+this step, you can install the application from the [container
+repository](https://github.com/asoc-org/apscp/pkgs/container/apscp).
 Specifically, please use the following system command for the latest
 stable release.
 
@@ -131,8 +131,8 @@ docker run -e MAPBOX_PUBLIC_TOKEN -dp 3838:3838 --name apscp -it ghcr.io/asoc-or
 ```
 
 After running the system command, you can view the application by
-opening the following link in [Google
-Chrome](https://www.google.com/chrome/): `http://localhost:3838`. After
+opening the following link in [*Google
+Chrome*](https://www.google.com/chrome/): `http://localhost:3838`. After
 you have finished using the application, you can terminate it using the
 following system command. **Note that if you don’t terminate the
 application once you are finished using it, then it will continue
@@ -144,9 +144,9 @@ docker rm -f apscp
 
 ### Using Docker Compose
 
-To use this method, you will need to install [Docker
-Engine](https://www.docker.com/) ([see here for
-instructions](https://docs.docker.com/get-docker/)) and Docker Compose
+To use this method, you will need to install [*Docker
+Engine*](https://www.docker.com/) ([see here for
+instructions](https://docs.docker.com/get-docker/)) and *Docker Compose*
 ([see here for instructions](https://docs.docker.com/compose/install/)).
 After installing both programs, you can install the application by
 [cloning this
@@ -159,7 +159,7 @@ docker-compose up -d
 ```
 
 You can then view the application by opening the following link in
-[Google Chrome](https://www.google.com/chrome/):
+[*Google Chrome*](https://www.google.com/chrome/):
 `http://localhost:3838`. After you have finished using the application,
 you can terminate it using the following system command. **Note that if
 you don’t terminate the application once you are finished using it, then
