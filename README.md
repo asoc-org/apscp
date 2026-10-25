@@ -52,7 +52,40 @@ need to run the application on your own computer, then you can run it
 using the [R statistical computing
 environment](https://www.r-project.org/),
 [Docker](https://www.docker.com/), or [Docker
-Compose](https://docs.docker.com/compose/).
+Compose](https://docs.docker.com/compose/). **Note that – regardless of
+which option you choose to run the application on your computer – you
+will need to have a [Mapbox
+token](https://docs.mapbox.com/help/getting-started/access-tokens/).**
+
+### Obtaining and setting up a Mapbox token
+
+To begin with, you will need to obtain a Mapbox token. This is because
+the application uses Mapbox for displaying maps. To obtain a token,
+please refer to [Mapbox documentation for detailed
+instructions](https://docs.mapbox.com/help/getting-started/access-tokens/).
+After obtaining a token, you will then need to save the token on your
+computer.
+
+- If you intend to run the application using R, you can save the token
+  in your `.Renviron` file. You can use the R code
+  `usethis::edit_r_environ()` to automatically find and open this file.
+  After finding and opening this file, you can save the token by adding
+  the following text to it (replacing `INSERT_TOKEN_HERE` with the
+  actual token value).
+
+      MAPBOX_PUBLIC_TOKEN=**INSERT_TOKEN_HERE**
+
+- Alternatively, if you intend to run the application using Docker or
+  Docker Compose, you can save the token as a system environmental
+  variable named `MAPBOX_PUBLIC_TOKEN`. To complete this step on a
+  Windows computer, please [refer to these
+  instructions](https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/How-to-set-an-environment-variable.html).
+  On a Linux or macOS system, this step can be completed by opening the
+  `~/.bashrc` file or `~/.zshrc` file (which ever file already exists)
+  and then adding the following text to it (replacing
+  `INSERT_TOKEN_HERE` with the actual token value).
+
+      export MAPBOX_PUBLIC_TOKEN=**INSERT_TOKEN_HERE**
 
 ### Using R
 
@@ -85,7 +118,7 @@ stable release.
 
 ``` bash
 # run latest stable release
-docker run -dp 3838:3838 --name apscp -it ghcr.io/asoc-org/apscp:latest
+docker run -e MAPBOX_PUBLIC_TOKEN -dp 3838:3838 --name apscp -it ghcr.io/asoc-org/apscp:latest
 ```
 
 Alternatively, you can instead use the following system command for the
@@ -93,7 +126,7 @@ most recent developmental release.
 
 ``` bash
 # run developmental release
-docker run -dp 3838:3838 --name apscp -it ghcr.io/asoc-org/apscp:dev
+docker run -e MAPBOX_PUBLIC_TOKEN -dp 3838:3838 --name apscp -it ghcr.io/asoc-org/apscp:dev
 ```
 
 After running the system command, you can view the application by
