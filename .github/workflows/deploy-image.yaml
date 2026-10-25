@@ -19,6 +19,7 @@ jobs:
     permissions:
       contents: read
       packages: write
+      actions: write
 
     env:
       REGISTRY: ghcr.io
@@ -57,7 +58,6 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-
 
       - name: Remove old images
         uses: snok/container-retention-policy@v3.1.0
