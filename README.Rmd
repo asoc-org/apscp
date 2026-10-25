@@ -35,7 +35,7 @@ The application is available online. Please note that you must use [Google Chrom
 
 ## Installation
 
-The application is available as an online service provided by the [Antarctic and Southern Ocean Coalition](https://www.asoc.org/). If you need to run the application on your own computer, then you can run it using the [R statistical computing environment](https://www.r-project.org/), [Docker](https://www.docker.com/), or [Docker Compose](https://docs.docker.com/compose/). **Note that -- regardless of which option you choose to run the application on your computer -- you will need to have a [Mapbox token](https://docs.mapbox.com/help/getting-started/access-tokens/).**
+The application is available as an online service provided by the [Antarctic and Southern Ocean Coalition](https://www.asoc.org/). If you need to run the application directly on your own computer, then you can run it using the [R statistical computing environment](https://www.r-project.org/), [Docker](https://www.docker.com/), or [Docker Compose](https://docs.docker.com/compose/). **Note that if you choose to run the application directly on your computer, you will need to have obtained a [Mapbox token](https://docs.mapbox.com/help/getting-started/access-tokens/) and configured your computer so that the application can find the token.**
 
 ### Obtaining and setting up a Mapbox token
 
