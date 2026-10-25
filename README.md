@@ -4,11 +4,11 @@
 # apscp: Decision Support Tool for the Antarctic Peninsula
 
 [![lifecycle](https://img.shields.io/badge/Lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![check-ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-ubuntu.yaml?branch=master&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
-[![check-windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-windows.yaml?branch=master&label=Windows)](https://github.com/asoc-org/apscp/actions)
-[![check-macos](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-macos.yaml?branch=master&label=macOS)](https://github.com/asoc-org/apscp/actions)
+[![check-ubuntu](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-ubuntu.yaml?branch=main&label=Ubuntu)](https://github.com/asoc-org/apscp/actions)
+[![check-windows](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-windows.yaml?branch=main&label=Windows)](https://github.com/asoc-org/apscp/actions)
+[![check-macos](https://img.shields.io/github/actions/workflow/status/asoc-org/apscp/check-macos.yaml?branch=main&label=macOS)](https://github.com/asoc-org/apscp/actions)
 [![Coverage
-Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=master)](https://codecov.io/github/asoc-org/apscp?branch=master)
+Status](https://codecov.io/github/asoc-org/apscp/coverage.svg?branch=main)](https://codecov.io/github/asoc-org/apscp?branch=main)
 
 Interactive decision support tool to navigate management options for the
 Antarctic Peninsula. The tool identifies priority areas for implementing
