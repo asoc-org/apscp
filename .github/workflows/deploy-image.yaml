@@ -68,7 +68,7 @@ jobs:
         uses: snok/container-retention-policy@v3.1.0
         with:
           image-names: apscp
-          image-tags: "dev"
+          image-tags: "!latest !release"
           cut-off: "0s"
           keep-n-most-recent: 1
           account: asoc-org
