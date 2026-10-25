@@ -68,6 +68,7 @@ jobs:
         with:
           image-names: apscp
           image-tags: "dev"
+          cut-off: "0s"
           keep-n-most-recent: 1
           account: asoc-org
           token: ${{ secrets.GITHUB_TOKEN }}
