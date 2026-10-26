@@ -54,7 +54,7 @@ print(x)
 #> [1] 1 2 3 4 5 6
 #> 
 #> $colors
-#> [1] "#C0FFBF" "#FEEDF5" "#DEEBFF" "#4daf4a" "#f781bf" "#377eb8"
+#> [1] "#C0FFBF" "#DEEBFF" "#FEEDF5" "#4daf4a" "#377eb8" "#f781bf"
 #> 
 #> $labels
 #> [1] "Biodiversity locked"   "Tourism locked"        "Scientific locked"    
