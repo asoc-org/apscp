@@ -48,9 +48,9 @@ jobs:
           tags: |
             type=raw,value=dev,enable=${{ github.event_name != 'release' }}
             type=raw,value=latest,enable=${{ github.event_name == 'release' }}
-            type=raw,value=release,enable=${{ github.event_name == 'release' }}
             type=semver,pattern={{version}},enable=${{ github.event_name == 'release' }}
-            type=sha,format=short
+            type=sha,format=short,prefix=dev-sha-,enable=${{ github.event_name != 'release' }}
+            type=sha,format=short,prefix=release-sha-,enable=${{ github.event_name == 'release' }}
 
       - name: Build and push image
         uses: docker/build-push-action@v6
@@ -68,7 +68,7 @@ jobs:
         uses: snok/container-retention-policy@v3.1.0
         with:
           image-names: apscp
-          image-tags: "!latest !release"
+          image-tags: "dev*"
           cut-off: "0s"
           keep-n-most-recent: 1
           account: asoc-org
