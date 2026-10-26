@@ -33,5 +33,5 @@ Other functions for simulating data:
 ``` r
 # simulate PMTiles file
 simulate_pmtiles_file()
-#> [1] "/tmp/RtmpWIcmNq/file65c9556a122d.pmtiles"
+#> [1] "/tmp/RtmpQx8qrs/file66f642db92cb.pmtiles"
 ```

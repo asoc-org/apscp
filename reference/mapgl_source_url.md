@@ -49,5 +49,5 @@ x <- create_tile_from_sf(sim_data)
 
 # get layer identifier
 mapgl_source_url(x)
-#> [1] "http://localhost:8085/file65c942a17c1a.pmtiles"
+#> [1] "http://localhost:8085/file66f66a88f102.pmtiles"
 ```
