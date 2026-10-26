@@ -49,7 +49,7 @@ jobs:
             type=raw,value=dev,enable=${{ github.event_name != 'release' }}
             type=raw,value=latest,enable=${{ github.event_name == 'release' }}
             type=raw,value=release,enable=${{ github.event_name == 'release' }}
-            type=semver,pattern={{version}},value={{version}},prefix=release-,enable=${{ github.event_name == 'release' }}
+            type=semver,pattern=v{{version}},value={{version}},prefix=release-,enable=${{ github.event_name == 'release' }}
             type=sha,format=short
 
       - name: Build and push image
