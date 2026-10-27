@@ -126,7 +126,7 @@ test_that("methods", {
   expect_true(any(vapply(x$solutions, `[[`, character(1), "id") == "new_sol"))
   ## add_lock
   x$add_lock(new_lock)
-  expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock")
+  expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock"))
   ## add_tile
   x$add_tile(new_tile)
   expect_length(x$tiles, 2)
@@ -134,7 +134,7 @@ test_that("methods", {
   ## get_solution
   expect_equal(x$get_solution("new_sol"), new_sol)
   ## get_lock
-  expect_equal(x$get_solution("new_lock"), new_lock)
+  expect_equal(x$get_lock("new_lock"), new_lock)
   ## get_bbox
   bb1 <- x$get_bbox(native = TRUE, expand = 1)
   bb2 <- x$get_bbox(native = FALSE, expand = 1)

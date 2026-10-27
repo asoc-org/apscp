@@ -74,6 +74,7 @@ jobs:
       - uses: r-lib/actions/setup-renv@v2
         with:
           profile: '"dev"'
+          cache-version: 2
 
       - name: Install extra packages
         run: |
