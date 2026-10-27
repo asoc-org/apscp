@@ -4,3 +4,6 @@ R_DEFAULT_PACKAGES='utils,stats,methods'
 # ensure that freestiler is compiled with DuckDB support
 NOT_CRAN=true
 MY_UNIVERSE=true
+
+# renv configuration
+RENV_CONFIG_USER_PROFILE=true
