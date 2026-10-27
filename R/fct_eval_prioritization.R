@@ -126,7 +126,7 @@ calc_repr_metrics <- function(x, pu_data, prioritization, zones) {
 
   # if list is empty, then return NULL
   if (identical(length(x), 0L)) {
-    return(list(relative = NULL, absolute = NULL))
+    return(list(relative = NULL, absolute = NULL)) # nocov
   }
 
   # calculate constants

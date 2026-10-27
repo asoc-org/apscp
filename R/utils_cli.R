@@ -29,7 +29,6 @@ cli_list <- function(x, max_width = cli::console_width()) {
     switch(
       class(x)[[1]],
       "character" = {cli_format_vector(x, max_width = max_width)},
-      "double" = {cli_format_vector(x, max_width = max_width)},
       "integer" = {cli_format_vector(x, max_width = max_width)},
       "numeric" = {cli_format_vector(x, max_width = max_width)},
       "function" = "{.cls function} object",

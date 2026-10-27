@@ -19,6 +19,8 @@ test_that("solver", {
   expect_equal(x$x$costWeightChoices, c(0.6, 0.8, 0.9, 0.95))
   expect_equal(x$x$zoneColors, c("blue", "red", "green"))
   expect_equal(x$x$zoneLockedColors, c("pink", "orange", "yellow"))
+  expect_s3_class(renderSolver(x), "shiny.render.function")
+  expect_s3_class(solverOutput(x), "shiny.tag.list")
 })
 
 test_that("solver_html", {

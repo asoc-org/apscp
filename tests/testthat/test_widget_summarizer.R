@@ -13,6 +13,8 @@ test_that("summarizer", {
   expect_equal(x$x$project, serialize_object(d))
   expect_equal(x$x$zoneColors, c("blue", "red", "green"))
   expect_equal(x$x$zoneLockedColors, c("pink", "orange", "yellow"))
+  expect_s3_class(renderSummarizer(x), "shiny.render.function")
+  expect_s3_class(summarizerOutput(x), "shiny.tag.list")
 })
 
 test_that("summarizer_html", {

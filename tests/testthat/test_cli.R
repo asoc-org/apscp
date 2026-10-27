@@ -3,7 +3,8 @@ test_that("cli_list", {
     cli_list(
       list(
         "A" = "aaa",
-        "B" = 1.23,
+        "B1" = 1.23,
+        "B2" = c(5L, 10L),
         "CC" = rep("ccc", 100),
         "DDD" = c(strrep("d", 1000) , "d1"),
         "EEEE" = list(),

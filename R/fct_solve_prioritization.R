@@ -122,10 +122,12 @@ solve_prioritization <- function(
     solver %in% c("cbc", "gurobi")
   )
   if (!is.null(gurobi_server)) {
+    # nocov start
     ## gurobi_server
     assertthat::assert_that(
       assertthat::is.string(gurobi_server)
     )
+    # nocov end
   }
 
   # preliminary data processing
