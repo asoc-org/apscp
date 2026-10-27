@@ -8,6 +8,11 @@ options(shiny.autoload.r = FALSE)
 # ensure that renv displays installation logs
 options(renv.config.install.verbose = TRUE)
 
+# if continuous integration environment, set package compilation
+if (nzchar("CI")) {
+  options(install.packages.compile.from.source = "never")
+}
+
 # active renv package management
 source("renv/activate.R")
 
