@@ -10,6 +10,7 @@ test_that("new_dataset", {
   x <- new_dataset(f1, f2)
   # run tests
   expect_r6_class(x, "Dataset")
+  expect_message(print(x))
 })
 
 test_that("create_dataset_from_sf", {
@@ -99,11 +100,15 @@ test_that("methods", {
     ),
     rep(0, x$get_n_pu())
   )
-  ## set_column_data
+  ## set_column_data (numeric)
   expect_false(x$has_column("new"))
   v <- round(runif(x$get_n_pu()), 3)
   x$set_column_data("new", v)
   expect_equal(v, x$get_column_data("new"))
+  ## set_column_data (character and overwrite)
+  v2 <- rep("a", x$get_n_pu())
+  x$set_column_data("new", v2)
+  expect_equal(v2, x$get_column_data("new"))
 })
 
 test_that("read_dataset/write_dataset", {

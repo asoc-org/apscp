@@ -30,8 +30,9 @@ jobs:
           - {os: macOS-latest, r: '4.6.0'}
 
     env:
-      NANONEXT_LIBS: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MAPBOX_PUBLIC_TOKEN: ${{ secrets.MAPBOX_PUBLIC_TOKEN }}
+      NANONEXT_LIBS: 1
       CI: true
 
     steps:

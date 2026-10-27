@@ -8,6 +8,7 @@ test_that("new_categorical_legend", {
   )
   # run tests
   expect_s3_class(x, "CategoricalLegend")
+  expect_message(print(x))
   expect_equal(x$values, c(0, 1))
   expect_equal(x$colors, c("#000000", "#AAAAAA"))
   expect_equal(x$labels, c("a", "b"))
@@ -56,6 +57,7 @@ test_that("new_continuous_legend", {
   )
   # run tests
   expect_s3_class(x, "ContinuousLegend")
+  expect_message(print(x))
   expect_equal(x$values, c(0, 1))
   expect_equal(x$colors, c("#000000", "#DDDDDD"))
   expect_equal(x$breaks, c(0.2, 0.5, 0.8))

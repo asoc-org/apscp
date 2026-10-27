@@ -22,6 +22,7 @@ test_that("new_solution", {
   )
   # run tests
   expect_s3_class(x, "Solution")
+  expect_message(print(x))
   expect_equal(x$name, "solution")
   expect_equal(x$layer, l)
   expect_equal(x$settings, s)

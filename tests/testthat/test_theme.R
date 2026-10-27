@@ -3,6 +3,7 @@ test_that("new_theme (character zone)", {
   x <- new_theme(name = "species", zone = "Biodiversity")
   # run tests
   expect_s3_class(x, "Theme")
+  expect_message(print(x))
   expect_equal(x$name, "species")
   expect_equal(x$zone, "Biodiversity")
 })
@@ -31,6 +32,7 @@ test_that("new_theme (NULL zone)", {
   x <- new_theme(name = "species", zone = NULL)
   # run tests
   expect_s3_class(x, "Theme")
+  expect_message(print(x))
   expect_equal(x$name, "species")
   expect_equal(x$zone, NULL)
 })

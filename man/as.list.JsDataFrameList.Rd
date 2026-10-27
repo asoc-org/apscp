@@ -20,6 +20,8 @@ Convert a JavaScript list of data frames object to a \code{list} object.
 \seealso{
 Other miscellaneous functions:
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
+\code{\link[=cli_format_vector]{cli_format_vector()}},
+\code{\link[=cli_list]{cli_list()}},
 \code{\link[=color_palette]{color_palette()}},
 \code{\link[=is_installed]{is_installed()}},
 \code{\link[=is_prioritization_settings]{is_prioritization_settings()}},

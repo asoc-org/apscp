@@ -63,6 +63,7 @@ to create the project.}
 \subsection{Public methods}{
   \itemize{
     \item \href{#method-Project-initialize}{\code{Project$new()}}
+    \item \href{#method-Project-print}{\code{Project$print()}}
     \item \href{#method-Project-get_centroid}{\code{Project$get_centroid()}}
     \item \href{#method-Project-get_bbox}{\code{Project$get_bbox()}}
     \item \href{#method-Project-get_solution}{\code{Project$get_solution()}}
@@ -127,6 +128,21 @@ Defaults to 0.}
   }
   \subsection{Returns}{
     A new \code{Project} object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-print}{}}}
+\subsection{\code{Project$print()}}{
+  Print object.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$print()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Invisible \code{NULL}.
   }
 }
 

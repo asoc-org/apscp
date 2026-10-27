@@ -6,6 +6,7 @@ test_that("new_tile", {
   x <- new_tile(source_layer = "data-src", path = p, max_zoom = 5)
   # run tests
   expect_s3_class(x, "Tile")
+  expect_message(print(x))
   expect_equal(x$source_layer, "data-src")
   expect_equal(x$path, p)
   expect_equal(x$max_zoom, 5)

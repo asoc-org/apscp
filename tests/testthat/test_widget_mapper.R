@@ -10,6 +10,13 @@ test_that("mapper", {
   expect_equal(x$x$project, serialize_object(d))
 })
 
+test_that("mapper_html", {
+  # create object
+  x <- mapper_html(id = "x", style = NULL, class = NULL)
+  # run tests
+  expect_s3_class(x, "shiny.tag")
+})
+
 test_that("builtin dataset", {
   # define skips
   skip_if_sim_deps_not_installed()

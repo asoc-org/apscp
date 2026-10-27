@@ -316,5 +316,5 @@ get_project_element <- function(project, id) {
     return(project$solutions[[i]])
   }
   # if couldn't find element, then return error
-  cli::cli_abort(paste0("Couldn't find element `", id, "` in project."))
+  cli::cli_abort(paste0("Couldn't find element `", id, "` in project.")) # nocov
 }

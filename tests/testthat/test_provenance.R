@@ -8,6 +8,7 @@ test_that("new_provenance", {
   )
   # run tests
   expect_s3_class(x, "Provenance")
+  expect_message(print(x))
   expect_equal(x$name, "Global")
   expect_equal(x$icon, "globe")
   expect_equal(x$color, "#123456")

@@ -26,7 +26,7 @@
 #' print(tile_server_dir())
 #'
 #' # start tile server
-#' tile_server_start()
+#' tile_server_start(sim_project)
 #'
 #' # check if tile server is active
 #' is_tile_server_active()

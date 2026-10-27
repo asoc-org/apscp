@@ -90,7 +90,8 @@ test_that("new_project", {
     author_email = "greg@gmail.com"
   )
   # run tests
-  expect_true(inherits(x, "Project"))
+  expect_r6_class(x, "Project")
+  expect_message(print(x))
   expect_equal(x$tiles, list(g))
   expect_equal(x$dataset, w)
   expect_equal(x$costs, list(cost))
@@ -113,6 +114,8 @@ test_that("methods", {
   new_sol$id <- "new_sol"
   new_lock <- x$locks[[1]]
   new_lock$id <- "new_lock"
+  x$features[[1]]$id <- "feature_1"
+  x$costs[[1]]$id <- "cost_1"
   # run tests
   ## add new solution
   x$add_solution(new_sol)
@@ -134,6 +137,23 @@ test_that("methods", {
   expect_length(ct1, 2)
   expect_type(ct2, "double")
   expect_length(ct2, 2)
+  ## get_project_element
+  expect_s3_class(
+    get_project_element(x, "cost_1"),
+    "Cost"
+  )
+  expect_s3_class(
+    get_project_element(x, "feature_1"),
+    "Feature"
+  )
+  expect_s3_class(
+    get_project_element(x, "new_sol"),
+    "Solution"
+  )
+  expect_s3_class(
+    get_project_element(x, "new_lock"),
+    "Lock"
+  )
 })
 
 test_that("map_project", {

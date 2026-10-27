@@ -1,4 +1,5 @@
 test_that("add_sidebar_control", {
+  # define skips
   skip_if_missing_mapbox_token()
   # create object
   m <- add_sidebar_control(mapgl::mapboxgl(), "sidebar")
