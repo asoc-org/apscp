@@ -76,7 +76,7 @@ jobs:
 
       - name: Install extra packages
         run: |
-          install.packages(c("sessioninfo", "rcmdcheck"))
+          install.packages(c("sessioninfo", "covr"))
         shell: Rscript {0}
 
       - name: Session information
