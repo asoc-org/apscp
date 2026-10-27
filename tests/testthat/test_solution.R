@@ -87,7 +87,7 @@ test_that("deserialize_object", {
   expect_equal(x, y)
 })
 
-test_that("create_solution", {
+test_that("create_solution (column)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # prepare data
@@ -113,6 +113,48 @@ test_that("create_solution", {
   expect_equal(x$settings, s)
   expect_equal(x$metrics, m)
   expect_true(file.exists(x$layer$tile$path))
+})
+
+test_that("create_solution_from_prioritization (column = NULL)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  skip_if_not_installed("prioritizr")
+  skip_if_not_installed("rcbc")
+  # simulate data
+  p <- simulate_project()
+  s <- simulate_prioritization_settings(p)
+  # set all targets and weights to be equal
+  s$features$target <- 0.01
+  s$features$weight <- 1
+  # ensure no active costs
+  s$costs$zones <- NA
+  # generate prioritization
+  d <- solve_prioritization(p, s)
+  # create object
+  x <- create_solution_from_prioritization(
+    name = "sol",
+    prioritization = d,
+    project = p,
+    column = NULL,
+    settings = s
+  )
+  # run tests
+  expect_s3_class(x, "Solution")
+  expect_equal(x$name, "sol")
+  expect_equal(x$settings, s)
+  expect_true(assertthat::is.string(x$layer$column))
+  expect_true(p$dataset$has_column(x$layer$column))
+  expect_equal(
+    p$dataset$get_column_data(x$layer$column),
+    as.numeric(d)
+  )  
+  expect_true(file.exists(x$layer$tile$path))
+  expect_type(x$metrics, "list")
+  expect_type(x$metrics$coverage, "list")
+  expect_type(x$metrics$performance, "list")
+  expect_type(x$metrics$features, "list")
+  expect_type(x$metrics$locks, "list")
+  expect_type(x$metrics$costs, "list")
 })
 
 test_that("create_solution_from_prioritization (metrics = NULL)", {

@@ -157,6 +157,8 @@ create_legend <- function(
 #'
 #' @param project [new_project()] object.
 #'
+#' @inheritParams solver
+#'
 #' @details
 #' Note that colors for zones are specified in the golem configuration file.
 #'
@@ -175,39 +177,45 @@ create_legend <- function(
 #' print(x)
 #'
 #' @export
-create_solution_legend <- function(project) {
+create_solution_legend <- function(
+  project,
+  zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors")
+) {
   # assert argument is valid
-  assertthat::assert_that(inherits(project, "Project"))
+  assertthat::assert_that(
+    inherits(project, "Project"),
+    is.character(zone_colors),
+    assertthat::noNA(zone_colors),
+    is.character(zone_locked_colors),
+    assertthat::noNA(zone_locked_colors)
+  )
 
   # obtain zone names
   zones <- project$zones
 
-  # obtain colors
-  cols <- get_golem_config("zone_colors")
-  locked_cols <- get_golem_config("zone_locked_colors")
-
   # if needed, add extra colors
-  if (length(zones) > length(cols)) {
-    cols <- c(
-      cols,
-      color_palette("plasma", length(zones) - length(cols) + 1L)
+  if (length(zones) > length(zone_colors)) {
+    zone_colors <- c(
+      zone_colors,
+      color_palette("plasma", length(zones) - length(zone_colors) + 1L)
     )
   }
-  if (length(zones) > length(locked_cols)) {
-    locked_cols <- c(
-      locked_cols,
-      color_palette("viridis", length(zones) - length(cols) + 1L)
+  if (length(zones) > length(zone_locked_colors)) {
+    zone_locked_colors <- c(
+      zone_locked_colors,
+      color_palette("viridis", length(zones) - length(zone_locked_colors) + 1L)
     )
   }
 
   # subset required colors
-  cols <- cols[seq_along(zones)]
-  locked_cols <- locked_cols[seq_along(zones)]
+  zone_colors <- zone_colors[seq_along(zones)]
+  zone_locked_colors <- zone_locked_colors[seq_along(zones)]
 
   # create legend
   new_solution_legend(
     values = seq_len(length(zones) * 2L),
-    colors = c(locked_cols, cols),
+    colors = c(zone_locked_colors, zone_colors),
     labels = c(paste(zones, "locked"), paste(zones, "priority"))
   )
 }
@@ -245,7 +253,7 @@ get_paint_parameters <- function(x, column) {
 
 #' @export
 get_paint_parameters.default <- function(x, column) {
-  rlang::abort("`x` is not recognized.")
+  rlang::abort("`x` is not recognized.") # nocov
 }
 
 #' @export

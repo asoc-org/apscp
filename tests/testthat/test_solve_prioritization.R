@@ -149,3 +149,82 @@ test_that("expected behavior (active locks)", {
     )
   )
 })
+
+test_that("convert_lock_settings_to_allocation", {
+  # run tests
+  ## no allocated zones
+  expect_equal(
+    convert_lock_settings_to_allocation(
+      data.frame(
+        id = character(0),
+        name = character(0),
+        zone = character(0),
+        column = character(0),
+        priority = numeric(0)
+      )
+    ),
+    character(0)
+  )
+  expect_equal(
+    convert_lock_settings_to_allocation(
+      data.frame(
+        id = "layer",
+        name = "name",
+        zone = NA_character_,
+        column = "column",
+        priority = 1
+      )
+    ),
+    character(0)
+  )
+  ## one allocated zone
+  expect_equal(
+    convert_lock_settings_to_allocation(
+      data.frame(
+        id = "layer1",
+        name = "name1",
+        zone = "zone1",
+        column = "column1",
+        priority = 100
+      )
+    ),
+    c("zone1" = "column1")
+  )
+  expect_equal(
+    convert_lock_settings_to_allocation(
+      data.frame(
+        id = c("layer1", "layer2"),
+        name = c("name1", "name2"),
+        zone = c(NA_character_, "zone1"),
+        column = c("column1", "column2"),
+        priority = c(1, 100)
+      )
+    ),
+    c("zone1" = "column2")
+  )
+  ## multiple allocated zones
+  expect_equal(
+    convert_lock_settings_to_allocation(
+      data.frame(
+        id = c("layer1", "layer2"),
+        name = c("name1", "name2"),
+        zone = c("zone1", "zone2"),
+        column = c("column1", "column2"),
+        priority = c(1, 100)
+      )
+    ),
+    c("zone2" = "column2", "zone1" = "column1")
+  )
+  expect_equal(
+    convert_lock_settings_to_allocation(
+      data.frame(
+        id = c("layer1", "layer2"),
+        name = c("name1", "name2"),
+        zone = c("zone1", "zone1"),
+        column = c("column1", "column2"),
+        priority = c(1, 100)
+      )
+    ),
+    c("zone1" = "column2", "zone1" = "column1")
+  )
+})

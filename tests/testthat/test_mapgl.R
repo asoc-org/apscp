@@ -15,7 +15,7 @@ test_that("has_mapbox_token", {
   )
 })
 
-test_that("mapgl identifers and urls", {
+test_that("mapgl identifiers and urls", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
@@ -100,6 +100,31 @@ test_that("mapgl_add_layer (categorical legend)", {
   # run tests
   expect_s3_class(
     mapgl_add_layer(mapgl::mapboxgl(), x),
+    "mapboxgl"
+  )
+})
+
+test_that("mapgl_clear_layer", {
+  # define skips
+  skip_if_missing_mapbox_token()
+  skip_if_sim_deps_not_installed()
+  # create object
+  s <- simulate_spatial_data()
+  l <- new_layer(
+    dataset = create_dataset_from_sf(s),
+    tile = create_tile_from_sf(s, verbose = FALSE),
+    column = "feat_1",
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance(),
+    total = 500,
+    details = "extra info"
+  )
+  x <- new_cost(
+    name = "cost", zone = "Biodiversity", weight = 0.5, layer = l, id = "a"
+  )
+  # run tests
+  expect_s3_class(
+    mapgl_clear_layer(mapgl_add_layer(mapgl::mapboxgl(), x), x),
     "mapboxgl"
   )
 })

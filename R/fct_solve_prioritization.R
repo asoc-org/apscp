@@ -370,7 +370,7 @@ convert_lock_settings_to_allocation <- function(data) {
   # remove any rows with a missing zone value
   data <- data[!is.na(data$zone), , drop = FALSE]
   # if no rows remain, then return empty vector
-  if (identical(nrow(data), 0L)) return(c())
+  if (identical(nrow(data), 0L)) return(character(0))
   # sort data frame according to order of priority
   data <- data[order(data$priority, decreasing = TRUE), , drop = FALSE]
   # initialize vector with allocations

@@ -63,7 +63,7 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
   if (isTRUE(verbose)) {
     mirai::daemons(n, output = TRUE)
   } else {
-    mirai::daemons(n)
+    mirai::daemons(n) # nocov
   }
   # load dependencies on workers
   do.call(

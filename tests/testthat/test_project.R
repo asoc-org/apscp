@@ -116,13 +116,25 @@ test_that("methods", {
   new_lock$id <- "new_lock"
   x$features[[1]]$id <- "feature_1"
   x$costs[[1]]$id <- "cost_1"
+  new_tile_path <- simulate_pmtiles_file()
+  new_tile <- new_tile(
+    source_layer = "data-src", path = new_tile_path, max_zoom = 5
+  )
   # run tests
-  ## add new solution
+  ## add_solution
   x$add_solution(new_sol)
   expect_true(any(vapply(x$solutions, `[[`, character(1), "id") == "new_sol"))
-  ## add new lock
+  ## add_lock
   x$add_lock(new_lock)
-  expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock"))
+  expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock")
+  ## add_tile
+  x$add_tile(new_tile)
+  expect_length(x$tiles, 2)
+  expect_equal(x$tiles[[2]], new_tile)
+  ## get_solution
+  expect_equal(x$get_solution("new_sol"), new_sol)
+  ## get_lock
+  expect_equal(x$get_solution("new_lock"), new_lock)
   ## get_bbox
   bb1 <- x$get_bbox(native = TRUE, expand = 1)
   bb2 <- x$get_bbox(native = FALSE, expand = 1)

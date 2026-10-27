@@ -307,7 +307,7 @@ mapgl_add_layer <- function(
       fill_opacity = 0.8
     )
   } else {
-    stop("`x$layer$legend` is not a valid legend.") # nocov
+    rlang::abort("`x$layer$legend` is not a valid legend.") # nocov
   }
 
   # return updated map with layer

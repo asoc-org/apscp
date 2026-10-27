@@ -25,6 +25,7 @@ jobs:
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      RENV_CONFIG_USER_PROFILE: true
       NANONEXT_LIBS: 1
       CI: true
 

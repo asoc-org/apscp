@@ -152,6 +152,29 @@ test_that("create_legend (presence)", {
   expect_equal(x$units, "presence")
 })
 
+test_that("create_solution_legend", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  p <- simulate_project()
+  x <- create_solution_legend(
+    p, zone_colors = "#C0FFBF", zone_locked_colors = "#4daf4a"
+  )
+  # run tests
+  expect_s3_class(x, "SolutionLegend")
+  expect_equal(x$values, seq_along(rep(p$zones, 2L)))
+  expect_setequal(
+    x$labels,
+    paste(
+      rep(p$zones, 2L),
+      rep(c("locked", "priority"), each = length(p$zones))
+    )
+  )
+  expect_length(x$colors, length(p$zones) * 2)
+  expect_true(all(startsWith(x$colors, "#")))
+  expect_true(all(nchar(x$colors) %in% c(7L, 9L)))
+})
+
 test_that("get_paint_parameters (continuous)", {
   # create object
   d <- new_continuous_legend(

@@ -51,7 +51,7 @@ sidebar_pane <- function(
   disabled = FALSE
 ) {
   if (is.null(id)) {
-    stop("The sidebar pane needs an `id`.")
+    rlang::abort("The sidebar pane needs an `id`.") # nocov
   }
   if (is.null(icon)) {
     h <- htmltools::tags$h3(

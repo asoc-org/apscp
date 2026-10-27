@@ -321,7 +321,9 @@ Dataset <- R6::R6Class(
         } else if (is.character(values)) {
           column_type <- "VARCHAR(255)"
         } else {
-          stop("`values` must be a numeric or character vector.") # nocov
+          # nocov start
+          rlang::abort("`values` must be a numeric or character vector.")
+          # nocov end
         }
         DBI::dbExecute(
           self$pu_db_con,
