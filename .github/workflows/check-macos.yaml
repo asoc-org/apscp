@@ -46,14 +46,15 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          brew install pkg-config
-          brew install sqlite3
-          brew install libspatialite
-          brew install spatialite-tools
-          brew install proj
-          brew install geos
-          brew install gdal
-          brew install cbc
+          brew install \
+            pkg-config \
+            sqlite3 \
+            libspatialite \
+            spatialite-tools \
+            proj \
+            geos \
+            gdal \
+            cbc
           brew link cbc --force
           brew link coinutils --force
           brew link osi --force
