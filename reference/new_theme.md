@@ -52,4 +52,6 @@ x <- new_theme(name = "Penguins", zone = "Biodiversity")
 # preview object
 print(x)
 #> A <Theme> object.
+#> • name: "Penguins"
+#> • zone: "Biodiversity"
 ```

@@ -204,5 +204,24 @@ x <- new_project(
 
 # preview object
 print(x)
-#> A <Project> object.
+#> • Metadata:
+#>   • name: Project
+#>   • version: 0.0.1.9000
+#>   • author_name: Unknown
+#>   • author_email: Unknown
+#> • Mapping:
+#>   • Number of tiles: 1
+#>   • bearing: 0
+#>   • zoom: 0
+#>   • bbox: -20, -30, 20, 30(xmin/ymin/xmax/ymax)
+#> • Dataset:
+#>   • Number of planning units: 90
+#>   • Planning unit path: /tmp/Rtmpzpyv3c/file63877d855df.gpkg
+#>   • Boundary path: /tmp/Rtmpzpyv3c/file638747630e28.rds
+#>   • Boundary data loaded: TRUE
+#> • Components:
+#>   • Number of features: 2
+#>   • Number of locks: 1
+#>   • Number of costs: 1
+#>   • Number of solutions: 0
 ```

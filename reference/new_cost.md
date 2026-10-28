@@ -84,4 +84,9 @@ x <- new_cost(
 # preview object
 print(x)
 #> A <Cost> object.
+#> • name: "cost"
+#> • zone: "tourism"
+#> • weight: 0.3
+#> • layer: <Layer> object
+#> • id: "4546063d-3256-45e6-aee9-0d7ccc75097d"
 ```

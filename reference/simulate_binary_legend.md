@@ -36,4 +36,8 @@ Other functions for simulating data:
 # simulate legend
 simulate_binary_legend()
 #> A <CategoricalLegend> object.
+#> • values: 0 and 1
+#> • colors: "#000000" and "#DDDDDD"
+#> • labels: "absent" and "present"
+#> • units: "binary"
 ```

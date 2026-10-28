@@ -99,6 +99,8 @@ Other functions for defining classes:
 
 - [`Project$new()`](#method-Project-initialize)
 
+- [`Project$print()`](#method-Project-print)
+
 - [`Project$get_centroid()`](#method-Project-get_centroid)
 
 - [`Project$get_bbox()`](#method-Project-get_bbox)
@@ -214,6 +216,20 @@ Create a `Project` object.
 #### Returns
 
 A new `Project` object.
+
+------------------------------------------------------------------------
+
+### `Project$print()`
+
+Print object.
+
+#### Usage
+
+    Project$print()
+
+#### Returns
+
+Invisible `NULL`.
 
 ------------------------------------------------------------------------
 

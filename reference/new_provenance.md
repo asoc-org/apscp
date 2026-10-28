@@ -64,4 +64,9 @@ x <- new_provenance(
 # print object
 print(x)
 #> A <Provenance> object.
+#> • name: "Global"
+#> • icon: "globe"
+#> • color: "#123456"
+#> • description: "Data is global."
+#> • url: "https://www.google.com"
 ```

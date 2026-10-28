@@ -88,4 +88,7 @@ x <- create_tile_from_project(
 # preview object
 print(x)
 #> A <Tile> object.
+#> • source_layer: "layer"
+#> • path: "/tmp/Rtmpzpyv3c/file63876eb39cba.pmtiles"
+#> • max_zoom: 8
 ```

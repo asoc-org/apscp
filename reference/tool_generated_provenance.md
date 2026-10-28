@@ -38,4 +38,8 @@ x <- tool_generated_provenance()
 # print object
 print(x)
 #> A <Provenance> object.
+#> • name: "User generated"
+#> • icon: "user"
+#> • color: "black"
+#> • description: "Generated with the tool"
 ```

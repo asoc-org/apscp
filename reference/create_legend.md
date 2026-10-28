@@ -74,4 +74,9 @@ x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
 # preview object
 print(x)
 #> A <ContinuousLegend> object.
+#> • values: 190, 197.5, 205, 212.5, and 220
+#> • colors: "#F1EEF6", "#BDC9E1", "#74A9CF", "#2B8CBE", and "#045A8D"
+#> • breaks: 190, 200, 210, and 220
+#> • labels: "190", "200", "210", and "220"
+#> • units: "USD"
 ```

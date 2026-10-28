@@ -67,4 +67,8 @@ l <- new_categorical_legend(
 # print object
 print(l)
 #> A <CategoricalLegend> object.
+#> • values: 0 and 1
+#> • colors: "#000000" and "#AAAAAA"
+#> • labels: "a" and "b"
+#> • units: "land-use types"
 ```

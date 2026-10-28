@@ -27,6 +27,8 @@ A `list` of `data.frame` objects.
 
 Other miscellaneous functions:
 [`as.data.frame.JsDataFrame()`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md),
+[`cli_format_vector()`](https://asoc-org.github.io/apscp/reference/cli_format_vector.md),
+[`cli_list()`](https://asoc-org.github.io/apscp/reference/cli_list.md),
 [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md),
 [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
 [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md),

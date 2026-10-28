@@ -54,6 +54,8 @@ Other functions for defining classes:
 
 - [`Dataset$new()`](#method-Dataset-initialize)
 
+- [`Dataset$print()`](#method-Dataset-print)
+
 - [`Dataset$get_n_pu()`](#method-Dataset-get_n_pu)
 
 - [`Dataset$get_boundary_data()`](#method-Dataset-get_boundary_data)
@@ -101,6 +103,20 @@ Create a `Dataset` object.
 #### Returns
 
 A new `Dataset` object.
+
+------------------------------------------------------------------------
+
+### `Dataset$print()`
+
+Print object.
+
+#### Usage
+
+    Dataset$print()
+
+#### Returns
+
+Invisible `NULL`.
 
 ------------------------------------------------------------------------
 

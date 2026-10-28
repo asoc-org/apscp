@@ -5,7 +5,11 @@ Create a legend for solutions generated with the tool.
 ## Usage
 
 ``` r
-create_solution_legend(project)
+create_solution_legend(
+  project,
+  zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors")
+)
 ```
 
 ## Arguments
@@ -14,6 +18,16 @@ create_solution_legend(project)
 
   [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
   object.
+
+- zone_colors:
+
+  `character` vector of colors for each zone. Defaults to
+  `get_golem_config("zone_colors")`.
+
+- zone_locked_colors:
+
+  `character` vector of colors for each zone. Defaults to
+  `get_golem_config("zone_locked_colors")`.
 
 ## Value
 

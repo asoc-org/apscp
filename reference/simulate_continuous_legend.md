@@ -36,4 +36,9 @@ Other functions for simulating data:
 # simulate legend
 simulate_continuous_legend()
 #> A <ContinuousLegend> object.
+#> • values: 0 and 1
+#> • colors: "#000000" and "#DDDDDD"
+#> • breaks: 0.2, 0.5, and 0.8
+#> • labels: "Low", "Medium", and "High"
+#> • units: "quantile"
 ```

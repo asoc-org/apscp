@@ -102,4 +102,12 @@ x <- new_layer(
 # preview object
 print(x)
 #> A <Layer> object.
+#> • column: "feat_1"
+#> • total: 500
+#> • dataset: <Dataset> object
+#> • tile: <Tile> object
+#> • legend: <ContinuousLegend> object
+#> • provenance: <Provenance> object
+#> • visible: <logical> object
+#> • details: "extra info"
 ```

@@ -152,19 +152,19 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $features$id
 #> $features$id[[1]]
-#> [1] "e32bd4bc-da14-4745-8307-3087059bdc7f"
+#> [1] "f66f8d59-57cb-4bb8-9831-6c6e7426f0da"
 #> 
 #> $features$id[[2]]
-#> [1] "3422b75d-1502-4b72-ac94-96ad112bf828"
+#> [1] "feec73e4-5804-46b0-af58-a32cc7e73020"
 #> 
 #> $features$id[[3]]
-#> [1] "2dde3fab-97c3-41b8-b36d-e8b7748558d9"
+#> [1] "f70c40f3-5c89-4011-baa2-fe5f71fce47c"
 #> 
 #> $features$id[[4]]
-#> [1] "9b3d6765-6316-419a-a4a8-41b1654090fe"
+#> [1] "45638243-58df-4a54-81f3-3e1a1f3ad99a"
 #> 
 #> $features$id[[5]]
-#> [1] "aedcf290-c116-4f97-879b-ce0dfc5dcac6"
+#> [1] "a1355f79-75f6-41b7-9450-01d86442786d"
 #> 
 #> 
 #> $features$total
@@ -233,10 +233,10 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $locks$id
 #> $locks$id[[1]]
-#> [1] "2f0dd99d-7f12-4085-a3a8-c7393202f29d"
+#> [1] "e14c28a5-03ee-43e1-bc42-09bac1f45c6a"
 #> 
 #> $locks$id[[2]]
-#> [1] "266a8467-ba64-4a6d-93f2-699a9c207d35"
+#> [1] "2bb40944-548f-4b8a-b05d-8642f490a293"
 #> 
 #> 
 #> $locks$total
@@ -278,7 +278,7 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> 
 #> $costs$id
 #> $costs$id[[1]]
-#> [1] "39ae4721-d5c1-4bd3-9269-1accbbef30be"
+#> [1] "8ef918a4-4147-4df5-a616-cbf869839d22"
 #> 
 #> 
 #> $costs$total

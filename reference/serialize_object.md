@@ -90,6 +90,10 @@ x <- new_categorical_legend(c(0, 1), c("#000000", "#AAAAAA"), c("a", "b"))
 # preview object
 print(x)
 #> A <CategoricalLegend> object.
+#> • values: 0 and 1
+#> • colors: "#000000" and "#AAAAAA"
+#> • labels: "a" and "b"
+#> • units: <NULL> object
 
 # serialize object
 s <- serialize_object(x)
@@ -119,4 +123,8 @@ d <- deserialize_object(s)
 # we can see that it is identical to x (i.e., the original object)
 print(d)
 #> A <CategoricalLegend> object.
+#> • values: 0 and 1
+#> • colors: "#000000" and "#AAAAAA"
+#> • labels: "a" and "b"
+#> • units: <NULL> object
 ```

@@ -79,4 +79,8 @@ x <- new_lock(
 # preview object
 print(x)
 #> A <Lock> object.
+#> • name: "lock"
+#> • zone: "scientific"
+#> • id: "7fde3f53-e964-4560-aaa0-ff66d19fe782"
+#> • layer: <Layer> object
 ```

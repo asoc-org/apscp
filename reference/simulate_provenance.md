@@ -36,4 +36,9 @@ Other functions for simulating data:
 # simulate provenance
 simulate_provenance()
 #> A <Provenance> object.
+#> • name: "Global"
+#> • icon: "globe"
+#> • color: "#123456"
+#> • description: "Data is global."
+#> • url: "https://google.com"
 ```

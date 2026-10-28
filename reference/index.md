@@ -300,6 +300,12 @@ Functions with assorted uses.
 
   Convert `JsDataFrameList` object to list object.
 
+- [`cli_format_vector()`](https://asoc-org.github.io/apscp/reference/cli_format_vector.md)
+  : Format atomic vector for printing.
+
+- [`cli_list()`](https://asoc-org.github.io/apscp/reference/cli_list.md)
+  : Print list
+
 - [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
   : Color palette
 

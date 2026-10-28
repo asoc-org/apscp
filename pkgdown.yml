@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   apscp: apscp.html
   optimization: optimization.html
-last_built: 2026-10-26T22:44Z
+last_built: 2026-10-28T01:56Z
 urls:
   reference: https://asoc-org.github.io/apscp/reference
   article: https://asoc-org.github.io/apscp/articles

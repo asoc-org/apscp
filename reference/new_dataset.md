@@ -64,29 +64,9 @@ x <- new_dataset(sim_path1, sim_path2)
 
 # preview object
 print(x)
-#> <Dataset>
-#>   Public:
-#>     boundary_data: NULL
-#>     boundary_path: /tmp/RtmpQx8qrs/file66f668e80b07.rds
-#>     clone: function (deep = FALSE) 
-#>     get_boundary_data: function () 
-#>     get_column_data: function (column) 
-#>     get_column_held: function (column, status) 
-#>     get_column_names: function () 
-#>     get_column_total: function (column) 
-#>     get_dataframe: function (column = NULL) 
-#>     get_n_pu: function () 
-#>     get_pu_status: function (zone, allocation) 
-#>     get_sf: function (column = NULL) 
-#>     has_column: function (column) 
-#>     initialize: function (pu_path, boundary_path) 
-#>     n_pu: 90
-#>     pu_db_con: NULL
-#>     pu_db_table: file66f617e7e5a7
-#>     pu_path: /tmp/RtmpQx8qrs/file66f617e7e5a7.gpkg
-#>     set_column_data: function (column, values) 
-#>   Private:
-#>     close_db_con: function () 
-#>     finalize: function () 
-#>     open_db_con: function () 
+#> A <Dataset> object.
+#> • Number of planning units: 90
+#> • Planning unit path: /tmp/Rtmpzpyv3c/file638718cb4be1.gpkg
+#> • Boundary path: /tmp/Rtmpzpyv3c/file6387506c00ee.rds
+#> • Boundary data loaded: TRUE
 ```
