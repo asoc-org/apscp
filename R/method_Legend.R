@@ -84,13 +84,16 @@ create_legend <- function(
     )
   )
 
+  # if colors are manually specified, then prepare the colors
+  if (startsWith(palette, "#")) {
+    palette <- strsplit(palette, ";")[[1]]
+  }
+
   # depending on the type...
   if (identical(type, "presence/absence")) {
-    # generate colors
-    if (!startsWith(palette, "#")) {
+    # if color ramp specified, then prepare the colors
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = 2L)
-    } else {
-      palette <- strsplit(palette, ";")[[1]]
     }
     # create legend
     out <- new_categorical_legend(
@@ -100,11 +103,9 @@ create_legend <- function(
       units = units
     )
   } else if (identical(type, "presence")) {
-    # generate colors
-    if (!startsWith(palette, "#")) {
+    # if color ramp specified, then prepare the colors
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = 2L)[[2]]
-    } else {
-      palette <- strsplit(palette, ";")[[1]]
     }
     # create legend
     out <- new_categorical_legend(
@@ -114,11 +115,9 @@ create_legend <- function(
       units = units
     )
   } else if (identical(type, "categorical")) {
-    # generate colors
-    if (!startsWith(palette, "#")) {
+    # if color ramp specified, then prepare the colors
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = length(v))
-    } else {
-     palette <- strsplit(palette, ";")[[1]]
     }
     # create legend
     out <- new_categorical_legend(
@@ -130,10 +129,10 @@ create_legend <- function(
   } else {
     # generate colors
     n_colors <- 5
-    if (!startsWith(palette, "#")) {
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = n_colors)
     } else {
-     palette <- strsplit(palette, ";")[[1]]
+      palette <- grDevices::colorRampPalette(palette)(n_colors)
     }
     # compute breaks
     br <- labeling::extended(dmin = min(v), dmax = max(v), m = 4)

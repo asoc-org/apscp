@@ -130,7 +130,7 @@ write_dataset <- function(x, pu_path, boundary_path) {
       )
     )
   } else {
-    file.copy(x$pu_db_path, pu_path)
+    file.copy(from = x$pu_path, to = pu_path, overwrite = TRUE)
   }
 
   # save boundary data

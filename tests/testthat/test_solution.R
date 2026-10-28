@@ -87,15 +87,15 @@ test_that("deserialize_object", {
   expect_equal(x, y)
 })
 
-test_that("create_solution (column)", {
+test_that("create_solution", {
   # define skips
   skip_if_sim_deps_not_installed()
   # prepare data
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
   p$dataset$set_column_data("solv", v)
+  m <- eval_prioritization(p, s, p$dataset$get_column_data("solv"))
   # create object
   x <- create_solution(
     name = "sol",
@@ -105,6 +105,34 @@ test_that("create_solution (column)", {
     legend = simulate_solution_legend(),
     settings = s,
     metrics = m
+  )
+  # run tests
+  expect_s3_class(x, "Solution")
+  expect_equal(x$name, "sol")
+  expect_equal(x$layer$column, "solv")
+  expect_equal(x$settings, s)
+  expect_equal(x$metrics, m)
+  expect_true(file.exists(x$layer$tile$path))
+})
+
+test_that("create_solution (metrics = NULL)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # prepare data
+  p <- simulate_project()
+  s <- simulate_prioritization_settings(p)
+  v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
+  p$dataset$set_column_data("solv", v)
+  m <- eval_prioritization(p, s, p$dataset$get_column_data("solv"))
+  # create object
+  x <- create_solution(
+    name = "sol",
+    project = p,
+    column = "solv",
+    provenance = simulate_provenance(),
+    legend = simulate_solution_legend(),
+    settings = s,
+    metrics = NULL
   )
   # run tests
   expect_s3_class(x, "Solution")
@@ -147,7 +175,7 @@ test_that("create_solution_from_prioritization (column = NULL)", {
   expect_equal(
     p$dataset$get_column_data(x$layer$column),
     as.numeric(d)
-  )  
+  )
   expect_true(file.exists(x$layer$tile$path))
   expect_type(x$metrics, "list")
   expect_type(x$metrics$coverage, "list")

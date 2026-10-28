@@ -98,12 +98,25 @@ test_that("deserialize_object (continuous)", {
   expect_equal(x, y)
 })
 
-test_that("create_legend (continuous)", {
+test_that("create_legend (continuous, palette colors)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),
     column = "cost",
     palette = "PuBu",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "ContinuousLegend")
+  expect_equal(x$units, "acres")
+})
+
+test_that("create_legend (continuous, manual colors)", {
+  # create object
+  x <- create_legend(
+    simulate_spatial_data(),
+    column = "cost",
+    palette = "#000000;#DDDDDD",
     units = "acres"
   )
   # run tests
@@ -124,7 +137,7 @@ test_that("create_legend (presence/absence)", {
   expect_equal(x$units, NULL)
 })
 
-test_that("create_legend (categorical)", {
+test_that("create_legend (categorical, palette colors)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),
@@ -138,7 +151,21 @@ test_that("create_legend (categorical)", {
   expect_equal(x$units, "acres")
 })
 
-test_that("create_legend (presence)", {
+test_that("create_legend (categorical, manual colors)", {
+  # create object
+  x <- create_legend(
+    simulate_spatial_data(),
+    column = "solution",
+    palette = "#e41a1c;#377eb8;#4daf4a;#984ea3;#ff7f00;#ffff33;#000000",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "CategoricalLegend")
+  expect_equal(x$labels, c("0", "1", "2", "3", "4", "5", "6"))
+  expect_equal(x$units, "acres")
+})
+
+test_that("create_legend (presence, palette)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),

@@ -293,7 +293,7 @@ calc_performance_metrics <- function(
 
   # if list is empty, then return NULL
   if (identical(length(x), 0L)) {
-    return(list(relative = NULL, absolute = NULL))
+    return(list(relative = NULL, absolute = NULL)) # nocov
   }
 
   # extract features settings
