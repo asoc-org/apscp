@@ -24,6 +24,7 @@ test_that("new_feature", {
   )
   # run tests
   expect_s3_class(x, "Feature")
+  expect_message(print(x))
   expect_equal(x$name, "feature")
   expect_equal(x$zone_targets, c(0.1, 0.2, 0.3))
   expect_equal(x$zone_weights, c(1, 0.5, 0.7))

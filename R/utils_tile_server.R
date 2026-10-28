@@ -26,7 +26,7 @@
 #' print(tile_server_dir())
 #'
 #' # start tile server
-#' tile_server_start()
+#' tile_server_start(sim_project)
 #'
 #' # check if tile server is active
 #' is_tile_server_active()
@@ -58,7 +58,7 @@ tile_server_start <- function(x, verbose = TRUE) {
   if (length(new_paths) > 0) {
     if (!identical(.Platform$OS.type, "unix")) {
       ## if on Windows, then copy the files
-      file.copy(existing_paths, to = new_paths)
+      file.copy(existing_paths, to = new_paths) # nocov
     } else {
       ## otherwise, use symlinks to reduce storage burden
       file.symlink(existing_paths, to = new_paths)
@@ -128,7 +128,7 @@ tile_server_add_tile <- function(x) {
   if (!file.exists(new_path)) {
     if (!identical(.Platform$OS.type, "unix")) {
       ## if on Windows, then copy the file
-      file.copy(x$path, to = new_path)
+      file.copy(x$path, to = new_path) # nocov
     } else {
       ## otherwise, use symlink to reduce storage burden
       file.symlink(x$path, to = new_path)
@@ -168,7 +168,7 @@ tile_server_stop <- function() {
 #'
 #' @export
 is_tile_server_active <- function() {
-  if (is.null(.pkg_env$tile_server_status)) return(FALSE)
+  if (is.null(.pkg_env$tile_server_status)) return(FALSE) # nocov
   .pkg_env$tile_server_status
 }
 
@@ -196,13 +196,13 @@ tile_server_dir <- function() {
 
   # if NULL, then manually specify temporary directory
   if (is.null(x)) {
-    x <- tempfile()
+    x <- tempfile() # nocov
   }
 
   # if directory does not exist and inherits from temporary directory,
   # then create it
   if (!dir.exists(x) && startsWith(x, tempdir())) {
-    dir.create(x, showWarnings = FALSE, recursive = TRUE)
+    dir.create(x, showWarnings = FALSE, recursive = TRUE) # nocov
   }
 
   # validate directory

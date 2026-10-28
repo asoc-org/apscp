@@ -122,10 +122,12 @@ solve_prioritization <- function(
     solver %in% c("cbc", "gurobi")
   )
   if (!is.null(gurobi_server)) {
+    # nocov start
     ## gurobi_server
     assertthat::assert_that(
       assertthat::is.string(gurobi_server)
     )
+    # nocov end
   }
 
   # preliminary data processing
@@ -368,7 +370,7 @@ convert_lock_settings_to_allocation <- function(data) {
   # remove any rows with a missing zone value
   data <- data[!is.na(data$zone), , drop = FALSE]
   # if no rows remain, then return empty vector
-  if (identical(nrow(data), 0L)) return(c())
+  if (identical(nrow(data), 0L)) return(character(0))
   # sort data frame according to order of priority
   data <- data[order(data$priority, decreasing = TRUE), , drop = FALSE]
   # initialize vector with allocations

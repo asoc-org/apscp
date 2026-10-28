@@ -124,7 +124,7 @@ mapper_menu_item_header_scaffold <- function(type) {
     icon <- shiny::icon("rocket")
     icon_tooltip_text <- "This solution layer indicates priority areas."
   } else {
-    stop("`type` not recognized.") # nocov
+    rlang::abort("`type` is not recognized.") # nocov
   }
 
   # return scaffold

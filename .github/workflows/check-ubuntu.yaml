@@ -30,8 +30,10 @@ jobs:
           - {os: ubuntu-latest, r: '4.6.0'}
 
     env:
-      NANONEXT_LIBS: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MAPBOX_PUBLIC_TOKEN: ${{ secrets.MAPBOX_PUBLIC_TOKEN }}
+      RENV_CONFIG_USER_PROFILE: true
+      NANONEXT_LIBS: 1
       CI: true
 
     steps:
@@ -45,14 +47,38 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          sudo apt-get -y install cmake curl gdal-bin htop libuv1-dev libglpk-dev libabsl-dev libsqlite3-mod-spatialite libcurl4-gnutls-dev libssl-dev libudunits2-dev libgdal-dev libgeos-dev libproj-dev coinor-libcbc-dev coinor-libclp-dev coinor-libsymphony-dev coinor-libcgl-dev libharfbuzz-dev libfribidi-dev libfontconfig1-dev
+          sudo apt-get -y install \
+            cmake \
+            curl \
+            gdal-bin \
+            htop \
+            libuv1-dev \
+            libglpk-dev \
+            libabsl-dev \
+            libsqlite3-mod-spatialite \
+            libcurl4-gnutls-dev \
+            libssl-dev \
+            libgit2-dev \
+            libudunits2-dev \
+            libgdal-dev \
+            libgeos-dev \
+            libproj-dev \
+            coinor-libcbc-dev \
+            coinor-libclp-dev \
+            coinor-libsymphony-dev \
+            coinor-libcgl-dev \
+            libharfbuzz-dev \
+            libfribidi-dev \
+            libfontconfig1-dev
 
-      - name: Install dependencies
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          profile: '"dev"'
+          cache-version: 2
+
+      - name: Install extra packages
         run: |
-          options(install.packages.compile.from.source = "never")
-          install.packages(c("renv", "remotes", "testthat", "rvest"))
-          renv::restore()
-          remotes::install_cran("rcmdcheck")
+          install.packages(c("sessioninfo", "rcmdcheck"))
         shell: Rscript {0}
 
       - name: Session information
@@ -62,19 +88,12 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: Check
-        run: |
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--as-cran", "--no-build-vignettes")'
+          upload-snapshots: true
 
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check

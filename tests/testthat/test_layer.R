@@ -19,6 +19,7 @@ test_that("new_layer", {
   )
   # run tests
   expect_s3_class(x, "Layer")
+  expect_message(print(x))
   expect_equal(x$dataset, w)
   expect_equal(x$tile, r)
   expect_equal(x$column, "feat_1")

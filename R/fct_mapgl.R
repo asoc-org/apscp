@@ -307,7 +307,7 @@ mapgl_add_layer <- function(
       fill_opacity = 0.8
     )
   } else {
-    stop("`x$layer$legend` is not a valid legend.") # nocov
+    rlang::abort("`x$layer$legend` is not a valid legend.") # nocov
   }
 
   # return updated map with layer
@@ -327,10 +327,13 @@ mapgl_add_layer <- function(
   )
 }
 
+# nocov start
+
 #' Clear layer
 #'
 #' Clear an object as a layer from a \pkg{mapgl} object.
 #'
+#' @inheritParams mapgl::clear_layer
 #' @inheritParams mapgl_add_source
 #'
 #' @details
@@ -344,10 +347,12 @@ mapgl_add_layer <- function(
 mapgl_clear_layer <- function(map, x) {
   # assert arguments are valid
   assertthat::assert_that(
-    inherits(map, c("mapboxgl", "mapboxgl_proxy")),
+    inherits(map, "mapboxgl_proxy"),
     inherits(x, c("Feature", "Cost", "Lock", "Solution"))
   )
 
   # return updated map
   mapgl::clear_layer(map, mapgl_layer_id(x))
 }
+
+# nocov end

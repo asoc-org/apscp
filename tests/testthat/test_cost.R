@@ -15,6 +15,7 @@ test_that("new_cost", {
   x <- new_cost(name = "cost", zone = "Biodiversity", weight = 0.5, layer = l)
   # run tests
   expect_s3_class(x, "Cost")
+  expect_message(print(x))
   expect_equal(x$name, "cost")
   expect_equal(x$weight, 0.5)
   expect_equal(x$layer, l)

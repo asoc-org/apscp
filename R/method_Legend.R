@@ -84,13 +84,16 @@ create_legend <- function(
     )
   )
 
+  # if colors are manually specified, then prepare the colors
+  if (startsWith(palette, "#")) {
+    palette <- strsplit(palette, ";")[[1]]
+  }
+
   # depending on the type...
   if (identical(type, "presence/absence")) {
-    # generate colors
-    if (!startsWith(palette, "#")) {
+    # if color ramp specified, then prepare the colors
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = 2L)
-    } else {
-      palette <- strsplit(palette, ";")[[1]]
     }
     # create legend
     out <- new_categorical_legend(
@@ -100,11 +103,9 @@ create_legend <- function(
       units = units
     )
   } else if (identical(type, "presence")) {
-    # generate colors
-    if (!startsWith(palette, "#")) {
+    # if color ramp specified, then prepare the colors
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = 2L)[[2]]
-    } else {
-      palette <- strsplit(palette, ";")[[1]]
     }
     # create legend
     out <- new_categorical_legend(
@@ -114,11 +115,9 @@ create_legend <- function(
       units = units
     )
   } else if (identical(type, "categorical")) {
-    # generate colors
-    if (!startsWith(palette, "#")) {
+    # if color ramp specified, then prepare the colors
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = length(v))
-    } else {
-     palette <- strsplit(palette, ";")[[1]]
     }
     # create legend
     out <- new_categorical_legend(
@@ -130,10 +129,10 @@ create_legend <- function(
   } else {
     # generate colors
     n_colors <- 5
-    if (!startsWith(palette, "#")) {
+    if (!startsWith(palette[[1]], "#")) {
       palette <- color_palette(palette, n = n_colors)
     } else {
-     palette <- strsplit(palette, ";")[[1]]
+      palette <- grDevices::colorRampPalette(palette)(n_colors)
     }
     # compute breaks
     br <- labeling::extended(dmin = min(v), dmax = max(v), m = 4)
@@ -157,6 +156,8 @@ create_legend <- function(
 #'
 #' @param project [new_project()] object.
 #'
+#' @inheritParams solver
+#'
 #' @details
 #' Note that colors for zones are specified in the golem configuration file.
 #'
@@ -175,39 +176,45 @@ create_legend <- function(
 #' print(x)
 #'
 #' @export
-create_solution_legend <- function(project) {
+create_solution_legend <- function(
+  project,
+  zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors")
+) {
   # assert argument is valid
-  assertthat::assert_that(inherits(project, "Project"))
+  assertthat::assert_that(
+    inherits(project, "Project"),
+    is.character(zone_colors),
+    assertthat::noNA(zone_colors),
+    is.character(zone_locked_colors),
+    assertthat::noNA(zone_locked_colors)
+  )
 
   # obtain zone names
   zones <- project$zones
 
-  # obtain colors
-  cols <- get_golem_config("zone_colors")
-  locked_cols <- get_golem_config("zone_locked_colors")
-
   # if needed, add extra colors
-  if (length(zones) > length(cols)) {
-    cols <- c(
-      cols,
-      color_palette("plasma", length(zones) - length(cols) + 1L)
+  if (length(zones) > length(zone_colors)) {
+    zone_colors <- c(
+      zone_colors,
+      color_palette("plasma", length(zones) - length(zone_colors) + 1L)
     )
   }
-  if (length(zones) > length(locked_cols)) {
-    locked_cols <- c(
-      locked_cols,
-      color_palette("viridis", length(zones) - length(cols) + 1L)
+  if (length(zones) > length(zone_locked_colors)) {
+    zone_locked_colors <- c(
+      zone_locked_colors,
+      color_palette("viridis", length(zones) - length(zone_locked_colors) + 1L)
     )
   }
 
   # subset required colors
-  cols <- cols[seq_along(zones)]
-  locked_cols <- locked_cols[seq_along(zones)]
+  zone_colors <- zone_colors[seq_along(zones)]
+  zone_locked_colors <- zone_locked_colors[seq_along(zones)]
 
   # create legend
   new_solution_legend(
     values = seq_len(length(zones) * 2L),
-    colors = c(locked_cols, cols),
+    colors = c(zone_locked_colors, zone_colors),
     labels = c(paste(zones, "locked"), paste(zones, "priority"))
   )
 }
@@ -245,7 +252,7 @@ get_paint_parameters <- function(x, column) {
 
 #' @export
 get_paint_parameters.default <- function(x, column) {
-  rlang::abort("`x` is not recognized.")
+  rlang::abort("`x` is not recognized.") # nocov
 }
 
 #' @export

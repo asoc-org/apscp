@@ -30,8 +30,10 @@ jobs:
           - {os: windows-latest, r: '4.6.0'}
 
     env:
-      NANONEXT_LIBS: 1
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      MAPBOX_PUBLIC_TOKEN: ${{ secrets.MAPBOX_PUBLIC_TOKEN }}
+      RENV_CONFIG_USER_PROFILE: true
+      NANONEXT_LIBS: 1
       CI: true
 
     steps:
@@ -48,12 +50,14 @@ jobs:
           pacman -Sy --noconfirm mingw-w64-ucrt-x86_64-libspatialite
         shell: bash
 
-      - name: Install dependencies
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          profile: '"dev"'
+          cache-version: 2
+
+      - name: Install extra packages
         run: |
-          options(install.packages.compile.from.source = "always")
-          install.packages(c("renv", "remotes", "testthat", "rvest"))
-          renv::restore()
-          remotes::install_cran("rcmdcheck")
+          install.packages(c("sessioninfo", "rcmdcheck"))
         shell: Rscript {0}
 
       - name: Session information
@@ -63,19 +67,12 @@ jobs:
           sessioninfo::session_info(pkgs, include_base = TRUE)
         shell: Rscript {0}
 
-      - name: Check
-        run: |
-          rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran", "--no-build-vignettes", "--no-multiarch"), error_on = "warning", check_dir = "check")
-        shell: Rscript {0}
+      - uses: r-lib/actions/check-r-package@v2
+        with:
+          args: 'c("--no-manual", "--as-cran", "--no-build-vignettes")'
+          upload-snapshots: true
 
       - name: Show testthat output
         if: always()
         run: find check -name 'testthat.Rout*' -exec cat '{}' \; || true
         shell: bash
-
-      - name: Upload check results
-        if: failure()
-        uses: actions/upload-artifact@main
-        with:
-          name: ${{ runner.os }}-r${{ matrix.config.r }}-results
-          path: check

@@ -10,6 +10,7 @@ test_that("new_dataset", {
   x <- new_dataset(f1, f2)
   # run tests
   expect_r6_class(x, "Dataset")
+  expect_message(print(x))
 })
 
 test_that("create_dataset_from_sf", {
@@ -99,14 +100,18 @@ test_that("methods", {
     ),
     rep(0, x$get_n_pu())
   )
-  ## set_column_data
+  ## set_column_data (numeric)
   expect_false(x$has_column("new"))
   v <- round(runif(x$get_n_pu()), 3)
   x$set_column_data("new", v)
   expect_equal(v, x$get_column_data("new"))
+  ## set_column_data (character and overwrite)
+  v2 <- rep("a", x$get_n_pu())
+  x$set_column_data("new", v2)
+  expect_equal(v2, x$get_column_data("new"))
 })
 
-test_that("read_dataset/write_dataset", {
+test_that("read_dataset/write_dataset (non-compressed)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
@@ -115,6 +120,47 @@ test_that("read_dataset/write_dataset", {
   path2 <- tempfile(fileext = ".rds")
   # run file operations
   write_dataset(x, path1, path2)
+  y <- read_dataset(path1, path2)
+  # run tests
+  expect_equal(
+    x$get_dataframe(),
+    y$get_dataframe(),
+    ignore_attr = TRUE
+  )
+  expect_equal(x$get_boundary_data(), y$get_boundary_data())
+})
+
+test_that("read_dataset/write_dataset (compressed)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  x <- create_dataset_from_sf(simulate_spatial_data())
+  path1 <- tempfile(fileext = ".gpkg")
+  path2 <- tempfile(fileext = ".rds")
+  # run file operations
+  write_dataset(x, path1, path2)
+  y <- read_dataset(path1, path2)
+  # run tests
+  expect_equal(
+    x$get_dataframe(),
+    y$get_dataframe(),
+    ignore_attr = TRUE
+  )
+  expect_equal(x$get_boundary_data(), y$get_boundary_data())
+})
+
+test_that("read_dataset/write_dataset (relative paths)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  x <- create_dataset_from_sf(simulate_spatial_data())
+  path1 <- tempfile(fileext = ".gpkg")
+  path2 <- tempfile(fileext = ".rds")
+  # run file operations
+  withr::with_dir(
+    tempdir(),
+    write_dataset(x, basename(path1), basename(path2))
+  )
   y <- read_dataset(path1, path2)
   # run tests
   expect_equal(

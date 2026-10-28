@@ -1,5 +1,6 @@
 R/aaa.R
 R/app_*.R
+R/run_*.R
 R/import-*.R
-R/widget_*.R
+R/widget_*_server*.R
 R/zzz.R

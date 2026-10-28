@@ -44,6 +44,7 @@ Other functions for defining classes:
 \subsection{Public methods}{
   \itemize{
     \item \href{#method-Dataset-initialize}{\code{Dataset$new()}}
+    \item \href{#method-Dataset-print}{\code{Dataset$print()}}
     \item \href{#method-Dataset-get_n_pu}{\code{Dataset$get_n_pu()}}
     \item \href{#method-Dataset-get_boundary_data}{\code{Dataset$get_boundary_data()}}
     \item \href{#method-Dataset-get_column_names}{\code{Dataset$get_column_names()}}
@@ -78,6 +79,21 @@ Other functions for defining classes:
   }
   \subsection{Returns}{
     A new \code{Dataset} object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-print}{}}}
+\subsection{\code{Dataset$print()}}{
+  Print object.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$print()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    Invisible \code{NULL}.
   }
 }
 

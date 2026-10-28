@@ -118,3 +118,38 @@ standardize_zone_targets <- function(x, digits = 2) {
   # return value
   y
 }
+
+#' Is relative path?
+#'
+#' Check if a file path is relative or not.
+#'
+#' @param x `character` value with file path.
+#'
+#' @return A `logical` value.
+#'
+#' @family misc
+#'
+#' @examples
+#' # check if various paths are relative or not
+#' is_relative_path("/usr/home/data.txt")
+#' is_relative_path("~/data.txt")
+#' is_relative_path("C:/Users/root/data.txt")
+#' is_relative_path("data.txt")
+#'
+#' @export
+is_relative_path <- function(x) {
+  # assert argument is valid
+  assertthat::assert_that(assertthat::is.string(x))
+
+  # check if file path is absolute
+  is_abs <- startsWith(x, "/")
+  if (!is_abs && nchar(x) >= 3L) {
+    is_abs <- any(
+      tolower(substr(x, 1, 3)) %in%
+      c(paste0(letters, ":\\"), paste0(letters, ":/"))
+    )
+  }
+
+  # return if is relative
+  !is_abs
+}

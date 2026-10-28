@@ -168,6 +168,64 @@ Project <- R6::R6Class(
     },
 
     #' @description
+    #' Print object.
+    #' @return Invisible `NULL`.
+    print = function() {
+      # print object
+      ## start container
+      id1 <- cli::cli_div()
+      id2 <- cli::cli_ul()
+      ## meta details
+      cli::cli_li("Metadata:")
+      id3 <- cli::cli_ul()
+      cli::cli_li("{.field name}: {self$name}")
+      cli::cli_li("{.field version}: {self$version}")
+      cli::cli_li("{.field author_name}: {self$author_name}")
+      cli::cli_li("{.field author_email}: {self$author_email}")
+      cli::cli_end(id3)
+      ## map details
+      cli::cli_li("Mapping:")
+      id3 <- cli::cli_ul()
+      cli::cli_li("Number of tiles: {.val {length(self$tiles)}}")
+      cli::cli_li("{.field bearing}: {self$bearing}")
+      cli::cli_li("{.field zoom}: {self$zoom}")
+      cli::cli_li(
+        paste0(
+          "{.field bbox}: ",
+          "{.val {self$bbox$xmin}}, ",
+          "{.val {self$bbox$ymin}}, ",
+          "{.val {self$bbox$xmax}}, ",
+          "{.val {self$bbox$ymax}}",
+          "(xmin/ymin/xmax/ymax)"
+        )
+      )
+      cli::cli_end(id3)
+      ## dataset
+      cli::cli_li("Dataset:")
+      id3 <- cli::cli_ul()
+      cli::cli_li("Number of planning units: {.val {self$dataset$n_pu}}")
+      cli::cli_li("Planning unit path:  {.path {self$dataset$pu_path}}")
+      cli::cli_li("Boundary path: {.path {self$dataset$boundary_path}}")
+      cli::cli_li(
+        "Boundary data loaded: {.val {is.null(self$dataset$boundary_data)}}"
+      )
+      cli::cli_end(id3)
+      ## components
+      cli::cli_li("Components:")
+      id3 <- cli::cli_ul()
+      cli::cli_li("Number of features: {.val {length(self$features)}}")
+      cli::cli_li("Number of locks: {.val {length(self$locks)}}")
+      cli::cli_li("Number of costs: {.val {length(self$costs)}}")
+      cli::cli_li("Number of solutions: {.val {length(self$solutions)}}")
+      cli::cli_end(id3)
+      # end containers
+      cli::cli_end(id2)
+      cli::cli_end(id1)
+      # return NULL
+      invisible(NULL)
+    },
+
+    #' @description
     #' Get centroid.
     #' @param native `logical` value indicating if the bounding box should
     #' be in (`TRUE`) the native coordinate reference system or (`FALSE`)

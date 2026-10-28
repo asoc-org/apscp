@@ -134,6 +134,7 @@ Collate:
     'utils_as.R'
     'utils_assertions.R'
     'utils_async.R'
+    'utils_cli.R'
     'utils_color_palette.R'
     'utils_matrix.R'
     'utils_sf.R'

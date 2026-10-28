@@ -8,6 +8,7 @@ test_that("new_categorical_legend", {
   )
   # run tests
   expect_s3_class(x, "CategoricalLegend")
+  expect_message(print(x))
   expect_equal(x$values, c(0, 1))
   expect_equal(x$colors, c("#000000", "#AAAAAA"))
   expect_equal(x$labels, c("a", "b"))
@@ -56,6 +57,7 @@ test_that("new_continuous_legend", {
   )
   # run tests
   expect_s3_class(x, "ContinuousLegend")
+  expect_message(print(x))
   expect_equal(x$values, c(0, 1))
   expect_equal(x$colors, c("#000000", "#DDDDDD"))
   expect_equal(x$breaks, c(0.2, 0.5, 0.8))
@@ -96,12 +98,25 @@ test_that("deserialize_object (continuous)", {
   expect_equal(x, y)
 })
 
-test_that("create_legend (continuous)", {
+test_that("create_legend (continuous, palette colors)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),
     column = "cost",
     palette = "PuBu",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "ContinuousLegend")
+  expect_equal(x$units, "acres")
+})
+
+test_that("create_legend (continuous, manual colors)", {
+  # create object
+  x <- create_legend(
+    simulate_spatial_data(),
+    column = "cost",
+    palette = "#000000;#DDDDDD",
     units = "acres"
   )
   # run tests
@@ -122,7 +137,7 @@ test_that("create_legend (presence/absence)", {
   expect_equal(x$units, NULL)
 })
 
-test_that("create_legend (categorical)", {
+test_that("create_legend (categorical, palette colors)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),
@@ -136,7 +151,21 @@ test_that("create_legend (categorical)", {
   expect_equal(x$units, "acres")
 })
 
-test_that("create_legend (presence)", {
+test_that("create_legend (categorical, manual colors)", {
+  # create object
+  x <- create_legend(
+    simulate_spatial_data(),
+    column = "solution",
+    palette = "#e41a1c;#377eb8;#4daf4a;#984ea3;#ff7f00;#ffff33;#000000",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "CategoricalLegend")
+  expect_equal(x$labels, c("0", "1", "2", "3", "4", "5", "6"))
+  expect_equal(x$units, "acres")
+})
+
+test_that("create_legend (presence, palette)", {
   # create object
   x <- create_legend(
     simulate_spatial_data(),
@@ -148,6 +177,29 @@ test_that("create_legend (presence)", {
   expect_s3_class(x, "CategoricalLegend")
   expect_equal(x$labels, c("presence"))
   expect_equal(x$units, "presence")
+})
+
+test_that("create_solution_legend", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  p <- simulate_project()
+  x <- create_solution_legend(
+    p, zone_colors = "#C0FFBF", zone_locked_colors = "#4daf4a"
+  )
+  # run tests
+  expect_s3_class(x, "SolutionLegend")
+  expect_equal(x$values, seq_along(rep(p$zones, 2L)))
+  expect_setequal(
+    x$labels,
+    paste(
+      rep(p$zones, 2L),
+      rep(c("locked", "priority"), each = length(p$zones))
+    )
+  )
+  expect_length(x$colors, length(p$zones) * 2)
+  expect_true(all(startsWith(x$colors, "#")))
+  expect_true(all(nchar(x$colors) %in% c(7L, 9L)))
 })
 
 test_that("get_paint_parameters (continuous)", {

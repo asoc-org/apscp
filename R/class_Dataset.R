@@ -71,6 +71,26 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Print object.
+    #' @return Invisible `NULL`.
+    print = function() {
+      # print object
+      id <- cli::cli_div()
+      cli::cli_text("A {.cls Dataset} object.")
+      cli::cli_bullets(
+        c(
+          "*" = "Number of planning units: {.val {self$n_pu}}",
+          "*" = "Planning unit path: {.path {self$pu_path}}",
+          "*" = "Boundary path: {.path {self$boundary_path}}",
+          "*" = "Boundary data loaded: {.val {is.null(self$boundary_data)}}"
+        )
+      )
+      cli::cli_end(id)
+      # return NULL
+      invisible(NULL)
+    },
+
+    #' @description
     #' Get number of planning units.
     #' @return An `integer` value.
     get_n_pu = function() {
@@ -301,7 +321,9 @@ Dataset <- R6::R6Class(
         } else if (is.character(values)) {
           column_type <- "VARCHAR(255)"
         } else {
-          stop("`values` must be a numeric or character vector.")
+          # nocov start
+          rlang::abort("`values` must be a numeric or character vector.")
+          # nocov end
         }
         DBI::dbExecute(
           self$pu_db_con,

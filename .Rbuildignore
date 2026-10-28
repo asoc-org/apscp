@@ -55,3 +55,4 @@ logs
 inst/tiles/*.pmtiles
 ^pkgdown$
 ^CONTRIBUTING.md$
+^codecov.yml$

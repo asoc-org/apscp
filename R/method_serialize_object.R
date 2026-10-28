@@ -46,7 +46,7 @@ serialize_object <- function(x) {
 
 #' @export
 serialize_object.default <- function(x) {
-  rlang::abort("`x` is not recognized.")
+  rlang::abort("`x` is not recognized.") # nocov
 }
 
 #' @rdname serialize_object

@@ -15,6 +15,7 @@ test_that("new_lock", {
   x <- new_lock(name = "lock", zone = "Biodiversity", layer = l)
   # run tests
   expect_s3_class(x, "Lock")
+  expect_message(print(x))
   expect_equal(x$name, "lock")
   expect_equal(x$zone, "Biodiversity")
 })
