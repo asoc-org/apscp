@@ -4,6 +4,7 @@ import * as d3 from "d3";
 // define utility functions
 import {rad2deg} from "../utils/math.js";
 import {deg2rad} from "../utils/math.js";
+import {mouseCoordinates} from "../utils/misc.js";
 
 /** Class representing an object for creating a pie chart. */
 export class PieChart {
@@ -152,11 +153,13 @@ export class PieChart {
             .attr("stroke", this.getColor(d.type, d.zone))
             .attr("stroke-width", 4);
         }
+        // extract mouse coordinates
+        let mouse = mouseCoordinates(event);
         // set tooltip position
         this.tooltip
           .classed("active", true)
-          .style("top", `${event.clientY + 5}px`)
-          .style("left", `${event.clientX + 5}px`);
+          .style("top", `${mouse.y + 5}px`)
+          .style("left", `${mouse.x + 5}px`);
         // set tooltip content
         this.renderTooltipContent(d.type, d.zone);
       })

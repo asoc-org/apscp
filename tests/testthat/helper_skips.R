@@ -77,3 +77,16 @@ skip_if_freestiler_rust_not_enabled <- function() {
     message = "freestiler package was not installed with Rust support."
   )
 }
+
+#' Skip if Chrome is not available
+#'
+#' Skip a test if Chrome is not available for \pkg{chromote}.
+#'
+#' @export
+skip_if_chrome_not_installed <- function() {
+  x <- chromote::find_chrome()
+  skip_if(
+    is.null(x) || !nzchar(x),
+    message = "Chrome is not installed."
+  )
+}

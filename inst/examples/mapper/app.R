@@ -5,11 +5,14 @@ library(shiny)
 library(mapgl)
 
 # simulate project data
-sim_data <- simulate_project()
+sim_project <- simulate_project()
+
+# simulate settings for generating a solution
+sim_settings <- simulate_prioritization_settings(sim_project)
 
 # start tile server
-tile_server_start(sim_data)
-.Last <- function() {tile_server_stop()}
+tile_server_start(sim_project)
+.Last <- function() {try(tile_server_stop(), silent = TRUE)}
 
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
@@ -38,15 +41,26 @@ server <- function(input, output, session) {
   # define application state
   state <- list2env(list(n = 0L))
 
+  # on session end, stop tile server
+  onStop(function() try(tile_server_stop(), silent = TRUE))
+
   # initialize map
   output$map <- renderMapboxgl({
-    map_project(sim_data) #|>
-    #add_layer_visibility_control(position = "top", mapper_id = "mapper")
+    map_project(
+      sim_project,
+      config = list(
+        basemap = list(
+          showPointOfInterestLabels = FALSE,
+          showPlaceLabels = FALSE,
+          showRoadLabels = FALSE
+        )
+      )
+    )
   })
 
   # initialize mapper object
   output$mapper <- renderMapper({
-    mapper(map_id = "map", project = sim_data)
+    mapper(map_id = "map", project = sim_project)
   })
 
   # define behavior to synchronize components
@@ -55,7 +69,7 @@ server <- function(input, output, session) {
     mapper_sync(
       "mapper",
       map = mapboxgl_proxy("map"),
-      project = sim_data,
+      project = sim_project,
       data = input$mapper_sync
     )
   })
@@ -65,21 +79,29 @@ server <- function(input, output, session) {
     # increment solution counter
     state$n <- state$n + 1L
     # generate new solution values
-    new_sol_values <- sample.int(3, sim_data$dataset$get_n_pu(), replace = TRUE)
+    new_sol_values <- withr::with_seed(
+      state$n,
+      sample.int(
+        3,
+        sim_project$dataset$get_n_pu(),
+        replace = TRUE
+      )
+    )
     # generate name for new solution
     new_name <- paste0("sol_", state$n)
     # add solution values to dataset
-    sim_data$dataset$set_column_data(new_name, new_sol_values)
+    sim_project$dataset$set_column_data(new_name, new_sol_values)
     # create new solution
     new_sol <- create_solution(
       new_name,
-      dataset = sim_data$dataset,
+      project = sim_project,
+      settings = sim_settings,
       column = new_name,
       provenance = simulate_provenance(),
       legend = simulate_solution_legend()
     )
     # add in solution
-    sim_data$add_solution(new_sol)
+    sim_project$add_solution(new_sol)
     # add solution to mapper
     mapper_add_solution(
       id = "mapper",
