@@ -134,7 +134,8 @@ simulate_project <- function() {
   # create cost
   costs <- list(
     new_cost(
-      name = paste0("Tourism revenue"),
+      name = "Tourism revenue",
+      id = "cost-1",
       weight = sample(
         seq(
           from = get_golem_config("prioritization_cost_weights")[1],
@@ -159,6 +160,7 @@ simulate_project <- function() {
   # create object
   lock1 <- new_lock(
     name = "Protected areas",
+    id = "lock-1",
     zone = "Biodiversity",
     layer = new_layer(
       dataset = dataset,
@@ -176,6 +178,7 @@ simulate_project <- function() {
   )
   lock2 <- new_lock(
     name = "Field camps",
+    id = "lock-2",
     zone = "Scientific",
     layer = new_layer(
       dataset = dataset,
@@ -209,6 +212,7 @@ simulate_project <- function() {
   features <- lapply(seq_len(5), function(i) {
     new_feature(
       name = paste0("Species ", i),
+      id = paste0("feature-", i),
       zone_targets = simulate_feature_zone_targets(
         seq(
           from = get_golem_config("prioritization_feature_targets")[1],
