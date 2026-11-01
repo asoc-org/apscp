@@ -2,8 +2,9 @@ test_that("app_summarizer", {
   # define skips
   skip_on_cran()
   skip_if_not_installed("shinytest2")
+  skip_on_os("windows")
+  skip_on_os("mac")
   skip_if_missing_mapbox_token()
-  skip_if_chrome_not_installed()
   # find application
   path <- system.file("examples", "summarizer", package = "apscp")
   # initialize application

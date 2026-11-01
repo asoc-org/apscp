@@ -2,7 +2,8 @@ test_that("app_mapper", {
   # define skips
   skip_on_cran()
   skip_if_not_installed("shinytest2")
-  skip_if_chrome_not_installed()
+  skip_on_os("windows")
+  skip_on_os("mac")
   skip_if_missing_mapbox_token()
   # find application
   path <- system.file("examples", "mapper", package = "apscp")

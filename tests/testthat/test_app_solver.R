@@ -2,7 +2,8 @@ test_that("app_solver", {
   # define skips
   skip_on_cran()
   skip_if_not_installed("shinytest2")
-  skip_if_chrome_not_installed()
+  skip_on_os("windows")
+  skip_on_os("mac")
   # find application
   path <- system.file("examples", "solver", package = "apscp")
   # initialize application

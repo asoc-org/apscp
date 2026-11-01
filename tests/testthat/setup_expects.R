@@ -1,7 +1,3 @@
-# set load timeout for Shiny application tests
-options(shinytest2.load_timeout = 25000)
-
-
 #' Expect screenshot on application hover
 #'
 #' Function to test application hover states.

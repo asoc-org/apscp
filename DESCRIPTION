@@ -61,8 +61,7 @@ Suggests:
     testthat (>= 3.3.2),
     knitr (>= 1.48),
     rmarkdown (>= 2.31),
-    shinytest2 (>= 0.5.1),
-    chromote (>= 0.5.1)
+    shinytest2 (>= 0.5.1)
 Config/renv/profiles/dev/dependencies:
     devtools (>= 2.5.2),
     roxygen2 (>= 8.0.0),
