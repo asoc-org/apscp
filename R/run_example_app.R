@@ -31,7 +31,7 @@ run_example_app <- function(name) {
   )
 
   # find file path for application
-  file <- system.file("examples", paste0(name, ".R"), package = "apscp")
+  file <- system.file("examples", name, "app.R", package = "apscp")
   assertthat::assert_that(
     isTRUE(nzchar(file)),
     file.exists(file),

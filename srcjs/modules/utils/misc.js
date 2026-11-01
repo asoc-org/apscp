@@ -54,3 +54,31 @@ export function waitFor(condition) {
   }
   return new Promise(poll);
 }
+
+/**
+ * Get mouse coordinates.
+ * @param {object} event - Mouse event object.
+ * @param {number} event.clientX - Mouse X coordinate in pixels.
+ * @param {number} event.clientY - Mouse Y coordinate in pixels.
+ * @return {object}
+ */
+export function mouseCoordinates(event) {
+  // extract coordinates
+  let out = {x: event.clientX, y: event.clientY};
+  // if browser is running in headless mode,
+  // then manually adjust mouse position
+  if (out.x < 1 && out.y < 1) {
+    let windowWidth =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth;
+    let windowHeight =
+      window.innerHeight ||
+      document.documentElement.clientHeight ||
+      document.body.clientHeight;
+    out.x = Math.floor(windowWidth / 2);
+    out.y = Math.floor(windowHeight / 2);
+  }
+  // return result
+  return out;
+}

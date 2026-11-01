@@ -69,7 +69,8 @@ jobs:
             coinor-libcgl-dev \
             libharfbuzz-dev \
             libfribidi-dev \
-            libfontconfig1-dev
+            libfontconfig1-dev \
+            chromium-browser
 
       - uses: r-lib/actions/setup-renv@v2
         with:

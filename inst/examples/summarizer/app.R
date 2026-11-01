@@ -13,7 +13,7 @@ ui <- bslib::page_fluid(
   add_external_resources(),
   h4("Summarizer Demo"),
   splitLayout(
-    cellWidths = c("80%", "395px"),
+    cellWidths = c("800px", "395px"),
     tagList(htmltools::tags$div()),
     tagList(
       h3("Summarizer"),

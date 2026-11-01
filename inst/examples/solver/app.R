@@ -47,12 +47,27 @@ server <- function(input, output, session) {
     solver_sync("solver", project = sim_data, data = input$solver_sync)
   })
 
-  # display solver settings in text box
+  # define task to simulate processing
+  task <- ExtendedTask$new(
+    function(x) {
+      Sys.sleep(1)
+      return(x)
+    }
+  ) |> bslib::bind_task_button("solver_start_button")
+
+  # define observer for button press
   observeEvent(input$solver_settings, {
     req(input$solver_settings)
-    # update text box with settings
-    output$text <- renderPrint(print(input$solver_settings))
-    # reset solver status
+    task$invoke(input$solver_settings)
+  })
+
+  # define observer for task result
+  shiny::observe({
+    ## fetch task result
+    result <- task$result()
+    ## update text box
+    output$text <- renderPrint(print(result))
+    ## reset widget
     solver_reset("solver")
   })
 }

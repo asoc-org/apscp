@@ -129,7 +129,15 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   # map
   output$map <- renderMapboxgl({
-    mapboxgl() |>
+    mapboxgl(
+      config = list(
+        basemap = list(
+          showPointOfInterestLabels = FALSE,
+          showPlaceLabels = FALSE,
+          showRoadLabels = FALSE
+        )
+      )
+    ) |>
       add_sidebar_control(
         id = "leftsidebar", position = "top-left", selected = "profile_id"
       ) |>

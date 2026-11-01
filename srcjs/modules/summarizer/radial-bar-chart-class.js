@@ -5,6 +5,7 @@ import * as d3 from "d3";
 import {rad2deg} from "../utils/math.js";
 import {deg2rad} from "../utils/math.js";
 import {mean} from "../utils/stats.js";
+import {mouseCoordinates} from "../utils/misc.js";
 
 /** Class representing an object for creating a chart for a theme. */
 export class RadialBarChart {
@@ -256,11 +257,13 @@ export class RadialBarChart {
           }
           // set tooltip content
           this.renderTooltipContent(type, d);
+          // extract mouse coordinates
+          let mouse = mouseCoordinates(event);
           // set tooltip position
           this.tooltip
             .classed("active", true)
-            .style("top", `${event.clientY + 5}px`)
-            .style("left", `${event.clientX - 5}px`);
+            .style("top", `${mouse.y + 5}px`)
+            .style("left", `${mouse.x - 5}px`);
           // if tooltip runs off the page, adjust tooltip position
           const tooltipHeight =
             this.tooltip
@@ -268,9 +271,9 @@ export class RadialBarChart {
             .getBoundingClientRect()
             .height;
           const tooltipOverflow =
-            event.clientY + 5 + tooltipHeight - window.innerHeight;
+            mouse.y + 5 + tooltipHeight - window.innerHeight;
           if (tooltipOverflow > 0) {
-            this.tooltip.style("top", `${event.clientY - tooltipOverflow}px`);
+            this.tooltip.style("top", `${mouse.y - tooltipOverflow}px`);
           }
         })
         .on("mouseout", (event, d) => {
