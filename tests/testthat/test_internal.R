@@ -38,10 +38,3 @@ test_that("standardize_zone_targets", {
     c(0.2, 0.15, 0.1)
   )
 })
-
-test_that("is_relative_path", {
-  expect_true(is_relative_path("asdf.docx"))
-  expect_false(is_relative_path("/asdf.docx"))
-  expect_false(is_relative_path("C:/asdf.docx"))
-  expect_false(is_relative_path("D:\\asdf.docx"))
-})

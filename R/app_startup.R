@@ -79,10 +79,7 @@ app_startup <- function() {
       cli::cli_h3("Tile server")
     }
     ## initialize tile server
-    tile_server_start(
-      golem::get_golem_options("project"),
-      verbose = get_golem_config("logging")
-    )
+    tile_server_start(x = NULL, verbose = get_golem_config("logging"))
   } else if (identical(get_golem_config("tile_server_mode"), "external")) {
     ## otherwise, make tile files available for external tile server
     ## if logging, then display details

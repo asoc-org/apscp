@@ -2,7 +2,8 @@
 #'
 #' Start a tile server for a project.
 #'
-#' @param x [new_project()] object.
+#' @param x [new_project()] object. Defaults to `NULL` such that
+#' the tile server is initialized started with no tiles.
 #'
 #' @param verbose `logical` value indicating if information about
 #' the tile server should be displayed? Defaults to `TRUE`.
@@ -38,31 +39,22 @@
 #' tile_server_stop()
 #'
 #' @export
-tile_server_start <- function(x, verbose = TRUE) {
+tile_server_start <- function(x = NULL, verbose = TRUE) {
   # assert valid arguments
   assertthat::assert_that(
-    inherits(x, "Project"),
     assertthat::is.flag(verbose),
     assertthat::noNA(verbose)
   )
+  if (!is.null(x)) {
+    assertthat::assert_that(inherits(x, "Project"))
+  }
 
   # obtain directory for tile server
   dir <- tile_server_dir()
 
   # copy pm tiles to directory
-  existing_paths <- vapply(x$tiles, `[[`, "character", "path")
-  new_paths <- file.path(dir, basename(existing_paths))
-  idx <- !file.exists(new_paths)
-  new_paths <- new_paths[idx]
-  existing_paths <- existing_paths[idx]
-  if (length(new_paths) > 0) {
-    if (!identical(.Platform$OS.type, "unix")) {
-      ## if on Windows, then copy the files
-      file.copy(existing_paths, to = new_paths) # nocov
-    } else {
-      ## otherwise, use symlinks to reduce storage burden
-      file.symlink(existing_paths, to = new_paths)
-    }
+  if (!is.null(x)) {
+    file_symlink(vapply(x$tiles, `[[`, "character", "path"), dir)
   }
 
   # obtain port for tile server

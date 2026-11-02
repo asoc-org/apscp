@@ -50,6 +50,7 @@ export(create_tile_from_project)
 export(create_tile_from_sf)
 export(deserialize_object)
 export(eval_prioritization)
+export(file_symlink)
 export(get_paint_parameters)
 export(has_mapbox_token)
 export(is_installed)
@@ -130,11 +131,13 @@ import(shiny)
 importFrom(DBI,dbConnect)
 importFrom(R6,R6Class)
 importFrom(RSQLite,SQLite)
-importFrom(golem,activate_js)
-importFrom(golem,add_resource_path)
-importFrom(golem,bundle_resources)
-importFrom(golem,favicon)
-importFrom(golem,with_golem_options)
+importFrom(golem,
+  activate_js,
+  add_resource_path,
+  bundle_resources,
+  favicon,
+  with_golem_options
+)
 importFrom(markdown,markdownToHTML)
 importFrom(rcbc,cbc_solve)
 importFrom(shiny,shinyApp)

@@ -7,6 +7,9 @@
 #' @param boundary_path `character` file path for boundary data.
 #' If the dataset does not have boundary data, then use `boundary_path = NULL`.
 #'
+#' @param dataset_dir `character` file path specifying a directory to
+#' to store planning unit and boundary data.
+#'
 #' @inherit new_dataset return
 #'
 #' @family io
@@ -29,13 +32,16 @@
 #' print(x)
 #'
 #' @export
-read_dataset <- function(pu_path, boundary_path) {
+read_dataset <- function(pu_path, boundary_path, dataset_dir = tempfile()) {
   # assert arguments are valid
   assertthat::assert_that(
     ## pu_path
     assertthat::is.string(pu_path),
     assertthat::noNA(pu_path),
-    assertthat::is.readable(pu_path)
+    assertthat::is.readable(pu_path),
+    ## dataset_dir
+    assertthat::is.string(dataset_dir),
+    assertthat::noNA(dataset_dir)
   )
   if (!is.null(boundary_path)) {
     assertthat::assert_that(
@@ -46,25 +52,41 @@ read_dataset <- function(pu_path, boundary_path) {
     )
   }
 
-  # if needed, extract file to temporary folder
-  if (endsWith(pu_path, ".zip")) {
-    ## create temporary directory
-    td <- tempfile()
-    dir.create(td, showWarnings = FALSE, recursive = TRUE)
-    ## extract to temporary directory
-    utils::unzip(pu_path, exdir = td)
-    ## find path with data
-    pu_path <- file.path(td, tools::file_path_sans_ext(basename(pu_path)))
-    ## validate file path
-    assertthat::assert_that(
-      assertthat::is.string(pu_path),
-      assertthat::noNA(pu_path),
-      assertthat::is.readable(pu_path)
-    )
+  # if needed, create dataset_dir
+  if (!dir.exists(dataset_dir)) {
+    dir.create(dataset_dir, showWarnings = FALSE, recursive = TRUE)
   }
 
+  # if needed, extract file to temporary folder
+  if (endsWith(pu_path, ".zip")) {
+    ## extract to temporary directory
+    utils::unzip(pu_path, exdir = dataset_dir)
+    ## set path with planning unit data
+    new_pu_path <- file.path(
+      dataset_dir,
+      tools::file_path_sans_ext(basename(pu_path))
+    )
+  } else {
+    ## set path with planning unit data
+    new_pu_path <- file.path(dataset_dir, basename(pu_path))
+    if (!file.exists(new_pu_path)) {
+      if (!identical(.Platform$OS.type, "unix")) {
+        file.copy(pu_path, new_pu_path)
+      } else {
+        file.symlink(pu_path, new_pu_path)
+      }
+    }
+  }
+
+  ## validate file paths
+  assertthat::assert_that(
+    assertthat::is.string(new_pu_path),
+    assertthat::noNA(new_pu_path),
+    assertthat::is.readable(new_pu_path)
+  )
+
   # return object
-  new_dataset(pu_path = pu_path, boundary_path = boundary_path)
+  new_dataset(pu_path = new_pu_path, boundary_path = boundary_path)
 }
 
 #' Write dataset

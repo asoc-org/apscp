@@ -4,10 +4,11 @@
 \alias{tile_server_start}
 \title{Start tile server}
 \usage{
-tile_server_start(x, verbose = TRUE)
+tile_server_start(x = NULL, verbose = TRUE)
 }
 \arguments{
-\item{x}{\code{\link[=new_project]{new_project()}} object.}
+\item{x}{\code{\link[=new_project]{new_project()}} object. Defaults to \code{NULL} such that
+the tile server is initialized started with no tiles.}
 
 \item{verbose}{\code{logical} value indicating if information about
 the tile server should be displayed? Defaults to \code{TRUE}.}

@@ -5,6 +5,7 @@
 \title{Run the Shiny application}
 \usage{
 run_app(
+  project,
   onStart = app_startup,
   options = list(),
   enableBookmarking = NULL,
@@ -13,6 +14,8 @@ run_app(
 )
 }
 \arguments{
+\item{project}{A \code{\link[=new_project]{new_project()}} object.}
+
 \item{onStart}{A function that will be called before the app is actually run.
 This is only needed for \code{shinyAppObj}, since in the \code{shinyAppDir}
 case, a \code{global.R} file can be used for this purpose.}

@@ -53,7 +53,10 @@ read_project <- function(path) {
   boundary_path <- file.path(dirname(path), l$dataset_paths$boundary_path)
 
   # import dataset
-  d <- read_dataset(pu_path = pu_path, boundary_path = boundary_path)
+  d <- read_dataset(
+    pu_path = pu_path, boundary_path = boundary_path,
+    dataset_dir = tempfile()
+  )
 
   # set dataset paths to NULL because they are not a parameter of new_project
   l$dataset_paths <- NULL
@@ -65,12 +68,9 @@ read_project <- function(path) {
   )
 
   # copy the tile files to the tile directory
-  withr::with_dir(
-    dirname(path),
-    file.copy(
-      basename(vapply(l$tiles, `[[`, "path", 1)),
-      get_golem_config("tile_server_dir")
-    )
+  file_symlink(
+    file.path(dirname(path), vapply(l$tiles, `[[`, "path", 1)),
+    file.path(get_golem_config("tile_server_dir"))
   )
 
   # return object

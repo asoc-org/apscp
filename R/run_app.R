@@ -2,6 +2,8 @@
 #'
 #' Run the Shiny application.
 #'
+#' @param project A [new_project()] object.
+#'
 #' @param ... arguments to pass to golem_opts.
 #' See `?golem::get_golem_options` for more details.
 #'
@@ -12,6 +14,7 @@
 #' @inherit apscp examples
 #' @export
 run_app <- function(
+  project,
   onStart = app_startup,
   options = list(),
   enableBookmarking = NULL,
@@ -27,6 +30,6 @@ run_app <- function(
       enableBookmarking = enableBookmarking,
       uiPattern = uiPattern
     ),
-    golem_opts = list(...)
+    golem_opts = list(project = rlang::enquo(project), ...)
   )
 }

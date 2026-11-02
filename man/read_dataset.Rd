@@ -4,13 +4,16 @@
 \alias{read_dataset}
 \title{Read dataset}
 \usage{
-read_dataset(pu_path, boundary_path)
+read_dataset(pu_path, boundary_path, dataset_dir = tempfile())
 }
 \arguments{
 \item{pu_path}{\code{character} file path for planning unit data.}
 
 \item{boundary_path}{\code{character} file path for boundary data.
 If the dataset does not have boundary data, then use \code{boundary_path = NULL}.}
+
+\item{dataset_dir}{\code{character} file path specifying a directory to
+to store planning unit and boundary data.}
 }
 \value{
 A \code{\link{Dataset}} object.

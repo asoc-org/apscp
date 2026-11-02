@@ -18,7 +18,17 @@ app_server_initialize <- quote({
   app_data <- list2env(
     list(
       ## objects
-      project = golem::get_golem_options("project"),
+      project = {
+        rlang::try_fetch(
+          expr = rlang::eval_tidy(golem::get_golem_options("project")),
+          error = function(cnd) {
+            rlang::abort(
+              message = "`project` must be a `new_project()` object.",
+              parent = cnd
+            )
+          }
+        )
+      },
       ## state variables
       task_id = NULL,
       task_mirai = NULL,
