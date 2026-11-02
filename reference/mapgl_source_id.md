@@ -54,5 +54,5 @@ x <- create_tile_from_sf(sim_data)
 
 # get source identifier
 mapgl_source_id(x)
-#> [1] "src-file37ba76cc5b86.pmtiles"
+#> [1] "src-file36a352c6ec7.pmtiles"
 ```

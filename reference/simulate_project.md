@@ -39,7 +39,7 @@ x <- simulate_project()
 print(x)
 #> • Metadata:
 #>   • name: Project
-#>   • version: 0.0.1.9000
+#>   • version: 0.0.2
 #>   • author_name: Unknown
 #>   • author_email: Unknown
 #> • Mapping:
@@ -49,8 +49,8 @@ print(x)
 #>   • bbox: -20, -30, 20, 30(xmin/ymin/xmax/ymax)
 #> • Dataset:
 #>   • Number of planning units: 90
-#>   • Planning unit path: /tmp/RtmpyexSqt/file37ba75cd5ca9.gpkg
-#>   • Boundary path: /tmp/RtmpyexSqt/file37ba7942e486.rds
+#>   • Planning unit path: /tmp/RtmpKTauZJ/file36a36e37360a.gpkg
+#>   • Boundary path: /tmp/RtmpKTauZJ/file36a358a22afe.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 5

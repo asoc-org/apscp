@@ -206,7 +206,7 @@ x <- new_project(
 print(x)
 #> • Metadata:
 #>   • name: Project
-#>   • version: 0.0.1.9000
+#>   • version: 0.0.2
 #>   • author_name: Unknown
 #>   • author_email: Unknown
 #> • Mapping:
@@ -216,8 +216,8 @@ print(x)
 #>   • bbox: -20, -30, 20, 30(xmin/ymin/xmax/ymax)
 #> • Dataset:
 #>   • Number of planning units: 90
-#>   • Planning unit path: /tmp/RtmpyexSqt/file37ba72ad0a4d.gpkg
-#>   • Boundary path: /tmp/RtmpyexSqt/file37ba28c25c6.rds
+#>   • Planning unit path: /tmp/RtmpKTauZJ/file36a31b3dd746.gpkg
+#>   • Boundary path: /tmp/RtmpKTauZJ/file36a325cb375f.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 2

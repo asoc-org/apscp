@@ -81,6 +81,6 @@ print(x)
 #> A <Lock> object.
 #> • name: "lock"
 #> • zone: "scientific"
-#> • id: "aa0e27fc-2dba-4422-9cc8-1690b5fd1ad0"
+#> • id: "dbe570f8-e4d5-41bb-91e5-79e0722d8e24"
 #> • layer: <Layer> object
 ```
