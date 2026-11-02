@@ -77,7 +77,8 @@ jobs:
 
       - name: Install extra packages
         run: |
-          install.packages(c("sessioninfo", "pkgdown"))
+          install.packages(c("sessioninfo", "pkgdown", "remotes"))
+          remotes::install_local()
         shell: Rscript {0}
 
       - name: Session information
