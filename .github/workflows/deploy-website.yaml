@@ -70,14 +70,14 @@ jobs:
             libfribidi-dev \
             libfontconfig1-dev
 
-      - name: Install dependencies
+      - uses: r-lib/actions/setup-renv@v2
+        with:
+          profile: '"dev"'
+          cache-version: 2
+
+      - name: Install extra packages
         run: |
-          options(install.packages.compile.from.source = "never")
-          install.packages(c("renv", "remotes", "testthat", "rvest"))
-          renv::restore()
-          remotes::install_cran("rcmdcheck")
-          remotes::install_cran("pkgdown")
-          remotes::install_local()
+          install.packages(c("sessioninfo", "pkgdown"))
         shell: Rscript {0}
 
       - name: Session information
