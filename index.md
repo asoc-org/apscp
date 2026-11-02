@@ -57,10 +57,10 @@ computer.
 
 - If you intend to run the application using *R*, you can save the token
   in your `.Renviron` file. You can use the *R* code
-  `usethis::edit_r_environ()` to automatically find and open this file.
-  After finding and opening this file, you can save the token by adding
-  the following text to it (replacing `**INSERT_TOKEN_HERE**` with the
-  actual token value).
+  [`usethis::edit_r_environ()`](https://usethis.r-lib.org/reference/edit.html)
+  to automatically find and open this file. After finding and opening
+  this file, you can save the token by adding the following text to it
+  (replacing `**INSERT_TOKEN_HERE**` with the actual token value).
 
   ``` R
   MAPBOX_PUBLIC_TOKEN=**INSERT_TOKEN_HERE**

@@ -125,7 +125,7 @@ conventions:
 - `class_*.R`: Defines S3 and R6 object classes for managing data.
 - `fct_*.R`: Defines functions for analysis and data manipulation.
 - `import-*.R`: Files imported from other packages with
-  `usethis::use_standalone()`.
+  [`usethis::use_standalone()`](https://usethis.r-lib.org/reference/use_standalone.html).
 - `internal.R` Miscellaneous internal functions.
 - `method_`: Defines S3 methods for managing data.
 - `package.R`: Package-level documentation.
@@ -159,8 +159,9 @@ flow](https://guides.github.com/introduction/flow/) for development.
     - Write your code.
     - Test your code (bonus points for adding unit tests).
     - Document your code (see function documentation above).
-    - Check your code with `devtools::check()` and aim for 0 errors and
-      warnings.
+    - Check your code with
+      [`devtools::check()`](https://devtools.r-lib.org/reference/check.html)
+      and aim for 0 errors and warnings.
 5.  Commit and push your changes.
 6.  Submit a [pull
     request](https://guides.github.com/activities/forking/#making-a-pull-request).

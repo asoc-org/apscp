@@ -160,50 +160,31 @@ columns:
 <span class="r-in"><span><span class="co"># preview settings</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">sim_settings</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                      id      name column         zone target</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  de26dbd4-98a0-457b-87e1-36c4df121f35 Species 1 feat_1 Biodiversity    0.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  de26dbd4-98a0-457b-87e1-36c4df121f35 Species 1 feat_1      Tourism    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  de26dbd4-98a0-457b-87e1-36c4df121f35 Species 1 feat_1   Scientific    0.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  76a5131b-8574-46a7-a56d-f061a342e98b Species 2 feat_2 Biodiversity    0.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  76a5131b-8574-46a7-a56d-f061a342e98b Species 2 feat_2      Tourism    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  76a5131b-8574-46a7-a56d-f061a342e98b Species 2 feat_2   Scientific    0.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  c702f64d-f697-47b6-9a41-f3bf3c6ccea9 Species 3 feat_3 Biodiversity    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  c702f64d-f697-47b6-9a41-f3bf3c6ccea9 Species 3 feat_3      Tourism    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  c702f64d-f697-47b6-9a41-f3bf3c6ccea9 Species 3 feat_3   Scientific    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 80ba718e-aad0-45fc-b448-ea154ad44e46 Species 4 feat_4 Biodiversity    0.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 80ba718e-aad0-45fc-b448-ea154ad44e46 Species 4 feat_4      Tourism    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 80ba718e-aad0-45fc-b448-ea154ad44e46 Species 4 feat_4   Scientific    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 0d178817-2c62-4b35-8bd5-85dc48143674 Species 5 feat_5 Biodiversity    1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14 0d178817-2c62-4b35-8bd5-85dc48143674 Species 5 feat_5      Tourism    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 0d178817-2c62-4b35-8bd5-85dc48143674 Species 5 feat_5   Scientific    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1     0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2     1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3     0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4     0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5     0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6     1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7     0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8     1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9     0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12    1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13    1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14    0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           id      name column         zone target weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  feature-1 Species 1 feat_1 Biodiversity    0.4    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  feature-1 Species 1 feat_1      Tourism    0.0    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  feature-1 Species 1 feat_1   Scientific    0.2    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  feature-2 Species 2 feat_2 Biodiversity    0.8    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  feature-2 Species 2 feat_2      Tourism    0.0    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  feature-2 Species 2 feat_2   Scientific    0.2    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  feature-3 Species 3 feat_3 Biodiversity    0.0    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  feature-3 Species 3 feat_3      Tourism    0.0    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  feature-3 Species 3 feat_3   Scientific    0.0    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 feature-4 Species 4 feat_4 Biodiversity    0.6    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 feature-4 Species 4 feat_4      Tourism    0.0    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 feature-4 Species 4 feat_4   Scientific    0.0    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 feature-5 Species 5 feat_5 Biodiversity    1.0    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14 feature-5 Species 5 feat_5      Tourism    0.0    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 feature-5 Species 5 feat_5   Scientific    0.0    1.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     id            name column         zone</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 94bea9cb-325e-43ca-8751-ff6ea1554da2 Protected areas  aspas Biodiversity</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2dc8fc75-f26b-42d2-be60-905793a8baca     Field camps  camps   Scientific</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   priority</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       id            name column         zone priority</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 lock-1 Protected areas  aspas Biodiversity        2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 lock-2     Field camps  camps   Scientific        1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $costs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                     id            name column    zone weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 cecb96b8-781c-4f1a-8b24-436cd775fbea Tourism revenue   cost Tourism      1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       id            name column    zone weight</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 cost-1 Tourism revenue   cost Tourism      1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># solve prioritization</span></span></span>

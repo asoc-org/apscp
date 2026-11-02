@@ -309,6 +309,9 @@ Functions with assorted uses.
 - [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
   : Color palette
 
+- [`file_symlink()`](https://asoc-org.github.io/apscp/reference/file_symlink.md)
+  : Symlink a file
+
 - [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md)
   : Is package installed?
 

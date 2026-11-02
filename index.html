@@ -80,7 +80,7 @@
 <p>To begin with, you will need to obtain a <em>Mapbox</em> token. This is because the application uses <em>Mapbox</em> for displaying maps. To obtain a token, please refer to <a href="https://docs.mapbox.com/help/getting-started/access-tokens/" class="external-link"><em>Mapbox</em> documentation for detailed instructions</a>. After obtaining a token, you will then need to save the token on your computer.</p>
 <ul>
 <li>
-<p>If you intend to run the application using <em>R</em>, you can save the token in your <code>.Renviron</code> file. You can use the <em>R</em> code <code>usethis::edit_r_environ()</code> to automatically find and open this file. After finding and opening this file, you can save the token by adding the following text to it (replacing <code>**INSERT_TOKEN_HERE**</code> with the actual token value).</p>
+<p>If you intend to run the application using <em>R</em>, you can save the token in your <code>.Renviron</code> file. You can use the <em>R</em> code <code><a href="https://usethis.r-lib.org/reference/edit.html" class="external-link">usethis::edit_r_environ()</a></code> to automatically find and open this file. After finding and opening this file, you can save the token by adding the following text to it (replacing <code>**INSERT_TOKEN_HERE**</code> with the actual token value).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>MAPBOX_PUBLIC_TOKEN<span class="ot">=</span><span class="er">**</span>INSERT_TOKEN_HERE<span class="sc">**</span></span></code></pre></div>
 </li>
 <li>

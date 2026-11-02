@@ -6,6 +6,7 @@ Run the Shiny application.
 
 ``` r
 run_app(
+  project,
   onStart = app_startup,
   options = list(),
   enableBookmarking = NULL,
@@ -15,6 +16,12 @@ run_app(
 ```
 
 ## Arguments
+
+- project:
+
+  A
+  [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
+  object.
 
 - onStart:
 

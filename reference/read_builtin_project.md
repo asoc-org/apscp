@@ -50,9 +50,9 @@ print(x)
 #> • Dataset:
 #>   • Number of planning units: 48447
 #>   • Planning unit path:
-#>   /tmp/Rtmpzpyv3c/file6387382f4f2a/antarctic-peninsula_pu.gpkg
+#>   /tmp/RtmpyexSqt/file37ba478bbeed/antarctic-peninsula_pu.gpkg
 #>   • Boundary path:
-#>   /home/runner/.cache/R/renv/library/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
+#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 53

@@ -129,7 +129,7 @@ x <- create_solution_from_prioritization(
 print(x)
 #> A <Solution> object.
 #> • name: "sol"
-#> • id: "81257b7b-ab9b-4e37-b71d-2790ec9b4258"
+#> • id: "09231c7b-b32e-464e-a2bd-a1faa6c4fd2d"
 #> • settings: <list> object
 #> • metrics: <list> object
 #> • layer: <Layer> object

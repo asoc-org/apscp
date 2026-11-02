@@ -7,7 +7,7 @@ object.
 ## Usage
 
 ``` r
-read_dataset(pu_path, boundary_path)
+read_dataset(pu_path, boundary_path, dataset_dir = tempfile())
 ```
 
 ## Arguments
@@ -20,6 +20,11 @@ read_dataset(pu_path, boundary_path)
 
   `character` file path for boundary data. If the dataset does not have
   boundary data, then use `boundary_path = NULL`.
+
+- dataset_dir:
+
+  `character` file path specifying a directory to to store planning unit
+  and boundary data.
 
 ## Value
 
@@ -61,8 +66,8 @@ print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 48447
 #> • Planning unit path:
-#>   /tmp/Rtmpzpyv3c/file63872bebd261/antarctic-peninsula_pu.gpkg
+#>   /tmp/RtmpyexSqt/file37ba1369f8f5/antarctic-peninsula_pu.gpkg
 #> • Boundary path:
-#>   /home/runner/.cache/R/renv/library/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
+#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
 #> • Boundary data loaded: TRUE
 ```

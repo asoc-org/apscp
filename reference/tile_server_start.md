@@ -5,7 +5,7 @@ Start a tile server for a project.
 ## Usage
 
 ``` r
-tile_server_start(x, verbose = TRUE)
+tile_server_start(x = NULL, verbose = TRUE)
 ```
 
 ## Arguments
@@ -13,7 +13,8 @@ tile_server_start(x, verbose = TRUE)
 - x:
 
   [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
-  object.
+  object. Defaults to `NULL` such that the tile server is initialized
+  started with no tiles.
 
 - verbose:
 

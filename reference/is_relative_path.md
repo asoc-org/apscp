@@ -26,6 +26,7 @@ Other miscellaneous functions:
 [`cli_format_vector()`](https://asoc-org.github.io/apscp/reference/cli_format_vector.md),
 [`cli_list()`](https://asoc-org.github.io/apscp/reference/cli_list.md),
 [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md),
+[`file_symlink()`](https://asoc-org.github.io/apscp/reference/file_symlink.md),
 [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
 [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md)
 
