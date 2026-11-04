@@ -20,7 +20,10 @@ Create a map to display the project.
 \examples{
 \dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
 # find file path for built-in project
-path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+path <- system.file(
+  "extdata", "antarctic-peninsula.metadata.rds",
+  package = "apscp"
+)
 
 # import project
 x <- read_project(path)

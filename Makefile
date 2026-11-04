@@ -36,6 +36,8 @@ bundle_dev:
 data:
 	$(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-data.R
 	rm -f prepare-data.Rout
+	$(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-solutions.R
+	rm -f prepare-solutions.Rout
 
 ## build docs
 man:

@@ -24,11 +24,11 @@ Import a \code{\link{Dataset}} object.
 \examples{
 # specify file paths
 pu_path <- system.file(
-  "extdata", "antarctic-peninsula_pu.gpkg.zip",
+  "extdata", "antarctic-peninsula.gpkg.zip",
   package = "apscp"
 )
 bd_path <- system.file(
-  "extdata", "antarctic-peninsula_bd.rds",
+  "extdata", "antarctic-peninsula.boundary.rds",
   package = "apscp"
 )
 

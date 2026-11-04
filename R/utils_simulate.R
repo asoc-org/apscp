@@ -237,6 +237,7 @@ simulate_project <- function() {
         tile = tile,
         column = paste0("feat_", i),
         visible = TRUE,
+        hidden = isTRUE(i == 3),
         legend = create_legend(
           d, paste0("feat_", i),
           palette = "viridis",

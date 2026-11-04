@@ -254,8 +254,7 @@ features <-
     new_feature(
       name = x$name,
       zone_targets = standardize_zone_targets(
-        c(x$biodiversity_target, x$scientific_target, x$tourism_target),
-        digits = 1
+        c(x$biodiversity_target, x$scientific_target, x$tourism_target)
       ),
       zone_weights = rep(1, 3L),
       zone_helds = c(
@@ -308,4 +307,7 @@ project <- new_project(
 
 # Exports
 ## write project
-write_project(project, "inst/extdata/antarctic-peninsula.yml")
+write_project(
+  project,
+  "inst/extdata/antarctic-peninsula.metadata.rds"
+)

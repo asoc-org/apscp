@@ -12,6 +12,7 @@ new_layer(
   legend,
   provenance,
   visible = FALSE,
+  hidden = FALSE,
   details = NULL
 )
 }
@@ -33,6 +34,10 @@ object.}
 
 \item{visible}{\code{logical} value indicating if the layer should
 be visible by default? Defaults to \code{FALSE}.}
+
+\item{hidden}{\code{logical} value indicating if the layer should
+be forcibly hidden and cannot be viewed in the application.
+Defaults to \code{FALSE}.}
 
 \item{details}{\code{character} value with additional details for the layer.
 Defaults to \code{NULL}.}
@@ -56,6 +61,7 @@ x <- new_layer(
   legend = simulate_continuous_legend(),
   provenance = simulate_provenance(),
   visible = TRUE,
+  hidden = FALSE,
   details = "extra info"
 )
 

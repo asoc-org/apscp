@@ -22,19 +22,26 @@ test_that("update_named_list_elements", {
 
 test_that("standardize_zone_targets", {
   expect_equal(
-    standardize_zone_targets(c(0.5, 0.5)),
+    standardize_zone_targets(c(0.5, 0.5), c(0, 0.5, 1)),
     c(0.5, 0.5)
   )
   expect_equal(
-    standardize_zone_targets(c(0.5, 0.5, 0.5, 0.5)),
+    standardize_zone_targets(c(0.5, 0.5, 0.5, 0.5), c(0, 0.25, 0.5, 1)),
     c(0.25, 0.25, 0.25, 0.25)
   )
   expect_equal(
-    standardize_zone_targets(c(0.5, 0.5, 0.5)),
-    c(0.33, 0.33, 0.34)
+    standardize_zone_targets(c(0.5, 0.5, 0.5), c(0, 0.25, 0.5, 1)),
+    c(0.25, 0.25, 0.25)
   )
   expect_equal(
-    standardize_zone_targets(c(0.2, 0.15, 0.1)),
-    c(0.2, 0.15, 0.1)
+    standardize_zone_targets(
+      c(0.6, 0.1, 0.0),
+      c(0, 0.2, 0.4, 0.6, 0.8, 1)
+    ),
+    c(0.6, 0.2, 0.0)
+  )
+  expect_equal(
+    standardize_zone_targets(c(1, 0, 0), NULL),
+    c(1, 0, 0)
   )
 })

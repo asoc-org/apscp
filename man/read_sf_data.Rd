@@ -18,7 +18,7 @@ Read sf data from zip file
 \examples{
 # specify file path to import data
 path <- system.file(
-  "extdata", "antarctic-peninsula_pu.gpkg.zip", package = "apscp"
+  "extdata", "antarctic-peninsula.gpkg.zip", package = "apscp"
 )
 
 # read data

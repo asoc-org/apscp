@@ -9,7 +9,7 @@ write_project(x, path)
 \arguments{
 \item{x}{\code{\link{Project}} object.}
 
-\item{path}{\code{character} file path for YAML metadata file.}
+\item{path}{\code{character} file path for metadata file.}
 }
 \value{
 An invisible \code{TRUE} indicating success.
@@ -19,7 +19,10 @@ Export project data.
 }
 \examples{
 # find file path for built-in project
-path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+path <- system.file(
+  "extdata", "antarctic-peninsula.metadata.rds",
+  package = "apscp"
+)
 
 # import project
 x <- read_project(path)
@@ -28,7 +31,7 @@ x <- read_project(path)
 print(x)
 
 # save project to temporary file
-write_project(x, tempfile(fileext = ".yml"))
+write_project(x, tempfile(fileext = ".metadata.rds"))
 
 }
 \seealso{

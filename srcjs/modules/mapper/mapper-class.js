@@ -96,7 +96,10 @@ export class Mapper {
       el = createMenuItem(
         project.features[i], this, project.features[i].themes
       );
-      if (project.features[i].layer.visible === true) {
+      if (
+        project.features[i].layer.visible === true &&
+        project.features[i].layer.hidden === false
+      ) {
         this._menu.appendChild(el);
         this._activeLayerIds.add(el.dataset.id);
       } else {
@@ -105,7 +108,10 @@ export class Mapper {
     }
     for (i = 0; i < project.costs.length; i++) {
       el = createMenuItem(project.costs[i], this);
-      if (project.costs[i].layer.visible === true) {
+      if (
+        project.costs[i].layer.visible === true &&
+        project.costs[i].layer.hidden === false
+      ) {
         this._menu.appendChild(el);
         this._activeLayerIds.add(el.dataset.id);
       } else {
@@ -114,7 +120,10 @@ export class Mapper {
     }
     for (i = 0; i < project.locks.length; i++) {
       el = createMenuItem(project.locks[i], this);
-      if (project.locks[i].layer.visible === true) {
+      if (
+        project.locks[i].layer.visible === true &&
+        project.locks[i].layer.hidden === false
+      ) {
         this._menu.appendChild(el);
         this._activeLayerIds.add(el.dataset.id);
       } else {
@@ -123,7 +132,10 @@ export class Mapper {
     }
     for (i = 0; i < project.solutions.length; i++) {
       el = createMenuItem(project.solutions[i], this);
-      if (project.solutions[i].layer.visible === true) {
+      if (
+        project.solutions[i].layer.visible === true &&
+        project.solutions[i].layer.hidden === false
+      ) {
         this._menu.appendChild(el);
         this._activeLayerIds.add(el.dataset.id);
       } else {

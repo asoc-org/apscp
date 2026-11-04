@@ -16,12 +16,13 @@ app_server_solution <- quote({
   # define task for generating solutions
   task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, gurobi_server, verbose) {
-      # if app cache has solution, then simply return it
-      if (isTRUE(app_data$cache$exists(id))) {
+      # if project has solution, then return prioritization based on it
+      sol <- try(app_data$project$get_solution(id), silent = TRUE)
+      if (inherits(sol, "Solution")) {
         return(
-          append(
-            list(id = id, name = name, settings = settings),
-            app_data$cache$get(id)
+          list(
+            id = id, name = name, settings = settings, solution = sol,
+            cache = TRUE
           )
         )
       }
@@ -47,7 +48,8 @@ app_server_solution <- quote({
             metrics = try(
               eval_prioritization(project, settings, x),
               silent = TRUE
-            )
+            ),
+            cache = FALSE
           )
         },
         .args = list(
@@ -103,9 +105,7 @@ app_server_solution <- quote({
       return()
     }
     # create id for solution and set as task id
-    id <- digest::digest(
-      input$solver_settings[names(input$solver_settings) != "name"]
-    )
+    id <- hash_prioritization_settings(input$solver_settings)
     app_data$task_id <- id
     # create asynchronous task
     task$invoke(
@@ -158,22 +158,26 @@ app_server_solution <- quote({
       )
       return()
     }
-    # add result to cache
-    app_data$cache$set(
-      result$id,
-      list(prioritization = result$prioritization, metrics = result$metrics)
-    )
     # create solution
-    sol <- create_solution_from_prioritization(
-      id = uuid::UUIDgenerate(),
-      name = result$name,
-      project = app_data$project,
-      prioritization = result$prioritization,
-      settings = result$settings,
-      metrics = result$metrics
-    )
-    # add tile file to tracking for automatic clean up
-    app_data$session_files <- c(app_data$session_files, sol$layer$tile$path)
+    if (!isTRUE(result$cache)) {
+      ## if result is not cached, then create new solution
+      sol <- create_solution_from_prioritization(
+        id = result$id,
+        name = result$name,
+        project = app_data$project,
+        prioritization = result$prioritization,
+        settings = result$settings,
+        metrics = result$metrics
+      )
+      ## add tile file to tracking for automatic clean up
+      app_data$session_files <- c(app_data$session_files, sol$layer$tile$path)
+    } else {
+      ## if result is cached, then modify solution from cached solution
+      sol <- result$solution
+      sol$name <- result$name
+      sol$settings <- result$settings
+      sol$id <- uuid::UUIDgenerate()
+    }
     # add solution to project
     app_data$project$add_solution(sol)
     # reset state
