@@ -294,7 +294,6 @@ Project <- R6::R6Class(
       sf::st_bbox(b, crs = sf::st_crs(bb))
     },
 
-
     #' @description
     #' Get solution from the project.
     #' @param id `character` value.

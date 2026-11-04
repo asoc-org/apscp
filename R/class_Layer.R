@@ -23,6 +23,10 @@ NULL
 #' @param visible `logical` value indicating if the layer should
 #' be visible by default? Defaults to `FALSE`.
 #'
+#' @param hidden `logical` value indicating if the layer should
+#' be forcibly hidden and cannot be viewed in the application.
+#' Defaults to `FALSE`.
+#'
 #' @param details `character` value with additional details for the layer.
 #' Defaults to `NULL`.
 #'
@@ -43,6 +47,7 @@ NULL
 #'   legend = simulate_continuous_legend(),
 #'   provenance = simulate_provenance(),
 #'   visible = TRUE,
+#'   hidden = FALSE,
 #'   details = "extra info"
 #' )
 #'
@@ -58,6 +63,7 @@ new_layer <- function(
   legend,
   provenance,
   visible = FALSE,
+  hidden = FALSE,
   details = NULL
 ) {
   # assert that arguments are valid
@@ -69,7 +75,10 @@ new_layer <- function(
     assertthat::noNA(column),
     ## visible
     assertthat::is.flag(visible),
-    assertthat::noNA(column),
+    assertthat::noNA(visible),
+    ## hidden
+    assertthat::is.flag(hidden),
+    assertthat::noNA(hidden),
     ## total
     assertthat::is.number(total),
     assertthat::noNA(total),
@@ -98,6 +107,7 @@ new_layer <- function(
       legend = legend,
       provenance = provenance,
       visible = visible,
+      hidden = hidden,
       details = details
     ),
     class = "Layer"

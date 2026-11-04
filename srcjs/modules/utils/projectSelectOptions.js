@@ -23,12 +23,20 @@ export function projectSelectOptions(
   includeSolutions = true
 ) {
   // initialize variables
-  let options = Array(
-    (project.features.length * includeFeatures) +
-    (project.costs.length * includeCosts) +
-    (project.locks.length * includeLocks) +
-    (project.solutions.length * includeSolutions)
-  );
+  let n = 0;
+  if (includeFeatures) {
+    n += project.features.reduce((v, x) => v + x.layer.hidden === false, 0);
+  }
+  if (includeCosts) {
+    n += project.costs.reduce((v, x) => v + x.layer.hidden === false, 0);
+  }
+  if (includeLocks) {
+    n += project.locks.reduce((v, x) => v + x.layer.hidden === false, 0);
+  }
+  if (includeSolutions) {
+    n += project.solutions.reduce((v, x) => v + x.layer.hidden === false, 0);
+  }
+  let options = Array(n);
   let groups = new Set();
   let includeClass =
     (includeFeatures + includeCosts + includeLocks + includeSolutions) > 1;
@@ -38,9 +46,11 @@ export function projectSelectOptions(
   // if needed, add features
   if (includeFeatures) {
     for (i = 0; i < project.features.length; ++i) {
-      options[k] = selectOption(project.features[i], includeClass);
-      for (j = 0; j < options[i].group.length; ++j) {
-        groups.add(options[i].group[j]);
+      if (project.features[i].layer.hidden === false) {
+        options[k] = selectOption(project.features[i], includeClass);
+        for (j = 0; j < options[i].group.length; ++j) {
+          groups.add(options[i].group[j]);
+        }
       }
       ++k;
     };
@@ -48,7 +58,9 @@ export function projectSelectOptions(
   // if needed, add locks
   if (includeLocks) {
     for (i = 0; i < project.locks.length; ++i) {
-      options[k] = selectOption(project.locks[i], includeClass);
+      if (project.locks[i].layer.hidden === false) {
+        options[k] = selectOption(project.locks[i], includeClass);
+      }
       ++k;
     };
     groups.add("Locks");
@@ -56,7 +68,9 @@ export function projectSelectOptions(
   // if needed, add costs
   if (includeCosts) {
     for (i = 0; i < project.costs.length; ++i) {
-      options[k] = selectOption(project.costs[i], includeClass);
+      if (project.costs[i].layer.hidden === false) {
+        options[k] = selectOption(project.costs[i], includeClass);
+      }
       ++k;
     };
     groups.add("Costs");
@@ -64,7 +78,9 @@ export function projectSelectOptions(
   // if needed, add solutions
   if (includeSolutions) {
     for (i = 0; i < project.solutions.length; ++i) {
-      options[k] = selectOption(project.solutions[i], includeClass);
+      if (project.solutions[i].layer.hidden === false) {
+        options[k] = selectOption(project.solutions[i], includeClass);
+      }
       ++k;
     };
     groups.add("Solutions");

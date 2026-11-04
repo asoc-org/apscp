@@ -62,9 +62,8 @@ is_prioritization_settings <- function(x) {
 }
 
 assertthat::on_failure(is_prioritization_settings) <- function(call, env) {
-  x <- eval(call$x, envir = env)
   paste0(
-    "{.arg ", deparse(call$x),
-    "} does not contain valid settings data."
+    "`", deparse(call$x),
+    "` does not contain valid settings data."
   )
 }

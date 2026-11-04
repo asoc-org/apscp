@@ -126,6 +126,7 @@ serialize_object.Layer <- function(x) {
     column = x$column,
     total = x$total,
     visible = x$visible,
+    hidden = x$hidden,
     details = x$details,
     legend = serialize_object(x$legend),
     provenance = serialize_object.Provenance(x$provenance),

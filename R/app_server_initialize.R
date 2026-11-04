@@ -32,9 +32,7 @@ app_server_initialize <- quote({
       ## state variables
       task_id = NULL,
       task_mirai = NULL,
-      session_files = character(0),
-      ## cache
-      cache = cachem::cache_mem()
+      session_files = character(0)
     )
   )
 

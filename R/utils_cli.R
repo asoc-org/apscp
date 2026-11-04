@@ -31,6 +31,7 @@ cli_list <- function(x, max_width = cli::console_width()) {
       "character" = {cli_format_vector(x, max_width = max_width)},
       "integer" = {cli_format_vector(x, max_width = max_width)},
       "numeric" = {cli_format_vector(x, max_width = max_width)},
+      "logical" = {cli_format_vector(x, max_width = max_width)},
       "function" = "{.cls function} object",
       "list" = "{.cls list} object",
       "matrix" = paste0(

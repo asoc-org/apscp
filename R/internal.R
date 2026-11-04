@@ -85,36 +85,52 @@ update_named_list_elements <- function(x, element_name, new_value) {
 #'
 #' @param x `numeric` values.
 #'
-#' @param digits `numeric` value indicating the number of digits desired
-#' for the output. Defaults to 2.
+#' @param options `numeric` values indicating available target values.
+#' Defaults to `NULL` such that the options are calculated based on
+#' default golem configuration (
+#' `do.call(seq, as.list(get_golem_config("prioritization_feature_targets")))`).
 #'
 #' @return A `numeric` vector.
 #'
 #' @noRd
-standardize_zone_targets <- function(x, digits = 2) {
+standardize_zone_targets <- function(
+  x,
+  options = NULL
+) {
+  if (is.null(options)) {
+    options <- seq(
+      get_golem_config("prioritization_feature_targets")[[1]],
+      get_golem_config("prioritization_feature_targets")[[2]],
+      get_golem_config("prioritization_feature_targets")[[3]]
+    )
+  }
+  # assert valid arguments
+  assertthat::assert_that(
+    is.numeric(x),
+    is.numeric(options)
+  )
+  # if targets sum to 1 and are available options, then return initial input
+  options_prec <- as.character(as.integer(options * 1000))
+  x_prec <- as.character(as.integer(x * 1000))
+  if (sum(x) <= 1 && all(x_prec %in% options_prec)) {
+    return(round(x, 3))
+  }
   # if needed, ensure values sum to 1
   if (sum(x) > 1) {
     x <- x / sum(x)
   }
-  # define constants
-  up <- 10^digits
-  xmin <- 1 / up
-  # try simply ceiling the values to begin with
-  y <- ceiling(x * up) / up
-  # if needed, apply further standardization to help meet targets
-  while (sum(y) > 1) {
-    # find indices for target values that would not get reduced to zero
-    nz <- which(y > xmin)
-    # find the index that should be reduced
-    i <- which.max(y[nz] - x[nz])
-    # reduced the value by smallest rounding increment
-    y[nz[i]] <- y[nz[i]] - xmin
+  # ensure that target values are a valid option
+  x_prec <- as.character(as.integer(x * 1000))
+  if (!all(x_prec %in% options_prec)) {
+    i <- which(!x_prec %in% options_prec)
+    for (j in i) {
+      if (x[j] > 0) {
+        valid_options <- options[options > 0]
+      }
+      x[j] <- valid_options[which.min(abs(x[j] - valid_options))]
+    }
+    standardize_zone_targets(x, options = options)
   }
-  # ensure that rounding worked
-  assertthat::assert_that(
-    sum(y) <= 1,
-    msg = "Failed to standardize targets."
-  )
   # return value
-  y
+  x
 }

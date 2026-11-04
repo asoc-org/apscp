@@ -48,7 +48,7 @@ NULL
 #' @export
 create_solution <- function(
   name, project, column, legend, provenance, settings,
-  tile = NULL, metrics = NULL, id = uuid::UUIDgenerate()
+  tile = NULL, metrics = NULL, hidden = FALSE, id = uuid::UUIDgenerate()
 ) {
   # assert valid arguments
   assertthat::assert_that(
@@ -106,6 +106,7 @@ create_solution <- function(
       legend = legend,
       provenance = provenance,
       tile = tile,
+      hidden = hidden,
       visible = FALSE,
       details = NULL
     )

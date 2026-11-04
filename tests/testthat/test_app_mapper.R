@@ -37,7 +37,7 @@ test_that("app_mapper", {
   app$expect_screenshot(name = "05-hide-legend", delay = 3)
   ## delete first solution layer and all feature layers
   app$click(selector = ".solution-layer:nth-child(1) .layer-button")
-  for (i in seq_len(4)) {
+  for (i in seq_len(3)) {
     app$wait_for_idle()
     app$click(selector = ".feature-layer:nth-child(1) .layer-button")
   }
