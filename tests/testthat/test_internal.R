@@ -40,4 +40,8 @@ test_that("standardize_zone_targets", {
     ),
     c(0.6, 0.2, 0.0)
   )
+  expect_equal(
+    standardize_zone_targets(c(1, 0, 0), NULL),
+    c(1, 0, 0)
+  )
 })
