@@ -80,7 +80,7 @@ test_that("app_solver", {
     paste0(
       "$('",
       ".feature-setting:nth-child(1) .statuses .weight-status:nth-child(3)",
-      "')[0].hoverSelect.set('0')"
+      "')[0].hoverSelect.set('1')"
     )
   )
   app$wait_for_idle()
@@ -93,7 +93,7 @@ test_that("app_solver", {
   ## change targets for second feature
   app$run_js(
     paste0(
-      "$('.feature-setting:nth-child(1) .target-slider')[0]",
+      "$('.feature-setting:nth-child(2) .target-slider')[0]",
       ".noUiSlider.set([1, 1, 1])"
     )
   )

@@ -171,6 +171,10 @@ write_dataset <- function(x, pu_path, boundary_path) {
 #' @param boundary_data [Matrix::sparseMatrix()] object with boundary data.
 #' Defaults to `NULL` such that the boundary data are calculated automatically.
 #'
+#' @param solution_columns `character` vector indicating the names of columns
+#' in `x` that should be treated as solutions. Defaults to `NULL` such that
+#' no columns are treated as solutions.ks
+#'
 #' @inherit new_dataset return
 #'
 #' @family method
@@ -186,20 +190,67 @@ write_dataset <- function(x, pu_path, boundary_path) {
 #' print(x)
 #'
 #' @export
-create_dataset_from_sf <- function(x, boundary_data = NULL) {
+create_dataset_from_sf <- function(
+  x, boundary_data = NULL, solution_columns = NULL
+) {
   # assert valid argument
   assertthat::assert_that(inherits(x, "sf"))
+  if (!is.null(solution_columns)) {
+    assertthat::assert_that(
+      is.character(solution_columns),
+      assertthat::noNA(solution_columns),
+      all_match_of(solution_columns, names(x))
+    )
+  } else {
+    solution_columns <- character(0)
+  }
 
   # if needed, calculate boundary data
   if (is.null(boundary_data)) {
     boundary_data <- prioritizr::boundary_matrix(x)
   }
 
+  # create copy of x without solution names
+  x2 <- x[, setdiff(names(x), solution_columns), drop = FALSE]
+
   # save data to disk
   pu_path <- tempfile(fileext = ".gpkg")
   boundary_path <- tempfile(fileext = ".rds")
-  sf::write_sf(x, pu_path)
+  sf::write_sf(x2, pu_path)
   write_matrix(boundary_data, boundary_path)
+
+  # add solutions to geopackage
+  if (length(solution_columns) > 0) {
+    ## initialize connection
+    con <- DBI::dbConnect(RSQLite::SQLite(), dbname = pu_path)
+    on.exit(
+      suppressWarnings(try(DBI::dbDisconnect(con), silent = TRUE)),
+      add = TRUE, after = TRUE
+    )
+    # find name of attribute table
+    pu_table <- gpkg_layer_name(con)
+    ## write table with solutions
+    DBI::dbWriteTable(
+      con,
+      name = paste0(pu_table, "_solutions"),
+      value = tibble::tibble(
+        solution = rep(solution_columns, each = nrow(x)),
+        `_index` = rep(
+          DBI::dbGetQuery(
+            con,
+            paste0("SELECT \"_index\" FROM ", pu_table)
+          )[[1]],
+          length(solution_columns)
+        ),
+        status = unlist(
+          sf::st_drop_geometry(x)[, solution_columns, drop = FALSE],
+          recursive = FALSE, use.names = FALSE
+        )
+      )
+    )
+    ## stop connection
+    suppressWarnings(try(DBI::dbDisconnect(con), silent = TRUE))
+  }
 
   # return object
   new_dataset(pu_path = pu_path, boundary_path = boundary_path)

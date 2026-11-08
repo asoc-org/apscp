@@ -52,12 +52,7 @@ Dataset <- R6::R6Class(
       private$open_db_con()
       on.exit(private$close_db_con(), add = TRUE, after = TRUE)
       # set database fields
-      pu_table <- DBI::dbListTables(self$pu_db_con)
-      pu_table <- pu_table[!startsWith(pu_table, "gpkg_")]
-      pu_table <- pu_table[!startsWith(pu_table, "rtree_")]
-      pu_table <- pu_table[!startsWith(pu_table, "sqlite_")]
-      assertthat::assert_that(assertthat::is.string(pu_table))
-      self$pu_db_table <- pu_table
+      self$pu_db_table <- gpkg_layer_name(self$pu_db_con)
       # store additional fields
       self$n_pu <- DBI::dbGetQuery(
         self$pu_db_con,
@@ -68,6 +63,10 @@ Dataset <- R6::R6Class(
         "_index" %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table),
         msg = "`pu_path` must have a column called \"_index\"."
       )
+      # initialize solution table
+      private$init_db_solution_table()
+      # initialize database indexes
+      private$init_db_solution_indexes()
     },
 
     #' @description
@@ -117,9 +116,9 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get column names.
+    #' Get column names for attribute table.
     #' @return A `character` vector.
-    get_column_names = function() {
+    get_attribute_columns = function() {
       # initialize database connection
       private$open_db_con()
       on.exit(private$close_db_con(), add = TRUE, after = TRUE)
@@ -128,21 +127,42 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get `data.frame` with data.
-    #' @param column `character` vector. Defaults to `NULL` such that
-    #' all columns are returned.
+    #' Get solution names.
+    #' @return A `character` vector.
+    get_solution_columns = function() {
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # return unique solution names
+      DBI::dbGetQuery(
+        self$pu_db_con,
+        paste0(
+          "SELECT DISTINCT solution from ",
+          self$pu_db_table,
+          "_solutions"
+        )
+      )[[1]]
+    },
+
+    #' @description
+    #' Get `data.frame` with attribute data.
+    #' @param column `character` vector of column names.
+    #' Defaults to `NULL` such that all columns are returned.
     #' @return A `data.frame` object.
-    get_dataframe = function(column = NULL) {
+    get_attribute_dataframe = function(column = NULL) {
       # assert arguments are valid
       if (!is.null(column)) {
         assertthat::assert_that(
-          self$has_column(column),
+          self$has_attribute_column(column),
           msg = paste0("Dataset does not have column \"", column, "\".")
         )
       }
       # if column is NULL, then override with column names
       if (is.null(column)) {
-        column <- setdiff(self$get_column_names(), c("fid", "geom", "geometry"))
+        column <- setdiff(
+          self$get_attribute_columns(),
+          c("fid", "geom", "geometry")
+        )
       }
       column <- paste(paste0("\"", column, "\""), collapse = ",")
       # initialize database connection
@@ -156,13 +176,48 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get [sf::st_sf()] object with data.
-    #' @param column `character` vector. Defaults to `NULL` such that
-    #' all columns are returned.
+    #' Get `data.frame` with solution data.
+    #' @param column `character` vector of column names.
+    #' Defaults to `NULL` such that all columns are returned.
+    #' @return A `data.frame` object.
+    get_solution_dataframe = function(column = NULL) {
+      # assert arguments are valid
+      if (!is.null(column)) {
+        assertthat::assert_that(
+          self$has_solution_column(column),
+          msg = paste0("Dataset does not have column \"", column, "\".")
+        )
+      }
+      # if column is NULL, then override with solution names
+      if (is.null(column)) {
+        column <- self$get_solution_columns()
+      }
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # return data frame
+      stats::setNames(
+        as.data.frame(
+          vapply(
+            column,
+            function(x) self$get_solution_data(x),
+            numeric(self$get_n_pu())
+          )
+        ),
+        nm = column
+      )
+    },
+
+    #' @description
+    #' Get [sf::st_sf()] object with attribute data.
+    #' @param column `character` vector of column names.
+    #' Defaults to `NULL` such that all columns are returned.
     #' @return A [sf::st_sf()] object.
-    get_sf = function(column = NULL) {
+    get_attribute_sf = function(column = NULL) {
       # if column is NULL, return full dataset
-      if (is.null(column)) return(sf::read_sf(self$pu_path))
+      if (is.null(column)) {
+        return(sf::read_sf(self$pu_path, layer = self$pu_db_table))
+      }
       # assert arguments are valid
       assertthat::assert_that(
         is.character(column),
@@ -180,25 +235,82 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get column data.
-    #' @param column `character` value.
-    #' @return A vector.
-    get_column_data = function(column) {
-      # assert arguments are valid
-      assertthat::assert_that(assertthat::is.string(column))
-      # return vector
-      self$get_dataframe(column)[[1]]
+    #' Get [sf::st_sf()] object with solution data.
+    #' @param column `character` vector of solution names.
+    #' Defaults to `NULL` such that all solutions are returned.
+    #' @return A [sf::st_sf()] object.
+    get_solution_sf = function(column = NULL) {
+      # import data and return specified column(s)
+      d <- self$get_solution_dataframe(column = column)
+      # add geometry column
+      d$geom <- sf::st_geometry(
+        sf::read_sf(self$pu_path, layer = self$pu_db_table)
+      )
+      # convert to sf object
+      sf::st_as_sf(d)
     },
 
     #' @description
-    #' Get total (sum) of values in a column.
-    #' @param column `character` or `integer` value.
-    #' @return A `character` vector of layer names.
-    get_column_total = function(column) {
+    #' Get data from a column in the attribute table.
+    #' @param column `character` value indicating the attribute column name.
+    #' @return A vector.
+    get_attribute_data = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(self$has_column(column))
+      assertthat::assert_that(assertthat::is.string(column))
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # return vector
+      DBI::dbGetQuery(
+        self$pu_db_con,
+        paste0("SELECT ", column, " FROM ", self$pu_db_table)
+      )[[1]]
+    },
+
+    #' @description
+    #' Get data from the solution table.
+    #' @param column `character` value indicating name of solution.
+    #' @return A vector.
+    get_solution_data = function(column) {
+      # assert arguments are valid
+      assertthat::assert_that(assertthat::is.string(column))
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # return vector
+      as.double(
+        DBI::dbGetQuery(
+          self$pu_db_con,
+          paste0(
+            "SELECT status FROM ",
+            self$pu_db_table,
+            "_solutions WHERE solution = '",
+            column, "'"
+          )
+        )[[1]]
+      )
+    },
+
+    #' @description
+    #' Get total (sum) of values in a column from the attribute table.
+    #' @param column `character` value.
+    #' @return A `numeric` vector.
+    get_attribute_total = function(column) {
+      # assert arguments are valid
+      assertthat::assert_that(self$has_attribute_column(column))
       # return sum of values
-      colSums(self$get_dataframe(column), na.rm = TRUE)
+      colSums(self$get_attribute_dataframe(column), na.rm = TRUE)
+    },
+
+    #' @description
+    #' Get total (sum) of values for a solution.
+    #' @param column `character` value.
+    #' @return A `numeric` vector.
+    get_solution_total = function(column) {
+      # assert arguments are valid
+      assertthat::assert_that(self$has_solution_column(column))
+      # return sum of values
+      colSums(self$get_solution_dataframe(column), na.rm = TRUE)
     },
 
     #' @description
@@ -228,7 +340,7 @@ Dataset <- R6::R6Class(
       if (length(allocation) > 0L) {
         assertthat::assert_that(
           !is.null(names(allocation)),
-          self$has_column(allocation)
+          self$has_attribute_column(allocation)
         )
       }
       # if no planning units allocated to zone, then return 0
@@ -239,7 +351,7 @@ Dataset <- R6::R6Class(
         return(rep(0, self$get_n_pu()))
       }
       # get data frame with allocations
-      pu_data <- self$get_dataframe(unique(allocation))
+      pu_data <- self$get_attribute_dataframe(unique(allocation))
       # create vector with binary values indicating if planning unit is assigned
       # the zone based on the data in the allocation columns
       out <- numeric(self$get_n_pu())
@@ -258,16 +370,16 @@ Dataset <- R6::R6Class(
     #' @param status `numeric` vector with binary values for each
     #' planning unit.
     #' @return A `numeric` value.
-    get_column_held = function(column, status) {
+    get_attribute_held = function(column, status) {
       # assert arguments are valid
       assertthat::assert_that(
         length(column) > 0,
-        self$has_column(column),
+        self$has_attribute_column(column),
         is.numeric(status),
         identical(length(status), self$get_n_pu())
       )
       # run calculations
-      m <- as.matrix(self$get_dataframe(column))
+      m <- as.matrix(self$get_attribute_dataframe(column))
       total <- colSums(m, na.rm = TRUE)
       held <- colSums(
         m * matrix(status, ncol = length(column), nrow = nrow(m)),
@@ -278,20 +390,54 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Check if the dataset has a column or columns.
+    #' Check if the attribute table has a column (or columns) with a specified
+    #' name.
     #' @param column `character vector.
     #' @return A `logical` value.
-    has_column = function(column) {
+    has_attribute_column = function(column) {
       (length(column) > 0) &&
-        all(column %in% self$get_column_names())
+        all(column %in% self$get_attribute_columns())
     },
 
     #' @description
-    #' Set column data.
+    #' Check if the solution table has a solution (or solutions) with a
+    #' specified name.
+    #' @param column `character vector.
+    #' @return A `logical` value.
+    has_solution_column = function(column) {
+      if (identical(length(column), 0L)) return (FALSE)
+      if (identical(length(column), 1L)) {
+        # initialize database connection
+        private$open_db_con()
+        on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+        # return if solution exists in solution table
+        return(
+        (length(column) > 0) &&
+          (
+            nrow(
+              DBI::dbGetQuery(
+                self$pu_db_con,
+                paste0(
+                  "SELECT solution from ",
+                  self$pu_db_table, "_solutions ",
+                  "WHERE solution = '", column[[1]], "' AND ",
+                  "_index = 1"
+                )
+              )
+            ) > 0L
+          )
+        )
+      } else {
+        all(column %in% self$get_solution_columns())
+      }
+    },
+
+    #' @description
+    #' Set data for the attribute table.
     #' @param column `character` value.
     #' @param values `numeric` vector.
     #' @return An invisible `TRUE` indicating success.
-    set_column_data = function(column, values) {
+    set_attribute_data = function(column, values) {
       # assert arguments are valid
       assertthat::assert_that(
         assertthat::is.string(column),
@@ -303,7 +449,6 @@ Dataset <- R6::R6Class(
       on.exit(private$close_db_con(), add = TRUE, after = TRUE)
       # execute the follow commands as a single database transaction
       DBI::dbWithTransaction(self$pu_db_con, {
-
         # if needed, remove existing column from database
         if (column %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table)) {
           DBI::dbExecute(
@@ -382,9 +527,86 @@ Dataset <- R6::R6Class(
       })
       # return self
       invisible(self)
-    }
-  ),
+    },
 
+    #' @description
+    #' Append data for to solution table.
+    #' @param column `character` value.
+    #' @param values `numeric` vector.
+    #' @return An invisible `TRUE` indicating success.
+    append_solution_data = function(column, values) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.string(column),
+        assertthat::noNA(column),
+        identical(length(values), self$get_n_pu())
+      )
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # add solution status values
+      DBI::dbAppendTable(
+        self$pu_db_con,
+        name = paste0(self$pu_db_table, "_solutions"),
+        value = tibble::tibble(
+          solution = column,
+          `_index` = DBI::dbGetQuery(
+            self$pu_db_con,
+            paste0("SELECT \"_index\" FROM ", self$pu_db_table)
+          )[[1]],
+          status = as.integer(values)
+        )
+      )
+      # return self
+      invisible(self)
+    },
+
+    #' @description
+    #' Set data for the solution table.
+    #' @param x Named `list` of solutions. Each element must contain
+    #' a `numeric` vector with solutions values, and element names
+    #' correspond to solution identifiers.
+    #' @return An invisible `TRUE` indicating success.
+    set_solution_data = function(x) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        is.list(x),
+        all(lengths(x) == self$get_n_pu()),
+        is.character(names(x))
+      )
+      assertthat::assert_that(
+        all(vapply(x, is.numeric, logical(1))),
+        msg = "All elements of `x` must be a numeric vector."
+      )
+      # delete solution table indexes
+      private$delete_db_solution_indexes()
+      # initialize database connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # overwrite with new table
+      DBI::dbWriteTable(
+        self$pu_db_con,
+        overwrite = TRUE,
+        name = paste0(self$pu_db_table, "_solutions"),
+        value = tibble::tibble(
+          solution = rep(names(x), each = self$get_n_pu()),
+          `_index` = rep(
+            DBI::dbGetQuery(
+              self$pu_db_con,
+              paste0("SELECT \"_index\" FROM ", self$pu_db_table)
+            )[[1]],
+            length(x)
+          ),
+          status = unlist(x, recursive = FALSE, use.names = FALSE)
+        )
+      )
+      # add solution indexes
+      private$init_db_solution_indexes()
+      # return self
+      invisible(self)
+    }
+
+  ),
   private = list(
 
     open_db_con = function() {
@@ -455,6 +677,50 @@ Dataset <- R6::R6Class(
         DBI::dbDisconnect(self$pu_db_con)
         self$pu_db_con <- NULL
       }
+      invisible(NULL)
+    },
+
+    init_db_solution_table = function() {
+      # open db connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # create empty table
+      DBI::dbExecute(
+        self$pu_db_con,
+        paste0(
+          "CREATE TABLE IF NOT EXISTS ", self$pu_db_table, "_solutions (",
+          "solution VARCHAR(255), ",
+          "_index INTEGER, ",
+          "status INTEGER );"
+        )
+      )
+      invisible(NULL)
+    },
+
+    init_db_solution_indexes = function() {
+      # open db connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # if needed, create index for solution column in table
+      DBI::dbExecute(
+        self$pu_db_con,
+        paste0(
+          "CREATE INDEX IF NOT EXISTS solutions_idx ON ",
+           self$pu_db_table, "_solutions (solution);"
+        )
+      )
+      invisible(NULL)
+    },
+
+    delete_db_solution_indexes = function() {
+      # open db connection
+      private$open_db_con()
+      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
+      # if needed, drop index for solution column in table
+      DBI::dbExecute(
+        self$pu_db_con,
+        "DROP INDEX IF EXISTS solutions_idx;"
+      )
       invisible(NULL)
     },
 

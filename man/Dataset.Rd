@@ -47,15 +47,23 @@ Other functions for defining classes:
     \item \href{#method-Dataset-print}{\code{Dataset$print()}}
     \item \href{#method-Dataset-get_n_pu}{\code{Dataset$get_n_pu()}}
     \item \href{#method-Dataset-get_boundary_data}{\code{Dataset$get_boundary_data()}}
-    \item \href{#method-Dataset-get_column_names}{\code{Dataset$get_column_names()}}
-    \item \href{#method-Dataset-get_dataframe}{\code{Dataset$get_dataframe()}}
-    \item \href{#method-Dataset-get_sf}{\code{Dataset$get_sf()}}
-    \item \href{#method-Dataset-get_column_data}{\code{Dataset$get_column_data()}}
-    \item \href{#method-Dataset-get_column_total}{\code{Dataset$get_column_total()}}
+    \item \href{#method-Dataset-get_attribute_columns}{\code{Dataset$get_attribute_columns()}}
+    \item \href{#method-Dataset-get_solution_columns}{\code{Dataset$get_solution_columns()}}
+    \item \href{#method-Dataset-get_attribute_dataframe}{\code{Dataset$get_attribute_dataframe()}}
+    \item \href{#method-Dataset-get_solution_dataframe}{\code{Dataset$get_solution_dataframe()}}
+    \item \href{#method-Dataset-get_attribute_sf}{\code{Dataset$get_attribute_sf()}}
+    \item \href{#method-Dataset-get_solution_sf}{\code{Dataset$get_solution_sf()}}
+    \item \href{#method-Dataset-get_attribute_data}{\code{Dataset$get_attribute_data()}}
+    \item \href{#method-Dataset-get_solution_data}{\code{Dataset$get_solution_data()}}
+    \item \href{#method-Dataset-get_attribute_total}{\code{Dataset$get_attribute_total()}}
+    \item \href{#method-Dataset-get_solution_total}{\code{Dataset$get_solution_total()}}
     \item \href{#method-Dataset-get_pu_status}{\code{Dataset$get_pu_status()}}
-    \item \href{#method-Dataset-get_column_held}{\code{Dataset$get_column_held()}}
-    \item \href{#method-Dataset-has_column}{\code{Dataset$has_column()}}
-    \item \href{#method-Dataset-set_column_data}{\code{Dataset$set_column_data()}}
+    \item \href{#method-Dataset-get_attribute_held}{\code{Dataset$get_attribute_held()}}
+    \item \href{#method-Dataset-has_attribute_column}{\code{Dataset$has_attribute_column()}}
+    \item \href{#method-Dataset-has_solution_column}{\code{Dataset$has_solution_column()}}
+    \item \href{#method-Dataset-set_attribute_data}{\code{Dataset$set_attribute_data()}}
+    \item \href{#method-Dataset-append_solution_data}{\code{Dataset$append_solution_data()}}
+    \item \href{#method-Dataset-set_solution_data}{\code{Dataset$set_solution_data()}}
     \item \href{#method-Dataset-clone}{\code{Dataset$clone()}}
   }
 }
@@ -128,13 +136,13 @@ Other functions for defining classes:
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_names"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_names}{}}}
-\subsection{\code{Dataset$get_column_names()}}{
-  Get column names.
+\if{html}{\out{<a id="method-Dataset-get_attribute_columns"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_attribute_columns}{}}}
+\subsection{\code{Dataset$get_attribute_columns()}}{
+  Get column names for attribute table.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_names()}
+    \preformatted{Dataset$get_attribute_columns()}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
@@ -143,20 +151,35 @@ Other functions for defining classes:
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_dataframe"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_dataframe}{}}}
-\subsection{\code{Dataset$get_dataframe()}}{
-  Get \code{data.frame} with data.
+\if{html}{\out{<a id="method-Dataset-get_solution_columns"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_solution_columns}{}}}
+\subsection{\code{Dataset$get_solution_columns()}}{
+  Get solution names.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_dataframe(column = NULL)}
+    \preformatted{Dataset$get_solution_columns()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{character} vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_attribute_dataframe"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_attribute_dataframe}{}}}
+\subsection{\code{Dataset$get_attribute_dataframe()}}{
+  Get \code{data.frame} with attribute data.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_attribute_dataframe(column = NULL)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{\code{character} vector. Defaults to \code{NULL} such that
-all columns are returned.}
+      \item{\code{column}}{\code{character} vector of column names.
+Defaults to \code{NULL} such that all columns are returned.}
     }
     \if{html}{\out{</div>}}
   }
@@ -166,20 +189,43 @@ all columns are returned.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_sf"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_sf}{}}}
-\subsection{\code{Dataset$get_sf()}}{
-  Get \code{\link[sf:st_sf]{sf::st_sf()}} object with data.
+\if{html}{\out{<a id="method-Dataset-get_solution_dataframe"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_solution_dataframe}{}}}
+\subsection{\code{Dataset$get_solution_dataframe()}}{
+  Get \code{data.frame} with solution data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_sf(column = NULL)}
+    \preformatted{Dataset$get_solution_dataframe(column = NULL)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{\code{character} vector. Defaults to \code{NULL} such that
-all columns are returned.}
+      \item{\code{column}}{\code{character} vector of column names.
+Defaults to \code{NULL} such that all columns are returned.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{data.frame} object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_attribute_sf"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_attribute_sf}{}}}
+\subsection{\code{Dataset$get_attribute_sf()}}{
+  Get \code{\link[sf:st_sf]{sf::st_sf()}} object with attribute data.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_attribute_sf(column = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{\code{character} vector of column names.
+Defaults to \code{NULL} such that all columns are returned.}
     }
     \if{html}{\out{</div>}}
   }
@@ -189,13 +235,80 @@ all columns are returned.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_data"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_data}{}}}
-\subsection{\code{Dataset$get_column_data()}}{
-  Get column data.
+\if{html}{\out{<a id="method-Dataset-get_solution_sf"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_solution_sf}{}}}
+\subsection{\code{Dataset$get_solution_sf()}}{
+  Get \code{\link[sf:st_sf]{sf::st_sf()}} object with solution data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_data(column)}
+    \preformatted{Dataset$get_solution_sf(column = NULL)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{\code{character} vector of solution names.
+Defaults to \code{NULL} such that all solutions are returned.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{\link[sf:st_sf]{sf::st_sf()}} object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_attribute_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_attribute_data}{}}}
+\subsection{\code{Dataset$get_attribute_data()}}{
+  Get data from a column in the attribute table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_attribute_data(column)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{\code{character} value indicating the attribute column name.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_solution_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_solution_data}{}}}
+\subsection{\code{Dataset$get_solution_data()}}{
+  Get data from the solution table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_solution_data(column)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{\code{character} value indicating name of solution.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_attribute_total"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_attribute_total}{}}}
+\subsection{\code{Dataset$get_attribute_total()}}{
+  Get total (sum) of values in a column from the attribute table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_attribute_total(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -206,29 +319,29 @@ all columns are returned.}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A vector.
+    A \code{numeric} vector.
   }
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_total"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_total}{}}}
-\subsection{\code{Dataset$get_column_total()}}{
-  Get total (sum) of values in a column.
+\if{html}{\out{<a id="method-Dataset-get_solution_total"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_solution_total}{}}}
+\subsection{\code{Dataset$get_solution_total()}}{
+  Get total (sum) of values for a solution.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_total(column)}
+    \preformatted{Dataset$get_solution_total(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{\code{character} or \code{integer} value.}
+      \item{\code{column}}{\code{character} value.}
     }
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A \code{character} vector of layer names.
+    A \code{numeric} vector.
   }
 }
 
@@ -268,14 +381,14 @@ planning unit is allocated to the \code{zone}.
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_held"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_held}{}}}
-\subsection{\code{Dataset$get_column_held()}}{
+\if{html}{\out{<a id="method-Dataset-get_attribute_held"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_attribute_held}{}}}
+\subsection{\code{Dataset$get_attribute_held()}}{
   Get proportion of values in a column that would be considered to by
 held by selected planning units.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_held(column, status)}
+    \preformatted{Dataset$get_attribute_held(column, status)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -293,13 +406,14 @@ planning unit.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-has_column"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-has_column}{}}}
-\subsection{\code{Dataset$has_column()}}{
-  Check if the dataset has a column or columns.
+\if{html}{\out{<a id="method-Dataset-has_attribute_column"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-has_attribute_column}{}}}
+\subsection{\code{Dataset$has_attribute_column()}}{
+  Check if the attribute table has a column (or columns) with a specified
+name.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$has_column(column)}
+    \preformatted{Dataset$has_attribute_column(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -315,13 +429,36 @@ planning unit.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-set_column_data"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-set_column_data}{}}}
-\subsection{\code{Dataset$set_column_data()}}{
-  Set column data.
+\if{html}{\out{<a id="method-Dataset-has_solution_column"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-has_solution_column}{}}}
+\subsection{\code{Dataset$has_solution_column()}}{
+  Check if the solution table has a solution (or solutions) with a
+specified name.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$set_column_data(column, values)}
+    \preformatted{Dataset$has_solution_column(column)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{`character vector.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{logical} value.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-set_attribute_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-set_attribute_data}{}}}
+\subsection{\code{Dataset$set_attribute_data()}}{
+  Set data for the attribute table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$set_attribute_data(column, values)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -329,6 +466,53 @@ planning unit.}
     \describe{
       \item{\code{column}}{\code{character} value.}
       \item{\code{values}}{\code{numeric} vector.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible \code{TRUE} indicating success.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-append_solution_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-append_solution_data}{}}}
+\subsection{\code{Dataset$append_solution_data()}}{
+  Append data for to solution table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$append_solution_data(column, values)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{\code{character} value.}
+      \item{\code{values}}{\code{numeric} vector.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible \code{TRUE} indicating success.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-set_solution_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-set_solution_data}{}}}
+\subsection{\code{Dataset$set_solution_data()}}{
+  Set data for the solution table.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$set_solution_data(x)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{Named \code{list} of solutions. Each element must contain
+a \code{numeric} vector with solutions values, and element names
+correspond to solution identifiers.}
     }
     \if{html}{\out{</div>}}
   }

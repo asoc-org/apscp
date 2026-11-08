@@ -4,10 +4,10 @@ test_that("new_solution", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
+  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solution"))
   l <- new_layer(
-    dataset = create_dataset_from_sf(p$dataset$get_sf()),
-    tile = create_tile_from_sf(p$dataset$get_sf(), verbose = FALSE),
+    dataset = p$dataset,
+    tile = p$tiles[[1]],
     column = "solution",
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
@@ -35,10 +35,10 @@ test_that("serialize_object", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
+  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solution"))
   l <- new_layer(
-    dataset = create_dataset_from_sf(p$dataset$get_sf()),
-    tile = create_tile_from_sf(p$dataset$get_sf(), verbose = FALSE),
+    dataset = p$dataset,
+    tile = p$tiles[[1]],
     column = "solution",
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
@@ -66,10 +66,10 @@ test_that("deserialize_object", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_column_data("solution"))
+  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solution"))
   l <- new_layer(
     dataset = p$dataset,
-    tile = create_tile_from_sf(p$dataset$get_sf(), verbose = FALSE),
+    tile = p$tiles[[1]],
     column = "solution",
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
@@ -94,8 +94,8 @@ test_that("create_solution", {
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
-  p$dataset$set_column_data("solv", v)
-  m <- eval_prioritization(p, s, p$dataset$get_column_data("solv"))
+  p$dataset$append_solution_data("solv", v)
+  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solv"))
   # create object
   x <- create_solution(
     name = "sol",
@@ -122,8 +122,8 @@ test_that("create_solution (metrics = NULL)", {
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
-  p$dataset$set_column_data("solv", v)
-  m <- eval_prioritization(p, s, p$dataset$get_column_data("solv"))
+  p$dataset$append_solution_data("solv", v)
+  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solv"))
   # create object
   x <- create_solution(
     name = "sol",
@@ -171,9 +171,9 @@ test_that("create_solution_from_prioritization (column = NULL)", {
   expect_equal(x$name, "sol")
   expect_equal(x$settings, s)
   expect_true(assertthat::is.string(x$layer$column))
-  expect_true(p$dataset$has_column(x$layer$column))
+  expect_true(p$dataset$has_solution_column(x$layer$column))
   expect_equal(
-    p$dataset$get_column_data(x$layer$column),
+    p$dataset$get_solution_data(x$layer$column),
     as.numeric(d)
   )
   expect_true(file.exists(x$layer$tile$path))

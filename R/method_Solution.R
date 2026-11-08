@@ -58,7 +58,7 @@ create_solution <- function(
     inherits(project, "Project"),
     ## column_name
     assertthat::is.string(column),
-    project$dataset$has_column(column),
+    project$dataset$has_solution_column(column),
     ## legend
     inherits(legend, "Legend"),
     ## provenance
@@ -74,6 +74,7 @@ create_solution <- function(
     tile <- create_tile_from_project(
       x = project,
       column = column,
+      type = "solution",
       source_layer = "layer",
       path = tempfile(
         tmpdir = get_golem_config("tile_server_dir"),
@@ -88,7 +89,7 @@ create_solution <- function(
   # if needed, create metrics
   if (is.null(metrics)) {
     metrics <- eval_prioritization(
-      project, settings, project$dataset$get_column_data(column)
+      project, settings, project$dataset$get_solution_data(column)
     )
   }
   assertthat::assert_that(is.list(metrics))
@@ -102,7 +103,7 @@ create_solution <- function(
     layer = new_layer(
       dataset = project$dataset,
       column = column,
-      total = project$dataset$get_column_total(column),
+      total = project$dataset$get_solution_total(column),
       legend = legend,
       provenance = provenance,
       tile = tile,
@@ -198,7 +199,10 @@ create_solution_from_prioritization <- function(
     # add solution to dataset
     column <- make_unique_column_name(
       paste0("sol-", uuid::UUIDgenerate()),
-      project$dataset$get_column_names()
+      c(
+        project$dataset$get_attribute_columns(),
+        project$dataset$get_solution_columns()
+      )
     )
   } else {
     assertthat::assert_that(
@@ -206,7 +210,8 @@ create_solution_from_prioritization <- function(
       assertthat::noNA(column)
     )
     assertthat::assert_that(
-      !project$dataset$has_column(column),
+      !project$dataset$has_attribute_column(column),
+      !project$dataset$has_solution_column(column),
       msg = "`project$dataset` already has a column with this column name."
     )
   }
@@ -219,7 +224,7 @@ create_solution_from_prioritization <- function(
   }
 
   # store column in dataset
-  project$dataset$set_column_data(column, prioritization)
+  project$dataset$append_solution_data(column, prioritization)
 
   # return new solution object
   new_solution(
@@ -229,6 +234,7 @@ create_solution_from_prioritization <- function(
       tile = create_tile_from_project(
         x = project,
         column = column,
+        type = "solution",
         path = tempfile(
           tmpdir = get_golem_config("tile_server_dir"),
           fileext = ".pmtiles"

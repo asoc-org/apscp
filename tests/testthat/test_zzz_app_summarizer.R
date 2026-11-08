@@ -25,21 +25,21 @@ test_that("app_summarizer", {
   expect_app_hover_screenshot(
     app,
     selector = ".summary-results .pie-chart g:nth-child(1) > path",
-    name = "02-summary-coverage-leftover",
+    name = "02-summary-cov-leftover",
     delay = 3
   )
   ### hover on zone locked
   expect_app_hover_screenshot(
     app,
     selector = ".summary-results .pie-chart g:nth-child(3) > path",
-    name = "03-summary-coverage-zone-locked",
+    name = "03-summary-cov-zone-locked",
     delay = 3
   )
   ### hover on zone held
   expect_app_hover_screenshot(
     app,
     selector = ".summary-results .pie-chart g:nth-child(2) > path",
-    name = "04-summary-coverage-zone-held",
+    name = "04-summary-cov-zone-held",
     delay = 3
   )
   ## performance
@@ -50,7 +50,7 @@ test_that("app_summarizer", {
       ".summary-results .radial-bar-chart",
       "g:nth-child(1) > path:nth-child(2)"
     ),
-    name = "05-summary-performance-leftover",
+    name = "05-summary-perf-leftover",
     delay = 3
   )
   ### hover on locked
@@ -60,7 +60,7 @@ test_that("app_summarizer", {
       ".summary-results .radial-bar-chart",
       "g:nth-child(3) > path:nth-child(2)"
     ),
-    name = "06-summary-performance-locked",
+    name = "06-summary-perf-locked",
     delay = 3
   )
   ### hover on held
@@ -70,7 +70,7 @@ test_that("app_summarizer", {
       ".summary-results .radial-bar-chart",
       "g:nth-child(2) > path:nth-child(2)"
     ),
-    name = "07-summary-performance-held",
+    name = "07-summary-perf-held",
     delay = 3
   )
   ## features panel

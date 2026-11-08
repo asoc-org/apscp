@@ -134,3 +134,44 @@ standardize_zone_targets <- function(
   # return value
   x
 }
+
+#' Geopackage layer name
+#'
+#' Get the layer name for a geopackage file.
+#'
+#' @param x `character` value with file path or [DBI::dbConnect()] object.
+#'
+#' @return A `character` value.
+#'
+#' @noRd
+gpkg_layer_name <- function(x) {
+  # assert valid argument
+  con <- FALSE
+  if (is.character(x)) {
+    assertthat::assert_that(file.exists(x))
+    x <- DBI::dbConnect(RSQLite::SQLite(), dbname = x)
+    con <- TRUE
+  }
+  assertthat::assert_that(
+    inherits(x, "SQLiteConnection"),
+    msg = "`x` must be a file path or SQLite connection."
+  )
+  # if opened in the function, set handler to terminate connection
+  if (isTRUE(con)) {
+    on.exit(DBI::dbDisconnect(x), add = TRUE, after = TRUE)
+  }
+  # extract table name
+  name <- DBI::dbListTables(x)
+  name <- name[!startsWith(name, "gpkg_")]
+  name <- name[!startsWith(name, "rtree_")]
+  name <- name[!startsWith(name, "sqlite_")]
+  name <- name[!endsWith(name, "_solutions")]
+  name <- name[nchar(name) > nchar("_solutions")]
+  # assert valid name
+  assertthat::assert_that(
+    assertthat::is.string(name),
+    msg = "`x` does not contain a valid layer."
+  )
+  # return name
+  name
+}

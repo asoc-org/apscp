@@ -7,6 +7,7 @@
 create_tile_from_file(
   x,
   column,
+  type,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
@@ -16,7 +17,9 @@ create_tile_from_file(
 \arguments{
 \item{x}{\code{character} value denoting the file path.}
 
-\item{column}{\code{character} value with column name.}
+\item{column}{\code{character} value with column name for data.}
+
+\item{type}{\verb{character value indicating if the underlying data is obtained from the attribute table or the solution table. Available options include }"attribute"\code{or}"solution"`.}
 
 \item{source_layer}{\code{character} value with name for layer in PMTiles archive.
 Defaults to \code{"data-src"}.}
@@ -50,7 +53,8 @@ path <- tempfile(fileext = ".gpkg")
 # create tile
 x <- create_tile_from_file(
   path,
-  column = "solution"
+  column = "solution",
+  type = "solution"
 )
 
 # preview object

@@ -114,7 +114,7 @@ simulate_project <- function() {
   d <- simulate_spatial_data()
 
   # create dataset
-  dataset <- create_dataset_from_sf(d)
+  dataset <- create_dataset_from_sf(d, solution_columns = "solution")
 
   # create tile
   td <- tempdir()
@@ -152,7 +152,7 @@ simulate_project <- function() {
         visible = TRUE,
         legend = create_legend(d, "cost", units = "USD"),
         provenance = provenance,
-        total = unname(dataset$get_column_total("cost"))
+        total = unname(dataset$get_attribute_total("cost"))
       )
     )
   )
@@ -173,7 +173,7 @@ simulate_project <- function() {
         units = "presence-only"
       ),
       provenance = provenance,
-      total = unname(dataset$get_column_total("aspas"))
+      total = unname(dataset$get_attribute_total("aspas"))
     )
   )
   lock2 <- new_lock(
@@ -191,7 +191,7 @@ simulate_project <- function() {
         units = "presence/absence"
       ),
       provenance = provenance,
-      total = unname(dataset$get_column_total("camps")),
+      total = unname(dataset$get_attribute_total("camps")),
       details = "These sites include castles, monuments, and churches."
     )
   )
@@ -224,14 +224,12 @@ simulate_project <- function() {
       zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
       zone_helds = unname(
         c(
-          dataset$get_column_held(column = paste0("feat_", i), s1),
-          dataset$get_column_held(column = paste0("feat_", i), s2),
-          dataset$get_column_held(column = paste0("feat_", i), s3)
+          dataset$get_attribute_held(column = paste0("feat_", i), s1),
+          dataset$get_attribute_held(column = paste0("feat_", i), s2),
+          dataset$get_attribute_held(column = paste0("feat_", i), s3)
         ),
       ),
-      themes = themes[
-        sample.int(length(themes), sample.int(length(themes), 1L))
-      ],
+      themes = themes[c(1, sample(c(2, 3), 1))],
       layer = new_layer(
         dataset = dataset,
         tile = tile,
@@ -244,7 +242,7 @@ simulate_project <- function() {
           units = "suitability"
         ),
         provenance = provenance,
-        total = unname(dataset$get_column_total(paste0("feat_", i)))
+        total = unname(dataset$get_attribute_total(paste0("feat_", i)))
       )
     )
   })
@@ -275,7 +273,7 @@ simulate_project <- function() {
         visible = TRUE,
         legend = create_solution_legend(out),
         provenance = provenance,
-        total = unname(dataset$get_column_total("solution"))
+        total = unname(dataset$get_solution_total("solution"))
       ),
       settings = s,
       metrics = eval_prioritization(out, s, d$solution)

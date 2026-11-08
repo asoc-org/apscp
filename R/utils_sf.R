@@ -41,7 +41,12 @@ read_sf_data <- function(path) {
   utils::unzip(path, exdir = td)
 
   # import data
-  sf::read_sf(file.path(td, tools::file_path_sans_ext(basename(path))))
+  sf::read_sf(
+    file.path(td, tools::file_path_sans_ext(basename(path))),
+    layer = gpkg_layer_name(
+      file.path(td, tools::file_path_sans_ext(basename(path)))
+    )
+  )
 }
 
 #' Write sf data to zip file

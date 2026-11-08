@@ -4,13 +4,17 @@
 \alias{create_dataset_from_sf}
 \title{Create dataset from sf object.}
 \usage{
-create_dataset_from_sf(x, boundary_data = NULL)
+create_dataset_from_sf(x, boundary_data = NULL, solution_columns = NULL)
 }
 \arguments{
 \item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
 
 \item{boundary_data}{\code{\link[Matrix:sparseMatrix]{Matrix::sparseMatrix()}} object with boundary data.
 Defaults to \code{NULL} such that the boundary data are calculated automatically.}
+
+\item{solution_columns}{\code{character} vector indicating the names of columns
+in \code{x} that should be treated as solutions. Defaults to \code{NULL} such that
+no columns are treated as solutions.ks}
 }
 \value{
 A \code{\link{Dataset}} object.

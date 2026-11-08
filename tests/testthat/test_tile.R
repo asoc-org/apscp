@@ -55,14 +55,14 @@ test_that("create_tile_from_sf", {
   expect_equal(x$max_zoom, 5)
 })
 
-test_that("create_tile_from_project (engine = r)", {
+test_that("create_tile_from_project (engine = r, type = attribute)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
   d <- simulate_project()
   path <- tempfile(fileext = ".pmtiles")
   x <- create_tile_from_project(
-    d, column = "solution",
+    d, column = "cost", type = "attribute",
     source_layer = "x", path = path, max_zoom = 5,
     engine = "r", verbose = FALSE
   )
@@ -74,7 +74,7 @@ test_that("create_tile_from_project (engine = r)", {
   expect_equal(x$max_zoom, 5)
 })
 
-test_that("create_tile_from_project (engine = rust)", {
+test_that("create_tile_from_project (engine = rust, type = attribute)", {
   # define skips
   skip_if_sim_deps_not_installed()
   skip_if_freestiler_rust_not_enabled()
@@ -82,7 +82,7 @@ test_that("create_tile_from_project (engine = rust)", {
   d <- simulate_project()
   path <- tempfile(fileext = ".pmtiles")
   x <- create_tile_from_project(
-    d, column = "solution",
+    d, column = "cost", type = "attribute",
     source_layer = "x", path = path, max_zoom = 5,
     engine = "rust", verbose = FALSE
   )
@@ -94,22 +94,41 @@ test_that("create_tile_from_project (engine = rust)", {
   expect_equal(x$max_zoom, 5)
 })
 
-test_that("create_tile_from_file", {
+test_that("create_tile_from_project (engine = r, type = solution)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
-  d <- sf::st_transform(simulate_spatial_data(), 4326)
-  path1 <- tempfile(fileext = ".gpkg")
-  sf::write_sf(d, path1)
-  path2 <- tempfile(fileext = ".pmtiles")
-  x <- create_tile_from_file(
-    path1, column = "solution",
-    source_layer = "x", path = path2, max_zoom = 5, verbose = FALSE
+  d <- simulate_project()
+  path <- tempfile(fileext = ".pmtiles")
+  x <- create_tile_from_project(
+    d, column = "solution", type = "solution",
+    source_layer = "x", path = path, max_zoom = 5,
+    engine = "r", verbose = FALSE
   )
   # run tests
   expect_s3_class(x, "Tile")
   expect_equal(x$source_layer, "x")
-  expect_equal(x$path, path2)
-  expect_true(file.exists(path2))
+  expect_equal(x$path, path)
+  expect_true(file.exists(path))
+  expect_equal(x$max_zoom, 5)
+})
+
+test_that("create_tile_from_file (engine = rust, type = solution)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  skip_if_freestiler_rust_not_enabled()
+  # create object
+  d <- simulate_project()
+  path <- tempfile(fileext = ".pmtiles")
+  x <- create_tile_from_project(
+    d, column = "solution", type = "solution",
+    source_layer = "x", path = path, max_zoom = 5,
+    engine = "rust", verbose = FALSE
+  )
+  # run tests
+  expect_s3_class(x, "Tile")
+  expect_equal(x$source_layer, "x")
+  expect_equal(x$path, path)
+  expect_true(file.exists(path))
   expect_equal(x$max_zoom, 5)
 })

@@ -14,6 +14,7 @@
 devtools::load_all()
 ## load data
 project <- read_builtin_project()
+print(project$dataset)
 ## define parameters
 ## multiplier values for feature targets
 feature_target_values <- c(0, 1)
@@ -24,7 +25,7 @@ if (!file.exists(cache_path)) {
 }
 ## maximum number of solutions to prepare
 ### set to Inf to generate all solutions
-max_n <- 5
+max_n <- Inf
 
 # Preliminary processing
 ## import cache
@@ -155,6 +156,8 @@ scenario_data <-
 prioritization_results <-
   seq_along(scenario_data) %>%
   lapply(function(i) {
+    ## display progress
+    cli::cli_text(paste0("starting ", i, " / ", length(scenario_data)))
     ## if prioritization with id already exists, then return it
     id <- hash_prioritization_settings(scenario_data[[i]])
     if (id %in% names(cache_data)) {
@@ -167,7 +170,7 @@ prioritization_results <-
       gap = get_golem_config("solver_gap"),
       solver = "gurobi",
       gurobi_server = "localhost:61000",
-      verbose = TRUE
+      verbose = FALSE
     )
     ## save cache data,
     ### note that the cache is saved after generating each prioritization
@@ -178,7 +181,7 @@ prioritization_results <-
   })
 
 ## create tile file with solutions
-pu_data <- project$dataset$get_sf()
+pu_data <- project$dataset$get_attribute_sf()
 pu_data <- pu_data[, "_index", drop = FALSE]
 for (i in seq_along(cache_data)) {
   pu_data[[paste0("precompute_", i)]] <- cache_data[[i]]
@@ -191,31 +194,51 @@ tile <- create_tile_from_sf(
   )
 )
 
+## add solutions to dataset
+project$dataset$set_solution_data(
+  stats::setNames(
+    lapply(prioritization_results, function(x) as.numeric(x$result)),
+    paste0("precompute_", seq_along(prioritization_results))
+  )
+)
+
+## define solution legend
+solution_legend <- create_solution_legend(project)
+
 ## create solution objects from prioritizations
 solution_data <-
   seq_along(prioritization_results) %>%
   lapply(function(i) {
+    ## display progress
+    cli::cli_text(paste0("starting ", i, " / ", length(scenario_data)))
     ### define variables
     curr_column <- paste0("precompute_", i)
     curr_name <- paste0("Precompute ", i)
     curr_scenario <- scenario_data[[i]]
-    ### add column with prioritization data to dataset
-    project$dataset$set_column_data(
-      curr_column,
-      as.numeric(prioritization_results[[i]]$result)
-    )
     ### return solution
-    create_solution(
-      id = prioritization_results[[i]]$id,
+    new_solution(
       name = curr_name,
-      project = project,
-      column = curr_column,
-      legend = create_solution_legend(project),
-      provenance = precomputed_provenance(),
       settings = curr_scenario,
-      tile = tile,
-      hidden = TRUE,
-      metrics = NULL
+      metrics = eval_prioritization(
+        project,
+        curr_scenario,
+        as.numeric(prioritization_results[[i]]$result)
+      ),
+      id = prioritization_results[[i]]$id,
+      layer = new_layer(
+        dataset = project$dataset,
+        column = curr_column,
+        total = sum(
+          as.numeric(prioritization_results[[i]]$result),
+          na.rm = TRUE
+        ),
+        legend = solution_legend,
+        provenance = precomputed_provenance(),
+        tile = tile,
+        hidden = TRUE,
+        visible = FALSE,
+        details = NULL
+      )
     )
   })
 
