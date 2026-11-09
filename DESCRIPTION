@@ -99,6 +99,7 @@ Collate:
     'app_server_summarizer.R'
     'app_startup.R'
     'app_ui.R'
+    'utils_compress.R'
     'internal.R'
     'class_Dataset.R'
     'class_Layer.R'

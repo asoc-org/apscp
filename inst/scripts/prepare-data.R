@@ -180,7 +180,7 @@ locks <-
       layer = new_layer(
         dataset = dataset,
         column = x$name,
-        total = dataset$get_attribute_total(x$name),
+        total = dataset$get_pu_column_total(x$name),
         details = convert_na_to_null(x$details),
         visible = x$visible,
         tile = tile,
@@ -217,7 +217,7 @@ costs <-
       layer = new_layer(
         dataset = dataset,
         column = x$name,
-        total = dataset$get_attribute_total(x$name),
+        total = dataset$get_pu_column_total(x$name),
         details = convert_na_to_null(x$details),
         visible = x$visible,
         tile = tile,
@@ -258,7 +258,7 @@ features <-
       ),
       zone_weights = rep(1, 3L),
       zone_helds = c(
-        dataset$get_attribute_held(x$name, biodiversity_status),
+        dataset$get_pu_column_held(x$name, biodiversity_status),
         0,
         0
       ),
@@ -266,7 +266,7 @@ features <-
       layer = new_layer(
         dataset = dataset,
         column = x$name,
-        total = dataset$get_attribute_total(x$name),
+        total = dataset$get_pu_column_total(x$name),
         details = convert_na_to_null(x$details),
         visible = x$visible,
         tile = tile,

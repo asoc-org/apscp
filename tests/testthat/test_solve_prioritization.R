@@ -63,7 +63,7 @@ test_that("active locks", {
   expect_true(
     all(
       vapply(p$locks, FUN.VALUE = logical(1), function(y) {
-        idx <- which(p$dataset$get_attribute_data(y$layer$column) > 1e-4)
+        idx <- which(p$dataset$get_pu_column_data(y$layer$column) > 1e-4)
         all(x[idx] == match(y$zone, p$zones))
       })
     ),

@@ -181,7 +181,7 @@ prioritization_results <-
   })
 
 ## create tile file with solutions
-pu_data <- project$dataset$get_attribute_sf()
+pu_data <- project$dataset$get_pu_sf()
 pu_data <- pu_data[, "_index", drop = FALSE]
 for (i in seq_along(cache_data)) {
   pu_data[[paste0("precompute_", i)]] <- cache_data[[i]]
@@ -194,13 +194,13 @@ tile <- create_tile_from_sf(
   )
 )
 
-## add solutions to dataset
-project$dataset$set_solution_data(
-  stats::setNames(
-    lapply(prioritization_results, function(x) as.numeric(x$result)),
-    paste0("precompute_", seq_along(prioritization_results))
+## add solutions to dataset cache
+{for (i in seq_along(prioritization_results)) {
+  project$dataset$set_cache_column_data(
+    prioritization_results[[i]]$id,
+    prioritization_results[[i]]$result
   )
-)
+}}
 
 ## define solution legend
 solution_legend <- create_solution_legend(project)

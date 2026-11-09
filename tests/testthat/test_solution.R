@@ -4,7 +4,7 @@ test_that("new_solution", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solution"))
+  m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solution"))
   l <- new_layer(
     dataset = p$dataset,
     tile = p$tiles[[1]],
@@ -35,7 +35,7 @@ test_that("serialize_object", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solution"))
+  m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solution"))
   l <- new_layer(
     dataset = p$dataset,
     tile = p$tiles[[1]],
@@ -66,7 +66,7 @@ test_that("deserialize_object", {
   # create object
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
-  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solution"))
+  m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solution"))
   l <- new_layer(
     dataset = p$dataset,
     tile = p$tiles[[1]],
@@ -95,7 +95,7 @@ test_that("create_solution", {
   s <- simulate_prioritization_settings(p)
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
   p$dataset$append_solution_data("solv", v)
-  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solv"))
+  m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solv"))
   # create object
   x <- create_solution(
     name = "sol",
@@ -123,7 +123,7 @@ test_that("create_solution (metrics = NULL)", {
   s <- simulate_prioritization_settings(p)
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
   p$dataset$append_solution_data("solv", v)
-  m <- eval_prioritization(p, s, p$dataset$get_solution_data("solv"))
+  m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solv"))
   # create object
   x <- create_solution(
     name = "sol",
@@ -171,9 +171,9 @@ test_that("create_solution_from_prioritization (column = NULL)", {
   expect_equal(x$name, "sol")
   expect_equal(x$settings, s)
   expect_true(assertthat::is.string(x$layer$column))
-  expect_true(p$dataset$has_solution_column(x$layer$column))
+  expect_true(p$dataset$has_pu_column_data(x$layer$column))
   expect_equal(
-    p$dataset$get_solution_data(x$layer$column),
+    p$dataset$get_pu_column_data(x$layer$column),
     as.numeric(d)
   )
   expect_true(file.exists(x$layer$tile$path))

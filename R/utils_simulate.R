@@ -5,7 +5,7 @@ NULL
 #'
 #' Simulate spatial data for conservation planning.
 #'
-#' @return A [sf::st_sf()] odbject.
+#' @return A [sf::st_sf()] object.
 #'
 #' @details
 #' Note that simulation functions are intended to help facilitate
@@ -38,6 +38,13 @@ simulate_spatial_data <- function() {
     sample(seq(0, 6), size = length(idx), replace = TRUE)
   )
 
+  # create cached simulated solution with 3 zones
+  solution2 <- pu * NA_real_
+  solution2[idx] <- withr::with_seed(
+    seed = 500,
+    sample(seq(0, 6), size = length(idx), replace = TRUE)
+  )
+
   # create binary layer
   binary <- pu * NA_real_
   binary[idx] <- withr::with_seed(
@@ -52,7 +59,8 @@ simulate_spatial_data <- function() {
     prioritizr::get_sim_locked_in_raster(),
     prioritizr::get_sim_locked_out_raster(),
     binary,
-    solution
+    solution,
+    solution2
   )
   names(d) <- c(
     "cost",
@@ -60,7 +68,8 @@ simulate_spatial_data <- function() {
     "aspas",
     "camps",
     "invasive_species",
-    "solution"
+    "solution",
+    "solution2"
   )
   terra::ext(d) <- c(-20, 20, -30, 30)
   terra::crs(d) <- "epsg:4326"
@@ -114,7 +123,7 @@ simulate_project <- function() {
   d <- simulate_spatial_data()
 
   # create dataset
-  dataset <- create_dataset_from_sf(d, solution_columns = "solution")
+  dataset <- create_dataset_from_sf(d, cache_columns = "solution2")
 
   # create tile
   td <- tempdir()
@@ -152,7 +161,7 @@ simulate_project <- function() {
         visible = TRUE,
         legend = create_legend(d, "cost", units = "USD"),
         provenance = provenance,
-        total = unname(dataset$get_attribute_total("cost"))
+        total = unname(dataset$get_pu_column_total("cost"))
       )
     )
   )
@@ -173,7 +182,7 @@ simulate_project <- function() {
         units = "presence-only"
       ),
       provenance = provenance,
-      total = unname(dataset$get_attribute_total("aspas"))
+      total = unname(dataset$get_pu_column_total("aspas"))
     )
   )
   lock2 <- new_lock(
@@ -191,7 +200,7 @@ simulate_project <- function() {
         units = "presence/absence"
       ),
       provenance = provenance,
-      total = unname(dataset$get_attribute_total("camps")),
+      total = unname(dataset$get_pu_column_total("camps")),
       details = "These sites include castles, monuments, and churches."
     )
   )
@@ -224,9 +233,9 @@ simulate_project <- function() {
       zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
       zone_helds = unname(
         c(
-          dataset$get_attribute_held(column = paste0("feat_", i), s1),
-          dataset$get_attribute_held(column = paste0("feat_", i), s2),
-          dataset$get_attribute_held(column = paste0("feat_", i), s3)
+          dataset$get_pu_column_held(column = paste0("feat_", i), s1),
+          dataset$get_pu_column_held(column = paste0("feat_", i), s2),
+          dataset$get_pu_column_held(column = paste0("feat_", i), s3)
         ),
       ),
       themes = themes[c(1, sample(c(2, 3), 1))],
@@ -242,7 +251,7 @@ simulate_project <- function() {
           units = "suitability"
         ),
         provenance = provenance,
-        total = unname(dataset$get_attribute_total(paste0("feat_", i)))
+        total = unname(dataset$get_pu_column_total(paste0("feat_", i)))
       )
     )
   })
@@ -273,7 +282,7 @@ simulate_project <- function() {
         visible = TRUE,
         legend = create_solution_legend(out),
         provenance = provenance,
-        total = unname(dataset$get_solution_total("solution"))
+        total = unname(dataset$get_pu_column_total("solution"))
       ),
       settings = s,
       metrics = eval_prioritization(out, s, d$solution)
@@ -531,5 +540,39 @@ simulate_feature_zone_targets <- function(x, n) {
     x <- x[x + sum(out) <= 1]
   }
   ## return output
+  out
+}
+
+#' Simulate cache
+#'
+#' Simulate a cache.
+#'
+#' @param x [sf::st_sf()] object.
+#'
+#' @param n `integer` number of solutions to create in the cache.
+#'
+#' @family simulation
+#'
+#' @return A `list` object.
+#'
+#' @noRd
+simulate_cache <- function(x, n = 10) {
+  # assert valid arguments
+  assertthat::assert_that(
+    ## x
+    inherits(x, "sf"),
+    ## n
+    assertthat::is.count(n),
+    assertthat::noNA(n)
+  )
+  # create object
+  out <- list()
+  idx <- which(!is.na(x))
+  for (i in seq_len(n)) {
+    v <- rep(NA_real_, nrow(x))
+    v[idx] <- sample.int(6L, size = length(idx), replace = TRUE)
+    out[[paste0("precompute_", i)]] <- compress_object(v)
+  }
+  # return cache
   out
 }

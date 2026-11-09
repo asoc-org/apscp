@@ -35,7 +35,7 @@ NULL
 #'   settings = simulate_prioritization_settings(sim_project),
 #'   metrics = eval_prioritization(
 #'     sim_project, sim_settings,
-#'     sim_project$dataset$get_solution_data("solution")
+#'     sim_project$dataset$get_pu_column_data("solution")
 #'   )
 #' )
 #'

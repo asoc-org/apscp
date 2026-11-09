@@ -62,10 +62,11 @@ read_project <- function(path) {
   # normalize paths to save directory as metadata path
   pu_path <- file.path(dirname(path), l$dataset_paths$pu_path)
   boundary_path <- file.path(dirname(path), l$dataset_paths$boundary_path)
+  cache_path <- file.path(dirname(path), l$dataset_paths$cache_path)
 
   # import dataset
   d <- read_dataset(
-    pu_path = pu_path, boundary_path = boundary_path,
+    pu_path = pu_path, boundary_path = boundary_path, cache_path = cache_path,
     dataset_dir = tempfile()
   )
 
@@ -150,9 +151,10 @@ write_project <- function(x, path) {
   }
   pu_path <- paste0(path_no_ext, ".gpkg.zip")
   boundary_path <- paste0(path_no_ext, ".boundary.rds")
+  cache_path <- paste0(path_no_ext, ".cache.rds")
 
   # save dataset
-  write_dataset(x$dataset, pu_path, boundary_path)
+  write_dataset(x$dataset, pu_path, boundary_path, cache_path)
 
   # serialize project
   ## note we set global option so that only the base file name is
@@ -165,7 +167,8 @@ write_project <- function(x, path) {
   # assign dataset paths
   l$dataset_paths <- list(
     pu_path = basename(pu_path),
-    boundary_path = basename(boundary_path)
+    boundary_path = basename(boundary_path),
+    cache_path = basename(cache_path)
   )
 
   # copy tile files to new directory

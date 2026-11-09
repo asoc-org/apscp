@@ -1,4 +1,4 @@
-#' @include internal.R
+#' @include internal.R utils_compress.R
 NULL
 
 #' R6 class representing a dataset
@@ -27,6 +27,12 @@ Dataset <- R6::R6Class(
     #' @field boundary_data [Matrix::sparseMatrix()] object.
     boundary_data = NULL,
 
+    #' @field cache_path `character` file path.
+    cache_path = NULL,
+
+    #' @field cache_data `list` object.
+    cache_data = NULL,
+
     #' @field n_pu `integer` value.
     n_pu = NULL,
 
@@ -34,8 +40,9 @@ Dataset <- R6::R6Class(
     #' Create a `Dataset` object.
     #' @param pu_path `character ` file path.
     #' @param boundary_path `character` file path.
+    #' @param cache_path `character` file path.
     #' @return A new `Dataset` object.
-    initialize = function(pu_path, boundary_path) {
+    initialize = function(pu_path, boundary_path, cache_path) {
       # assert that arguments are valid
       assertthat::assert_that(
         ## pu_path
@@ -43,11 +50,17 @@ Dataset <- R6::R6Class(
         assertthat::noNA(pu_path),
         ## boundary_path
         assertthat::is.string(boundary_path),
-        assertthat::noNA(boundary_path)
+        assertthat::noNA(boundary_path),
+        ## cache_path
+        assertthat::is.string(cache_path),
+        assertthat::noNA(cache_path)
       )
-      # set boundary field
+      # set fields
       self$boundary_path <- boundary_path
       self$pu_path <- pu_path
+      self$cache_path <- cache_path
+      # import cache
+      self$cache_data <- readRDS(cache_path)
       # initialize database connection
       private$open_db_con()
       on.exit(private$close_db_con(), add = TRUE, after = TRUE)
@@ -63,10 +76,6 @@ Dataset <- R6::R6Class(
         "_index" %in% DBI::dbListFields(self$pu_db_con, self$pu_db_table),
         msg = "`pu_path` must have a column called \"_index\"."
       )
-      # initialize solution table
-      private$init_db_solution_table()
-      # initialize database indexes
-      private$init_db_solution_indexes()
     },
 
     #' @description
@@ -116,9 +125,9 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get column names for attribute table.
+    #' Get column names of planning unit data.
     #' @return A `character` vector.
-    get_attribute_columns = function() {
+    get_pu_columns = function() {
       # initialize database connection
       private$open_db_con()
       on.exit(private$close_db_con(), add = TRUE, after = TRUE)
@@ -127,40 +136,31 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get solution names.
+    #' Get column names of cached table.
     #' @return A `character` vector.
-    get_solution_columns = function() {
-      # initialize database connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # return unique solution names
-      DBI::dbGetQuery(
-        self$pu_db_con,
-        paste0(
-          "SELECT DISTINCT solution from ",
-          self$pu_db_table,
-          "_solutions"
-        )
-      )[[1]]
+    get_cache_columns = function() {
+      names(self$cache_data)
     },
 
     #' @description
-    #' Get `data.frame` with attribute data.
+    #' Get `data.frame` with planning unit data.
     #' @param column `character` vector of column names.
     #' Defaults to `NULL` such that all columns are returned.
     #' @return A `data.frame` object.
-    get_attribute_dataframe = function(column = NULL) {
+    get_pu_dataframe = function(column = NULL) {
       # assert arguments are valid
       if (!is.null(column)) {
         assertthat::assert_that(
-          self$has_attribute_column(column),
-          msg = paste0("Dataset does not have column \"", column, "\".")
+          self$has_pu_column(column),
+          msg = paste0(
+            "Planning unit data does not have column \"", column, "\"."
+          )
         )
       }
       # if column is NULL, then override with column names
       if (is.null(column)) {
         column <- setdiff(
-          self$get_attribute_columns(),
+          self$get_pu_columns(),
           c("fid", "geom", "geometry")
         )
       }
@@ -176,32 +176,28 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get `data.frame` with solution data.
+    #' Get `data.frame` with cache data.
     #' @param column `character` vector of column names.
     #' Defaults to `NULL` such that all columns are returned.
     #' @return A `data.frame` object.
-    get_solution_dataframe = function(column = NULL) {
+    get_cache_dataframe = function(column = NULL) {
       # assert arguments are valid
       if (!is.null(column)) {
         assertthat::assert_that(
-          self$has_solution_column(column),
-          msg = paste0("Dataset does not have column \"", column, "\".")
+          self$has_cache_column(column),
+          msg = paste0("Cache data does not have column \"", column, "\".")
         )
       }
       # if column is NULL, then override with solution names
       if (is.null(column)) {
-        column <- self$get_solution_columns()
+        column <- self$get_cache_columns()
       }
-      # initialize database connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
       # return data frame
       stats::setNames(
         as.data.frame(
-          vapply(
-            column,
-            function(x) self$get_solution_data(x),
-            numeric(self$get_n_pu())
+          lapply(
+            self$cache_data[column],
+            decompress_object
           )
         ),
         nm = column
@@ -209,11 +205,11 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get [sf::st_sf()] object with attribute data.
+    #' Get [sf::st_sf()] object with planning unit data.
     #' @param column `character` vector of column names.
     #' Defaults to `NULL` such that all columns are returned.
     #' @return A [sf::st_sf()] object.
-    get_attribute_sf = function(column = NULL) {
+    get_pu_sf = function(column = NULL) {
       # if column is NULL, return full dataset
       if (is.null(column)) {
         return(sf::read_sf(self$pu_path, layer = self$pu_db_table))
@@ -235,13 +231,13 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get [sf::st_sf()] object with solution data.
-    #' @param column `character` vector of solution names.
+    #' Get [sf::st_sf()] object with cache data.
+    #' @param column `character` vector of column names.
     #' Defaults to `NULL` such that all solutions are returned.
     #' @return A [sf::st_sf()] object.
-    get_solution_sf = function(column = NULL) {
+    get_cache_sf = function(column = NULL) {
       # import data and return specified column(s)
-      d <- self$get_solution_dataframe(column = column)
+      d <- self$get_cache_dataframe(column = column)
       # add geometry column
       d$geom <- sf::st_geometry(
         sf::read_sf(self$pu_path, layer = self$pu_db_table)
@@ -251,10 +247,10 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get data from a column in the attribute table.
-    #' @param column `character` value indicating the attribute column name.
+    #' Get data from a column of the planing unit data.
+    #' @param column `character` value indicating the column name.
     #' @return A vector.
-    get_attribute_data = function(column) {
+    get_pu_column_data = function(column) {
       # assert arguments are valid
       assertthat::assert_that(assertthat::is.string(column))
       # initialize database connection
@@ -268,49 +264,39 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get data from the solution table.
+    #' Get data from a column of the cache data.
     #' @param column `character` value indicating name of solution.
     #' @return A vector.
-    get_solution_data = function(column) {
+    get_cache_column_data = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(assertthat::is.string(column))
-      # initialize database connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # return vector
-      as.double(
-        DBI::dbGetQuery(
-          self$pu_db_con,
-          paste0(
-            "SELECT status FROM ",
-            self$pu_db_table,
-            "_solutions WHERE solution = '",
-            column, "'"
-          )
-        )[[1]]
+      assertthat::assert_that(
+        assertthat::is.string(column),
+        self$has_cache_column(column)
       )
+      # return vector
+      decompress_object(self$cache_data[[column]])
     },
 
     #' @description
-    #' Get total (sum) of values in a column from the attribute table.
+    #' Get total (sum) of values in a column of the planning unit data.
     #' @param column `character` value.
     #' @return A `numeric` vector.
-    get_attribute_total = function(column) {
+    get_pu_column_total = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(self$has_attribute_column(column))
+      assertthat::assert_that(self$has_pu_column(column))
       # return sum of values
-      colSums(self$get_attribute_dataframe(column), na.rm = TRUE)
+      colSums(self$get_pu_dataframe(column), na.rm = TRUE)
     },
 
     #' @description
-    #' Get total (sum) of values for a solution.
+    #' Get total (sum) of values in a column of the cache data.
     #' @param column `character` value.
     #' @return A `numeric` vector.
-    get_solution_total = function(column) {
+    get_cache_column_total = function(column) {
       # assert arguments are valid
-      assertthat::assert_that(self$has_solution_column(column))
+      assertthat::assert_that(self$has_cache_column(column))
       # return sum of values
-      colSums(self$get_solution_dataframe(column), na.rm = TRUE)
+      colSums(self$get_cache_dataframe(column), na.rm = TRUE)
     },
 
     #' @description
@@ -340,7 +326,7 @@ Dataset <- R6::R6Class(
       if (length(allocation) > 0L) {
         assertthat::assert_that(
           !is.null(names(allocation)),
-          self$has_attribute_column(allocation)
+          self$has_pu_column(allocation)
         )
       }
       # if no planning units allocated to zone, then return 0
@@ -351,7 +337,7 @@ Dataset <- R6::R6Class(
         return(rep(0, self$get_n_pu()))
       }
       # get data frame with allocations
-      pu_data <- self$get_attribute_dataframe(unique(allocation))
+      pu_data <- self$get_pu_dataframe(unique(allocation))
       # create vector with binary values indicating if planning unit is assigned
       # the zone based on the data in the allocation columns
       out <- numeric(self$get_n_pu())
@@ -370,16 +356,16 @@ Dataset <- R6::R6Class(
     #' @param status `numeric` vector with binary values for each
     #' planning unit.
     #' @return A `numeric` value.
-    get_attribute_held = function(column, status) {
+    get_pu_column_held = function(column, status) {
       # assert arguments are valid
       assertthat::assert_that(
         length(column) > 0,
-        self$has_attribute_column(column),
+        self$has_pu_column(column),
         is.numeric(status),
         identical(length(status), self$get_n_pu())
       )
       # run calculations
-      m <- as.matrix(self$get_attribute_dataframe(column))
+      m <- as.matrix(self$get_pu_dataframe(column))
       total <- colSums(m, na.rm = TRUE)
       held <- colSums(
         m * matrix(status, ncol = length(column), nrow = nrow(m)),
@@ -390,54 +376,31 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Check if the attribute table has a column (or columns) with a specified
-    #' name.
+    #' Check if a column (or columns) exists with a specified name in the
+    #' planning unit data.
     #' @param column `character vector.
     #' @return A `logical` value.
-    has_attribute_column = function(column) {
+    has_pu_column = function(column) {
       (length(column) > 0) &&
-        all(column %in% self$get_attribute_columns())
+        all(column %in% self$get_pu_columns())
     },
 
     #' @description
-    #' Check if the solution table has a solution (or solutions) with a
-    #' specified name.
+    #' Check if a column (or columns) exists with a specified name in the
+    #' cache data.
     #' @param column `character vector.
     #' @return A `logical` value.
-    has_solution_column = function(column) {
+    has_cache_column = function(column) {
       if (identical(length(column), 0L)) return (FALSE)
-      if (identical(length(column), 1L)) {
-        # initialize database connection
-        private$open_db_con()
-        on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-        # return if solution exists in solution table
-        return(
-        (length(column) > 0) &&
-          (
-            nrow(
-              DBI::dbGetQuery(
-                self$pu_db_con,
-                paste0(
-                  "SELECT solution from ",
-                  self$pu_db_table, "_solutions ",
-                  "WHERE solution = '", column[[1]], "' AND ",
-                  "_index = 1"
-                )
-              )
-            ) > 0L
-          )
-        )
-      } else {
-        all(column %in% self$get_solution_columns())
-      }
+      all(column %in% names(self$cache_data))
     },
 
     #' @description
-    #' Set data for the attribute table.
+    #' Set data for a column of the planning unit data.
     #' @param column `character` value.
     #' @param values `numeric` vector.
     #' @return An invisible `TRUE` indicating success.
-    set_attribute_data = function(column, values) {
+    set_pu_column_data = function(column, values) {
       # assert arguments are valid
       assertthat::assert_that(
         assertthat::is.string(column),
@@ -530,78 +493,19 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Append data for to solution table.
+    #' Set data for a column of the cache data.
     #' @param column `character` value.
     #' @param values `numeric` vector.
     #' @return An invisible `TRUE` indicating success.
-    append_solution_data = function(column, values) {
+    set_cache_column_data = function(column, values) {
       # assert arguments are valid
       assertthat::assert_that(
         assertthat::is.string(column),
         assertthat::noNA(column),
         identical(length(values), self$get_n_pu())
       )
-      # initialize database connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # add solution status values
-      DBI::dbAppendTable(
-        self$pu_db_con,
-        name = paste0(self$pu_db_table, "_solutions"),
-        value = tibble::tibble(
-          solution = column,
-          `_index` = DBI::dbGetQuery(
-            self$pu_db_con,
-            paste0("SELECT \"_index\" FROM ", self$pu_db_table)
-          )[[1]],
-          status = as.integer(values)
-        )
-      )
-      # return self
-      invisible(self)
-    },
-
-    #' @description
-    #' Set data for the solution table.
-    #' @param x Named `list` of solutions. Each element must contain
-    #' a `numeric` vector with solutions values, and element names
-    #' correspond to solution identifiers.
-    #' @return An invisible `TRUE` indicating success.
-    set_solution_data = function(x) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        is.list(x),
-        all(lengths(x) == self$get_n_pu()),
-        is.character(names(x))
-      )
-      assertthat::assert_that(
-        all(vapply(x, is.numeric, logical(1))),
-        msg = "All elements of `x` must be a numeric vector."
-      )
-      # delete solution table indexes
-      private$delete_db_solution_indexes()
-      # initialize database connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # overwrite with new table
-      DBI::dbWriteTable(
-        self$pu_db_con,
-        overwrite = TRUE,
-        name = paste0(self$pu_db_table, "_solutions"),
-        value = tibble::tibble(
-          solution = rep(names(x), each = self$get_n_pu()),
-          `_index` = rep(
-            DBI::dbGetQuery(
-              self$pu_db_con,
-              paste0("SELECT \"_index\" FROM ", self$pu_db_table)
-            )[[1]],
-            length(x)
-          ),
-          status = unlist(x, recursive = FALSE, use.names = FALSE)
-        )
-      )
-      # add solution indexes
-      private$init_db_solution_indexes()
+      # add values to cache
+      self$cache_data[[column]] <- compress_object(values)
       # return self
       invisible(self)
     }
@@ -680,50 +584,6 @@ Dataset <- R6::R6Class(
       invisible(NULL)
     },
 
-    init_db_solution_table = function() {
-      # open db connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # create empty table
-      DBI::dbExecute(
-        self$pu_db_con,
-        paste0(
-          "CREATE TABLE IF NOT EXISTS ", self$pu_db_table, "_solutions (",
-          "solution VARCHAR(255), ",
-          "_index INTEGER, ",
-          "status INTEGER );"
-        )
-      )
-      invisible(NULL)
-    },
-
-    init_db_solution_indexes = function() {
-      # open db connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # if needed, create index for solution column in table
-      DBI::dbExecute(
-        self$pu_db_con,
-        paste0(
-          "CREATE INDEX IF NOT EXISTS solutions_idx ON ",
-           self$pu_db_table, "_solutions (solution);"
-        )
-      )
-      invisible(NULL)
-    },
-
-    delete_db_solution_indexes = function() {
-      # open db connection
-      private$open_db_con()
-      on.exit(private$close_db_con(), add = TRUE, after = TRUE)
-      # if needed, drop index for solution column in table
-      DBI::dbExecute(
-        self$pu_db_con,
-        "DROP INDEX IF EXISTS solutions_idx;"
-      )
-      invisible(NULL)
-    },
-
     finalize = function() {
       private$close_db_con()
     }
@@ -738,6 +598,8 @@ Dataset <- R6::R6Class(
 #' @param pu_path `character` file path.
 #'
 #' @param boundary_path `character` file path.
+#'
+#' @param cache_path `character` file path.
 #'
 #' @return A [`Dataset`] object.
 #'
@@ -760,14 +622,23 @@ Dataset <- R6::R6Class(
 #' bd_data <- prioritizr::boundary_matrix(sim_data)
 #' write_matrix(bd_data, sim_path2)
 #'
+#' # manually prepare cache data
+#' sim_path3 <- tempfile(fileext = ".rds")
+#' cache_data <- simulate_cache(sim_data)
+#' saveRDS(sim_path3)
+#'
 #' # create object
-#' x <- new_dataset(sim_path1, sim_path2)
+#' x <- new_dataset(sim_path1, sim_path2, sim_path3)
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-new_dataset <- function(pu_path, boundary_path) {
+new_dataset <- function(pu_path, boundary_path, cache_path) {
   # create new dataset
-  Dataset$new(pu_path = pu_path, boundary_path = boundary_path)
+  Dataset$new(
+    pu_path = pu_path,
+    boundary_path = boundary_path,
+    cache_path = cache_path
+  )
 }

@@ -4,12 +4,14 @@
 \alias{new_dataset}
 \title{New dataset}
 \usage{
-new_dataset(pu_path, boundary_path)
+new_dataset(pu_path, boundary_path, cache_path)
 }
 \arguments{
 \item{pu_path}{\code{character} file path.}
 
 \item{boundary_path}{\code{character} file path.}
+
+\item{cache_path}{\code{character} file path.}
 }
 \value{
 A \code{\link{Dataset}} object.
@@ -30,8 +32,13 @@ sim_path2 <- tempfile(fileext = ".rds")
 bd_data <- prioritizr::boundary_matrix(sim_data)
 write_matrix(bd_data, sim_path2)
 
+# manually prepare cache data
+sim_path3 <- tempfile(fileext = ".rds")
+cache_data <- simulate_cache(sim_data)
+saveRDS(sim_path3)
+
 # create object
-x <- new_dataset(sim_path1, sim_path2)
+x <- new_dataset(sim_path1, sim_path2, sim_path3)
 
 # preview object
 print(x)

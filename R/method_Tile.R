@@ -88,10 +88,6 @@ create_tile_from_sf <- function(
 #'
 #' @param column `character` value with column name for data.
 #'
-#' @param type `character value indicating if the underlying data is obtained
-#' from the attribute table or the solution table. Available options include
-#' `"attribute"` or `"solution"`.
-#'
 #' @param engine `character` value denoting the engine for processing the
 #' the tiles. Available options include `"r"` or `"rust"`.
 #' Defaults to `get_golem_config("tile_engine")`.
@@ -107,8 +103,7 @@ create_tile_from_sf <- function(
 #' # create tile
 #' x <- create_tile_from_project(
 #'   sim_project,
-#'   column = "solution",
-#'   type = "solution"
+#'   column = "solution"
 #' )
 #'
 #' # preview object
@@ -118,7 +113,6 @@ create_tile_from_sf <- function(
 create_tile_from_project <- function(
   x,
   column,
-  type,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
@@ -132,10 +126,6 @@ create_tile_from_project <- function(
     ## column
     assertthat::is.string(column),
     assertthat::noNA(column),
-    ## type
-    assertthat::is.string(type),
-    assertthat::noNA(type),
-    is_match_of(type, c("attribute", "solution")),
     ## source_layer
     assertthat::is.string(source_layer),
     assertthat::noNA(source_layer),
@@ -156,13 +146,8 @@ create_tile_from_project <- function(
   )
   # create tiles
   if (identical(engine, "r")) {
-    if (identical(type, "attribute")) {
-      d <- x$dataset$get_attribute_sf(column)
-    } else {
-      d <- x$dataset$get_solution_sf(column)
-    }
     out <- create_tile_from_sf(
-      x = d,
+      x = x$dataset$get_pu_sf(column),
       path = path,
       source_layer = source_layer,
       max_zoom = max_zoom,
@@ -176,7 +161,6 @@ create_tile_from_project <- function(
     out <- create_tile_from_file(
       x = x$dataset$pu_path,
       column = column,
-      type = type,
       path = path,
       source_layer = source_layer,
       max_zoom = max_zoom,
@@ -210,11 +194,7 @@ create_tile_from_project <- function(
 #' path <- tempfile(fileext = ".gpkg")
 #'
 #' # create tile
-#' x <- create_tile_from_file(
-#'   path,
-#'   column = "solution",
-#'   type = "solution"
-#' )
+#' x <- create_tile_from_file(path, column = "solution")
 #'
 #' # preview object
 #' print(x)
@@ -223,7 +203,6 @@ create_tile_from_project <- function(
 create_tile_from_file <- function(
   x,
   column,
-  type,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
@@ -237,10 +216,6 @@ create_tile_from_file <- function(
     ## column
     assertthat::is.string(column),
     assertthat::noNA(column),
-    ## type
-    assertthat::is.string(type),
-    assertthat::noNA(type),
-    is_match_of(type, c("attribute", "solution")),
     ## source_layer
     assertthat::is.string(source_layer),
     assertthat::noNA(source_layer),
@@ -256,38 +231,18 @@ create_tile_from_file <- function(
     assertthat::noNA(verbose)
   )
   # create tiles
-  if (identical(type, "attribute")) {
-    withr::with_options(
-      list(freestiler.duckdb_backend = "rust"), {
-      freestiler::freestile_query(
-        query = paste0(
-          "SELECT \"", column, "\",\"GEOM\" FROM ST_Read(\"", x, "\")"
-        ),
-        output = path,
-        layer_name = source_layer,
-        max_zoom = max_zoom,
-        quiet = !verbose
-      )
-    })
-  } else {
-    withr::with_options(
-      list(freestiler.duckdb_backend = "rust"), {
-      freestiler::freestile_query(
-        query = paste0(
-          "SELECT \"j\".\"", column, "\",\"x\".\"GEOM\" FROM ",
-          "sqlite_scan(\"", x, "\", ",
-          "\"", tools::file_path_sans_ext(basename(x)), "_solutions\") as j ",
-          "JOIN ST_Read(\"", x, "\") as x ",
-          "ON \"j\".\"_index\" = \"x\".\"_index\" ",
-          "WHERE \"solution\" = '", column, "'"
-        ),
-        output = path,
-        layer_name = source_layer,
-        max_zoom = max_zoom,
-        quiet = !verbose
-      )
-    })
-  }
+  withr::with_options(
+    list(freestiler.duckdb_backend = "rust"), {
+    freestiler::freestile_query(
+      query = paste0(
+        "SELECT \"", column, "\",\"GEOM\" FROM ST_Read(\"", x, "\")"
+      ),
+      output = path,
+      layer_name = source_layer,
+      max_zoom = max_zoom,
+      quiet = !verbose
+    )
+  })
   # verify tile generation worked
   assertthat::assert_that(
     file.exists(path),

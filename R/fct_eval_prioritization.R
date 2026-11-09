@@ -55,7 +55,7 @@ eval_prioritization <- function(project, settings, prioritization) {
   )
 
   # prepare data for evaluation
-  pu_data <- as.matrix(project$dataset$get_attribute_dataframe())
+  pu_data <- as.matrix(project$dataset$get_pu_dataframe())
   pu_data[is.na(pu_data)] <- 0
 
   # prepare prioritization for evaluation
@@ -89,7 +89,7 @@ eval_prioritization <- function(project, settings, prioritization) {
 #' @param x `list` with [new_feature()], [new_lock()], or [new_cost()] data.
 #'
 #' @param pu_data Object generated with
-#' `as.matrix(Dataset$get_attribute_dataframe())`.
+#' `as.matrix(Dataset$get_pu_dataframe())`.
 #'
 #' @param prioritization `numeric` vector or object generated with
 #' [solve_prioritization()].

@@ -4,15 +4,16 @@
 \alias{write_dataset}
 \title{Write dataset}
 \usage{
-write_dataset(x, pu_path, boundary_path)
+write_dataset(x, pu_path, boundary_path, cache_path)
 }
 \arguments{
 \item{x}{\code{\link{Dataset}} object.}
 
 \item{pu_path}{\code{character} file path for planning unit data.}
 
-\item{boundary_path}{\code{character} file path for boundary data.
-If the dataset does not have boundary data, then use \code{boundary_path = NULL}.}
+\item{boundary_path}{\code{character} file path for boundary data.}
+
+\item{cache_path}{\code{character} file path for cache data.}
 }
 \value{
 An invisible \code{TRUE} indicating success.
@@ -29,10 +30,11 @@ dataset <- create_dataset_from_sf(sim_data)
 
 # define file paths for saving data
 pu_path <- tempfile(fileext = ".gpkg.zip")
-bd_path <- tempfile(fileext = ".csv.gz")
+bd_path <- tempfile(fileext = ".boundary.rds")
+cc_path <- tempfile(fileext = ".cache.rds")
 
 # save files
-write_dataset(dataset, pu_path, bd_path)
+write_dataset(dataset, pu_path, bd_path, cc_path)
 
 }
 \seealso{
