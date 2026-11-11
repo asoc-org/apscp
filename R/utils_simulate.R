@@ -145,14 +145,16 @@ simulate_project <- function() {
     new_cost(
       name = "Tourism revenue",
       id = "cost-1",
-      weight = sample(
-        seq(
-          from = get_golem_config("prioritization_cost_weights")[1],
-          to = get_golem_config("prioritization_cost_weights")[2],
-          by = get_golem_config("prioritization_cost_weights")[3]
-        ),
-        1L
-      ),
+      weight = withr::with_seed(1L, {
+        sample(
+          seq(
+            from = get_golem_config("prioritization_cost_weights")[1],
+            to = get_golem_config("prioritization_cost_weights")[2],
+            by = get_golem_config("prioritization_cost_weights")[3]
+          ),
+          1L
+        )
+      }),
       zone = "Tourism",
       layer = new_layer(
         dataset = dataset,
@@ -217,20 +219,25 @@ simulate_project <- function() {
   s1 <- dataset$get_pu_status(zone = "Biodiversity", alloc)
   s2 <- dataset$get_pu_status(zone = "Tourism", alloc)
   s3 <- dataset$get_pu_status(zone = "Scientific", alloc)
+
   # create feature objects
   features <- lapply(seq_len(5), function(i) {
     new_feature(
       name = paste0("Species ", i),
       id = paste0("feature-", i),
-      zone_targets = simulate_feature_zone_targets(
-        seq(
-          from = get_golem_config("prioritization_feature_targets")[1],
-          to = get_golem_config("prioritization_feature_targets")[2],
-          by = get_golem_config("prioritization_feature_targets")[3]
-        ),
-        3L
-      ),
-      zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
+      zone_targets = withr::with_seed(i, {
+        simulate_feature_zone_targets(
+          seq(
+            from = get_golem_config("prioritization_feature_targets")[1],
+            to = get_golem_config("prioritization_feature_targets")[2],
+            by = get_golem_config("prioritization_feature_targets")[3]
+          ),
+          3L
+        )
+      }),
+      zone_weights = withr::with_seed(i, {
+        sample(c(0, 0.5, 1), 3L, replace = TRUE)
+      }),
       zone_helds = unname(
         c(
           dataset$get_pu_column_held(column = paste0("feat_", i), s1),
@@ -238,7 +245,9 @@ simulate_project <- function() {
           dataset$get_pu_column_held(column = paste0("feat_", i), s3)
         ),
       ),
-      themes = themes[c(1, sample(c(2, 3), 1))],
+      themes = withr::with_seed(i, {
+        themes[c(1, sample(c(2, 3), 1))]
+      }),
       layer = new_layer(
         dataset = dataset,
         tile = tile,
@@ -555,7 +564,17 @@ simulate_feature_zone_targets <- function(x, n) {
 #'
 #' @return A `list` object.
 #'
-#' @noRd
+#' @examples
+#' # simulate data
+#' d <- simulate_spatial_data()
+#'
+#' # simulate cache
+#' sim_cache <- simulate_cache(d)
+#'
+#' # preview cache
+#' print(sim_cache)
+#'
+#' @export
 simulate_cache <- function(x, n = 10) {
   # assert valid arguments
   assertthat::assert_that(

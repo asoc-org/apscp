@@ -34,6 +34,7 @@ print(s)
 \seealso{
 Other functions for simulating data:
 \code{\link[=simulate_binary_legend]{simulate_binary_legend()}},
+\code{\link[=simulate_cache]{simulate_cache()}},
 \code{\link[=simulate_continuous_legend]{simulate_continuous_legend()}},
 \code{\link[=simulate_pmtiles_file]{simulate_pmtiles_file()}},
 \code{\link[=simulate_project]{simulate_project()}},

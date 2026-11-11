@@ -74,7 +74,6 @@ create_solution <- function(
     tile <- create_tile_from_project(
       x = project,
       column = column,
-      type = "solution",
       source_layer = "layer",
       path = tempfile(
         tmpdir = get_golem_config("tile_server_dir"),
@@ -230,7 +229,6 @@ create_solution_from_prioritization <- function(
       tile = create_tile_from_project(
         x = project,
         column = column,
-        type = "solution",
         path = tempfile(
           tmpdir = get_golem_config("tile_server_dir"),
           fileext = ".pmtiles"

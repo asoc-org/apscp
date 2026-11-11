@@ -295,6 +295,31 @@ Project <- R6::R6Class(
     },
 
     #' @description
+    #' Check if cache has an object with a particular identifier.
+    #' @param id `character` value.
+    #' @return A `logical` value.
+    has_cache_object = function(id) {
+      self$dataset$has_cache_object(id)
+    },
+
+    #' @description
+    #' Get object from cache.
+    #' @param id `character` value.
+    #' @return An object.
+    get_cache_object = function(id) {
+      self$dataset$get_cache_object(id)
+    },
+
+    #' @description
+    #' Set object in cache.
+    #' @param id `character` value.
+    #' @param value An object.
+    #' @return An invisible `TRUE` indicating success.
+    set_cache_object = function(id, value) {
+      self$dataset$set_cache_object(id, value)
+    },
+
+    #' @description
     #' Get solution from the project.
     #' @param id `character` value.
     #' @return A [new_solution()] object.
@@ -372,6 +397,7 @@ Project <- R6::R6Class(
       # return TRUE
       invisible(TRUE)
     }
+
   )
 )
 

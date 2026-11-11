@@ -8,10 +8,13 @@
  * @param {boolean} includeFeatures - Should features be included in the
  * output?
  * @param {boolean} includeCosts - Should costs be included in the
- * output?
+ * output?  Default to `TRUE`.
  * @param {boolean} includeLocks - Should locks be included in the
- * output?
+ * output?  Default to `TRUE`.
  * @param {boolean} includeSolutions - Should solutions be included in the
+ * output? Default to `TRUE`.
+ * @param {boolean} includeSelectAll - Should an option be included to
+ * select all options? Default to `FALSE`.
  * output?
  * @return {object}
  */
@@ -20,7 +23,8 @@ export function projectSelectOptions(
   includeFeatures = true,
   includeCosts = true,
   includeLocks = true,
-  includeSolutions = true
+  includeSolutions = true,
+  includeSelectAll = false
 ) {
   // initialize variables
   let n = 0;
@@ -43,6 +47,15 @@ export function projectSelectOptions(
   // define counters
   let i, j, k;
   k = 0;
+  // if needed, add select all
+  if (includeSelectAll === true) {
+    options[k] = {
+      value: "#selectall",
+      name: "Select all",
+      sort: "0-select-all"
+    };
+    ++k;
+  }
   // if needed, add features
   if (includeFeatures) {
     for (i = 0; i < project.features.length; ++i) {

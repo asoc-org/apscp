@@ -16,12 +16,24 @@ app_server_solution <- quote({
   # define task for generating solutions
   task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, gurobi_server, verbose) {
+      # define cache ids
+      id1 <- paste0("s-", id)
+      id2 <- paste0("m-", id)
       # if project has solution, then return prioritization based on it
-      sol <- try(app_data$project$get_solution(id), silent = TRUE)
-      if (inherits(sol, "Solution")) {
+      if (app_data$project$has_cache_object(id1)) {
+        x <- app_data$project$get_cache_object(id1)
+        if (app_data$project$has_cache_object(id2)) {
+          m <- app_data$project$get_cache_object(id2)
+        } else {
+          m <- eval_prioritization(project, settings, prioritization)
+        }
         return(
           list(
-            id = id, name = name, settings = settings, solution = sol,
+            id = id,
+            name = name,
+            settings = settings,
+            prioritization = x,
+            metrics = m,
             cache = TRUE
           )
         )
@@ -158,26 +170,27 @@ app_server_solution <- quote({
       )
       return()
     }
-    # create solution
+    # if needed, cache result
     if (!isTRUE(result$cache)) {
-      ## if result is not cached, then create new solution
-      sol <- create_solution_from_prioritization(
-        id = result$id,
-        name = result$name,
-        project = app_data$project,
-        prioritization = result$prioritization,
-        settings = result$settings,
-        metrics = result$metrics
-      )
-      ## add tile file to tracking for automatic clean up
-      app_data$session_files <- c(app_data$session_files, sol$layer$tile$path)
-    } else {
-      ## if result is cached, then modify solution from cached solution
-      sol <- result$solution
-      sol$name <- result$name
-      sol$settings <- result$settings
-      sol$id <- uuid::UUIDgenerate()
+      # define cache ids
+      id1 <- paste0("s-", result$id)
+      id2 <- paste0("m-", result$id)
+      if (!isTRUE(app_data$project$has_cache_object(id1))) {
+        app_data$project$set_cache_object(id1, result$prioritization)
+      }
+      if (!isTRUE(app_data$project$has_cache_object(id2))) {
+        app_data$project$set_cache_object(id2, result$metrics)
+      }
     }
+    # create solution
+    sol <- create_solution_from_prioritization(
+      id = result$id,
+      name = result$name,
+      project = app_data$project,
+      prioritization = result$prioritization,
+      settings = result$settings,
+      metrics = result$metrics
+    )
     # add solution to project
     app_data$project$add_solution(sol)
     # reset state
@@ -191,11 +204,7 @@ app_server_solution <- quote({
       visible = TRUE
     )
     # add solution to summarizer
-    summarizer_add_solution(
-      id = "summarizer",
-      solution = sol,
-      show = TRUE
-    )
+    summarizer_add_solution(id = "summarizer", solution = sol, show = TRUE)
     # open solution results sidebar
     sidebar_open(id = "right_sidebar", pane_id = "results_pane")
     # reset solver status

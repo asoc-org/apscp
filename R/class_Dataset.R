@@ -106,6 +106,53 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
+    #' Get identifiers present in cache.
+    #' @return A `character` vector.
+    get_cache_ids = function() {
+      names(self$cache_data)
+    },
+
+    #' @description
+    #' Check if cache has an object with a particular identifier.
+    #' @param id `character identifier value.
+    #' @return A `logical` value.
+    has_cache_object = function(id) {
+      assertthat::assert_that(assertthat::is.string(id))
+      isTRUE(id %in% names(self$cache_data))
+    },
+
+    #' @description
+    #' Get object from cache.
+    #' @param id `character` identifier value.
+    #' @return A vector.
+    get_cache_object = function(id) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.string(id),
+        self$has_cache_object(id)
+      )
+      # return object
+      decompress_object(self$cache_data[[id]])
+    },
+
+    #' @description
+    #' Set object in cache.
+    #' @param id `character` identifier value.
+    #' @param value An object.
+    #' @return An invisible `TRUE` indicating success.
+    set_cache_object = function(id, value) {
+      # assert arguments are valid
+      assertthat::assert_that(
+        assertthat::is.string(id),
+        assertthat::noNA(id)
+      )
+      # add values to cache
+      self$cache_data[[id]] <- compress_object(value)
+      # return TRUE
+      invisible(TRUE)
+    },
+
+    #' @description
     #' Get boundary data.
     #' @return A [Matrix::sparseMatrix()] object.
     get_boundary_data = function() {
@@ -133,13 +180,6 @@ Dataset <- R6::R6Class(
       on.exit(private$close_db_con(), add = TRUE, after = TRUE)
       # list database fields
       DBI::dbListFields(self$pu_db_con, self$pu_db_table)
-    },
-
-    #' @description
-    #' Get column names of cached table.
-    #' @return A `character` vector.
-    get_cache_columns = function() {
-      names(self$cache_data)
     },
 
     #' @description
@@ -176,35 +216,6 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get `data.frame` with cache data.
-    #' @param column `character` vector of column names.
-    #' Defaults to `NULL` such that all columns are returned.
-    #' @return A `data.frame` object.
-    get_cache_dataframe = function(column = NULL) {
-      # assert arguments are valid
-      if (!is.null(column)) {
-        assertthat::assert_that(
-          self$has_cache_column(column),
-          msg = paste0("Cache data does not have column \"", column, "\".")
-        )
-      }
-      # if column is NULL, then override with solution names
-      if (is.null(column)) {
-        column <- self$get_cache_columns()
-      }
-      # return data frame
-      stats::setNames(
-        as.data.frame(
-          lapply(
-            self$cache_data[column],
-            decompress_object
-          )
-        ),
-        nm = column
-      )
-    },
-
-    #' @description
     #' Get [sf::st_sf()] object with planning unit data.
     #' @param column `character` vector of column names.
     #' Defaults to `NULL` such that all columns are returned.
@@ -231,22 +242,6 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Get [sf::st_sf()] object with cache data.
-    #' @param column `character` vector of column names.
-    #' Defaults to `NULL` such that all solutions are returned.
-    #' @return A [sf::st_sf()] object.
-    get_cache_sf = function(column = NULL) {
-      # import data and return specified column(s)
-      d <- self$get_cache_dataframe(column = column)
-      # add geometry column
-      d$geom <- sf::st_geometry(
-        sf::read_sf(self$pu_path, layer = self$pu_db_table)
-      )
-      # convert to sf object
-      sf::st_as_sf(d)
-    },
-
-    #' @description
     #' Get data from a column of the planing unit data.
     #' @param column `character` value indicating the column name.
     #' @return A vector.
@@ -259,22 +254,8 @@ Dataset <- R6::R6Class(
       # return vector
       DBI::dbGetQuery(
         self$pu_db_con,
-        paste0("SELECT ", column, " FROM ", self$pu_db_table)
+        paste0("SELECT \"", column, "\" FROM ", self$pu_db_table)
       )[[1]]
-    },
-
-    #' @description
-    #' Get data from a column of the cache data.
-    #' @param column `character` value indicating name of solution.
-    #' @return A vector.
-    get_cache_column_data = function(column) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        assertthat::is.string(column),
-        self$has_cache_column(column)
-      )
-      # return vector
-      decompress_object(self$cache_data[[column]])
     },
 
     #' @description
@@ -286,17 +267,6 @@ Dataset <- R6::R6Class(
       assertthat::assert_that(self$has_pu_column(column))
       # return sum of values
       colSums(self$get_pu_dataframe(column), na.rm = TRUE)
-    },
-
-    #' @description
-    #' Get total (sum) of values in a column of the cache data.
-    #' @param column `character` value.
-    #' @return A `numeric` vector.
-    get_cache_column_total = function(column) {
-      # assert arguments are valid
-      assertthat::assert_that(self$has_cache_column(column))
-      # return sum of values
-      colSums(self$get_cache_dataframe(column), na.rm = TRUE)
     },
 
     #' @description
@@ -386,16 +356,6 @@ Dataset <- R6::R6Class(
     },
 
     #' @description
-    #' Check if a column (or columns) exists with a specified name in the
-    #' cache data.
-    #' @param column `character vector.
-    #' @return A `logical` value.
-    has_cache_column = function(column) {
-      if (identical(length(column), 0L)) return (FALSE)
-      all(column %in% names(self$cache_data))
-    },
-
-    #' @description
     #' Set data for a column of the planning unit data.
     #' @param column `character` value.
     #' @param values `numeric` vector.
@@ -417,7 +377,8 @@ Dataset <- R6::R6Class(
           DBI::dbExecute(
             self$pu_db_con,
             paste0(
-              "ALTER TABLE ", self$pu_db_table, " DROP COLUMN ", column, ";"
+              "ALTER TABLE ", self$pu_db_table,
+              " DROP COLUMN \"", column, "\";"
             )
           )
         }
@@ -488,24 +449,6 @@ Dataset <- R6::R6Class(
           paste0("DROP INDEX IF EXISTS \"temp_idx\";")
         )
       })
-      # return self
-      invisible(self)
-    },
-
-    #' @description
-    #' Set data for a column of the cache data.
-    #' @param column `character` value.
-    #' @param values `numeric` vector.
-    #' @return An invisible `TRUE` indicating success.
-    set_cache_column_data = function(column, values) {
-      # assert arguments are valid
-      assertthat::assert_that(
-        assertthat::is.string(column),
-        assertthat::noNA(column),
-        identical(length(values), self$get_n_pu())
-      )
-      # add values to cache
-      self$cache_data[[column]] <- compress_object(values)
       # return self
       invisible(self)
     }
@@ -625,7 +568,7 @@ Dataset <- R6::R6Class(
 #' # manually prepare cache data
 #' sim_path3 <- tempfile(fileext = ".rds")
 #' cache_data <- simulate_cache(sim_data)
-#' saveRDS(sim_path3)
+#' saveRDS(cache_data, sim_path3)
 #'
 #' # create object
 #' x <- new_dataset(sim_path1, sim_path2, sim_path3)

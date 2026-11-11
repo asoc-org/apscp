@@ -7,7 +7,6 @@
 create_tile_from_file(
   x,
   column,
-  type,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
@@ -18,8 +17,6 @@ create_tile_from_file(
 \item{x}{\code{character} value denoting the file path.}
 
 \item{column}{\code{character} value with column name for data.}
-
-\item{type}{\verb{character value indicating if the underlying data is obtained from the attribute table or the solution table. Available options include }"attribute"\code{or}"solution"`.}
 
 \item{source_layer}{\code{character} value with name for layer in PMTiles archive.
 Defaults to \code{"data-src"}.}
@@ -51,11 +48,7 @@ sim_data <- sf::st_transform(sim_data, 4326)
 path <- tempfile(fileext = ".gpkg")
 
 # create tile
-x <- create_tile_from_file(
-  path,
-  column = "solution",
-  type = "solution"
-)
+x <- create_tile_from_file(path, column = "solution")
 
 # preview object
 print(x)

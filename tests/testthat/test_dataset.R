@@ -120,32 +120,18 @@ test_that("cache methods", {
   d <- simulate_spatial_data()
   x <- create_dataset_from_sf(d, cache_columns = "solution")
   # run tests
-  ## has_cache_column
-  expect_true(x$has_cache_column("solution"))
-  expect_false(x$has_cache_column("asdf"))
-  ## get_cache_column_data
+  ## has_cache_object
+  expect_true(x$has_cache_object("solution"))
+  expect_false(x$has_cache_object("asdf"))
+  ## get_cache_object
   expect_equal(
-    x$get_cache_column_data("solution"),
+    x$get_cache_object("solution"),
     d$solution
   )
-  ## get_cache_dataframe
-  expect_equal(
-    x$get_cache_dataframe("solution"),
-    data.frame(solution = d$solution)
-  )
-  ## set_cache_column_data
+  ## set_cache_object
   v <- sample.int(6, x$get_n_pu(), replace = TRUE)
-  x$set_cache_column_data("sol2", v)
-  expect_equal(x$get_cache_column_data("sol2"), v)
-  ## get_cache_dataframe
-  expect_equal(
-    x$get_cache_dataframe(c("solution", "sol2")),
-    data.frame(solution = d$solution, sol2 = v)
-  )
-  expect_equal(
-    x$get_cache_dataframe(NULL),
-    data.frame(solution = d$solution, sol2 = v)
-  )
+  x$set_cache_object("sol2", v)
+  expect_equal(x$get_cache_object("sol2"), v)
 })
 
 test_that("read_dataset/write_dataset (non-compressed)", {
@@ -170,8 +156,8 @@ test_that("read_dataset/write_dataset (non-compressed)", {
   )
   expect_equal(x$get_boundary_data(), y$get_boundary_data())
   expect_equal(
-    x$get_cache_dataframe(),
-    y$get_cache_dataframe(),
+    x$get_cache_object("solution"),
+    y$get_cache_object("solution"),
     ignore_attr = TRUE
   )
 })
@@ -198,8 +184,8 @@ test_that("read_dataset/write_dataset (compressed)", {
   )
   expect_equal(x$get_boundary_data(), y$get_boundary_data())
   expect_equal(
-    x$get_cache_dataframe(),
-    y$get_cache_dataframe(),
+    x$get_cache_object("solution"),
+    y$get_cache_object("solution"),
     ignore_attr = TRUE
   )
 })
@@ -229,8 +215,8 @@ test_that("read_dataset/write_dataset (relative paths)", {
   )
   expect_equal(x$get_boundary_data(), y$get_boundary_data())
   expect_equal(
-    x$get_cache_dataframe(),
-    y$get_cache_dataframe(),
+    x$get_cache_object("solution"),
+    y$get_cache_object("solution"),
     ignore_attr = TRUE
   )
 })

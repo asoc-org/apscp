@@ -35,7 +35,7 @@ write_matrix(bd_data, sim_path2)
 # manually prepare cache data
 sim_path3 <- tempfile(fileext = ".rds")
 cache_data <- simulate_cache(sim_data)
-saveRDS(sim_path3)
+saveRDS(cache_data, sim_path3)
 
 # create object
 x <- new_dataset(sim_path1, sim_path2, sim_path3)

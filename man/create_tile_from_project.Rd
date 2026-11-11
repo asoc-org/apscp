@@ -7,7 +7,6 @@
 create_tile_from_project(
   x,
   column,
-  type,
   source_layer = "layer",
   path = tempfile(fileext = ".pmtiles"),
   max_zoom = 8,
@@ -19,8 +18,6 @@ create_tile_from_project(
 \item{x}{\code{\link[=new_project]{new_project()}} object.}
 
 \item{column}{\code{character} value with column name for data.}
-
-\item{type}{\verb{character value indicating if the underlying data is obtained from the attribute table or the solution table. Available options include }"attribute"\code{or}"solution"`.}
 
 \item{source_layer}{\code{character} value with name for layer in PMTiles archive.
 Defaults to \code{"data-src"}.}
@@ -51,8 +48,7 @@ sim_project <- simulate_project()
 # create tile
 x <- create_tile_from_project(
   sim_project,
-  column = "solution",
-  type = "solution"
+  column = "solution"
 )
 
 # preview object

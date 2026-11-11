@@ -3,7 +3,7 @@ test_that("new_project", {
   skip_if_sim_deps_not_installed()
   # create data
   s <- simulate_spatial_data()
-  w <- create_dataset_from_sf(s)
+  w <- create_dataset_from_sf(s, cache_column = "solution2")
   g <- create_tile_from_sf(s)
   # create bbox
   bb <- sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
@@ -166,6 +166,14 @@ test_that("methods", {
     get_project_element(x, "new_lock"),
     "Lock"
   )
+  ## has_cache_object
+  expect_false(x$dataset$has_pu_column("solution2"))
+  expect_true(x$has_cache_object("solution2"))
+  expect_false(x$has_cache_object("asdf"))
+  ## set_cache_object
+  v <- letters[1:5]
+  x$set_cache_object("asdf", v)
+  expect_equal(x$get_cache_object("asdf"), v)
 })
 
 test_that("map_project", {

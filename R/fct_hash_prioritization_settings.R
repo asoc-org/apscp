@@ -67,8 +67,8 @@ sanitize_prioritization_settings <- function(settings, digits = 3) {
       dplyr::select(column, zone, target, weight) |>
       dplyr::mutate(
         column = sanitize_text(column),
-        target = as.integer(as.double(target) * digits),
-        weight = as.integer(as.double(weight) * digits)
+        target = as.integer(as.double(target) * (10^digits)),
+        weight = as.integer(as.double(weight) * (10^digits))
       ) |>
       dplyr::arrange() |>
       as.data.frame(),
@@ -77,7 +77,7 @@ sanitize_prioritization_settings <- function(settings, digits = 3) {
       dplyr::select(column, zone, priority) |>
       dplyr::mutate(
         column = sanitize_text(column),
-        priority = as.integer(as.double(priority) * digits)
+        priority = as.integer(as.double(priority) * (10^digits))
       ) |>
       dplyr::arrange() |>
       as.data.frame(),
@@ -86,7 +86,7 @@ sanitize_prioritization_settings <- function(settings, digits = 3) {
       dplyr::select(column, zone, weight) |>
       dplyr::mutate(
         column = sanitize_text(column),
-        weight = as.integer(as.double(weight) * digits)
+        weight = as.integer(as.double(weight) * (10^digits))
       ) |>
       dplyr::arrange() |>
       as.data.frame()

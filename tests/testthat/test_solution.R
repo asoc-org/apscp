@@ -94,7 +94,7 @@ test_that("create_solution", {
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
-  p$dataset$append_solution_data("solv", v)
+  p$dataset$set_pu_column_data("solv", v)
   m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solv"))
   # create object
   x <- create_solution(
@@ -122,7 +122,7 @@ test_that("create_solution (metrics = NULL)", {
   p <- simulate_project()
   s <- simulate_prioritization_settings(p)
   v <- sample.int(3, p$dataset$get_n_pu(), replace = TRUE)
-  p$dataset$append_solution_data("solv", v)
+  p$dataset$set_pu_column_data("solv", v)
   m <- eval_prioritization(p, s, p$dataset$get_pu_column_data("solv"))
   # create object
   x <- create_solution(
@@ -171,7 +171,7 @@ test_that("create_solution_from_prioritization (column = NULL)", {
   expect_equal(x$name, "sol")
   expect_equal(x$settings, s)
   expect_true(assertthat::is.string(x$layer$column))
-  expect_true(p$dataset$has_pu_column_data(x$layer$column))
+  expect_true(p$dataset$has_pu_column(x$layer$column))
   expect_equal(
     p$dataset$get_pu_column_data(x$layer$column),
     as.numeric(d)

@@ -180,73 +180,21 @@ prioritization_results <-
     list(id = id, result = cache_data[[id]])
   })
 
-## create tile file with solutions
-pu_data <- project$dataset$get_pu_sf()
-pu_data <- pu_data[, "_index", drop = FALSE]
-for (i in seq_along(cache_data)) {
-  pu_data[[paste0("precompute_", i)]] <- cache_data[[i]]
-}
-tile <- create_tile_from_sf(
-  pu_data,
-  path = file.path(
-    getwd(),
-    "inst/extdata/antarctic-peninsula-solutions.pmtiles"
-  )
-)
-
 ## add solutions to dataset cache
 {for (i in seq_along(prioritization_results)) {
-  project$dataset$set_cache_column_data(
-    prioritization_results[[i]]$id,
-    prioritization_results[[i]]$result
+  prioritization <- as.numeric(prioritization_results[[i]]$result)
+  metrics <- eval_prioritization(project, scenario_data[[i]], prioritization)
+  project$dataset$set_cache_object(
+    paste0("s-", prioritization_results[[i]]$id),
+    prioritization
+  )
+  project$dataset$set_cache_object(
+    paste0("m-", prioritization_results[[i]]$id),
+    metrics
   )
 }}
 
-## define solution legend
-solution_legend <- create_solution_legend(project)
-
-## create solution objects from prioritizations
-solution_data <-
-  seq_along(prioritization_results) %>%
-  lapply(function(i) {
-    ## display progress
-    cli::cli_text(paste0("starting ", i, " / ", length(scenario_data)))
-    ### define variables
-    curr_column <- paste0("precompute_", i)
-    curr_name <- paste0("Precompute ", i)
-    curr_scenario <- scenario_data[[i]]
-    ### return solution
-    new_solution(
-      name = curr_name,
-      settings = curr_scenario,
-      metrics = eval_prioritization(
-        project,
-        curr_scenario,
-        as.numeric(prioritization_results[[i]]$result)
-      ),
-      id = prioritization_results[[i]]$id,
-      layer = new_layer(
-        dataset = project$dataset,
-        column = curr_column,
-        total = sum(
-          as.numeric(prioritization_results[[i]]$result),
-          na.rm = TRUE
-        ),
-        legend = solution_legend,
-        provenance = precomputed_provenance(),
-        tile = tile,
-        hidden = TRUE,
-        visible = FALSE,
-        details = NULL
-      )
-    )
-  })
-
 # Exports
-## add tile to project
-project$tiles[[2]] <- tile
-## add solutions to project
-project$solutions <- unname(solution_data)
 ## save project to temporary directory
 td <- tempfile()
 dir.create(td, showWarnings = FALSE, recursive = TRUE)

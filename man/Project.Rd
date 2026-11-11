@@ -66,6 +66,9 @@ to create the project.}
     \item \href{#method-Project-print}{\code{Project$print()}}
     \item \href{#method-Project-get_centroid}{\code{Project$get_centroid()}}
     \item \href{#method-Project-get_bbox}{\code{Project$get_bbox()}}
+    \item \href{#method-Project-has_cache_object}{\code{Project$has_cache_object()}}
+    \item \href{#method-Project-get_cache_object}{\code{Project$get_cache_object()}}
+    \item \href{#method-Project-set_cache_object}{\code{Project$set_cache_object()}}
     \item \href{#method-Project-get_solution}{\code{Project$get_solution()}}
     \item \href{#method-Project-get_lock}{\code{Project$get_lock()}}
     \item \href{#method-Project-add_solution}{\code{Project$add_solution()}}
@@ -194,6 +197,73 @@ box by 10 percent. Defaults to 0.}
   }
   \subsection{Returns}{
     A \code{\link[sf:st_bbox]{sf::st_bbox()}} object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-has_cache_object"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-has_cache_object}{}}}
+\subsection{\code{Project$has_cache_object()}}{
+  Check if cache has an object with a particular identifier.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$has_cache_object(id)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{\code{character} value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{logical} value.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-get_cache_object"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-get_cache_object}{}}}
+\subsection{\code{Project$get_cache_object()}}{
+  Get object from cache.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$get_cache_object(id)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{\code{character} value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An object.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-set_cache_object"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-set_cache_object}{}}}
+\subsection{\code{Project$set_cache_object()}}{
+  Set object in cache.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$set_cache_object(id, value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{\code{character} value.}
+      \item{\code{value}}{An object.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible \code{TRUE} indicating success.
   }
 }
 

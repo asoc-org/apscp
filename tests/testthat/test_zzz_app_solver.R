@@ -79,8 +79,8 @@ test_that("app_solver", {
   app$run_js(
     paste0(
       "$('",
-      ".feature-setting:nth-child(1) .statuses .weight-status:nth-child(3)",
-      "')[0].hoverSelect.set('1')"
+      ".feature-setting:nth-child(2) .statuses .weight-status:nth-child(3)",
+      "')[0].hoverSelect.set('0.5')"
     )
   )
   app$wait_for_idle()
