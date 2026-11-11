@@ -6,7 +6,7 @@ library(mapgl)
 
 # simulate project data
 set.seed(500)
-sim_data <- simulate_project()
+sim_project <- simulate_project()
 
 # define user interface for Shiny application
 ui <- bslib::page_fluid(
@@ -29,7 +29,7 @@ server <- function(input, output, session) {
 
   # initialize solver object
   output$summarizer <- renderSummarizer({
-    summarizer(project = sim_data)
+    summarizer(project = sim_project)
   })
 
 }

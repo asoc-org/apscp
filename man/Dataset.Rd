@@ -36,6 +36,10 @@ Other functions for defining classes:
 
     \item{\code{boundary_data}}{\code{\link[Matrix:sparseMatrix]{Matrix::sparseMatrix()}} object.}
 
+    \item{\code{cache_path}}{\code{character} file path.}
+
+    \item{\code{cache_data}}{\code{list} object.}
+
     \item{\code{n_pu}}{\code{integer} value.}
   }
   \if{html}{\out{</div>}}
@@ -46,16 +50,20 @@ Other functions for defining classes:
     \item \href{#method-Dataset-initialize}{\code{Dataset$new()}}
     \item \href{#method-Dataset-print}{\code{Dataset$print()}}
     \item \href{#method-Dataset-get_n_pu}{\code{Dataset$get_n_pu()}}
+    \item \href{#method-Dataset-get_cache_ids}{\code{Dataset$get_cache_ids()}}
+    \item \href{#method-Dataset-has_cache_object}{\code{Dataset$has_cache_object()}}
+    \item \href{#method-Dataset-get_cache_object}{\code{Dataset$get_cache_object()}}
+    \item \href{#method-Dataset-set_cache_object}{\code{Dataset$set_cache_object()}}
     \item \href{#method-Dataset-get_boundary_data}{\code{Dataset$get_boundary_data()}}
-    \item \href{#method-Dataset-get_column_names}{\code{Dataset$get_column_names()}}
-    \item \href{#method-Dataset-get_dataframe}{\code{Dataset$get_dataframe()}}
-    \item \href{#method-Dataset-get_sf}{\code{Dataset$get_sf()}}
-    \item \href{#method-Dataset-get_column_data}{\code{Dataset$get_column_data()}}
-    \item \href{#method-Dataset-get_column_total}{\code{Dataset$get_column_total()}}
+    \item \href{#method-Dataset-get_pu_columns}{\code{Dataset$get_pu_columns()}}
+    \item \href{#method-Dataset-get_pu_dataframe}{\code{Dataset$get_pu_dataframe()}}
+    \item \href{#method-Dataset-get_pu_sf}{\code{Dataset$get_pu_sf()}}
+    \item \href{#method-Dataset-get_pu_column_data}{\code{Dataset$get_pu_column_data()}}
+    \item \href{#method-Dataset-get_pu_column_total}{\code{Dataset$get_pu_column_total()}}
     \item \href{#method-Dataset-get_pu_status}{\code{Dataset$get_pu_status()}}
-    \item \href{#method-Dataset-get_column_held}{\code{Dataset$get_column_held()}}
-    \item \href{#method-Dataset-has_column}{\code{Dataset$has_column()}}
-    \item \href{#method-Dataset-set_column_data}{\code{Dataset$set_column_data()}}
+    \item \href{#method-Dataset-get_pu_column_held}{\code{Dataset$get_pu_column_held()}}
+    \item \href{#method-Dataset-has_pu_column}{\code{Dataset$has_pu_column()}}
+    \item \href{#method-Dataset-set_pu_column_data}{\code{Dataset$set_pu_column_data()}}
     \item \href{#method-Dataset-clone}{\code{Dataset$clone()}}
   }
 }
@@ -66,7 +74,7 @@ Other functions for defining classes:
   Create a \code{Dataset} object.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$new(pu_path, boundary_path)}
+    \preformatted{Dataset$new(pu_path, boundary_path, cache_path)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -74,6 +82,7 @@ Other functions for defining classes:
     \describe{
       \item{\code{pu_path}}{\code{character } file path.}
       \item{\code{boundary_path}}{\code{character} file path.}
+      \item{\code{cache_path}}{\code{character} file path.}
     }
     \if{html}{\out{</div>}}
   }
@@ -113,6 +122,88 @@ Other functions for defining classes:
 }
 
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_cache_ids"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_cache_ids}{}}}
+\subsection{\code{Dataset$get_cache_ids()}}{
+  Get identifiers present in cache.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_cache_ids()}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{character} vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-has_cache_object"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-has_cache_object}{}}}
+\subsection{\code{Dataset$has_cache_object()}}{
+  Check if cache has an object with a particular identifier.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$has_cache_object(id)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{`character identifier value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A \code{logical} value.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_cache_object"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_cache_object}{}}}
+\subsection{\code{Dataset$get_cache_object()}}{
+  Get object from cache.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_cache_object(id)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{\code{character} identifier value.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-set_cache_object"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-set_cache_object}{}}}
+\subsection{\code{Dataset$set_cache_object()}}{
+  Set object in cache.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$set_cache_object(id, value)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{id}}{\code{character} identifier value.}
+      \item{\code{value}}{An object.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible \code{TRUE} indicating success.
+  }
+}
+
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-Dataset-get_boundary_data"></a>}}
 \if{latex}{\out{\hypertarget{method-Dataset-get_boundary_data}{}}}
 \subsection{\code{Dataset$get_boundary_data()}}{
@@ -128,13 +219,13 @@ Other functions for defining classes:
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_names"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_names}{}}}
-\subsection{\code{Dataset$get_column_names()}}{
-  Get column names.
+\if{html}{\out{<a id="method-Dataset-get_pu_columns"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_columns}{}}}
+\subsection{\code{Dataset$get_pu_columns()}}{
+  Get column names of planning unit data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_names()}
+    \preformatted{Dataset$get_pu_columns()}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
@@ -143,20 +234,20 @@ Other functions for defining classes:
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_dataframe"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_dataframe}{}}}
-\subsection{\code{Dataset$get_dataframe()}}{
-  Get \code{data.frame} with data.
+\if{html}{\out{<a id="method-Dataset-get_pu_dataframe"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_dataframe}{}}}
+\subsection{\code{Dataset$get_pu_dataframe()}}{
+  Get \code{data.frame} with planning unit data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_dataframe(column = NULL)}
+    \preformatted{Dataset$get_pu_dataframe(column = NULL)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{\code{character} vector. Defaults to \code{NULL} such that
-all columns are returned.}
+      \item{\code{column}}{\code{character} vector of column names.
+Defaults to \code{NULL} such that all columns are returned.}
     }
     \if{html}{\out{</div>}}
   }
@@ -166,20 +257,20 @@ all columns are returned.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_sf"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_sf}{}}}
-\subsection{\code{Dataset$get_sf()}}{
-  Get \code{\link[sf:st_sf]{sf::st_sf()}} object with data.
+\if{html}{\out{<a id="method-Dataset-get_pu_sf"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_sf}{}}}
+\subsection{\code{Dataset$get_pu_sf()}}{
+  Get \code{\link[sf:st_sf]{sf::st_sf()}} object with planning unit data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_sf(column = NULL)}
+    \preformatted{Dataset$get_pu_sf(column = NULL)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
     \if{html}{\out{<div class="arguments">}}
     \describe{
-      \item{\code{column}}{\code{character} vector. Defaults to \code{NULL} such that
-all columns are returned.}
+      \item{\code{column}}{\code{character} vector of column names.
+Defaults to \code{NULL} such that all columns are returned.}
     }
     \if{html}{\out{</div>}}
   }
@@ -189,13 +280,35 @@ all columns are returned.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_data"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_data}{}}}
-\subsection{\code{Dataset$get_column_data()}}{
-  Get column data.
+\if{html}{\out{<a id="method-Dataset-get_pu_column_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_column_data}{}}}
+\subsection{\code{Dataset$get_pu_column_data()}}{
+  Get data from a column of the planing unit data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_data(column)}
+    \preformatted{Dataset$get_pu_column_data(column)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{column}}{\code{character} value indicating the column name.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    A vector.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Dataset-get_pu_column_total"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_column_total}{}}}
+\subsection{\code{Dataset$get_pu_column_total()}}{
+  Get total (sum) of values in a column of the planning unit data.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Dataset$get_pu_column_total(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -206,29 +319,7 @@ all columns are returned.}
     \if{html}{\out{</div>}}
   }
   \subsection{Returns}{
-    A vector.
-  }
-}
-
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_total"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_total}{}}}
-\subsection{\code{Dataset$get_column_total()}}{
-  Get total (sum) of values in a column.
-  \subsection{Usage}{
-    \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_total(column)}
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Arguments}{
-    \if{html}{\out{<div class="arguments">}}
-    \describe{
-      \item{\code{column}}{\code{character} or \code{integer} value.}
-    }
-    \if{html}{\out{</div>}}
-  }
-  \subsection{Returns}{
-    A \code{character} vector of layer names.
+    A \code{numeric} vector.
   }
 }
 
@@ -268,14 +359,14 @@ planning unit is allocated to the \code{zone}.
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-get_column_held"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-get_column_held}{}}}
-\subsection{\code{Dataset$get_column_held()}}{
+\if{html}{\out{<a id="method-Dataset-get_pu_column_held"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-get_pu_column_held}{}}}
+\subsection{\code{Dataset$get_pu_column_held()}}{
   Get proportion of values in a column that would be considered to by
 held by selected planning units.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$get_column_held(column, status)}
+    \preformatted{Dataset$get_pu_column_held(column, status)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -293,13 +384,14 @@ planning unit.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-has_column"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-has_column}{}}}
-\subsection{\code{Dataset$has_column()}}{
-  Check if the dataset has a column or columns.
+\if{html}{\out{<a id="method-Dataset-has_pu_column"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-has_pu_column}{}}}
+\subsection{\code{Dataset$has_pu_column()}}{
+  Check if a column (or columns) exists with a specified name in the
+planning unit data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$has_column(column)}
+    \preformatted{Dataset$has_pu_column(column)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{
@@ -315,13 +407,13 @@ planning unit.}
 }
 
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Dataset-set_column_data"></a>}}
-\if{latex}{\out{\hypertarget{method-Dataset-set_column_data}{}}}
-\subsection{\code{Dataset$set_column_data()}}{
-  Set column data.
+\if{html}{\out{<a id="method-Dataset-set_pu_column_data"></a>}}
+\if{latex}{\out{\hypertarget{method-Dataset-set_pu_column_data}{}}}
+\subsection{\code{Dataset$set_pu_column_data()}}{
+  Set data for a column of the planning unit data.
   \subsection{Usage}{
     \if{html}{\out{<div class="r">}}
-    \preformatted{Dataset$set_column_data(column, values)}
+    \preformatted{Dataset$set_pu_column_data(column, values)}
     \if{html}{\out{</div>}}
   }
   \subsection{Arguments}{

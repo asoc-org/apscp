@@ -7,7 +7,7 @@
 read_project(path)
 }
 \arguments{
-\item{path}{\code{character} file path for YAML metadata file.}
+\item{path}{\code{character} file path for metadata file.}
 }
 \value{
 A \code{\link{Project}} object.
@@ -17,7 +17,10 @@ Import project data.
 }
 \examples{
 # find file path for built-in project
-path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+path <- system.file(
+  "extdata", "antarctic-peninsula.metadata.rds",
+  package = "apscp"
+)
 
 # import project
 x <- read_project(path)

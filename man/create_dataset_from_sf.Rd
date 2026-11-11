@@ -4,13 +4,17 @@
 \alias{create_dataset_from_sf}
 \title{Create dataset from sf object.}
 \usage{
-create_dataset_from_sf(x, boundary_data = NULL)
+create_dataset_from_sf(x, boundary_data = NULL, cache_columns = NULL)
 }
 \arguments{
 \item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
 
 \item{boundary_data}{\code{\link[Matrix:sparseMatrix]{Matrix::sparseMatrix()}} object with boundary data.
 Defaults to \code{NULL} such that the boundary data are calculated automatically.}
+
+\item{cache_columns}{\code{character} vector indicating the names of columns
+in \code{x} that should be moved to the cache. Defaults to \code{NULL} such that
+no columns should be moved to the cache.}
 }
 \value{
 A \code{\link{Dataset}} object.
@@ -39,6 +43,7 @@ Other functions for calling class methods:
 \code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
+\code{\link[=precomputed_provenance]{precomputed_provenance()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }
 \concept{method}

@@ -36,6 +36,8 @@ bundle_dev:
 data:
 	$(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-data.R
 	rm -f prepare-data.Rout
+	# $(R) CMD BATCH --no-restore --no-save inst/scripts/prepare-solutions.R
+	# rm -f prepare-solutions.Rout
 
 ## build docs
 man:
@@ -55,7 +57,7 @@ test:
 
 ## test examples
 examples:
-	$(R) --slave -e "devtools::run_examples();warnings()" > examples.log 2>&1
+	$(R) --slave -e "options(warn=2);devtools::run_examples();warnings()" > examples.log 2>&1
 	rm -f Rplots.pdf
 
 app_sidebar: bundle_dev

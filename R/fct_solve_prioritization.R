@@ -143,7 +143,7 @@ solve_prioritization <- function(
   ## zone names
   prob_zones <- project$zones
   ## planning unit data
-  pu_data <- project$dataset$get_dataframe(NULL)
+  pu_data <- project$dataset$get_pu_dataframe(NULL)
   pu_data[["_index"]] <- NULL
   pu_data$id <- seq_len(nrow(pu_data))
   pu_data[["_zeros"]] <- 0

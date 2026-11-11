@@ -46,3 +46,8 @@ test_that("deserialize_object", {
   # run tests
   expect_equal(x, y)
 })
+
+test_that("predefined provenance methods", {
+  expect_s3_class(precomputed_provenance(), "Provenance")
+  expect_s3_class(tool_generated_provenance(), "Provenance")
+})

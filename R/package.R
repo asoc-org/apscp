@@ -47,7 +47,12 @@ utils::globalVariables(
   c(
     "session",
     "app_data",
-    "."
+    ".",
+    "column",
+    "zone",
+    "target",
+    "weight",
+    "priority"
   )
 )
 

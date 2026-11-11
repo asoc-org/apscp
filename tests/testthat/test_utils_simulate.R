@@ -57,6 +57,10 @@ test_that("simulate_prioritization_settings", {
   # create object
   p <- simulate_project()
   x <- simulate_prioritization_settings(p)
+  # generate hash
+  h <- hash_prioritization_settings(x)
+  x2 <- x
+  x2$features$column[[1]] <- paste0(x2$features$column[[1]], "1")
   # run tests
   expect_type(x, "list")
   expect_s3_class(x$features, "data.frame")
@@ -77,4 +81,8 @@ test_that("simulate_prioritization_settings", {
   expect_type(x$costs$column, "character")
   expect_type(x$costs$zone, "character")
   expect_type(x$costs$weight, "double")
+  expect_type(h, "character")
+  expect_length(h, 1L)
+  expect_true(identical(h, hash_prioritization_settings(x)))
+  expect_false(identical(h, hash_prioritization_settings(x2)))
 })

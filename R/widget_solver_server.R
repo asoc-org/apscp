@@ -120,7 +120,9 @@ solver_sync <- function(
   value <- stats::setNames(
     lapply(
       seq_len(ncol(status)),
-      function(i) project$dataset$get_column_held(feature_columns, status[, i])
+      function(i) {
+        project$dataset$get_pu_column_held(feature_columns, status[, i])
+      }
     ),
     project$zones
   )

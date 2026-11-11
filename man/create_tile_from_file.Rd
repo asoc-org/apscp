@@ -16,7 +16,7 @@ create_tile_from_file(
 \arguments{
 \item{x}{\code{character} value denoting the file path.}
 
-\item{column}{\code{character} value with column name.}
+\item{column}{\code{character} value with column name for data.}
 
 \item{source_layer}{\code{character} value with name for layer in PMTiles archive.
 Defaults to \code{"data-src"}.}
@@ -48,10 +48,7 @@ sim_data <- sf::st_transform(sim_data, 4326)
 path <- tempfile(fileext = ".gpkg")
 
 # create tile
-x <- create_tile_from_file(
-  path,
-  column = "solution"
-)
+x <- create_tile_from_file(path, column = "solution")
 
 # preview object
 print(x)
@@ -67,6 +64,7 @@ Other functions for calling class methods:
 \code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
+\code{\link[=precomputed_provenance]{precomputed_provenance()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }
 \concept{method}

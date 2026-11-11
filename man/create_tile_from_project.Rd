@@ -17,7 +17,7 @@ create_tile_from_project(
 \arguments{
 \item{x}{\code{\link[=new_project]{new_project()}} object.}
 
-\item{column}{\code{character} value with column name.}
+\item{column}{\code{character} value with column name for data.}
 
 \item{source_layer}{\code{character} value with name for layer in PMTiles archive.
 Defaults to \code{"data-src"}.}
@@ -65,6 +65,7 @@ Other functions for calling class methods:
 \code{\link[=create_tile_from_file]{create_tile_from_file()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
+\code{\link[=precomputed_provenance]{precomputed_provenance()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }
 \concept{method}

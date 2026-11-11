@@ -5,7 +5,7 @@ NULL
 #'
 #' Import project data.
 #'
-#' @param path `character` file path for YAML metadata file.
+#' @param path `character` file path for metadata file.
 #'
 #' @return A [`Project`] object.
 #'
@@ -13,7 +13,10 @@ NULL
 #'
 #' @examples
 #' # find file path for built-in project
-#' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+#' path <- system.file(
+#'   "extdata", "antarctic-peninsula.metadata.rds",
+#'   package = "apscp"
+#' )
 #'
 #' # import project
 #' x <- read_project(path)
@@ -31,7 +34,15 @@ read_project <- function(path) {
   )
 
   # import metadata
-  l <- yaml::read_yaml(path)
+  if (endsWith(path, ".yml")) {
+    l <- yaml::read_yaml(path)
+  } else if (endsWith(path, ".metadata.rds")) {
+    l <- readRDS(path)
+  } else {
+    # nocov start
+    rlang::abort("`path` must have a .yml or .metadata.rds file extension.")
+    # nocov end
+  }
 
   # validate yaml metadata
   assertthat::assert_that(
@@ -51,10 +62,11 @@ read_project <- function(path) {
   # normalize paths to save directory as metadata path
   pu_path <- file.path(dirname(path), l$dataset_paths$pu_path)
   boundary_path <- file.path(dirname(path), l$dataset_paths$boundary_path)
+  cache_path <- file.path(dirname(path), l$dataset_paths$cache_path)
 
   # import dataset
   d <- read_dataset(
-    pu_path = pu_path, boundary_path = boundary_path,
+    pu_path = pu_path, boundary_path = boundary_path, cache_path = cache_path,
     dataset_dir = tempfile()
   )
 
@@ -91,7 +103,7 @@ read_project <- function(path) {
 #'
 #' @param x [`Project`] object.
 #'
-#' @param path `character` file path for YAML metadata file.
+#' @param path `character` file path for metadata file.
 #'
 #' @return An invisible `TRUE` indicating success.
 #'
@@ -99,7 +111,10 @@ read_project <- function(path) {
 #'
 #' @examples
 #' # find file path for built-in project
-#' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+#' path <- system.file(
+#'   "extdata", "antarctic-peninsula.metadata.rds",
+#'   package = "apscp"
+#' )
 #'
 #' # import project
 #' x <- read_project(path)
@@ -108,7 +123,7 @@ read_project <- function(path) {
 #' print(x)
 #'
 #' # save project to temporary file
-#' write_project(x, tempfile(fileext = ".yml"))
+#' write_project(x, tempfile(fileext = ".metadata.rds"))
 #'
 #' @export
 write_project <- function(x, path) {
@@ -119,17 +134,27 @@ write_project <- function(x, path) {
     ## path
     assertthat::is.string(path),
     assertthat::noNA(path),
-    dir.exists(dirname(path)),
-    endsWith(path, ".yml")
+    dir.exists(dirname(path))
   )
+  assertthat::assert_that(
+    endsWith(path, ".yml") || endsWith(path, ".metadata.rds"),
+    msg = "`path` must have a .yml or .metadata.rds file extension."
+ )
 
   # define file paths for datasets
   path_no_ext <- tools::file_path_sans_ext(path)
-  pu_path <- paste0(path_no_ext, "_pu.gpkg.zip")
-  boundary_path <- paste0(path_no_ext, "_bd.rds")
+  if (endsWith(path_no_ext, ".metadata")) {
+    path_no_ext <- substr(
+      path_no_ext,
+      1L, nchar(path_no_ext) - nchar(".metadata")
+    )
+  }
+  pu_path <- paste0(path_no_ext, ".gpkg.zip")
+  boundary_path <- paste0(path_no_ext, ".boundary.rds")
+  cache_path <- paste0(path_no_ext, ".cache.rds")
 
   # save dataset
-  write_dataset(x$dataset, pu_path, boundary_path)
+  write_dataset(x$dataset, pu_path, boundary_path, cache_path)
 
   # serialize project
   ## note we set global option so that only the base file name is
@@ -142,7 +167,8 @@ write_project <- function(x, path) {
   # assign dataset paths
   l$dataset_paths <- list(
     pu_path = basename(pu_path),
-    boundary_path = basename(boundary_path)
+    boundary_path = basename(boundary_path),
+    cache_path = basename(cache_path)
   )
 
   # copy tile files to new directory
@@ -155,7 +181,11 @@ write_project <- function(x, path) {
   })
 
   # save metadata
-  yaml::write_yaml(l, file = path)
+  if (endsWith(path, ".yml")) {
+    yaml::write_yaml(l, file = path)
+  } else {
+    saveRDS(l, path)
+  }
 
   # return success
   invisible(TRUE)
@@ -178,12 +208,20 @@ write_project <- function(x, path) {
 #'
 #' @export
 read_builtin_project <- function() {
-  # find path
+  # find path by looking for YAML file
   path <- dir(
     system.file("extdata", package = "apscp"),
     pattern = "^.*\\.yml$",
     full.names = TRUE
   )
+  # if can't find YAML file, look for RDS file
+  if (identical(length(path), 0L)) {
+    path <- dir(
+      system.file("extdata", package = "apscp"),
+      pattern = "^.*\\.metadata\\.rds$",
+      full.names = TRUE
+    )
+  }
   # if can't find path, throw error
   assertthat::assert_that(
     identical(length(path), 1L),
@@ -208,7 +246,10 @@ read_builtin_project <- function() {
 #'
 #' @examplesIf interactive()
 #' # find file path for built-in project
-#' path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+#' path <- system.file(
+#'   "extdata", "antarctic-peninsula.metadata.rds",
+#'   package = "apscp"
+#' )
 #'
 #' # import project
 #' x <- read_project(path)

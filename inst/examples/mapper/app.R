@@ -90,7 +90,7 @@ server <- function(input, output, session) {
     # generate name for new solution
     new_name <- paste0("sol_", state$n)
     # add solution values to dataset
-    sim_project$dataset$set_column_data(new_name, new_sol_values)
+    sim_project$dataset$set_pu_column_data(new_name, new_sol_values)
     # create new solution
     new_sol <- create_solution(
       new_name,

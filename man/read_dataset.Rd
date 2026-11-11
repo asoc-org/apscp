@@ -4,13 +4,14 @@
 \alias{read_dataset}
 \title{Read dataset}
 \usage{
-read_dataset(pu_path, boundary_path, dataset_dir = tempfile())
+read_dataset(pu_path, boundary_path, cache_path, dataset_dir = tempfile())
 }
 \arguments{
 \item{pu_path}{\code{character} file path for planning unit data.}
 
-\item{boundary_path}{\code{character} file path for boundary data.
-If the dataset does not have boundary data, then use \code{boundary_path = NULL}.}
+\item{boundary_path}{\code{character} file path for boundary data.}
+
+\item{cache_path}{\code{character} file path for cache data.}
 
 \item{dataset_dir}{\code{character} file path specifying a directory to
 to store planning unit and boundary data.}
@@ -24,16 +25,20 @@ Import a \code{\link{Dataset}} object.
 \examples{
 # specify file paths
 pu_path <- system.file(
-  "extdata", "antarctic-peninsula_pu.gpkg.zip",
+  "extdata", "antarctic-peninsula.gpkg.zip",
   package = "apscp"
 )
 bd_path <- system.file(
-  "extdata", "antarctic-peninsula_bd.rds",
+  "extdata", "antarctic-peninsula.boundary.rds",
+  package = "apscp"
+)
+cc_path <- system.file(
+  "extdata", "antarctic-peninsula.cache.rds",
   package = "apscp"
 )
 
 # import data
-x <- read_dataset(pu_path, bd_path)
+x <- read_dataset(pu_path, bd_path, cc_path)
 
 # preview object
 print(x)

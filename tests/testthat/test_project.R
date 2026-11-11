@@ -3,7 +3,7 @@ test_that("new_project", {
   skip_if_sim_deps_not_installed()
   # create data
   s <- simulate_spatial_data()
-  w <- create_dataset_from_sf(s)
+  w <- create_dataset_from_sf(s, cache_column = "solution2")
   g <- create_tile_from_sf(s)
   # create bbox
   bb <- sf::st_bbox(c(0, 1, 0, 1), crs = sf::st_crs(4326))
@@ -166,6 +166,14 @@ test_that("methods", {
     get_project_element(x, "new_lock"),
     "Lock"
   )
+  ## has_cache_object
+  expect_false(x$dataset$has_pu_column("solution2"))
+  expect_true(x$has_cache_object("solution2"))
+  expect_false(x$has_cache_object("asdf"))
+  ## set_cache_object
+  v <- letters[1:5]
+  x$set_cache_object("asdf", v)
+  expect_equal(x$get_cache_object("asdf"), v)
 })
 
 test_that("map_project", {
@@ -227,7 +235,7 @@ test_that("deserialize_object", {
   expect_equal(x, y)
 })
 
-test_that("read_project/write_project", {
+test_that("read_project/write_project (YAML)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create objects
@@ -241,12 +249,60 @@ test_that("read_project/write_project", {
   y <- read_project(path)
   # run tests
   file <- tools::file_path_sans_ext(basename(path))
-  yml_file <- paste0(file, ".yml")
-  pu_file <- paste0(file, "_pu.gpkg.zip")
-  bd_file <- paste0(file, "_bd.rds")
+  meta_file <- paste0(file, ".yml")
+  pu_file <- paste0(file, ".gpkg.zip")
+  bd_file <- paste0(file, ".boundary.rds")
   pm_file <- basename(x$tiles[[1]]$path)
   ## file were saved
-  expect_true(file.exists(file.path(td, yml_file)))
+  expect_true(file.exists(file.path(td, meta_file)))
+  expect_true(file.exists(file.path(td, pu_file)))
+  expect_true(file.exists(file.path(td, bd_file)))
+  expect_true(file.exists(file.path(td, pm_file)))
+  ## data imported correctly
+  x1 <- serialize_object(x)
+  expect_equal(
+    ## note that path elements are set to NULL because the file paths
+    ## should correspond to different locations
+    update_named_list_elements(x1, "path", NULL),
+    update_named_list_elements(serialize_object(y), "path", NULL),
+    tolerance = 1e-4
+  )
+})
+
+test_that("read_project/write_project (rds)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create objects
+  x <- simulate_project()
+  td <- tempfile()
+  dir.create(td, showWarnings = FALSE, recursive = TRUE)
+  path <- tempfile(tmpdir = td, fileext = ".metadata.rds")
+  # write project
+  write_project(x, path)
+  # read project
+  y <- read_project(path)
+  # run tests
+  file <- tools::file_path_sans_ext(basename(path))
+  meta_file <- basename(path)
+  pu_file <- paste0(
+    tools::file_path_sans_ext(
+      tools::file_path_sans_ext(
+        basename(path)
+      )
+    ),
+    ".gpkg.zip"
+  )
+  bd_file <- paste0(
+    tools::file_path_sans_ext(
+      tools::file_path_sans_ext(
+          basename(path)
+      )
+    ),
+    ".boundary.rds"
+  )
+  pm_file <- basename(x$tiles[[1]]$path)
+  ## file were saved
+  expect_true(file.exists(file.path(td, meta_file)))
   expect_true(file.exists(file.path(td, pu_file)))
   expect_true(file.exists(file.path(td, bd_file)))
   expect_true(file.exists(file.path(td, pm_file)))

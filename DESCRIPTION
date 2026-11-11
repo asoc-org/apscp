@@ -50,7 +50,9 @@ Imports:
     RSQLite (>= 3.53.3),
     shinyalert (>= 3.1.0),
     markdown (>= 2.0),
-    mirai (>= 2.7.2)
+    mirai (>= 2.7.2),
+    dplyr (>= 1.2.1),
+    digest (>= 0.6.39)
 Suggests:
     slam (>= 0.1-56),
     gurobi (>= 13.0-2),
@@ -97,6 +99,7 @@ Collate:
     'app_server_summarizer.R'
     'app_startup.R'
     'app_ui.R'
+    'utils_compress.R'
     'internal.R'
     'class_Dataset.R'
     'class_Layer.R'
@@ -110,6 +113,7 @@ Collate:
     'class_Theme.R'
     'class_Tile.R'
     'fct_eval_prioritization.R'
+    'fct_hash_prioritization_settings.R'
     'fct_mapgl.R'
     'fct_solve_prioritization.R'
     'import-standalone-as_Matrix.R'

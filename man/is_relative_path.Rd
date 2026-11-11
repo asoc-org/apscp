@@ -30,8 +30,12 @@ Other miscellaneous functions:
 \code{\link[=cli_format_vector]{cli_format_vector()}},
 \code{\link[=cli_list]{cli_list()}},
 \code{\link[=color_palette]{color_palette()}},
+\code{\link[=compress_object]{compress_object()}},
+\code{\link[=decompress_object]{decompress_object()}},
 \code{\link[=file_symlink]{file_symlink()}},
+\code{\link[=hash_prioritization_settings]{hash_prioritization_settings()}},
 \code{\link[=is_installed]{is_installed()}},
-\code{\link[=is_prioritization_settings]{is_prioritization_settings()}}
+\code{\link[=is_prioritization_settings]{is_prioritization_settings()}},
+\code{\link[=sanitize_prioritization_settings]{sanitize_prioritization_settings()}}
 }
 \concept{misc}

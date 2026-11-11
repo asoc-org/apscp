@@ -13,6 +13,7 @@ create_solution(
   settings,
   tile = NULL,
   metrics = NULL,
+  hidden = FALSE,
   id = uuid::UUIDgenerate()
 )
 }
@@ -36,6 +37,10 @@ Defaults to \code{NULL} such that a \code{\link[=new_tile]{new_tile()}} object i
 
 \item{metrics}{\code{list} with evaluation metrics for the solution.
 Defaults to \code{NULL} such that metrics are calculated automatically.}
+
+\item{hidden}{\code{logical} value indicating if the layer should
+be forcibly hidden and cannot be viewed in the application.
+Defaults to \code{FALSE}.}
 
 \item{id}{\code{character} value with unique identifier.
 Defaults to a random identifier (\code{\link[uuid:UUIDgenerate]{uuid::UUIDgenerate()}}).}
@@ -74,6 +79,7 @@ Other functions for calling class methods:
 \code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
 \code{\link[=new_dataset]{new_dataset()}},
+\code{\link[=precomputed_provenance]{precomputed_provenance()}},
 \code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
 }
 \concept{method}

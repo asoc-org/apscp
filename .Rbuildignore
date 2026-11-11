@@ -56,3 +56,4 @@ inst/tiles/*.pmtiles
 ^pkgdown$
 ^CONTRIBUTING.md$
 ^codecov.yml$
+inst/extdata/solution-cache.rds

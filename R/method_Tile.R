@@ -86,7 +86,7 @@ create_tile_from_sf <- function(
 #'
 #' @param x [new_project()] object.
 #'
-#' @param column `character` value with column name.
+#' @param column `character` value with column name for data.
 #'
 #' @param engine `character` value denoting the engine for processing the
 #' the tiles. Available options include `"r"` or `"rust"`.
@@ -147,7 +147,7 @@ create_tile_from_project <- function(
   # create tiles
   if (identical(engine, "r")) {
     out <- create_tile_from_sf(
-      x = x$dataset$get_sf(column),
+      x = x$dataset$get_pu_sf(column),
       path = path,
       source_layer = source_layer,
       max_zoom = max_zoom,
@@ -194,10 +194,7 @@ create_tile_from_project <- function(
 #' path <- tempfile(fileext = ".gpkg")
 #'
 #' # create tile
-#' x <- create_tile_from_file(
-#'   path,
-#'   column = "solution"
-#' )
+#' x <- create_tile_from_file(path, column = "solution")
 #'
 #' # preview object
 #' print(x)

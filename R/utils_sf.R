@@ -12,7 +12,7 @@ NULL
 #' @examples
 #' # specify file path to import data
 #' path <- system.file(
-#'   "extdata", "antarctic-peninsula_pu.gpkg.zip", package = "apscp"
+#'   "extdata", "antarctic-peninsula.gpkg.zip", package = "apscp"
 #' )
 #'
 #' # read data
@@ -41,7 +41,12 @@ read_sf_data <- function(path) {
   utils::unzip(path, exdir = td)
 
   # import data
-  sf::read_sf(file.path(td, tools::file_path_sans_ext(basename(path))))
+  sf::read_sf(
+    file.path(td, tools::file_path_sans_ext(basename(path))),
+    layer = gpkg_layer_name(
+      file.path(td, tools::file_path_sans_ext(basename(path)))
+    )
+  )
 }
 
 #' Write sf data to zip file

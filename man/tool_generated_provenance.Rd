@@ -7,7 +7,7 @@
 tool_generated_provenance()
 }
 \value{
-A \code{\link[=new_provenance]{new_provenance()}} object
+A \code{\link[=new_provenance]{new_provenance()}} object.
 }
 \description{
 Create a \code{\link[=new_provenance]{new_provenance()}} object that indicates data were generated with
@@ -31,6 +31,7 @@ Other functions for calling class methods:
 \code{\link[=create_tile_from_file]{create_tile_from_file()}},
 \code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
-\code{\link[=new_dataset]{new_dataset()}}
+\code{\link[=new_dataset]{new_dataset()}},
+\code{\link[=precomputed_provenance]{precomputed_provenance()}}
 }
 \concept{method}
