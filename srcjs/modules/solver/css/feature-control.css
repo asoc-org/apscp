@@ -7,6 +7,11 @@
   display: none;
 }
 
+/* hide select all option in Tom Select */
+.ts-dropdown .ts-dropdown-content div[data-group="Select all"] div[data-value="_selectall"] {
+  display: none;
+}
+
 /* style buttons for controlling multple features */
 .feature-buttons {
   display: flex;

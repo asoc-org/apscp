@@ -4,7 +4,10 @@
 \alias{simulate_spatial_data}
 \title{Simulate spatial data}
 \usage{
-simulate_spatial_data()
+simulate_spatial_data(seed = 500)
+}
+\arguments{
+\item{seed}{\code{integer} value with seed for simulations. Defaults to 500.}
 }
 \value{
 A \code{\link[sf:st_sf]{sf::st_sf()}} object.

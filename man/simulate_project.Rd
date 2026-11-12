@@ -4,7 +4,10 @@
 \alias{simulate_project}
 \title{Simulate project}
 \usage{
-simulate_project()
+simulate_project(seed = 500)
+}
+\arguments{
+\item{seed}{\code{integer} value with seed for simulations. Defaults to 500.}
 }
 \value{
 A \code{\link{Project}} object.

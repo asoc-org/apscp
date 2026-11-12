@@ -64,9 +64,9 @@ test_that("app_solver", {
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
   app$expect_screenshot(name = "05-features-zones-all-on", delay = 3)
-  ## toggle off second zone for second feature
+  ## toggle off second zone for first feature
   app$click(
-    selector = ".feature-setting:nth-child(2) .switches div:nth-child(2) input"
+    selector = ".feature-setting:nth-child(1) .switches div:nth-child(2) input"
   )
   app$wait_for_idle()
   app$run_js("$('#solver_name').val('sol3').change();")
@@ -75,11 +75,11 @@ test_that("app_solver", {
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
   app$expect_screenshot(name = "06-features-zone-switch-off", delay = 3)
-  ## change weight for first zone for second feature
+  ## change weight for first zone for first feature
   app$run_js(
     paste0(
       "$('",
-      ".feature-setting:nth-child(2) .statuses .weight-status:nth-child(3)",
+      ".feature-setting:nth-child(1) .statuses .weight-status:nth-child(3)",
       "')[0].hoverSelect.set('0.5')"
     )
   )
@@ -90,10 +90,10 @@ test_that("app_solver", {
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
   app$expect_screenshot(name = "07-features-weight", delay = 3)
-  ## change targets for second feature
+  ## change targets for first feature
   app$run_js(
     paste0(
-      "$('.feature-setting:nth-child(2) .target-slider')[0]",
+      "$('.feature-setting:nth-child(1) .target-slider')[0]",
       ".noUiSlider.set([1, 1, 1])"
     )
   )

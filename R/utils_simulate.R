@@ -5,6 +5,8 @@ NULL
 #'
 #' Simulate spatial data for conservation planning.
 #'
+#' @param seed `integer` value with seed for simulations. Defaults to 500.
+#'
 #' @return A [sf::st_sf()] object.
 #'
 #' @details
@@ -20,89 +22,88 @@ NULL
 #' # preview object
 #' print(d)
 #' @export
-simulate_spatial_data <- function() {
+simulate_spatial_data <- function(seed = 500) {
   # assert dependencies available
   assertthat::assert_that(
     is_installed("prioritizr"),
-    is_installed("terra")
-  )
-  # obtain planning unit data
-  pu <- prioritizr::get_sim_pu_raster()
-  fts <- prioritizr::get_sim_features()
-  idx <- terra::cells(is.na(pu), 0)[[1]]
-
-  # create simulated solution with 3 zones
-  solution <- pu * NA_real_
-  solution[idx] <- withr::with_seed(
-    seed = 500,
-    sample(seq(0, 6), size = length(idx), replace = TRUE)
+    is_installed("terra"),
+    assertthat::is.number(seed),
+    assertthat::noNA(seed)
   )
 
-  # create cached simulated solution with 3 zones
-  solution2 <- pu * NA_real_
-  solution2[idx] <- withr::with_seed(
-    seed = 500,
-    sample(seq(0, 6), size = length(idx), replace = TRUE)
-  )
+  # run simulations with seed
+  withr::with_seed(seed = seed, {
+    # obtain planning unit data
+    pu <- prioritizr::get_sim_pu_raster()
+    fts <- prioritizr::get_sim_features()
+    idx <- terra::cells(is.na(pu), 0)[[1]]
 
-  # create binary layer
-  binary <- pu * NA_real_
-  binary[idx] <- withr::with_seed(
-    seed = 500,
-    sample(seq(0, 1), size = length(idx), replace = TRUE)
-  )
+    # create simulated solution with 3 zones
+    solution <- pu * NA_real_
+    solution[idx] <- sample(seq(0, 6), size = length(idx), replace = TRUE)
 
-  # prepare spatial layers for dataset
-  d <- c(
-    prioritizr::get_sim_pu_raster(),
-    fts,
-    prioritizr::get_sim_locked_in_raster(),
-    prioritizr::get_sim_locked_out_raster(),
-    binary,
-    solution,
-    solution2
-  )
-  names(d) <- c(
-    "cost",
-    paste0("feat_", seq_len(terra::nlyr(fts))),
-    "aspas",
-    "camps",
-    "invasive_species",
-    "solution",
-    "solution2"
-  )
-  terra::ext(d) <- c(-20, 20, -30, 30)
-  terra::crs(d) <- "epsg:4326"
+    # create cached simulated solution with 3 zones
+    solution2 <- pu * NA_real_
+    solution2[idx] <- sample(seq(0, 6), size = length(idx), replace = TRUE)
 
-  # convert to as sf object
-  d <- sf::st_as_sf(
-    terra::as.polygons(
-      d, values = TRUE, na.rm = TRUE, na.all = TRUE, dissolve = FALSE
+    # create binary layer
+    binary <- pu * NA_real_
+    binary[idx] <- sample(seq(0, 1), size = length(idx), replace = TRUE)
+
+    # prepare spatial layers for dataset
+    d <- c(
+      prioritizr::get_sim_pu_raster(),
+      fts,
+      prioritizr::get_sim_locked_in_raster(),
+      prioritizr::get_sim_locked_out_raster(),
+      binary,
+      solution,
+      solution2
     )
-  )
+    names(d) <- c(
+      "cost",
+      paste0("feat_", seq_len(terra::nlyr(fts))),
+      "aspas",
+      "camps",
+      "invasive_species",
+      "solution",
+      "solution2"
+    )
+    terra::ext(d) <- c(-20, 20, -30, 30)
+    terra::crs(d) <- "epsg:4326"
 
-  # handle missing cost values
-  d <- d[!is.na(d$cost), , drop = FALSE]
+    # convert to as sf object
+    d <- sf::st_as_sf(
+      terra::as.polygons(
+        d, values = TRUE, na.rm = TRUE, na.all = TRUE, dissolve = FALSE
+      )
+    )
 
-  # set coordinate reference system
-  suppressWarnings(
-    d <- sf::st_set_crs(d, sf::st_crs(4326))
-  )
+    # handle missing cost values
+    d <- d[!is.na(d$cost), , drop = FALSE]
 
-  # set 0s to NA values for locked columns
-  d$aspas[d$aspas < 0.99] <- NA_real_
-  d$camps[d$camps < 0.99] <- NA_real_
+    # set coordinate reference system
+    suppressWarnings(
+      d <- sf::st_set_crs(d, sf::st_crs(4326))
+    )
 
-  # add _index column
-  d[["_index"]] <- seq_len(nrow(d))
+    # set 0s to NA values for locked columns
+    d$aspas[d$aspas < 0.99] <- NA_real_
+    d$camps[d$camps < 0.99] <- NA_real_
 
-  # return result
-  d
+    # add _index column
+    d[["_index"]] <- seq_len(nrow(d))
+
+    # return result
+    d
+  })
 }
 
 #' Simulate project
 #'
 #' Simulate a new project.
+#'
+#' @inheritParams simulate_spatial_data
 #'
 #' @return A [`Project`] object.
 #'
@@ -118,188 +119,189 @@ simulate_spatial_data <- function() {
 #' print(x)
 #'
 #' @export
-simulate_project <- function() {
-  # simulate spatial data
-  d <- simulate_spatial_data()
-
-  # create dataset
-  dataset <- create_dataset_from_sf(d, cache_columns = "solution2")
-
-  # create tile
-  td <- tempdir()
-  tile <- create_tile_from_sf(
-    d,
-    path = tempfile(tmpdir = td, fileext = ".pmtiles"),
-    max_zoom = 8, verbose = FALSE
+simulate_project <- function(seed = 500) {
+  # assert valid argument
+  assertthat::assert_that(
+    assertthat::is.number(seed),
+    assertthat::noNA(seed)
   )
 
-  # create provenance
-  provenance <- new_provenance(
-    name = "Simulated", icon = "server", color = "#123456",
-    description = "Data is simulated.",
-    url = "https://google.com"
-  )
+  # run simulations with seed
+  withr::with_seed(seed = seed, {
+    # simulate spatial data
+    d <- simulate_spatial_data(seed = seed)
 
-  # create cost
-  costs <- list(
-    new_cost(
-      name = "Tourism revenue",
-      id = "cost-1",
-      weight = withr::with_seed(1L, {
-        sample(
+    # create dataset
+    dataset <- create_dataset_from_sf(d, cache_columns = "solution2")
+
+    # create tile
+    td <- tempdir()
+    tile <- create_tile_from_sf(
+      d,
+      path = tempfile(tmpdir = td, fileext = ".pmtiles"),
+      max_zoom = 8, verbose = FALSE
+    )
+
+    # create provenance
+    provenance <- new_provenance(
+      name = "Simulated", icon = "server", color = "#123456",
+      description = "Data is simulated.",
+      url = "https://google.com"
+    )
+
+    # create cost
+    costs <- list(
+      new_cost(
+        name = "Tourism revenue",
+        id = "cost-1",
+        weight = sample(
           seq(
             from = get_golem_config("prioritization_cost_weights")[1],
             to = get_golem_config("prioritization_cost_weights")[2],
             by = get_golem_config("prioritization_cost_weights")[3]
           ),
           1L
+        ),
+        zone = "Tourism",
+        layer = new_layer(
+          dataset = dataset,
+          tile = tile,
+          column = "cost",
+          visible = TRUE,
+          legend = create_legend(d, "cost", units = "USD"),
+          provenance = provenance,
+          total = unname(dataset$get_pu_column_total("cost"))
         )
-      }),
-      zone = "Tourism",
+      )
+    )
+
+    # create object
+    lock1 <- new_lock(
+      name = "Protected areas",
+      id = "lock-1",
+      zone = "Biodiversity",
       layer = new_layer(
         dataset = dataset,
         tile = tile,
-        column = "cost",
+        column = "aspas",
         visible = TRUE,
-        legend = create_legend(d, "cost", units = "USD"),
+        legend = create_legend(
+          d, "aspas",
+          palette = "Greens",
+          units = "presence-only"
+        ),
         provenance = provenance,
-        total = unname(dataset$get_pu_column_total("cost"))
+        total = unname(dataset$get_pu_column_total("aspas"))
       )
     )
-  )
-
-  # create object
-  lock1 <- new_lock(
-    name = "Protected areas",
-    id = "lock-1",
-    zone = "Biodiversity",
-    layer = new_layer(
-      dataset = dataset,
-      tile = tile,
-      column = "aspas",
-      visible = TRUE,
-      legend = create_legend(
-        d, "aspas",
-        palette = "Greens",
-        units = "presence-only"
-      ),
-      provenance = provenance,
-      total = unname(dataset$get_pu_column_total("aspas"))
+    lock2 <- new_lock(
+      name = "Field camps",
+      id = "lock-2",
+      zone = "Scientific",
+      layer = new_layer(
+        dataset = dataset,
+        tile = tile,
+        column = "camps",
+        visible = FALSE,
+        legend = create_legend(
+          d, "camps",
+          palette = "Reds",
+          units = "presence/absence"
+        ),
+        provenance = provenance,
+        total = unname(dataset$get_pu_column_total("camps")),
+        details = "These sites include castles, monuments, and churches."
+      )
     )
-  )
-  lock2 <- new_lock(
-    name = "Field camps",
-    id = "lock-2",
-    zone = "Scientific",
-    layer = new_layer(
-      dataset = dataset,
-      tile = tile,
-      column = "camps",
-      visible = FALSE,
-      legend = create_legend(
-        d, "camps",
-        palette = "Reds",
-        units = "presence/absence"
-      ),
-      provenance = provenance,
-      total = unname(dataset$get_pu_column_total("camps")),
-      details = "These sites include castles, monuments, and churches."
+
+    # create theme objects
+    themes <- list(
+      new_theme("Species", "Biodiversity"),
+      new_theme("Iconic species", "Tourism"),
+      new_theme("Medicinal species", "Scientific")
     )
-  )
 
-  # create theme objects
-  themes <- list(
-    new_theme("Species", "Biodiversity"),
-    new_theme("Iconic species", "Tourism"),
-    new_theme("Medicinal species", "Scientific")
-  )
+    # create status values for each zone
+    alloc <- c("Biodiversity" = "aspas", "Tourism" = "camps")
+    s1 <- dataset$get_pu_status(zone = "Biodiversity", alloc)
+    s2 <- dataset$get_pu_status(zone = "Tourism", alloc)
+    s3 <- dataset$get_pu_status(zone = "Scientific", alloc)
 
-  # create status values for each zone
-  alloc <- c("Biodiversity" = "aspas", "Tourism" = "camps")
-  s1 <- dataset$get_pu_status(zone = "Biodiversity", alloc)
-  s2 <- dataset$get_pu_status(zone = "Tourism", alloc)
-  s3 <- dataset$get_pu_status(zone = "Scientific", alloc)
-
-  # create feature objects
-  features <- lapply(seq_len(5), function(i) {
-    new_feature(
-      name = paste0("Species ", i),
-      id = paste0("feature-", i),
-      zone_targets = withr::with_seed(i, {
-        simulate_feature_zone_targets(
+    # create feature objects
+    features <- lapply(seq_len(5), function(i) {
+      new_feature(
+        name = paste0("Species ", i),
+        id = paste0("feature-", i),
+        zone_targets = simulate_feature_zone_targets(
           seq(
             from = get_golem_config("prioritization_feature_targets")[1],
             to = get_golem_config("prioritization_feature_targets")[2],
             by = get_golem_config("prioritization_feature_targets")[3]
           ),
           3L
+        ),
+        zone_weights = sample(c(0, 0.5, 1), 3L, replace = TRUE),
+        zone_helds = unname(
+          c(
+            dataset$get_pu_column_held(column = paste0("feat_", i), s1),
+            dataset$get_pu_column_held(column = paste0("feat_", i), s2),
+            dataset$get_pu_column_held(column = paste0("feat_", i), s3)
+          ),
+        ),
+        themes = themes[c(1, sample(c(2, 3), 1))],
+        layer = new_layer(
+          dataset = dataset,
+          tile = tile,
+          column = paste0("feat_", i),
+          visible = TRUE,
+          hidden = isTRUE(i == 3),
+          legend = create_legend(
+            d, paste0("feat_", i),
+            palette = "viridis",
+            units = "suitability"
+          ),
+          provenance = provenance,
+          total = unname(dataset$get_pu_column_total(paste0("feat_", i)))
         )
-      }),
-      zone_weights = withr::with_seed(i, {
-        sample(c(0, 0.5, 1), 3L, replace = TRUE)
-      }),
-      zone_helds = unname(
-        c(
-          dataset$get_pu_column_held(column = paste0("feat_", i), s1),
-          dataset$get_pu_column_held(column = paste0("feat_", i), s2),
-          dataset$get_pu_column_held(column = paste0("feat_", i), s3)
+      )
+    })
+
+    # create project
+    out <- new_project(
+      zones = c("Biodiversity", "Tourism", "Scientific"),
+      bbox = sf::st_bbox(d),
+      dataset = dataset,
+      tiles = list(tile),
+      costs = costs,
+      locks = list(lock1, lock2),
+      features = features,
+      solutions = list()
+    )
+
+    # create prioritization settings
+    s <- simulate_prioritization_settings(out)
+
+    # add solution to project
+    out$add_solution(
+      new_solution(
+        name = "Solution 1",
+        layer = new_layer(
+          dataset = dataset,
+          tile = tile,
+          column = "solution",
+          visible = TRUE,
+          legend = create_solution_legend(out),
+          provenance = provenance,
+          total = unname(dataset$get_pu_column_total("solution"))
         ),
-      ),
-      themes = withr::with_seed(i, {
-        themes[c(1, sample(c(2, 3), 1))]
-      }),
-      layer = new_layer(
-        dataset = dataset,
-        tile = tile,
-        column = paste0("feat_", i),
-        visible = TRUE,
-        hidden = isTRUE(i == 3),
-        legend = create_legend(
-          d, paste0("feat_", i),
-          palette = "viridis",
-          units = "suitability"
-        ),
-        provenance = provenance,
-        total = unname(dataset$get_pu_column_total(paste0("feat_", i)))
+        settings = s,
+        metrics = eval_prioritization(out, s, d$solution)
       )
     )
+
+    # return project
+    out
   })
-
-  # create project
-  out <- new_project(
-    zones = c("Biodiversity", "Tourism", "Scientific"),
-    bbox = sf::st_bbox(d),
-    dataset = dataset,
-    tiles = list(tile),
-    costs = costs,
-    locks = list(lock1, lock2),
-    features = features,
-    solutions = list()
-  )
-
-  # create prioritization settings
-  s <- simulate_prioritization_settings(out)
-
-  # add solution to project
-  out$add_solution(
-    new_solution(
-      name = "Solution 1",
-      layer = new_layer(
-        dataset = dataset,
-        tile = tile,
-        column = "solution",
-        visible = TRUE,
-        legend = create_solution_legend(out),
-        provenance = provenance,
-        total = unname(dataset$get_pu_column_total("solution"))
-      ),
-      settings = s,
-      metrics = eval_prioritization(out, s, d$solution)
-    )
-  )
-
-  # return project
-  out
 }
 
 #' Simulate continuous legend

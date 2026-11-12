@@ -67,14 +67,16 @@ export class FeatureControl {
       );
     }
     // cache options for select menu
-    this._cache = projectSelectOptions(project, true, false, false, false);
+    this._cache = projectSelectOptions(
+      project, true, false, false, false, true
+    );
     // set starting options
     this._cache.items = Array();
     for (let i = 0; i < project.features.length; ++i) {
       for (let j = 0; j < project.features[i].themes.length; ++j) {
         if (
           project.features[i].themes[j].name ===
-          this._cache.optgroups[0].value
+            this._cache.optgroups[1].value
         ) {
           this._cache.items.push(project.features[i].id);
         }
@@ -139,7 +141,7 @@ export class FeatureControl {
       labelField: "name",
       searchField: ["name"],
       maxOptions: null,
-      sortField: "name",
+      sortField: "sort",
       closeAfterSelect: false,
       optgroups: this._cache.optgroups,
       optgroupField: "group",
@@ -156,7 +158,6 @@ export class FeatureControl {
           const allChecked =
             groupOptions.length > 0 &&
             groupOptions.every(x => values.includes(x.value));
-          // return HTML for header
           return "" +
             "<div class=\"optgroup-header\" " +
             `data-group="${escape(data.value)}">` +
@@ -197,15 +198,47 @@ export class FeatureControl {
         });
       },
       onItemAdd: (value) => {
-        let x = this._settings.get(value);
-        if (x) {
-          x.element.style.display = "block";
+        // handle value
+        if (value === "_selectall") {
+          // if value for is select all item, then select all items
+          let items = Array();
+          for (
+            const [key, value] of
+            Object.entries(this._select.tomselect.options)
+          ) {
+            if (key !== "_selectall") {
+              this._select.tomselect.addItem(key);
+            }
+          }
+          // refresh options
+          this._select.tomselect.close();
+          this._select.tomselect.refreshItems();
+          this._select.tomselect.open();
+        } else {
+          // otherwise, only select relevant item
+          let x = this._settings.get(value);
+          if (x) {
+            x.element.style.display = "block";
+          }
         }
       },
       onItemRemove: (value) => {
-        let x = this._settings.get(value);
-        if (x) {
-          x.element.style.display = "none";
+        // handle value
+        if (value === "_selectall") {
+          // if value is for select all item, then deselect all items
+          this._select.tomselect.clear();
+          this._select.tomselect.close();
+          this._select.tomselect.refreshItems();
+          this._select.tomselect.open();
+        } else {
+          // otherwise, find element for value
+          let x = this._settings.get(value);
+          if (x) {
+            // hide value
+            x.element.style.display = "none";
+            // uncheck select all checkbox
+            this._select.tomselect.removeItem("_selectall");
+          }
         }
       }
     });

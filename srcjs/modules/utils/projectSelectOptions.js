@@ -50,10 +50,12 @@ export function projectSelectOptions(
   // if needed, add select all
   if (includeSelectAll === true) {
     options[k] = {
-      value: "#selectall",
+      value: "_selectall",
       name: "Select all",
-      sort: "0-select-all"
+      sort: "0-select-all-item",
+      group: "Select all"
     };
+    groups.add("Select all");
     ++k;
   }
   // if needed, add features
@@ -61,12 +63,12 @@ export function projectSelectOptions(
     for (i = 0; i < project.features.length; ++i) {
       if (project.features[i].layer.hidden === false) {
         options[k] = selectOption(project.features[i], includeClass);
-        for (j = 0; j < options[i].group.length; ++j) {
-          groups.add(options[i].group[j]);
+        for (j = 0; j < options[k].group.length; ++j) {
+          groups.add(options[k].group[j]);
         }
       }
       ++k;
-    };
+    }
   }
   // if needed, add locks
   if (includeLocks) {
@@ -75,7 +77,7 @@ export function projectSelectOptions(
         options[k] = selectOption(project.locks[i], includeClass);
       }
       ++k;
-    };
+    }
     groups.add("Locks");
   }
   // if needed, add costs
@@ -85,7 +87,7 @@ export function projectSelectOptions(
         options[k] = selectOption(project.costs[i], includeClass);
       }
       ++k;
-    };
+    }
     groups.add("Costs");
   }
   // if needed, add solutions
@@ -95,7 +97,7 @@ export function projectSelectOptions(
         options[k] = selectOption(project.solutions[i], includeClass);
       }
       ++k;
-    };
+    }
     groups.add("Solutions");
   }
   // return object
@@ -133,7 +135,7 @@ export function selectOption(x, includeClass = true) {
     out.group = group;
   }
   // process sort key
-  let ord = ["Features", "Locks", "Costs", "Solutions"];
+  let ord = ["Select all", "Features", "Locks", "Costs", "Solutions"];
   let i = ord.indexOf(group) + 1;
   if (i < 0) {
     i = 999; // if class not recognized, then put it last
