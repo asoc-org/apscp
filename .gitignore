@@ -13,6 +13,7 @@ data-raw/29092346/*
 data-raw/29092346/*/*
 data-raw/29092346/*/*/*
 inst/tiles/*.pmtiles
+inst/extdata/solution-cache.rds
 
 # temporary files
 tests/testthat/tiles/*.pmtiles

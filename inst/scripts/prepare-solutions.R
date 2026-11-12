@@ -183,14 +183,9 @@ prioritization_results <-
 ## add solutions to dataset cache
 {for (i in seq_along(prioritization_results)) {
   prioritization <- as.numeric(prioritization_results[[i]]$result)
-  metrics <- eval_prioritization(project, scenario_data[[i]], prioritization)
   project$dataset$set_cache_object(
-    paste0("s-", prioritization_results[[i]]$id),
+    prioritization_results[[i]]$id,
     prioritization
-  )
-  project$dataset$set_cache_object(
-    paste0("m-", prioritization_results[[i]]$id),
-    metrics
   )
 }}
 

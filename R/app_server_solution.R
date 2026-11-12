@@ -16,24 +16,16 @@ app_server_solution <- quote({
   # define task for generating solutions
   task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, gurobi_server, verbose) {
-      # define cache ids
-      id1 <- paste0("s-", id)
-      id2 <- paste0("m-", id)
       # if project has solution, then return prioritization based on it
-      if (app_data$project$has_cache_object(id1)) {
-        x <- app_data$project$get_cache_object(id1)
-        if (app_data$project$has_cache_object(id2)) {
-          m <- app_data$project$get_cache_object(id2)
-        } else {
-          m <- eval_prioritization(project, settings, prioritization)
-        }
+      if (app_data$project$has_cache_object(id)) {
+        x <- app_data$project$get_cache_object(id)
         return(
           list(
             id = id,
             name = name,
             settings = settings,
             prioritization = x,
-            metrics = m,
+            metrics = eval_prioritization(project, settings, x),
             cache = TRUE
           )
         )
