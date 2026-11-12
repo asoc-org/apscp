@@ -59,6 +59,6 @@ x <- new_tile(source = "data-src", path = path, max_zoom = 5)
 print(x)
 #> A <Tile> object.
 #> • source_layer: "data-src"
-#> • path: "/tmp/RtmpXY91Xf/file4d041cb0d5c8.pmtiles"
+#> • path: "/tmp/RtmpVYIMsi/file4cbc29100da8.pmtiles"
 #> • max_zoom: 5
 ```

@@ -72,7 +72,7 @@ x <- read_dataset(pu_path, bd_path, cc_path)
 print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 48447
-#> • Planning unit path: /tmp/RtmpXY91Xf/file4d0414cd749c/antarctic-peninsula.gpkg
+#> • Planning unit path: /tmp/RtmpVYIMsi/file4cbc5c656c89/antarctic-peninsula.gpkg
 #> • Boundary path:
 #>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula.boundary.rds
 #> • Boundary data loaded: TRUE

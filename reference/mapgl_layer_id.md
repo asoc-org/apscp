@@ -66,5 +66,5 @@ x <- new_cost(
 
 # get layer identifier
 mapgl_layer_id(x)
-#> [1] "lyr-4c27c24a-508c-423d-8c80-2577b898e128"
+#> [1] "lyr-87d07040-1dc0-4b68-8fc2-9191ebda55a8"
 ```

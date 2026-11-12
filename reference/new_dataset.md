@@ -76,7 +76,7 @@ x <- new_dataset(sim_path1, sim_path2, sim_path3)
 print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 90
-#> • Planning unit path: /tmp/RtmpXY91Xf/file4d041c540053.gpkg
-#> • Boundary path: /tmp/RtmpXY91Xf/file4d0454d3c6f6.rds
+#> • Planning unit path: /tmp/RtmpVYIMsi/file4cbc6ea3ce42.gpkg
+#> • Boundary path: /tmp/RtmpVYIMsi/file4cbc2b6daeea.rds
 #> • Boundary data loaded: TRUE
 ```
