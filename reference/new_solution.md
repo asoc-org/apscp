@@ -87,7 +87,7 @@ x <- new_solution(
 print(x)
 #> A <Solution> object.
 #> • name: "solution"
-#> • id: "7c01dd30-4eed-44f5-8d02-fdd6e3661e9e"
+#> • id: "e7bda221-960d-4e2e-8428-0c4e9fc0b2cd"
 #> • settings: <list> object
 #> • metrics: <list> object
 #> • layer: <Layer> object

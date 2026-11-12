@@ -77,6 +77,6 @@ x <- create_tile_from_sf(sim_data)
 print(x)
 #> A <Tile> object.
 #> • source_layer: "layer"
-#> • path: "/tmp/RtmpXZtosk/file4a313b9603ae.pmtiles"
+#> • path: "/tmp/RtmpkKFlPl/file4b20c3b9bc8.pmtiles"
 #> • max_zoom: 8
 ```

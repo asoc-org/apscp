@@ -63,7 +63,7 @@ x <- create_dataset_from_sf(sim_data)
 print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 90
-#> • Planning unit path: /tmp/RtmpXZtosk/file4a31391d8751.gpkg
-#> • Boundary path: /tmp/RtmpXZtosk/file4a316d9b9afb.rds
+#> • Planning unit path: /tmp/RtmpkKFlPl/file4b20b9413e.gpkg
+#> • Boundary path: /tmp/RtmpkKFlPl/file4b201abd6150.rds
 #> • Boundary data loaded: TRUE
 ```

@@ -115,7 +115,7 @@ x <- create_solution(
 print(x)
 #> A <Solution> object.
 #> • name: "user solution"
-#> • id: "3a415d89-5ec3-4528-9e5f-c342841cb3b9"
+#> • id: "53a27e5f-85fb-4863-b388-9f1115efcec8"
 #> • settings: <list> object
 #> • metrics: <list> object
 #> • layer: <Layer> object
