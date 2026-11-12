@@ -80,6 +80,14 @@ export default class SmartSlider {
   }
 
   /**
+   * Set values.
+   * @param {Array<number>} values - Array of new values.
+   */
+  set(values) {
+    this.noUiSlider.set(values);
+  }
+
+  /**
    * Enable widget.
    * @return {void}
    */

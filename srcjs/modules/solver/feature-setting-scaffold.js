@@ -60,10 +60,16 @@ function featureSettingHeader(feature, zones) {
   }
   // create name element
   let nameElement = createNameLabel(feature);
+  // create copy button
+  let copyButton = createFeatureSettingCopyButton();
+  // create reset button
+  let resetButton = createFeatureSettingResetButton();
   // create provenance element
   let provenanceElement = createProvenance(feature.layer.provenance);
   // append elements
   el.appendChild(switchContainer);
+  el.appendChild(copyButton);
+  el.appendChild(resetButton);
   el.appendChild(nameElement);
   el.appendChild(provenanceElement);
   // return element
@@ -169,5 +175,53 @@ function featureSettingTargets(feature, zones, choices) {
   targetsBody.appendChild(status);
   targetsBody.appendChild(slider);
   el.appendChild(targetsBody);
+  return el;
+}
+
+/**
+ * Create a copy button for a feature setting
+ * @return {HTMLElement}
+ */
+function createFeatureSettingCopyButton() {
+  // initialize element
+  let el = document.createElement("button");
+  el.classList.add("copy-button");
+  // add tooltip
+  el.setAttribute("type", "button");
+  el.setAttribute("data-toggle", "tooltip");
+  el.setAttribute("data-placement", "top");
+  el.setAttribute("data-container", "body");
+  el.setAttribute("title", "Copy targets and weights to other features.");
+  // create icon for button
+  let icon = document.createElement("i");
+  icon.classList.add("fa");
+  icon.classList.add("fa-regular");
+  icon.classList.add("fa-clone");
+  el.appendChild(icon);
+  // return element
+  return el;
+}
+
+/**
+ * Create a reset button for a feature setting
+ * @return {HTMLElement}
+ */
+function createFeatureSettingResetButton() {
+  // initialize element
+  let el = document.createElement("button");
+  el.classList.add("reset-button");
+  // add tooltip
+  el.setAttribute("type", "button");
+  el.setAttribute("data-toggle", "tooltip");
+  el.setAttribute("data-placement", "top");
+  el.setAttribute("data-container", "body");
+  el.setAttribute("title", "Reset targets and weights to initial values.");
+  // create icon for button
+  let icon = document.createElement("i");
+  icon.classList.add("fa");
+  icon.classList.add("fa-solid");
+  icon.classList.add("fa-rotate-left");
+  el.appendChild(icon);
+  // return element
   return el;
 }

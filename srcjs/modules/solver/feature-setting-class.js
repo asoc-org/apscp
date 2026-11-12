@@ -75,6 +75,18 @@ export class FeatureSetting {
   _status;
 
   /**
+   * Copy button element.
+   * @type {HTMLElement}
+   */
+  _copy;
+
+  /**
+   * Reset button element.
+   * @type {HTMLElement}
+   */
+  _reset;
+
+  /**
    * List of hover select elements.
    * @type {NodeList<HTMLElement>}
    */
@@ -136,6 +148,8 @@ export class FeatureSetting {
     this._title = this.element.querySelector(".name-label");
     this._switches = Array.from(this.element.querySelectorAll(".switch"));
     this._selects = this.element.querySelectorAll(".weight-status");
+    this._copy = this.element.querySelector(".copy-button");
+    this._reset = this.element.querySelector(".reset-button");
     // initialize slider widget
     new SmartSlider(
       this._slider,
@@ -213,6 +227,16 @@ export class FeatureSetting {
         }
       });
     }
+    // set event handler for reset button
+    this._reset.addEventListener("click", (event) => {
+      for (let i = 0; i < zones.length; ++i) {
+        if (this._switches[i].checked !== true) {
+          this.switchOnZone(i);
+        }
+      }
+      this._slider.smartSlider.reset();
+      this._selects.hoverSelect.reset();
+    });
   }
 
   /**
@@ -239,6 +263,33 @@ export class FeatureSetting {
    */
   get weights() {
     return Array.from(this._selects, x => Number(x.hoverSelect.get()));
+  };
+
+
+  /**
+   * Copy settings.
+   * @param {FeatureSetting} - Feature setting object with new values.
+   * @return {void}
+   */
+  copy(x) {
+    // copy switches
+    for (let i = 0; i < this._zones.length; ++i) {
+      // identify statuses
+      let x_status = x._switches[i].checked;
+      let this_status = this._switches[i].checked;
+      // copy values
+      if (x_status === true && this_status === false) {
+        this.switchOnZone(i);
+      } else if (x_status === false && this_status === true) {
+        this.switchOffZone(i);
+      }
+    }
+    // copy slider values
+    this._slider.smartSlider.set(x._slider.smartSlider.get());
+    // copy weight values
+    for (let i = 0; i < this._zones.length; ++i) {
+      this._selects[i].hoverSelect.set(x._selects[i].hoverSelect.get());
+    }
   };
 
   /**

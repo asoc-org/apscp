@@ -124,7 +124,7 @@ export class FeatureControl {
     // create feature setting objects and add them to the menu
     this._settings.forEach(x => x.appendTo(menuElement));
     // create select menu
-    this._select = document.createElement("input");
+    this._select = document.createElement("select");
     this._select.setAttribute("multiple", "");
     this._select.setAttribute("placeholder", "Choose features...");
     // append elements to container
@@ -154,7 +154,7 @@ export class FeatureControl {
           const groupOptions =
             Object.values(this.options)
             .filter(x => x.group.includes(data.value));
-          const values = this.getValue().split(",");
+          const values = toArray(this.getValue());
           const allChecked =
             groupOptions.length > 0 &&
             groupOptions.every(x => values.includes(x.value));
@@ -249,6 +249,15 @@ export class FeatureControl {
         x.element.style.display = "block";
       }
     });
+    // define event listeners for copy buttons
+    this._settings.forEach((x) => {
+      x._copy.addEventListener("click", () => {
+        // apply sider values to active features
+        this._select.tomselect.getValue().forEach((y) => {
+          this._settings.get(y).copy(x);
+        });
+      });
+    });
     // free memory
     this._cache = undefined;
   }
@@ -275,8 +284,9 @@ export class FeatureControl {
    * @return {void}
   */
   switchOnZoneForFeaturesInMenu(index) {
-    this.getFeaturesInMenu()
-    .forEach((x) => this._settings.get(x).switchOnZone(index));
+    this
+      .getFeaturesInMenu()
+      .forEach((x) => this._settings.get(x).switchOnZone(index));
   }
 
   /**
@@ -285,8 +295,9 @@ export class FeatureControl {
    * @return {void}
    */
   switchOffZoneForFeaturesInMenu(index) {
-    this.getFeaturesInMenu()
-    .forEach((x) => this._settings.get(x).switchOffZone(index));
+    this
+      .getFeaturesInMenu()
+      .forEach((x) => this._settings.get(x).switchOffZone(index));
   }
 
   /**
@@ -294,9 +305,7 @@ export class FeatureControl {
    * @return {Array<FeatureSetting>}
    */
   getFeaturesInMenu() {
-    let out = this._select.tomselect.getValue();
-    if (out === "") return [];
-    return out.split(",");
+    return toArray(this._select.tomselect.getValue());
   }
 
   /**

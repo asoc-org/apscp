@@ -104,10 +104,38 @@ test_that("app_solver", {
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
   app$expect_screenshot(name = "08-feature-target", delay = 3)
+  ## copy targets with first feature
+  app$run_js(
+    paste0(
+      "$('.feature-setting:nth-child(1) .copy-button')[0]",
+      ".click()"
+    )
+  )
+  app$wait_for_idle()
+  app$run_js("$('#solver_name').val('sol5').change();")
+  app$run_js("$('#solver_start_button').prop('disabled', false)")
+  app$wait_for_idle()
+  app$click(selector = "#solver_start_button")
+  app$wait_for_idle()
+  app$expect_screenshot(name = "09-feature-copy", delay = 3)
+  ## reset targets with first feature
+  app$run_js(
+    paste0(
+      "$('.feature-setting:nth-child(1) .reset-button')[0]",
+      ".click()"
+    )
+  )
+  app$wait_for_idle()
+  app$run_js("$('#solver_name').val('sol6').change();")
+  app$run_js("$('#solver_start_button').prop('disabled', false)")
+  app$wait_for_idle()
+  app$click(selector = "#solver_start_button")
+  app$wait_for_idle()
+  app$expect_screenshot(name = "10-feature-reset", delay = 3)
   ## set lock panel active
   app$click(selector = "a[data-value='locks-panel']")
   app$wait_for_idle()
-  app$expect_screenshot(name = "09-locks-panel", delay = 3)
+  app$expect_screenshot(name = "11-locks-panel", delay = 3)
   ## change tourism zone lock
   app$click(selector = ".lock-setting:nth-child(2) .ts-control")
   app$wait_for_idle()
@@ -116,16 +144,16 @@ test_that("app_solver", {
   app$wait_for_idle()
   app$click(selector = "a[data-value='locks-panel']")
   app$wait_for_idle()
-  app$run_js("$('#solver_name').val('sol4').change();")
+  app$run_js("$('#solver_name').val('sol7').change();")
   app$run_js("$('#solver_start_button').prop('disabled', false)")
   app$wait_for_idle()
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
-  app$expect_screenshot(name = "10-locks-change", delay = 3)
+  app$expect_screenshot(name = "12-locks-change", delay = 3)
   ## set costs panel active
   app$click(selector = "a[data-value='costs-panel']")
   app$wait_for_idle()
-  app$expect_screenshot(name = "11-costs-panel", delay = 3)
+  app$expect_screenshot(name = "13-costs-panel", delay = 3)
   ## change zone for cost
   app$run_js(
     paste0(
@@ -135,28 +163,28 @@ test_that("app_solver", {
     )
   )
   app$wait_for_idle()
-  app$run_js("$('#solver_name').val('sol4').change();")
+  app$run_js("$('#solver_name').val('sol8').change();")
   app$run_js("$('#solver_start_button').prop('disabled', false)")
   app$wait_for_idle()
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
-  app$expect_screenshot(name = "12-costs-zone", delay = 3)
+  app$expect_screenshot(name = "14-costs-zone", delay = 3)
   ## change cost slider
   app$run_js("$('.weight-slider')[0].noUiSlider.set(1)")
   app$wait_for_idle()
-  app$run_js("$('#solver_name').val('sol4').change();")
+  app$run_js("$('#solver_name').val('sol9').change();")
   app$run_js("$('#solver_start_button').prop('disabled', false)")
   app$wait_for_idle()
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
-  app$expect_screenshot(name = "13-costs-weight", delay = 3)
+  app$expect_screenshot(name = "15-costs-weight", delay = 3)
   ## toggle off cost
   app$click(selector = ".cost-setting .switches input")
   app$wait_for_idle()
-  app$run_js("$('#solver_name').val('sol5').change();")
+  app$run_js("$('#solver_name').val('sol10').change();")
   app$run_js("$('#solver_start_button').prop('disabled', false)")
   app$wait_for_idle()
   app$click(selector = "#solver_start_button")
   app$wait_for_idle()
-  app$expect_screenshot(name = "14-costs-off", delay = 3)
+  app$expect_screenshot(name = "16-costs-off", delay = 3)
 })
