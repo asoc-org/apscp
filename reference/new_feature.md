@@ -110,7 +110,7 @@ x <- new_feature(
 print(x)
 #> A <Feature> object.
 #> • name: "species 1"
-#> • id: "970c1c9d-cb7e-4aff-bee6-457d6965a744"
+#> • id: "d91b3915-5597-4866-ac1e-4bc041da293b"
 #> • zone_targets: 0.1, 0.2, and 0.3
 #> • zone_weights: 0.5, 1, and 0.7
 #> • zone_helds: 0.2, 0.3, and 0.1
