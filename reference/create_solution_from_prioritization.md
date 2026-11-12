@@ -107,6 +107,7 @@ Other functions for calling class methods:
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -129,7 +130,7 @@ x <- create_solution_from_prioritization(
 print(x)
 #> A <Solution> object.
 #> • name: "sol"
-#> • id: "aaa1e8d9-79b5-4fed-88c2-8171fd70daef"
+#> • id: "092ab405-994e-47d7-9c26-90483c2ca807"
 #> • settings: <list> object
 #> • metrics: <list> object
 #> • layer: <Layer> object

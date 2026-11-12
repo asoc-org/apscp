@@ -92,6 +92,9 @@ Functions and definitions for new classes.
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
   : New dataset
 
+- [`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md)
+  : Precomputed provenance
+
 - [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
   : Tool generated provenance
 
@@ -271,6 +274,8 @@ Functions for simulating data.
 
 - [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md)
   : Simulate binary legend
+- [`simulate_cache()`](https://asoc-org.github.io/apscp/reference/simulate_cache.md)
+  : Simulate cache
 - [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md)
   : Simulate continuous legend
 - [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md)
@@ -309,8 +314,17 @@ Functions with assorted uses.
 - [`color_palette()`](https://asoc-org.github.io/apscp/reference/color_palette.md)
   : Color palette
 
+- [`compress_object()`](https://asoc-org.github.io/apscp/reference/compress_object.md)
+  : Compress object
+
+- [`decompress_object()`](https://asoc-org.github.io/apscp/reference/decompress_object.md)
+  : Decompress object
+
 - [`file_symlink()`](https://asoc-org.github.io/apscp/reference/file_symlink.md)
   : Symlink a file
+
+- [`hash_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/hash_prioritization_settings.md)
+  : Hash prioritization settings key
 
 - [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md)
   : Is package installed?
@@ -320,6 +334,9 @@ Functions with assorted uses.
 
 - [`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
   : Is relative path?
+
+- [`sanitize_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/sanitize_prioritization_settings.md)
+  : Sanitize prioritization settings
 
 - [`add_external_resources()`](https://asoc-org.github.io/apscp/reference/add_external_resources.md)
   : Add external resources to a Shiny application

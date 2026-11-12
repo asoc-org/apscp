@@ -12,7 +12,7 @@ read_project(path)
 
 - path:
 
-  `character` file path for YAML metadata file.
+  `character` file path for metadata file.
 
 ## Value
 
@@ -37,7 +37,10 @@ Other functions for reading and writing data:
 
 ``` r
 # find file path for built-in project
-path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+path <- system.file(
+  "extdata", "antarctic-peninsula.metadata.rds",
+  package = "apscp"
+)
 
 # import project
 x <- read_project(path)
@@ -46,21 +49,21 @@ x <- read_project(path)
 print(x)
 #> • Metadata:
 #>   • name: Antarctic Peninsula
-#>   • version: 0.0.0.9000
+#>   • version: 0.0.2
 #>   • author_name: Jasmine Lee
 #>   • author_email: jasmine.lee@monash.edu
 #> • Mapping:
 #>   • Number of tiles: 1
 #>   • bearing: 101
 #>   • zoom: 2
-#>   • bbox: -75.4165505, -73.2404735, -44.3891674,
-#>   -60.3476308(xmin/ymin/xmax/ymax)
+#>   • bbox: -75.4165504765101, -73.2404734584194, -44.3891673562134,
+#>   -60.3476308273474(xmin/ymin/xmax/ymax)
 #> • Dataset:
 #>   • Number of planning units: 48447
 #>   • Planning unit path:
-#>   /tmp/RtmpKTauZJ/file36a32b901ddd/antarctic-peninsula_pu.gpkg
+#>   /tmp/RtmpXY91Xf/file4d0466d8acf3/antarctic-peninsula.gpkg
 #>   • Boundary path:
-#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
+#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula.boundary.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 53

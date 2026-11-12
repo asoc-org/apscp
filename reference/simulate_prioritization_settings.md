@@ -30,6 +30,7 @@ testing and should not be used for any research purposes.
 
 Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
+[`simulate_cache()`](https://asoc-org.github.io/apscp/reference/simulate_cache.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md),
 [`simulate_project()`](https://asoc-org.github.io/apscp/reference/simulate_project.md),
@@ -50,21 +51,21 @@ s <- simulate_prioritization_settings(x)
 print(s)
 #> $features
 #>           id      name column         zone target weight
-#> 1  feature-1 Species 1 feat_1 Biodiversity    0.2    0.5
-#> 2  feature-1 Species 1 feat_1      Tourism    0.0    0.5
+#> 1  feature-1 Species 1 feat_1 Biodiversity    0.8    1.0
+#> 2  feature-1 Species 1 feat_1      Tourism    0.2    1.0
 #> 3  feature-1 Species 1 feat_1   Scientific    0.0    0.5
-#> 4  feature-2 Species 2 feat_2 Biodiversity    1.0    0.0
-#> 5  feature-2 Species 2 feat_2      Tourism    0.0    0.5
-#> 6  feature-2 Species 2 feat_2   Scientific    0.0    0.0
-#> 7  feature-3 Species 3 feat_3 Biodiversity    0.4    0.0
-#> 8  feature-3 Species 3 feat_3      Tourism    0.4    0.0
-#> 9  feature-3 Species 3 feat_3   Scientific    0.0    1.0
-#> 10 feature-4 Species 4 feat_4 Biodiversity    0.2    0.0
-#> 11 feature-4 Species 4 feat_4      Tourism    0.2    0.5
-#> 12 feature-4 Species 4 feat_4   Scientific    0.0    0.5
-#> 13 feature-5 Species 5 feat_5 Biodiversity    0.4    0.0
+#> 4  feature-2 Species 2 feat_2 Biodiversity    0.2    0.5
+#> 5  feature-2 Species 2 feat_2      Tourism    0.6    0.5
+#> 6  feature-2 Species 2 feat_2   Scientific    0.0    0.5
+#> 7  feature-3 Species 3 feat_3 Biodiversity    0.2    0.0
+#> 8  feature-3 Species 3 feat_3      Tourism    0.6    0.5
+#> 9  feature-3 Species 3 feat_3   Scientific    0.2    0.0
+#> 10 feature-4 Species 4 feat_4 Biodiversity    1.0    0.0
+#> 11 feature-4 Species 4 feat_4      Tourism    0.0    0.5
+#> 12 feature-4 Species 4 feat_4   Scientific    0.0    0.0
+#> 13 feature-5 Species 5 feat_5 Biodiversity    0.4    0.5
 #> 14 feature-5 Species 5 feat_5      Tourism    0.6    0.0
-#> 15 feature-5 Species 5 feat_5   Scientific    0.0    0.5
+#> 15 feature-5 Species 5 feat_5   Scientific    0.0    0.0
 #> 
 #> $locks
 #>       id            name column         zone priority

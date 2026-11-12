@@ -25,7 +25,7 @@ create_tile_from_file(
 
 - column:
 
-  `character` value with column name.
+  `character` value with column name for data.
 
 - source_layer:
 
@@ -63,6 +63,7 @@ Other functions for calling class methods:
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -79,10 +80,7 @@ sim_data <- sf::st_transform(sim_data, 4326)
 path <- tempfile(fileext = ".gpkg")
 
 # create tile
-x <- create_tile_from_file(
-  path,
-  column = "solution"
-)
+x <- create_tile_from_file(path, column = "solution")
 
 # preview object
 print(x)

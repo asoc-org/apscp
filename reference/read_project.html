@@ -52,7 +52,7 @@
 
 
 <dl><dt id="arg-path">path<a class="anchor" aria-label="anchor" href="#arg-path"></a></dt>
-<dd><p><code>character</code> file path for YAML metadata file.</p></dd>
+<dd><p><code>character</code> file path for metadata file.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -77,7 +77,10 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># find file path for built-in project</span></span></span>
-<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula.yml"</span>, package <span class="op">=</span> <span class="st">"apscp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula.metadata.rds"</span>,</span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"apscp"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># import project</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">read_project</span><span class="op">(</span><span class="va">path</span><span class="op">)</span></span></span>
@@ -86,21 +89,21 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • Metadata:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">name</span>: Antarctic Peninsula</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">version</span>: 0.0.0.9000</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">version</span>: 0.0.2</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">author_name</span>: Jasmine Lee</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">author_email</span>: jasmine.lee@monash.edu</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • Mapping:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Number of tiles: <span style="color: #0000BB;">1</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">bearing</span>: 101</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">zoom</span>: 2</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">bbox</span>: <span style="color: #0000BB;">-75.4165505</span>, <span style="color: #0000BB;">-73.2404735</span>, <span style="color: #0000BB;">-44.3891674</span>,</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">-60.3476308</span>(xmin/ymin/xmax/ymax)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   • <span style="color: #00BB00;">bbox</span>: <span style="color: #0000BB;">-75.4165504765101</span>, <span style="color: #0000BB;">-73.2404734584194</span>, <span style="color: #0000BB;">-44.3891673562134</span>,</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">-60.3476308273474</span>(xmin/ymin/xmax/ymax)</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • Dataset:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Number of planning units: <span style="color: #0000BB;">48447</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Planning unit path:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/tmp/RtmpKTauZJ/file36a32b901ddd/antarctic-peninsula_pu.gpkg</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/tmp/RtmpXY91Xf/file4d0466d8acf3/antarctic-peninsula.gpkg</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Boundary path:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula.boundary.rds</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Boundary data loaded: <span style="color: #0000BB;">TRUE</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> • Components:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>   • Number of features: <span style="color: #0000BB;">53</span></span>

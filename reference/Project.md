@@ -105,6 +105,12 @@ Other functions for defining classes:
 
 - [`Project$get_bbox()`](#method-Project-get_bbox)
 
+- [`Project$has_cache_object()`](#method-Project-has_cache_object)
+
+- [`Project$get_cache_object()`](#method-Project-get_cache_object)
+
+- [`Project$set_cache_object()`](#method-Project-set_cache_object)
+
 - [`Project$get_solution()`](#method-Project-get_solution)
 
 - [`Project$get_lock()`](#method-Project-get_lock)
@@ -282,6 +288,70 @@ Get the bounding box.
 A
 [`sf::st_bbox()`](https://r-spatial.github.io/sf/reference/st_bbox.html)
 object.
+
+------------------------------------------------------------------------
+
+### `Project$has_cache_object()`
+
+Check if cache has an object with a particular identifier.
+
+#### Usage
+
+    Project$has_cache_object(id)
+
+#### Arguments
+
+- `id`:
+
+  `character` value.
+
+#### Returns
+
+A `logical` value.
+
+------------------------------------------------------------------------
+
+### `Project$get_cache_object()`
+
+Get object from cache.
+
+#### Usage
+
+    Project$get_cache_object(id)
+
+#### Arguments
+
+- `id`:
+
+  `character` value.
+
+#### Returns
+
+An object.
+
+------------------------------------------------------------------------
+
+### `Project$set_cache_object()`
+
+Set object in cache.
+
+#### Usage
+
+    Project$set_cache_object(id, value)
+
+#### Arguments
+
+- `id`:
+
+  `character` value.
+
+- `value`:
+
+  An object.
+
+#### Returns
+
+An invisible `TRUE` indicating success.
 
 ------------------------------------------------------------------------
 

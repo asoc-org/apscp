@@ -175,10 +175,14 @@ Other miscellaneous functions:
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`cli_format_vector()`](https://asoc-org.github.io/apscp/reference/cli_format_vector.md),
 [`cli_list()`](https://asoc-org.github.io/apscp/reference/cli_list.md),
+[`compress_object()`](https://asoc-org.github.io/apscp/reference/compress_object.md),
+[`decompress_object()`](https://asoc-org.github.io/apscp/reference/decompress_object.md),
 [`file_symlink()`](https://asoc-org.github.io/apscp/reference/file_symlink.md),
+[`hash_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/hash_prioritization_settings.md),
 [`is_installed()`](https://asoc-org.github.io/apscp/reference/is_installed.md),
 [`is_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/is_prioritization_settings.md),
-[`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md)
+[`is_relative_path()`](https://asoc-org.github.io/apscp/reference/is_relative_path.md),
+[`sanitize_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/sanitize_prioritization_settings.md)
 
 ## Examples
 
@@ -204,10 +208,10 @@ color_palette("plasma", NULL)
 
 # obtain all colors from a random palette
 color_palette("random", NULL)
-#>  [1] "#67001F" "#B2182B" "#D6604D" "#F4A582" "#FDDBC7" "#F7F7F7" "#D1E5F0"
-#>  [8] "#92C5DE" "#4393C3" "#2166AC" "#053061"
+#> [1] "#FFFFFF" "#F0F0F0" "#D9D9D9" "#BDBDBD" "#969696" "#737373" "#525252"
+#> [8] "#252525" "#000000"
 
 # obtain 5 colors from random palette(s)
 color_palette("random", 5)
-#> [1] "#F0F9E8" "#BAE4BC" "#7BCCC4" "#43A2CA" "#0868AC"
+#> [1] "#A6CEE3" "#1F78B4" "#B2DF8A" "#33A02C" "#FB9A99"
 ```

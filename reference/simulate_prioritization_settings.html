@@ -69,6 +69,7 @@ package testing and should not be used for any research purposes.</p>
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other functions for simulating data:
 <code><a href="simulate_binary_legend.html">simulate_binary_legend()</a></code>,
+<code><a href="simulate_cache.html">simulate_cache()</a></code>,
 <code><a href="simulate_continuous_legend.html">simulate_continuous_legend()</a></code>,
 <code><a href="simulate_pmtiles_file.html">simulate_pmtiles_file()</a></code>,
 <code><a href="simulate_project.html">simulate_project()</a></code>,
@@ -89,21 +90,21 @@ package testing and should not be used for any research purposes.</p>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">s</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $features</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           id      name column         zone target weight</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  feature-1 Species 1 feat_1 Biodiversity    0.2    0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  feature-1 Species 1 feat_1      Tourism    0.0    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  feature-1 Species 1 feat_1 Biodiversity    0.8    1.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  feature-1 Species 1 feat_1      Tourism    0.2    1.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3  feature-1 Species 1 feat_1   Scientific    0.0    0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  feature-2 Species 2 feat_2 Biodiversity    1.0    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  feature-2 Species 2 feat_2      Tourism    0.0    0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  feature-2 Species 2 feat_2   Scientific    0.0    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  feature-3 Species 3 feat_3 Biodiversity    0.4    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  feature-3 Species 3 feat_3      Tourism    0.4    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  feature-3 Species 3 feat_3   Scientific    0.0    1.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 feature-4 Species 4 feat_4 Biodiversity    0.2    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11 feature-4 Species 4 feat_4      Tourism    0.2    0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12 feature-4 Species 4 feat_4   Scientific    0.0    0.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 feature-5 Species 5 feat_5 Biodiversity    0.4    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  feature-2 Species 2 feat_2 Biodiversity    0.2    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  feature-2 Species 2 feat_2      Tourism    0.6    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  feature-2 Species 2 feat_2   Scientific    0.0    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  feature-3 Species 3 feat_3 Biodiversity    0.2    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  feature-3 Species 3 feat_3      Tourism    0.6    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  feature-3 Species 3 feat_3   Scientific    0.2    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 feature-4 Species 4 feat_4 Biodiversity    1.0    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11 feature-4 Species 4 feat_4      Tourism    0.0    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12 feature-4 Species 4 feat_4   Scientific    0.0    0.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 feature-5 Species 5 feat_5 Biodiversity    0.4    0.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14 feature-5 Species 5 feat_5      Tourism    0.6    0.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15 feature-5 Species 5 feat_5   Scientific    0.0    0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15 feature-5 Species 5 feat_5   Scientific    0.0    0.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $locks</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       id            name column         zone priority</span>

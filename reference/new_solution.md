@@ -70,8 +70,8 @@ x <- new_solution(
   layer = new_layer(
     column = "solution",
     total = 500,
-    dataset = create_dataset_from_sf(sim_project$dataset$get_sf()),
-    tile = create_tile_from_sf(sim_project$dataset$get_sf()),
+    dataset = sim_project$dataset,
+    tile = sim_project$tiles[[1]],
     legend = simulate_solution_legend(),
     provenance = simulate_provenance(),
     details = "extra info"
@@ -79,7 +79,7 @@ x <- new_solution(
   settings = simulate_prioritization_settings(sim_project),
   metrics = eval_prioritization(
     sim_project, sim_settings,
-    sim_project$dataset$get_column_data("solution")
+    sim_project$dataset$get_pu_column_data("solution")
   )
 )
 
@@ -87,7 +87,7 @@ x <- new_solution(
 print(x)
 #> A <Solution> object.
 #> • name: "solution"
-#> • id: "b490b2a9-8101-4952-9706-800dd7b4cfec"
+#> • id: "83382895-bd5b-4548-821e-ef4e7476d7bc"
 #> • settings: <list> object
 #> • metrics: <list> object
 #> • layer: <Layer> object

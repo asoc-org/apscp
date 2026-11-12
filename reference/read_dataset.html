@@ -44,7 +44,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_dataset</span><span class="op">(</span><span class="va">pu_path</span>, <span class="va">boundary_path</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_dataset</span><span class="op">(</span><span class="va">pu_path</span>, <span class="va">boundary_path</span>, <span class="va">cache_path</span>, dataset_dir <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -56,8 +56,11 @@
 
 
 <dt id="arg-boundary-path">boundary_path<a class="anchor" aria-label="anchor" href="#arg-boundary-path"></a></dt>
-<dd><p><code>character</code> file path for boundary data.
-If the dataset does not have boundary data, then use <code>boundary_path = NULL</code>.</p></dd>
+<dd><p><code>character</code> file path for boundary data.</p></dd>
+
+
+<dt id="arg-cache-path">cache_path<a class="anchor" aria-label="anchor" href="#arg-cache-path"></a></dt>
+<dd><p><code>character</code> file path for cache data.</p></dd>
 
 
 <dt id="arg-dataset-dir">dataset_dir<a class="anchor" aria-label="anchor" href="#arg-dataset-dir"></a></dt>
@@ -88,25 +91,28 @@ to store planning unit and boundary data.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># specify file paths</span></span></span>
 <span class="r-in"><span><span class="va">pu_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula_pu.gpkg.zip"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula.gpkg.zip"</span>,</span></span>
 <span class="r-in"><span>  package <span class="op">=</span> <span class="st">"apscp"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">bd_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula_bd.rds"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula.boundary.rds"</span>,</span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"apscp"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cc_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"extdata"</span>, <span class="st">"antarctic-peninsula.cache.rds"</span>,</span></span>
 <span class="r-in"><span>  package <span class="op">=</span> <span class="st">"apscp"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># import data</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">read_dataset</span><span class="op">(</span><span class="va">pu_path</span>, <span class="va">bd_path</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">read_dataset</span><span class="op">(</span><span class="va">pu_path</span>, <span class="va">bd_path</span>, <span class="va">cc_path</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># preview object</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A <span style="color: #0000BB;">&lt;Dataset&gt;</span> object.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Number of planning units: <span style="color: #0000BB;">48447</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Planning unit path:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/tmp/RtmpKTauZJ/file36a313306635/antarctic-peninsula_pu.gpkg</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Planning unit path: <span style="color: #0000BB;">/tmp/RtmpXY91Xf/file4d0414cd749c/antarctic-peninsula.gpkg</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Boundary path:</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>   <span style="color: #0000BB;">/home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula.boundary.rds</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Boundary data loaded: <span style="color: #0000BB;">TRUE</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

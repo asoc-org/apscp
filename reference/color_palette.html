@@ -128,10 +128,14 @@ object delimited by semicolon (<code>";"</code>) characters.</p>
 <code><a href="as.list.JsDataFrameList.html">as.list.JsDataFrameList()</a></code>,
 <code><a href="cli_format_vector.html">cli_format_vector()</a></code>,
 <code><a href="cli_list.html">cli_list()</a></code>,
+<code><a href="compress_object.html">compress_object()</a></code>,
+<code><a href="decompress_object.html">decompress_object()</a></code>,
 <code><a href="file_symlink.html">file_symlink()</a></code>,
+<code><a href="hash_prioritization_settings.html">hash_prioritization_settings()</a></code>,
 <code><a href="is_installed.html">is_installed()</a></code>,
 <code><a href="is_prioritization_settings.html">is_prioritization_settings()</a></code>,
-<code><a href="is_relative_path.html">is_relative_path()</a></code></p></div>
+<code><a href="is_relative_path.html">is_relative_path()</a></code>,
+<code><a href="sanitize_prioritization_settings.html">sanitize_prioritization_settings()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -157,12 +161,12 @@ object delimited by semicolon (<code>";"</code>) characters.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># obtain all colors from a random palette</span></span></span>
 <span class="r-in"><span><span class="fu">color_palette</span><span class="op">(</span><span class="st">"random"</span>, <span class="cn">NULL</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "#67001F" "#B2182B" "#D6604D" "#F4A582" "#FDDBC7" "#F7F7F7" "#D1E5F0"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [8] "#92C5DE" "#4393C3" "#2166AC" "#053061"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#FFFFFF" "#F0F0F0" "#D9D9D9" "#BDBDBD" "#969696" "#737373" "#525252"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [8] "#252525" "#000000"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># obtain 5 colors from random palette(s)</span></span></span>
 <span class="r-in"><span><span class="fu">color_palette</span><span class="op">(</span><span class="st">"random"</span>, <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#F0F9E8" "#BAE4BC" "#7BCCC4" "#43A2CA" "#0868AC"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "#A6CEE3" "#1F78B4" "#B2DF8A" "#33A02C" "#FB9A99"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -83,13 +83,13 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1           29      37         24
+#> 1           32      30         28
 #> 
 #> $coverage$locked
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1           29      37         24
+#> 1           32      30         28
 #> 
 #> 
 #> $performance
@@ -123,13 +123,13 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        0.321   0.272        NaN
+#> 1        0.239   0.222        NaN
 #> 
 #> $performance$locked
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        0.321   0.272        NaN
+#> 1        0.239   0.222        NaN
 #> 
 #> 
 #> $features
@@ -205,21 +205,21 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 5 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        23.7     30.7      20.2 
-#> 2         9.27    11.5       7.31
-#> 3        20.6     27.0      17.3 
-#> 4        12.7     15.6       9.85
-#> 5        16.2     20.6      13.8 
+#> 1         26.8   24.4       23.3 
+#> 2         10.1    9.57       8.46
+#> 3         23.1   21.7       20.0 
+#> 4         14.1   12.5       11.6 
+#> 5         18.1   16.5       16.1 
 #> 
 #> $features$locked
 #> # A tibble: 5 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        23.7     30.7      20.2 
-#> 2         9.27    11.5       7.31
-#> 3        20.6     27.0      17.3 
-#> 4        12.7     15.6       9.85
-#> 5        16.2     20.6      13.8 
+#> 1         26.8   24.4       23.3 
+#> 2         10.1    9.57       8.46
+#> 3         23.1   21.7       20.0 
+#> 4         14.1   12.5       11.6 
+#> 5         18.1   16.5       16.1 
 #> 
 #> 
 #> $locks
@@ -259,15 +259,15 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 2 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1            4       5          1
-#> 2            2       5          3
+#> 1            3       6          1
+#> 2            3       3          4
 #> 
 #> $locks$locked
 #> # A tibble: 2 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1            4       5          1
-#> 2            2       5          3
+#> 1            3       6          1
+#> 2            3       3          4
 #> 
 #> 
 #> $costs
@@ -295,13 +295,13 @@ eval_prioritization(sim_project, sim_settings, sim_prioritization)
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        5963.   7602.      4923.
+#> 1        6591.   6173.      5723.
 #> 
 #> $costs$locked
 #> # A tibble: 1 × 3
 #>   Biodiversity Tourism Scientific
 #>          <dbl>   <dbl>      <dbl>
-#> 1        5963.   7602.      4923.
+#> 1        6591.   6173.      5723.
 #> 
 #> 
 ```

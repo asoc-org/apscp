@@ -113,21 +113,21 @@ sim_settings <- simulate_prioritization_settings(sim_project)
 print(sim_settings)
 #> $features
 #>           id      name column         zone target weight
-#> 1  feature-1 Species 1 feat_1 Biodiversity    0.4    0.0
-#> 2  feature-1 Species 1 feat_1      Tourism    0.0    1.0
-#> 3  feature-1 Species 1 feat_1   Scientific    0.2    0.5
-#> 4  feature-2 Species 2 feat_2 Biodiversity    0.8    0.5
-#> 5  feature-2 Species 2 feat_2      Tourism    0.0    0.0
-#> 6  feature-2 Species 2 feat_2   Scientific    0.2    1.0
-#> 7  feature-3 Species 3 feat_3 Biodiversity    0.0    0.5
-#> 8  feature-3 Species 3 feat_3      Tourism    0.0    1.0
-#> 9  feature-3 Species 3 feat_3   Scientific    0.0    0.0
-#> 10 feature-4 Species 4 feat_4 Biodiversity    0.6    0.0
-#> 11 feature-4 Species 4 feat_4      Tourism    0.0    0.0
-#> 12 feature-4 Species 4 feat_4   Scientific    0.0    1.0
-#> 13 feature-5 Species 5 feat_5 Biodiversity    1.0    1.0
-#> 14 feature-5 Species 5 feat_5      Tourism    0.0    0.5
-#> 15 feature-5 Species 5 feat_5   Scientific    0.0    1.0
+#> 1  feature-1 Species 1 feat_1 Biodiversity    0.8    1.0
+#> 2  feature-1 Species 1 feat_1      Tourism    0.2    1.0
+#> 3  feature-1 Species 1 feat_1   Scientific    0.0    0.5
+#> 4  feature-2 Species 2 feat_2 Biodiversity    0.2    0.5
+#> 5  feature-2 Species 2 feat_2      Tourism    0.6    0.5
+#> 6  feature-2 Species 2 feat_2   Scientific    0.0    0.5
+#> 7  feature-3 Species 3 feat_3 Biodiversity    0.2    0.0
+#> 8  feature-3 Species 3 feat_3      Tourism    0.6    0.5
+#> 9  feature-3 Species 3 feat_3   Scientific    0.2    0.0
+#> 10 feature-4 Species 4 feat_4 Biodiversity    1.0    0.0
+#> 11 feature-4 Species 4 feat_4      Tourism    0.0    0.5
+#> 12 feature-4 Species 4 feat_4   Scientific    0.0    0.0
+#> 13 feature-5 Species 5 feat_5 Biodiversity    0.4    0.5
+#> 14 feature-5 Species 5 feat_5      Tourism    0.6    0.0
+#> 15 feature-5 Species 5 feat_5   Scientific    0.0    0.0
 #> 
 #> $locks
 #>       id            name column         zone priority
@@ -144,13 +144,12 @@ sol <- solve_prioritization(sim_project, sim_settings, gap = 0.1)
 
 # preview solution
 print(sol)
-#>  [1] NA NA NA  3 NA NA  6  3  4  4  3 NA NA NA  1 NA NA NA NA NA  1  1 NA  3 NA
-#> [26]  1 NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA NA  1 NA NA NA  3 NA NA  1
-#> [51] NA  1 NA NA NA NA NA NA  3 NA NA  6  1 NA NA NA NA  1 NA  3  6 NA  3 NA  3
-#> [76] NA  6  6 NA  1 NA NA NA  6  6  6  4  3 NA NA
+#>  [1] 5 5 5 3 5 5 5 3 5 5 3 5 5 5 1 5 5 5 5 5 1 1 5 3 5 1 5 5 5 5 5 5 5 5 5 5 5 5
+#> [39] 4 5 5 5 1 5 5 5 3 5 5 1 5 1 5 5 5 4 4 4 3 5 5 5 1 4 4 4 4 1 5 3 5 4 3 4 3 4
+#> [77] 4 4 4 1 4 4 4 4 4 4 4 3 4 4
 #> attr(,"class")
 #> [1] "Prioritization"
 #> attr(,"obj_value")
 #>            Problem 1 Problem 2 Problem 3
-#> solution_1  1.262683         0  6319.059
+#> solution_1 0.5272344 0.1049029  8681.907
 ```

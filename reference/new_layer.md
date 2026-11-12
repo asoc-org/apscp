@@ -13,6 +13,7 @@ new_layer(
   legend,
   provenance,
   visible = FALSE,
+  hidden = FALSE,
   details = NULL
 )
 ```
@@ -55,6 +56,11 @@ new_layer(
   `logical` value indicating if the layer should be visible by default?
   Defaults to `FALSE`.
 
+- hidden:
+
+  `logical` value indicating if the layer should be forcibly hidden and
+  cannot be viewed in the application. Defaults to `FALSE`.
+
 - details:
 
   `character` value with additional details for the layer. Defaults to
@@ -96,6 +102,7 @@ x <- new_layer(
   legend = simulate_continuous_legend(),
   provenance = simulate_provenance(),
   visible = TRUE,
+  hidden = FALSE,
   details = "extra info"
 )
 
@@ -108,6 +115,7 @@ print(x)
 #> • tile: <Tile> object
 #> • legend: <ContinuousLegend> object
 #> • provenance: <Provenance> object
-#> • visible: <logical> object
+#> • visible: TRUE
+#> • hidden: FALSE
 #> • details: "extra info"
 ```

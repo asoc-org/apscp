@@ -5,8 +5,14 @@ Simulate a new project.
 ## Usage
 
 ``` r
-simulate_project()
+simulate_project(seed = 500)
 ```
+
+## Arguments
+
+- seed:
+
+  `integer` value with seed for simulations. Defaults to 500.
 
 ## Value
 
@@ -22,6 +28,7 @@ testing and should not be used for any research purposes.
 
 Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
+[`simulate_cache()`](https://asoc-org.github.io/apscp/reference/simulate_cache.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md),
 [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md),
@@ -49,8 +56,8 @@ print(x)
 #>   • bbox: -20, -30, 20, 30(xmin/ymin/xmax/ymax)
 #> • Dataset:
 #>   • Number of planning units: 90
-#>   • Planning unit path: /tmp/RtmpKTauZJ/file36a36e37360a.gpkg
-#>   • Boundary path: /tmp/RtmpKTauZJ/file36a358a22afe.rds
+#>   • Planning unit path: /tmp/RtmpXY91Xf/file4d04e43880a.gpkg
+#>   • Boundary path: /tmp/RtmpXY91Xf/file4d044b0206.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 5

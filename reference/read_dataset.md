@@ -7,7 +7,7 @@ object.
 ## Usage
 
 ``` r
-read_dataset(pu_path, boundary_path, dataset_dir = tempfile())
+read_dataset(pu_path, boundary_path, cache_path, dataset_dir = tempfile())
 ```
 
 ## Arguments
@@ -18,8 +18,11 @@ read_dataset(pu_path, boundary_path, dataset_dir = tempfile())
 
 - boundary_path:
 
-  `character` file path for boundary data. If the dataset does not have
-  boundary data, then use `boundary_path = NULL`.
+  `character` file path for boundary data.
+
+- cache_path:
+
+  `character` file path for cache data.
 
 - dataset_dir:
 
@@ -50,24 +53,27 @@ Other functions for reading and writing data:
 ``` r
 # specify file paths
 pu_path <- system.file(
-  "extdata", "antarctic-peninsula_pu.gpkg.zip",
+  "extdata", "antarctic-peninsula.gpkg.zip",
   package = "apscp"
 )
 bd_path <- system.file(
-  "extdata", "antarctic-peninsula_bd.rds",
+  "extdata", "antarctic-peninsula.boundary.rds",
+  package = "apscp"
+)
+cc_path <- system.file(
+  "extdata", "antarctic-peninsula.cache.rds",
   package = "apscp"
 )
 
 # import data
-x <- read_dataset(pu_path, bd_path)
+x <- read_dataset(pu_path, bd_path, cc_path)
 
 # preview object
 print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 48447
-#> • Planning unit path:
-#>   /tmp/RtmpKTauZJ/file36a313306635/antarctic-peninsula_pu.gpkg
+#> • Planning unit path: /tmp/RtmpXY91Xf/file4d0414cd749c/antarctic-peninsula.gpkg
 #> • Boundary path:
-#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
+#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula.boundary.rds
 #> • Boundary data loaded: TRUE
 ```

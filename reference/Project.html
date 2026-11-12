@@ -131,6 +131,9 @@ to create the project.</p></dd>
 <li><p><a href="#method-Project-print"><code>Project$print()</code></a></p></li>
 <li><p><a href="#method-Project-get_centroid"><code>Project$get_centroid()</code></a></p></li>
 <li><p><a href="#method-Project-get_bbox"><code>Project$get_bbox()</code></a></p></li>
+<li><p><a href="#method-Project-has_cache_object"><code>Project$has_cache_object()</code></a></p></li>
+<li><p><a href="#method-Project-get_cache_object"><code>Project$get_cache_object()</code></a></p></li>
+<li><p><a href="#method-Project-set_cache_object"><code>Project$set_cache_object()</code></a></p></li>
 <li><p><a href="#method-Project-get_solution"><code>Project$get_solution()</code></a></p></li>
 <li><p><a href="#method-Project-get_lock"><code>Project$get_lock()</code></a></p></li>
 <li><p><a href="#method-Project-add_solution"><code>Project$add_solution()</code></a></p></li>
@@ -276,11 +279,11 @@ box by 10 percent. Defaults to 0.</p></dd>
 
 </div>
 
-<p></p><hr><a id="method-Project-get_solution"></a><div class="section">
-<h3 id="project-get-solution-"><code>Project$get_solution()</code><a class="anchor" aria-label="anchor" href="#project-get-solution-"></a></h3>
-<p>Get solution from the project.</p><div class="section">
+<p></p><hr><a id="method-Project-has_cache_object"></a><div class="section">
+<h3 id="project-has-cache-object-"><code>Project$has_cache_object()</code><a class="anchor" aria-label="anchor" href="#project-has-cache-object-"></a></h3>
+<p>Check if cache has an object with a particular identifier.</p><div class="section">
 <h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_solution</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">has_cache_object</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
@@ -290,16 +293,16 @@ box by 10 percent. Defaults to 0.</p></dd>
 </dl><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
-<p>A <code><a href="new_solution.html">new_solution()</a></code> object.</p>
+<p>A <code>logical</code> value.</p>
 </div>
 
 </div>
 
-<p></p><hr><a id="method-Project-get_lock"></a><div class="section">
-<h3 id="project-get-lock-"><code>Project$get_lock()</code><a class="anchor" aria-label="anchor" href="#project-get-lock-"></a></h3>
-<p>Get lock from the project.</p><div class="section">
+<p></p><hr><a id="method-Project-get_cache_object"></a><div class="section">
+<h3 id="project-get-cache-object-"><code>Project$get_cache_object()</code><a class="anchor" aria-label="anchor" href="#project-get-cache-object-"></a></h3>
+<p>Get object from cache.</p><div class="section">
 <h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_lock</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_cache_object</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>id</code></dt>
@@ -309,20 +312,23 @@ box by 10 percent. Defaults to 0.</p></dd>
 </dl><p></p></div>
 </div><p></p><div class="section">
 <h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
-<p>A <code><a href="new_solution.html">new_solution()</a></code> object.</p>
+<p>An object.</p>
 </div>
 
 </div>
 
-<p></p><hr><a id="method-Project-add_solution"></a><div class="section">
-<h3 id="project-add-solution-"><code>Project$add_solution()</code><a class="anchor" aria-label="anchor" href="#project-add-solution-"></a></h3>
-<p>Add a new solution to the project.</p><div class="section">
+<p></p><hr><a id="method-Project-set_cache_object"></a><div class="section">
+<h3 id="project-set-cache-object-"><code>Project$set_cache_object()</code><a class="anchor" aria-label="anchor" href="#project-set-cache-object-"></a></h3>
+<p>Set object in cache.</p><div class="section">
 <h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_solution</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">set_cache_object</span><span class="op">(</span><span class="va">id</span>, <span class="va">value</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
 <h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>x</code></dt>
-<dd><p><code><a href="new_solution.html">new_solution()</a></code> object.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>id</code></dt>
+<dd><p><code>character</code> value.</p></dd>
+
+      <dt><code>value</code></dt>
+<dd><p>An object.</p></dd>
 
 
 </dl><p></p></div>
@@ -333,20 +339,77 @@ box by 10 percent. Defaults to 0.</p></dd>
 
 </div>
 
+<p></p><hr><a id="method-Project-get_solution"></a><div class="section">
+<h3 id="project-get-solution-"><code>Project$get_solution()</code><a class="anchor" aria-label="anchor" href="#project-get-solution-"></a></h3>
+<p>Get solution from the project.</p><div class="section">
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_solution</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>id</code></dt>
+<dd><p><code>character</code> value.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<p>A <code><a href="new_solution.html">new_solution()</a></code> object.</p>
+</div>
+
+</div>
+
+<p></p><hr><a id="method-Project-get_lock"></a><div class="section">
+<h3 id="project-get-lock-"><code>Project$get_lock()</code><a class="anchor" aria-label="anchor" href="#project-get-lock-"></a></h3>
+<p>Get lock from the project.</p><div class="section">
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">get_lock</span><span class="op">(</span><span class="va">id</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>id</code></dt>
+<dd><p><code>character</code> value.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
+<p>A <code><a href="new_solution.html">new_solution()</a></code> object.</p>
+</div>
+
+</div>
+
+<p></p><hr><a id="method-Project-add_solution"></a><div class="section">
+<h3 id="project-add-solution-"><code>Project$add_solution()</code><a class="anchor" aria-label="anchor" href="#project-add-solution-"></a></h3>
+<p>Add a new solution to the project.</p><div class="section">
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_solution</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div><p></p><div class="section">
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>x</code></dt>
+<dd><p><code><a href="new_solution.html">new_solution()</a></code> object.</p></dd>
+
+
+</dl><p></p></div>
+</div><p></p><div class="section">
+<h4 id="returns-9">Returns<a class="anchor" aria-label="anchor" href="#returns-9"></a></h4>
+<p>An invisible <code>TRUE</code> indicating success.</p>
+</div>
+
+</div>
+
 <p></p><hr><a id="method-Project-add_lock"></a><div class="section">
 <h3 id="project-add-lock-"><code>Project$add_lock()</code><a class="anchor" aria-label="anchor" href="#project-add-lock-"></a></h3>
 <p>Add a lock to the project.</p><div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_lock</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p><code><a href="new_lock.html">new_lock()</a></code> object.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-7">Returns<a class="anchor" aria-label="anchor" href="#returns-7"></a></h4>
+<h4 id="returns-10">Returns<a class="anchor" aria-label="anchor" href="#returns-10"></a></h4>
 <p>An invisible <code>TRUE</code> indicating success.</p>
 </div>
 
@@ -355,17 +418,17 @@ box by 10 percent. Defaults to 0.</p></dd>
 <p></p><hr><a id="method-Project-add_tile"></a><div class="section">
 <h3 id="project-add-tile-"><code>Project$add_tile()</code><a class="anchor" aria-label="anchor" href="#project-add-tile-"></a></h3>
 <p>Add a tile to the project.</p><div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">add_tile</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-10">Arguments<a class="anchor" aria-label="anchor" href="#arguments-10"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>x</code></dt>
 <dd><p><code><a href="new_tile.html">new_tile()</a></code> object.</p></dd>
 
 
 </dl><p></p></div>
 </div><p></p><div class="section">
-<h4 id="returns-8">Returns<a class="anchor" aria-label="anchor" href="#returns-8"></a></h4>
+<h4 id="returns-11">Returns<a class="anchor" aria-label="anchor" href="#returns-11"></a></h4>
 <p>An invisible <code>TRUE</code> indicating success.</p>
 </div>
 
@@ -374,10 +437,10 @@ box by 10 percent. Defaults to 0.</p></dd>
 <p></p><hr><a id="method-Project-clone"></a><div class="section">
 <h3 id="project-clone-"><code>Project$clone()</code><a class="anchor" aria-label="anchor" href="#project-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-12">Usage<a class="anchor" aria-label="anchor" href="#usage-12"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">Project</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div><p></p><div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-11">Arguments<a class="anchor" aria-label="anchor" href="#arguments-11"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 

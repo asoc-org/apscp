@@ -5,13 +5,19 @@ Simulate spatial data for conservation planning.
 ## Usage
 
 ``` r
-simulate_spatial_data()
+simulate_spatial_data(seed = 500)
 ```
+
+## Arguments
+
+- seed:
+
+  `integer` value with seed for simulations. Defaults to 500.
 
 ## Value
 
 A [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
-odbject.
+object.
 
 ## Details
 
@@ -22,6 +28,7 @@ testing and should not be used for any research purposes.
 
 Other functions for simulating data:
 [`simulate_binary_legend()`](https://asoc-org.github.io/apscp/reference/simulate_binary_legend.md),
+[`simulate_cache()`](https://asoc-org.github.io/apscp/reference/simulate_cache.md),
 [`simulate_continuous_legend()`](https://asoc-org.github.io/apscp/reference/simulate_continuous_legend.md),
 [`simulate_pmtiles_file()`](https://asoc-org.github.io/apscp/reference/simulate_pmtiles_file.md),
 [`simulate_prioritization_settings()`](https://asoc-org.github.io/apscp/reference/simulate_prioritization_settings.md),
@@ -37,7 +44,7 @@ d <- simulate_spatial_data()
 
 # preview object
 print(d)
-#> Simple feature collection with 90 features and 11 fields
+#> Simple feature collection with 90 features and 12 fields
 #> Geometry type: POLYGON
 #> Dimension:     XY
 #> Bounding box:  xmin: -20 ymin: -30 xmax: 20 ymax: 30
@@ -54,15 +61,15 @@ print(d)
 #> 8  211.0424 0.7219284 0.4142271 0.5411391 0.5479991 0.5510725    NA     1
 #> 9  210.3878 0.7435505 0.4123446 0.4763017 0.5498153 0.5991256    NA    NA
 #> 10 204.3971 0.7631509 0.4038949 0.4147364 0.5348758 0.6448475    NA    NA
-#>    invasive_species solution                       geometry _index
-#> 1                 0        6 POLYGON ((-20 24, -20 30, -...      1
-#> 2                 0        2 POLYGON ((-16 24, -16 30, -...      2
-#> 3                 0        6 POLYGON ((-12 24, -12 30, -...      3
-#> 4                 0        4 POLYGON ((-8 24, -8 30, -4 ...      4
-#> 5                 1        1 POLYGON ((-4 24, -4 30, 0 3...      5
-#> 6                 0        0 POLYGON ((0 24, 0 30, 4 30,...      6
-#> 7                 0        6 POLYGON ((4 24, 4 30, 8 30,...      7
-#> 8                 1        3 POLYGON ((8 24, 8 30, 12 30...      8
-#> 9                 0        6 POLYGON ((12 24, 12 30, 16 ...      9
-#> 10                1        1 POLYGON ((16 24, 16 30, 20 ...     10
+#>    invasive_species solution solution2                       geometry _index
+#> 1                 1        6         5 POLYGON ((-20 24, -20 30, -...      1
+#> 2                 1        2         0 POLYGON ((-16 24, -16 30, -...      2
+#> 3                 1        6         6 POLYGON ((-12 24, -12 30, -...      3
+#> 4                 1        4         1 POLYGON ((-8 24, -8 30, -4 ...      4
+#> 5                 0        1         0 POLYGON ((-4 24, -4 30, 0 3...      5
+#> 6                 1        0         1 POLYGON ((0 24, 0 30, 4 30,...      6
+#> 7                 0        6         2 POLYGON ((4 24, 4 30, 8 30,...      7
+#> 8                 0        3         2 POLYGON ((8 24, 8 30, 12 30...      8
+#> 9                 0        6         1 POLYGON ((12 24, 12 30, 16 ...      9
+#> 10                0        1         6 POLYGON ((16 24, 16 30, 20 ...     10
 ```

@@ -14,7 +14,7 @@ tool_generated_provenance()
 
 A
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md)
-object
+object.
 
 ## See also
 
@@ -27,7 +27,8 @@ Other functions for calling class methods:
 [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
-[`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
+[`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md)
 
 ## Examples
 
@@ -42,4 +43,5 @@ print(x)
 #> • icon: "user"
 #> • color: "black"
 #> • description: "Generated with the tool"
+#> • url: ""
 ```

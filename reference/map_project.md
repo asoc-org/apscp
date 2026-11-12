@@ -45,7 +45,10 @@ Other functions for mapping data:
 ``` r
 if (FALSE) { # interactive()
 # find file path for built-in project
-path <- system.file("extdata", "antarctic-peninsula.yml", package = "apscp")
+path <- system.file(
+  "extdata", "antarctic-peninsula.metadata.rds",
+  package = "apscp"
+)
 
 # import project
 x <- read_project(path)

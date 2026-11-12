@@ -44,7 +44,7 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_dataset</span><span class="op">(</span><span class="va">x</span>, <span class="va">pu_path</span>, <span class="va">boundary_path</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">write_dataset</span><span class="op">(</span><span class="va">x</span>, <span class="va">pu_path</span>, <span class="va">boundary_path</span>, <span class="va">cache_path</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -60,8 +60,11 @@
 
 
 <dt id="arg-boundary-path">boundary_path<a class="anchor" aria-label="anchor" href="#arg-boundary-path"></a></dt>
-<dd><p><code>character</code> file path for boundary data.
-If the dataset does not have boundary data, then use <code>boundary_path = NULL</code>.</p></dd>
+<dd><p><code>character</code> file path for boundary data.</p></dd>
+
+
+<dt id="arg-cache-path">cache_path<a class="anchor" aria-label="anchor" href="#arg-cache-path"></a></dt>
+<dd><p><code>character</code> file path for cache data.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -93,10 +96,11 @@ If the dataset does not have boundary data, then use <code>boundary_path = NULL<
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># define file paths for saving data</span></span></span>
 <span class="r-in"><span><span class="va">pu_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".gpkg.zip"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">bd_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".csv.gz"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">bd_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".boundary.rds"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">cc_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".cache.rds"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># save files</span></span></span>
-<span class="r-in"><span><span class="fu">write_dataset</span><span class="op">(</span><span class="va">dataset</span>, <span class="va">pu_path</span>, <span class="va">bd_path</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">write_dataset</span><span class="op">(</span><span class="va">dataset</span>, <span class="va">pu_path</span>, <span class="va">bd_path</span>, <span class="va">cc_path</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

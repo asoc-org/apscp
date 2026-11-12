@@ -7,7 +7,7 @@ object.
 ## Usage
 
 ``` r
-new_dataset(pu_path, boundary_path)
+new_dataset(pu_path, boundary_path, cache_path)
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ new_dataset(pu_path, boundary_path)
   `character` file path.
 
 - boundary_path:
+
+  `character` file path.
+
+- cache_path:
 
   `character` file path.
 
@@ -42,6 +46,7 @@ Other functions for calling class methods:
 [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -59,14 +64,19 @@ sim_path2 <- tempfile(fileext = ".rds")
 bd_data <- prioritizr::boundary_matrix(sim_data)
 write_matrix(bd_data, sim_path2)
 
+# manually prepare cache data
+sim_path3 <- tempfile(fileext = ".rds")
+cache_data <- simulate_cache(sim_data)
+saveRDS(cache_data, sim_path3)
+
 # create object
-x <- new_dataset(sim_path1, sim_path2)
+x <- new_dataset(sim_path1, sim_path2, sim_path3)
 
 # preview object
 print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 90
-#> • Planning unit path: /tmp/RtmpKTauZJ/file36a334e2d327.gpkg
-#> • Boundary path: /tmp/RtmpKTauZJ/file36a31752b188.rds
+#> • Planning unit path: /tmp/RtmpXY91Xf/file4d041c540053.gpkg
+#> • Boundary path: /tmp/RtmpXY91Xf/file4d0454d3c6f6.rds
 #> • Boundary data loaded: TRUE
 ```

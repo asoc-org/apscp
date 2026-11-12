@@ -53,6 +53,7 @@
 <span>  <span class="va">settings</span>,</span>
 <span>  tile <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  metrics <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hidden <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  id <span class="op">=</span> <span class="fu">uuid</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/uuid/man/UUIDgenerate.html" class="external-link">UUIDgenerate</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -97,6 +98,12 @@ Defaults to <code>NULL</code> such that a <code><a href="new_tile.html">new_tile
 Defaults to <code>NULL</code> such that metrics are calculated automatically.</p></dd>
 
 
+<dt id="arg-hidden">hidden<a class="anchor" aria-label="anchor" href="#arg-hidden"></a></dt>
+<dd><p><code>logical</code> value indicating if the layer should
+be forcibly hidden and cannot be viewed in the application.
+Defaults to <code>FALSE</code>.</p></dd>
+
+
 <dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
 <dd><p><code>character</code> value with unique identifier.
 Defaults to a random identifier (<code><a href="https://rdrr.io/pkg/uuid/man/UUIDgenerate.html" class="external-link">uuid::UUIDgenerate()</a></code>).</p></dd>
@@ -117,6 +124,7 @@ Defaults to a random identifier (<code><a href="https://rdrr.io/pkg/uuid/man/UUI
 <code><a href="create_tile_from_project.html">create_tile_from_project()</a></code>,
 <code><a href="create_tile_from_sf.html">create_tile_from_sf()</a></code>,
 <code><a href="new_dataset.html">new_dataset()</a></code>,
+<code><a href="precomputed_provenance.html">precomputed_provenance()</a></code>,
 <code><a href="tool_generated_provenance.html">tool_generated_provenance()</a></code></p></div>
     </div>
 
@@ -139,7 +147,7 @@ Defaults to a random identifier (<code><a href="https://rdrr.io/pkg/uuid/man/UUI
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> A <span style="color: #0000BB;">&lt;Solution&gt;</span> object.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">name</span>: <span style="color: #0000BB;">"user solution"</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">id</span>: <span style="color: #0000BB;">"dee9bd41-3e91-4940-b535-0f25d57bef01"</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">id</span>: <span style="color: #0000BB;">"ccf91feb-7a84-4239-ba93-a0cdba9bf1b2"</span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">settings</span>: <span style="color: #0000BB;">&lt;list&gt;</span> object</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">metrics</span>: <span style="color: #0000BB;">&lt;list&gt;</span> object</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> <span style="color: #00BB00;">layer</span>: <span style="color: #0000BB;">&lt;Layer&gt;</span> object</span>

@@ -44,6 +44,14 @@ Other functions for defining classes:
   [`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
   object.
 
+- `cache_path`:
+
+  `character` file path.
+
+- `cache_data`:
+
+  `list` object.
+
 - `n_pu`:
 
   `integer` value.
@@ -58,25 +66,33 @@ Other functions for defining classes:
 
 - [`Dataset$get_n_pu()`](#method-Dataset-get_n_pu)
 
+- [`Dataset$get_cache_ids()`](#method-Dataset-get_cache_ids)
+
+- [`Dataset$has_cache_object()`](#method-Dataset-has_cache_object)
+
+- [`Dataset$get_cache_object()`](#method-Dataset-get_cache_object)
+
+- [`Dataset$set_cache_object()`](#method-Dataset-set_cache_object)
+
 - [`Dataset$get_boundary_data()`](#method-Dataset-get_boundary_data)
 
-- [`Dataset$get_column_names()`](#method-Dataset-get_column_names)
+- [`Dataset$get_pu_columns()`](#method-Dataset-get_pu_columns)
 
-- [`Dataset$get_dataframe()`](#method-Dataset-get_dataframe)
+- [`Dataset$get_pu_dataframe()`](#method-Dataset-get_pu_dataframe)
 
-- [`Dataset$get_sf()`](#method-Dataset-get_sf)
+- [`Dataset$get_pu_sf()`](#method-Dataset-get_pu_sf)
 
-- [`Dataset$get_column_data()`](#method-Dataset-get_column_data)
+- [`Dataset$get_pu_column_data()`](#method-Dataset-get_pu_column_data)
 
-- [`Dataset$get_column_total()`](#method-Dataset-get_column_total)
+- [`Dataset$get_pu_column_total()`](#method-Dataset-get_pu_column_total)
 
 - [`Dataset$get_pu_status()`](#method-Dataset-get_pu_status)
 
-- [`Dataset$get_column_held()`](#method-Dataset-get_column_held)
+- [`Dataset$get_pu_column_held()`](#method-Dataset-get_pu_column_held)
 
-- [`Dataset$has_column()`](#method-Dataset-has_column)
+- [`Dataset$has_pu_column()`](#method-Dataset-has_pu_column)
 
-- [`Dataset$set_column_data()`](#method-Dataset-set_column_data)
+- [`Dataset$set_pu_column_data()`](#method-Dataset-set_pu_column_data)
 
 - [`Dataset$clone()`](#method-Dataset-clone)
 
@@ -88,7 +104,7 @@ Create a `Dataset` object.
 
 #### Usage
 
-    Dataset$new(pu_path, boundary_path)
+    Dataset$new(pu_path, boundary_path, cache_path)
 
 #### Arguments
 
@@ -97,6 +113,10 @@ Create a `Dataset` object.
   `character ` file path.
 
 - `boundary_path`:
+
+  `character` file path.
+
+- `cache_path`:
 
   `character` file path.
 
@@ -134,6 +154,84 @@ An `integer` value.
 
 ------------------------------------------------------------------------
 
+### `Dataset$get_cache_ids()`
+
+Get identifiers present in cache.
+
+#### Usage
+
+    Dataset$get_cache_ids()
+
+#### Returns
+
+A `character` vector.
+
+------------------------------------------------------------------------
+
+### `Dataset$has_cache_object()`
+
+Check if cache has an object with a particular identifier.
+
+#### Usage
+
+    Dataset$has_cache_object(id)
+
+#### Arguments
+
+- `id`:
+
+  \`character identifier value.
+
+#### Returns
+
+A `logical` value.
+
+------------------------------------------------------------------------
+
+### `Dataset$get_cache_object()`
+
+Get object from cache.
+
+#### Usage
+
+    Dataset$get_cache_object(id)
+
+#### Arguments
+
+- `id`:
+
+  `character` identifier value.
+
+#### Returns
+
+A vector.
+
+------------------------------------------------------------------------
+
+### `Dataset$set_cache_object()`
+
+Set object in cache.
+
+#### Usage
+
+    Dataset$set_cache_object(id, value)
+
+#### Arguments
+
+- `id`:
+
+  `character` identifier value.
+
+- `value`:
+
+  An object.
+
+#### Returns
+
+An invisible `TRUE` indicating success.
+
+------------------------------------------------------------------------
+
 ### `Dataset$get_boundary_data()`
 
 Get boundary data.
@@ -150,13 +248,13 @@ object.
 
 ------------------------------------------------------------------------
 
-### `Dataset$get_column_names()`
+### `Dataset$get_pu_columns()`
 
-Get column names.
+Get column names of planning unit data.
 
 #### Usage
 
-    Dataset$get_column_names()
+    Dataset$get_pu_columns()
 
 #### Returns
 
@@ -164,20 +262,20 @@ A `character` vector.
 
 ------------------------------------------------------------------------
 
-### `Dataset$get_dataframe()`
+### `Dataset$get_pu_dataframe()`
 
-Get `data.frame` with data.
+Get `data.frame` with planning unit data.
 
 #### Usage
 
-    Dataset$get_dataframe(column = NULL)
+    Dataset$get_pu_dataframe(column = NULL)
 
 #### Arguments
 
 - `column`:
 
-  `character` vector. Defaults to `NULL` such that all columns are
-  returned.
+  `character` vector of column names. Defaults to `NULL` such that all
+  columns are returned.
 
 #### Returns
 
@@ -185,21 +283,21 @@ A `data.frame` object.
 
 ------------------------------------------------------------------------
 
-### `Dataset$get_sf()`
+### `Dataset$get_pu_sf()`
 
 Get [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
-object with data.
+object with planning unit data.
 
 #### Usage
 
-    Dataset$get_sf(column = NULL)
+    Dataset$get_pu_sf(column = NULL)
 
 #### Arguments
 
 - `column`:
 
-  `character` vector. Defaults to `NULL` such that all columns are
-  returned.
+  `character` vector of column names. Defaults to `NULL` such that all
+  columns are returned.
 
 #### Returns
 
@@ -208,13 +306,33 @@ object.
 
 ------------------------------------------------------------------------
 
-### `Dataset$get_column_data()`
+### `Dataset$get_pu_column_data()`
 
-Get column data.
+Get data from a column of the planing unit data.
 
 #### Usage
 
-    Dataset$get_column_data(column)
+    Dataset$get_pu_column_data(column)
+
+#### Arguments
+
+- `column`:
+
+  `character` value indicating the column name.
+
+#### Returns
+
+A vector.
+
+------------------------------------------------------------------------
+
+### `Dataset$get_pu_column_total()`
+
+Get total (sum) of values in a column of the planning unit data.
+
+#### Usage
+
+    Dataset$get_pu_column_total(column)
 
 #### Arguments
 
@@ -224,27 +342,7 @@ Get column data.
 
 #### Returns
 
-A vector.
-
-------------------------------------------------------------------------
-
-### `Dataset$get_column_total()`
-
-Get total (sum) of values in a column.
-
-#### Usage
-
-    Dataset$get_column_total(column)
-
-#### Arguments
-
-- `column`:
-
-  `character` or `integer` value.
-
-#### Returns
-
-A `character` vector of layer names.
+A `numeric` vector.
 
 ------------------------------------------------------------------------
 
@@ -283,14 +381,14 @@ is allocated to the `zone`.
 
 ------------------------------------------------------------------------
 
-### `Dataset$get_column_held()`
+### `Dataset$get_pu_column_held()`
 
 Get proportion of values in a column that would be considered to by held
 by selected planning units.
 
 #### Usage
 
-    Dataset$get_column_held(column, status)
+    Dataset$get_pu_column_held(column, status)
 
 #### Arguments
 
@@ -308,13 +406,14 @@ A `numeric` value.
 
 ------------------------------------------------------------------------
 
-### `Dataset$has_column()`
+### `Dataset$has_pu_column()`
 
-Check if the dataset has a column or columns.
+Check if a column (or columns) exists with a specified name in the
+planning unit data.
 
 #### Usage
 
-    Dataset$has_column(column)
+    Dataset$has_pu_column(column)
 
 #### Arguments
 
@@ -328,13 +427,13 @@ A `logical` value.
 
 ------------------------------------------------------------------------
 
-### `Dataset$set_column_data()`
+### `Dataset$set_pu_column_data()`
 
-Set column data.
+Set data for a column of the planning unit data.
 
 #### Usage
 
-    Dataset$set_column_data(column, values)
+    Dataset$set_pu_column_data(column, values)
 
 #### Arguments
 

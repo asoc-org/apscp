@@ -27,7 +27,7 @@ create_tile_from_project(
 
 - column:
 
-  `character` value with column name.
+  `character` value with column name for data.
 
 - source_layer:
 
@@ -71,6 +71,7 @@ Other functions for calling class methods:
 [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -89,6 +90,6 @@ x <- create_tile_from_project(
 print(x)
 #> A <Tile> object.
 #> • source_layer: "layer"
-#> • path: "/tmp/RtmpKTauZJ/file36a34fce7f5c.pmtiles"
+#> • path: "/tmp/RtmpXY91Xf/file4d045eedd5d2.pmtiles"
 #> • max_zoom: 8
 ```

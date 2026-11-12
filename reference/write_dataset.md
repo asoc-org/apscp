@@ -7,7 +7,7 @@ object.
 ## Usage
 
 ``` r
-write_dataset(x, pu_path, boundary_path)
+write_dataset(x, pu_path, boundary_path, cache_path)
 ```
 
 ## Arguments
@@ -23,8 +23,11 @@ write_dataset(x, pu_path, boundary_path)
 
 - boundary_path:
 
-  `character` file path for boundary data. If the dataset does not have
-  boundary data, then use `boundary_path = NULL`.
+  `character` file path for boundary data.
+
+- cache_path:
+
+  `character` file path for cache data.
 
 ## Value
 
@@ -55,8 +58,9 @@ dataset <- create_dataset_from_sf(sim_data)
 
 # define file paths for saving data
 pu_path <- tempfile(fileext = ".gpkg.zip")
-bd_path <- tempfile(fileext = ".csv.gz")
+bd_path <- tempfile(fileext = ".boundary.rds")
+cc_path <- tempfile(fileext = ".cache.rds")
 
 # save files
-write_dataset(dataset, pu_path, bd_path)
+write_dataset(dataset, pu_path, bd_path, cc_path)
 ```

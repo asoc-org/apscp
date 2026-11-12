@@ -16,6 +16,7 @@ create_solution(
   settings,
   tile = NULL,
   metrics = NULL,
+  hidden = FALSE,
   id = uuid::UUIDgenerate()
 )
 ```
@@ -65,6 +66,11 @@ create_solution(
   `list` with evaluation metrics for the solution. Defaults to `NULL`
   such that metrics are calculated automatically.
 
+- hidden:
+
+  `logical` value indicating if the layer should be forcibly hidden and
+  cannot be viewed in the application. Defaults to `FALSE`.
+
 - id:
 
   `character` value with unique identifier. Defaults to a random
@@ -86,6 +92,7 @@ Other functions for calling class methods:
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -108,7 +115,7 @@ x <- create_solution(
 print(x)
 #> A <Solution> object.
 #> • name: "user solution"
-#> • id: "dee9bd41-3e91-4940-b535-0f25d57bef01"
+#> • id: "ccf91feb-7a84-4239-ba93-a0cdba9bf1b2"
 #> • settings: <list> object
 #> • metrics: <list> object
 #> • layer: <Layer> object

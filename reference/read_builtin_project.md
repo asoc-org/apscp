@@ -38,21 +38,21 @@ x <- read_builtin_project()
 print(x)
 #> • Metadata:
 #>   • name: Antarctic Peninsula
-#>   • version: 0.0.0.9000
+#>   • version: 0.0.2
 #>   • author_name: Jasmine Lee
 #>   • author_email: jasmine.lee@monash.edu
 #> • Mapping:
 #>   • Number of tiles: 1
 #>   • bearing: 101
 #>   • zoom: 2
-#>   • bbox: -75.4165505, -73.2404735, -44.3891674,
-#>   -60.3476308(xmin/ymin/xmax/ymax)
+#>   • bbox: -75.4165504765101, -73.2404734584194, -44.3891673562134,
+#>   -60.3476308273474(xmin/ymin/xmax/ymax)
 #> • Dataset:
 #>   • Number of planning units: 48447
 #>   • Planning unit path:
-#>   /tmp/RtmpKTauZJ/file36a320280634/antarctic-peninsula_pu.gpkg
+#>   /tmp/RtmpXY91Xf/file4d04325c3805/antarctic-peninsula.gpkg
 #>   • Boundary path:
-#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula_bd.rds
+#>   /home/runner/.cache/R/renv/library/profiles/dev/renv/apscp-b1608be9/linux-ubuntu-noble/R-4.6/x86_64-pc-linux-gnu/apscp/extdata/antarctic-peninsula.boundary.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 53

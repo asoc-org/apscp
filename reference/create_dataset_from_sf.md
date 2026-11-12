@@ -9,7 +9,7 @@ object.
 ## Usage
 
 ``` r
-create_dataset_from_sf(x, boundary_data = NULL)
+create_dataset_from_sf(x, boundary_data = NULL, cache_columns = NULL)
 ```
 
 ## Arguments
@@ -24,6 +24,12 @@ create_dataset_from_sf(x, boundary_data = NULL)
   [`Matrix::sparseMatrix()`](https://rdrr.io/pkg/Matrix/man/sparseMatrix.html)
   object with boundary data. Defaults to `NULL` such that the boundary
   data are calculated automatically.
+
+- cache_columns:
+
+  `character` vector indicating the names of columns in `x` that should
+  be moved to the cache. Defaults to `NULL` such that no columns should
+  be moved to the cache.
 
 ## Value
 
@@ -41,6 +47,7 @@ Other functions for calling class methods:
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
+[`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
 [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
 
 ## Examples
@@ -56,7 +63,7 @@ x <- create_dataset_from_sf(sim_data)
 print(x)
 #> A <Dataset> object.
 #> • Number of planning units: 90
-#> • Planning unit path: /tmp/RtmpKTauZJ/file36a323e851ed.gpkg
-#> • Boundary path: /tmp/RtmpKTauZJ/file36a3415cebc1.rds
+#> • Planning unit path: /tmp/RtmpXY91Xf/file4d047d37f6d1.gpkg
+#> • Boundary path: /tmp/RtmpXY91Xf/file4d042294f8b9.rds
 #> • Boundary data loaded: TRUE
 ```
