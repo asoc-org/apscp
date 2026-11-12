@@ -115,20 +115,20 @@ demo-kill:
 	docker-compose down
 
 demo-enter:
-	 docker exec -it $$(docker ps -q --filter ancestor=jhansonasoc/apscp | head -n 1) /bin/bash
+	 docker exec -it $$(docker ps -q --filter ancestor=ghcr.io/asoc-org/apscp | head -n 1) /bin/bash
 
 # Docker commands
 ## create local image and push to docker
 
 ## create latest image
 image: bundle
-	docker build -t jhansonasoc/apscp:latest .
-	docker push jhansonasoc/apscp:latest
+	docker build -t ghcr.io/asoc-org/apscp:latest .
+	docker push ghcr.io/asoc-org/apscp:latest
 
 ## create dev image
 image-dev: bundle
-	docker build -t jhansonasoc/apscp:dev .
-	docker push jhansonasoc/apscp:dev
+	docker build -t ghcr.io/asoc-org/apscp:dev .
+	docker push ghcr.io/asoc-org/apscp:dev
 
 ## delete all local containers and images
 reset:

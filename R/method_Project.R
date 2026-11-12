@@ -80,9 +80,10 @@ read_project <- function(path) {
   )
 
   # copy the tile files to the tile directory
-  file_symlink(
+  file.copy(
     file.path(dirname(path), vapply(l$tiles, `[[`, "path", 1)),
-    file.path(get_golem_config("tile_server_dir"))
+    file.path(get_golem_config("tile_server_dir")),
+    overwrite = FALSE
   )
 
   # return object
