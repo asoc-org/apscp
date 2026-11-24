@@ -122,11 +122,24 @@ test_that("create_legend (continuous, manual colors)", {
   expect_equal(x$units, "acres")
 })
 
-test_that("create_legend (continuous, force to be categorical)", {
+test_that("create_legend (continuous, manual colors, single value)", {
   # create object
   x <- create_legend(
     rep(2, 4),
     palette = "#000000;#DDDDDD",
+    type = "continuous",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "CategoricalLegend")
+  expect_equal(x$units, "acres")
+})
+
+test_that("create_legend (continuous, color palette, single value)", {
+  # create object
+  x <- create_legend(
+    rep(2, 4),
+    palette = "magma",
     type = "continuous",
     units = "acres"
   )
