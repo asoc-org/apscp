@@ -48,7 +48,6 @@ jobs:
         run: |
           sudo apt-get -y install \
             cmake \
-            libcurl4-openssl-dev \
             libx11-dev \
             pandoc \
             gdal-bin \
