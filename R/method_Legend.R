@@ -1,13 +1,11 @@
 #' @include internal.R
 NULL
 
-#' Create a new legend
+#' Create new legend.
 #'
-#' Create a new legend automatically for a column in a [sf::st_sf()] object.
+#' Create a new legend automatically.
 #'
-#' @param x [sf::st_sf()] object.
-#'
-#' @param column `character` value with name of column.
+#' @param x `numeric` vector.
 #'
 #' @param palette `character` value with the color palette. In particular,
 #' `palette` can be the name of a color palette that is recognized by
@@ -15,8 +13,8 @@ NULL
 #' hex color code delimited by semicolons
 #' (e.g., `palette = "#000000;#DDDDDD;#123456"`).
 #'
-#' @param type `character` value indicating if legend should be `"continuous"`
-#' `"categorical"`, `"presence/absence"`, or `"presence".
+#' @param type `character` value indicating if legend should be `"continuous"`,
+#' `"softcontinuous"`, `"categorical"`, `"presence/absence"`, or `"presence".
 #' Defaults to `NULL`, such that
 #' the legend type will be determined automatically.
 #'
@@ -31,26 +29,15 @@ NULL
 #' sim_data <- simulate_spatial_data()
 #'
 #' # create object
-#' x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
+#' x <- create_legend(sim_data$cost, units = "USD", palette = "PuBu")
 #'
 #' # preview object
 #' print(x)
 #'
 #' @export
-create_legend <- function(
-  x,
-  column,
-  units = NULL,
-  palette = "viridis",
-  type = NULL
-) {
+create_legend <- function(x, units = NULL, palette = "viridis", type = NULL) {
   # assert arguments are valid
-  assertthat::assert_that(
-    inherits(x, "sf"),
-    assertthat::is.string(column),
-    assertthat::noNA(column),
-    assertthat::has_name(x, column)
-  )
+  assertthat::assert_that(is.numeric(x))
   if (!is.null(units)) {
     assertthat::assert_that(
       ## units
@@ -60,7 +47,7 @@ create_legend <- function(
   }
 
   # compute layer values
-  v <- sort(unique(x[[column]]))
+  v <- sort(unique(x))
 
   # if needed, determine type
   if (is.null(type)) {
@@ -69,6 +56,21 @@ create_legend <- function(
     } else if (all(v == 1)) {
       type <- "presence"
     } else if (all(v == round(v))) {
+      type <- "categorical"
+    } else {
+      type <- "continuous"
+    }
+  }
+
+  # if x only has one value and type is continuous, then force to be categorical
+  if (identical(type, "continuous") && identical(length(v), 1L)) {
+    type <- "categorical"
+  }
+
+  # if type = soft-continuous, then convert to categorical if all values
+  # are integer and fewer than 6 classes
+  if (identical(type, "softcontinuous")) {
+    if (all(v == round(v)) && (length(v) <= 6L)) {
       type <- "categorical"
     } else {
       type <- "continuous"
@@ -216,6 +218,99 @@ create_solution_legend <- function(
     values = seq_len(length(zones) * 2L),
     colors = c(zone_locked_colors, zone_colors),
     labels = c(paste(zones, "locked"), paste(zones, "priority"))
+  )
+}
+
+#' Create contrast legend
+#'
+#' Create a legend for a layer that contrasts differences between
+#' two or more prioritizations.
+#'
+#' @param project [new_project()] object.
+#'
+#' @param name1 `character` value with the name of a [new_solution()].
+#'
+#' @param name2 `character` value with the name of a [new_solution()].
+#'
+#' @param values `numeric` vector with values to include in the legend.
+#' Defaults to `NULL` such that the legend contains values for all possible
+#' similarities and differences between the solutions.
+#'
+#' @inheritParams create_solution_legend
+#'
+#' @return A [new_categorical_legend()] object.
+#'
+#' @family method
+#'
+#' @export
+create_contrast_legend <- function(
+  project, name1, name2, values = NULL,
+  zone_colors = get_golem_config("zone_colors"),
+  zone_locked_colors = get_golem_config("zone_locked_colors")
+) {
+  # assert valid arguments
+  assertthat::assert_that(
+    inherits(project, "Project"),
+    assertthat::is.string(name1),
+    assertthat::noNA(name1),
+    assertthat::is.string(name2),
+    assertthat::noNA(name2)
+  )
+  if (!is.null(values)) {
+    assertthat::assert_that(
+      is.numeric(values),
+      !all(is.na(values))
+    )
+  }
+
+  # define data frame with legend information
+  ## initialize default values
+  default_values <- stats::setNames(
+    c(
+      zone_locked_colors[seq_along(project$zones)],
+      zone_colors[seq_along(project$zones)]
+    ),
+    nm = c(paste(project$zones, "locked"), paste(project$zones, "priority"))
+  )
+  data <- expand.grid(
+    id1 = names(default_values),
+    id2 = names(default_values),
+    stringsAsFactors = FALSE
+  )
+  data$value <- seq_len(nrow(data))
+  data$color <- NA_character_
+  ## if needed, subset values
+  if (!is.null(values)) {
+    data <- data[which(seq_len(nrow(data)) %in% values), , drop = FALSE]
+  }
+  ## assign legend text
+  data$text <- paste(name1, data$id1, "and", name2, data$id2)
+  idx <- data$id1 == data$id2
+  data$text[idx] <- paste("Both", name1, "and", name2, data$id1[idx])
+  ## assign legend colors for same zones
+  idx <- match(
+    c(
+      paste("Both", name1, "and", name2, project$zones, "locked"),
+      paste("Both", name1, "and", name2, project$zones, "priority")
+    ),
+    data$text
+  )
+  data$color[idx[!is.na(idx)]] <- c(
+    zone_locked_colors[seq_along(project$zones)],
+    zone_colors[seq_along(project$zones)]
+  )[!is.na(idx)]
+  ## assign remaining colors
+  idx <- which(is.na(data$color))
+  for (i in idx) {
+    data$color[i] <- grDevices::colorRampPalette(
+      c(default_values[[data$id1[[i]]]], default_values[[data$id2[[i]]]])
+    )(3)[[2]]
+  }
+  # return object
+  new_categorical_legend(
+    values = data$value,
+    colors = data$color,
+    labels = data$text
   )
 }
 

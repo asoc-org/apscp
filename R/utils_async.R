@@ -42,7 +42,9 @@ mirai_async_start <- function(n = 2, verbose = TRUE) {
     "calc_performance_metrics",
     "is_prioritization_settings",
     "convert_lock_settings_to_prioritization",
-    "convert_lock_settings_to_allocation"
+    "convert_lock_settings_to_allocation",
+    "compute_contrast",
+    "compute_heatmap"
   )
   # create list with desired functions,
   ## note that we manually override the environment for each function

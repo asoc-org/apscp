@@ -69,7 +69,7 @@ print.Cost <- function(x, ...) {
 print.Solution <- function(x, ...) {
   id <- cli::cli_div()
   cli::cli_text("A {.cls Solution} object.")
-  cli_list(x)
+  cli_list(x[setdiff(names(x), c("settings", "metrics"))])
   cli::cli_end(id)
 }
 

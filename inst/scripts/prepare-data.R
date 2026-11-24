@@ -192,8 +192,7 @@ locks <-
           url = x$provenance_url
         ),
         legend = create_legend(
-          x = vector_data,
-          column = x$name,
+          x = vector_data[[x$name]],
           palette = x$palette,
           type = x$type,
           units = x$units
@@ -229,8 +228,7 @@ costs <-
           url = x$provenance_url
         ),
         legend = create_legend(
-          x = vector_data,
-          column = x$name,
+          x = vector_data[[x$name]],
           palette = x$palette,
           type = x$type,
           units = x$units
@@ -278,8 +276,7 @@ features <-
           url = x$provenance_url
         ),
         legend = create_legend(
-          x = vector_data,
-          column = x$name,
+          x = vector_data[[x$name]],
           palette = x$palette,
           type = x$type,
           units = x$units

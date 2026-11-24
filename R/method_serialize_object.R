@@ -193,6 +193,18 @@ serialize_object.Solution <- function(x) {
 }
 
 #' @rdname serialize_object
+#' @method serialize_object Product
+#' @export
+serialize_object.Product <- function(x) {
+  list(
+    name = x$name,
+    id = x$id,
+    layer = serialize_object.Layer(x$layer),
+    class = "Product"
+  )
+}
+
+#' @rdname serialize_object
 #' @method serialize_object Theme
 #' @export
 serialize_object.Theme <- function(x) {
@@ -236,6 +248,7 @@ serialize_object.Project <- function(x) {
     features = lapply(x$features, function(y) serialize_object.Feature(y)),
     locks = lapply(x$locks, function(y) serialize_object.Lock(y)),
     solutions = lapply(x$solutions, function(y) serialize_object.Solution(y)),
+    products = lapply(x$products, function(y) serialize_object.Product(y)),
     class = "Project"
   )
 }

@@ -168,7 +168,7 @@ simulate_project <- function(seed = 500) {
           tile = tile,
           column = "cost",
           visible = TRUE,
-          legend = create_legend(d, "cost", units = "USD"),
+          legend = create_legend(d$cost, units = "USD"),
           provenance = provenance,
           total = unname(dataset$get_pu_column_total("cost"))
         )
@@ -186,7 +186,7 @@ simulate_project <- function(seed = 500) {
         column = "aspas",
         visible = TRUE,
         legend = create_legend(
-          d, "aspas",
+          d$aspas,
           palette = "Greens",
           units = "presence-only"
         ),
@@ -204,7 +204,7 @@ simulate_project <- function(seed = 500) {
         column = "camps",
         visible = FALSE,
         legend = create_legend(
-          d, "camps",
+          d$camps,
           palette = "Reds",
           units = "presence/absence"
         ),
@@ -256,7 +256,7 @@ simulate_project <- function(seed = 500) {
           visible = TRUE,
           hidden = isTRUE(i == 3),
           legend = create_legend(
-            d, paste0("feat_", i),
+            d[[paste0("feat_", i)]],
             palette = "viridis",
             units = "suitability"
           ),

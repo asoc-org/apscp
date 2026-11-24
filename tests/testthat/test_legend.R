@@ -101,8 +101,7 @@ test_that("deserialize_object (continuous)", {
 test_that("create_legend (continuous, palette colors)", {
   # create object
   x <- create_legend(
-    simulate_spatial_data(),
-    column = "cost",
+    runif(20),
     palette = "PuBu",
     units = "acres"
   )
@@ -114,8 +113,7 @@ test_that("create_legend (continuous, palette colors)", {
 test_that("create_legend (continuous, manual colors)", {
   # create object
   x <- create_legend(
-    simulate_spatial_data(),
-    column = "cost",
+    runif(20),
     palette = "#000000;#DDDDDD",
     units = "acres"
   )
@@ -124,11 +122,36 @@ test_that("create_legend (continuous, manual colors)", {
   expect_equal(x$units, "acres")
 })
 
+test_that("create_legend (softcontinuous, continuous)", {
+  # create object
+  x <- create_legend(
+    runif(20),
+    palette = "#000000;#DDDDDD",
+    type = "softcontinuous",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "ContinuousLegend")
+  expect_equal(x$units, "acres")
+})
+
+test_that("create_legend (softcontinuous, categorical)", {
+  # create object
+  x <- create_legend(
+    c(1, 2, 3, 1, 1, NA, 2),
+    type = "softcontinuous",
+    palette = "magma",
+    units = "acres"
+  )
+  # run tests
+  expect_s3_class(x, "CategoricalLegend")
+  expect_equal(x$units, "acres")
+})
+
 test_that("create_legend (presence/absence)", {
   # create object
   x <- create_legend(
-    simulate_spatial_data(),
-    column = "invasive_species",
+    c(0, 1, 0, 0, 1, 0, NA),
     palette = "PuBu"
   )
   # run tests
@@ -140,8 +163,7 @@ test_that("create_legend (presence/absence)", {
 test_that("create_legend (categorical, palette colors)", {
   # create object
   x <- create_legend(
-    simulate_spatial_data(),
-    column = "solution",
+    c(0, 1, 3, 2, 1, 0, NA, 4, 5, 6),
     palette = "PuBu",
     units = "acres"
   )
@@ -154,8 +176,7 @@ test_that("create_legend (categorical, palette colors)", {
 test_that("create_legend (categorical, manual colors)", {
   # create object
   x <- create_legend(
-    simulate_spatial_data(),
-    column = "solution",
+    c(0, 1, 3, 2, 1, 0, NA, 4, 5, 6),
     palette = "#e41a1c;#377eb8;#4daf4a;#984ea3;#ff7f00;#ffff33;#000000",
     units = "acres"
   )
@@ -168,8 +189,7 @@ test_that("create_legend (categorical, manual colors)", {
 test_that("create_legend (presence, palette)", {
   # create object
   x <- create_legend(
-    simulate_spatial_data(),
-    column = "aspas",
+    c(NA, 1, 1, NA),
     palette = "PuBu",
     units = "presence"
   )
@@ -198,6 +218,24 @@ test_that("create_solution_legend", {
     )
   )
   expect_length(x$colors, length(p$zones) * 2)
+  expect_true(all(startsWith(x$colors, "#")))
+  expect_true(all(nchar(x$colors) %in% c(7L, 9L)))
+})
+
+test_that("create_constrast_legend", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  p <- simulate_project()
+  x <- create_contrast_legend(p, "z1", "z2")
+  # calculations for tests
+  v <- c(paste(p$zones, "locked"), paste(p$zones, "priority"))
+  d <- expand.grid(id1 = v, id2 = v)
+  # run test
+  expect_s3_class(x, "CategoricalLegend")
+  expect_equal(length(x$values), nrow(d))
+  expect_equal(length(x$colors), nrow(d))
+  expect_equal(length(x$labels), nrow(d))
   expect_true(all(startsWith(x$colors, "#")))
   expect_true(all(nchar(x$colors) %in% c(7L, 9L)))
 })

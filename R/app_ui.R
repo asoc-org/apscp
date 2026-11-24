@@ -35,12 +35,18 @@ app_ui <- function(request) {
         ## right side bar
         sidebar_tabs(
           id = "right_sidebar",
-          list(shiny::icon("rocket"), shiny::icon("chart-pie")),
+          list(
+            shiny::icon("rocket"),
+            shiny::icon("chart-pie"),
+            shiny::icon("circle-half-stroke"),
+            shiny::icon("object-group")
+          ),
           sidebar_pane(
             title = "Generate solution",
             id = "settings_pane",
             icon = NULL,
-            tooltip = "Open sidebar for solution settings.",
+            tooltip =
+              "Open sidebar to customize settings and generate a solution.",
             solverOutput("solver", height = "100%", width = "100%")
           ),
           sidebar_pane(
@@ -50,6 +56,25 @@ app_ui <- function(request) {
             tooltip = "Open sidebar for solution results.",
             disabled = TRUE,
             summarizerOutput("summarizer", height = "100%", width = "100%")
+          ),
+          sidebar_pane(
+            title = "Contrast two solutions",
+            id = "contrast_pane",
+            icon = NULL,
+            tooltip = paste(
+              "Open sidebar to generate a layer",
+              "contrasting two solutions."
+            ),
+            disabled = TRUE,
+            contrasterOutput("contraster", height = NULL, width = "100%")
+          ),
+          sidebar_pane(
+            title = "Compute heat map of solutions",
+            id = "heatmap_pane",
+            icon = NULL,
+            tooltip = "Open sidebar to generate a heat map of solutions.",
+            disabled = TRUE,
+            heatmapperOutput("heatmapper", height = NULL, width = "100%")
           )
         )
       ),

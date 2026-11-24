@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Contraster style
+   ========================================================================== */
+
+/* define CSS variables */
+.contraster {
+  --space-sm: 5px;
+}
+
+/* Container
+   ========================================================================== */
+
+.contraster .contraster-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--space-sm);
+  gap: 10px;
+}
+
+/* Footer
+   ========================================================================== */
+
+.contraster .contraster-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.contraster .contraster-footer button {
+  width: 125px;
+  white-space: nowrap;
+  padding-left: 6px;
+  padding-right: 6px;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
+}
+
+/* Disabled elements
+   ========================================================================== */
+
+.contraster .contraster-footer button:disabled {
+  cursor: not-allowed;
+}

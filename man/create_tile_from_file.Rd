@@ -56,15 +56,19 @@ print(x)
 }
 \seealso{
 Other functions for calling class methods:
+\code{\link[=contrast_provenance]{contrast_provenance()}},
+\code{\link[=create_contrast_legend]{create_contrast_legend()}},
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
 \code{\link[=create_legend]{create_legend()}},
+\code{\link[=create_product]{create_product()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
 \code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
+\code{\link[=heatmap_provenance]{heatmap_provenance()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=precomputed_provenance]{precomputed_provenance()}},
-\code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
+\code{\link[=solution_provenance]{solution_provenance()}}
 }
 \concept{method}

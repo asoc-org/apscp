@@ -85,6 +85,32 @@ mapper_html <- function(id, style, class, ...) {
     )
   )
 
+  ## contrast layer
+  x <- htmltools::tagAppendChild(
+    x,
+    htmltools::tags$template(
+      class = "contrast-layer-template",
+      htmltools::tags$div(
+        class = c("mapper-menu-item", "product-layer"),
+        mapper_menu_item_header_scaffold(type = "Contrast"),
+       htmltools::tags$div(class = "legend-container")
+      )
+    )
+  )
+
+  ## heat map layer
+  x <- htmltools::tagAppendChild(
+    x,
+    htmltools::tags$template(
+      class = "heatmap-layer-template",
+      htmltools::tags$div(
+        class = c("mapper-menu-item", "product-layer"),
+        mapper_menu_item_header_scaffold(type = "Heatmap"),
+       htmltools::tags$div(class = "legend-container")
+      )
+    )
+  )
+
   # return result
   x
 }
@@ -123,6 +149,18 @@ mapper_menu_item_header_scaffold <- function(type) {
   } else if (identical(type, "Solution")) {
     icon <- shiny::icon("rocket")
     icon_tooltip_text <- "This solution layer indicates priority areas."
+  } else if (identical(type, "Contrast")) {
+    icon <- shiny::icon("circle-half-stroke")
+    icon_tooltip_text <- paste(
+      "This contrast layer shows similarities and",
+      "differences between two solutions."
+    )
+  } else if (identical(type, "Heatmap")) {
+    icon <- shiny::icon("object-group")
+    icon_tooltip_text <- paste(
+      "This heat map layer shows the number of",
+      "solutions that allocated priority areas to a particular zone."
+    )
   } else {
     rlang::abort("`type` is not recognized.") # nocov
   }

@@ -83,6 +83,20 @@ reference:
     contents:
       - has_concept("summarizer")
 
+  - title: Contraster widget
+    desc: >
+      Functions for widget to create a layer to contrast solutions.
+    contents:
+      - has_concept("contraster")
+      - compute_contrast
+
+  - title: Heatmapper widget
+    desc: >
+      Functions for widget to create heat maps from solutions.
+    contents:
+      - has_concept("heatmapper")
+      - compute_heatmap
+
   - title: Tile server
     desc: >
       Functions for creating a tile server.

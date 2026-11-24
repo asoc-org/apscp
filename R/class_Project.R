@@ -41,6 +41,9 @@ Project <- R6::R6Class(
     #' @field solutions `list` of [new_solution()] objects.
     solutions = NULL,
 
+    #' @field products `list` of [new_product()] objects.
+    products = NULL,
+
     #' @field name `character` name of the project.
     name = "Project",
 
@@ -65,6 +68,8 @@ Project <- R6::R6Class(
     #' @param costs `list` of [new_cost()] objects.
     #' @param solutions `list` of [new_solution()] objects.
     #' Defaults to an empty list.
+    #' @param products `list` of [new_product()] objects.
+    #' Defaults to an empty list.
     #' @param name `character` name of the project.
     #' Defaults to `"Project"`.
     #' @param author_name `character` name of the project author.
@@ -79,7 +84,7 @@ Project <- R6::R6Class(
     #' @return A new `Project` object.
     initialize = function(
       zones, bbox, dataset, tiles,
-      features, locks, costs, solutions = list(),
+      features, locks, costs, solutions = list(), products = list(),
       name = "Project", author_name = "Unknown", author_email = "Unknown",
       version = "Unknown", bearing = 0, zoom = 0
     ) {
@@ -124,7 +129,9 @@ Project <- R6::R6Class(
         is.list(costs),
         all_elements_inherit(costs, "Cost"),
         ## solutions
-        is.list(solutions)
+        is.list(solutions),
+        ## products
+        is.list(products)
       )
       assertthat::assert_that(
         all(
@@ -149,6 +156,11 @@ Project <- R6::R6Class(
           all_elements_inherit(solutions, "Solution")
         )
       }
+      if (length(products) > 0) {
+        assertthat::assert_that(
+          all_elements_inherit(products, "Product")
+        )
+      }
 
       # assign fields
       self$dataset <- dataset
@@ -159,6 +171,7 @@ Project <- R6::R6Class(
       self$locks <- locks
       self$costs <- costs
       self$solutions <- solutions
+      self$products <- products
       self$name <- name
       self$author_name <- author_name
       self$author_email <- author_email
@@ -329,11 +342,15 @@ Project <- R6::R6Class(
       # find identifiers
       i <- which(vapply(self$solutions, `[[`, character(1), "id") == id)
       assertthat::assert_that(
+        isTRUE(length(i) <= 1L),
+        msg = "Multiple solutions found with matching `id`."
+      )
+      assertthat::assert_that(
         identical(length(i), 1L),
         msg = "Couldn't find solution with matching `id`."
       )
       # return solution
-      self$solutions[[i]]
+      self$solutions[[i[[1]]]]
     },
 
     #' @description
@@ -376,7 +393,22 @@ Project <- R6::R6Class(
       # assert arguments are valid
       assertthat::assert_that(inherits(x, "Lock"))
       # add object
-      self$locks[[length(self$locks)]] <- x
+      self$locks[[length(self$locks) + 1]] <- x
+      # add tile
+      self$add_tile(x$layer$tile)
+      # return TRUE
+      invisible(TRUE)
+    },
+
+    #' @description
+    #' Add a product to the project.
+    #' @param x [new_product()] object.
+    #' @return An invisible `TRUE` indicating success.
+    add_product = function(x) {
+      # assert arguments are valid
+      assertthat::assert_that(inherits(x, "Product"))
+      # add object
+      self$products[[length(self$products) + 1]] <- x
       # add tile
       self$add_tile(x$layer$tile)
       # return TRUE
@@ -420,6 +452,9 @@ Project <- R6::R6Class(
 #' @param locks `list` of [new_lock()] objects.
 #'
 #' @param solutions `list` of [new_solution()] objects.
+#' Defaults to an empty list().
+#'
+#' @param products `list` of [new_product()] objects.
 #' Defaults to an empty list().
 #'
 #' @param name `character` name of the project.
@@ -542,6 +577,7 @@ new_project <- function(
   features,
   locks,
   solutions = list(),
+  products = list(),
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
@@ -562,6 +598,7 @@ new_project <- function(
     features = features,
     locks = locks,
     solutions = solutions,
+    products = products,
     name = name,
     author_name = author_name,
     author_email = author_email,

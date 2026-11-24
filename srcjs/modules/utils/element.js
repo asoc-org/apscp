@@ -33,7 +33,7 @@ export function createProvenance(x) {
   el.classList.add("fas");
   el.classList.add("fa-" + x.icon);
   el.style.color = x.color;
-  if (x.url !== undefined) {
+  if ((x.url !== undefined) && (x.url.length > 0)) {
     el.classList.add("has-link");
     el.addEventListener("click", () => window.open(x.url, "_blank"));
   }

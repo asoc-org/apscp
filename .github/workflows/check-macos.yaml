@@ -62,6 +62,7 @@ jobs:
           brew link osi --force
           brew link clp --force
           brew link cgl --force
+          echo "PKG_CONFIG_PATH=/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH" >> $GITHUB_ENV
 
       - uses: r-lib/actions/setup-renv@v2
         with:

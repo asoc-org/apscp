@@ -32,7 +32,7 @@ deserialize_object <- function(x, dataset = NULL) {
 
   # check if dataset required
   need_dataset_classes <- c(
-    "Layer", "Cost", "Feature", "Lock", "Solution", "Project"
+    "Layer", "Cost", "Feature", "Lock", "Solution", "Project", "Product"
   )
   if (x$class %in% need_dataset_classes) {
     assertthat::assert_that(
@@ -90,6 +90,9 @@ deserialize_object <- function(x, dataset = NULL) {
   if (assertthat::has_name(x, "solutions")) {
     x$solutions <- lapply(x$solutions, deserialize_object, dataset = dataset)
   }
+  if (assertthat::has_name(x, "products")) {
+    x$products <- lapply(x$products, deserialize_object, dataset = dataset)
+  }
   if (x_class %in% c("Layer", "Project")) {
     x$dataset <- dataset
   }
@@ -115,6 +118,7 @@ deserialize_object <- function(x, dataset = NULL) {
     Lock = do.call(new_lock, x),
     Cost = do.call(new_cost, x),
     Solution = do.call(new_solution, x),
+    Product = do.call(new_product, x),
     Theme = do.call(new_theme, x),
     Project = do.call(new_project, x)
   )

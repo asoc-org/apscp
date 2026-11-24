@@ -12,6 +12,7 @@
 \alias{serialize_object.Lock}
 \alias{serialize_object.Cost}
 \alias{serialize_object.Solution}
+\alias{serialize_object.Product}
 \alias{serialize_object.Theme}
 \alias{serialize_object.bbox}
 \alias{serialize_object.Project}
@@ -38,6 +39,8 @@ serialize_object(x)
 \method{serialize_object}{Cost}(x)
 
 \method{serialize_object}{Solution}(x)
+
+\method{serialize_object}{Product}(x)
 
 \method{serialize_object}{Theme}(x)
 

@@ -69,8 +69,10 @@ jobs:
             coinor-libcgl-dev \
             libharfbuzz-dev \
             libfribidi-dev \
-            libfontconfig1-dev \
-            chromium-browser
+            libfontconfig1-dev
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          rm -f ./google-chrome-stable_current_amd64.deb
 
       - uses: r-lib/actions/setup-renv@v2
         with:

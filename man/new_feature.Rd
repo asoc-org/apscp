@@ -86,6 +86,7 @@ Other functions for defining classes:
 \code{\link[=new_cost]{new_cost()}},
 \code{\link[=new_layer]{new_layer()}},
 \code{\link[=new_lock]{new_lock()}},
+\code{\link[=new_product]{new_product()}},
 \code{\link[=new_project]{new_project()}},
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
