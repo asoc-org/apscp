@@ -15,7 +15,7 @@ app_server_summarizer <- quote({
 
   # initialize widget
   output$summarizer <- renderSummarizer({
-    summarizer(project = app_data$project)
+    suppressMessages(summarizer(project = app_data$project))
   })
 
   # force widget to render when not visible

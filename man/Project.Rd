@@ -17,6 +17,7 @@ Other functions for defining classes:
 \code{\link[=new_feature]{new_feature()}},
 \code{\link[=new_layer]{new_layer()}},
 \code{\link[=new_lock]{new_lock()}},
+\code{\link[=new_product]{new_product()}},
 \code{\link[=new_project]{new_project()}},
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
@@ -48,6 +49,8 @@ Other functions for defining classes:
 
     \item{\code{solutions}}{\code{list} of \code{\link[=new_solution]{new_solution()}} objects.}
 
+    \item{\code{products}}{\code{list} of \code{\link[=new_product]{new_product()}} objects.}
+
     \item{\code{name}}{\code{character} name of the project.}
 
     \item{\code{author_name}}{\code{character} name of the project author.}
@@ -73,6 +76,7 @@ to create the project.}
     \item \href{#method-Project-get_lock}{\code{Project$get_lock()}}
     \item \href{#method-Project-add_solution}{\code{Project$add_solution()}}
     \item \href{#method-Project-add_lock}{\code{Project$add_lock()}}
+    \item \href{#method-Project-add_product}{\code{Project$add_product()}}
     \item \href{#method-Project-add_tile}{\code{Project$add_tile()}}
     \item \href{#method-Project-clone}{\code{Project$clone()}}
   }
@@ -93,6 +97,7 @@ to create the project.}
   locks,
   costs,
   solutions = list(),
+  products = list(),
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
@@ -113,6 +118,8 @@ to create the project.}
       \item{\code{locks}}{\code{list} of \code{\link[=new_lock]{new_lock()}} objects.}
       \item{\code{costs}}{\code{list} of \code{\link[=new_cost]{new_cost()}} objects.}
       \item{\code{solutions}}{\code{list} of \code{\link[=new_solution]{new_solution()}} objects.
+Defaults to an empty list.}
+      \item{\code{products}}{\code{list} of \code{\link[=new_product]{new_product()}} objects.
 Defaults to an empty list.}
       \item{\code{name}}{\code{character} name of the project.
 Defaults to \code{"Project"}.}
@@ -347,6 +354,28 @@ box by 10 percent. Defaults to 0.}
     \if{html}{\out{<div class="arguments">}}
     \describe{
       \item{\code{x}}{\code{\link[=new_lock]{new_lock()}} object.}
+    }
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Returns}{
+    An invisible \code{TRUE} indicating success.
+  }
+}
+
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Project-add_product"></a>}}
+\if{latex}{\out{\hypertarget{method-Project-add_product}{}}}
+\subsection{\code{Project$add_product()}}{
+  Add a product to the project.
+  \subsection{Usage}{
+    \if{html}{\out{<div class="r">}}
+    \preformatted{Project$add_product(x)}
+    \if{html}{\out{</div>}}
+  }
+  \subsection{Arguments}{
+    \if{html}{\out{<div class="arguments">}}
+    \describe{
+      \item{\code{x}}{\code{\link[=new_product]{new_product()}} object.}
     }
     \if{html}{\out{</div>}}
   }

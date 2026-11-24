@@ -99,6 +99,7 @@ color_palette("random", 5)
 }
 \seealso{
 Other miscellaneous functions:
+\code{\link[=alert_error]{alert_error()}},
 \code{\link[=as.data.frame.JsDataFrame]{as.data.frame.JsDataFrame()}},
 \code{\link[=as.list.JsDataFrameList]{as.list.JsDataFrameList()}},
 \code{\link[=cli_format_vector]{cli_format_vector()}},

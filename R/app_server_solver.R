@@ -15,7 +15,7 @@ app_server_solver <- quote({
 
   # initialize widget
   output$solver <- renderSolver({
-    solver(project = app_data$project)
+    suppressMessages(solver(project = app_data$project))
   })
 
   # define widget synchronization

@@ -275,7 +275,7 @@ mapgl_add_layer <- function(
   # assert arguments are valid
   assertthat::assert_that(
     inherits(map, c("mapboxgl", "mapboxgl_proxy")),
-    inherits(x, c("Feature", "Cost", "Lock", "Solution")),
+    inherits(x, c("Feature", "Cost", "Lock", "Solution", "Product")),
     assertthat::is.string(visibility),
     assertthat::noNA(visibility),
     inherits(x$layer$legend, "Legend")

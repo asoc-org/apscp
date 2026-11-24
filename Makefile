@@ -72,6 +72,12 @@ app_solver: bundle_dev
 app_summarizer: bundle_dev
 	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('summarizer')"
 
+app_contraster: bundle_dev
+	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('contraster')"
+
+app_heatmapper: bundle_dev
+	$(R) --slave -e "devtools::load_all();options(shiny.launch.browser=TRUE);run_example_app('heatmapper')"
+
 ## run checks
 check:
 	echo "\n===== R CMD CHECK =====\n" > check.log 2>&1

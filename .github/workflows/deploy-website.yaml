@@ -48,7 +48,8 @@ jobs:
         run: |
           sudo apt-get -y install \
             cmake \
-            curl \
+            libx11-dev \
+            pandoc \
             gdal-bin \
             htop \
             libuv1-dev \
@@ -68,12 +69,23 @@ jobs:
             coinor-libcgl-dev \
             libharfbuzz-dev \
             libfribidi-dev \
-            libfontconfig1-dev
+            libfontconfig1-dev \
+            libprotobuf-dev \
+            libprotoc-dev \
+            protobuf-compiler
+          wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+          sudo apt install -y ./google-chrome-stable_current_amd64.deb
+          rm -f ./google-chrome-stable_current_amd64.deb
+
+      - name: Set R environmental variables
+        run: |
+          cat("RENV_CONFIG_INSTALL_VERBOSE=TRUE", file.path(R.home("etc"), "Renviron.site"), append = TRUE)
+        shell: sudo Rscript {0}
 
       - uses: r-lib/actions/setup-renv@v2
         with:
           profile: '"dev"'
-          cache-version: 2
+          cache-version: 3
 
       - name: Install extra packages
         run: |

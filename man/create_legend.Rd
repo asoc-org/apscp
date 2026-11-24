@@ -2,14 +2,12 @@
 % Please edit documentation in R/method_Legend.R
 \name{create_legend}
 \alias{create_legend}
-\title{Create a new legend}
+\title{Create new legend.}
 \usage{
-create_legend(x, column, units = NULL, palette = "viridis", type = NULL)
+create_legend(x, units = NULL, palette = "viridis", type = NULL)
 }
 \arguments{
-\item{x}{\code{\link[sf:st_sf]{sf::st_sf()}} object.}
-
-\item{column}{\code{character} value with name of column.}
+\item{x}{\code{numeric} vector.}
 
 \item{units}{\code{character} value containing the units for the values in the
 underlying data. Defaults to a \code{NULL} value.}
@@ -20,22 +18,22 @@ underlying data. Defaults to a \code{NULL} value.}
 hex color code delimited by semicolons
 (e.g., \code{palette = "#000000;#DDDDDD;#123456"}).}
 
-\item{type}{\code{character} value indicating if legend should be \code{"continuous"}
-\code{"categorical"}, \code{"presence/absence"}, or \verb{"presence". Defaults to }NULL`, such that
+\item{type}{\code{character} value indicating if legend should be \code{"continuous"},
+\code{"softcontinuous"}, \code{"categorical"}, \code{"presence/absence"}, or \verb{"presence". Defaults to }NULL`, such that
 the legend type will be determined automatically.}
 }
 \value{
 A new \code{\link[=new_continuous_legend]{new_continuous_legend()}} or \code{\link[=new_categorical_legend]{new_categorical_legend()}} object.
 }
 \description{
-Create a new legend automatically for a column in a \code{\link[sf:st_sf]{sf::st_sf()}} object.
+Create a new legend automatically.
 }
 \examples{
 # simulate spatial data
 sim_data <- simulate_spatial_data()
 
 # create object
-x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
+x <- create_legend(sim_data$cost, units = "USD", palette = "PuBu")
 
 # preview object
 print(x)
@@ -43,15 +41,19 @@ print(x)
 }
 \seealso{
 Other functions for calling class methods:
+\code{\link[=contrast_provenance]{contrast_provenance()}},
+\code{\link[=create_contrast_legend]{create_contrast_legend()}},
 \code{\link[=create_dataset_from_sf]{create_dataset_from_sf()}},
+\code{\link[=create_product]{create_product()}},
 \code{\link[=create_solution]{create_solution()}},
 \code{\link[=create_solution_from_prioritization]{create_solution_from_prioritization()}},
 \code{\link[=create_solution_legend]{create_solution_legend()}},
 \code{\link[=create_tile_from_file]{create_tile_from_file()}},
 \code{\link[=create_tile_from_project]{create_tile_from_project()}},
 \code{\link[=create_tile_from_sf]{create_tile_from_sf()}},
+\code{\link[=heatmap_provenance]{heatmap_provenance()}},
 \code{\link[=new_dataset]{new_dataset()}},
 \code{\link[=precomputed_provenance]{precomputed_provenance()}},
-\code{\link[=tool_generated_provenance]{tool_generated_provenance()}}
+\code{\link[=solution_provenance]{solution_provenance()}}
 }
 \concept{method}

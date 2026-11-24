@@ -237,7 +237,7 @@ create_solution_from_prioritization <- function(
       ),
       column = column,
       legend = create_solution_legend(project),
-      provenance = tool_generated_provenance(),
+      provenance = solution_provenance(),
       total = sum(prioritization, na.rm = TRUE),
       details = NULL
     ),

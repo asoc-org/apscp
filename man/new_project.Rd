@@ -13,6 +13,7 @@ new_project(
   features,
   locks,
   solutions = list(),
+  products = list(),
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
@@ -37,6 +38,9 @@ new_project(
 \item{locks}{\code{list} of \code{\link[=new_lock]{new_lock()}} objects.}
 
 \item{solutions}{\code{list} of \code{\link[=new_solution]{new_solution()}} objects.
+Defaults to an empty list().}
+
+\item{products}{\code{list} of \code{\link[=new_product]{new_product()}} objects.
 Defaults to an empty list().}
 
 \item{name}{\code{character} name of the project.
@@ -162,6 +166,7 @@ Other functions for defining classes:
 \code{\link[=new_feature]{new_feature()}},
 \code{\link[=new_layer]{new_layer()}},
 \code{\link[=new_lock]{new_lock()}},
+\code{\link[=new_product]{new_product()}},
 \code{\link[=new_provenance]{new_provenance()}},
 \code{\link[=new_solution]{new_solution()}},
 \code{\link[=new_solution_legend]{new_solution_legend()}},

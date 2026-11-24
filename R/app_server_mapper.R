@@ -1,6 +1,6 @@
 #' Sever function: mapper
 #'
-#' Set behavior for mapper widget.
+#' Set behavior for [mapper()] widget.
 #'
 #' @details
 #' This object is designed to be used within `app_server()` function.
@@ -15,7 +15,7 @@ app_server_mapper <- quote({
 
   # initialize widget
   output$mapper <- renderMapper({
-    mapper(map_id = "map", project = app_data$project)
+    suppressMessages(mapper(map_id = "map", project = app_data$project))
   })
 
   # widget synchronization

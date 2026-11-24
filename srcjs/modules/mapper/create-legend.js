@@ -115,7 +115,6 @@ export function createSolutionLegend(x) {
       let itemSymbol = document.createElement("div");
       itemSymbol.className = "item-symbol";
       itemSymbol.style.backgroundColor = x.colors[(j * n) + i];
-      itemSymbol.style.color = x.colors[(j * n) + i];
       // add item to legend
       item.appendChild(itemSymbol);
       item.appendChild(itemLabel);

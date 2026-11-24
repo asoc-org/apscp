@@ -36,6 +36,19 @@ test_that("new_project", {
       details = "extra info"
     )
   )
+  # create product
+  product <- new_product(
+    name = "prod",
+    layer = new_layer(
+      column = "solution",
+      total = 500,
+      dataset = w,
+      tile = g,
+      legend = simulate_solution_legend(),
+      provenance = simulate_provenance(),
+      details = "extra info"
+    )
+  )
   # create theme
   features <- list(
     new_feature(
@@ -85,6 +98,7 @@ test_that("new_project", {
     costs = list(cost),
     locks = list(lock),
     features = features,
+    products = list(product),
     name = "Project 1",
     author_name = "Greg",
     author_email = "greg@gmail.com"
@@ -97,6 +111,7 @@ test_that("new_project", {
   expect_equal(x$costs, list(cost))
   expect_equal(x$locks, list(lock))
   expect_equal(x$features, features)
+  expect_equal(x$products, list(product))
   expect_equal(x$solutions, list())
   expect_equal(x$name, "Project 1")
   expect_equal(x$author_name, "Greg")
@@ -120,6 +135,19 @@ test_that("methods", {
   new_tile <- new_tile(
     source_layer = "data-src", path = new_tile_path, max_zoom = 5
   )
+  new_prod <- new_product(
+    name = "new_prod",
+    id = "new_prod",
+    layer = new_layer(
+      column = "solution",
+      total = 500,
+      dataset = x$dataset,
+      tile = x$tiles[[1]],
+      legend = simulate_solution_legend(),
+      provenance = simulate_provenance(),
+      details = "extra info"
+    )
+  )
   # run tests
   ## add_solution
   x$add_solution(new_sol)
@@ -127,6 +155,9 @@ test_that("methods", {
   ## add_lock
   x$add_lock(new_lock)
   expect_true(any(vapply(x$locks, `[[`, character(1), "id") == "new_lock"))
+  ## add_product
+  x$add_product(new_prod)
+  expect_true(any(vapply(x$products, `[[`, character(1), "id") == "new_prod"))
   ## add_tile
   x$add_tile(new_tile)
   expect_length(x$tiles, 2)

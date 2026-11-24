@@ -37,6 +37,8 @@ run_example_app("mapper")
 \seealso{
 Other functions for the mapper widget:
 \code{\link[=mapper]{mapper()}},
+\code{\link[=mapper_add_lock]{mapper_add_lock()}},
+\code{\link[=mapper_add_product]{mapper_add_product()}},
 \code{\link[=mapper_add_solution]{mapper_add_solution()}},
 \code{\link[=mapper_sync]{mapper_sync()}}
 }

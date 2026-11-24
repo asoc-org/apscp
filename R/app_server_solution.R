@@ -14,7 +14,7 @@
 app_server_solution <- quote({
 
   # define task for generating solutions
-  task <- ExtendedTask$new(
+  solver_task <- ExtendedTask$new(
     function(id, name, project, settings, gap, solver, gurobi_server, verbose) {
       # if project has solution, then return prioritization based on it
       if (app_data$project$has_cache_object(id)) {
@@ -85,23 +85,12 @@ app_server_solution <- quote({
     )
     # if invalid, then display popup and reset solver
     if (!isTRUE(is_valid)) {
-      ## display modal
-      shinyalert::shinyalert(
-        title = "Oops",
+      alert_error(
         text = paste(
           "At least one feature must have a non-zero target and weight.",
           "To resolve this, please try adjusting the targets and weight for",
           "the features."
-        ),
-        size = "s",
-        closeOnEsc = TRUE,
-        closeOnClickOutside = TRUE,
-        type = "error",
-        showConfirmButton = TRUE,
-        confirmButtonText = "OK",
-        timer = 0,
-        confirmButtonCol = "#0275d8",
-        animation = TRUE
+        )
       )
       ## reset solver status
       solver_reset("solver")
@@ -112,7 +101,7 @@ app_server_solution <- quote({
     id <- hash_prioritization_settings(input$solver_settings)
     app_data$task_id <- id
     # create asynchronous task
-    task$invoke(
+    solver_task$invoke(
       id = id,
       name = input$solver_settings$name,
       project = app_data$project,
@@ -128,7 +117,7 @@ app_server_solution <- quote({
   # this is triggered when the asynchronous task has completed
   shiny::observe({
     # obtain task result
-    result <- try(task$result(), silent = TRUE)
+    result <- try(solver_task$result(), silent = TRUE)
     # if result has different identifier than expected, then exit observer
     if (
       inherits(result, "try-error") ||
@@ -174,6 +163,10 @@ app_server_solution <- quote({
         app_data$project$set_cache_object(id2, result$metrics)
       }
     }
+    # if cache, then update id to avoid solutions with duplicate identifiers
+    if (isTRUE(result$cache)) {
+      result$id <- uuid::UUIDgenerate()
+    }
     # create solution
     sol <- create_solution_from_prioritization(
       id = result$id,
@@ -189,17 +182,24 @@ app_server_solution <- quote({
     app_data$task_mirai <- NULL
     app_data$task_id <- NULL
     # add solution to mapper
-    mapper_add_solution(
-      id = "mapper",
-      map = mapgl::mapboxgl_proxy("map"),
-      solution = sol,
-      visible = TRUE
+    suppressMessages(
+      mapper_add_solution(
+        id = "mapper",
+        map = mapgl::mapboxgl_proxy("map"),
+        solution = sol,
+        visible = TRUE
+      )
     )
-    # add solution to summarizer
+    # add solution to widgets
     summarizer_add_solution(id = "summarizer", solution = sol, show = TRUE)
+    # update solution comparison sidebar
+    contraster_add_solution(id = "contraster", solution = sol)
+    heatmapper_add_solution(id = "heatmapper", solution = sol)
     # open solution results sidebar
     sidebar_open(id = "right_sidebar", pane_id = "results_pane")
-    # reset solver status
+    sidebar_enable(id = "right_sidebar", pane_id = "contrast_pane")
+    sidebar_enable(id = "right_sidebar", pane_id = "heatmap_pane")
+    # reset solver widget
     solver_reset("solver")
   })
 
@@ -212,7 +212,7 @@ app_server_solution <- quote({
     # reset state
     app_data$task_mirai <- NULL
     app_data$task_id <- NULL
-    # reset solver status
+    # reset solver widget
     solver_reset("solver")
   })
 

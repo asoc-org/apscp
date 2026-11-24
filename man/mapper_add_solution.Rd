@@ -38,6 +38,8 @@ run_example_app("mapper")
 Other functions for the mapper widget:
 \code{\link[=mapper]{mapper()}},
 \code{\link{mapper-shiny}},
+\code{\link[=mapper_add_lock]{mapper_add_lock()}},
+\code{\link[=mapper_add_product]{mapper_add_product()}},
 \code{\link[=mapper_sync]{mapper_sync()}}
 }
 \concept{mapper}

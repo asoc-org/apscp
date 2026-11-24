@@ -3,4 +3,5 @@ R/app_*.R
 R/run_*.R
 R/import-*.R
 R/widget_*_server*.R
+R/ui_alert_error.R
 R/zzz.R

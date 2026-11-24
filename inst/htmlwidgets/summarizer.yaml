@@ -1,6 +1,7 @@
+# (uncomment to add a dependency)
 # dependencies:
-#   - name: summarizer-style
-#     version: 1.0.0
-#     src: htmlwidgets
-#     stylesheet:
-#       - summarizer.css
+#  - name:
+#    version:
+#    src:
+#    script:
+#    stylesheet:

@@ -18,12 +18,17 @@ import {createNameLabel} from "../utils/element.js";
  * @return
  */
 export function createMenuItem(x, mapper, themes = undefined) {
+  // identify layer type
+  let type = x.class.toLowerCase();
+  if (type === "product") {
+    type = x.layer.provenance.name.toLowerCase();
+  }
+
   // initialize container element
   let el = document.importNode(
-    document
-      .querySelector("." + x.class.toLowerCase() + "-layer-template")
-      .content,
-    true).children[0];
+    document.querySelector("." + type + "-layer-template").content,
+    true
+  ).children[0];
 
   // find components of container element
   let showLegendCheckbox = el.querySelector(".legend-checkbox");

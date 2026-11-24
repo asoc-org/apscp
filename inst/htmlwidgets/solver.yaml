@@ -1,6 +1,7 @@
+# (uncomment to add a dependency)
 # dependencies:
-#   - name: solver-style
-#     version: 1.0.0
-#     src: htmlwidgets
-#     stylesheet:
-#       - solver.css
+#  - name:
+#    version:
+#    src:
+#    script:
+#    stylesheet:

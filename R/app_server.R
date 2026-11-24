@@ -16,6 +16,8 @@ app_server <- function(input, output, session) {
   eval(app_server_map)
   eval(app_server_mapper)
   eval(app_server_solver)
+  eval(app_server_heatmapper)
+  eval(app_server_contraster)
   eval(app_server_summarizer)
 
   # generate new solution events

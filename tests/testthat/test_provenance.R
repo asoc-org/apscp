@@ -36,7 +36,6 @@ test_that("serialize_object", {
 
 test_that("deserialize_object", {
   # create object
-  # create object
   x <- new_provenance(
    name = "Global", icon = "globe", color = "#123456",
    description = "Data is global.",
@@ -48,6 +47,20 @@ test_that("deserialize_object", {
 })
 
 test_that("predefined provenance methods", {
-  expect_s3_class(precomputed_provenance(), "Provenance")
-  expect_s3_class(tool_generated_provenance(), "Provenance")
+  expect_s3_class(
+    precomputed_provenance(),
+    "Provenance"
+  )
+  expect_s3_class(
+    solution_provenance(),
+    "Provenance"
+  )
+  expect_s3_class(
+    contrast_provenance("sol1", "sol2"),
+    "Provenance"
+  )
+  expect_s3_class(
+    heatmap_provenance("z1", c("sol1", "sol2", "sol3")),
+    "Provenance"
+  )
 })
