@@ -74,6 +74,14 @@ print.Solution <- function(x, ...) {
 }
 
 #' @export
+print.Product <- function(x, ...) {
+  id <- cli::cli_div()
+  cli::cli_text("A {.cls Product} object.")
+  cli_list(x)
+  cli::cli_end(id)
+}
+
+#' @export
 print.Theme <- function(x, ...) {
   id <- cli::cli_div()
   cli::cli_text("A {.cls Theme} object.")

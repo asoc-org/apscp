@@ -222,7 +222,7 @@ test_that("create_solution_legend", {
   expect_true(all(nchar(x$colors) %in% c(7L, 9L)))
 })
 
-test_that("create_constrast_legend", {
+test_that("create_constrast_legend (values = NULL)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # create object
@@ -231,6 +231,24 @@ test_that("create_constrast_legend", {
   # calculations for tests
   v <- c(paste(p$zones, "locked"), paste(p$zones, "priority"))
   d <- expand.grid(id1 = v, id2 = v)
+  # run test
+  expect_s3_class(x, "CategoricalLegend")
+  expect_equal(length(x$values), nrow(d))
+  expect_equal(length(x$colors), nrow(d))
+  expect_equal(length(x$labels), nrow(d))
+  expect_true(all(startsWith(x$colors, "#")))
+  expect_true(all(nchar(x$colors) %in% c(7L, 9L)))
+})
+
+test_that("create_constrast_legend (values = numeric)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  p <- simulate_project()
+  x <- create_contrast_legend(p, "z1", "z2", seq_len(10))
+  # calculations for tests
+  v <- c(paste(p$zones, "locked"), paste(p$zones, "priority"))
+  d <- expand.grid(id1 = v, id2 = v)[seq_len(10), , drop = FALSE]
   # run test
   expect_s3_class(x, "CategoricalLegend")
   expect_equal(length(x$values), nrow(d))
