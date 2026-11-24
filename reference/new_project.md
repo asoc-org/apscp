@@ -14,6 +14,7 @@ new_project(
   features,
   locks,
   solutions = list(),
+  products = list(),
   name = "Project",
   author_name = "Unknown",
   author_email = "Unknown",
@@ -69,6 +70,12 @@ new_project(
   [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
   objects. Defaults to an empty list().
 
+- products:
+
+  `list` of
+  [`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md)
+  objects. Defaults to an empty list().
+
 - name:
 
   `character` name of the project. Defaults to `"Project"`.
@@ -109,6 +116,7 @@ Other functions for defining classes:
 [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
 [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md),
 [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+[`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
 [`new_solution_legend()`](https://asoc-org.github.io/apscp/reference/new_solution_legend.md),
@@ -216,8 +224,8 @@ print(x)
 #>   • bbox: -20, -30, 20, 30(xmin/ymin/xmax/ymax)
 #> • Dataset:
 #>   • Number of planning units: 90
-#>   • Planning unit path: /tmp/RtmpkKFlPl/file4b2057532fdd.gpkg
-#>   • Boundary path: /tmp/RtmpkKFlPl/file4b20345382a7.rds
+#>   • Planning unit path: /tmp/RtmpTQBxqa/file7fba74446219.gpkg
+#>   • Boundary path: /tmp/RtmpTQBxqa/file7fba2c6b89a5.rds
 #>   • Boundary data loaded: TRUE
 #> • Components:
 #>   • Number of features: 2

@@ -48,6 +48,7 @@ Other functions for defining classes:
 [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
 [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
 [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md),
+[`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md),
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
@@ -81,6 +82,6 @@ print(x)
 #> A <Lock> object.
 #> • name: "lock"
 #> • zone: "scientific"
-#> • id: "5fd13875-8ab6-49a2-9876-395bd13f6c90"
+#> • id: "5e0fc408-601c-4474-ad56-66034683586d"
 #> • layer: <Layer> object
 ```

@@ -37,6 +37,9 @@ serialize_object(x)
 # S3 method for class 'Solution'
 serialize_object(x)
 
+# S3 method for class 'Product'
+serialize_object(x)
+
 # S3 method for class 'Theme'
 serialize_object(x)
 

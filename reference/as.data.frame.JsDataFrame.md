@@ -26,6 +26,7 @@ A `data.frame` object.
 ## See also
 
 Other miscellaneous functions:
+[`alert_error()`](https://asoc-org.github.io/apscp/reference/alert_error.md),
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`cli_format_vector()`](https://asoc-org.github.io/apscp/reference/cli_format_vector.md),
 [`cli_list()`](https://asoc-org.github.io/apscp/reference/cli_list.md),

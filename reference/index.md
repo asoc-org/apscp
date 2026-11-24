@@ -45,6 +45,9 @@ Functions and definitions for new classes.
 - [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md)
   : New lock
 
+- [`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md)
+  : New product
+
 - [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md)
   : New project
 
@@ -63,11 +66,20 @@ Functions and definitions for new classes.
 - [`new_tile()`](https://asoc-org.github.io/apscp/reference/new_tile.md)
   : New tile
 
+- [`contrast_provenance()`](https://asoc-org.github.io/apscp/reference/contrast_provenance.md)
+  : Contrast provenance
+
+- [`create_contrast_legend()`](https://asoc-org.github.io/apscp/reference/create_contrast_legend.md)
+  : Create contrast legend
+
 - [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md)
   : Create dataset from sf object.
 
 - [`create_legend()`](https://asoc-org.github.io/apscp/reference/create_legend.md)
-  : Create a new legend
+  : Create new legend.
+
+- [`create_product()`](https://asoc-org.github.io/apscp/reference/create_product.md)
+  : Create product
 
 - [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md)
   : Create solution
@@ -89,14 +101,17 @@ Functions and definitions for new classes.
 
   Create tile from `sf` data.
 
+- [`heatmap_provenance()`](https://asoc-org.github.io/apscp/reference/heatmap_provenance.md)
+  : Heat map provenance
+
 - [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md)
   : New dataset
 
 - [`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md)
   : Precomputed provenance
 
-- [`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
-  : Tool generated provenance
+- [`solution_provenance()`](https://asoc-org.github.io/apscp/reference/solution_provenance.md)
+  : Solution provenance
 
 ## Prioritization
 
@@ -211,6 +226,10 @@ Functions for widget to control map.
   : Shiny bindings for mapper
 - [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md) :
   Mapper
+- [`mapper_add_lock()`](https://asoc-org.github.io/apscp/reference/mapper_add_lock.md)
+  : Add lock to map
+- [`mapper_add_product()`](https://asoc-org.github.io/apscp/reference/mapper_add_product.md)
+  : Add product to map
 - [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
   : Add solution to map
 - [`mapper_sync()`](https://asoc-org.github.io/apscp/reference/mapper_sync.md)
@@ -243,6 +262,38 @@ Functions for widget to summarize solutions.
   : Summarizer
 - [`summarizer_add_solution()`](https://asoc-org.github.io/apscp/reference/summarizer_add_solution.md)
   : Add solution to summarizer
+
+## Contraster widget
+
+Functions for widget to create a layer to contrast solutions.
+
+- [`contrasterOutput()`](https://asoc-org.github.io/apscp/reference/contraster-shiny.md)
+  [`renderContraster()`](https://asoc-org.github.io/apscp/reference/contraster-shiny.md)
+  : Shiny bindings for contraster
+- [`contraster()`](https://asoc-org.github.io/apscp/reference/contraster.md)
+  : Contraster
+- [`contraster_add_solution()`](https://asoc-org.github.io/apscp/reference/contraster_add_solution.md)
+  : Add solution to contraster widget
+- [`contraster_reset()`](https://asoc-org.github.io/apscp/reference/contraster_reset.md)
+  : Reset contraster widget
+- [`compute_contrast()`](https://asoc-org.github.io/apscp/reference/compute_contrast.md)
+  : Compute contrast
+
+## Heatmapper widget
+
+Functions for widget to create heat maps from solutions.
+
+- [`heatmapperOutput()`](https://asoc-org.github.io/apscp/reference/heatmapper-shiny.md)
+  [`renderHeatmapper()`](https://asoc-org.github.io/apscp/reference/heatmapper-shiny.md)
+  : Shiny bindings for heatmapper
+- [`heatmapper()`](https://asoc-org.github.io/apscp/reference/heatmapper.md)
+  : Heat mapper
+- [`heatmapper_add_solution()`](https://asoc-org.github.io/apscp/reference/heatmapper_add_solution.md)
+  : Add solution to heat mapper widget
+- [`heatmapper_reset()`](https://asoc-org.github.io/apscp/reference/heatmapper_reset.md)
+  : Reset heat mapper widget
+- [`compute_heatmap()`](https://asoc-org.github.io/apscp/reference/compute_heatmap.md)
+  : Compute heat map
 
 ## Tile server
 
@@ -294,6 +345,9 @@ Functions for simulating data.
 ## Miscellaneous functions
 
 Functions with assorted uses.
+
+- [`alert_error()`](https://asoc-org.github.io/apscp/reference/alert_error.md)
+  : Error alert
 
 - [`as.data.frame(`*`<JsDataFrame>`*`)`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md)
   :

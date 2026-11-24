@@ -16,6 +16,7 @@ Other functions for defining classes:
 [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
 [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md),
 [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+[`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md),
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
@@ -77,6 +78,12 @@ Other functions for defining classes:
   [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
   objects.
 
+- `products`:
+
+  `list` of
+  [`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md)
+  objects.
+
 - `name`:
 
   `character` name of the project.
@@ -119,6 +126,8 @@ Other functions for defining classes:
 
 - [`Project$add_lock()`](#method-Project-add_lock)
 
+- [`Project$add_product()`](#method-Project-add_product)
+
 - [`Project$add_tile()`](#method-Project-add_tile)
 
 - [`Project$clone()`](#method-Project-clone)
@@ -140,6 +149,7 @@ Create a `Project` object.
       locks,
       costs,
       solutions = list(),
+      products = list(),
       name = "Project",
       author_name = "Unknown",
       author_email = "Unknown",
@@ -192,6 +202,12 @@ Create a `Project` object.
 
   `list` of
   [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md)
+  objects. Defaults to an empty list.
+
+- `products`:
+
+  `list` of
+  [`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md)
   objects. Defaults to an empty list.
 
 - `name`:
@@ -433,6 +449,27 @@ Add a lock to the project.
 - `x`:
 
   [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md)
+  object.
+
+#### Returns
+
+An invisible `TRUE` indicating success.
+
+------------------------------------------------------------------------
+
+### `Project$add_product()`
+
+Add a product to the project.
+
+#### Usage
+
+    Project$add_product(x)
+
+#### Arguments
+
+- `x`:
+
+  [`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md)
   object.
 
 #### Returns

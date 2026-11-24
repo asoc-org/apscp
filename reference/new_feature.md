@@ -75,6 +75,7 @@ Other functions for defining classes:
 [`new_cost()`](https://asoc-org.github.io/apscp/reference/new_cost.md),
 [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md),
 [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+[`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md),
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
@@ -110,7 +111,7 @@ x <- new_feature(
 print(x)
 #> A <Feature> object.
 #> • name: "species 1"
-#> • id: "911d72e0-c5d9-4544-9a94-6bfececafab5"
+#> • id: "e1229e50-e224-4355-812c-2b68dfcdc91d"
 #> • zone_targets: 0.1, 0.2, and 0.3
 #> • zone_weights: 0.5, 1, and 0.7
 #> • zone_helds: 0.2, 0.3, and 0.1

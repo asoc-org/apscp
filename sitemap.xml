@@ -13,6 +13,7 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/add_external_resources.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/add_layer_visibility_control.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/add_sidebar_control.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/alert_error.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/apscp.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.html</loc></url>
@@ -20,9 +21,18 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/cli_list.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/color_palette.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/compress_object.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/compute_contrast.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/compute_heatmap.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/contact_sidebar_pane.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/contrast_provenance.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/contraster-shiny.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/contraster.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/contraster_add_solution.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/contraster_reset.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/create_contrast_legend.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_legend.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/create_product.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_solution.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/create_solution_legend.html</loc></url>
@@ -36,6 +46,11 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/get_paint_parameters.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/has_mapbox_token.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/hash_prioritization_settings.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/heatmap_provenance.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/heatmapper-shiny.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/heatmapper.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/heatmapper_add_solution.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/heatmapper_reset.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/index.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/is_installed.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/is_prioritization_settings.html</loc></url>
@@ -51,6 +66,8 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/mapgl_source_url.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/mapper-shiny.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/mapper.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/mapper_add_lock.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/mapper_add_product.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/mapper_add_solution.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/mapper_sync.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/mirai_async_start.html</loc></url>
@@ -62,6 +79,7 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/new_feature.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/new_layer.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/new_lock.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/new_product.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/new_project.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/new_provenance.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/new_solution.html</loc></url>
@@ -93,6 +111,7 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_provenance.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_solution_legend.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/simulate_spatial_data.html</loc></url>
+<url><loc>https://asoc-org.github.io/apscp/reference/solution_provenance.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/solve_prioritization.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/solver-shiny.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/solver.html</loc></url>
@@ -106,7 +125,6 @@
 <url><loc>https://asoc-org.github.io/apscp/reference/tile_server_dir.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/tile_server_start.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/tile_server_stop.html</loc></url>
-<url><loc>https://asoc-org.github.io/apscp/reference/tool_generated_provenance.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/write_dataset.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/write_matrix.html</loc></url>
 <url><loc>https://asoc-org.github.io/apscp/reference/write_project.html</loc></url>

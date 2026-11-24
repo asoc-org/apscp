@@ -55,6 +55,8 @@ active.
 Other functions for the mapper widget:
 [`mapper()`](https://asoc-org.github.io/apscp/reference/mapper.md),
 [`mapper-shiny`](https://asoc-org.github.io/apscp/reference/mapper-shiny.md),
+[`mapper_add_lock()`](https://asoc-org.github.io/apscp/reference/mapper_add_lock.md),
+[`mapper_add_product()`](https://asoc-org.github.io/apscp/reference/mapper_add_product.md),
 [`mapper_add_solution()`](https://asoc-org.github.io/apscp/reference/mapper_add_solution.md)
 
 ## Examples

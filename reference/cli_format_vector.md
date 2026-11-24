@@ -26,6 +26,7 @@ A `character` value.
 ## See also
 
 Other miscellaneous functions:
+[`alert_error()`](https://asoc-org.github.io/apscp/reference/alert_error.md),
 [`as.data.frame.JsDataFrame()`](https://asoc-org.github.io/apscp/reference/as.data.frame.JsDataFrame.md),
 [`as.list.JsDataFrameList()`](https://asoc-org.github.io/apscp/reference/as.list.JsDataFrameList.md),
 [`cli_list()`](https://asoc-org.github.io/apscp/reference/cli_list.md),

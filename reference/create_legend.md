@@ -1,25 +1,18 @@
-# Create a new legend
+# Create new legend.
 
-Create a new legend automatically for a column in a
-[`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
-object.
+Create a new legend automatically.
 
 ## Usage
 
 ``` r
-create_legend(x, column, units = NULL, palette = "viridis", type = NULL)
+create_legend(x, units = NULL, palette = "viridis", type = NULL)
 ```
 
 ## Arguments
 
 - x:
 
-  [`sf::st_sf()`](https://r-spatial.github.io/sf/reference/sf.html)
-  object.
-
-- column:
-
-  `character` value with name of column.
+  `numeric` vector.
 
 - units:
 
@@ -36,8 +29,8 @@ create_legend(x, column, units = NULL, palette = "viridis", type = NULL)
 
 - type:
 
-  `character` value indicating if legend should be `"continuous"`
-  `"categorical"`, `"presence/absence"`, or
+  `character` value indicating if legend should be `"continuous"`,
+  `"softcontinuous"`, `"categorical"`, `"presence/absence"`, or
   `"presence". Defaults to `NULL\`, such that the legend type will be
   determined automatically.
 
@@ -52,16 +45,20 @@ object.
 ## See also
 
 Other functions for calling class methods:
+[`contrast_provenance()`](https://asoc-org.github.io/apscp/reference/contrast_provenance.md),
+[`create_contrast_legend()`](https://asoc-org.github.io/apscp/reference/create_contrast_legend.md),
 [`create_dataset_from_sf()`](https://asoc-org.github.io/apscp/reference/create_dataset_from_sf.md),
+[`create_product()`](https://asoc-org.github.io/apscp/reference/create_product.md),
 [`create_solution()`](https://asoc-org.github.io/apscp/reference/create_solution.md),
 [`create_solution_from_prioritization()`](https://asoc-org.github.io/apscp/reference/create_solution_from_prioritization.md),
 [`create_solution_legend()`](https://asoc-org.github.io/apscp/reference/create_solution_legend.md),
 [`create_tile_from_file()`](https://asoc-org.github.io/apscp/reference/create_tile_from_file.md),
 [`create_tile_from_project()`](https://asoc-org.github.io/apscp/reference/create_tile_from_project.md),
 [`create_tile_from_sf()`](https://asoc-org.github.io/apscp/reference/create_tile_from_sf.md),
+[`heatmap_provenance()`](https://asoc-org.github.io/apscp/reference/heatmap_provenance.md),
 [`new_dataset()`](https://asoc-org.github.io/apscp/reference/new_dataset.md),
 [`precomputed_provenance()`](https://asoc-org.github.io/apscp/reference/precomputed_provenance.md),
-[`tool_generated_provenance()`](https://asoc-org.github.io/apscp/reference/tool_generated_provenance.md)
+[`solution_provenance()`](https://asoc-org.github.io/apscp/reference/solution_provenance.md)
 
 ## Examples
 
@@ -70,7 +67,7 @@ Other functions for calling class methods:
 sim_data <- simulate_spatial_data()
 
 # create object
-x <- create_legend(sim_data, "cost", units = "USD", palette = "PuBu")
+x <- create_legend(sim_data$cost, units = "USD", palette = "PuBu")
 
 # preview object
 print(x)

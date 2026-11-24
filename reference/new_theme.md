@@ -37,6 +37,7 @@ Other functions for defining classes:
 [`new_feature()`](https://asoc-org.github.io/apscp/reference/new_feature.md),
 [`new_layer()`](https://asoc-org.github.io/apscp/reference/new_layer.md),
 [`new_lock()`](https://asoc-org.github.io/apscp/reference/new_lock.md),
+[`new_product()`](https://asoc-org.github.io/apscp/reference/new_product.md),
 [`new_project()`](https://asoc-org.github.io/apscp/reference/new_project.md),
 [`new_provenance()`](https://asoc-org.github.io/apscp/reference/new_provenance.md),
 [`new_solution()`](https://asoc-org.github.io/apscp/reference/new_solution.md),
