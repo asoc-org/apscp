@@ -62,7 +62,6 @@ create_product <- function(
       paste0("prod-", uuid::UUIDgenerate()),
       project$dataset$get_pu_columns()
     )
-    project$dataset$set_pu_column_data(column, values)
   } else {
     assertthat::assert_that(
       assertthat::is.string(column),
@@ -73,6 +72,9 @@ create_product <- function(
       msg = "`project$dataset` already has a column with this column name."
     )
   }
+
+  # add column with values to dataset
+  project$dataset$set_pu_column_data(column, values)
 
   # if needed, create tile
   if (is.null(tile)) {

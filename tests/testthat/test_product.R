@@ -4,20 +4,21 @@ test_that("new_product", {
   # simulate project
   sim_project <- simulate_project()
   # create object
-  x <- new_product(
-    name = "prod",
-    layer = new_layer(
-      column = "solution",
-      total = 500,
-      dataset = sim_project$dataset,
-      tile = sim_project$tiles[[1]],
-      legend = simulate_solution_legend(),
-      provenance = simulate_provenance(),
-      details = "extra info"
-    )
+  l <- new_layer(
+    column = "solution",
+    total = 500,
+    dataset = sim_project$dataset,
+    tile = sim_project$tiles[[1]],
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance(),
+    details = "extra info"
   )
+  x <- new_product(name = "prod", layer = l)
   # run tests
   expect_s3_class(x, "Product")
+  expect_message(print(x))
+  expect_equal(x$name, "prod")
+  expect_equal(x$layer, l)
 })
 
 test_that("serialize_object", {
@@ -68,7 +69,7 @@ test_that("deserialize_object", {
   expect_equal(x, y)
 })
 
-test_that("create_product", {
+test_that("create_product (column = NULL)", {
   # define skips
   skip_if_sim_deps_not_installed()
   # simulate project
@@ -88,4 +89,23 @@ test_that("create_product", {
     v,
     sim_project$dataset$get_pu_column_data(x$layer$column)
   )
+})
+
+test_that("create_product (column = character)", {
+  # define skips
+  skip_if_sim_deps_not_installed()
+  # create object
+  p <- simulate_project()
+  v <- runif(p$dataset$get_n_pu())
+  x <- create_product(
+    name = "prod",
+    values = v,
+    column = "prod",
+    project = p,
+    legend = simulate_solution_legend(),
+    provenance = simulate_provenance()
+  )
+  # run tests
+  expect_s3_class(x, "Product")
+  expect_equal(v, p$dataset$get_pu_column_data("prod"))
 })

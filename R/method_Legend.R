@@ -62,8 +62,18 @@ create_legend <- function(x, units = NULL, palette = "viridis", type = NULL) {
     }
   }
 
+  # if colors are manually specified, then prepare the colors
+  if (startsWith(palette, "#")) {
+    palette <- strsplit(palette, ";")[[1]]
+  }
+
   # if x only has one value and type is continuous, then force to be categorical
   if (identical(type, "continuous") && identical(length(v), 1L)) {
+    if (!startsWith(palette[[1]], "#")) {
+      palette <- color_palette(palette, n = length(v))
+    } else {
+      palette <- grDevices::colorRampPalette(palette)(length(v))
+    }
     type <- "categorical"
   }
 
@@ -85,11 +95,6 @@ create_legend <- function(x, units = NULL, palette = "viridis", type = NULL) {
       c("presence/absence", "presence", "categorical", "continuous")
     )
   )
-
-  # if colors are manually specified, then prepare the colors
-  if (startsWith(palette, "#")) {
-    palette <- strsplit(palette, ";")[[1]]
-  }
 
   # depending on the type...
   if (identical(type, "presence/absence")) {
