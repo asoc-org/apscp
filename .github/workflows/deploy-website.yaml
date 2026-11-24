@@ -48,7 +48,9 @@ jobs:
         run: |
           sudo apt-get -y install \
             cmake \
-            curl \
+            libcurl4-openssl-dev \
+            libx11-dev \
+            pandoc \
             gdal-bin \
             htop \
             libuv1-dev \
