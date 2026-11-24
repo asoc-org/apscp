@@ -3127,7 +3127,7 @@
     },
     "nanonext": {
       "Package": "nanonext",
-      "Version": "1.10.3",
+      "Version": "1.10.4",
       "Source": "Repository",
       "Type": "Package",
       "Title": "Lightweight Toolkit for Messaging, Concurrency and the Web",

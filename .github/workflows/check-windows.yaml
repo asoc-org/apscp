@@ -33,6 +33,7 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       MAPBOX_PUBLIC_TOKEN: ${{ secrets.MAPBOX_PUBLIC_TOKEN }}
       RENV_CONFIG_USER_PROFILE: true
+      RENV_CONFIG_INSTALL_VERBOSE: TRUE
       NANONEXT_LIBS: 1
       CI: true
 
